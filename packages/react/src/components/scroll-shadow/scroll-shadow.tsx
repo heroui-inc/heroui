@@ -55,6 +55,7 @@ export const ScrollShadowRoot = ({
   orientation = "vertical",
   ref,
   size = 40,
+  style: styleProp,
   variant = "fade",
   visibility = "auto",
   ...props
@@ -104,7 +105,8 @@ export const ScrollShadowRoot = ({
 
   const style = {
     "--scroll-shadow-size": `${size}px`,
-    ...props.style,
+    "--scroll-shadow-offset": `${offset}px`,
+    ...styleProp,
   } as React.CSSProperties;
 
   return (
@@ -113,6 +115,8 @@ export const ScrollShadowRoot = ({
       className={slots.base({className})}
       data-orientation={orientation}
       data-scroll-shadow-size={size}
+      // Selects the scroll-driven fade where supported; controlled mode stays attribute-driven
+      data-shadow-mode={visibility === "auto" ? "auto" : "manual"}
       data-slot="scroll-shadow"
       style={style}
       {...props}

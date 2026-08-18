@@ -3,6 +3,39 @@
   @apply relative;
   --scroll-shadow-size: 40px;
   --scroll-shadow-scrollbar-size: 10px;
+  --scroll-shadow-offset: 0px;
+}
+
+/* Fade sizes for the scroll-driven variant below. They stay at 0px whenever the scroll
+   timeline is inactive, which is exactly the state of a container without overflow. */
+@property --scroll-shadow-start-fade {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --scroll-shadow-end-fade {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes scroll-shadow-start-fade {
+  from {
+    --scroll-shadow-start-fade: 0px;
+  }
+  to {
+    --scroll-shadow-start-fade: var(--scroll-shadow-size);
+  }
+}
+
+@keyframes scroll-shadow-end-fade {
+  from {
+    --scroll-shadow-end-fade: var(--scroll-shadow-size);
+  }
+  to {
+    --scroll-shadow-end-fade: 0px;
+  }
 }
 
 /* Orientation: Vertical */
@@ -17,7 +50,15 @@
 
 /* Variant: Fade - Vertical */
 .scroll-shadow--fade.scroll-shadow--vertical {
-  &:where([data-top-scroll="true"], [data-bottom-scroll="true"], [data-top-bottom-scroll="true"]) {
+  /* `[data-shadow-mode="auto"]` lets the scroll-driven variant below reuse this plumbing.
+     It only paints once `--scroll-linear-gradient` is set, since an undefined variable
+     makes `mask-image` invalid at computed-value time, which resolves to `none`. */
+  &:where(
+    [data-top-scroll="true"],
+    [data-bottom-scroll="true"],
+    [data-top-bottom-scroll="true"],
+    [data-shadow-mode="auto"]
+  ) {
     mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
     mask-position:
       left top,
@@ -53,7 +94,12 @@
 
 /* Variant: Fade - Horizontal */
 .scroll-shadow--fade.scroll-shadow--horizontal {
-  &:where([data-left-scroll="true"], [data-right-scroll="true"], [data-left-right-scroll="true"]) {
+  &:where(
+    [data-left-scroll="true"],
+    [data-right-scroll="true"],
+    [data-left-right-scroll="true"],
+    [data-shadow-mode="auto"]
+  ) {
     mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
     mask-position:
       left top,
@@ -100,4 +146,45 @@
 .scroll-shadow--hide-scrollbar {
   @apply scrollbar-none;
   --scroll-shadow-scrollbar-size: 0px;
+}
+
+/* Variant: Fade - scroll-driven
+   Where scroll timelines are available the fade is derived from the real scroll state,
+   so it is already correct on the first paint and needs no measurement or hydration.
+   A container without overflow has an inactive timeline, which leaves both fades at 0px
+   and collapses the mask to a no-op. The attribute-driven rules above remain the
+   fallback for engines without scroll timelines, and keep serving controlled mode. */
+@supports (animation-timeline: scroll(self)) {
+  /* These gradients must stay after the attribute rules above: they carry the same
+     specificity, so source order is what lets the scrubbed values win in auto mode. */
+  .scroll-shadow--fade[data-shadow-mode="auto"] {
+    animation:
+      scroll-shadow-start-fade linear both,
+      scroll-shadow-end-fade linear both;
+    animation-range:
+      var(--scroll-shadow-offset) calc(var(--scroll-shadow-offset) + var(--scroll-shadow-size)),
+      calc(100% - var(--scroll-shadow-size) - var(--scroll-shadow-offset))
+        calc(100% - var(--scroll-shadow-offset));
+  }
+
+  .scroll-shadow--fade.scroll-shadow--vertical[data-shadow-mode="auto"] {
+    animation-timeline: scroll(self block), scroll(self block);
+    --scroll-linear-gradient:
+      180deg, transparent 0, #000 var(--scroll-shadow-start-fade),
+      #000 calc(100% - var(--scroll-shadow-end-fade)), transparent 100%;
+  }
+
+  .scroll-shadow--fade.scroll-shadow--horizontal[data-shadow-mode="auto"] {
+    animation-timeline: scroll(self inline), scroll(self inline);
+    --scroll-linear-gradient:
+      90deg, transparent 0, #000 var(--scroll-shadow-start-fade),
+      #000 calc(100% - var(--scroll-shadow-end-fade)), transparent 100%;
+
+    /* Inline-axis progress starts at the right edge in RTL, so flip the physical direction */
+    &:dir(rtl) {
+      --scroll-linear-gradient:
+        270deg, transparent 0, #000 var(--scroll-shadow-start-fade),
+        #000 calc(100% - var(--scroll-shadow-end-fade)), transparent 100%;
+    }
+  }
 }
