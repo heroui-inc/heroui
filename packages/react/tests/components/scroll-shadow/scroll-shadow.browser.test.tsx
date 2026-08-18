@@ -130,8 +130,8 @@ describe("ScrollShadow (browser)", () => {
       expect((await fadesOf(scroller)).start).toBe("0px");
     });
 
-    // The server cannot measure overflow, so the markup assumes an end-edge shadow. An
-    // inactive scroll timeline must collapse it rather than fade content that fits.
+    // A container without overflow has an inactive timeline, which has to hold both fades
+    // at 0px rather than fade content that fits.
     it("renders no fade when the content fits", async () => {
       await render(<Fitting />);
 
@@ -197,6 +197,27 @@ describe("ScrollShadow (browser)", () => {
       if (!supportsScrollTimelines()) return;
 
       expect(await fadesOf(scrollerOf())).toEqual({start: "0px", end: "0px"});
+    });
+  });
+
+  describe("disabled detection", () => {
+    it("renders no fade when detection is turned off", async () => {
+      await render(
+        <ScrollShadow
+          data-testid="scroller"
+          isEnabled={false}
+          size={SHADOW_SIZE}
+          style={{height: VIEWPORT}}
+        >
+          <div style={{height: 1200}}>Tall content</div>
+        </ScrollShadow>,
+      );
+
+      const scroller = scrollerOf();
+
+      await nextFrames();
+
+      expect(getComputedStyle(scroller).maskImage).toBe("none");
     });
   });
 

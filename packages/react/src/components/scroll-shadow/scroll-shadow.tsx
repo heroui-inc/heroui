@@ -115,8 +115,9 @@ export const ScrollShadowRoot = ({
       className={slots.base({className})}
       data-orientation={orientation}
       data-scroll-shadow-size={size}
-      // Selects the scroll-driven fade where supported; controlled mode stays attribute-driven
-      data-shadow-mode={visibility === "auto" ? "auto" : "manual"}
+      // Selects the scroll-driven fade where supported. Controlled and disabled modes stay
+      // attribute-driven, matching what the hook does for the same combination of props.
+      data-shadow-mode={isEnabled && visibility === "auto" ? "auto" : "manual"}
       data-slot="scroll-shadow"
       style={style}
       {...props}
