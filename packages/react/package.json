@@ -80,6 +80,7 @@
     "@react-aria/utils": "3.34.1",
     "@react-stately/data": "3.16.1",
     "@storybook/react": "10.1.10",
+    "@tailwindcss/vite": "4.3.0",
     "@types/fs-extra": "11.0.4",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
