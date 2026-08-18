@@ -32,6 +32,19 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/**
+ * Widens the pressable area of a control smaller than the 24px minimum target size
+ * (WCAG 2.5.8) with a transparent centred overlay, leaving its size, its visible content
+ * and the surrounding layout untouched. The host must establish a containing block
+ * (`relative` or `absolute`), otherwise the overlay escapes to the nearest one.
+ */
+@utility touch-target {
+  &::after {
+    content: "";
+    @apply absolute top-1/2 left-1/2 size-6 -translate-x-1/2 -translate-y-1/2;
+  }
+}
+
 /* === Statuses === */
 @utility status-focused {
   @apply focus-ring;

@@ -89,22 +89,17 @@
 
 /* Remove Button  */
 .tag__remove-button {
-  @apply size-3 text-inherit;
+  /**
+   * The glyph is 12px, half the minimum target size. A finger tap that misses it lands on the
+   * tag body, which consumes the press without removing anything, so removing a tag by touch
+   * takes several attempts. `touch-target` widens the pressable area to 24px. On `--sm` the
+   * overlay reaches ~2px past the tag box, which the 6px list gap absorbs, so it never
+   * overlaps a neighbouring tag.
+   */
+  @apply touch-target size-3 text-inherit;
 
   /* SVG icon styling */
   & svg {
     @apply size-[inherit] shrink-0 self-center text-current;
-  }
-
-  /**
-   * The glyph is 12px, half the 24px minimum target size (WCAG 2.5.8). A finger tap that
-   * misses it lands on the tag body, which consumes the press without removing anything, so
-   * removing a tag by touch takes several attempts. Widen the pressable area with a
-   * transparent overlay: it is centred on the glyph and stays within the tag's own padding,
-   * leaving layout and the visible glyph untouched.
-   */
-  &::after {
-    content: "";
-    @apply absolute top-1/2 left-1/2 size-6 -translate-x-1/2 -translate-y-1/2;
   }
 }
