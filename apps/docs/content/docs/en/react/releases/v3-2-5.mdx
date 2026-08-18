@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: Patch release that scopes animation compositor hints so Modal button labels stay sharp after reopen, keeps stacked Drawer handles from closing ancestor drawers, preserves keystrokes in nested Table inputs, stops NumberField from reserving stepper columns when buttons are absent, and keeps Toast region CSS variables when custom styles are passed.
+description: Patch release that adds Select.ClearButton, keeps modal-level overlays above closing popovers, enlarges the Tag remove-button touch target, scopes animation compositor hints so Modal button labels stay sharp after reopen, keeps stacked Drawer handles from closing ancestor drawers, preserves keystrokes in nested Table inputs, stops NumberField from reserving stepper columns when buttons are absent, and keeps Toast region CSS variables when custom styles are passed.
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">August 13, 2026</span>
 </div>
 
-Patch release: [Button](/docs/components/button), Menu, and Dropdown apply compositor hints only while animating so labels stay sharp after a [Modal](/docs/components/modal) reopens, a nested [Drawer](/docs/components/drawer) handle now closes only its own drawer, [Table](/docs/components/table) preserves keystrokes in nested editable controls, [NumberField](/docs/components/number-field) no longer reserves stepper columns when buttons are absent, and [Toast](/docs/components/toast) keeps region CSS variables when custom styles are passed.
+Patch release: [Select](/docs/components/select) gains a `ClearButton`, modal-level overlays stay above closing popovers, [Tag](/docs/components/tag) remove targets meet the 24px floor, [Button](/docs/components/button), Menu, and Dropdown apply compositor hints only while animating so labels stay sharp after a [Modal](/docs/components/modal) reopens, a nested [Drawer](/docs/components/drawer) handle now closes only its own drawer, [Table](/docs/components/table) preserves keystrokes in nested editable controls, [NumberField](/docs/components/number-field) no longer reserves stepper columns when buttons are absent, and [Toast](/docs/components/toast) keeps region CSS variables when custom styles are passed.
 
 ## Installation
 
@@ -42,8 +42,18 @@ Update to the latest version:
   **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
 </Callout>
 
+## Features
+
+### Select
+
+[Select](/docs/components/select) adds a clear affordance without nesting buttons inside `Select.Trigger`. Compose `Select.ClearButton` next to the value and indicator, and listen with the root `onClear` prop. The control renders as a pointer-only `span` (`aria-hidden`); keyboard and screen reader users clear with `Backspace` or `Delete` when the clear button is composed and the popover is closed.
+
+- **Clear button**: Add `Select.ClearButton` and root `onClear` so selections can be cleared without invalid nested buttons ([#6796](https://github.com/heroui-inc/heroui/pull/6796)).
+
 ## Bug Fixes
 
+- **Overlays**: Raise `Modal`, `AlertDialog`, and `Drawer` to the shared overlay z-index and disable pointer events on exiting popover-level overlays so closing `Dropdown` / `Select` / `Popover` layers no longer cover or intercept clicks on a newly opened modal ([#6798](https://github.com/heroui-inc/heroui/pull/6798)).
+- **Tag**: Expand the remove-button pressable area to 24×24 while keeping the 12×12 glyph, so taps on multi-select `Autocomplete` chips land reliably ([#6797](https://github.com/heroui-inc/heroui/pull/6797)).
 - **Button, Menu, and Dropdown**: Scope `will-change` compositor hints to pressed and enter/exit animation states so static labels remain sharp inside transformed overlays, including after a `Modal` closes and reopens ([#6779](https://github.com/heroui-inc/heroui/pull/6779)).
 - **Drawer**: Scope drag gestures to the nearest owning `Drawer.Dialog` so a nested drawer handle closes only its own drawer while the parent stays open and unshifted ([#6780](https://github.com/heroui-inc/heroui/pull/6780)).
 - **Table**: Keep typeahead from stealing keystrokes and focus from nested editable controls. `keyboardNavigationBehavior` is now exposed as a prop and defaults to `"tab"`, while typeahead remains available in non-editable cells ([#6781](https://github.com/heroui-inc/heroui/pull/6781)).
