@@ -59,7 +59,7 @@ export default function App() {
 ### 1. Component Structure
 
 **v2:** Simple Select with `SelectItem` children  
-**v3:** Compound components (`Select.Trigger`, `Select.Value`, `Select.Indicator`, `Select.Popover`) with `ListBox` for items
+**v3:** Compound components (`Select.Trigger`, `Select.Value`, `Select.ClearButton`, `Select.Indicator`, `Select.Popover`) with `ListBox` for items
 
 ### 2. Item Components
 
@@ -84,7 +84,7 @@ export default function App() {
 | `startContent` | — | Customize `Select.Trigger` directly |
 | `endContent` | — | Customize `Select.Trigger` directly |
 | `selectorIcon` | — | Customize `Select.Indicator` children |
-| `isClearable` | — | Implement clear button manually |
+| `isClearable` | `Select.ClearButton` | Built-in subcomponent; do not nest a `<button>` in `Select.Trigger` |
 | `renderValue` | — | Use `Select.Value` render prop |
 | `labelPlacement` | — | Labels are always outside |
 | `isRequired` | `isRequired` | Still exists |
@@ -483,6 +483,7 @@ Select (Root)
   ├── Label (optional)
   ├── Select.Trigger
   │   ├── Select.Value
+  │   ├── Select.ClearButton (optional)
   │   └── Select.Indicator
   ├── Description (optional)
   ├── Select.Popover
@@ -512,15 +513,15 @@ Select (Root)
 
 ### Clear Button
 
-The `isClearable` prop has been removed. To implement a clear button:
+The `isClearable` prop has been removed. Use `Select.ClearButton` inside `Select.Trigger`. Do not nest a `<button>` in the trigger — `Select.Trigger` is already a button.
+
+The clear control is a pointer affordance; the trigger also clears on `Backspace` or `Delete` for keyboard and screen reader users.
 
 ```tsx
 <Select value={value} onChange={setValue}>
   <Select.Trigger>
     <Select.Value />
-    {value && (
-      <button onClick={() => setValue(null)}>Clear</button>
-    )}
+    <Select.ClearButton />
     <Select.Indicator />
   </Select.Trigger>
   {/* ... */}
@@ -529,7 +530,7 @@ The `isClearable` prop has been removed. To implement a clear button:
 
 ## Summary
 
-1. **Component Structure**: Must use compound components (`Select.Trigger`, `Select.Value`, `Select.Indicator`, `Select.Popover`)
+1. **Component Structure**: Must use compound components (`Select.Trigger`, `Select.Value`, `Select.ClearButton`, `Select.Indicator`, `Select.Popover`)
 2. **Item Components**: `SelectItem` → `ListBox.Item`, `SelectSection` → `ListBox.Section` (use `Header` for section titles and `Separator` between sections)
 3. **Label/Description/Error**: Use separate components instead of props
 4. **Selection Props**: `selectedKeys`/`onSelectionChange` → `value`/`onChange`
@@ -539,5 +540,5 @@ The `isClearable` prop has been removed. To implement a clear button:
 8. **Styling**: `variant` simplified to `primary` \| `secondary`; `color`, `size`, `radius` removed - use Tailwind for more
 9. **ClassNames Removed**: Use `className` props on individual components
 10. **Content Props Removed**: `startContent`, `endContent` - customize trigger directly
-11. **Clear Button**: `isClearable` removed - implement manually
+11. **Clear Button**: `isClearable` removed - use `Select.ClearButton` inside `Select.Trigger` (do not nest a `<button>`)
 12. **Custom Value**: Use `Select.Value` render prop instead of `renderValue`
