@@ -67,6 +67,32 @@ export const DropdownToModalFixture = () => {
   );
 };
 
+/** Dropdown nested inside a Modal, so its popover has to stay above the Modal that owns it. */
+export const ModalWithDropdownFixture = () => (
+  <Modal>
+    <Button>Open modal</Button>
+    <Modal.Backdrop>
+      <Modal.Container>
+        <Modal.Dialog>
+          <Modal.Header>
+            <Modal.Heading>Modal with dropdown</Modal.Heading>
+          </Modal.Header>
+          <Modal.Body>
+            <Dropdown>
+              <Dropdown.Trigger aria-label="Menu">Actions</Dropdown.Trigger>
+              <Dropdown.Popover>
+                <Dropdown.Menu>
+                  <Dropdown.Item id="rename">Rename</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown.Popover>
+            </Dropdown>
+          </Modal.Body>
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal>
+);
+
 /** Controlled dropdown closed inside `onAction`, with an AlertDialog opened in the same action. */
 export const DropdownToAlertDialogFixture = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
