@@ -10,7 +10,9 @@ import "../../../../styles/dist/heroui.min.css";
 const SHADOW_SIZE = 40;
 const VIEWPORT = 240;
 
-const supportsScrollTimelines = () => CSS.supports("animation-timeline", "scroll(self)");
+// Read once at module scope so the groups below skip visibly instead of passing vacuously
+// on an engine without scroll timelines.
+const supportsScrollTimelines = CSS.supports("animation-timeline", "scroll(self)");
 
 /** Lets the compositor apply the scroll-driven animation before styles are read. */
 const nextFrames = () =>
@@ -18,8 +20,7 @@ const nextFrames = () =>
     requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
   });
 
-const fadesOf = async (element: Element) => {
-  await nextFrames();
+const fadesOf = (element: Element) => {
   const computed = getComputedStyle(element);
 
   return {
@@ -28,7 +29,11 @@ const fadesOf = async (element: Element) => {
   };
 };
 
-const Overflowing = ({offset}: {offset?: number} = {}) => (
+/** Interpolated lengths land on device pixels, so compare them numerically. */
+const startFadePxOf = (element: Element) =>
+  Number.parseFloat(getComputedStyle(element).getPropertyValue("--scroll-shadow-start-fade"));
+
+const Overflowing = ({offset}: {offset?: number}) => (
   <ScrollShadow
     data-testid="scroller"
     offset={offset}
@@ -45,15 +50,17 @@ const Fitting = () => (
   </ScrollShadow>
 );
 
-const OverflowingRow = () => (
-  <ScrollShadow
-    data-testid="scroller"
-    orientation="horizontal"
-    size={SHADOW_SIZE}
-    style={{width: VIEWPORT}}
-  >
-    <div style={{width: 1200}}>Wide content</div>
-  </ScrollShadow>
+const OverflowingRow = ({dir}: {dir?: "ltr" | "rtl"}) => (
+  <div dir={dir}>
+    <ScrollShadow
+      data-testid="scroller"
+      orientation="horizontal"
+      size={SHADOW_SIZE}
+      style={{width: VIEWPORT}}
+    >
+      <div style={{width: 1200}}>Wide content</div>
+    </ScrollShadow>
+  </div>
 );
 
 const FittingRow = () => (
@@ -69,65 +76,65 @@ const FittingRow = () => (
 
 const scrollerOf = () => page.getByTestId("scroller").element();
 
+const maxScrollTopOf = (element: Element) => element.scrollHeight - element.clientHeight;
+
+const maxScrollLeftOf = (element: Element) => element.scrollWidth - element.clientWidth;
+
 describe("ScrollShadow (browser)", () => {
-  describe("scroll-driven fade", () => {
+  describe.skipIf(!supportsScrollTimelines)("scroll-driven fade", () => {
     it("fades only the end edge while resting at the start", async () => {
       await render(<Overflowing />);
 
-      if (!supportsScrollTimelines()) return;
-
-      expect(await fadesOf(scrollerOf())).toEqual({start: "0px", end: `${SHADOW_SIZE}px`});
+      await expect
+        .poll(() => fadesOf(scrollerOf()))
+        .toEqual({start: "0px", end: `${SHADOW_SIZE}px`});
     });
 
     it("fades both edges once scrolled into the middle", async () => {
       await render(<Overflowing />);
 
-      if (!supportsScrollTimelines()) return;
-
       const scroller = scrollerOf();
 
       scroller.scrollTop = 400;
 
-      expect(await fadesOf(scroller)).toEqual({
-        start: `${SHADOW_SIZE}px`,
-        end: `${SHADOW_SIZE}px`,
-      });
+      await expect
+        .poll(() => fadesOf(scroller))
+        .toEqual({start: `${SHADOW_SIZE}px`, end: `${SHADOW_SIZE}px`});
     });
 
     it("fades only the start edge at the end of the scroll range", async () => {
       await render(<Overflowing />);
 
-      if (!supportsScrollTimelines()) return;
-
       const scroller = scrollerOf();
 
-      scroller.scrollTop = scroller.scrollHeight;
+      scroller.scrollTop = maxScrollTopOf(scroller);
 
-      expect(await fadesOf(scroller)).toEqual({start: `${SHADOW_SIZE}px`, end: "0px"});
+      await expect.poll(() => fadesOf(scroller)).toEqual({start: `${SHADOW_SIZE}px`, end: "0px"});
     });
 
     it("scrubs the start fade in across the shadow size", async () => {
       await render(<Overflowing />);
 
-      if (!supportsScrollTimelines()) return;
-
       const scroller = scrollerOf();
 
       scroller.scrollTop = SHADOW_SIZE / 2;
 
-      expect((await fadesOf(scroller)).start).toBe(`${SHADOW_SIZE / 2}px`);
+      await expect.poll(() => startFadePxOf(scroller)).toBeCloseTo(SHADOW_SIZE / 2, 0);
     });
 
     it("holds the start fade back until the offset is passed", async () => {
       await render(<Overflowing offset={80} />);
 
-      if (!supportsScrollTimelines()) return;
-
       const scroller = scrollerOf();
 
       scroller.scrollTop = 80;
+      await nextFrames();
 
-      expect((await fadesOf(scroller)).start).toBe("0px");
+      expect(startFadePxOf(scroller)).toBe(0);
+
+      scroller.scrollTop = 80 + SHADOW_SIZE / 2;
+
+      await expect.poll(() => startFadePxOf(scroller)).toBeCloseTo(SHADOW_SIZE / 2, 0);
     });
 
     // A container without overflow has an inactive timeline, which has to hold both fades
@@ -135,9 +142,20 @@ describe("ScrollShadow (browser)", () => {
     it("renders no fade when the content fits", async () => {
       await render(<Fitting />);
 
-      if (!supportsScrollTimelines()) return;
+      await nextFrames();
 
-      expect(await fadesOf(scrollerOf())).toEqual({start: "0px", end: "0px"});
+      expect(fadesOf(scrollerOf())).toEqual({start: "0px", end: "0px"});
+    });
+
+    // Deriving the mask from CSS alone means auto mode resolves a `mask-image` even with
+    // nothing to scroll, so the root is always a stacking context. That is the deliberate
+    // cost of not measuring overflow; the fade itself still collapses to a no-op.
+    it("keeps a no-op mask rather than dropping it when the content fits", async () => {
+      await render(<Fitting />);
+
+      await nextFrames();
+
+      expect(getComputedStyle(scrollerOf()).maskImage).toContain("linear-gradient");
     });
 
     // The hook still writes the state attributes, so the attribute rules match too. The
@@ -145,12 +163,9 @@ describe("ScrollShadow (browser)", () => {
     it("resolves the mask from the scroll-driven gradient, not the attribute fallback", async () => {
       await render(<Overflowing />);
 
-      if (!supportsScrollTimelines()) return;
-
       const scroller = scrollerOf();
 
-      await nextFrames();
-      expect(scroller).toHaveAttribute("data-bottom-scroll", "true");
+      await expect.poll(() => scroller.getAttribute("data-bottom-scroll")).toBe("true");
 
       const computed = getComputedStyle(scroller);
 
@@ -158,45 +173,70 @@ describe("ScrollShadow (browser)", () => {
       expect(computed.maskImage).toMatch(/^linear-gradient\(rgba\(0, 0, 0, 0\)/);
       expect(computed.webkitMaskImage).toMatch(/^linear-gradient\(rgba\(0, 0, 0, 0\)/);
     });
+  });
 
-    it("keeps the shadow size and offset when a style prop is supplied", async () => {
-      await render(<Overflowing offset={80} />);
+  it("keeps the shadow size and offset when a style prop is supplied", async () => {
+    await render(<Overflowing offset={80} />);
 
-      const computed = getComputedStyle(scrollerOf());
+    const computed = getComputedStyle(scrollerOf());
 
-      expect(computed.getPropertyValue("--scroll-shadow-size").trim()).toBe(`${SHADOW_SIZE}px`);
-      expect(computed.getPropertyValue("--scroll-shadow-offset").trim()).toBe("80px");
-    });
+    expect(computed.getPropertyValue("--scroll-shadow-size").trim()).toBe(`${SHADOW_SIZE}px`);
+    expect(computed.getPropertyValue("--scroll-shadow-offset").trim()).toBe("80px");
+    expect(computed.height).toBe(`${VIEWPORT}px`);
   });
 
   // The inline axis drives Tabs' scroller, which is the common non-overflowing case.
-  describe("horizontal orientation", () => {
+  describe.skipIf(!supportsScrollTimelines)("horizontal orientation", () => {
     it("fades only the end edge while resting at the start", async () => {
       await render(<OverflowingRow />);
 
-      if (!supportsScrollTimelines()) return;
-
-      expect(await fadesOf(scrollerOf())).toEqual({start: "0px", end: `${SHADOW_SIZE}px`});
+      await expect
+        .poll(() => fadesOf(scrollerOf()))
+        .toEqual({start: "0px", end: `${SHADOW_SIZE}px`});
     });
 
     it("fades only the start edge at the end of the scroll range", async () => {
       await render(<OverflowingRow />);
 
-      if (!supportsScrollTimelines()) return;
-
       const scroller = scrollerOf();
 
-      scroller.scrollLeft = scroller.scrollWidth;
+      scroller.scrollLeft = maxScrollLeftOf(scroller);
 
-      expect(await fadesOf(scroller)).toEqual({start: `${SHADOW_SIZE}px`, end: "0px"});
+      await expect.poll(() => fadesOf(scroller)).toEqual({start: `${SHADOW_SIZE}px`, end: "0px"});
     });
 
     it("renders no fade when the content fits", async () => {
       await render(<FittingRow />);
 
-      if (!supportsScrollTimelines()) return;
+      await nextFrames();
 
-      expect(await fadesOf(scrollerOf())).toEqual({start: "0px", end: "0px"});
+      expect(fadesOf(scrollerOf())).toEqual({start: "0px", end: "0px"});
+    });
+
+    // Inline-axis progress runs right-to-left in RTL, so the physical gradient has to flip
+    // or the start fade would be painted on the wrong edge.
+    it("points the gradient at the left edge in LTR", async () => {
+      await render(<OverflowingRow dir="ltr" />);
+
+      await nextFrames();
+
+      expect(getComputedStyle(scrollerOf()).maskImage).toContain("90deg");
+    });
+
+    it("flips the gradient to the right edge in RTL", async () => {
+      await render(<OverflowingRow dir="rtl" />);
+
+      await nextFrames();
+
+      expect(getComputedStyle(scrollerOf()).maskImage).toContain("270deg");
+    });
+
+    it("still fades only the end edge while resting at the start in RTL", async () => {
+      await render(<OverflowingRow dir="rtl" />);
+
+      await expect
+        .poll(() => fadesOf(scrollerOf()))
+        .toEqual({start: "0px", end: `${SHADOW_SIZE}px`});
     });
   });
 
@@ -215,6 +255,8 @@ describe("ScrollShadow (browser)", () => {
 
       const scroller = scrollerOf();
 
+      expect(scroller).toHaveAttribute("data-scroll-shadow-mode", "manual");
+
       await nextFrames();
 
       expect(getComputedStyle(scroller).maskImage).toBe("none");
@@ -231,8 +273,10 @@ describe("ScrollShadow (browser)", () => {
 
       const scroller = scrollerOf();
 
-      expect(scroller).toHaveAttribute("data-shadow-mode", "manual");
-      expect(getComputedStyle(scroller).maskImage).toContain("linear-gradient");
+      expect(scroller).toHaveAttribute("data-scroll-shadow-mode", "manual");
+
+      // The fallback gradient opens with black; the scroll-driven one opens transparent.
+      expect(getComputedStyle(scroller).maskImage).toMatch(/^linear-gradient\(rgb\(0, 0, 0\)/);
     });
   });
 });

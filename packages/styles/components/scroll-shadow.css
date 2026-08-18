@@ -50,14 +50,14 @@
 
 /* Variant: Fade - Vertical */
 .scroll-shadow--fade.scroll-shadow--vertical {
-  /* `[data-shadow-mode="auto"]` lets the scroll-driven variant below reuse this plumbing.
-     It only paints once `--scroll-linear-gradient` is set, since an undefined variable
-     makes `mask-image` invalid at computed-value time, which resolves to `none`. */
+  /* `[data-scroll-shadow-mode="auto"]` lets the scroll-driven variant below reuse this
+     plumbing. It only paints once `--scroll-linear-gradient` is set, since an undefined
+     variable makes `mask-image` invalid at computed-value time, which resolves to `none`. */
   &:where(
     [data-top-scroll="true"],
     [data-bottom-scroll="true"],
     [data-top-bottom-scroll="true"],
-    [data-shadow-mode="auto"]
+    [data-scroll-shadow-mode="auto"]
   ) {
     mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
     mask-position:
@@ -98,7 +98,7 @@
     [data-left-scroll="true"],
     [data-right-scroll="true"],
     [data-left-right-scroll="true"],
-    [data-shadow-mode="auto"]
+    [data-scroll-shadow-mode="auto"]
   ) {
     mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
     mask-position:
@@ -153,11 +153,18 @@
    so it is already correct on the first paint and needs no measurement or hydration.
    A container without overflow has an inactive timeline, which leaves both fades at 0px
    and collapses the mask to a no-op. The attribute-driven rules above remain the
-   fallback for engines without scroll timelines, and keep serving controlled mode. */
+   fallback for engines without scroll timelines, and keep serving controlled mode.
+
+   Two consequences of deriving the mask from CSS alone:
+   - Auto mode always resolves a `mask-image`, even with nothing to scroll, so the root is
+     always a stacking context and a containing block for fixed descendants. Gating that on
+     overflow would need a measurement, which is the flicker this variant exists to avoid.
+   - The `animation` shorthand here lives in the components layer, so an `animate-*` utility
+     on the root replaces it and pins both fades at 0px, leaving no fade at all. */
 @supports (animation-timeline: scroll(self)) {
-  /* These gradients must stay after the attribute rules above: they carry the same
-     specificity, so source order is what lets the scrubbed values win in auto mode. */
-  .scroll-shadow--fade[data-shadow-mode="auto"] {
+  /* `.scroll-shadow` is repeated so these rules outrank the attribute-driven gradients
+     above on specificity rather than on source order, which a re-ordering could break. */
+  .scroll-shadow.scroll-shadow--fade[data-scroll-shadow-mode="auto"] {
     animation:
       scroll-shadow-start-fade linear both,
       scroll-shadow-end-fade linear both;
@@ -167,14 +174,16 @@
         calc(100% - var(--scroll-shadow-offset));
   }
 
-  .scroll-shadow--fade.scroll-shadow--vertical[data-shadow-mode="auto"] {
+  /* The orientation rules also outrank the `animation` shorthand above, which resets
+     `animation-timeline` to `auto`, so the timeline survives regardless of order. */
+  .scroll-shadow.scroll-shadow--fade.scroll-shadow--vertical[data-scroll-shadow-mode="auto"] {
     animation-timeline: scroll(self block), scroll(self block);
     --scroll-linear-gradient:
       180deg, transparent 0, #000 var(--scroll-shadow-start-fade),
       #000 calc(100% - var(--scroll-shadow-end-fade)), transparent 100%;
   }
 
-  .scroll-shadow--fade.scroll-shadow--horizontal[data-shadow-mode="auto"] {
+  .scroll-shadow.scroll-shadow--fade.scroll-shadow--horizontal[data-scroll-shadow-mode="auto"] {
     animation-timeline: scroll(self inline), scroll(self inline);
     --scroll-linear-gradient:
       90deg, transparent 0, #000 var(--scroll-shadow-start-fade),

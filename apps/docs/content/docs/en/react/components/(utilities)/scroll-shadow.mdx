@@ -93,6 +93,7 @@ The ScrollShadow component uses CSS variables to size the fade mask and reserve 
 | Variable                         | Default                             | Description                                                                                                      |
 | -------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `--scroll-shadow-size`           | `40px`                              | Controls the fade gradient size. This is set from the `size` prop.                                               |
+| `--scroll-shadow-offset`         | `0px`                               | How far the container must be scrolled before the fade starts. This is set from the `offset` prop.               |
 | `--scroll-shadow-scrollbar-size` | `10px` (`0px` when `hideScrollBar`) | Reserves a solid mask gutter for the native scrollbar so the fade does not cover it. Override for wider scrollbars. |
 
 ### Data Attributes
@@ -103,6 +104,21 @@ The component uses data attributes to control shadow visibility:
 - **Combined States**: `[data-top-bottom-scroll]`, `[data-left-right-scroll]` - Applied when content can be scrolled in both directions
 - **Orientation**: `[data-orientation="vertical"]` or `[data-orientation="horizontal"]` - Indicates scroll direction
 - **Size**: `[data-scroll-shadow-size]` - Contains the shadow gradient size value
+- **Shadow Mode**: `[data-scroll-shadow-mode]` - `"auto"` when the fade is derived from the scroll position, `"manual"` when `visibility` is controlled or `isEnabled` is `false`
+
+### Scroll-Driven Fade
+
+In `auto` mode, browsers that support [scroll-driven animations](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline)
+derive the fade from the scroll position in CSS. The mask is therefore correct on the very
+first paint, with no measurement and no flash of unfaded content during hydration. Browsers
+without support fall back to the `[data-*-scroll]` attributes above, which are written after
+hydration. Two things to keep in mind when customizing:
+
+- In `auto` mode the root always resolves a `mask-image`, even when there is nothing to scroll.
+  That makes it a stacking context and a containing block for `position: fixed` descendants.
+  Set `visibility` explicitly if you need to opt out.
+- The scroll-driven fade uses the `animation` property on the root. Applying an `animate-*`
+  utility to the same element replaces it and leaves no fade. Animate a wrapper instead.
 
 ## API Reference
 
