@@ -1,6 +1,6 @@
 /* Toast component styles */
 
-/* Toast Region - Container for all toasts */
+/* Toast Region */
 .toast-region {
   @apply pointer-events-none fixed z-(--z-index-toast) outline-none;
   @apply w-[calc(100vw-2rem)] sm:w-auto sm:min-w-(--toast-width);
@@ -8,9 +8,9 @@
   display: block;
 }
 
-/* Placement variants - Bottom */
+/* Placement - Bottom */
 .toast-region--bottom {
-  /* left-1/2 + -translate-x-1/2 centers in both LTR and RTL (translate is physical) */
+  /* left-1/2 + -translate-x-1/2 centers in both LTR and RTL */
   @apply bottom-4 left-1/2 -translate-x-1/2;
 }
 
@@ -22,9 +22,8 @@
   @apply end-4 bottom-4;
 }
 
-/* Placement variants - Top */
+/* Placement - Top */
 .toast-region--top {
-  /* left-1/2 + -translate-x-1/2 centers in both LTR and RTL (translate is physical) */
   @apply top-4 left-1/2 -translate-x-1/2;
 }
 
@@ -40,33 +39,94 @@
   @apply outline-2 outline-offset-2 outline-focus;
 }
 
-/* Base toast styles */
+/* Base */
 .toast {
   position: absolute;
   inset-inline-start: 0;
   inset-inline-end: 0;
+  border-radius: min(32px, var(--radius-3xl));
+
+  /* Motion state */
+  --toast-y: var(--offset-collapsed, 0px);
+  --toast-enter: 0%;
+  --toast-scale: var(--scale-collapsed, 1);
+  transform: translateY(calc(var(--dir, 1) * (var(--toast-y) + var(--toast-enter))))
+    scale(var(--toast-scale));
+  height: var(--toast-height, auto);
 
   @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 bg-surface px-4 py-3 shadow-overlay;
-  border-radius: min(32px, var(--radius-3xl));
+
+  /* Timing tokens */
+  --toast-ease: var(--ease-out-fluid);
+  --toast-enter-duration: 350ms;
+  --toast-exit-duration: 250ms;
+  --toast-translate-duration: var(--toast-enter-duration);
+  --toast-height-duration: var(--toast-enter-duration);
+  --toast-opacity-duration: 150ms;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER animation/transition for correct override specificity
+   */
+  transition:
+    transform var(--toast-translate-duration) var(--toast-ease),
+    height var(--toast-height-duration) var(--toast-ease),
+    opacity var(--toast-opacity-duration) var(--toast-ease);
+
+  @apply motion-reduce:animate-none motion-reduce:transition-none;
 }
 
+/* Enter */
+.toast[data-entering="true"] {
+  --toast-enter: -100%;
+}
+
+/* Stacking direction */
 .toast--bottom,
 .toast--bottom-start,
 .toast--bottom-end {
+  --dir: -1;
   bottom: 0;
+  transform-origin: bottom center;
+
+  &[data-expanded="true"]::after {
+    top: calc(-1 * var(--gap, 12px) - 1px);
+    bottom: 0;
+  }
 }
 
 .toast--top,
 .toast--top-start,
 .toast--top-end {
+  --dir: 1;
   top: 0;
+  transform-origin: top center;
+
+  &[data-expanded="true"]::after {
+    top: 0;
+    bottom: calc(-1 * var(--gap, 12px) - 1px);
+  }
 }
 
-.toast:not([data-frontmost="true"]) {
-  @apply pointer-events-none;
+/* Content fade between collapsed / expanded */
+.toast > :not([data-slot="toast-close"]) {
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition: opacity 200ms var(--toast-ease);
+  @apply motion-reduce:transition-none;
+}
 
-  height: var(--front-height);
+/* Collapsed non-front: force height to front toast (Sonner-style unified stack height) */
+.toast:not([data-frontmost="true"]):not([data-expanded="true"]) {
+  --toast-y: var(--offset-collapsed, 0px);
+  height: var(--front-height, 0px);
   overflow: hidden;
+
+  > :not([data-slot="toast-close"]) {
+    opacity: 0;
+  }
 
   .toast__close-button {
     @apply pointer-events-none opacity-0;
@@ -74,6 +134,46 @@
   }
 }
 
+/* Expanded */
+.toast[data-expanded="true"] {
+  --toast-y: var(--offset-expanded, 0px);
+  --toast-scale: 1;
+  height: var(--toast-height, auto);
+}
+
+/* Expanded hit area that covers the gap between toasts */
+.toast[data-expanded="true"]::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0;
+}
+
+/* Exit */
+.toast[data-exiting="true"] {
+  @apply opacity-0;
+}
+
+.toast[data-exiting="true"][data-frontmost="true"] {
+  --toast-translate-duration: var(--toast-exit-duration);
+  --toast-opacity-duration: 150ms;
+  --toast-enter: -100%;
+  --toast-scale: 1;
+}
+
+.toast[data-exiting="true"][data-expanded="true"]:not([data-frontmost="true"]) {
+  --toast-translate-duration: 200ms;
+  --toast-opacity-duration: 150ms;
+  --toast-scale: 0.96;
+}
+
+.toast[data-exiting="true"]:not([data-expanded="true"]):not([data-frontmost="true"]) {
+  --toast-translate-duration: 200ms;
+  --toast-opacity-duration: 150ms;
+  --toast-scale: calc(var(--scale-collapsed, 1) * 0.96);
+}
+
+/* Hidden (beyond maxVisibleToasts) */
 .toast[data-hidden="true"] {
   @apply pointer-events-none flex opacity-0;
 }
@@ -82,25 +182,12 @@
   @apply outline-2 outline-offset-2 outline-focus;
 }
 
-/* Toast placements + view transitions */
-.toast--bottom,
-.toast--bottom-start,
-.toast--bottom-end {
-  view-transition-class: toast-bottom;
-}
-
-.toast--top,
-.toast--top-start,
-.toast--top-end {
-  view-transition-class: toast-top;
-}
-
-/* Toast content */
+/* Content */
 .toast__content {
-  @apply flex h-full grow flex-col items-start self-center;
+  @apply flex grow flex-col items-start self-center;
 }
 
-/* Toast indicator */
+/* Indicator */
 .toast__indicator {
   @apply flex shrink-0 items-center justify-center p-1 text-overlay-foreground select-none;
 
@@ -108,7 +195,6 @@
     @apply box-content size-4;
   }
 
-  /* Spinner styles override for toast */
   [data-slot="spinner"] {
     @apply size-4;
   }
@@ -118,27 +204,43 @@
   }
 }
 
-/* Toast title */
+/* Settled promise icon (data-swapped skips first paint) */
+.toast__indicator[data-swapped="true"] > :not([data-slot="spinner"]) {
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER animation/transition for correct override specificity
+   */
+  animation:
+    toast-indicator-fade 150ms var(--toast-ease),
+    toast-indicator-scale 200ms var(--toast-ease);
+  @apply motion-reduce:animate-none;
+}
+
+/* Title */
 .toast__title {
   @apply text-sm leading-5 font-medium text-overlay-foreground;
 }
 
-/* Toast description */
+/* Description */
 .toast__description {
   @apply text-sm text-muted;
 }
 
-/* Toast close button */
+/* Close button */
 .toast__close-button {
   @apply pointer-events-none absolute -end-1 -top-1 size-5 border-border bg-default opacity-0 sm:border sm:bg-overlay;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
   transition: opacity 150ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
-  /* Overrides close button default icon size from 16px to 12px */
+
   [data-slot="close-button-icon"] {
     @apply size-3.5 sm:size-3;
   }
 
-  /* Overrides close button hover state */
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
@@ -147,17 +249,23 @@
   }
 }
 
-/* Only show close button on hover for frontmost toast */
-.toast[data-frontmost="true"]:hover .toast__close-button {
+/* Reveal close button on hover */
+.toast[data-frontmost="true"]:hover .toast__close-button,
+.toast[data-expanded="true"]:hover .toast__close-button {
   @apply pointer-events-auto opacity-100;
 }
 
-/* Toast action button */
+/* Exiting toasts never show the close button */
+.toast[data-exiting="true"] .toast__close-button {
+  @apply pointer-events-none opacity-0;
+}
+
+/* Action */
 .toast__action {
   @apply mt-2 sm:mt-0;
 }
 
-/* Variant modifiers */
+/* Variants */
 .toast--accent .toast__title {
   @apply text-accent-soft-foreground;
 }
@@ -186,64 +294,14 @@
   @apply text-danger-soft-foreground;
 }
 
-/* View transition animations */
-::view-transition-group(.toast-bottom),
-::view-transition-group(.toast-top) {
-}
-
-::view-transition-old(*),
-::view-transition-new(*) {
-  will-change: translate, opacity;
-}
-
-/* Bottom */
-::view-transition-new(.toast-bottom):only-child {
-  animation: toast-slide-bottom-in 350ms;
-}
-
-::view-transition-old(.toast-bottom):only-child {
-  animation: toast-slide-bottom-out 350ms;
-  animation-fill-mode: forwards;
-}
-
-/* Top */
-::view-transition-new(.toast-top):only-child {
-  animation: toast-slide-top-in 350ms;
-}
-
-::view-transition-old(.toast-top):only-child {
-  animation: toast-slide-top-out 350ms;
-  animation-fill-mode: forwards;
-}
-
-/* Keyframes */
-
-/* Bottom */
-@keyframes toast-slide-bottom-in {
+@keyframes toast-indicator-fade {
   from {
-    translate: 0 100%;
     opacity: 0;
   }
 }
 
-@keyframes toast-slide-bottom-out {
-  to {
-    translate: 0 100%;
-    opacity: 0;
-  }
-}
-
-/* Top */
-@keyframes toast-slide-top-in {
+@keyframes toast-indicator-scale {
   from {
-    translate: 0 -100%;
-    opacity: 0;
-  }
-}
-
-@keyframes toast-slide-top-out {
-  to {
-    translate: 0 -100%;
-    opacity: 0;
+    scale: 0.92;
   }
 }
