@@ -43,7 +43,7 @@
  * Element: backdrop - the overlay behind the dialog
  */
 .alert-dialog__backdrop {
-  @apply fixed inset-0 z-50;
+  @apply fixed inset-0 z-(--z-index-overlay);
   @apply flex flex-row items-center justify-center;
   @apply h-(--visual-viewport-height) w-full;
 

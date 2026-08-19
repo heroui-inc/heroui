@@ -92,6 +92,7 @@ ScrollShadow 组件使用 CSS 变量设置渐变遮罩尺寸，并为可见的�
 | 变量                              | 默认值                                 | 描述                                                                                                               |
 | --------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `--scroll-shadow-size`            | `40px`                                 | 控制渐变阴影尺寸。该值由 `size` prop 设置。                                                                         |
+| `--scroll-shadow-offset`          | `0px`                                  | 开始显示渐变之前需要滚动的距离。该值由 `offset` prop 设置。                                                         |
 | `--scroll-shadow-scrollbar-size`  | `10px`（`hideScrollBar` 时为 `0px`）   | 为原生滚动条保留一段实色遮罩区域，避免渐变覆盖滚动条。使用更宽的自定义滚动条时可以覆盖该值。                       |
 
 ### Data 属性
@@ -102,6 +103,18 @@ ScrollShadow 组件使用 CSS 变量设置渐变遮罩尺寸，并为可见的�
 - **组合状态**：`[data-top-bottom-scroll]`、`[data-left-right-scroll]` — 当内容可向两个方向滚动时应用
 - **方向**：`[data-orientation="vertical"]` 或 `[data-orientation="horizontal"]` — 表示滚动方向
 - **尺寸**：`[data-scroll-shadow-size]` — 阴影渐变尺寸数值
+- **阴影模式**：`[data-scroll-shadow-mode]` — 渐变由滚动位置推导时为 `"auto"`；`visibility` 受控或 `isEnabled` 为 `false` 时为 `"manual"`
+
+### 滚动驱动的渐变
+
+在 `auto` 模式下，支持[滚动驱动动画](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-timeline)的浏览器会直接在 CSS
+中根据滚动位置推导渐变。因此遮罩在首次绘制时就是正确的，无需测量，也不会在 hydration 期间出现未渐变内容的闪烁。
+不支持的浏览器会回退到上面的 `[data-*-scroll]` 属性，这些属性在 hydration 之后才写入。自定义样式时需要注意两点：
+
+- 在 `auto` 模式下，即使没有可滚动内容，根元素也始终会解析出 `mask-image`。这会使其成为层叠上下文，
+  并成为 `position: fixed` 后代元素的包含块。如需退出该行为，请显式设置 `visibility`。
+- 滚动驱动的渐变依赖根元素上的 `animation` 属性。在同一元素上使用 `animate-*` 工具类会覆盖它，导致渐变消失。
+  请改为对外层容器应用动画。
 
 ## API 参考
 

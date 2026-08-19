@@ -89,7 +89,14 @@
 
 /* Remove Button  */
 .tag__remove-button {
-  @apply size-3 text-inherit;
+  /**
+   * The glyph is 12px, half the minimum target size. A finger tap that misses it lands on the
+   * tag body, which consumes the press without removing anything, so removing a tag by touch
+   * takes several attempts. `touch-target` widens the pressable area to 24px. On `--sm` the
+   * overlay reaches ~2px past the tag box, which the 6px list gap absorbs, so it never
+   * overlaps a neighbouring tag.
+   */
+  @apply touch-target size-3 text-inherit;
 
   /* SVG icon styling */
   & svg {

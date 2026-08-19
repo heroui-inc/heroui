@@ -2103,6 +2103,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./select/custom-indicator").then((m) => m.CustomIndicator),
     file: "cn/select/custom-indicator.tsx",
   },
+  "select-with-clear-button": {
+    loader: () => import("./select/with-clear-button").then((m) => m.WithClearButton),
+    file: "cn/select/with-clear-button.tsx",
+  },
   "select-custom-value": {
     loader: () => import("./select/custom-value").then((m) => m.CustomValue),
     file: "cn/select/custom-value.tsx",

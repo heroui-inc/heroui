@@ -27,6 +27,7 @@ export default () => (
     <Label />
     <Select.Trigger>
       <Select.Value />
+      <Select.ClearButton />
       <Select.Indicator />
     </Select.Trigger>
     <Description />
@@ -108,6 +109,14 @@ The Select component supports two visual variants:
 
 <ComponentPreview name="select-custom-indicator" />
 
+### With Clear Button
+
+`Select.Trigger` is a button, so a nested `<button>` cannot be used for clear. Compose `Select.ClearButton` inside the trigger instead — it renders as a non-button control and does not open the menu.
+
+<ComponentPreview name="select-with-clear-button" />
+
+Because ARIA treats the children of a button as presentational, the clear control cannot take focus. It is therefore `aria-hidden` and acts as a pointer affordance only. When a `Select.ClearButton` is composed, the trigger also clears on `Backspace` or `Delete`, which is how keyboard and screen reader users clear the selection. Both paths call `onClear`.
+
 ### Custom Value
 
 <ComponentPreview name="select-custom-value" />
@@ -173,6 +182,7 @@ The Select component uses these CSS classes ([View source styles](https://github
 - `.select` - Base select container
 - `.select__trigger` - The button that triggers the select
 - `.select__value` - The displayed value or placeholder
+- `.select__clear-button` - The optional clear control inside the trigger
 - `.select__indicator` - The dropdown indicator icon
 - `.select__popover` - The popover container
 
@@ -187,6 +197,7 @@ The Select component uses these CSS classes ([View source styles](https://github
 - `.select__trigger[data-focus-visible="true"]` - Focused trigger state
 - `.select__trigger[data-disabled="true"]` - Disabled trigger state
 - `.select__value[data-placeholder="true"]` - Placeholder state
+- `.select__clear-button[data-empty="true"]` - Clear button hidden when no selection
 - `.select__indicator[data-open="true"]` - Open indicator state
 
 ### Interactive States
@@ -214,6 +225,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `value`         | `Key \| Key[] \| null`                  | -                  | Current value (controlled)                               |
 | `defaultValue`  | `Key \| Key[] \| null`                  | -                  | Default value (uncontrolled)                             |
 | `onChange`      | `(value: Key \| Key[] \| null) => void` | -                  | Handler called when the value changes                    |
+| `onClear`       | `() => void`                            | -                  | Handler called when the selection is cleared             |
 | `isRequired`    | `boolean`                               | -                  | Whether user input is required                           |
 | `isInvalid`     | `boolean`                               | -                  | Whether the select value is invalid                      |
 | `name`          | `string`                                | -                  | The name of the input, used when submitting an HTML form |
@@ -245,6 +257,16 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | ----------- | ----------- | ------- | ------------------------ |
 | `className` | `string`    | -       | Additional CSS classes   |
 | `children`  | `ReactNode` | -       | Custom indicator content |
+
+### Select.ClearButton
+
+| Prop        | Type                      | Default | Description                                |
+| ----------- | ------------------------- | ------- | ------------------------------------------ |
+| `className` | `string`                  | -       | Additional CSS classes                     |
+| `children`  | `ReactNode`               | -       | Custom content, replacing the default icon |
+| `onClick`   | `(e: MouseEvent) => void` | -       | Handler called when the control is clicked |
+
+`Select.ClearButton` renders as a `span` so it can live inside `Select.Trigger` (a button) without nesting buttons. It is visually hidden when the selection is empty.
 
 ### Select.Popover
 

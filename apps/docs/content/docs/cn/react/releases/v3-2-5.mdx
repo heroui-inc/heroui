@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: 补丁版本：将动画合成器提示限制在动画状态，确保 Modal 重新打开后按钮文本依然清晰，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，在没有步进按钮时不再为 NumberField 预留侧栏空间，并在传入自定义样式时保留 Toast 区域 CSS 变量。
+description: 补丁版本：新增 Select.ClearButton，确保 Modal 级浮层位于关闭中的 Popover 之上，扩大 Tag 移除按钮触摸目标，通过滚动时间线驱动 ScrollShadow 淡出以避免 SSR 闪烁，将动画合成器提示限制在动画状态，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，在没有步进按钮时不再为 NumberField 预留侧栏空间，并在传入自定义样式时保留 Toast 区域 CSS 变量。
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 8 月 13 日</span>
 </div>
 
-补丁版本：[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；[Toast](/docs/components/toast) 在传入自定义样式时也会保留区域 CSS 变量。
+补丁版本：[Select](/docs/components/select) 新增 `ClearButton`，Modal 级浮层会保持在关闭中的 Popover 之上，[Tag](/docs/components/tag) 的移除目标达到 24px，[ScrollShadow](/docs/components/scroll-shadow) 通过滚动时间线驱动淡出以避免 SSR 闪烁；[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；[Toast](/docs/components/toast) 在传入自定义样式时也会保留区域 CSS 变量。
 
 ## 安装
 
@@ -42,8 +42,19 @@ github:
   **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
 </Callout>
 
+## 新功能
+
+### Select
+
+[Select](/docs/components/select) 新增清除交互，且不会在 `Select.Trigger` 内嵌套按钮。将 `Select.ClearButton` 与 Value、Indicator 一起组合，并通过根组件的 `onClear` 监听清除。该控件渲染为仅指针可用的 `span`（`aria-hidden`）；键盘与读屏用户在组合了清除按钮且弹层关闭时，可用 `Backspace` 或 `Delete` 清除。
+
+- **清除按钮**：新增 `Select.ClearButton` 与根组件 `onClear`，无需非法嵌套按钮即可清除选中项 ([#6796](https://github.com/heroui-inc/heroui/pull/6796))。
+
 ## 错误修复
 
+- **浮层**：将 `Modal`、`AlertDialog` 与 `Drawer` 提升到共享的 overlay z-index，并在 Popover 级浮层退出动画期间禁用指针事件，避免关闭中的 `Dropdown` / `Select` / `Popover` 盖住或拦截新打开 Modal 的点击 ([#6798](https://github.com/heroui-inc/heroui/pull/6798))。
+- **Tag**：将移除按钮的可点击区域扩大到 24×24，同时保持 12×12 图标，使多选 `Autocomplete` 芯片上的点击更可靠 ([#6797](https://github.com/heroui-inc/heroui/pull/6797))。
+- **ScrollShadow**：在支持的浏览器中通过 CSS 滚动时间线驱动淡出，使首屏绘制即正确、无需 hydration 后测量，从而避免闪烁；不支持的引擎与受控模式仍使用属性驱动，并合并消费者 `style` 以保留 `--scroll-shadow-size` / `--scroll-shadow-offset` ([#6800](https://github.com/heroui-inc/heroui/pull/6800))。
 - **Button、Menu 与 Dropdown**：将 `will-change` 合成器提示限制在按下和进出场动画状态，使静态文本在带有 transform 的浮层中保持清晰，包括 `Modal` 关闭后重新打开的场景 ([#6779](https://github.com/heroui-inc/heroui/pull/6779))。
 - **Drawer**：将拖拽手势限制在最近的所属 `Drawer.Dialog`，使嵌套抽屉的把手只关闭自身抽屉，而父抽屉保持打开且不发生位移 ([#6780](https://github.com/heroui-inc/heroui/pull/6780))。
 - **Table**：防止 typeahead 抢走嵌套可编辑控件的按键输入与焦点。`keyboardNavigationBehavior` 现已作为 prop 暴露，并默认设为 `"tab"`，同时保留非可编辑单元格中的 typeahead ([#6781](https://github.com/heroui-inc/heroui/pull/6781))。

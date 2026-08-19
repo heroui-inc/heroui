@@ -1,6 +1,13 @@
 import type {ComponentProps} from "react";
 
-import {SelectIndicator, SelectPopover, SelectRoot, SelectTrigger, SelectValue} from "./select";
+import {
+  SelectClearButton,
+  SelectIndicator,
+  SelectPopover,
+  SelectRoot,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
@@ -10,6 +17,7 @@ export const Select = Object.assign(SelectRoot, {
   Trigger: SelectTrigger,
   Value: SelectValue,
   Indicator: SelectIndicator,
+  ClearButton: SelectClearButton,
   Popover: SelectPopover,
 });
 
@@ -19,13 +27,14 @@ export type Select<T extends object = object> = {
   TriggerProps: ComponentProps<typeof SelectTrigger>;
   ValueProps: ComponentProps<typeof SelectValue>;
   IndicatorProps: ComponentProps<typeof SelectIndicator>;
+  ClearButtonProps: ComponentProps<typeof SelectClearButton>;
   PopoverProps: ComponentProps<typeof SelectPopover>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {SelectIndicator, SelectPopover, SelectRoot, SelectTrigger, SelectValue};
+export {SelectClearButton, SelectIndicator, SelectPopover, SelectRoot, SelectTrigger, SelectValue};
 
 export type {
   SelectRootProps,
@@ -33,6 +42,7 @@ export type {
   SelectTriggerProps,
   SelectValueProps,
   SelectIndicatorProps,
+  SelectClearButtonProps,
   SelectPopoverProps,
 } from "./select";
 
