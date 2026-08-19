@@ -267,8 +267,6 @@ const Toast = <T extends object = ToastContentValue>({
     const frontHeight =
       (frontToastKey ? heightsByKey?.[frontToastKey] : undefined) ?? toastHeight ?? 0;
 
-    // Expanded offset: cumulative heights of the toasts in front of this
-    // one, falling back to the front height until an entry is measured.
     let heightsBefore = 0;
 
     for (let i = 0; i < index; i++) {
@@ -282,13 +280,14 @@ const Toast = <T extends object = ToastContentValue>({
       "--offset-expanded": `${heightsBefore + index * gap}px`,
       "--scale-collapsed": `${1 - index * finalScaleFactor}`,
       viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
-      // Exiting toasts render below live siblings so the fading ghost never swallows clicks aimed at the successor sliding into its slot.
       zIndex: isExiting ? 0 : visibleToasts.length - fullIndex,
-      ...(frontHeight
+
+      ...(frontHeight != null
         ? ({
             "--front-height": `${frontHeight}px`,
           } as CSSProperties)
         : null),
+
       ...(typeof toastHeight === "number"
         ? ({
             "--toast-height": `${toastHeight}px`,

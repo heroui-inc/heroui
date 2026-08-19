@@ -1,6 +1,6 @@
 /* Toast component styles */
 
-/* Toast Region - Container for all toasts */
+/* Toast Region */
 .toast-region {
   @apply pointer-events-none fixed z-50 outline-none;
   @apply w-[calc(100vw-2rem)] sm:w-auto sm:min-w-(--toast-width);
@@ -8,9 +8,9 @@
   display: block;
 }
 
-/* Placement variants - Bottom */
+/* Placement - Bottom */
 .toast-region--bottom {
-  /* left-1/2 + -translate-x-1/2 centers in both LTR and RTL (translate is physical) */
+  /* left-1/2 + -translate-x-1/2 centers in both LTR and RTL */
   @apply bottom-4 left-1/2 -translate-x-1/2;
 }
 
@@ -22,7 +22,7 @@
   @apply end-4 bottom-4;
 }
 
-/* Placement variants - Top */
+/* Placement - Top */
 .toast-region--top {
   @apply top-4 left-1/2 -translate-x-1/2;
 }
@@ -39,22 +39,24 @@
   @apply outline-2 outline-offset-2 outline-focus;
 }
 
-/* Base toast styles */
+/* Base */
 .toast {
   position: absolute;
   inset-inline-start: 0;
   inset-inline-end: 0;
   border-radius: min(32px, var(--radius-3xl));
+
+  /* Motion state */
   --toast-y: var(--offset-collapsed, 0px);
   --toast-enter: 0%;
   --toast-scale: var(--scale-collapsed, 1);
   transform: translateY(calc(var(--dir, 1) * (var(--toast-y) + var(--toast-enter))))
     scale(var(--toast-scale));
-  /* px so height can transition on expand; auto snaps. */
   height: var(--toast-height, auto);
 
   @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 bg-surface px-4 py-3 shadow-overlay;
 
+  /* Timing tokens */
   --toast-ease: var(--ease-out-fluid);
   --toast-enter-duration: 350ms;
   --toast-exit-duration: 250ms;
@@ -68,17 +70,18 @@
    */
   transition:
     transform var(--toast-translate-duration) var(--toast-ease),
+    height var(--toast-height-duration) var(--toast-ease),
     opacity var(--toast-opacity-duration) var(--toast-ease);
 
   @apply motion-reduce:animate-none motion-reduce:transition-none;
 }
 
-/* First paint is off-edge; dropping data-entering transitions transform in. */
+/* Enter */
 .toast[data-entering="true"] {
   --toast-enter: -100%;
 }
 
-/* Stacking direction: offsets move away from the anchored edge; the hit-area pseudo-element (see below) extends toward the neighbor. */
+/* Stacking direction */
 .toast--bottom,
 .toast--bottom-start,
 .toast--bottom-end {
@@ -105,7 +108,7 @@
   }
 }
 
-/* Content fades between collapsed and expanded (the close button manages its own opacity). */
+/* Content fade between collapsed / expanded */
 .toast > :not([data-slot="toast-close"]) {
   /**
    * Transitions
@@ -115,18 +118,11 @@
   @apply motion-reduce:transition-none;
 }
 
-/* Behind toasts keep their own height and shift by the extra front height so a taller incoming toast pushes them instead of snapping. */
-.toast:not([data-frontmost="true"]) {
-  --toast-y: calc(
-    var(--offset-collapsed, 0px) + max(0px, var(--front-height, 0px) - var(--toast-height, 0px))
-  );
-  height: var(--toast-height, auto);
-}
-
-/* Collapsed behind toasts hide their content; clip can never become a scroll container. Expanded overflow stays visible for the close button. */
+/* Collapsed non-front: force height to front toast (Sonner-style unified stack height) */
 .toast:not([data-frontmost="true"]):not([data-expanded="true"]) {
-  overflow: clip;
-  max-height: var(--front-height);
+  --toast-y: var(--offset-collapsed, 0px);
+  height: var(--front-height, 0px);
+  overflow: hidden;
 
   > :not([data-slot="toast-close"]) {
     opacity: 0;
@@ -138,27 +134,14 @@
   }
 }
 
-/* Expanded stack: cumulative-height offsets and natural (measured) heights. */
+/* Expanded */
 .toast[data-expanded="true"] {
   --toast-y: var(--offset-expanded, 0px);
   --toast-scale: 1;
-
-  /**
-   * Transitions
-   * CRITICAL: motion-reduce must be AFTER animation/transition for correct override specificity
-   */
-  transition:
-    transform var(--toast-translate-duration) var(--toast-ease),
-    height var(--toast-height-duration) var(--toast-ease),
-    opacity var(--toast-opacity-duration) var(--toast-ease);
-  @apply motion-reduce:transition-none;
-}
-
-.toast[data-expanded="true"]:not([data-frontmost="true"]) {
   height: var(--toast-height, auto);
 }
 
-/* Invisible hit area over the toast box and its gap: fills the border-radius hit-testing dead zones so the pointer never leaves the stack between toasts. z-index: -1 keeps it behind the toast's own content. */
+/* Expanded hit area that covers the gap between toasts */
 .toast[data-expanded="true"]::after {
   content: "";
   position: absolute;
@@ -166,12 +149,11 @@
   inset-inline: 0;
 }
 
-/* Exit. Keep durations <= DEFAULT_EXIT_DURATION. */
+/* Exit */
 .toast[data-exiting="true"] {
   @apply opacity-0;
 }
 
-/* Frontmost: slide off the anchored edge. */
 .toast[data-exiting="true"][data-frontmost="true"] {
   --toast-translate-duration: var(--toast-exit-duration);
   --toast-opacity-duration: 150ms;
@@ -179,23 +161,19 @@
   --toast-scale: 1;
 }
 
-/* Expanded background: fade in place. */
 .toast[data-exiting="true"][data-expanded="true"]:not([data-frontmost="true"]) {
   --toast-translate-duration: 200ms;
   --toast-opacity-duration: 150ms;
-
   --toast-scale: 0.96;
 }
 
-/* Collapsed background: fade in place. */
 .toast[data-exiting="true"]:not([data-expanded="true"]):not([data-frontmost="true"]) {
   --toast-translate-duration: 200ms;
   --toast-opacity-duration: 150ms;
-
   --toast-scale: calc(var(--scale-collapsed, 1) * 0.96);
 }
 
-/* Toasts beyond maxVisibleToasts stay invisible in all states. */
+/* Hidden (beyond maxVisibleToasts) */
 .toast[data-hidden="true"] {
   @apply pointer-events-none flex opacity-0;
 }
@@ -204,12 +182,12 @@
   @apply outline-2 outline-offset-2 outline-focus;
 }
 
-/* Natural height + self-center on purpose: h-full resolves differently against auto vs definite heights and made text snap on demotion. */
+/* Content */
 .toast__content {
   @apply flex grow flex-col items-start self-center;
 }
 
-/* Toast indicator */
+/* Indicator */
 .toast__indicator {
   @apply flex shrink-0 items-center justify-center p-1 text-overlay-foreground select-none;
 
@@ -226,7 +204,7 @@
   }
 }
 
-/* Settled promise icon. data-swapped skips the first paint. */
+/* Settled promise icon (data-swapped skips first paint) */
 .toast__indicator[data-swapped="true"] > :not([data-slot="spinner"]) {
   /**
    * Transitions
@@ -238,17 +216,17 @@
   @apply motion-reduce:animate-none;
 }
 
-/* Toast title */
+/* Title */
 .toast__title {
   @apply text-sm leading-5 font-medium text-overlay-foreground;
 }
 
-/* Toast description */
+/* Description */
 .toast__description {
   @apply text-sm text-muted;
 }
 
-/* Toast close button */
+/* Close button */
 .toast__close-button {
   @apply pointer-events-none absolute -end-1 -top-1 size-5 border-border bg-default opacity-0 sm:border sm:bg-overlay;
 
@@ -259,12 +237,10 @@
   transition: opacity 150ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
 
-  /* Override the close button's default icon size */
   [data-slot="close-button-icon"] {
     @apply size-3.5 sm:size-3;
   }
 
-  /* Overrides close button hover state */
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
@@ -273,23 +249,23 @@
   }
 }
 
-/* Reveal on hover for the frontmost toast and for every expanded toast. */
+/* Reveal close button on hover */
 .toast[data-frontmost="true"]:hover .toast__close-button,
 .toast[data-expanded="true"]:hover .toast__close-button {
   @apply pointer-events-auto opacity-100;
 }
 
-/* Exiting toasts never show or accept their close button. Declared after the hover reveal so it wins. */
+/* Exiting toasts never show the close button */
 .toast[data-exiting="true"] .toast__close-button {
   @apply pointer-events-none opacity-0;
 }
 
-/* Toast action button */
+/* Action */
 .toast__action {
   @apply mt-2 sm:mt-0;
 }
 
-/* Variant modifiers */
+/* Variants */
 .toast--accent .toast__title {
   @apply text-accent-soft-foreground;
 }

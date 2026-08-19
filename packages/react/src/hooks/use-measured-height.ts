@@ -16,24 +16,20 @@ export const useMeasuredHeight = (ref: RefObject<HTMLDivElement | null>) => {
       return;
     }
 
-    // Unclamp to measure natural height. Leave transition intact.
     const previousHeight = element.style.height;
 
     element.style.height = "auto";
-
     const measuredHeight = element.scrollHeight;
 
     element.style.height = previousHeight;
 
-    setHeight((prevHeight) => (prevHeight !== measuredHeight ? measuredHeight : prevHeight));
+    setHeight((prev) => (prev !== measuredHeight ? measuredHeight : prev));
   }, [ref]);
 
-  // Measure before the first paint so consumers can position siblings without a one-frame layout shift.
   useSafeLayoutEffect(() => {
     calculateHeight();
   }, [calculateHeight]);
 
-  // Re-measure only when content changes; async changes without DOM mutations are not detected.
   useEffect(() => {
     const element = ref.current;
 
@@ -41,7 +37,6 @@ export const useMeasuredHeight = (ref: RefObject<HTMLDivElement | null>) => {
       return;
     }
 
-    // Exclude `style` and state attributes to avoid triggering measurements or canceling in-progress transitions.
     let measureFrame = 0;
     const scheduleMeasure = () => {
       if (measureFrame) return;
@@ -61,9 +56,7 @@ export const useMeasuredHeight = (ref: RefObject<HTMLDivElement | null>) => {
       subtree: true,
     });
 
-    // Width changes re-wrap text; debounced so a drag-resize measures once.
     let resizeTimeoutId: ReturnType<typeof setTimeout> | undefined;
-
     const handleWindowResize = () => {
       clearTimeout(resizeTimeoutId);
       resizeTimeoutId = setTimeout(calculateHeight, 150);
