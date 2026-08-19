@@ -1,6 +1,6 @@
 /* Base container */
 .input-otp {
-  @apply relative flex items-center gap-2;
+  @apply relative flex w-full items-center gap-2;
 
   &[data-disabled="true"] {
     @apply cursor-not-allowed opacity-50;
@@ -9,12 +9,12 @@
 
 /* Group - slots separated with gap */
 .input-otp__group {
-  @apply flex items-center gap-2;
+  @apply flex min-w-0 items-center gap-2;
 }
 
 /* Individual slot box - fully rounded, standalone */
 .input-otp__slot {
-  @apply relative flex h-10 w-9.5 flex-1 items-center justify-center;
+  @apply relative flex h-10 w-9.5 min-w-0 flex-1 items-center justify-center;
   @apply border bg-field text-field-foreground shadow-field;
   @apply rounded-field text-sm font-semibold outline-none;
 

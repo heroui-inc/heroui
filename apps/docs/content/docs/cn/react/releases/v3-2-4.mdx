@@ -1,0 +1,77 @@
+---
+title: v3.2.4
+description: 补丁版本：修复 Autocomplete 弹层裁剪末尾选项的问题，恢复外部滚动模式下 Modal 点击遮罩关闭的行为，将 Tabs.ListContainer 的箭头滚动限制在可滚动范围内，将 tailwind-variants 升级到 3.3.1 以修复重新渲染后变体类名回退的问题，将 React Aria 升级到 1.20.0，并为 @heroui/react 添加行为测试套件。
+github:
+  pull: 6758
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 8 月 4 日</span>
+</div>
+
+补丁版本：[Autocomplete](/docs/components/autocomplete) 弹层不再裁剪末尾选项，`scroll="outside"` 的 [Modal](/docs/components/modal) 重新支持点击遮罩关闭，[Tabs](/docs/components/tabs) 的箭头滚动现在会精确停在边缘，`tailwind-variants` 升级到 `3.3.1` 以修复重新渲染后变体修饰符回退到错误类名的问题，React Aria 升级到 `1.20.0`（`react-aria@3.51.0`），并为 `@heroui/react` 添加了行为测试套件。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 错误修复
+
+- **Variants**：修复重新渲染后变体修饰符回退到错误类名的问题——受控的 `Checkbox` 取消选中时不再从 `checkbox--primary` 变为 `checkbox--secondary`，secondary 变体的 `Tabs` 也不再回退到 primary 变体 ([#6760](https://github.com/heroui-inc/heroui/pull/6760))。
+- **Autocomplete**：将弹层改为 flex 纵向布局，并允许列表收缩到 `320px` 上限以下，使弹层高度小于内容高度时末尾选项仍可访问——最常见于触发器位于视口中部的 `Modal` 场景 ([#6766](https://github.com/heroui-inc/heroui/pull/6766))。
+- **Modal**：将 `scroll="outside"` 时的滚动移交给背景遮罩，使点击遮罩仍可关闭弹窗——占满视口高度的容器不再吞掉遮罩点击并将其判定为弹窗内部 ([#6770](https://github.com/heroui-inc/heroui/pull/6770))。
+- **Tooltip**：在相邻 Tooltip 之间切换时保留进入与退出动画。React Aria 的预热计时器会抑制被替换 Tooltip 上的 `data-entering` / `data-exiting`，使其在 HeroUI 的 CSS 关键帧执行前就被卸载——如需恢复 React Aria 的即时切换行为，可传入新增的 `shouldSkipAnimation` 属性 ([#6772](https://github.com/heroui-inc/heroui/pull/6772))。
+- **Tabs**：将 `Tabs.ListContainer` 的箭头滚动限制在可滚动范围内，靠近边缘时点击会精确停在边缘而不会滚动过头；已经位于边缘时点击不再触发滚动 ([#6749](https://github.com/heroui-inc/heroui/pull/6749))。
+- **Badge**：将背景裁剪到 padding box，使其不再溢出 `1px` 边框，从而消除 Firefox 中圆角处出现的细微颜色边缘 ([#6768](https://github.com/heroui-inc/heroui/pull/6768))。
+- **Link**：在 link 根元素上暴露 `data-slot="link"` ([#6754](https://github.com/heroui-inc/heroui/pull/6754))。
+- **Exports**：调整 `./styles` 的导出条件顺序，将 `style` 置于 `default` 之前，使 `style` 条件可被正确命中 ([#6754](https://github.com/heroui-inc/heroui/pull/6754))。
+
+## 测试
+
+`@heroui/react` 现已包含基于共享 `@heroui/testing` 测试工具的行为测试套件——提供 Vitest 配置、初始化设置以及 `render`、`setupUser`、`ssrSmoke`、定时器和滚动锁定等辅助函数。测试套件位于 `packages/react/tests/components/`，并拆分为两个 Vitest project：`react-jsdom` 负责行为测试与客户端 SSR 冒烟测试，`react-browser` 负责 Playwright 检查。CI 中的 QA 任务会运行两者，覆盖率下限仅对 jsdom 生效。
+
+- **行为测试**：新增测试工具包、各组件测试套件、双 Vitest project 以及 QA 任务 ([#6754](https://github.com/heroui-inc/heroui/pull/6754))。
+
+## 依赖
+
+- **React Aria**：升级到 [React Aria 1.20.0](https://react-aria.adobe.com/releases/v1-20-0)——`react-aria-components@1.20.0`、`react-aria@3.51.0`、`@react-types/shared@3.36.1` 以及 `@internationalized/date@3.12.3` ([#6752](https://github.com/heroui-inc/heroui/pull/6752))。
+- **tailwind-variants**：将 `@heroui/react` 和 `@heroui/styles` 升级到 `tailwind-variants@3.3.1` ([#6760](https://github.com/heroui-inc/heroui/pull/6760))。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6758](https://github.com/heroui-inc/heroui/pull/6758)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />

@@ -8,19 +8,17 @@ links:
   storybook: Components/Feedback/ProgressBar
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { ProgressBar, Label } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="progress-bar-basic"
 />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import { ProgressBar, Label } from '@heroui/react';
@@ -36,6 +34,8 @@ export default () => (
 );
 ```
 
+## 示例
+
 ### 尺寸
 
 <ComponentPreview
@@ -48,9 +48,17 @@ export default () => (
   name="progress-bar-colors"
 />
 
+### 无可见标签
+
+无需可见标签时，使用 `aria-label` 提供无障碍标签。
+
+<ComponentPreview
+  name="progress-bar-without-label"
+/>
+
 ### 不确定进度
 
-在无法确定具体进度时，使用 `isIndeterminate`。
+无法确定进度时使用 `isIndeterminate`。
 
 <ComponentPreview
   name="progress-bar-indeterminate"
@@ -58,48 +66,21 @@ export default () => (
 
 ### 自定义数值范围
 
-使用 `minValue`、`maxValue` 与 `formatOptions` 自定义取值范围与展示格式。
+使用 `minValue`、`maxValue` 与 `formatOptions` 自定义取值范围与显示格式。
 
 <ComponentPreview
   name="progress-bar-custom-value"
 />
 
-### 无可见标签
+## 自定义样式
 
-不需要可见标签时，请使用 `aria-label` 保证无障碍。
+### Tailwind CSS
 
-<ComponentPreview
-  name="progress-bar-without-label"
-/>
+<ComponentPreview name="progress-bar-custom-styles" />
 
-<RelatedComponents component="progress-bar" />
+### 全局 CSS
 
-## 样式
-
-### 传入 Tailwind CSS 类
-
-你可以为 ProgressBar 的各个部分单独添加类名：
-
-```tsx
-import { ProgressBar, Label } from '@heroui/react';
-
-function CustomProgressBar() {
-  return (
-    <ProgressBar value={60}>
-      <Label>Loading</Label>
-      <ProgressBar.Output />
-      <ProgressBar.Track className="bg-purple-100 dark:bg-purple-900">
-        <ProgressBar.Fill className="bg-purple-500" />
-      </ProgressBar.Track>
-    </ProgressBar>
-  );
-}
-```
-
-### 自定义组件类
-
-要自定义 ProgressBar 的组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -117,26 +98,28 @@ function CustomProgressBar() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 ProgressBar 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/progress-bar.css)）：
 
-#### 基础与元素类
+#### 基础与元素类 [!toc]
 
 - `.progress-bar` - 基础容器（网格布局）
 - `.progress-bar__output` - 数值文本展示
 - `.progress-bar__track` - 轨道背景
 - `.progress-bar__fill` - 轨道上已填充部分
 
-#### 尺寸类
+#### 尺寸类 [!toc]
 
 - `.progress-bar--sm` - 小尺寸变体（更细的轨道）
 - `.progress-bar--md` - 中等尺寸变体（默认）
 - `.progress-bar--lg` - 大尺寸变体（更粗的轨道）
 
-#### 颜色类
+#### 颜色类 [!toc]
 
 - `.progress-bar--default` - 默认颜色变体
 - `.progress-bar--accent` - 强调色变体
@@ -146,8 +129,7 @@ ProgressBar 使用以下 CSS 类（[查看源码样式](https://github.com/herou
 
 ## API 参考
 
-### ProgressBar Props
-
+### ProgressBar
 继承自 [React Aria ProgressBar](https://react-spectrum.adobe.com/react-aria/ProgressBar.html)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -171,3 +153,7 @@ ProgressBar 使用以下 CSS 类（[查看源码样式](https://github.com/herou
 | `percentage` | `number` | 进度百分比（0–100） |
 | `valueText` | `string` | 格式化后的数值文本 |
 | `isIndeterminate` | `boolean` | 是否为不确定进度 |
+
+## 相关组件
+
+<RelatedComponents component="progress-bar" />

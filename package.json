@@ -1,7 +1,7 @@
 {
   "name": "heroui",
   "private": true,
-  "version": "3.2.2",
+  "version": "3.2.4",
   "license": "MIT",
   "author": {
     "name": "HeroUI",
@@ -37,18 +37,20 @@
     "typecheck:docs-cn": "dotenv -- turbo typecheck --filter=@heroui/docs-cn",
     "typecheck:react": "turbo typecheck --filter=@heroui/react",
     "typecheck:storybook": "dotenv -- turbo typecheck --filter=@heroui/storybook",
+    "test": "turbo test",
+    "test:coverage": "turbo test:coverage --filter=@heroui/react",
     "typegen:docs": "dotenv -- pnpm --filter @heroui/docs typegen",
     "typegen:docs-cn": "dotenv -- pnpm --filter @heroui/docs-cn typegen",
     "version:bump": "bumpp package.json packages/react/package.json packages/styles/package.json",
     "release": "pnpm run build && bumpp package.json packages/react/package.json packages/styles/package.json --all",
     "clean": "pnpm clean:cache && pnpm i",
-    "clean:cache": "find . \\( -name '.turbo' -o -name '.next' -o -name 'dist' -o -name 'node_modules' -o -name '.source' -o -name '.contentlayer' -o -name 'pnpm-lock.yaml' \\) -prune -exec rm -rf '{}' +",
+    "clean:cache": "find . \\( -name '.turbo' -o -name '.next' -o -name 'dist' -o -name 'node_modules' -o -name '.source' -o -name '.contentlayer' -o -name '.vitest-attachments' -o -name 'coverage' -o -name 'bundle-sizes.json'  -o -name 'tsconfig.tsbuildinfo'  -o -name 'pnpm-lock.yaml' \\) -prune -exec rm -rf '{}' +",
     "upli": "pnpm up --filter \"./**\"  -L -i",
     "prepare": "husky",
     "postinstall": "pnpm --filter @heroui/styles build && pnpm typegen:docs && pnpm typegen:docs-cn"
   },
   "devDependencies": {
-    "@babel/core": "7.28.5",
+    "@babel/core": "7.29.6",
     "@babel/preset-react": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
     "bumpp": "11.0.1",
@@ -81,46 +83,29 @@
     "eslint-plugin-react-refresh": "0.4.26",
     "eslint-plugin-sort-destructure-keys": "2.0.0",
     "eslint-plugin-sort-keys-fix": "1.1.2",
-    "eslint-plugin-storybook": "10.1.10",
+    "eslint-plugin-storybook": "10.2.10",
     "eslint-plugin-unused-imports": "4.3.0",
     "globals": "16.5.0",
     "husky": "9.1.7",
     "jiti": "2.6.1",
     "lint-staged": "16.2.7",
-    "parcel": "2.16.3",
-    "postcss": "8.5.6",
+    "parcel": "2.16.4",
+    "postcss": "8.5.23",
     "prettier": "3.7.4",
     "prettier-plugin-css-order": "2.1.2",
     "prettier-plugin-tailwindcss": "0.7.2",
-    "rollup": "4.54.0",
+    "rollup": "4.59.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.2",
     "tsup": "8.5.1",
     "tsx": "4.21.0",
-    "turbo": "2.7.2",
+    "turbo": "2.9.14",
     "typescript": "5.9.3",
     "typescript-eslint": "8.50.1",
-    "vitest": "4.0.16"
-  },
-  "pnpm": {
-    "overrides": {
-      "shiki": "3.20.0",
-      "ts-morph": "27.0.2"
-    },
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@swc/core",
-      "core-js",
-      "esbuild",
-      "lmdb",
-      "msgpackr-extract",
-      "protobufjs",
-      "sharp",
-      "unrs-resolver"
-    ]
+    "vitest": "4.1.10"
   },
   "engines": {
-    "node": ">=20.x",
+    "node": ">=22.x",
     "pnpm": ">=10.x"
   },
   "packageManager": "pnpm@10.26.2"

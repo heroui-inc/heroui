@@ -15,6 +15,7 @@ import {getAllBlogPosts, getBlogPost, getRelatedPosts} from "@/lib/blog";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
 import {getTechArticleJsonLd} from "@/lib/json-ld";
+import {LOCALES, getLocalizedAlternates} from "@/lib/seo";
 import {getMDXComponents} from "@/mdx-components";
 
 import {PostCard} from "../post-card";
@@ -40,17 +41,23 @@ export async function generateMetadata({params}: BlogPostPageProps): Promise<Met
 
   if (!post) return {};
 
-  const url = `/${lang}/blog/${slug}`;
+  const path = `/blog/${slug}`;
+  // Untranslated posts are served in every locale from the default-locale file,
+  // so only locales with a real translation belong in the hreflang cluster.
+  const translatedLocales = LOCALES.filter(
+    (locale) => getBlogPost(slug, locale)?.locale === locale,
+  );
+  const alternates = getLocalizedAlternates({locale: lang, locales: translatedLocales, path});
+  const url = alternates.canonical;
 
   return {
-    alternates: {
-      canonical: url,
-    },
+    alternates,
     description: post.description,
     openGraph: {
       authors: [post.author],
       description: post.description,
       publishedTime: post.date,
+      siteName: siteConfig.name,
       title: post.title,
       type: "article",
       url,
@@ -60,6 +67,7 @@ export async function generateMetadata({params}: BlogPostPageProps): Promise<Met
     twitter: {
       card: "summary_large_image",
       description: post.description,
+      site: "@hero_ui",
       title: post.title,
       ...(post.image && {images: [post.image]}),
     },
@@ -110,7 +118,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
       />
       <main className="mx-auto w-full max-w-3xl px-6 py-16 sm:px-8">
         <Link
-          className="button button--tertiary mb-12 -ml-2 inline-flex items-center gap-1"
+          className="button button--tertiary -ms-2 mb-12 inline-flex items-center gap-1"
           href={`/${lang}/blog`}
         >
           <ChevronLeft className="size-4" />
@@ -149,7 +157,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
                 {post.authorAvatar ? (
                   <img
                     alt=""
-                    className="mr-0 size-0 rounded-full opacity-0 transition-all group-hover/author:mr-2 group-hover/author:size-6 group-hover/author:opacity-100"
+                    className="me-0 size-0 rounded-full opacity-0 transition-all group-hover/author:me-2 group-hover/author:size-6 group-hover/author:opacity-100"
                     src={post.authorAvatar}
                   />
                 ) : null}

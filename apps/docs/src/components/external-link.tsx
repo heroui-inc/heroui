@@ -21,7 +21,7 @@ export const ExternalLink = React.forwardRef<HTMLAnchorElement, ExternalLinkProp
         {...props}
       >
         {children}
-        <LinkIcon className="absolute top-[8px] right-[-1px] outline-transparent transition-transform outline-solid group-data-[hover=true]:translate-y-0.5 [&>path]:stroke-[2.5px]" />
+        <LinkIcon className="absolute end-[-1px] top-[8px] outline-transparent transition-transform outline-solid group-data-[hover=true]:translate-y-0.5 [&>path]:stroke-[2.5px]" />
       </Link>
     );
   },

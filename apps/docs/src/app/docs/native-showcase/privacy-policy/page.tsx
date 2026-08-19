@@ -9,6 +9,9 @@ const EFFECTIVE_DATE = "May 21, 2026";
 const CONTACT_EMAIL: string = siteConfig.supportEmail;
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: new URL("/docs/native-showcase/privacy-policy", siteConfig.siteUrl).toString(),
+  },
   description: [
     "Privacy policy for the ",
     NATIVE_APP.NAME,

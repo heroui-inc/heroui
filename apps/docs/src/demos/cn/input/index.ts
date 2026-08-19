@@ -4,3 +4,4 @@ export {FullWidth} from "./full-width";
 export {OnSurface} from "./on-surface";
 export {Types} from "./types";
 export {Variants} from "./variants";
+export {CustomStyles} from "./custom-styles";

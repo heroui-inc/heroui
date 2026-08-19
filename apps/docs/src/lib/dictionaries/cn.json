@@ -2,19 +2,21 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.2 — 补丁版本",
-        "href": "/docs/react/releases/v3-2-2",
-        "date": "2026-07-06"
+        "label": "HeroUI React v3.2.4 — 补丁版本",
+        "href": "/docs/react/releases/v3-2-4",
+        "date": "2026-08-04"
       },
       {
-        "label": "HeroUI Native v1.0.6 — 补丁版本",
-        "href": "/docs/native/releases/v1-0-6",
-        "date": "2026-07-21"
+        "label": "HeroUI Native v1.0.8 — 补丁版本",
+        "href": "/docs/native/releases/v1-0-8",
+        "date": "2026-07-31"
       }
     ],
     "titleMain": "开箱即用",
     "titleMuted": "设计灵活可定制",
     "description": "HeroUI 是面向网页与移动端的现代 UI 库，助你快速迭代、保持一致，并打造令人愉悦的用户体验。",
+    "metaTitle": "HeroUI v3（前身为 NextUI）- 开箱即用，设计灵活可定制。",
+    "metaDescription": "基于 React Aria 和 Tailwind CSS v4 构建的精美、无障碍 React UI 组件。用于构建生产级应用的现代化 MUI、Chakra UI 和 shadcn/ui 替代方案。",
     "getStarted": "快速开始",
     "viewComponents": "查看组件",
     "githubStarsPrefix": "开源项目，已有",
@@ -61,7 +63,7 @@
     "relatedPosts": "相关文章"
   },
   "showcase": {
-    "heading": "展示",
+    "heading": "相关案例",
     "description": "探索展示 HeroUI 组件在真实场景中应用的互动示例。"
   },
   "footer": {
@@ -115,6 +117,9 @@
     "androidComingSoon": "Android · 即将推出"
   },
   "themes": {
+    "heading": "主题编辑器",
+    "metaTitle": "HeroUI 主题编辑器 – 自定义 React UI",
+    "metaDescription": "通过可视化控件自定义 HeroUI React 主题，调整颜色、字体与圆角，实时预览组件并复制可用于生产环境的 HeroUI CSS 变量。",
     "theme": "主题",
     "custom": "自定义",
     "designTheme": "设计主题",

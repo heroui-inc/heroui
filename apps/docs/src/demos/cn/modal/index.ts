@@ -11,3 +11,4 @@ export {Placements} from "./placements";
 export {ScrollComparison} from "./scroll-comparison";
 export {Sizes} from "./sizes";
 export {WithForm} from "./with-form";
+export {CustomStyles} from "./custom-styles";

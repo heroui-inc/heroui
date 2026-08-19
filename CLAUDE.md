@@ -9,10 +9,10 @@ HeroUI v3 is a modern React UI library built with Tailwind CSS v4, using a pnpm 
 ### Key Technical Stack
 
 - **Node.js**: v22+ required
-- **pnpm**: v10.9.0 (package manager)
+- **pnpm**: v10.26.2 (package manager)
 - **React**: v19+
-- **Tailwind CSS**: v4.1.4
-- **TypeScript**: v5.8.3
+- **Tailwind CSS**: v4.1.18
+- **TypeScript**: v5.9.3
 - **Turborepo**: Build orchestration
 - **Storybook**: Component development
 - **Vitest**: Testing framework
@@ -40,11 +40,17 @@ pnpm build --filter=@heroui/react
 # Run linting
 pnpm lint
 
-# Run tests
+# Run tests (turbo → packages with a test script; jsdom + browser)
 pnpm test
 
-# Test specific component
-pnpm test button
+# Filter by file name (e.g. button.test.tsx)
+pnpm --filter @heroui/react exec vitest run button
+
+# Coverage (jsdom floors only — not a depth bar)
+pnpm test:coverage
+
+# Changed-set (local jsdom only; not a merge gate)
+pnpm --filter @heroui/react test:changed
 
 # Run formatting
 pnpm run format
@@ -53,10 +59,22 @@ pnpm run format
 pnpm typecheck
 ```
 
+### Behavioral tests (`@heroui/react`)
+
+- Suites: `packages/react/tests/components/<name>/` — `*.test.tsx` (jsdom), `*.ssr.test.tsx` (Client SSR via `ssrSmoke()`, not RSC), `*.browser.test.tsx` (Playwright for high-risk portals/overlays; not universal), optional `fixtures.tsx`
+- Harness: `@heroui/testing/helpers` (`render`, `setupUser`, `runAllTimers`, `ssrSmoke`, `User`); browser `render` from `@heroui/testing/browser`. Sources via `@/`. Pattern testers: `user.createTester(...)` — do not import `createTester` directly
+- Query/assert: role/label/text first; HeroUI `data-*` + light BEM + documented `data-slot` on compound parts; no colors, full class lists, or RAC internals
+- Timers: fake timers per-suite only; wire `advanceTimers` into `setupUser` + `User`
+- Naming: `describe("Component")`; nested concern; `it` as `supports…` / `calls…` / `exposes…` / `renders…`. SSR: `"Component SSR"`; browser: `"Component (browser)"`
+- Intentional skips: internals (`rac`, `icons`), non-exported helpers (`color-input-group`, `date-input-group`), in-progress `calendar-year-picker`, parent-covered parts (`list-box-item`, `menu-item`, …), Toast SSR (client portal — jsdom + browser). Public `input-group` has its own suite. SSR/browser are risk-based
+- Browser setup (once locally): `playwright install chromium` before `pnpm test`. CI: `--with-deps`, then `test:browser` + `test:coverage`
+- Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`
+- Coverage: jsdom-only floors — green ≠ depth. `test:changed`: local jsdom shortcut only, not a merge gate
+
 ### Package-Specific Commands
 
 - Use `--filter` flag with package name: `pnpm build --filter=@heroui/react`
-- Main packages: `@heroui/react`, `@heroui/docs`, `@heroui/storybook`
+- Main packages: `@heroui/react`, `@heroui/styles`, `@heroui/docs`, `@heroui/storybook`
 
 ## Git Commit Convention
 
@@ -97,10 +115,11 @@ git commit -m "ci: add Claude Code GitHub Action workflow"
 ├── apps/
 │   └── docs/          # Documentation site (Next.js + Fumadocs)
 ├── packages/
-│   ├── react/         # Main UI component library
+│   ├── react/         # Main UI component library (@heroui/react)
+│   ├── styles/        # CSS styles & variants (@heroui/styles)
 │   ├── standard/      # Shared ESLint, Prettier, TypeScript configs
 │   ├── storybook/     # Storybook configuration
-│   └── vitest/        # Shared Vitest configurations
+│   └── testing/       # Shared test harness (@heroui/testing)
 ├── turbo.json         # Turborepo configuration
 └── pnpm-workspace.yaml # Workspace definition
 ```
@@ -361,24 +380,11 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 
 ### Current Components
 
-- `accordion`: Collapsible content sections
-- `alert`: Alert messages with compound components
-- `avatar`: User avatars with Radix UI
-- `button`: Button with variants and sizes
-- `checkbox`: Checkbox with compound components (uses external Label/Description)
-- `chip`: Small informational badges
-- `description`: Description text for form fields
-- `field-error`: Error messages for form fields
-- `fieldset`: Form field grouping components (Fieldset, Legend, FieldGroup, Field, CheckboxField)
-- `label`: Label text for form fields
-- `link`: Styled anchor links
-- `menu`: Dropdown menu system
-- `popover`: Popover overlays
-- `spinner`: Loading indicators
-- `tabs`: Tab navigation
-- `typography`: Typography component for headings, body copy, and prose
-- `textfield`: Text input field with compound components
-- `tooltip`: Hover tooltips
+**Completed**: accordion, alert, alert-dialog, autocomplete, avatar, badge, breadcrumbs, button, button-group, calendar, card, checkbox, checkbox-group, chip, close-button, color-area, color-field, color-picker, color-slider, color-swatch, color-swatch-picker, combo-box, date-field, date-picker, date-range-picker, description, disclosure, disclosure-group, drawer, dropdown, empty-state, error-message, field-error, fieldset, form, header, input, input-group, input-otp, kbd, label, link, list-box, list-box-item, list-box-section, menu, menu-item, menu-section, meter, modal, number-field, pagination, popover, progress-bar, progress-circle, radio, radio-group, range-calendar, scroll-shadow, search-field, select, separator, skeleton, slider, spinner, surface, switch, switch-group, table, tabs, tag, tag-group, textarea, textfield, time-field, toast, toggle-button, toggle-button-group, toolbar, tooltip, typography
+
+**In Progress**: calendar-year-picker
+
+> Source of truth: `packages/react/src/components/index.ts`.
 
 ## Development Workflow
 
@@ -532,9 +538,10 @@ This workflow ensures thorough understanding, proper planning, and high-quality 
    **IMPORTANT**: The compound component should be exported as the default export.
 
 2. **Testing**:
-   - Run `pnpm test` for all tests
-   - Run `pnpm test <component>` for specific component
-   - Ensure all new features have tests
+   - Follow Behavioral tests conventions above (semantics-first, `setupUser`, `data-*` state hooks)
+   - Run `pnpm test` for jsdom + browser; filter with `pnpm --filter @heroui/react exec vitest run <name>`
+   - Place tests under `packages/react/tests/components/<name>/` (`*.test.tsx` / `*.ssr.test.tsx` / `*.browser.test.tsx`, optional `fixtures.tsx`)
+   - Prefer arrow functions for harness helpers and test fixtures
 
 3. **Documentation**:
    - Docs live in `apps/docs/content/`

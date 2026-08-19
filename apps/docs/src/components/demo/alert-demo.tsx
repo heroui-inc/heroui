@@ -11,7 +11,7 @@ export function AlertDemo() {
   return (
     <Alert className="w-full items-center xl:w-[400px]">
       <Alert.Indicator />
-      <Alert.Content className="text-left">
+      <Alert.Content className="text-start">
         <Alert.Title className="leading-5">{t.title}</Alert.Title>
         <Alert.Description className="text-xs">{t.description}</Alert.Description>
       </Alert.Content>

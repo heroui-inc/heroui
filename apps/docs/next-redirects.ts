@@ -4,8 +4,11 @@ import {join} from "path";
 type Redirect = {
   source: string;
   destination: string;
-  permanent: boolean;
-};
+  has?: Array<{type: "host"; value: string}>;
+} & (
+  | {permanent: boolean; statusCode?: never}
+  | {permanent?: never; statusCode: 301 | 302 | 303 | 307 | 308}
+);
 
 /**
  * Check if a directory name is a route group (starts with parentheses)
@@ -129,6 +132,23 @@ export async function getRedirects(): Promise<Redirect[]> {
   const rootDir = join(process.cwd(), "content/docs/en/react");
   const redirects: Redirect[] = [];
 
+  // Keep the apex domain canonical. This rule is also enforced in the Vercel
+  // project domain configuration, which must route `www` to this deployment for
+  // the application-level permanent status to take effect.
+  redirects.push({
+    destination: "https://heroui.com/:path*",
+    has: [{type: "host", value: "www.heroui.com"}],
+    permanent: true,
+    source: "/:path*",
+  });
+
+  // The default-locale homepage is canonical at the apex, without `/en`.
+  redirects.push({
+    destination: "/",
+    permanent: true,
+    source: "/en",
+  });
+
   // Theme builder redirect - redirect /theme to /themes
   redirects.push({
     destination: "/themes",
@@ -150,6 +170,14 @@ export async function getRedirects(): Promise<Redirect[]> {
       source: "/blog/:slug",
     },
   );
+
+  // This post has no Chinese translation. Avoid serving English content at a
+  // Chinese URL and point crawlers directly at the published English article.
+  redirects.push({
+    destination: "/en/blog/styling-and-theming-in-heroui-native",
+    source: "/cn/blog/styling-and-theming-in-heroui-native",
+    statusCode: 301,
+  });
 
   // Showcase moved under [lang] for i18n. Redirect legacy /showcase and
   // /showcase/<id> to the default-locale URL so old links keep working.
@@ -245,6 +273,14 @@ export async function getRedirects(): Promise<Redirect[]> {
         destination: "/docs/react/getting-started/design-principles",
         source: "/docs/design-principles",
       },
+      {
+        destination: "/docs/react/getting-started/colors",
+        source: "/docs/customization/colors",
+      },
+      {
+        destination: "/docs/react/getting-started/colors",
+        source: "/docs/react/customization/colors",
+      },
     ]),
   );
 
@@ -298,6 +334,14 @@ export async function getRedirects(): Promise<Redirect[]> {
       {
         destination: "/docs/react/components/number-field",
         source: "/docs/react/components/numberfield",
+      },
+      {
+        destination: "/docs/react/components/tag-group",
+        source: "/docs/react/components/taggroup",
+      },
+      {
+        destination: "/docs/react/components/tag-group",
+        source: "/docs/components/taggroup",
       },
     ]),
   );

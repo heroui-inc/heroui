@@ -1,3 +1,4 @@
+export {CustomStyles} from "./custom-styles";
 export {Basic} from "./basic";
 export {Disabled} from "./disabled";
 export {FullWidth} from "./full-width";

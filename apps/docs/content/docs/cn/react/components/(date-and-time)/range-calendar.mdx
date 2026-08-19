@@ -8,17 +8,15 @@ links:
   storybook: Components/Date and Time/RangeCalendar
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { RangeCalendar } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview name="range-calendar-basic" />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import {RangeCalendar} from '@heroui/react';
@@ -42,9 +40,15 @@ export default () => (
 )
 ```
 
+## 示例
+
+### 禁用
+
+<ComponentPreview name="range-calendar-disabled" />
+
 ### 年份选择
 
-`RangeCalendar.YearPickerTrigger`、`RangeCalendar.YearPickerGrid` 及其 body/cell 子组件提供一体化的年份导航模式。
+`RangeCalendar.YearPickerTrigger`, `RangeCalendar.YearPickerGrid`, and their body/cell subcomponents provide an integrated year navigation pattern.
 
 <ComponentPreview name="range-calendar-year-picker" />
 
@@ -52,123 +56,97 @@ export default () => (
 
 <ComponentPreview name="range-calendar-default-value" />
 
-### 受控
+### 受控组件
 
 <ComponentPreview name="range-calendar-controlled" />
 
-### 最小与最大日期
+### 日期范围限制
 
 <ComponentPreview name="range-calendar-min-max-dates" />
 
 ### 不可用日期
 
-使用 `isDateUnavailable` 禁用周末、节假日或已被预订的日期等。
+使用 `isDateUnavailable` 屏蔽周末、节假日或已预订等不可用日期。
 
 <ComponentPreview name="range-calendar-unavailable-dates" />
 
 ### 基于锚点的不可用日期
 
-选择范围时，`isDateUnavailable` 的第二个参数 `anchorDate` 为用户选中的开始日期。可据此限制结束日期（例如仅允许开始日期前后 7 天）。
+选择范围时，`isDateUnavailable` 会收到第二个参数 `anchorDate`（首个选中日期）。可用它限制哪些结束日期有效（例如起始日期后 7 天内）。
 
 <ComponentPreview name="range-calendar-anchor-unavailable-dates" />
 
-### 固定周数
+### 月份周数
 
-将 `weeksInMonth` 设为固定值（例如 `6`），可在月份切换时保持网格高度稳定。
+将 `weeksInMonth` 设为固定值（例如 `6`），在月份切换时保持网格高度稳定。
 
 <ComponentPreview name="range-calendar-weeks-in-month" />
 
 ### 周视图
 
-设置 `visibleDuration={{ weeks: n }}` 可一次显示一个或多个周。翻页会按可见周范围前进。显示多周时可配合 `pageBehavior="single"` 每次仅移动一周。
+设置 `visibleDuration={{ weeks: n }}` 一次显示一个或多个周。导航按可见周范围前进。显示多周时，使用 `pageBehavior="single"` 每次移动一周。
 
 <ComponentPreview name="range-calendar-week-view" />
 
 ### 日视图
 
-设置 `visibleDuration={{ days: n }}` 可显示连续多天的滚动窗口。翻页会按可见天数范围前进。显示多天时配合 `pageBehavior="single"` 可每次仅移动一天。
+设置 `visibleDuration={{ days: n }}` 显示连续日期的滚动窗口。导航按可见日范围前进。显示多天时，使用 `pageBehavior="single"` 每次移动一天。
 
 <ComponentPreview name="range-calendar-day-view" />
 
-### 允许非连续范围
+### 非连续范围
 
-启用 `allowsNonContiguousRanges`，允许选择跨越不可用日期的范围。
+启用 `allowsNonContiguousRanges` 以允许跨越不可用日期进行选择。
 
 <ComponentPreview name="range-calendar-allows-non-contiguous-ranges" />
-
-### 禁用
-
-<ComponentPreview name="range-calendar-disabled" />
 
 ### 只读
 
 <ComponentPreview name="range-calendar-read-only" />
 
-### 无效
+### 无效状态
 
 <ComponentPreview name="range-calendar-invalid" />
 
-### 焦点日期
+### 聚焦值
 
 <ComponentPreview name="range-calendar-focused-value" />
 
-### 单元格指示器
+### 单元格标记
 
-你可以自定义 `RangeCalendar.Cell` 的子节点，并使用 `RangeCalendar.CellIndicator` 展示活动等元数据。
+可自定义 `RangeCalendar.Cell` 的子内容，并使用 `RangeCalendar.CellIndicator` 展示事件等元数据。
 
 <ComponentPreview name="range-calendar-with-indicators" />
 
-### 多个月份
-
-使用 `visibleDuration` 与 `offset` 渲染多个月份网格，适用于预订与规划场景。在各列头部为 `RangeCalendar.Heading` 设置 `offset`（例如 `offset={{ months: 1 }}`）以显示对应月份标题。
-
-<ComponentPreview name="range-calendar-multiple-months" />
-
-### 国际化历法
-
-默认情况下，RangeCalendar 按用户语言环境的历法显示日期。你可以使用 `I18nProvider` 包裹 RangeCalendar，并通过 [Unicode 历法语言扩展](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string) 覆盖。
-
-下方示例展示印度历法系统：
-
-<ComponentPreview name="range-calendar-international-calendar" />
-
-**说明：** `onChange` 事件始终返回与 `value` 或 `defaultValue` 相同历法系统中的日期（若未提供值则为公历），与界面展示的本地化格式无关。
-
-### 实际场景示例
+### 典型场景
 
 <ComponentPreview name="range-calendar-booking-calendar" />
 
-<RelatedComponents component="range-calendar" />
+### 多月份展示
 
-## 样式
+结合 `visibleDuration` 与 `offset` 渲染多个网格，适用于预订与规划场景。
 
-### 传入 Tailwind CSS 类
+<ComponentPreview name="range-calendar-multiple-months" />
 
-```tsx
-import {RangeCalendar} from '@heroui/react';
+### 国际化日历
 
-function CustomRangeCalendar() {
-  return (
-    <RangeCalendar aria-label="Trip dates" className="w-80 rounded-2xl border border-border bg-surface p-3 shadow-sm">
-      <RangeCalendar.Header className="pb-3">
-        <RangeCalendar.Heading className="text-default" />
-        <RangeCalendar.NavButton slot="previous" className="text-default" />
-        <RangeCalendar.NavButton slot="next" className="text-default" />
-      </RangeCalendar.Header>
-      <RangeCalendar.Grid>
-        <RangeCalendar.GridHeader>
-          {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
-        </RangeCalendar.GridHeader>
-        <RangeCalendar.GridBody>
-          {(date) => <RangeCalendar.Cell date={date} />}
-        </RangeCalendar.GridBody>
-      </RangeCalendar.Grid>
-    </RangeCalendar>
-  );
-}
-```
+默认情况下，RangeCalendar 使用用户 locale 的历法系统显示日期。可用 `I18nProvider` 包裹组件，并设置 [Unicode 历法 locale 扩展](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string) 覆盖。
 
-### 自定义组件类
+以下示例展示印度历法系统：
+
+<ComponentPreview name="range-calendar-international-calendar" />
+
+**注意：** 无论显示 locale 如何，`onChange` 事件始终返回与 `value` 或 `defaultValue` 相同历法系统的日期（未提供 value 时为公历）。
+
+## 自定义样式
+
+### Tailwind CSS
+
+<ComponentPreview name="range-calendar-custom-styles" />
+
+### 全局 CSS
+
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -185,6 +163,10 @@ function CustomRangeCalendar() {
   }
 }
 ```
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -225,8 +207,7 @@ RangeCalendar 同时支持伪类与 React Aria 的 data 属性：
 
 ## API 参考
 
-### RangeCalendar Props
-
+### RangeCalendar
 RangeCalendar 继承 React Aria [RangeCalendar](https://react-spectrum.adobe.com/react-aria/RangeCalendar.html) 的全部 props。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -283,8 +264,7 @@ RangeCalendar 继承 React Aria [RangeCalendar](https://react-spectrum.adobe.com
 | `RangeCalendar.YearPickerGrid` | `format` | `DateFormatterOptions` | `{year: 'numeric'}` | 自定义年份单元格标签（纪元、历法系统等）。 |
 | `RangeCalendar.YearPickerGrid` | `visibleYears` | `number` | min–max 跨度或 `20` | 滑动窗口中显示的年份数量。当同时设置 `minValue` 与 `maxValue` 时，默认为二者之间的完整范围。 |
 
-### RangeCalendar.Cell Render Props
-
+### RangeCalendar.Cell Render
 当 `RangeCalendar.Cell` 的 `children` 为函数时，可使用 React Aria 的渲染参数：
 
 | Prop | 类型 | 描述 |
@@ -306,3 +286,7 @@ RangeCalendar 继承 React Aria [RangeCalendar](https://react-spectrum.adobe.com
 - [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — 各日期组件共用的日期类型（`CalendarDate`、`CalendarDateTime`、`ZonedDateTime`）与工具函数
 - [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — 为子树覆盖语言环境
 - [`useLocale`](https://react-aria.adobe.com/useLocale) — 读取当前语言环境与书写方向
+
+## 相关组件
+
+<RelatedComponents component="range-calendar" />

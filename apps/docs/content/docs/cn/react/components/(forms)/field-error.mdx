@@ -1,53 +1,23 @@
 ---
 title: FieldError 字段错误
-description: 用于展示表单字段的校验错误信息。
+description: 展示表单字段校验错误消息
 links:
   rac: FieldError
   source: field-error/field-error.tsx
   styles: field-error.css
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { FieldError } from '@heroui/react';
 ```
 
-## 用法
-
-FieldError 组件用于展示表单字段的校验错误信息。当父级字段被标记为无效时会自动显示，并提供平滑的透明度过渡。
-
 <ComponentPreview
   name="field-error-basic"
 />
 
-<RelatedComponents component="fielderror" />
-
-## API 参考
-
-### FieldError Props
-
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
-| `children` | `ReactNode \| ((validation: ValidationResult) => ReactNode)` | - | 错误信息内容或渲染函数。 |
-
-## 无障碍
-
-FieldError 组件通过以下方式保证无障碍：
-
-- 使用恰当的 ARIA 属性以播报错误
-- 通过语义化 HTML 支持屏幕阅读器
-- 同时提供视觉与程序化的错误提示
-- 根据校验状态自动控制可见性
-
-## 样式
-
-FieldError 组件使用以下 CSS 类：
-
-- `.field-error` - 基础错误样式，使用危险色（danger）
-- 仅在存在 `data-visible` 属性时显示
-- 长文案会以省略号截断
+FieldError 组件展示表单字段的校验错误消息。当父字段标记为无效时自动显示，并提供平滑的透明度过渡。
 
 ## 示例
 
@@ -119,3 +89,57 @@ function EmailField() {
   </FieldError>
 </TextField>
 ```
+
+## 自定义样式
+
+### Tailwind CSS
+
+<ComponentPreview name="field-error-custom-styles" />
+
+### 全局 CSS
+
+可使用 `@layer components` 指令自定义 FieldError 组件类。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .field-error {
+    @apply font-medium text-danger;
+  }
+}
+```
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+FieldError 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/field-error.css)）：
+
+#### 基础类 [!toc]
+
+- `.field-error` - 基础错误样式，danger 色
+- 仅在存在 `data-visible` 属性时显示
+- 长消息以省略号截断
+
+## API 参考
+
+### FieldError
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 附加 CSS 类 |
+| `children` | `ReactNode \| ((validation: ValidationResult) => ReactNode)` | - | 错误消息内容或 render 函数 |
+
+## 无障碍
+
+FieldError 组件通过以下方式确保无障碍性：
+
+- 使用适当的 ARIA 属性播报错误
+- 语义化 HTML 支持屏幕阅读器
+- 提供视觉与程序化错误指示
+- 根据校验状态自动管理可见性
+
+## 相关组件
+
+<RelatedComponents component="fielderror" />

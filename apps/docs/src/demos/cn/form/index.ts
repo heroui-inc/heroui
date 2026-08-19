@@ -1,2 +1,3 @@
 export {Basic} from "./basic";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
+export {CustomStyles} from "./custom-styles";

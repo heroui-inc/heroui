@@ -63,6 +63,7 @@ import { Menu, SubMenu } from 'heroui-native';
 - **Menu.ItemDescription**: Secondary description text for a menu item.
 - **Menu.ItemIndicator**: Visual selection indicator (checkmark or dot) for a menu item.
 - **SubMenu**: Root container that manages the expand/collapse state and provides animation context to children.
+- **SubMenu.Background**: Absolute-fill layer that paints the sub-menu surface while it is open. Rendered automatically; replaceable via the `background` prop on `SubMenu`.
 - **SubMenu.Trigger**: Pressable row that toggles the submenu open/closed. Styled like a regular menu item.
 - **SubMenu.TriggerIndicator**: Animated chevron icon (default: chevron-right) that rotates when the submenu opens/closes. Place inside `SubMenu.Trigger`.
 - **SubMenu.Content**: Absolutely positioned container that animates its height when the submenu opens/closes. Place `Menu.Item` elements inside.
@@ -637,6 +638,7 @@ Animation configuration for menu item press feedback. Can be:
 | `isDefaultOpen` | `boolean`                 | -       | Open state when initially rendered (uncontrolled)        |
 | `isDisabled`    | `boolean`                 | `false` | Whether the sub-menu is disabled                         |
 | `className`     | `string`                  | -       | Additional CSS class for the root container              |
+| `background`    | `React.ReactNode`         | -       | Background layer behind the open sub-menu surface        |
 | `animation`     | `SubMenuRootAnimation`    | -       | Animation configuration for the sub-menu                 |
 | `onOpenChange`  | `(open: boolean) => void` | -       | Callback fired when the sub-menu open state changes      |
 | `...ViewProps`  | `ViewProps`               | -       | All standard React Native View props are supported       |
@@ -658,6 +660,38 @@ Animation configuration for the SubMenu root component. Can be:
 | `rootContent.paddingHorizontal` | `number`                | `6`                                         | Padding horizontal when sub-menu is open        |
 | `rootContent.paddingTop`        | `number`                | `12`                                        | Padding top when sub-menu is open               |
 | `rootContent.springConfig`      | `WithSpringConfig`      | `{ damping: 100, stiffness: 950, mass: 3 }` | Spring configuration for expand/collapse        |
+| `background.exiting`            | `EntryOrExitLayoutType` | `FadeOut.duration(200)`                     | Exit animation for the background layer         |
+
+#### SubMenu.Background
+
+Absolute-fill layer rendered behind the open sub-menu surface. It paints the sub-menu surface coat (`--color-overlay`) and, with no children, the layer chosen by the active library theme — a `GlassView` blur under the `glass` theme, nothing under the default theme.
+
+The surface is mounted only while the sub-menu is open (and faded out on close) so the collapsed trigger row keeps the menu surface it sits on. That matters under themes with a translucent `--color-overlay`, where a permanent coat would tint the trigger row twice and make it read differently from its sibling `Menu.Item`s.
+
+Replace it via the `background` prop on `SubMenu` — a custom node takes over the mount and exit transition as well, so wrap content in `SubMenu.Background` to keep the absolute-fill, surface coat, and clipping:
+
+```tsx
+<SubMenu
+  background={
+    <SubMenu.Background>
+      <LinearGradient
+        colors={['#ffffff22', '#ffffff05']}
+        style={StyleSheet.absoluteFill}
+      />
+    </SubMenu.Background>
+  }
+>
+  ...
+</SubMenu>
+```
+
+Passing `background={null}` removes the layer entirely, leaving the open sub-menu transparent over the menu content.
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Custom content replacing the theme default layer   |
+| `className`    | `string`          | -       | Additional CSS class for the background container  |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported |
 
 #### SubMenu.Trigger
 

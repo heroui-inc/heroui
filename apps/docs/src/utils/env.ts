@@ -12,8 +12,9 @@ const getBaseURL = (): URL => {
   // preview
   if (__PREVIEW__) host = "v3.heroui.com";
 
-  // production
-  if (__PROD__) host = "www.heroui.com";
+  // production — the apex domain is canonical; `www` permanently redirects to it,
+  // so pointing metadata at `www` would make every canonical URL a redirect.
+  if (__PROD__) host = "heroui.com";
 
   // protocol
   const protocol = host.startsWith("localhost") ? "http" : "https";

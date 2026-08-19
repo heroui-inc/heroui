@@ -138,10 +138,17 @@
 
 /**
  * Modifier: container--scroll-outside
+ *
+ * The container is React Aria's modal ref, so it must stay `pointer-events: none`,
+ * otherwise clicks around the dialog count as inside the modal and never dismiss it.
+ * The backdrop owns the scrolling instead.
  */
 .modal__container--scroll-outside {
-  @apply scrollbar overflow-y-auto;
-  @apply pointer-events-auto;
+  @apply h-auto min-h-(--visual-viewport-height) overflow-y-visible;
+}
+
+.modal__backdrop:has(.modal__container--scroll-outside) {
+  @apply scrollbar items-start overflow-y-auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -316,7 +323,7 @@
  * Element: close-trigger - the optional x icon button to close the modal
  */
 .modal__close-trigger {
-  @apply absolute top-4 right-4;
+  @apply absolute end-4 top-4;
 }
 
 /**

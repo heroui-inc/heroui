@@ -19,26 +19,26 @@
     "culori": "4.0.2",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-aria-components": "1.19.0",
-    "react-scan": "0.4.3",
-    "tailwind-variants": "^3.2.2"
+    "react-aria-components": "1.20.0",
+    "react-scan": "0.5.7",
+    "tailwind-variants": "3.3.1"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
-    "@storybook/addon-a11y": "10.1.10",
-    "@storybook/addon-docs": "10.1.10",
+    "@storybook/addon-a11y": "10.2.10",
+    "@storybook/addon-docs": "10.2.10",
     "@storybook/icons": "2.0.1",
-    "@storybook/react": "10.1.10",
-    "@storybook/react-vite": "10.1.10",
+    "@storybook/react": "10.2.10",
+    "@storybook/react-vite": "10.2.10",
     "@tailwindcss/postcss": "4.3.0",
     "@tailwindcss/vite": "4.3.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.1.2",
     "glob": "13.0.0",
-    "postcss": "8.5.6",
-    "storybook": "10.1.10",
+    "postcss": "8.5.23",
+    "storybook": "10.2.10",
     "tailwindcss": "4.3.0",
-    "vite": "7.3.0"
+    "vite": "7.3.5"
   }
 }

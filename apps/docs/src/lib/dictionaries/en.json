@@ -2,19 +2,21 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.2 — patch release",
-        "href": "/docs/react/releases/v3-2-2",
-        "date": "2026-07-06"
+        "label": "HeroUI React v3.2.4 — patch release",
+        "href": "/docs/react/releases/v3-2-4",
+        "date": "2026-08-04"
       },
       {
-        "label": "HeroUI Native v1.0.6 — patch release",
-        "href": "/docs/native/releases/v1-0-6",
-        "date": "2026-07-21"
+        "label": "HeroUI Native v1.0.8 — patch release",
+        "href": "/docs/native/releases/v1-0-8",
+        "date": "2026-07-31"
       }
     ],
     "titleMain": "Beautiful by default.",
     "titleMuted": "Customizable by design.",
     "description": "HeroUI is the modern UI library for web and mobile, built to help you move fast, stay consistent, and deliver delightful user experiences.",
+    "metaTitle": "HeroUI v3 (Previously NextUI) - Beautiful by default, customizable by design.",
+    "metaDescription": "Beautiful, accessible React UI components built on React Aria and Tailwind CSS v4. The modern alternative to MUI, Chakra UI, and shadcn/ui for building production-ready applications.",
     "getStarted": "Get started",
     "viewComponents": "View components",
     "githubStarsPrefix": "Open source with",
@@ -96,7 +98,7 @@
     "themeSource": "Theme source"
   },
   "copyPrompt": {
-    "copy": "Copy prompt",
+    "copy": "Copy Prompt",
     "copied": "Copied",
     "ariaLabelCopy": "Copy prompt to clipboard",
     "ariaLabelCopied": "Prompt copied to clipboard"
@@ -115,6 +117,9 @@
     "androidComingSoon": "Android · Coming soon"
   },
   "themes": {
+    "heading": "Theme Builder",
+    "metaTitle": "HeroUI Theme Builder – Customize React UI",
+    "metaDescription": "Customize HeroUI React themes visually. Tune colors, typography, and radius, preview components live, and copy production-ready HeroUI CSS variables.",
     "theme": "Theme",
     "custom": "Custom",
     "designTheme": "Design theme",

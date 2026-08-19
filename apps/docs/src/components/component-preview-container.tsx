@@ -1,8 +1,21 @@
 "use client";
 
-import React from "react";
+import React, {useMemo} from "react";
 
 import {cn} from "@/utils/cn";
+
+/** Block `href="#"` in previews so placeholder links don't scroll the docs page. */
+const preventPlaceholderHashNavigation = (event: React.MouseEvent<HTMLDivElement>) => {
+  const anchor = (event.target as HTMLElement).closest("a");
+
+  if (!anchor) return;
+
+  const href = anchor.getAttribute("href");
+
+  if (href === "#") {
+    event.preventDefault();
+  }
+};
 
 interface ComponentPreviewContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "center" | "start" | "end";
@@ -33,6 +46,10 @@ export function ComponentPreviewContainer({
     start: "items-start justify-start",
   };
 
+  const shouldPreventNavigation = useMemo(() => {
+    return ["breadcrumbs-", "card-", "link-"].some((pattern) => name.includes(pattern));
+  }, [name]);
+
   return (
     <div
       className={cn("component-preview-container group relative my-4 w-full", className)}
@@ -46,11 +63,12 @@ export function ComponentPreviewContainer({
       <div
         data-name={name}
         className={cn(
-          "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-t border-r border-l border-separator p-4 sm:p-10",
+          "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-s border-e border-t border-separator p-4 sm:p-10",
           isBgSolid && "bg-background",
           alignmentClasses[align],
           "flex",
         )}
+        onClickCapture={shouldPreventNavigation ? preventPlaceholderHashNavigation : undefined}
       >
         <div className="flex w-full items-center justify-center" style={{minHeight}}>
           {Component}

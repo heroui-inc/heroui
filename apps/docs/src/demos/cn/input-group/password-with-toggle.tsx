@@ -16,7 +16,7 @@ export function PasswordWithToggle() {
           type={isVisible ? "text" : "password"}
           value={isVisible ? "87$2h.3diua" : "••••••••"}
         />
-        <InputGroup.Suffix className="pr-0">
+        <InputGroup.Suffix className="pe-0">
           <Button
             isIconOnly
             aria-label={isVisible ? "隐藏密码" : "显示密码"}

@@ -69,7 +69,7 @@
   }
 
   .link__icon[data-default-icon="true"] {
-    @apply ml-1 pb-1.5;
+    @apply ms-1 pb-1.5;
   }
 
   /* Handle Link with Button Variants */

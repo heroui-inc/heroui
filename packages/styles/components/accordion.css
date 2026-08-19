@@ -20,7 +20,7 @@
 }
 
 .accordion__indicator {
-  @apply ml-auto size-4 shrink-0 text-muted;
+  @apply ms-auto size-4 shrink-0 text-muted;
 
   /**
    * Transitions
@@ -40,7 +40,7 @@
 
 .accordion__item::after {
   content: "";
-  @apply absolute bottom-0 left-0 h-px w-full rounded-xs bg-separator;
+  @apply absolute start-0 bottom-0 h-px w-full rounded-xs bg-separator;
 }
 
 .accordion__item:last-child::after {
@@ -57,7 +57,7 @@
   cursor: var(--cursor-interactive);
 
   /* Base Styles */
-  @apply flex flex-1 items-center justify-between px-4 py-4 text-left text-sm font-medium no-highlight;
+  @apply flex flex-1 items-center justify-between px-4 py-4 text-start text-sm font-medium no-highlight;
 
   /**
    * Transitions
@@ -135,18 +135,18 @@
 .accordion--surface .accordion__item {
   /* Surface variant separator styling */
   &::after {
-    @apply left-[3%] w-[94%];
+    @apply start-[3%] w-[94%];
   }
 
   /* Special rounding for first and last items in surface variant */
   &:first-child [data-slot="accordion-trigger"] {
-    border-top-left-radius: min(32px, var(--radius-3xl));
-    border-top-right-radius: min(32px, var(--radius-3xl));
+    border-start-start-radius: min(32px, var(--radius-3xl));
+    border-start-end-radius: min(32px, var(--radius-3xl));
   }
 
   &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
     [data-slot="accordion-trigger"] {
-    border-bottom-left-radius: min(32px, var(--radius-3xl));
-    border-bottom-right-radius: min(32px, var(--radius-3xl));
+    border-end-start-radius: min(32px, var(--radius-3xl));
+    border-end-end-radius: min(32px, var(--radius-3xl));
   }
 }

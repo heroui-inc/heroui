@@ -8,17 +8,17 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Spinner } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="spinner-basic"
 />
+
+## 示例
 
 ### 颜色
 
@@ -32,26 +32,23 @@ import { Spinner } from '@heroui/react';
   name="spinner-sizes"
 />
 
-<RelatedComponents component="spinner" />
+### 速度
 
-## 样式
+为单个 Spinner 添加动画工具类即可调整其旋转速度。请同时加上 `motion-reduce:animate-none`，以便在用户开启“减少动态效果”时保持静止。
 
-### 传入 Tailwind CSS 类
+<ComponentPreview
+  name="spinner-speed"
+/>
 
-```tsx
-import {Spinner} from '@heroui/react';
+## 自定义样式
 
-function CustomSpinner() {
-  return (
-    <Spinner className="text-blue-500" />
-  );
-}
-```
+### Tailwind CSS
 
-### 自定义组件类
+<ComponentPreview name="spinner-custom-styles" />
 
-若要自定义 Spinner 的组件类名，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+### 全局 CSS
+
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -65,20 +62,22 @@ function CustomSpinner() {
 }
 ```
 
-HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 Spinner 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/spinner.css)）：
 
-#### 基础类与尺寸类
+#### 基础类与尺寸类 [!toc]
 - `.spinner` - 基础样式与默认尺寸
 - `.spinner--sm` - 小尺寸变体
 - `.spinner--md` - 中等尺寸变体（默认）
 - `.spinner--lg` - 大尺寸变体
 - `.spinner--xl` - 特大尺寸变体
 
-#### 颜色类
+#### 颜色类 [!toc]
 - `.spinner--current` - 继承当前文本颜色
 - `.spinner--accent` - 强调色变体
 - `.spinner--danger` - 危险色变体
@@ -87,10 +86,13 @@ Spinner 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 
 ## API 参考
 
-### Spinner Props
-
+### Spinner
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Spinner 的尺寸 |
 | `color` | `"current" \| "accent" \| "success" \| "warning" \| "danger"` | `"accent"` | Spinner 的颜色变体 |
 | `className` | `string` | - | 额外的 CSS 类名 |
+
+## 相关组件
+
+<RelatedComponents component="spinner" />

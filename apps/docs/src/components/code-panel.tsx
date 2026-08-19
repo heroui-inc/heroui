@@ -144,7 +144,7 @@ export function CodePanel({
           key="code-panel"
           aria-label={title}
           className={cn(
-            "fixed top-1/2 right-6 z-9999 flex h-[88vh] w-[45%] -translate-y-1/2 flex-col overflow-hidden rounded-xl bg-surface/94 shadow-xl backdrop-blur-md",
+            "fixed end-6 top-1/2 z-9999 flex h-[88vh] w-[45%] -translate-y-1/2 flex-col overflow-hidden rounded-xl bg-surface/94 shadow-xl backdrop-blur-md",
             className,
           )}
           {...PANEL_ANIMATION}

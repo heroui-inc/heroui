@@ -39,7 +39,7 @@ jobs:
       - name: Determine previous tag
         id: prev-tag
         run: |
-          PREV=$(git tag -l 'v*' --sort=-v:refname | grep -v "$(git describe --tags --exact-match 2>/dev/null || echo '')" | head -1)
+          PREV=$(git tag -l 'v*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | grep -vFxf <(git tag --points-at HEAD) | head -1)
           echo "tag=${PREV:-}" >> $GITHUB_OUTPUT
           echo "Previous tag: ${PREV:-none}"
 

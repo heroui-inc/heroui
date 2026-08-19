@@ -8,21 +8,17 @@ links:
   storybook: Components/Overlays/Popover
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Popover } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="popover-basic"
 />
 
-### 组件结构
-
-引入 Popover 后，可通过点语法访问各个部分。
+## 组件结构
 
 ```tsx
 import { Popover } from '@heroui/react';
@@ -41,16 +37,12 @@ export default () => (
 )
 ```
 
+## 示例
+
 ### 带箭头
 
 <ComponentPreview
   name="popover-with-arrow"
-/>
-
-### 位置
-
-<ComponentPreview
-  name="popover-placement"
 />
 
 ### 可交互内容
@@ -59,42 +51,27 @@ export default () => (
   name="popover-interactive"
 />
 
-<RelatedComponents component="popover" />
-
-### 自定义渲染函数
+### 位置
 
 <ComponentPreview
-  name="popover-custom-render-function"
+  name="popover-placement"
 />
 
-## 样式
+### 渲染函数
 
-### 传入 Tailwind CSS 类
+<ComponentPreview
+  name="popover-render-function"
+/>
 
-```tsx
-import { Popover, Button } from '@heroui/react';
+## 自定义样式
 
-function CustomPopover() {
-  return (
-    <Popover>
-      <Popover.Trigger>
-        <Button>Open</Button>
-      </Popover.Trigger>
-      <Popover.Content className="bg-accent text-accent-foreground">
-        <Popover.Dialog>
-          <h3>Custom Styled</h3>
-          <p>This popover has custom styling</p>
-        </Popover.Dialog>
-      </Popover.Content>
-    </Popover>
-  );
-}
-```
+### Tailwind CSS
 
-### 自定义组件类
+<ComponentPreview name="popover-custom-styles" />
 
-若要自定义 Popover 的组件类名，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+### 全局 CSS
+
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -112,13 +89,15 @@ function CustomPopover() {
 }
 ```
 
-HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 Popover 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/popover.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.popover` - Popover 根容器样式
 - `.popover__dialog` - 对话框内容包裹层
 - `.popover__heading` - 标题文本样式
@@ -135,8 +114,7 @@ Popover 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 
 ## API 参考
 
-### Popover Props
-
+### Popover
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 触发器与内容元素 |
@@ -144,8 +122,7 @@ Popover 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 | `defaultOpen` | `boolean` | `false` | 初始打开状态（非受控） |
 | `onOpenChange` | `(isOpen: boolean) => void` | - | 打开状态变化时调用 |
 
-### Popover.Content Props
-
+### Popover.Content
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 在 Popover 中展示的内容 |
@@ -155,24 +132,25 @@ Popover 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 | `className` | `string` | - | 额外的 CSS 类名 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, PopoverRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
 
-### Popover.Dialog Props
-
+### Popover.Dialog
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 对话框内容 |
 | `className` | `string` | - | 额外的 CSS 类名 |
 
-### Popover.Trigger Props
-
+### Popover.Trigger
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 触发 Popover 的元素 |
 | `className` | `string` | - | 额外的 CSS 类名 |
 
-### Popover.Arrow Props
-
+### Popover.Arrow
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 自定义箭头元素 |
 | `className` | `string` | - | 额外的 CSS 类名 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, OverlayArrowRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+## 相关组件
+
+<RelatedComponents component="popover" />

@@ -7,21 +7,17 @@ links:
   storybook: Components/Layout/Card
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Card } from "@heroui/react";
 ```
 
-### Usage
-
 <ComponentPreview
   name="card-default"
 />
 
-### Anatomy
-
-Import the Card component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Card } from "@heroui/react";
@@ -37,6 +33,8 @@ export default () => (
   </Card>
 );
 ```
+
+## Examples
 
 ### Variants
 
@@ -75,63 +73,38 @@ Cards come in semantic variants that describe their prominence level rather than
   name="card-with-form"
 />
 
-## Accessibility
+## Customization
 
-```tsx
-import { Card } from '@heroui/react';
-import { cardVariants } from '@heroui/styles';
+### Tailwind CSS
 
-// Semantic markup
-<Card role="article" aria-labelledby="card-title">
-  <Card.Header>
-    <Card.Title id="card-title">Article Title</Card.Title>
-  </Card.Header>
-</Card>
+<ComponentPreview name="card-custom-styles" />
 
-// Interactive cards
-<a className={cardVariants().base()} href="/details" aria-label="View product details">
-  <Card.Title>Product Name</Card.Title>
-</a>
-```
+### Global CSS
 
-<RelatedComponents component="card" />
-
-## Styling
-
-### Component Customization
-
-```tsx
-<Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
-  <Card.Header>
-    <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
-    <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
-  </Card.Header>
-  <Card.Content>
-    <p className="text-blue-800">Content with custom styling</p>
-  </Card.Content>
-</Card>
-```
-
-### CSS Variable Overrides
+To customize the Card component classes, you can use the `@layer components` directive.
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
-/* Override specific variants */
-.card--secondary {
-  @apply bg-gradient-to-br from-blue-50 to-purple-50;
-}
+@layer components {
+  .card--secondary {
+    @apply bg-gradient-to-br from-blue-50 to-purple-50;
+  }
 
-/* Custom element styles */
-.card__title {
-  @apply text-xl font-bold;
+  .card__title {
+    @apply text-xl font-bold;
+  }
 }
 ```
 
-## CSS Classes
+## Styling Reference
 
-Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/card.css)):
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
+### CSS Classes
 
-#### Base Classes
+Card uses [BEM](https://getbem.com/) naming for predictable styling ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/card.css)):
+
+#### Base Classes [!toc]
 
 - `.card` - Base container with padding and border
 - `.card__header` - Header section container
@@ -140,7 +113,7 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 - `.card__content` - Flexible content container
 - `.card__footer` - Footer with row layout
 
-#### Variant Classes
+#### Variant Classes [!toc]
 
 - `.card--transparent` - Minimal prominence, transparent background (maps to `transparent` variant)
 - `.card--default` - Standard appearance with surface-secondary (default)
@@ -191,3 +164,26 @@ Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View sour
 | ----------- | ----------------- | ------- | ------------------------- |
 | `className` | `string`          | -       | Additional CSS classes    |
 | `children`  | `React.ReactNode` | -       | Footer content            |
+
+## Accessibility
+
+```tsx
+import { Card } from '@heroui/react';
+import { cardVariants } from '@heroui/styles';
+
+// Semantic markup
+<Card role="article" aria-labelledby="card-title">
+  <Card.Header>
+    <Card.Title id="card-title">Article Title</Card.Title>
+  </Card.Header>
+</Card>
+
+// Interactive cards
+<a className={cardVariants().base()} href="/details" aria-label="View product details">
+  <Card.Title>Product Name</Card.Title>
+</a>
+```
+
+## Related Components
+
+<RelatedComponents component="card" />

@@ -105,7 +105,7 @@ export function Callbacks() {
               >
                 <div className="flex-1">
                   <span className="font-medium">{item.message}</span>
-                  <span className="ml-2 text-xs text-muted">({item.time})</span>
+                  <span className="ms-2 text-xs text-muted">({item.time})</span>
                 </div>
                 <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/10 text-success-soft-foreground">
                   <svg

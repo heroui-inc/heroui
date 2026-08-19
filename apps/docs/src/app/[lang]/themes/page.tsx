@@ -1,9 +1,13 @@
+import type {Metadata} from "next";
+
 import {Suspense} from "react";
 
 import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
+import {siteConfig} from "@/config/site";
 import {CodePanelProvider} from "@/hooks/use-code-panel";
 import {DictionaryProvider} from "@/hooks/use-dictionary";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
+import {absoluteUrl, getLocalizedAlternates} from "@/lib/seo";
 
 import {
   AccentColorSelector,
@@ -18,6 +22,39 @@ import {Onboarding} from "./components/onboarding";
 import {ThemeBuilderContent} from "./components/theme-builder-content";
 import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constants";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{lang: string}>;
+}): Promise<Metadata> {
+  const {lang} = await params;
+  const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
+  const alternates = getLocalizedAlternates({locale: lang, path: "/themes"});
+  const {metaDescription: description, metaTitle: title} = dict.themes;
+
+  return {
+    alternates,
+    description,
+    openGraph: {
+      description,
+      images: [{alt: title, url: siteConfig.ogImage}],
+      locale: lang === "cn" ? "zh_CN" : "en_US",
+      siteName: siteConfig.name,
+      title,
+      type: "website",
+      url: absoluteUrl(alternates.canonical),
+    },
+    title: {absolute: title},
+    twitter: {
+      card: "summary_large_image",
+      description,
+      images: siteConfig.ogImage,
+      site: "@hero_ui",
+      title,
+    },
+  };
+}
+
 export default async function ThemeBuilderPage({params}: {params: Promise<{lang: string}>}) {
   const {lang} = await params;
   const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
@@ -31,6 +68,7 @@ export default async function ThemeBuilderPage({params}: {params: Promise<{lang:
             className="grid h-dvh grid-rows-[auto_1fr_auto] bg-background px-4 sm:overflow-hidden sm:px-6"
             id={THEME_BUILDER_PAGE_ID}
           >
+            <h1 className="sr-only">{dict.themes.heading}</h1>
             <BuilderHeader />
             <ThemeBuilderContent />
             <div className="mx-auto hidden items-center justify-between gap-4 py-6 max-[1200px]:flex-col sm:flex">

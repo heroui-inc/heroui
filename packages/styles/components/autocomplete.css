@@ -130,11 +130,12 @@
 
 /* Similar to popover content styles */
 .autocomplete__popover {
-  @apply w-(--trigger-width) max-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-hidden overscroll-contain bg-overlay p-0 pt-2 text-sm;
+  @apply flex w-(--trigger-width) max-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 flex-col overflow-hidden overscroll-contain bg-overlay p-0 pt-2 text-sm outline-none;
   border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
-  /* Focus state */
+  &:focus,
+  &:focus-visible,
   &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply outline-none;
@@ -190,9 +191,13 @@
     rotate: 90deg;
   }
 
-  /* Listbox styles */
+  /* Listbox styles.
+   * `min-h-0` + the popover's flex column let the list shrink below 320px when the
+   * popover itself is constrained (e.g. inside a Modal, or a short viewport). Without
+   * it the list keeps its full 320px and its overflow is clipped by the popover, making
+   * the last options unreachable. */
   [data-slot="list-box"] {
-    @apply max-h-[320px] scrollbar overflow-y-auto p-1.5 outline-none;
+    @apply max-h-[320px] min-h-0 scrollbar overflow-y-auto p-1.5 outline-none;
   }
 
   [data-slot="list-box-item"] {
@@ -218,23 +223,12 @@
 
   /* Search Field styles */
   [data-slot="search-field"] {
-    @apply px-3 py-1 outline-none;
+    @apply shrink-0 px-3 py-1 outline-none;
   }
 
   /* Empty State */
   [data-slot="empty-state"] {
     @apply text-center text-sm text-overlay-foreground/60;
-  }
-}
-
-/* Popover dialog — mirrors Popover.Dialog focus management without a visible focus ring */
-.autocomplete__popover-dialog {
-  @apply outline-none;
-
-  &:focus,
-  &:focus-visible,
-  &[data-focus-visible="true"] {
-    @apply outline-none;
   }
 }
 

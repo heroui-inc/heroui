@@ -5,7 +5,6 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {}
 export const IconChevronDown = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Chevron down icon"
     fill="none"
     height={16}
     role="presentation"
@@ -26,7 +25,6 @@ export const IconChevronDown = (props: IconProps) => (
 export const IconChevronUp = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Chevron up icon"
     fill="none"
     height={16}
     role="presentation"
@@ -47,7 +45,6 @@ export const IconChevronUp = (props: IconProps) => (
 export const IconChevronLeft = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Chevron left icon"
     fill="none"
     height={16}
     role="presentation"
@@ -68,7 +65,6 @@ export const IconChevronLeft = (props: IconProps) => (
 export const IconChevronRight = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Chevron right icon"
     fill="none"
     height={16}
     role="presentation"
@@ -89,7 +85,6 @@ export const IconChevronRight = (props: IconProps) => (
 export const ExternalLinkIcon = ({height = 9, width = 9, ...props}: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="External link icon"
     fill="none"
     height={height}
     role="presentation"
@@ -108,7 +103,6 @@ export const ExternalLinkIcon = ({height = 9, width = 9, ...props}: IconProps) =
 export const CircleDashedIcon = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Circle dashed icon"
     fill="none"
     height={16}
     role="presentation"
@@ -127,7 +121,6 @@ export const CircleDashedIcon = (props: IconProps) => (
 export const CloseIcon = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Close icon"
     fill="none"
     height={16}
     role="presentation"
@@ -148,7 +141,6 @@ export const CloseIcon = (props: IconProps) => (
 export const InfoIcon = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Info icon"
     fill="none"
     height={16}
     role="presentation"
@@ -169,7 +161,6 @@ export const InfoIcon = (props: IconProps) => (
 export const WarningIcon = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Warning icon"
     fill="none"
     height={16}
     role="presentation"
@@ -190,7 +181,6 @@ export const WarningIcon = (props: IconProps) => (
 export const DangerIcon = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Danger icon"
     fill="none"
     height={16}
     role="presentation"
@@ -211,7 +201,6 @@ export const DangerIcon = (props: IconProps) => (
 export const SuccessIcon = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Success icon"
     fill="none"
     height={16}
     role="presentation"
@@ -232,7 +221,6 @@ export const SuccessIcon = (props: IconProps) => (
 export const IconMinus = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Minus icon"
     fill="none"
     height={16}
     role="presentation"
@@ -253,7 +241,6 @@ export const IconMinus = (props: IconProps) => (
 export const IconPlus = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Plus icon"
     fill="none"
     height={16}
     role="presentation"
@@ -274,7 +261,6 @@ export const IconPlus = (props: IconProps) => (
 export const IconSearch = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Search icon"
     fill="none"
     height={16}
     role="presentation"
@@ -295,7 +281,6 @@ export const IconSearch = (props: IconProps) => (
 export const IconCalendar = (props: IconProps) => (
   <svg
     aria-hidden="true"
-    aria-label="Calendar icon"
     fill="none"
     height="1em"
     role="presentation"

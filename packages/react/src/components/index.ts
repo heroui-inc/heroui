@@ -82,11 +82,11 @@ export * from "./select";
 export * from "./meter";
 export * from "./slider";
 export * from "./table";
+export * from "./calendar";
+export * from "./range-calendar";
 
 // in progress
-export * from "./calendar";
 export * from "./calendar-year-picker";
-export * from "./range-calendar";
 
 //  ===================================
 //  Icons

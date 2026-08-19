@@ -8,65 +8,46 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ScrollShadow } from "@heroui/react";
 ```
 
-## Usage
-
 <ComponentPreview name="scroll-shadow-default" />
 
-## Orientation
+## Examples
+
+### Orientation
 
 <ComponentPreview name="scroll-shadow-orientation" />
 
-## Hide Scroll Bar
+### Shadow Size
 
-<ComponentPreview name="scroll-shadow-hide-scroll-bar" />
+<ComponentPreview name="scroll-shadow-size" />
 
-## Custom Shadow Size
-
-<ComponentPreview name="scroll-shadow-custom-size" />
-
-## Visibility Change
-
-<ComponentPreview name="scroll-shadow-visibility-change" />
-
-## With Card
+### With Card
 
 <ComponentPreview name="scroll-shadow-with-card" />
 
-## Styling
+### Hide Scroll Bar
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="scroll-shadow-hide-scroll-bar" />
 
-```tsx
-import {ScrollShadow, Card} from "@heroui/react";
+### Visibility Change
 
-function CustomScrollShadow() {
-  return (
-    <Card className="w-full p-0 sm:max-w-md">
-      <ScrollShadow className="max-h-[300px] p-6 bg-gradient-to-b from-purple-50 to-pink-50">
-        <div className="space-y-4">
-          {Array.from({length: 10}).map((_, idx) => (
-            <p key={idx}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-              risus hendrerit venenatis.
-            </p>
-          ))}
-        </div>
-      </ScrollShadow>
-    </Card>
-  );
-}
-```
+<ComponentPreview name="scroll-shadow-visibility-change" />
 
-### Customizing the component classes
+## Customization
+
+### Tailwind CSS
+
+<ComponentPreview name="scroll-shadow-custom-styles" />
+
+### Global CSS
 
 To customize the ScrollShadow component classes, you can use the `@layer components` directive.
-<br />[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -84,22 +65,24 @@ To customize the ScrollShadow component classes, you can use the `@layer compone
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ScrollShadow component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/scroll-shadow.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 
 - `.scroll-shadow` - Root container element
 
-#### Orientation Variants
+#### Orientation Variants [!toc]
 
 - `.scroll-shadow--vertical` - Vertical scrolling (default)
 - `.scroll-shadow--horizontal` - Horizontal scrolling
 
-#### State Modifiers
+#### State Modifiers [!toc]
 
 - `.scroll-shadow--hide-scrollbar` - Hides native scrollbar
 
@@ -107,10 +90,10 @@ The ScrollShadow component uses these CSS classes ([View source styles](https://
 
 The ScrollShadow component uses CSS variables to size the fade mask and reserve space for visible native scrollbars:
 
-| Variable                          | Default                                | Description                                                                                                      |
-| --------------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `--scroll-shadow-size`            | `40px`                                 | Controls the fade gradient size. This is set from the `size` prop.                                               |
-| `--scroll-shadow-scrollbar-size`  | `10px` (`0px` when `hideScrollBar`)    | Reserves a solid mask gutter for the native scrollbar so the fade does not cover it. Override for wider scrollbars. |
+| Variable                         | Default                             | Description                                                                                                      |
+| -------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `--scroll-shadow-size`           | `40px`                              | Controls the fade gradient size. This is set from the `size` prop.                                               |
+| `--scroll-shadow-scrollbar-size` | `10px` (`0px` when `hideScrollBar`) | Reserves a solid mask gutter for the native scrollbar so the fade does not cover it. Override for wider scrollbars. |
 
 ### Data Attributes
 
@@ -137,3 +120,7 @@ The component uses data attributes to control shadow visibility:
 | `onVisibilityChange` | `(visibility: ScrollShadowVisibility) => void`                                | -            | Callback invoked when shadow visibility changes         |
 | `className`          | `string`                                                                      | -            | Additional CSS classes to apply to the root element     |
 | `children`           | `ReactNode`                                                                   | -            | The scrollable content                                  |
+
+## Related Components
+
+<RelatedComponents component="scrollshadow" />

@@ -40,6 +40,7 @@ import { Tabs } from 'heroui-native';
 
 - **Tabs**: Main container that manages tab state and selection. Controls active tab, handles value changes, and provides context to child components.
 - **Tabs.List**: Container for tab triggers. Groups triggers together with optional styling variants (primary or secondary).
+- **Tabs.ListBackground**: Optional theme-aware background container rendered behind the list surface. Mounted automatically for the `primary` variant when the active theme registers default background content (e.g. `glass`). Replace or remove it via the `background` prop on `Tabs.List`.
 - **Tabs.ScrollView**: Optional scrollable wrapper for tab triggers. Enables horizontal scrolling when tabs overflow with automatic centering of active tab.
 - **Tabs.Trigger**: Interactive button for each tab. Handles press events to change active tab and measures its position for indicator animation.
 - **Tabs.Label**: Text content for tab triggers. Displays the tab title with appropriate styling.
@@ -386,7 +387,18 @@ You can find more examples in the [GitHub repository](<https://github.com/heroui
 | -------------- | ----------------- | ------- | -------------------------------------------------- |
 | `children`     | `React.ReactNode` | -       | Children elements to be rendered inside the list   |
 | `className`    | `string`          | -       | Additional CSS classes                             |
+| `background` | `React.ReactNode` | - | Background layer behind the list surface. `undefined` renders the theme-aware default for the `primary` variant; custom node replaces it; `null` removes it |
 | `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### Tabs.ListBackground
+
+Absolute-fill container rendered behind the primary variant's list surface. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping.
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Custom content inside the background container |
+| `className`    | `string`          | -       | Additional CSS classes                         |
+| `...ViewProps` | `ViewProps`       | -       | All standard View props are supported          |
 
 ### Tabs.ScrollView
 

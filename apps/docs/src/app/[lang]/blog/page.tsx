@@ -8,6 +8,7 @@ import {getAllBlogPosts} from "@/lib/blog";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
 import {getBlogJsonLd} from "@/lib/json-ld";
+import {getLocalizedAlternates} from "@/lib/seo";
 
 import {BlogContent} from "./blog-content";
 
@@ -25,16 +26,15 @@ export async function generateMetadata({params}: BlogPageProps): Promise<Metadat
   const {blog} = dict;
 
   return {
-    alternates: {
-      canonical: `/${lang}/blog`,
-    },
+    alternates: getLocalizedAlternates({locale: lang, path: "/blog"}),
     description: blog.metaDescription,
     openGraph: {
       description: blog.metaDescription,
+      siteName: siteConfig.name,
       title: blog.metaTitle,
       url: `/${lang}/blog`,
     },
-    title: blog.metaTitle,
+    title: {absolute: blog.metaTitle},
   };
 }
 
@@ -54,7 +54,7 @@ export default async function BlogPage({params}: BlogPageProps) {
       datePublished: post.date,
       description: post.description,
       title: post.title,
-      url: new URL(`/${lang}/blog/${post.slug}`, baseUrl).toString(),
+      url: new URL(`/${post.locale}/blog/${post.slug}`, baseUrl).toString(),
     })),
     url: new URL(`/${lang}/blog`, baseUrl).toString(),
   });

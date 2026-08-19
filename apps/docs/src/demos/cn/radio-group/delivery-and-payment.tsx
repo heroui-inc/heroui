@@ -70,7 +70,7 @@ export function DeliveryAndPayment() {
                     "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
                   )}
                 >
-                  <Radio.Control className="absolute top-3 right-4 size-5">
+                  <Radio.Control className="absolute end-4 top-3 size-5">
                     <Radio.Indicator />
                   </Radio.Control>
                   <div className="flex flex-col gap-1">
@@ -98,7 +98,7 @@ export function DeliveryAndPayment() {
                     "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                   )}
                 >
-                  <Radio.Control className="absolute top-3 right-4 size-5">
+                  <Radio.Control className="absolute end-4 top-3 size-5">
                     <Radio.Indicator />
                   </Radio.Control>
                   <Icon className="size-6" icon={option.icon} />

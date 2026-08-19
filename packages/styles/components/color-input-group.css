@@ -61,12 +61,12 @@
 
   /* Remove border radius on left side when prefix is present */
   .color-input-group:has([data-slot="color-input-group-prefix"]) & {
-    @apply rounded-l-none pl-2;
+    @apply rounded-s-none ps-2;
   }
 
   /* Remove border radius on right side when suffix is present */
   .color-input-group:has([data-slot="color-input-group-suffix"]) & {
-    @apply rounded-r-none pr-2;
+    @apply rounded-e-none pe-2;
   }
 
   /* Focus state - handled by group */
@@ -78,12 +78,12 @@
 
 .color-input-group__prefix {
   @apply shrink-0 text-field-placeholder;
-  @apply mr-0 ml-3 flex items-center;
+  @apply ms-3 me-0 flex items-center;
 }
 
 .color-input-group__suffix {
   @apply shrink-0 text-field-placeholder;
-  @apply mr-3 flex items-center;
+  @apply me-3 flex items-center;
 }
 
 /* ==========================================================================

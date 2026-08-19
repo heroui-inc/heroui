@@ -18,3 +18,4 @@ export {WithSuffixIcon} from "./with-suffix-icon";
 export {WithTextPrefix} from "./with-text-prefix";
 export {WithTextSuffix} from "./with-text-suffix";
 export {WithTextArea} from "./with-textarea";
+export {CustomStyles} from "./custom-styles";

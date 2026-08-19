@@ -6,8 +6,10 @@ import path from "node:path";
 import {notFound} from "next/navigation";
 
 import {ShowcaseSource} from "@/components/showcase-source";
+import {siteConfig} from "@/config/site";
 import {hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
+import {getLocalizedAlternates} from "@/lib/seo";
 import {getAllShowcases, getShowcase} from "@/showcases";
 
 import {ShowcaseCodePanel} from "./showcase-code-panel";
@@ -30,15 +32,16 @@ export async function generateMetadata({params}: ShowcasePageProps): Promise<Met
 
   if (!showcase) return {};
 
+  const alternates = getLocalizedAlternates({locale: lang, path: `/showcase/${id}`});
+
   return {
-    alternates: {
-      canonical: `/${lang}/showcase/${id}`,
-    },
+    alternates,
     description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
     openGraph: {
       description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
+      siteName: siteConfig.name,
       title: `${showcase.name} - HeroUI Showcase`,
-      url: `/${lang}/showcase/${id}`,
+      url: alternates.canonical,
     },
     title: `${showcase.name} - HeroUI Showcase`,
   };

@@ -1,3 +1,4 @@
+export {CustomStyles} from "./custom-styles";
 export {BackdropVariants} from "./backdrop-variants";
 export {CloseMethods} from "./close-methods";
 export {Controlled} from "./controlled";
@@ -11,4 +12,3 @@ export {DismissBehavior} from "./dismiss-behavior";
 export {Placements} from "./placements";
 export {Sizes} from "./sizes";
 export {Statuses} from "./statuses";
-export {WithCloseButton} from "./with-close-button";

@@ -22,7 +22,7 @@ export function MobileFooter() {
 
   return (
     <>
-      <div className="fixed right-0 bottom-0 left-0 z-50 flex w-full items-center justify-between gap-4 border-t border-separator bg-background px-6 pt-3 pb-4 sm:hidden">
+      <div className="fixed start-0 end-0 bottom-0 z-50 flex w-full items-center justify-between gap-4 border-t border-separator bg-background px-6 pt-3 pb-4 sm:hidden">
         <div className="w-full cursor-pointer" onClick={() => setIsSheetOpen(true)}>
           <ThemeInput />
         </div>
@@ -40,7 +40,7 @@ export function MobileFooter() {
           <ThemesList />
           <div className="h-6" />
           <div className="flex w-full flex-wrap gap-4 gap-x-0 md:w-auto">
-            <div className="mb-4 flex items-center gap-4 pl-4">
+            <div className="mb-4 flex items-center gap-4 ps-4">
               <AccentColorSelector />
               <BaseColorSlider />
             </div>

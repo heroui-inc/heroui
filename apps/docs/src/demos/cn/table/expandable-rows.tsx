@@ -68,7 +68,7 @@ export function ExpandableRows() {
                     icon="gravity-ui:chevron-right"
                     className={cn(
                       "size-4 text-muted transition-transform duration-150",
-                      isExpanded ? "rotate-90" : "",
+                      isExpanded ? "rotate-90" : "rtl:rotate-180",
                     )}
                   />
                 </Button>

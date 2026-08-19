@@ -8,31 +8,19 @@ links:
   storybook: Components/Forms/Input
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Input } from '@heroui/react';
 ```
 
+<ComponentPreview name="input-basic" />
+
 <Callout>
   For validation, labels, and error messages, see **[TextField](/docs/components/text-field)**.
 </Callout>
 
-### Usage
-
-<ComponentPreview name="input-basic" />
-
-### Input Types
-
-<ComponentPreview name="input-types" />
-
-### Controlled
-
-<ComponentPreview name="input-controlled" />
-
-### Full Width
-
-<ComponentPreview name="input-full-width" />
+## Examples
 
 ### Variants
 
@@ -49,30 +37,25 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 
 <ComponentPreview name="input-on-surface" />
 
-<RelatedComponents component="input" />
+### Full Width
 
-## Styling
+<ComponentPreview name="input-full-width" />
 
-### Passing Tailwind CSS classes
+### Input Types
 
-```tsx
-import {Input, Label} from '@heroui/react';
+<ComponentPreview name="input-types" />
 
-function CustomInput() {
-  return (
-    <div className="flex flex-col gap-2">
-      <Label htmlFor="custom-input">Project name</Label>
-      <Input
-        id="custom-input"
-        className="rounded-xl border border-border/70 bg-surface px-4 py-2 text-sm shadow-sm focus-visible:border-accent"
-        placeholder="New web app"
-      />
-    </div>
-  );
-}
-```
+### Controlled
 
-### Customizing the component classes
+<ComponentPreview name="input-controlled" />
+
+## Customization
+
+### Tailwind CSS
+
+<ComponentPreview name="input-custom-styles" />
+
+### Global CSS
 
 The base class `.input` powers every instance. Override it once with `@layer components`.
 
@@ -98,7 +81,13 @@ The base class `.input` powers every instance. Override it once with `@layer com
 }
 ```
 
+## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
 ### CSS Classes
+
+#### Base Classes [!toc]
 
 - `.input` – Native input element styling
 
@@ -112,7 +101,7 @@ The base class `.input` powers every instance. Override it once with `@layer com
 
 ## API Reference
 
-### Input Props
+### Input
 
 Input accepts all standard HTML `<input>` attributes plus the following:
 
@@ -139,3 +128,7 @@ Input accepts all standard HTML `<input>` attributes plus the following:
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 > For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with Input as a child component.
+
+## Related Components
+
+<RelatedComponents component="input" />
