@@ -149,6 +149,23 @@ export async function getRedirects(): Promise<Redirect[]> {
     source: "/en",
   });
 
+  // HeroUI Agents product page lives on heroui.pro. Docs and npm still link to
+  // heroui.com/agents, so send those legacy paths to the live product URL.
+  const agentsProductUrl = "https://heroui.pro/agents";
+
+  redirects.push(
+    {
+      destination: agentsProductUrl,
+      permanent: true,
+      source: "/agents",
+    },
+    {
+      destination: agentsProductUrl,
+      permanent: true,
+      source: "/:lang(en|cn)/agents",
+    },
+  );
+
   // Theme builder redirect - redirect /theme to /themes
   redirects.push({
     destination: "/themes",

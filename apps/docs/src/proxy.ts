@@ -35,6 +35,7 @@ const PERMANENT_LOCALIZED_PREFIXES = ["/blog", "/docs", "/showcase", "/themes"];
 // Routes that live outside `app/[lang]` and must never receive a locale prefix.
 const LOCALE_REDIRECT_EXCLUDED_PREFIXES = [
   ...MARKDOWN_EXCLUDED_PREFIXES,
+  "/agents",
   "/install",
   "/native",
   "/react",
