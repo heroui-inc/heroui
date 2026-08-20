@@ -51,7 +51,7 @@
 .dropdown__popover {
   @apply max-w-[48svw] origin-(--trigger-anchor-point) scroll-py-1 scrollbar overflow-y-auto overscroll-contain bg-overlay p-0 text-sm md:min-w-55;
   border-radius: min(32px, var(--radius-3xl));
-  box-shadow: var(--shadow-overlay);
+  box-shadow: var(--overlay-shadow);
 
   /* Focus state */
   &:focus-visible:not(:focus),
