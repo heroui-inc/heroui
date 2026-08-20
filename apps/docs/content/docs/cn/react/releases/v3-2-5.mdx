@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: 补丁版本：新增 Select.ClearButton，确保 Modal 级浮层位于关闭中的 Popover 之上，扩大 Tag 移除按钮触摸目标，通过滚动时间线驱动 ScrollShadow 淡出以避免 SSR 闪烁，将动画合成器提示限制在动画状态，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，在没有步进按钮时不再为 NumberField 预留侧栏空间，并在传入自定义样式时保留 Toast 区域 CSS 变量。
+description: 补丁版本：Toast 支持堆叠并在悬停时展开，新增 Select.ClearButton，确保 Modal 级浮层位于关闭中的 Popover 之上，扩大 Tag 移除按钮触摸目标，通过滚动时间线驱动 ScrollShadow 淡出以避免 SSR 闪烁，将动画合成器提示限制在动画状态，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，在没有步进按钮时不再为 NumberField 预留侧栏空间，并在传入自定义样式时保留 Toast 区域 CSS 变量。
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 8 月 13 日</span>
 </div>
 
-补丁版本：[Select](/docs/components/select) 新增 `ClearButton`，Modal 级浮层会保持在关闭中的 Popover 之上，[Tag](/docs/components/tag) 的移除目标达到 24px，[ScrollShadow](/docs/components/scroll-shadow) 通过滚动时间线驱动淡出以避免 SSR 闪烁；[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；[Toast](/docs/components/toast) 在传入自定义样式时也会保留区域 CSS 变量。
+补丁版本：[Toast](/docs/components/toast) 支持堆叠并在悬停时展开，[Select](/docs/components/select) 新增 `ClearButton`，Modal 级浮层会保持在关闭中的 Popover 之上，[Tag](/docs/components/tag) 的移除目标达到 24px，[ScrollShadow](/docs/components/scroll-shadow) 通过滚动时间线驱动淡出以避免 SSR 闪烁；[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；Toast 在传入自定义样式时也会保留区域 CSS 变量。
 
 ## 安装
 
@@ -43,6 +43,12 @@ github:
 </Callout>
 
 ## 新功能
+
+### Toast
+
+[Toast](/docs/components/toast) 现在会折叠成堆叠布局：最新的 Toast 以完整尺寸显示在最前，较旧的会缩小并按间距错开。悬停或聚焦堆叠时会展开所有可见 Toast；离开后再次折叠。自动关闭计时器在堆叠被悬停或聚焦时暂停，页面处于后台标签页时也会暂停。
+
+- **堆叠**：将较旧的 Toast 折叠到最前方 Toast 之后，支持悬停/聚焦展开、`isExpanded` 强制展开、`toast.update()` 原地更新内容、`exitDuration` 控制退场动画，以及 `Alt+T` / `Escape` / `F6` 键盘操作 ([#6773](https://github.com/heroui-inc/heroui/pull/6773))。
 
 ### Select
 

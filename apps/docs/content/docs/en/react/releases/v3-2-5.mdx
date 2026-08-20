@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: Patch release that adds Select.ClearButton, keeps modal-level overlays above closing popovers, enlarges the Tag remove-button touch target, derives ScrollShadow fades from the scroll timeline to avoid SSR flicker, scopes animation compositor hints so Modal button labels stay sharp after reopen, keeps stacked Drawer handles from closing ancestor drawers, preserves keystrokes in nested Table inputs, stops NumberField from reserving stepper columns when buttons are absent, and keeps Toast region CSS variables when custom styles are passed.
+description: Patch release that stacks Toast notifications with expand-on-hover, adds Select.ClearButton, keeps modal-level overlays above closing popovers, enlarges the Tag remove-button touch target, derives ScrollShadow fades from the scroll timeline to avoid SSR flicker, scopes animation compositor hints so Modal button labels stay sharp after reopen, keeps stacked Drawer handles from closing ancestor drawers, preserves keystrokes in nested Table inputs, stops NumberField from reserving stepper columns when buttons are absent, and keeps Toast region CSS variables when custom styles are passed.
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">August 13, 2026</span>
 </div>
 
-Patch release: [Select](/docs/components/select) gains a `ClearButton`, modal-level overlays stay above closing popovers, [Tag](/docs/components/tag) remove targets meet the 24px floor, [ScrollShadow](/docs/components/scroll-shadow) derives its fade from the scroll timeline to avoid SSR flicker, [Button](/docs/components/button), Menu, and Dropdown apply compositor hints only while animating so labels stay sharp after a [Modal](/docs/components/modal) reopens, a nested [Drawer](/docs/components/drawer) handle now closes only its own drawer, [Table](/docs/components/table) preserves keystrokes in nested editable controls, [NumberField](/docs/components/number-field) no longer reserves stepper columns when buttons are absent, and [Toast](/docs/components/toast) keeps region CSS variables when custom styles are passed.
+Patch release: [Toast](/docs/components/toast) stacks notifications and expands on hover, [Select](/docs/components/select) gains a `ClearButton`, modal-level overlays stay above closing popovers, [Tag](/docs/components/tag) remove targets meet the 24px floor, [ScrollShadow](/docs/components/scroll-shadow) derives its fade from the scroll timeline to avoid SSR flicker, [Button](/docs/components/button), Menu, and Dropdown apply compositor hints only while animating so labels stay sharp after a [Modal](/docs/components/modal) reopens, a nested [Drawer](/docs/components/drawer) handle now closes only its own drawer, [Table](/docs/components/table) preserves keystrokes in nested editable controls, [NumberField](/docs/components/number-field) no longer reserves stepper columns when buttons are absent, and Toast keeps region CSS variables when custom styles are passed.
 
 ## Installation
 
@@ -43,6 +43,12 @@ Update to the latest version:
 </Callout>
 
 ## Features
+
+### Toast
+
+[Toast](/docs/components/toast) now collapses into a stacked layout: the newest toast sits at full size in front, while older ones scale down and stay offset by a gap. Hovering or focusing the stack expands every visible toast; leaving it collapses the stack again. Auto-dismiss timers pause while the stack is hovered or focused, and when the page is in a background tab.
+
+- **Stacking**: Collapse older toasts behind the frontmost one, with expand-on-hover/focus, an `isExpanded` override, `toast.update()` to replace content in place, `exitDuration` for exit animations, and `Alt+T` / `Escape` / `F6` keyboard support ([#6773](https://github.com/heroui-inc/heroui/pull/6773)).
 
 ### Select
 
