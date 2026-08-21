@@ -74,7 +74,7 @@
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
   }

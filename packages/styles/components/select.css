@@ -48,7 +48,7 @@
   }
 
   /* Focus visible state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
     border-color: var(--field-border-focus);
@@ -96,7 +96,7 @@
     }
   }
 
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     background-color: var(--select-trigger-bg-focus);
   }
@@ -186,7 +186,7 @@
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply outline-none;
   }

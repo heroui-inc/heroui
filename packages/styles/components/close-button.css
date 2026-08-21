@@ -19,7 +19,7 @@
   @apply transform-gpu motion-reduce:transition-none;
 
   /* Focus visible state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
