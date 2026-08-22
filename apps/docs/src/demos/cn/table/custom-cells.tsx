@@ -153,7 +153,7 @@ export function CustomCells() {
                 <Table.Cell className="font-medium">
                   <div className="flex items-center gap-2">
                     #{user.id.toString()}{" "}
-                    <Button isIconOnly size="sm" variant="ghost">
+                    <Button isIconOnly aria-label={`复制 ID #${user.id}`} size="sm" variant="ghost">
                       <Icon className="size-4 text-muted" icon="gravity-ui:copy" />
                     </Button>
                   </div>
@@ -183,13 +183,28 @@ export function CustomCells() {
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex items-center gap-1">
-                    <Button isIconOnly size="sm" variant="tertiary">
+                    <Button
+                      isIconOnly
+                      aria-label={`查看 ${user.name}`}
+                      size="sm"
+                      variant="tertiary"
+                    >
                       <Icon className="size-4" icon="gravity-ui:eye" />
                     </Button>
-                    <Button isIconOnly size="sm" variant="tertiary">
+                    <Button
+                      isIconOnly
+                      aria-label={`编辑 ${user.name}`}
+                      size="sm"
+                      variant="tertiary"
+                    >
                       <Icon className="size-4" icon="gravity-ui:pencil" />
                     </Button>
-                    <Button isIconOnly size="sm" variant="danger-soft">
+                    <Button
+                      isIconOnly
+                      aria-label={`删除 ${user.name}`}
+                      size="sm"
+                      variant="danger-soft"
+                    >
                       <Icon className="size-4" icon="gravity-ui:trash-bin" />
                     </Button>
                   </div>

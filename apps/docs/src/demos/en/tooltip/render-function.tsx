@@ -14,7 +14,7 @@ export function RenderFunction() {
       </Tooltip>
 
       <Tooltip delay={0}>
-        <Button isIconOnly variant="tertiary">
+        <Button isIconOnly aria-label="More information" variant="tertiary">
           <CircleInfo />
         </Button>
         <Tooltip.Content render={(props) => <div {...props} data-custom="foo" />}>

@@ -71,7 +71,7 @@ import { Button } from 'heroui-native';
 使用 `isIconOnly` 创建方形纯图标按钮。
 
 ```tsx
-<Button isIconOnly>
+<Button isIconOnly accessibilityLabel="喜欢">
   <Icon name="heart" size={18} />
 </Button>
 ```
@@ -277,17 +277,22 @@ export default function ButtonExample() {
       </Button>
 
       <View className="flex-row gap-4">
-        <Button size="sm" isIconOnly>
+        <Button size="sm" isIconOnly accessibilityLabel="喜欢">
           <Ionicons name="heart" size={16} color={themeColorAccentForeground} />
         </Button>
-        <Button size="sm" variant="secondary" isIconOnly>
+        <Button
+          size="sm"
+          variant="secondary"
+          isIconOnly
+          accessibilityLabel="收藏"
+        >
           <Ionicons
             name="bookmark"
             size={16}
             color={themeColorAccentSoftForeground}
           />
         </Button>
-        <Button size="sm" variant="danger" isIconOnly>
+        <Button size="sm" variant="danger" isIconOnly accessibilityLabel="删除">
           <Ionicons name="trash" size={16} color={themeColorDangerForeground} />
         </Button>
       </View>

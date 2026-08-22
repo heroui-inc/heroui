@@ -95,6 +95,27 @@ The `allowsEmptyCollection` prop enables the autocomplete to function even when 
 
 <ComponentPreview name="autocomplete-multiple-select" />
 
+<Callout type="warning">
+  In multiple mode, a bare `<Autocomplete.Value />` renders a copy of each selected item's
+  `ListBox.Item` children in the trigger, joined with locale-aware separators. Text-only items read
+  as plain text, but visual content such as checkboxes or avatars appears once per selected item,
+  and render function children are always called with `isSelected: false`.
+</Callout>
+
+To display selected values as plain text, use the `selectedText` render prop, which joins the
+`textValue` of each selected item:
+
+```tsx
+<Autocomplete.Value>
+  {({isPlaceholder, defaultChildren, selectedText}) =>
+    isPlaceholder ? defaultChildren : selectedText
+  }
+</Autocomplete.Value>
+```
+
+For richer layouts such as removable tags, render your own content from `state.selectedItems` as
+shown in the example above.
+
 ### Controlled
 
 <ComponentPreview name="autocomplete-controlled" />
@@ -340,12 +361,13 @@ const {contains} = useFilter({sensitivity: "base"});
 
 When using render functions with Autocomplete.Value, these values are provided:
 
-| Prop              | Type          | Description                        |
-| ----------------- | ------------- | ---------------------------------- |
-| `defaultChildren` | `ReactNode`   | The default rendered value         |
-| `isPlaceholder`   | `boolean`     | Whether the value is a placeholder |
-| `state`           | `SelectState` | The state of the autocomplete      |
-| `selectedItems`   | `Node[]`      | The currently selected items       |
+| Prop              | Type            | Description                                                                                                                     |
+| ----------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `defaultChildren` | `ReactNode`     | The default rendered value. In multiple mode this is a copy of each selected item's children joined with locale-aware separators |
+| `isPlaceholder`   | `boolean`       | Whether the value is a placeholder                                                                                              |
+| `state`           | `SelectState`   | The state of the autocomplete. Use `state.selectedItems` for the selected collection nodes                                      |
+| `selectedItems`   | `(T \| null)[]` | The values of the currently selected items                                                                                      |
+| `selectedText`    | `string`        | The `textValue` of the selected items joined with locale-aware separators                                                        |
 
 ## Accessibility
 

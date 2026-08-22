@@ -80,13 +80,13 @@ export function Basic() {
                 24
               </Chip>
             </Button>
-            <Button isIconOnly>
+            <Button isIconOnly aria-label="More fork options">
               <ButtonGroup.Separator />
               <ChevronDown />
             </Button>
           </ButtonGroup>
           <ButtonGroup variant="tertiary">
-            <Button isIconOnly>
+            <Button isIconOnly aria-label="Show QR code">
               <QrCode />
             </Button>
             <Button>
@@ -99,7 +99,7 @@ export function Basic() {
               <ThumbsUp />
               <span className="text-xs font-semibold">2.4K</span>
             </Button>
-            <Button isIconOnly>
+            <Button isIconOnly aria-label="Dislike">
               <ButtonGroup.Separator />
               <ThumbsDown />
             </Button>
@@ -121,7 +121,7 @@ export function Basic() {
               <Pin />
               Pinned
             </Button>
-            <Button isIconOnly>
+            <Button isIconOnly aria-label="More pin options">
               <ButtonGroup.Separator />
               <ChevronDown />
             </Button>
@@ -181,18 +181,18 @@ export function Basic() {
       {/* Icon-Only Alignment Button Group */}
       <div className="flex flex-col gap-2">
         <ButtonGroup variant="tertiary">
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align left">
             <TextAlignLeft />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align center">
             <ButtonGroup.Separator />
             <TextAlignCenter />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align right">
             <ButtonGroup.Separator />
             <TextAlignRight />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Justify">
             <ButtonGroup.Separator />
             <TextAlignJustify />
           </Button>

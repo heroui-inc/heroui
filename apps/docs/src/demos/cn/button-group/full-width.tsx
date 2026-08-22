@@ -16,14 +16,14 @@ export function FullWidth() {
         </Button>
       </ButtonGroup>
       <ButtonGroup fullWidth>
-        <Button isIconOnly>
+        <Button isIconOnly aria-label="左对齐">
           <TextAlignLeft />
         </Button>
-        <Button isIconOnly>
+        <Button isIconOnly aria-label="居中对齐">
           <ButtonGroup.Separator />
           <TextAlignCenter />
         </Button>
-        <Button isIconOnly>
+        <Button isIconOnly aria-label="右对齐">
           <ButtonGroup.Separator />
           <TextAlignRight />
         </Button>

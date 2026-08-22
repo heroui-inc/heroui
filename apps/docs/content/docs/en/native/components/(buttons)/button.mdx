@@ -71,7 +71,7 @@ Combine icons with labels for enhanced visual communication.
 Create square icon-only buttons using the isIconOnly prop.
 
 ```tsx
-<Button isIconOnly>
+<Button isIconOnly accessibilityLabel="Like">
   <Icon name="heart" size={18} />
 </Button>
 ```
@@ -277,17 +277,27 @@ export default function ButtonExample() {
       </Button>
 
       <View className="flex-row gap-4">
-        <Button size="sm" isIconOnly>
+        <Button size="sm" isIconOnly accessibilityLabel="Like">
           <Ionicons name="heart" size={16} color={themeColorAccentForeground} />
         </Button>
-        <Button size="sm" variant="secondary" isIconOnly>
+        <Button
+          size="sm"
+          variant="secondary"
+          isIconOnly
+          accessibilityLabel="Bookmark"
+        >
           <Ionicons
             name="bookmark"
             size={16}
             color={themeColorAccentSoftForeground}
           />
         </Button>
-        <Button size="sm" variant="danger" isIconOnly>
+        <Button
+          size="sm"
+          variant="danger"
+          isIconOnly
+          accessibilityLabel="Delete"
+        >
           <Ionicons name="trash" size={16} color={themeColorDangerForeground} />
         </Button>
       </View>

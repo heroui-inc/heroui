@@ -7,18 +7,18 @@ export function Orientation() {
       <div className="flex flex-col gap-2">
         <span className="text-sm text-muted">Horizontal</span>
         <ButtonGroup orientation="horizontal" variant="tertiary">
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align left">
             <TextAlignLeft />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align center">
             <ButtonGroup.Separator />
             <TextAlignCenter />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align right">
             <ButtonGroup.Separator />
             <TextAlignRight />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Justify">
             <ButtonGroup.Separator />
             <TextAlignJustify />
           </Button>
@@ -27,18 +27,18 @@ export function Orientation() {
       <div className="flex flex-col gap-2">
         <span className="text-sm text-muted">Vertical</span>
         <ButtonGroup orientation="vertical" variant="tertiary">
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align left">
             <TextAlignLeft />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align center">
             <ButtonGroup.Separator />
             <TextAlignCenter />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Align right">
             <ButtonGroup.Separator />
             <TextAlignRight />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="Justify">
             <ButtonGroup.Separator />
             <TextAlignJustify />
           </Button>

@@ -4,13 +4,13 @@ import {Button} from "@heroui/react";
 export function IconOnly() {
   return (
     <div className="flex gap-3">
-      <Button isIconOnly variant="tertiary">
+      <Button isIconOnly aria-label="More options" variant="tertiary">
         <Ellipsis />
       </Button>
-      <Button isIconOnly variant="secondary">
+      <Button isIconOnly aria-label="Settings" variant="secondary">
         <Gear />
       </Button>
-      <Button isIconOnly variant="danger">
+      <Button isIconOnly aria-label="Delete" variant="danger">
         <TrashBin />
       </Button>
     </div>
