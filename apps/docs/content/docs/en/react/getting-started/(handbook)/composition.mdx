@@ -282,7 +282,7 @@ function IconButton({ icon, label, ...props }) {
   return (
     <Tooltip>
       <Tooltip.Trigger>
-        <Button isIconOnly {...props}>
+        <Button isIconOnly aria-label={label} {...props}>
           <Icon icon={icon} />
         </Button>
       </Tooltip.Trigger>
