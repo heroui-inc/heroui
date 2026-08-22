@@ -43,7 +43,7 @@
   @apply w-fit origin-(--trigger-anchor-point) scrollbar-none overflow-y-auto overscroll-contain bg-overlay p-3;
   @apply motion-reduce:transition-none;
 
-  box-shadow: var(--shadow-overlay);
+  box-shadow: var(--overlay-shadow);
   border-radius: min(32px, calc(var(--radius) * 2.5));
 
   &:focus-visible,

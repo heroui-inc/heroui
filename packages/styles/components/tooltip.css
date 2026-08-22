@@ -4,7 +4,7 @@
 .tooltip {
   @apply max-w-xs origin-(--trigger-anchor-point) bg-overlay p-2 text-xs break-all;
   border-radius: min(32px, var(--radius-xl));
-  box-shadow: var(--shadow-overlay);
+  box-shadow: var(--overlay-shadow);
 
   /* Entering animations */
   &[data-entering="true"] {
