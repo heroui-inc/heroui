@@ -74,6 +74,38 @@ describe("RadioGroup", () => {
     );
   });
 
+  it("keeps item Label ids from colliding with the group Label id", () => {
+    render(
+      <RadioGroup name="plan">
+        <Label>Plan</Label>
+        <Radio value="a">
+          <Radio.Content>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Label>Basic</Label>
+          </Radio.Content>
+        </Radio>
+        <Radio value="b">
+          <Radio.Content>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Label>Premium</Label>
+          </Radio.Content>
+        </Radio>
+      </RadioGroup>,
+    );
+
+    const groupLabelId = screen.getByText("Plan").id;
+
+    expect(groupLabelId).toBeTruthy();
+    expect(screen.getByText("Basic")).not.toHaveAttribute("id", groupLabelId);
+    expect(screen.getByText("Premium")).not.toHaveAttribute("id", groupLabelId);
+    expect(screen.getByRole("radiogroup", {name: "Plan"})).toBeInTheDocument();
+    expect(screen.getByRole("radio", {name: "Basic"})).toBeInTheDocument();
+  });
+
   it("supports selection via createTester", async () => {
     const onChange = vi.fn();
 

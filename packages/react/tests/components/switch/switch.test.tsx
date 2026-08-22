@@ -41,6 +41,17 @@ describe("Switch", () => {
     expect(document.querySelector('[data-slot="switch-thumb"]')).not.toBeNull();
   });
 
+  it("renders a nested Label as a span so the content label has no descendant label", () => {
+    renderSwitch();
+
+    const label = screen.getByText("Enable notifications");
+    const content = document.querySelector('[data-slot="switch-content"]');
+
+    expect(label.tagName).toBe("SPAN");
+    expect(content?.tagName).toBe("LABEL");
+    expect(content?.querySelector("label")).toBeNull();
+  });
+
   it("supports data attribute passthrough on the field", () => {
     render(
       <Switch data-testid="notifications">
