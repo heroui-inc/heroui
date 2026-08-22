@@ -130,10 +130,10 @@ The `isIconOnly` prop is available in both v2 and v3. It renders a square button
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    <Button isIconOnly color="danger" variant="flat">
+    <Button isIconOnly aria-label="Like" color="danger" variant="flat">
       <HeartIcon />
     </Button>
-    <Button isIconOnly color="primary" variant="bordered" size="sm">
+    <Button isIconOnly aria-label="Search" color="primary" variant="bordered" size="sm">
       <SearchIcon />
     </Button>
     ```
@@ -142,10 +142,10 @@ The `isIconOnly` prop is available in both v2 and v3. It renders a square button
     ```tsx
     import { Icon } from "@iconify/react";
 
-    <Button isIconOnly variant="danger-soft">
+    <Button isIconOnly aria-label="Like" variant="danger-soft">
       <Icon icon="gravity-ui:heart" />
     </Button>
-    <Button isIconOnly variant="secondary" size="sm">
+    <Button isIconOnly aria-label="Search" variant="secondary" size="sm">
       <Icon icon="gravity-ui:magnifier" />
     </Button>
     ```
@@ -254,7 +254,7 @@ The `isIconOnly` prop is available in both v2 and v3. It renders a square button
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    <Button isIconOnly color="danger">
+    <Button isIconOnly aria-label="Like" color="danger">
       <HeartIcon />
     </Button>
     ```
@@ -263,7 +263,7 @@ The `isIconOnly` prop is available in both v2 and v3. It renders a square button
     ```tsx
     import { Icon } from "@iconify/react";
 
-    <Button isIconOnly variant="danger">
+    <Button isIconOnly aria-label="Like" variant="danger">
       <Icon icon="gravity-ui:heart" />
     </Button>
     ```

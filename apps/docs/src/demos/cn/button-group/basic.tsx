@@ -73,13 +73,13 @@ export function Basic() {
                 24
               </Chip>
             </Button>
-            <Button isIconOnly>
+            <Button isIconOnly aria-label="更多复刻选项">
               <ButtonGroup.Separator />
               <ChevronDown />
             </Button>
           </ButtonGroup>
           <ButtonGroup variant="tertiary">
-            <Button isIconOnly>
+            <Button isIconOnly aria-label="显示二维码">
               <QrCode />
             </Button>
             <Button>
@@ -92,7 +92,7 @@ export function Basic() {
               <ThumbsUp />
               <span className="text-xs font-semibold">2.4K</span>
             </Button>
-            <Button isIconOnly>
+            <Button isIconOnly aria-label="点踩">
               <ButtonGroup.Separator />
               <ThumbsDown />
             </Button>
@@ -114,7 +114,7 @@ export function Basic() {
               <Pin />
               已置顶
             </Button>
-            <Button isIconOnly>
+            <Button isIconOnly aria-label="更多置顶选项">
               <ButtonGroup.Separator />
               <ChevronDown />
             </Button>
@@ -174,18 +174,18 @@ export function Basic() {
       {/* 仅图标：对齐 */}
       <div className="flex flex-col gap-2">
         <ButtonGroup variant="tertiary">
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="左对齐">
             <TextAlignLeft />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="居中对齐">
             <ButtonGroup.Separator />
             <TextAlignCenter />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="右对齐">
             <ButtonGroup.Separator />
             <TextAlignRight />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="两端对齐">
             <ButtonGroup.Separator />
             <TextAlignJustify />
           </Button>

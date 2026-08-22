@@ -26,14 +26,14 @@ export function WithIcons() {
       <div className="flex flex-col items-start gap-2">
         <p className="text-sm text-muted">仅图标按钮</p>
         <ButtonGroup variant="tertiary">
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="搜索">
             <Globe />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="添加">
             <ButtonGroup.Separator />
             <Plus />
           </Button>
-          <Button isIconOnly>
+          <Button isIconOnly aria-label="删除">
             <ButtonGroup.Separator />
             <TrashBin />
           </Button>
