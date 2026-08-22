@@ -67,6 +67,38 @@ describe("CheckboxGroup", () => {
     expect(screen.getByText("Choose all that apply")).toBeInTheDocument();
   });
 
+  it("keeps item Label ids from colliding with the group Label id", () => {
+    render(
+      <CheckboxGroup name="interests">
+        <Label>Select your interests</Label>
+        <Checkbox value="coding">
+          <Checkbox.Content>
+            <Checkbox.Control>
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            <Label>Coding</Label>
+          </Checkbox.Content>
+        </Checkbox>
+        <Checkbox value="design">
+          <Checkbox.Content>
+            <Checkbox.Control>
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            <Label>Design</Label>
+          </Checkbox.Content>
+        </Checkbox>
+      </CheckboxGroup>,
+    );
+
+    const groupLabelId = screen.getByText("Select your interests").id;
+
+    expect(groupLabelId).toBeTruthy();
+    expect(screen.getByText("Coding")).not.toHaveAttribute("id", groupLabelId);
+    expect(screen.getByText("Design")).not.toHaveAttribute("id", groupLabelId);
+    expect(screen.getByRole("group", {name: "Select your interests"})).toBeInTheDocument();
+    expect(screen.getByRole("checkbox", {name: "Coding"})).toBeInTheDocument();
+  });
+
   it("exposes variant BEM modifier", () => {
     renderInterests({variant: "secondary"});
 
