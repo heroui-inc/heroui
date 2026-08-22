@@ -31,7 +31,7 @@
   }
 
   /* Focus visible state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -56,7 +56,7 @@
   @apply flex flex-col gap-3;
 
   /* Focus state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply outline-none;
   }
