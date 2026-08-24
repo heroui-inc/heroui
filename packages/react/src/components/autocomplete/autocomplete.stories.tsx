@@ -67,7 +67,7 @@ export const Default: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search animals" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search animals..." />
@@ -119,7 +119,7 @@ export const WithClearButton: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search animals" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search animals..." />
@@ -184,7 +184,7 @@ export const WithOnClearCallback: Story = {
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
             <Autocomplete.Filter filter={contains}>
-              <SearchField autoFocus name="search" variant="secondary">
+              <SearchField autoFocus aria-label="Search animals" name="search" variant="secondary">
                 <SearchField.Group>
                   <SearchField.SearchIcon />
                   <SearchField.Input placeholder="Search animals..." />
@@ -266,7 +266,12 @@ export const Variants: Story = {
               </Autocomplete.Trigger>
               <Autocomplete.Popover>
                 <Autocomplete.Filter filter={contains}>
-                  <SearchField autoFocus name="search" variant="secondary">
+                  <SearchField
+                    autoFocus
+                    aria-label="Search options"
+                    name="search"
+                    variant="secondary"
+                  >
                     <SearchField.Group>
                       <SearchField.SearchIcon />
                       <SearchField.Input placeholder="Search..." />
@@ -300,7 +305,12 @@ export const Variants: Story = {
               </Autocomplete.Trigger>
               <Autocomplete.Popover>
                 <Autocomplete.Filter filter={contains}>
-                  <SearchField autoFocus name="search" variant="secondary">
+                  <SearchField
+                    autoFocus
+                    aria-label="Search options"
+                    name="search"
+                    variant="secondary"
+                  >
                     <SearchField.Group>
                       <SearchField.SearchIcon />
                       <SearchField.Input placeholder="Search..." />
@@ -365,7 +375,12 @@ export const Variants: Story = {
               </Autocomplete.Trigger>
               <Autocomplete.Popover>
                 <Autocomplete.Filter filter={contains}>
-                  <SearchField autoFocus name="search" variant="secondary">
+                  <SearchField
+                    autoFocus
+                    aria-label="Search options"
+                    name="search"
+                    variant="secondary"
+                  >
                     <SearchField.Group>
                       <SearchField.SearchIcon />
                       <SearchField.Input placeholder="Search..." />
@@ -425,7 +440,12 @@ export const Variants: Story = {
               </Autocomplete.Trigger>
               <Autocomplete.Popover>
                 <Autocomplete.Filter filter={contains}>
-                  <SearchField autoFocus name="search" variant="secondary">
+                  <SearchField
+                    autoFocus
+                    aria-label="Search options"
+                    name="search"
+                    variant="secondary"
+                  >
                     <SearchField.Group>
                       <SearchField.SearchIcon />
                       <SearchField.Input placeholder="Search..." />
@@ -510,7 +530,7 @@ export const MultipleSelect: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search options" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search..." />
@@ -564,7 +584,7 @@ export const FullWidth: Story = {
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
             <Autocomplete.Filter filter={contains}>
-              <SearchField autoFocus name="search" variant="secondary">
+              <SearchField autoFocus aria-label="Search states" name="search" variant="secondary">
                 <SearchField.Group>
                   <SearchField.SearchIcon />
                   <SearchField.Input placeholder="Search states..." />
@@ -617,7 +637,7 @@ export const WithDescription: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search states" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search states..." />
@@ -661,7 +681,7 @@ export const WithSections: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search countries" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search countries..." />
@@ -758,7 +778,7 @@ export const WithDisabledOptions: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search animals" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search animals..." />
@@ -830,7 +850,7 @@ export const CustomIndicator: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search states" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search states..." />
@@ -904,7 +924,7 @@ export const Required: Story = {
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
             <Autocomplete.Filter filter={contains}>
-              <SearchField autoFocus name="search" variant="secondary">
+              <SearchField autoFocus aria-label="Search states" name="search" variant="secondary">
                 <SearchField.Group>
                   <SearchField.SearchIcon />
                   <SearchField.Input placeholder="Search states..." />
@@ -938,7 +958,12 @@ export const Required: Story = {
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
             <Autocomplete.Filter filter={contains}>
-              <SearchField autoFocus name="search" variant="secondary">
+              <SearchField
+                autoFocus
+                aria-label="Search countries"
+                name="search"
+                variant="secondary"
+              >
                 <SearchField.Group>
                   <SearchField.SearchIcon />
                   <SearchField.Input placeholder="Search countries..." />
@@ -996,7 +1021,7 @@ export const Controlled: Story = {
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
             <Autocomplete.Filter filter={contains}>
-              <SearchField autoFocus name="search" variant="secondary">
+              <SearchField autoFocus aria-label="Search states" name="search" variant="secondary">
                 <SearchField.Group>
                   <SearchField.SearchIcon />
                   <SearchField.Input placeholder="Search states..." />
@@ -1051,7 +1076,7 @@ export const ControlledOpenState: Story = {
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
             <Autocomplete.Filter filter={contains}>
-              <SearchField autoFocus name="search" variant="secondary">
+              <SearchField autoFocus aria-label="Search states" name="search" variant="secondary">
                 <SearchField.Group>
                   <SearchField.SearchIcon />
                   <SearchField.Input placeholder="Search states..." />
@@ -1111,7 +1136,13 @@ export const AsynchronousFiltering: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter inputValue={list.filterText} onInputChange={list.setFilterText}>
-            <SearchField autoFocus className="sticky top-0 z-10" name="search" variant="secondary">
+            <SearchField
+              autoFocus
+              aria-label="Search characters"
+              className="sticky top-0 z-10"
+              name="search"
+              variant="secondary"
+            >
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search characters..." />
@@ -1246,7 +1277,13 @@ export const Virtualization: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter inputValue={searchQuery} onInputChange={setSearchQuery}>
-            <SearchField autoFocus className="sticky top-0 z-10" name="search" variant="secondary">
+            <SearchField
+              autoFocus
+              aria-label="Search users"
+              className="sticky top-0 z-10"
+              name="search"
+              variant="secondary"
+            >
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search users..." />
@@ -1315,7 +1352,7 @@ export const Disabled: Story = {
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
             <Autocomplete.Filter filter={contains}>
-              <SearchField autoFocus name="search" variant="secondary">
+              <SearchField autoFocus aria-label="Search states" name="search" variant="secondary">
                 <SearchField.Group>
                   <SearchField.SearchIcon />
                   <SearchField.Input placeholder="Search states..." />
@@ -1348,7 +1385,12 @@ export const Disabled: Story = {
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
             <Autocomplete.Filter filter={contains}>
-              <SearchField autoFocus name="search" variant="secondary">
+              <SearchField
+                autoFocus
+                aria-label="Search countries"
+                name="search"
+                variant="secondary"
+              >
                 <SearchField.Group>
                   <SearchField.SearchIcon />
                   <SearchField.Input placeholder="Search countries..." />
@@ -1458,7 +1500,7 @@ export const UserSelection: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search users" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search users..." />
@@ -1583,7 +1625,7 @@ export const UserSelectionMultiple: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search users" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search users..." />
@@ -1661,7 +1703,7 @@ export const LocationSearch: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={customFilter}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search cities" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search cities..." />
@@ -1752,7 +1794,7 @@ export const TagGroupSelection: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search tags" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search tags..." />
@@ -1833,7 +1875,7 @@ export const EmailRecipients: Story = {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search emails" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search emails..." />

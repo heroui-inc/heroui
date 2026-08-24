@@ -79,7 +79,7 @@ export function CustomStyles() {
         </Autocomplete.Trigger>
         <Autocomplete.Popover className="overflow-hidden rounded-xl border border-border/80 bg-surface shadow-xl ring-1 ring-black/3 dark:border-border/90 dark:bg-surface dark:ring-white/5">
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="按姓名或角色搜索" name="search" variant="secondary">
               <SearchField.Group className="border-b border-separator bg-surface-secondary/50">
                 <SearchField.SearchIcon className="text-muted" />
                 <SearchField.Input placeholder="按姓名或角色搜索..." />

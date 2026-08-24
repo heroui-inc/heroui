@@ -20,7 +20,7 @@ export function AllowsEmptyCollection() {
       </Autocomplete.Trigger>
       <Autocomplete.Popover>
         <Autocomplete.Filter filter={contains}>
-          <SearchField autoFocus name="search" variant="secondary">
+          <SearchField autoFocus aria-label="Search states" name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
               <SearchField.Input placeholder="Search states..." />
