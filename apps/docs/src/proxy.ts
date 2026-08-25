@@ -31,6 +31,7 @@ const MARKDOWN_EXCLUDED_PATHS = new Set([
 const PUBLIC_FILE_PATTERN = /\.[a-z0-9]+$/i;
 const UNRESOLVED_TEMPLATE_PATTERN = /(?:\{[^/{}]+\}|%7B[^/]+%7D)/i;
 const PERMANENT_LOCALIZED_PREFIXES = ["/blog", "/docs", "/showcase", "/themes"];
+const TRUST_PATHS = new Set(["/about", "/contact", "/privacy"]);
 
 // Routes that live outside `app/[lang]` and must never receive a locale prefix.
 const LOCALE_REDIRECT_EXCLUDED_PREFIXES = [
@@ -136,8 +137,8 @@ export function proxy(request: NextRequest) {
   if (!getLocaleFromPath(pathname) && !shouldSkipLocaleRedirect(pathname)) {
     const url = request.nextUrl.clone();
 
-    if (pathname === "/") {
-      url.pathname = `/${DEFAULT_LOCALE}`;
+    if (pathname === "/" || TRUST_PATHS.has(pathname)) {
+      url.pathname = `/${DEFAULT_LOCALE}${pathname === "/" ? "" : pathname}`;
 
       return addHomepageDiscoveryHeaders(NextResponse.rewrite(url), pathname);
     }

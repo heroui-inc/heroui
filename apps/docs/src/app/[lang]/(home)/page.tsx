@@ -73,9 +73,29 @@ export default async function HomePage({params}: {params: Promise<{lang: string}
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
           <ReleaseBadges badges={home.releaseBadges} />
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">
-            {home.titleMain} <div className="text-muted/70">{home.titleMuted}</div>
+            {home.titleMain} <span className="block text-muted/70">{home.titleMuted}</span>
           </h1>
           <p className="text-balance text-muted md:text-lg">{home.description}</p>
+          <section aria-labelledby="heroui-overview" className="sr-only">
+            <h2 id="heroui-overview">Build accessible products with HeroUI</h2>
+            <p>
+              HeroUI is an open-source component library for React web and React Native
+              applications. The web library combines React Aria Components with Tailwind CSS v4 to
+              provide accessible behavior, typed APIs, customizable composition, and polished
+              defaults. Teams can inspect the source, use the free packages, and adapt each
+              component to their own design system.
+            </p>
+            <h3>Documentation for developers and coding agents</h3>
+            <p>
+              The HeroUI documentation includes installation guides, component APIs, examples,
+              theming references, migration instructions, and an official CLI guide. Coding agents
+              can use the generated llms.txt indexes, request documentation as markdown, search the
+              public Docs Agent API, read its OpenAPI specification, or connect the existing HeroUI
+              React and HeroUI Native MCP packages. These machine-readable resources expose the same
+              public documentation without requiring a paid plan or weakening authentication for
+              private services.
+            </p>
+          </section>
           <div className="mt-4 flex gap-3">
             <LinkRoot
               className={buttonVariants({variant: "primary"})}
