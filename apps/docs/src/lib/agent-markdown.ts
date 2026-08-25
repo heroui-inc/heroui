@@ -80,7 +80,10 @@ HeroUI is the modern UI library for web and mobile, built to help teams move fas
 - [Full LLM documentation](${baseUrl}/llms-full.txt)
 - [React LLM documentation](${baseUrl}/react/llms-full.txt)
 - [Native LLM documentation](${baseUrl}/native/llms-full.txt)
+- [HeroUI OpenAPI specification](${baseUrl}/openapi.json)
+- [HeroUI Docs Agent API](${baseUrl}/api/agent)
 - [API catalog](${baseUrl}/.well-known/api-catalog)
+- [MCP discovery handshake](${baseUrl}/.well-known/mcp)
 - [MCP server card](${baseUrl}/.well-known/mcp/server-card.json)
 - [Agent skills index](${baseUrl}/.well-known/agent-skills/index.json)
 
@@ -90,6 +93,13 @@ HeroUI is the modern UI library for web and mobile, built to help teams move fas
 - [HeroUI Native MCP server](${baseUrl}/docs/native/getting-started/mcp-server)
 - [HeroUI React Agent Skills](${baseUrl}/docs/react/getting-started/agent-skills)
 - [HeroUI Native Agent Skills](${baseUrl}/docs/native/getting-started/agent-skills)
+- [HeroUI CLI](${baseUrl}/docs/react/getting-started/cli)
+
+## About HeroUI
+
+- [About HeroUI](${baseUrl}/about)
+- [Contact HeroUI](${baseUrl}/contact)
+- [HeroUI privacy information](${baseUrl}/privacy)
 `;
 }
 

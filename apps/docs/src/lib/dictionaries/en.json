@@ -67,7 +67,10 @@
     "description": "Explore interactive examples showcasing HeroUI components in real-world scenarios."
   },
   "footer": {
-    "allRightsReserved": "All rights reserved."
+    "about": "About",
+    "allRightsReserved": "All rights reserved.",
+    "contact": "Contact",
+    "privacy": "Privacy"
   },
   "newsletter": {
     "label": "Hero Newsletter",

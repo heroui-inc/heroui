@@ -4,6 +4,11 @@ export function getOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: "sales@heroui.com",
+    },
     logo: "https://heroui.com/icons/favicon.svg",
     name: "HeroUI",
     sameAs: [siteConfig.links.github, siteConfig.links.twitter, siteConfig.links.discord],

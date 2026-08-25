@@ -15,6 +15,7 @@ export const LINKSET_HEADERS = {
 export const MARKDOWN_HEADERS = {
   ...AGENT_DISCOVERY_CACHE_HEADERS,
   "Content-Type": "text/markdown; charset=utf-8",
+  Vary: "Accept, Accept-Encoding",
 } as const;
 
 export const OPENAPI_HEADERS = {
@@ -70,8 +71,10 @@ export function getHomepageLinkHeader(): string {
   return [
     '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
     '</.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"',
+    '</.well-known/mcp>; rel="service"; type="application/json"',
     '</.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json"',
     '</.well-known/oauth-protected-resource>; rel="oauth-protected-resource"; type="application/json"',
+    '</openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json"',
     '</llms.txt>; rel="service-doc"; type="text/plain"',
     '</llms-full.txt>; rel="describedby"; type="text/plain"',
   ].join(", ");
@@ -85,6 +88,28 @@ export function jsonResponse(data: unknown, init: ResponseInit = {}): Response {
       ...init.headers,
     },
   });
+}
+
+export function agentErrorResponse({
+  code,
+  hint,
+  message,
+  status,
+}: {
+  code: string;
+  hint: string;
+  message: string;
+  status: number;
+}): Response {
+  return jsonResponse(
+    {
+      code,
+      error: true,
+      hint,
+      message,
+    },
+    {status},
+  );
 }
 
 export function getAgentServiceBaseUrl(origin: string): string {

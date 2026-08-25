@@ -22,11 +22,19 @@ export async function GET(request: Request) {
             anchor: agentApi,
             "service-desc": [
               {
+                href: absoluteUrl(origin, "/openapi.json"),
+                type: "application/vnd.oai.openapi+json",
+              },
+              {
                 href: absoluteUrl(origin, "/.well-known/openapi/heroui-agent-api.json"),
                 type: "application/vnd.oai.openapi+json",
               },
             ],
             "service-doc": [
+              {
+                href: absoluteUrl(origin, "/api/agent"),
+                type: "application/json",
+              },
               {
                 href: absoluteUrl(origin, "/docs/react/getting-started/llms-txt"),
                 type: "text/html",
@@ -40,6 +48,25 @@ export async function GET(request: Request) {
               {
                 href: absoluteUrl(origin, "/api/agent/health"),
                 type: "application/json",
+              },
+            ],
+          },
+          {
+            anchor: absoluteUrl(origin, "/.well-known/mcp"),
+            "service-desc": [
+              {
+                href: absoluteUrl(origin, "/.well-known/mcp/server-card.json"),
+                type: "application/json",
+              },
+            ],
+            "service-doc": [
+              {
+                href: absoluteUrl(origin, "/docs/react/getting-started/mcp-server"),
+                type: "text/html",
+              },
+              {
+                href: absoluteUrl(origin, "/docs/native/getting-started/mcp-server"),
+                type: "text/html",
               },
             ],
           },

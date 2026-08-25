@@ -8,6 +8,17 @@ export function Footer({dict}: {dict: Dictionary["footer"]}) {
       <p className="text-sm">
         &copy; {new Date().getFullYear()} NextUI Inc. {dict.allRightsReserved}
       </p>
+      <nav aria-label="HeroUI company information" className="flex items-center gap-2 text-sm">
+        <a className="hover:text-foreground" href="/about">
+          {dict.about}
+        </a>
+        <a className="hover:text-foreground" href="/contact">
+          {dict.contact}
+        </a>
+        <a className="hover:text-foreground" href="/privacy">
+          {dict.privacy}
+        </a>
+      </nav>
       <SocialLinks />
     </footer>
   );
