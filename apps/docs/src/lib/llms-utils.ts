@@ -122,7 +122,7 @@ export function generateIndexHeader(): string[] {
     "",
     "## HeroUI Agent and Developer Resources",
     "",
-    "HeroUI is free, open-source software. Its public docs agent API and existing MCP packages are read-only and require no account or paid plan.",
+    "HeroUI v3 web and mobile libraries are free, open-source software. The public docs agent API and existing MCP packages are read-only and require no account or paid plan.",
     "",
     ...agentResources.map(([title, path]) => `- [${title}](${formatAbsoluteUrl(path)})`),
     "",

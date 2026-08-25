@@ -51,6 +51,10 @@ function parseDate(value: string | undefined): Date | undefined {
 export default function sitemap(): MetadataRoute.Sitemap {
   const generatedAt = new Date();
   const paths: LocalizedPaths = new Map();
+  const trustEntries: SitemapEntry[] = ["/about", "/contact", "/privacy"].map((path) => ({
+    lastModified: generatedAt,
+    url: absoluteUrl(path),
+  }));
 
   for (const locale of LOCALES) {
     addPath(paths, "/", locale);
@@ -77,5 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Keep one canonical entry per URL. Machine-readable `.mdx`/`llms` routes
   // and the unprefixed native-showcase fallback are intentionally excluded.
-  return [...new Map(localizedEntries.map((entry) => [entry.url, entry])).values()];
+  return [
+    ...new Map([...trustEntries, ...localizedEntries].map((entry) => [entry.url, entry])).values(),
+  ];
 }

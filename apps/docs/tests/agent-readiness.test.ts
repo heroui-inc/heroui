@@ -2,7 +2,7 @@ import type {ReactElement, ReactNode} from "react";
 
 import {NextRequest} from "next/server";
 import {isValidElement} from "react";
-import {describe, expect, it} from "vitest";
+import {describe, expect, it, vi} from "vitest";
 
 import AboutPage from "@/app/[lang]/(home)/about/page";
 import ContactPage from "@/app/[lang]/(home)/contact/page";
@@ -17,6 +17,16 @@ import {getOrganizationJsonLd} from "@/lib/json-ld";
 import {generateIndexHeader} from "@/lib/llms-utils";
 
 import {GET as getMcpHandshake} from "@/app/.well-known/mcp/route";
+
+vi.mock("@/lib/get-llm-text", () => ({
+  getLLMText: vi.fn(),
+}));
+vi.mock("@/lib/source", () => ({
+  source: {
+    getPage: vi.fn(),
+    getPages: vi.fn(() => []),
+  },
+}));
 
 function extractText(node: ReactNode): string {
   if (typeof node === "string" || typeof node === "number") return String(node);
@@ -109,7 +119,7 @@ describe("HeroUI agent readiness", () => {
       transports: {package: string; type: string}[];
     };
 
-    expect(card.endpoint).toBe("https://heroui.com/.well-known/mcp");
+    expect(card.endpoint).toBe("https://heroui.com/.well-known/mcp/server-card.json");
     expect(card.transports).toEqual(
       expect.arrayContaining([
         expect.objectContaining({package: "@heroui/react-mcp", type: "stdio"}),
@@ -143,6 +153,12 @@ describe("HeroUI agent readiness", () => {
       expect(extractText(page).replace(/\s+/g, " ").trim().length).toBeGreaterThanOrEqual(500);
       expect(collectHeadingLevels(page)).toEqual(expect.arrayContaining([2]));
     }
+
+    const privacyText = extractText(PrivacyPage());
+
+    expect(privacyText).toContain("Vercel Analytics");
+    expect(privacyText).toContain("PostHog");
+    expect(privacyText).toContain("IP address");
   });
 
   it("server-renders meaningful homepage text with a hierarchical outline", async () => {

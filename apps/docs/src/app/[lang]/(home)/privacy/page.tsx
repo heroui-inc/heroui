@@ -32,9 +32,18 @@ export default function PrivacyPage() {
           <a href="mailto:jrgarciadev@gmail.com">jrgarciadev@gmail.com</a>, you control what you
           include in the message. Do not send passwords, authentication tokens, financial account
           details, government identification numbers, or other sensitive personal information by
-          email. The repository does not document specific retention periods, subprocessors, or a
-          complete inventory of website collection practices, so this page does not invent those
-          details.
+          email.
+        </p>
+      </section>
+      <section>
+        <h2>Site analytics and skill installation</h2>
+        <p>
+          HeroUI uses Vercel Analytics on the documentation site. When the public{" "}
+          <code>/install</code> route is used to download an agent-skill installer, the production
+          service records an installation event in PostHog with request metadata supplied by the
+          hosting platform: IP address, city, region, postal code, country, user agent, referring
+          page, and requested URL. This page does not claim a retention period or other processing
+          detail that HeroUI has not published.
         </p>
       </section>
       <section>

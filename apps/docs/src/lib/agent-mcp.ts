@@ -15,7 +15,7 @@ export function getMcpServerCard(origin: string) {
     },
     description:
       "HeroUI MCP servers expose read-only HeroUI React and HeroUI Native documentation, component metadata, source references, styles, and theme variables to AI coding agents.",
-    endpoint: absoluteUrl(origin, "/.well-known/mcp"),
+    endpoint: absoluteUrl(origin, "/.well-known/mcp/server-card.json"),
     links: {
       docs: [
         absoluteUrl(origin, "/docs/react/getting-started/mcp-server"),

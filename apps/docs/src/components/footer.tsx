@@ -10,13 +10,13 @@ export function Footer({dict}: {dict: Dictionary["footer"]}) {
       </p>
       <nav aria-label="HeroUI company information" className="flex items-center gap-2 text-sm">
         <a className="hover:text-foreground" href="/about">
-          About
+          {dict.about}
         </a>
         <a className="hover:text-foreground" href="/contact">
-          Contact
+          {dict.contact}
         </a>
         <a className="hover:text-foreground" href="/privacy">
-          Privacy
+          {dict.privacy}
         </a>
       </nav>
       <SocialLinks />
