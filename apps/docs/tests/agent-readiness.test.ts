@@ -154,8 +154,15 @@ describe("HeroUI agent readiness", () => {
       expect(collectHeadingLevels(page)).toEqual(expect.arrayContaining([2]));
     }
 
+    const contactText = extractText(ContactPage());
     const privacyText = extractText(PrivacyPage());
 
+    expect(contactText).toContain("sales@heroui.com");
+    expect(contactText).toContain("junior@heroui.com");
+    expect(contactText).not.toContain("jrgarciadev@gmail.com");
+    expect(privacyText).toContain("sales@heroui.com");
+    expect(privacyText).toContain("junior@heroui.com");
+    expect(privacyText).not.toContain("jrgarciadev@gmail.com");
     expect(privacyText).toContain("Vercel Analytics");
     expect(privacyText).toContain("PostHog");
     expect(privacyText).toContain("IP address");

@@ -20,10 +20,10 @@ export default function ContactPage() {
         <p>
           For sales and partnership questions, email{" "}
           <a href="mailto:sales@heroui.com">sales@heroui.com</a>. For general or privacy-related
-          questions, email <a href="mailto:jrgarciadev@gmail.com">jrgarciadev@gmail.com</a>. HeroUI
-          does not list a public street address or phone number in this repository, so this page
-          does not present one. These email addresses are the direct, verifiable contact options
-          currently published by the project.
+          questions, email <a href="mailto:junior@heroui.com">junior@heroui.com</a>. HeroUI does not
+          list a public street address or phone number in this repository, so this page does not
+          present one. These email addresses are the direct, verifiable contact options currently
+          published by the project.
         </p>
       </section>
       <section>

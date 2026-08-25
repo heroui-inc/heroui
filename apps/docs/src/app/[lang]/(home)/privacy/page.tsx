@@ -29,10 +29,9 @@ export default function PrivacyPage() {
         <h2>Information you choose to share</h2>
         <p>
           If you email <a href="mailto:sales@heroui.com">sales@heroui.com</a> or{" "}
-          <a href="mailto:jrgarciadev@gmail.com">jrgarciadev@gmail.com</a>, you control what you
-          include in the message. Do not send passwords, authentication tokens, financial account
-          details, government identification numbers, or other sensitive personal information by
-          email.
+          <a href="mailto:junior@heroui.com">junior@heroui.com</a>, you control what you include in
+          the message. Do not send passwords, authentication tokens, financial account details,
+          government identification numbers, or other sensitive personal information by email.
         </p>
       </section>
       <section>
@@ -53,8 +52,8 @@ export default function PrivacyPage() {
           website. Developers who build with HeroUI are responsible for the privacy practices of
           their own applications and for explaining those practices to their users. For a
           privacy-related question about heroui.com or email sent to the addresses above, contact{" "}
-          <a href="mailto:jrgarciadev@gmail.com">jrgarciadev@gmail.com</a>. If you need a detail
-          that is not documented here, ask directly rather than assuming a policy or practice.
+          <a href="mailto:junior@heroui.com">junior@heroui.com</a>. If you need a detail that is not
+          documented here, ask directly rather than assuming a policy or practice.
         </p>
       </section>
     </TrustPage>
