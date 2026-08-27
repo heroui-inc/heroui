@@ -79,6 +79,19 @@ export function generateIndexHeader(): string[] {
   const nativeUrl = "/native/llms.txt";
   const reactAbsoluteUrl = formatAbsoluteUrl(reactUrl);
   const nativeAbsoluteUrl = formatAbsoluteUrl(nativeUrl);
+  const agentResources = [
+    ["HeroUI OpenAPI specification", "/openapi.json"],
+    ["HeroUI Docs Agent API", "/api/agent"],
+    ["HeroUI Agent API health", "/api/agent/health"],
+    ["HeroUI Agent API search", "/api/agent/search"],
+    ["HeroUI Agent API page retrieval", "/api/agent/page"],
+    ["HeroUI API catalog", "/.well-known/api-catalog"],
+    ["HeroUI MCP discovery handshake", "/.well-known/mcp"],
+    ["HeroUI MCP server card", "/.well-known/mcp/server-card.json"],
+    ["HeroUI React MCP documentation", "/docs/react/getting-started/mcp-server"],
+    ["HeroUI Native MCP documentation", "/docs/native/getting-started/mcp-server"],
+    ["HeroUI CLI documentation", "/docs/react/getting-started/cli"],
+  ] as const;
 
   return [
     "# HeroUI v3 Documentation",
@@ -106,6 +119,18 @@ export function generateIndexHeader(): string[] {
     "",
     `- **React (Web)**: [${reactUrl}](${reactAbsoluteUrl}) - React component library for web applications`,
     `- **React Native**: [${nativeUrl}](${nativeAbsoluteUrl}) - React Native component library for mobile applications`,
+    "",
+    "## HeroUI Agent and Developer Resources",
+    "",
+    "HeroUI v3 web and mobile libraries are free, open-source software. The public docs agent API and existing MCP packages are read-only and require no account or paid plan.",
+    "",
+    ...agentResources.map(([title, path]) => `- [${title}](${formatAbsoluteUrl(path)})`),
+    "",
+    "## HeroUI Trust Pages",
+    "",
+    `- [About HeroUI](${formatAbsoluteUrl("/about")})`,
+    `- [Contact HeroUI](${formatAbsoluteUrl("/contact")})`,
+    `- [HeroUI Privacy](${formatAbsoluteUrl("/privacy")})`,
     "",
     "## Documentation Index",
     "",

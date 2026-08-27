@@ -73,7 +73,7 @@ export function MultipleSelect() {
       </Autocomplete.Trigger>
       <Autocomplete.Popover>
         <Autocomplete.Filter filter={contains}>
-          <SearchField autoFocus name="search" variant="secondary">
+          <SearchField autoFocus aria-label="搜索选项" name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
               <SearchField.Input placeholder="搜索…" />

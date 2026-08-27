@@ -38,7 +38,13 @@ export function AsynchronousFiltering() {
       </Autocomplete.Trigger>
       <Autocomplete.Popover>
         <Autocomplete.Filter inputValue={list.filterText} onInputChange={list.setFilterText}>
-          <SearchField autoFocus className="sticky top-0 z-10" name="search" variant="secondary">
+          <SearchField
+            autoFocus
+            aria-label="搜索角色"
+            className="sticky top-0 z-10"
+            name="search"
+            variant="secondary"
+          >
             <SearchField.Group>
               <SearchField.SearchIcon />
               <SearchField.Input placeholder="搜索角色…" />

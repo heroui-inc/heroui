@@ -67,7 +67,10 @@
     "description": "探索展示 HeroUI 组件在真实场景中应用的互动示例。"
   },
   "footer": {
-    "allRightsReserved": "保留所有权利。"
+    "about": "关于",
+    "allRightsReserved": "保留所有权利。",
+    "contact": "联系",
+    "privacy": "隐私"
   },
   "newsletter": {
     "label": "Hero 新闻通讯",

@@ -116,7 +116,7 @@ describe("Autocomplete", () => {
 
     expect(tester.getListbox()).not.toBeNull();
     expect(document.querySelector('[data-slot="autocomplete-popover"]')).not.toBeNull();
-    expect(screen.getByPlaceholderText("Search animals...")).toBeInTheDocument();
+    expect(screen.getByRole("searchbox", {name: "Search animals"})).toBeInTheDocument();
     expect(tester.getOptions()).toHaveLength(3);
 
     await tester.toggleOptionSelection({option: "Dog"});
