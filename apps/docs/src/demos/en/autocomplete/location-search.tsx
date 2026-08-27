@@ -61,7 +61,7 @@ export function LocationSearch() {
       </Autocomplete.Trigger>
       <Autocomplete.Popover>
         <Autocomplete.Filter filter={customFilter}>
-          <SearchField autoFocus name="search" variant="secondary">
+          <SearchField autoFocus aria-label="Search cities" name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
               <SearchField.Input placeholder="Search cities..." />
