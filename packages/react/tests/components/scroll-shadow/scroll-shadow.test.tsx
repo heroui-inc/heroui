@@ -48,6 +48,23 @@ const VisibilityHarness = ({
   );
 };
 
+const ContentGrowthHarness = () => {
+  const [rows, setRows] = useState(1);
+
+  return (
+    <>
+      <button type="button" onClick={() => setRows((count) => count + 1)}>
+        Add row
+      </button>
+      <ScrollShadow data-testid="scroll-shadow">
+        {Array.from({length: rows}, (_, index) => (
+          <p key={index}>Row {index}</p>
+        ))}
+      </ScrollShadow>
+    </>
+  );
+};
+
 describe("ScrollShadow", () => {
   it("renders children content", () => {
     render(<ScrollShadow>Scrollable content</ScrollShadow>);
@@ -121,6 +138,28 @@ describe("ScrollShadow", () => {
         "data-scroll-shadow-mode",
         "manual",
       );
+    });
+  });
+
+  describe("shadow state", () => {
+    it("updates the shadow state when content resizes without a scroll or resize event", async () => {
+      const user = setupUser();
+
+      render(<ContentGrowthHarness />);
+      await flushFrames();
+
+      const scrollShadow = screen.getByTestId("scroll-shadow");
+
+      expect(scrollShadow).toHaveAttribute("data-bottom-scroll", "false");
+
+      // A fixed-height container: its own box never changes, so ResizeObserver
+      // stays silent, and nothing scrolls. Only the content grew taller.
+      stubScrollMetrics(scrollShadow, {clientHeight: 100, scrollHeight: 300, scrollTop: 0});
+
+      await user.click(screen.getByRole("button", {name: "Add row"}));
+      await flushFrames();
+
+      expect(scrollShadow).toHaveAttribute("data-bottom-scroll", "true");
     });
   });
 

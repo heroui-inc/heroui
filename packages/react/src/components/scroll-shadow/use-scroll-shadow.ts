@@ -149,4 +149,14 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
       prevStateRef.current = null;
     };
   }, [containerRef, visibility, isEnabled, checkOverflow]);
+
+  // ResizeObserver only reports the container's own box, so content growing or
+  // shrinking inside a fixed-size container fires neither resize nor scroll and
+  // would leave the shadows stale. Re-measuring after every render covers that;
+  // the prevStateRef guard keeps it a no-op unless the measurement changed.
+  useEffect(() => {
+    if (!isEnabled || visibility !== "auto") return;
+
+    checkOverflow();
+  });
 };
