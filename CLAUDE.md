@@ -117,6 +117,9 @@ git commit -m "ci: add Claude Code GitHub Action workflow"
 ├── packages/
 │   ├── react/         # Main UI component library (@heroui/react)
 │   ├── styles/        # CSS styles & variants (@heroui/styles)
+│   │   ├── components/     # Per-component .css files (flat, e.g. button.css)
+│   │   ├── themes/         # Theme variables
+│   │   └── src/components/ # Per-component .styles.ts (tailwind-variants)
 │   ├── standard/      # Shared ESLint, Prettier, TypeScript configs
 │   ├── storybook/     # Storybook configuration
 │   └── testing/       # Shared test harness (@heroui/testing)
@@ -131,9 +134,15 @@ Each component in `packages/react/src/components/` follows this structure:
 ```
 component-name/
 ├── component-name.tsx      # Main component (uses React Aria)
-├── component-name.styles.ts # Tailwind Variants styling
 ├── component-name.stories.tsx # Storybook stories (title: "Components/ComponentName")
 └── index.ts               # Barrel exports
+```
+
+Styling lives in `@heroui/styles`, not next to the component:
+
+```
+packages/styles/src/components/component-name/component-name.styles.ts  # tv() props → BEM class names
+packages/styles/components/component-name.css                           # BEM class definitions
 ```
 
 **IMPORTANT**: All Storybook stories must use the "Components" group in their title. For example: `title: "Components/Card"`, `title: "Components/Button"`, etc.
@@ -148,7 +157,7 @@ component-name/
 
 **Migration to CSS-based Styling**:
 
-- The `button` component has been migrated to use CSS styles from `@heroui/styles/src/components/button.css`
+- The `button` component has been migrated to use CSS styles from `packages/styles/components/button.css`
 - This approach allows for better customization through CSS utilities and `@utility` directives
 - Other components will gradually be migrated to follow this CSS-based pattern
 - Components use `tv()` from `tailwind-variants` to map variant props to BEM class names
@@ -264,7 +273,7 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - Styles defined in `.styles.ts` files using `tv()` function from `tailwind-variants`
    - **IMPORTANT**: Always import from `tailwind-variants`, never from `@heroui/standard` (which doesn't exist)
    - **CRITICAL**: tailwind-variants already includes `twMerge` functionality, so NEVER manually use `twMerge`
-   - **RULE**: All component styles MUST be defined in separate `.styles.ts` files, NOT in the component implementation files
+   - **RULE**: All component styles MUST be defined in separate `.styles.ts` files under `packages/styles/src/components/`, NOT in the component implementation files
    - Component implementation files (`.tsx`) should only contain logic and React Aria primitives
    - Example imports:
      ```typescript
@@ -471,6 +480,8 @@ This workflow ensures thorough understanding, proper planning, and high-quality 
    - Add the export to `src/components/index.ts`
    - Generate boilerplate following HeroUI patterns
    - Set up the component with TypeScript and proper exports
+
+   The scaffold still emits a `<component-name>.styles.ts` into `packages/react/src/components/<component-name>/`, which no longer matches the layout. Move it to `packages/styles/src/components/<component-name>/` and add the matching `packages/styles/components/<component-name>.css`.
 
    After creating the component:
 
