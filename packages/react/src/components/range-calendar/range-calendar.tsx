@@ -69,11 +69,13 @@ const RangeCalendarContextProvider = ({
   timeZone,
   visibleRange,
 }: RangeCalendarContextProviderProps) => {
-  // Collapses to undefined outside day view, which keeps the context value
-  // stable even if React Aria hands us a fresh visibleRange each render.
+  // React Aria rebuilds visibleRange on every render, but the start/end dates it
+  // holds are stable, so keying off those keeps the value stable in day view too.
+  // Outside day view this collapses to undefined, which is stable either way.
+  const {end, start} = visibleRange;
   const dayView = React.useMemo(
-    () => (dayViewBase ? {...dayViewBase, timeZone, visibleRange} : undefined),
-    [dayViewBase, timeZone, visibleRange],
+    () => (dayViewBase ? {...dayViewBase, timeZone, visibleRange: {end, start}} : undefined),
+    [dayViewBase, timeZone, end, start],
   );
   const value = React.useMemo<RangeCalendarContext>(() => ({dayView, slots}), [dayView, slots]);
 
