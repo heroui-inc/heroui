@@ -1,5 +1,9 @@
 import * as React from "react";
 
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 /**
  * A hook that returns true if the component is mounted on the client (hydrated)
  * and false when rendering on the server.
@@ -18,13 +22,6 @@ import * as React from "react";
  * ```
  * @returns boolean indicating if the component is hydrated
  */
-
 export function useIsHydrated() {
-  const subscribe = () => () => {};
-
-  return React.useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false,
-  );
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
