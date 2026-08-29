@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: Patch release that stacks Toast notifications with expand-on-hover, adds Select.ClearButton, cascades theme tokens into nested data-theme scopes, restores native :focus-visible rings, renders nested Label as a span in Checkbox/Switch/Radio content, keeps modal-level overlays above closing popovers, enlarges the Tag remove-button touch target, derives ScrollShadow fades from the scroll timeline to avoid SSR flicker and keeps scroll attributes in sync when content resizes, scopes animation compositor hints so Modal button labels stay sharp after reopen, keeps stacked Drawer handles from closing ancestor drawers, preserves keystrokes in nested Table inputs, stops NumberField from reserving stepper columns when buttons are absent, and keeps Toast region CSS variables when custom styles are passed.
+description: Patch release that stacks Toast notifications with expand-on-hover, adds Select.ClearButton, adds a Tabs align variant, cascades theme tokens into nested data-theme scopes, restores native :focus-visible rings, renders nested Label as a span in Checkbox/Switch/Radio content, keeps modal-level overlays above closing popovers, enlarges the Tag remove-button touch target, derives ScrollShadow fades from the scroll timeline to avoid SSR flicker and keeps scroll attributes in sync when content resizes, scopes animation compositor hints so Modal button labels stay sharp after reopen, keeps stacked Drawer handles from closing ancestor drawers, preserves keystrokes in nested Table inputs, stops NumberField from reserving stepper columns when buttons are absent, and keeps Toast region CSS variables when custom styles are passed.
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">August 13, 2026</span>
 </div>
 
-Patch release: [Toast](/docs/components/toast) stacks notifications and expands on hover, [Select](/docs/components/select) gains a `ClearButton`, nested `data-theme` scopes cascade overlay and field tokens, native `:focus-visible` rings apply to exported variants, [Label](/docs/components/label) inside [Checkbox](/docs/components/checkbox), [Switch](/docs/components/switch), and [Radio](/docs/components/radio) content renders as a `span`, modal-level overlays stay above closing popovers, [Tag](/docs/components/tag) remove targets meet the 24px floor, [ScrollShadow](/docs/components/scroll-shadow) derives its fade from the scroll timeline to avoid SSR flicker and keeps scroll attributes in sync when content resizes, [Button](/docs/components/button), Menu, and Dropdown apply compositor hints only while animating so labels stay sharp after a [Modal](/docs/components/modal) reopens, a nested [Drawer](/docs/components/drawer) handle now closes only its own drawer, [Table](/docs/components/table) preserves keystrokes in nested editable controls, [NumberField](/docs/components/number-field) no longer reserves stepper columns when buttons are absent, and Toast keeps region CSS variables when custom styles are passed.
+Patch release: [Toast](/docs/components/toast) stacks notifications and expands on hover, [Select](/docs/components/select) gains a `ClearButton`, [Tabs](/docs/components/tabs) adds an `align` variant, nested `data-theme` scopes cascade overlay and field tokens, native `:focus-visible` rings apply to exported variants, [Label](/docs/components/label) inside [Checkbox](/docs/components/checkbox), [Switch](/docs/components/switch), and [Radio](/docs/components/radio) content renders as a `span`, modal-level overlays stay above closing popovers, [Tag](/docs/components/tag) remove targets meet the 24px floor, [ScrollShadow](/docs/components/scroll-shadow) derives its fade from the scroll timeline to avoid SSR flicker and keeps scroll attributes in sync when content resizes, [Button](/docs/components/button), Menu, and Dropdown apply compositor hints only while animating so labels stay sharp after a [Modal](/docs/components/modal) reopens, a nested [Drawer](/docs/components/drawer) handle now closes only its own drawer, [Table](/docs/components/table) preserves keystrokes in nested editable controls, [NumberField](/docs/components/number-field) no longer reserves stepper columns when buttons are absent, and Toast keeps region CSS variables when custom styles are passed.
 
 ## Installation
 
@@ -55,6 +55,12 @@ Update to the latest version:
 [Select](/docs/components/select) adds a clear affordance without nesting buttons inside `Select.Trigger`. Compose `Select.ClearButton` next to the value and indicator, and listen with the root `onClear` prop. The control renders as a pointer-only `span` (`aria-hidden`); keyboard and screen reader users clear with `Backspace` or `Delete` when the clear button is composed and the popover is closed.
 
 - **Clear button**: Add `Select.ClearButton` and root `onClear` so selections can be cleared without invalid nested buttons ([#6796](https://github.com/heroui-inc/heroui/pull/6796)).
+
+### Tabs
+
+[Tabs](/docs/components/tabs) can align tab content for the whole list with `align="start" | "center" | "end"`. The default remains `center`, so existing tabs are unchanged. Alignment uses logical properties (`text-start` / `justify-start`) for RTL, and is scoped to the list so nested tabs keep their own alignment.
+
+- **Align**: Set `align` on `Tabs` to control tab text and content alignment without repeating a `className` on every tab ([#6813](https://github.com/heroui-inc/heroui/pull/6813)).
 
 ## Bug Fixes
 

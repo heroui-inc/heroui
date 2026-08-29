@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: 补丁版本：Toast 支持堆叠并在悬停时展开，新增 Select.ClearButton，嵌套 data-theme 作用域会级联主题 token，恢复原生 :focus-visible 焦点环，Checkbox/Switch/Radio 内容中的嵌套 Label 渲染为 span，确保 Modal 级浮层位于关闭中的 Popover 之上，扩大 Tag 移除按钮触摸目标，通过滚动时间线驱动 ScrollShadow 淡出以避免 SSR 闪烁并在内容尺寸变化时保持滚动属性同步，将动画合成器提示限制在动画状态，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，在没有步进按钮时不再为 NumberField 预留侧栏空间，并在传入自定义样式时保留 Toast 区域 CSS 变量。
+description: 补丁版本：Toast 支持堆叠并在悬停时展开，新增 Select.ClearButton，Tabs 新增 align 变体，嵌套 data-theme 作用域会级联主题 token，恢复原生 :focus-visible 焦点环，Checkbox/Switch/Radio 内容中的嵌套 Label 渲染为 span，确保 Modal 级浮层位于关闭中的 Popover 之上，扩大 Tag 移除按钮触摸目标，通过滚动时间线驱动 ScrollShadow 淡出以避免 SSR 闪烁并在内容尺寸变化时保持滚动属性同步，将动画合成器提示限制在动画状态，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，在没有步进按钮时不再为 NumberField 预留侧栏空间，并在传入自定义样式时保留 Toast 区域 CSS 变量。
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 8 月 13 日</span>
 </div>
 
-补丁版本：[Toast](/docs/components/toast) 支持堆叠并在悬停时展开，[Select](/docs/components/select) 新增 `ClearButton`，嵌套 `data-theme` 作用域会级联 overlay 与表单 token，导出的变体也会应用原生 `:focus-visible` 焦点环；[Checkbox](/docs/components/checkbox)、[Switch](/docs/components/switch) 与 [Radio](/docs/components/radio) 内容中的 [Label](/docs/components/label) 会渲染为 `span`；Modal 级浮层会保持在关闭中的 Popover 之上，[Tag](/docs/components/tag) 的移除目标达到 24px，[ScrollShadow](/docs/components/scroll-shadow) 通过滚动时间线驱动淡出以避免 SSR 闪烁，并在内容尺寸变化时保持滚动属性同步；[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；Toast 在传入自定义样式时也会保留区域 CSS 变量。
+补丁版本：[Toast](/docs/components/toast) 支持堆叠并在悬停时展开，[Select](/docs/components/select) 新增 `ClearButton`，[Tabs](/docs/components/tabs) 新增 `align` 变体，嵌套 `data-theme` 作用域会级联 overlay 与表单 token，导出的变体也会应用原生 `:focus-visible` 焦点环；[Checkbox](/docs/components/checkbox)、[Switch](/docs/components/switch) 与 [Radio](/docs/components/radio) 内容中的 [Label](/docs/components/label) 会渲染为 `span`；Modal 级浮层会保持在关闭中的 Popover 之上，[Tag](/docs/components/tag) 的移除目标达到 24px，[ScrollShadow](/docs/components/scroll-shadow) 通过滚动时间线驱动淡出以避免 SSR 闪烁，并在内容尺寸变化时保持滚动属性同步；[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；Toast 在传入自定义样式时也会保留区域 CSS 变量。
 
 ## 安装
 
@@ -55,6 +55,12 @@ github:
 [Select](/docs/components/select) 新增清除交互，且不会在 `Select.Trigger` 内嵌套按钮。将 `Select.ClearButton` 与 Value、Indicator 一起组合，并通过根组件的 `onClear` 监听清除。该控件渲染为仅指针可用的 `span`（`aria-hidden`）；键盘与读屏用户在组合了清除按钮且弹层关闭时，可用 `Backspace` 或 `Delete` 清除。
 
 - **清除按钮**：新增 `Select.ClearButton` 与根组件 `onClear`，无需非法嵌套按钮即可清除选中项 ([#6796](https://github.com/heroui-inc/heroui/pull/6796))。
+
+### Tabs
+
+[Tabs](/docs/components/tabs) 可通过 `align="start" | "center" | "end"` 为整组标签设置对齐。默认仍为 `center`，现有 Tabs 外观不变。对齐使用逻辑属性（`text-start` / `justify-start`）以正确支持 RTL，并限定在标签列表上，使嵌套 Tabs 保持各自的对齐。
+
+- **对齐**：在 `Tabs` 上设置 `align`，无需在每个标签上重复 `className` 即可控制文本与内容对齐 ([#6813](https://github.com/heroui-inc/heroui/pull/6813))。
 
 ## 错误修复
 
