@@ -91,6 +91,15 @@ export default () => (
   name="tabs-secondary-vertical"
 />
 
+### 对齐方式
+
+标签内容默认居中。使用 `align` 可将其对齐到 `start` 或 `end`，这在垂直的侧边栏式导航中尤其有用。单个标签仍可通过 `Tabs.Tab` 上的 `className` 覆盖。
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-vertical-alignment"
+/>
+
 ### 渲染函数
 
 <ComponentPreview
@@ -158,6 +167,10 @@ Tabs 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 #### 变体类 [!toc]
 - `.tabs--secondary` - 次要类型变体，使用下划线指示器
 
+#### 对齐类 [!toc]
+- `.tabs--align-start` - 标签内容对齐到起始侧
+- `.tabs--align-end` - 标签内容对齐到结束侧
+
 ### 交互状态
 
 组件同时支持 CSS 伪类与 data 属性：
@@ -175,6 +188,7 @@ Tabs 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 |------|------|--------|------|
 | `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉样式变体。Primary 使用填充指示器，Secondary 使用下划线指示器 |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 标签布局方向 |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | 每个标签内部内容的对齐方式 |
 | `selectedKey` | `string` | - | 受控选中标签的 key |
 | `defaultSelectedKey` | `string` | - | 默认选中标签的 key |
 | `onSelectionChange` | `(key: Key) => void` | - | 选中变化回调 |

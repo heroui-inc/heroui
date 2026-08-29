@@ -49,13 +49,14 @@ interface TabsRootProps extends ComponentPropsWithRef<typeof TabsPrimitive>, Tab
 }
 
 const TabsRoot = ({
+  align,
   children,
   className,
   orientation = "horizontal",
   variant,
   ...props
 }: TabsRootProps) => {
-  const slots = React.useMemo(() => tabsVariants({variant}), [variant]);
+  const slots = React.useMemo(() => tabsVariants({align, variant}), [align, variant]);
 
   return (
     <TabsContext value={{orientation, slots}}>

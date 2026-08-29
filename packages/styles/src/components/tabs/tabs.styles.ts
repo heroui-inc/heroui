@@ -4,6 +4,7 @@ import {tv} from "tailwind-variants";
 
 export const tabsVariants = tv({
   defaultVariants: {
+    align: "center",
     variant: "primary",
   },
   slots: {
@@ -19,6 +20,15 @@ export const tabsVariants = tv({
     tabPanel: "tabs__panel",
   },
   variants: {
+    align: {
+      center: {}, // No class as the base already centers tab content
+      end: {
+        base: "tabs--align-end",
+      },
+      start: {
+        base: "tabs--align-start",
+      },
+    },
     variant: {
       primary: {},
       secondary: {
