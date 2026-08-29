@@ -2450,6 +2450,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./tabs/secondary-vertical").then((m) => m.SecondaryVertical),
     file: "en/tabs/secondary-vertical.tsx",
   },
+  "tabs-vertical-alignment": {
+    loader: () => import("./tabs/vertical-alignment").then((m) => m.VerticalAlignment),
+    file: "en/tabs/vertical-alignment.tsx",
+  },
   "tabs-render-function": {
     loader: () => import("./tabs/render-function").then((m) => m.RenderFunction),
     file: "en/tabs/render-function.tsx",

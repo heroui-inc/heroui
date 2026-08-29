@@ -89,6 +89,17 @@ Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display 
   name="tabs-secondary-vertical"
 />
 
+### Alignment
+
+Tab content is centered by default. Use `align` to align it to the `start` or `end` instead, which is
+especially useful for vertical, sidebar-style navigation. Individual tabs can still be overridden with
+`className` on `Tabs.Tab`.
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-vertical-alignment"
+/>
+
 ### Render Function
 
 <ComponentPreview
@@ -157,6 +168,10 @@ The Tabs component uses these CSS classes ([View source styles](https://github.c
 #### Variant Classes [!toc]
 - `.tabs--secondary` - Secondary variant with underline indicator
 
+#### Alignment Classes [!toc]
+- `.tabs--align-start` - Aligns tab content to the start
+- `.tabs--align-end` - Aligns tab content to the end
+
 ### Interactive States
 
 The component supports both CSS pseudo-classes and data attributes:
@@ -174,6 +189,7 @@ The component supports both CSS pseudo-classes and data attributes:
 |------|------|---------|-------------|
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual style variant. Primary uses a filled indicator, secondary uses an underline indicator |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Tab layout orientation |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment of the content inside each tab |
 | `selectedKey` | `string` | - | Controlled selected tab key |
 | `defaultSelectedKey` | `string` | - | Default selected tab key |
 | `onSelectionChange` | `(key: Key) => void` | - | Selection change handler |
