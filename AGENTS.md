@@ -33,7 +33,9 @@ HeroUI v3 is a modern React UI library built with **Tailwind CSS v4**, organized
 │   │   ├── src/utils/       # Shared utilities
 │   │   └── scripts/         # Build & codegen scripts
 │   ├── styles/            # CSS styles & variants (@heroui/styles)
-│   │   └── src/components/  # Per-component .css files
+│   │   ├── components/      # Per-component .css files (flat, e.g. button.css)
+│   │   ├── themes/          # Theme variables
+│   │   └── src/components/  # Per-component .styles.ts (tailwind-variants)
 │   ├── standard/          # Shared ESLint, Prettier, TS configs
 │   ├── storybook/         # Storybook configuration
 │   └── testing/           # Shared test harness (@heroui/testing)
@@ -106,12 +108,18 @@ Each component lives in `packages/react/src/components/<component-name>/`:
 ```
 component-name/
 ├── component-name.tsx          # Component implementation (uses React Aria)
-├── component-name.styles.ts    # Tailwind Variants styling
 ├── component-name.stories.tsx  # Storybook stories
 └── index.ts                    # Barrel exports
 ```
 
-CSS styles live in `packages/styles/src/components/<component-name>/`.
+Styling lives in `@heroui/styles`, split across two locations:
+
+| Path | Contents |
+|---|---|
+| `packages/styles/src/components/<component-name>/<component-name>.styles.ts` | The `tv()` map from variant props to BEM class names |
+| `packages/styles/components/<component-name>.css` | The BEM class definitions (flat directory, one file per component) |
+
+Note that `.styles.ts` files do **not** live alongside the component in `packages/react`.
 
 ### Creating a New Component
 
@@ -127,6 +135,8 @@ Then build to update package.json exports:
 ```bash
 pnpm build
 ```
+
+The scaffold still emits a `<component-name>.styles.ts` into `packages/react/src/components/<component-name>/`, which no longer matches the layout above. Move it to `packages/styles/src/components/<component-name>/` and add the matching `packages/styles/components/<component-name>.css`.
 
 ### Compound Component Pattern
 

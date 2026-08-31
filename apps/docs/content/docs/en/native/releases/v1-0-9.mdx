@@ -1,0 +1,142 @@
+---
+title: v1.0.9
+description:
+  Font weights resolve through Uniwind font-* utilities, SearchField pads Input only for composed slots, Toast duration 0 auto-hides, Select dialog swipe-to-dismiss on RNGH 3 Android
+github:
+  pull: 481
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">August 31, 2026</span>
+</div>
+
+HeroUI Native v1.0.9 reworks how font weights resolve in component styles, fixes SearchField padding when optional slots are omitted, corrects Toast auto-dismiss for zero-duration toasts, and restores Select/Dialog swipe-to-dismiss on Android under react-native-gesture-handler 3.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It on Your Device
+
+<NativeTryOnDevice />
+
+## ⚠️ Breaking Changes
+
+### Toast `duration: 0` Now Auto-Hides
+
+`duration` is typed `number | 'persistent'`, but `0` was silently treated as persistent because the auto-dismiss guard required `duration > 0`. Zero-duration toasts now go through the same `setTimeout` path as every other numeric duration and dismiss on the next tick.
+
+**Before:**
+
+```tsx
+toast.show({ label: 'Quick flash', duration: 0 });
+// Toast stayed on screen indefinitely — same as 'persistent'
+```
+
+**After:**
+
+```tsx
+toast.show({ label: 'Quick flash', duration: 0 });
+// Toast auto-hides on the next tick
+
+// To keep a toast on screen indefinitely, use 'persistent':
+toast.show({ label: 'Sticky', duration: 'persistent' });
+```
+
+**Migration:** Replace `duration: 0` with `duration: 'persistent'` if you relied on the old behavior.
+
+**Related PR:** [#471](https://github.com/heroui-inc/heroui-native/pull/471)
+
+### Custom Font Apps Must Define `--font-bold`
+
+Component styles now apply font weight through Uniwind `font-normal`, `font-medium`, `font-semibold`, and `font-bold` utilities. When `--font-*` variables are defined, each utility selects the matching family instead of a numeric `font-weight`. This fixes iOS picking the heaviest face in a custom family, but it means **all four variables must be defined if any are defined**.
+
+**Before:**
+
+```css
+@theme {
+  --font-normal: 'YourFont-400Regular';
+  --font-medium: 'YourFont-500Medium';
+  --font-semibold: 'YourFont-600SemiBold';
+}
+```
+
+**After:**
+
+```css
+@theme {
+  --font-normal: 'YourFont-400Regular';
+  --font-medium: 'YourFont-500Medium';
+  --font-semibold: 'YourFont-600SemiBold';
+  --font-bold: 'YourFont-700Bold';
+}
+```
+
+**Migration:** Add the missing `--font-bold` variable pointing at the bold face of your font family. System-font apps require no changes — numeric weights are restored automatically when no `--font-*` variables are defined.
+
+**Related PR:** [#473](https://github.com/heroui-inc/heroui-native/pull/473)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #465](https://github.com/heroui-inc/heroui-native/issues/465)**: SearchField.Input reserved leading and trailing padding for SearchIcon and ClearButton even when those parts were omitted. Padding is now applied only when the matching compound part is composed.
+- **[Issue #444](https://github.com/heroui-inc/heroui-native/issues/444)**: Opening a Select or Dialog with swipe-to-dismiss on Android under react-native-gesture-handler 3 threw because the portal content had no gesture root in its native ancestor chain. An internal `PortalGestureRoot` now wraps portal dialog content so swipe-to-dismiss works on RNGH 3 Android.
+- **LinkButton** no longer applies a default border radius (`rounded-none`), which previously clipped text at the edges.
+- **[Issue #476](https://github.com/heroui-inc/heroui-native/issues/476)**: `RadioGroup.Item` with a nested `Radio` exposed two `role="radio"` nodes to assistive technology. The nested trigger is now hidden from AT when inside a group item, so each option presents a single radio node.
+- **[Issue #467](https://github.com/heroui-inc/heroui-native/issues/467)**: Select trigger and item labels collapsed when using `content-fit` or compact sizing. Default flex styles are replaced with `flex-shrink: 1` so labels contribute intrinsic width while still shrinking when constrained.
+- **[Issue #461](https://github.com/heroui-inc/heroui-native/issues/461)**: System-font apps lost numeric font weights after the custom-font resolution rework. Weights now fall back to numeric `font-weight` values when no `--font-*` variables are defined.
+
+**Related PRs:**
+
+- [#481](https://github.com/heroui-inc/heroui-native/pull/481)
+- [#480](https://github.com/heroui-inc/heroui-native/pull/480)
+- [#474](https://github.com/heroui-inc/heroui-native/pull/474)
+- [#477](https://github.com/heroui-inc/heroui-native/pull/477)
+- [#468](https://github.com/heroui-inc/heroui-native/pull/468)
+- [#473](https://github.com/heroui-inc/heroui-native/pull/473)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Theming](/docs/native/getting-started/theming) — Documents the `--font-bold` variable requirement and explains how font weights resolve with and without custom fonts
+- [Typography](/docs/native/components/text) — Notes that custom `--font-*` families change weight resolution and links to the theming guide
+- [SearchField](/docs/native/components/search-field) — Clarifies that SearchIcon and ClearButton are optional and documents the Without Search Icon composition
+- [Toast](/docs/native/components/toast) — Clarifies `duration: 0` behavior versus `'persistent'`
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
