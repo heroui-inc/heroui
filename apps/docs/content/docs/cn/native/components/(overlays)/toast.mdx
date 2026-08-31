@@ -405,7 +405,7 @@ Toast 根动画配置，可为：
 | `placement`     | `'top' \| 'bottom'`                                                                                                               | -       | 位置                                                                                |
 | `isSwipeable`   | `boolean`                                                                                                                         | -       | 是否可滑动关闭                                                                      |
 | `animation`     | `ToastRootAnimation \| false \| "disabled" \| "disable-all"`                                                                      | -       | 动画配置                                                                            |
-| `duration`      | `number \| 'persistent'`                                                                                                          | `4000`  | 自动隐藏毫秒数；`'persistent'` 表示不自动隐藏                                     |
+| `duration`      | `number \| 'persistent'`                                                                                                          | `4000`  | 自动隐藏毫秒数；`0` 会在下一个 tick 自动隐藏，只有 `'persistent'` 才会让 Toast 一直停留在屏幕上 |
 | `id`            | `string`                                                                                                                          | -       | 可选 ID；未提供则自动生成                                                           |
 | `label`         | `string`                                                                                                                          | -       | 标题文字                                                                            |
 | `description`   | `string`                                                                                                                          | -       | 描述文字                                                                            |
@@ -421,7 +421,7 @@ Toast 根动画配置，可为：
 | ----------- | ---------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
 | `id`        | `string`                                             | -       | 可选 ID；未提供则自动生成                                                           |
 | `component` | `(props: ToastComponentProps) => React.ReactElement` | -       | 接收 Toast props 并返回 React 元素的函数                                            |
-| `duration`  | `number \| 'persistent'`                             | `4000`  | 自动隐藏毫秒数；`'persistent'` 表示不自动隐藏                                     |
+| `duration`  | `number \| 'persistent'`                             | `4000`  | 自动隐藏毫秒数；`0` 会在下一个 tick 自动隐藏，只有 `'persistent'` 才会让 Toast 一直停留在屏幕上 |
 | `onShow`    | `() => void`                                         | -       | 显示时回调                                                                          |
 | `onHide`    | `() => void`                                         | -       | 隐藏时回调                                                                          |
 

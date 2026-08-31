@@ -1,0 +1,142 @@
+---
+title: v1.0.9
+description:
+  字重通过 Uniwind 的 font-* 工具类解析，SearchField 仅为已组合的部件预留内边距，Toast 的 duration 0 会自动隐藏，修复 RNGH 3 下 Android 上 Select 与 Dialog 的滑动关闭
+github:
+  pull: 481
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 8 月 31 日</span>
+</div>
+
+HeroUI Native v1.0.9 重构了组件样式中字重的解析方式，修复了省略可选部件时 SearchField 的内边距问题，纠正了时长为零的 Toast 未自动关闭的行为，并恢复了 react-native-gesture-handler 3 下 Android 上 Select 与 Dialog 的滑动关闭。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 真机体验
+
+<NativeTryOnDevice />
+
+## ⚠️ 破坏性变更
+
+### Toast 的 `duration: 0` 现在会自动隐藏
+
+`duration` 的类型为 `number | 'persistent'`，但由于自动关闭的判断要求 `duration > 0`，`0` 被静默地当作持久显示处理。时长为零的 Toast 现在与其他数值时长走同一条 `setTimeout` 路径，会在下一个 tick 关闭。
+
+**之前：**
+
+```tsx
+toast.show({ label: 'Quick flash', duration: 0 });
+// Toast 会一直停留在屏幕上——与 'persistent' 相同
+```
+
+**之后：**
+
+```tsx
+toast.show({ label: 'Quick flash', duration: 0 });
+// Toast 会在下一个 tick 自动隐藏
+
+// 若要让 Toast 一直停留在屏幕上，请使用 'persistent'：
+toast.show({ label: 'Sticky', duration: 'persistent' });
+```
+
+**迁移：** 如果你依赖旧行为，请将 `duration: 0` 替换为 `duration: 'persistent'`。
+
+**相关 PR：** [#471](https://github.com/heroui-inc/heroui-native/pull/471)
+
+### 使用自定义字体的应用必须定义 `--font-bold`
+
+组件样式现在通过 Uniwind 的 `font-normal`、`font-medium`、`font-semibold` 与 `font-bold` 工具类应用字重。当定义了 `--font-*` 变量时，每个工具类会选择对应的字体族，而不再应用数值化的 `font-weight`。这修复了 iOS 会在自定义字体族中选中最粗字面的问题，但也意味着**只要定义了其中任意一个变量，就必须定义全部四个**。
+
+**之前：**
+
+```css
+@theme {
+  --font-normal: 'YourFont-400Regular';
+  --font-medium: 'YourFont-500Medium';
+  --font-semibold: 'YourFont-600SemiBold';
+}
+```
+
+**之后：**
+
+```css
+@theme {
+  --font-normal: 'YourFont-400Regular';
+  --font-medium: 'YourFont-500Medium';
+  --font-semibold: 'YourFont-600SemiBold';
+  --font-bold: 'YourFont-700Bold';
+}
+```
+
+**迁移：** 补上缺失的 `--font-bold` 变量，指向该字体族的 bold 字面。使用系统字体的应用无需任何修改——未定义任何 `--font-*` 变量时会自动恢复数值化字重。
+
+**相关 PR：** [#473](https://github.com/heroui-inc/heroui-native/pull/473)
+
+## 问题修复
+
+本版本包含以下问题的修复：
+
+- **[Issue #465](https://github.com/heroui-inc/heroui-native/issues/465)**：即使省略了 SearchIcon 与 ClearButton，`SearchField.Input` 仍会为它们预留左右内边距。现在只有在组合了对应复合部件时才会应用内边距。
+- **[Issue #444](https://github.com/heroui-inc/heroui-native/issues/444)**：在 react-native-gesture-handler 3 下的 Android 上，打开带滑动关闭的 Select 或 Dialog 会抛出异常，因为 Portal 内容在其原生祖先链中没有手势根节点。新增的内部 `PortalGestureRoot` 现在会包裹 Portal 对话框内容，使滑动关闭在 RNGH 3 的 Android 上正常工作。
+- **LinkButton** 不再应用默认圆角（`rounded-none`），此前该圆角会在边缘裁切文本。
+- **[Issue #476](https://github.com/heroui-inc/heroui-native/issues/476)**：嵌套了 `Radio` 的 `RadioGroup.Item` 会向辅助技术暴露两个 `role="radio"` 节点。位于分组项内部时，嵌套的触发器现在会对辅助技术隐藏，因此每个选项只呈现单个 radio 节点。
+- **[Issue #467](https://github.com/heroui-inc/heroui-native/issues/467)**：使用 `content-fit` 或紧凑尺寸时，Select 触发器与选项的文本会被压缩。默认的 flex 样式改为 `flex-shrink: 1`，使文本既能贡献其固有宽度，又能在空间受限时收缩。
+- **[Issue #461](https://github.com/heroui-inc/heroui-native/issues/461)**：自定义字体解析重构后，使用系统字体的应用丢失了数值化字重。未定义任何 `--font-*` 变量时，字重现在会回退到数值化的 `font-weight`。
+
+**相关 PR：**
+
+- [#481](https://github.com/heroui-inc/heroui-native/pull/481)
+- [#480](https://github.com/heroui-inc/heroui-native/pull/480)
+- [#474](https://github.com/heroui-inc/heroui-native/pull/474)
+- [#477](https://github.com/heroui-inc/heroui-native/pull/477)
+- [#468](https://github.com/heroui-inc/heroui-native/pull/468)
+- [#473](https://github.com/heroui-inc/heroui-native/pull/473)
+
+## 更新的文档
+
+以下文档页面已更新，以反映本版本的变更：
+
+- [Theming](/docs/native/getting-started/theming) - 记录 `--font-bold` 变量的必要性，并说明在使用与不使用自定义字体时字重如何解析
+- [Typography](/docs/native/components/text) - 说明自定义 `--font-*` 字体族会改变字重的解析方式，并链接到主题定制指南
+- [SearchField](/docs/native/components/search-field) - 明确 SearchIcon 与 ClearButton 为可选部件，并补充「不带搜索图标」的组合方式
+- [Toast](/docs/native/components/toast) - 明确 `duration: 0` 与 `'persistent'` 的区别
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！
