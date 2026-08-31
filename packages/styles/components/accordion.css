@@ -68,10 +68,16 @@
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  /* Hover state */
+  /**
+   * Hover state
+   * CRITICAL: `:hover` and `[data-hovered]` must be combined, never alternated. React Aria
+   * writes `data-hovered` on a render tick, so on pointer leave it outlives the native `:hover`
+   * by at least a frame. Alternating them keeps this background painted during that frame, which
+   * flashes the default color over a custom `hover:bg-*` the moment the pointer leaves. Combining
+   * them also drops the sticky `:hover` a touch tap leaves behind on hybrid devices.
+   */
   @media (hover: hover) {
-    &:hover:not([aria-expanded="true"]),
-    &[data-hovered="true"]:not([aria-expanded="true"]) {
+    &:hover[data-hovered="true"]:not([aria-expanded="true"]) {
       background-color: color-mix(in oklab, var(--foreground) 3%, transparent 90%);
     }
   }
@@ -119,9 +125,9 @@
   border-radius: min(32px, var(--radius-3xl));
 
   .accordion__trigger {
+    /* See the base trigger hover state for why both hover signals are required. */
     @media (hover: hover) {
-      &:hover:not([aria-expanded="true"]),
-      &[data-hovered="true"]:not([aria-expanded="true"]) {
+      &:hover[data-hovered="true"]:not([aria-expanded="true"]) {
         @apply bg-default;
       }
     }
