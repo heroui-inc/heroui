@@ -1,6 +1,7 @@
 ---
 title: SearchField 搜索框
 description: 用于筛选与查询的复合搜索输入框。
+icon: updated
 links:
   source_native: search-field/search-field.tsx
   styles_native: search-field/search-field.styles.ts
@@ -32,9 +33,9 @@ import { SearchField } from 'heroui-native';
 
 - **SearchField**：根容器，接收 `value` 与 `onChange` 并通过上下文下发；同时提供 `isDisabled`、`isInvalid`、`isRequired` 与动画设置。
 - **SearchField.Group**：横向 `flex-row` 容器，排列搜索图标、输入与清除按钮。
-- **SearchField.SearchIcon**：默认放大镜图标，绝对定位在输入左侧；可传入子节点替换默认图标。
-- **SearchField.Input**：包装 `Input` 并应用搜索相关默认行为；自动从上下文读取 `value` 与 `onChangeText`。
-- **SearchField.ClearButton**：清除输入的小图标按钮；值为空时自动隐藏；按下时调用上下文的 `onChange("")`。
+- **SearchField.SearchIcon**：*（可选）* 默认放大镜图标，绝对定位在输入左侧；可传入子节点替换默认图标。省略时，`Input` 不会预留左侧空间。
+- **SearchField.Input**：包装 `Input` 并应用搜索相关默认行为；自动从上下文读取 `value` 与 `onChangeText`。仅在组合了 SearchIcon 与 ClearButton 时才分别预留左侧与右侧空间。
+- **SearchField.ClearButton**：*（可选）* 清除输入的小图标按钮；值为空时自动隐藏；按下时调用上下文的 `onChange("")`。省略时，`Input` 不会预留右侧空间；若已组合但处于隐藏状态（值为空），右侧内边距会保留，以免首次输入时文本发生跳动。
 
 ## 用法
 
@@ -51,6 +52,21 @@ import { SearchField } from 'heroui-native';
   </SearchField.Group>
 </SearchField>
 ```
+
+### 不带搜索图标
+
+省略 `SearchField.SearchIcon` 即可去掉左侧的放大镜及其预留的内边距，`Input` 会自动收回这部分空间。
+
+```tsx
+<SearchField value={searchValue} onChange={setSearchValue}>
+  <SearchField.Group>
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+</SearchField>
+```
+
+同时省略 `ClearButton` 则会去掉右侧空间。若 `ClearButton` 已组合但处于隐藏状态（值为空），右侧内边距会保留，以免首次输入时文本发生跳动。
 
 ### 标签与说明
 

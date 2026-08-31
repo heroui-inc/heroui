@@ -1,6 +1,7 @@
 ---
 title: Typography
 description: Primitive typography component for rendering styled text with semantic type variants.
+icon: updated
 links:
   source_native: text/text.tsx
   styles_native: text/text.styles.ts
@@ -126,6 +127,8 @@ Use the `weight` prop to override the font weight implied by `type`. The overrid
 <Typography weight="medium">Medium body</Typography>
 <Typography weight="semibold">Semibold body</Typography>
 ```
+
+If your app defines custom `--font-*` families, each weight resolves to the matching family instead of a numeric weight, so every weight you use needs its variable defined. See [Custom Fonts](/docs/native/getting-started/theming#custom-fonts).
 
 ### Truncation
 

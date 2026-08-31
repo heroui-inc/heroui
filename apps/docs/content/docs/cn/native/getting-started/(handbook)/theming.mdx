@@ -326,12 +326,22 @@ export default function App() {
   --font-normal: 'YourFont-400Regular';
   --font-medium: 'YourFont-500Medium';
   --font-semibold: 'YourFont-600SemiBold';
+  --font-bold: 'YourFont-700Bold';
 }
 ```
 
 **说明：** CSS 变量中的字体名应与已加载字体的 PostScript 名称一致。请查阅字体包文档，或直接使用 `useFonts` 中出现的名称。
 
 所有 HeroUI Native 组件会自动使用这些字体变量，以保持排版一致。
+
+### 字重如何解析
+
+组件通过 `font-normal`、`font-medium`、`font-semibold` 与 `font-bold` 工具类请求字重，而它们的解析方式取决于你是否定义了上述变量：
+
+- **已定义自定义字体** — 字重会选择对应的字体族，因此 `--font-semibold` 必须指向本身就是 semibold 的字面。此时不会应用数值化的 `font-weight`，因为将数值字重与单一字重的字面搭配会让 iOS 选中该字体族中最粗的字面。
+- **未定义自定义字体** — 同一字重会对系统字体应用数值化的 `font-weight`。
+
+**只要定义了其中任意一个变量，就请定义全部四个。** 这两种模式是按字重分别解析的，因此没有对应变量的字重会回退到平台字体上的数值字重，而其他字重仍使用你的自定义字体族。除了混用字体之外，这种组合还可能让 iOS 使用你字体族中最粗的字面来渲染文本，因为将数值字重与单一字重的字面搭配，正是 iOS 解析错误的情形。
 
 ## 变量参考
 
