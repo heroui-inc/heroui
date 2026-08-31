@@ -127,6 +127,8 @@ Use the `weight` prop to override the font weight implied by `type`. The overrid
 <Typography weight="semibold">Semibold body</Typography>
 ```
 
+If your app defines custom `--font-*` families, each weight resolves to the matching family instead of a numeric weight, so every weight you use needs its variable defined. See [Custom Fonts](/docs/native/getting-started/theming#custom-fonts).
+
 ### Truncation
 
 Use the `truncate` boolean prop to limit the text to a single line with an ellipsis. It is mapped to React Native's `numberOfLines={1}`. An explicit `numberOfLines` prop, if provided, takes precedence.

@@ -326,12 +326,22 @@ After loading the fonts, override the font CSS variables in your `global.css` fi
   --font-normal: 'YourFont-400Regular';
   --font-medium: 'YourFont-500Medium';
   --font-semibold: 'YourFont-600SemiBold';
+  --font-bold: 'YourFont-700Bold';
 }
 ```
 
 **Note:** The font names in CSS variables should match the PostScript names of your loaded fonts. Check your font package documentation or use the font names exactly as they appear in your `useFonts` hook.
 
 All HeroUI Native components automatically use these font variables, ensuring consistent typography throughout your app.
+
+### How Font Weights Resolve
+
+Components request weights through the `font-normal`, `font-medium`, `font-semibold` and `font-bold` utilities, which resolve differently depending on whether you define the variables above:
+
+- **Custom fonts defined** — a weight selects the matching family, so `--font-semibold` must point at a face that is already semibold. No numeric `font-weight` is applied, because pairing one with a single-weight face makes iOS pick the heaviest face in the family.
+- **No custom fonts** — the same weight applies a numeric `font-weight` to the system font.
+
+**Define all four variables if you define any of them.** The two modes are resolved per weight, so a weight with no variable falls back to a numeric weight on the platform font while the others keep your custom family. Besides mixing typefaces, that combination can make iOS render text with the heaviest face of your family, because pairing a numeric weight with a single-weight face is exactly the case iOS resolves incorrectly.
 
 ## Variables Reference
 

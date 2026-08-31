@@ -405,7 +405,7 @@ Options for showing a toast. Can be either a config object with default styling 
 | `placement`     | `'top' \| 'bottom'`                                                                                                               | -       | Placement of the toast on screen                                                    |
 | `isSwipeable`   | `boolean`                                                                                                                         | -       | Whether the toast can be swiped to dismiss                                          |
 | `animation`     | `ToastRootAnimation \| false \| "disabled" \| "disable-all"`                                                                      | -       | Animation configuration for toast                                                   |
-| `duration`      | `number \| 'persistent'`                                                                                                          | `4000`  | Duration in milliseconds before auto-hide. Set to 'persistent' to prevent auto-hide |
+| `duration`      | `number \| 'persistent'`                                                                                                          | `4000`  | Duration in milliseconds before auto-hide. `0` auto-hides on the next tick; only `'persistent'` keeps the toast on screen indefinitely |
 | `id`            | `string`                                                                                                                          | -       | Optional ID for the toast. If not provided, one will be generated                   |
 | `label`         | `string`                                                                                                                          | -       | Label text for the toast                                                            |
 | `description`   | `string`                                                                                                                          | -       | Description text for the toast                                                      |
@@ -421,7 +421,7 @@ Options for showing a toast. Can be either a config object with default styling 
 | ----------- | ---------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
 | `id`        | `string`                                             | -       | Optional ID for the toast. If not provided, one will be generated                   |
 | `component` | `(props: ToastComponentProps) => React.ReactElement` | -       | A function that receives toast props and returns a React element                    |
-| `duration`  | `number \| 'persistent'`                             | `4000`  | Duration in milliseconds before auto-hide. Set to 'persistent' to prevent auto-hide |
+| `duration`  | `number \| 'persistent'`                             | `4000`  | Duration in milliseconds before auto-hide. `0` auto-hides on the next tick; only `'persistent'` keeps the toast on screen indefinitely |
 | `onShow`    | `() => void`                                         | -       | Callback function called when the toast is shown                                    |
 | `onHide`    | `() => void`                                         | -       | Callback function called when the toast is hidden                                   |
 
