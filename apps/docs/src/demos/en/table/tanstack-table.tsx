@@ -66,10 +66,10 @@ const features = tableFeatures({
   paginatedRowModel: createPaginatedRowModel(),
   rowPaginationFeature,
   rowSortingFeature,
-  sortedRowModel: createSortedRowModel(),
   sortFns: {
     alphanumeric: sortFn_alphanumeric,
   },
+  sortedRowModel: createSortedRowModel(),
 });
 
 const columnHelper = createColumnHelper<typeof features, User>();
