@@ -2,7 +2,7 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.5 — 补丁版本",
+        "label": "HeroUI React v3.2.5 — React Aria 1.21.0",
         "href": "/docs/react/releases/v3-2-5",
         "date": "2026-08-13"
       },
