@@ -6,11 +6,14 @@ import type {SortingState} from "@tanstack/react-table";
 import {Chip, Pagination, Table} from "@heroui/react";
 import {
   createColumnHelper,
+  createPaginatedRowModel,
+  createSortedRowModel,
   flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
+  rowPaginationFeature,
+  rowSortingFeature,
+  sortFn_alphanumeric,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import {useMemo, useState} from "react";
 
@@ -58,10 +61,20 @@ const users: User[] = [
   },
 ];
 
-// --- TanStack Column Definitions ------------------------------------------
-const columnHelper = createColumnHelper<User>();
+// --- TanStack Features & Column Definitions -------------------------------
+const features = tableFeatures({
+  paginatedRowModel: createPaginatedRowModel(),
+  rowPaginationFeature,
+  rowSortingFeature,
+  sortedRowModel: createSortedRowModel(),
+  sortFns: {
+    alphanumeric: sortFn_alphanumeric,
+  },
+});
 
-const columns = [
+const columnHelper = createColumnHelper<typeof features, User>();
+
+const columns = columnHelper.columns([
   columnHelper.accessor("name", {header: "Name"}),
   columnHelper.accessor("role", {header: "Role"}),
   columnHelper.accessor("status", {
@@ -73,7 +86,7 @@ const columns = [
     header: "Status",
   }),
   columnHelper.accessor("email", {header: "Email"}),
-];
+]);
 
 // --- Sorting Bridge -------------------------------------------------------
 // Convert TanStack SortingState → React Aria SortDescriptor
@@ -99,21 +112,18 @@ const PAGE_SIZE = 4;
 export function TanstackTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  // eslint-disable-next-line react-hooks/incompatible-library
-  const table = useReactTable({
+  const table = useTable({
     columns,
     data: users,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    initialState: {pagination: {pageSize: PAGE_SIZE}},
+    features,
+    initialState: {pagination: {pageIndex: 0, pageSize: PAGE_SIZE}},
     onSortingChange: setSorting,
     state: {sorting},
   });
 
   const sortDescriptor = useMemo(() => toSortDescriptor(sorting), [sorting]);
 
-  const {pageIndex} = table.getState().pagination;
+  const {pageIndex} = table.state.pagination;
   const pageCount = table.getPageCount();
   const pages = Array.from({length: pageCount}, (_, i) => i + 1);
   const start = pageIndex * PAGE_SIZE + 1;
@@ -129,7 +139,7 @@ export function TanstackTable() {
           onSortChange={(d) => setSorting(toSortingState(d))}
         >
           <Table.Header>
-            {table.getHeaderGroups()[0]!.headers.map((header) => (
+            {table.getHeaderGroups()[0]?.headers.map((header) => (
               <Table.Column
                 key={header.id}
                 allowsSorting={header.column.getCanSort()}
@@ -147,7 +157,7 @@ export function TanstackTable() {
           <Table.Body>
             {table.getRowModel().rows.map((row) => (
               <Table.Row key={row.id} id={row.id}>
-                {row.getVisibleCells().map((cell) => (
+                {row.getAllCells().map((cell) => (
                   <Table.Cell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Table.Cell>
