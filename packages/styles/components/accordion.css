@@ -70,14 +70,16 @@
 
   /**
    * Hover state
-   * CRITICAL: `:hover` and `[data-hovered]` must be combined, never alternated. React Aria
-   * writes `data-hovered` on a render tick, so on pointer leave it outlives the native `:hover`
-   * by at least a frame. Alternating them keeps this background painted during that frame, which
-   * flashes the default color over a custom `hover:bg-*` the moment the pointer leaves. Combining
-   * them also drops the sticky `:hover` a touch tap leaves behind on hybrid devices.
+   * CRITICAL: inside `@media (hover: hover)` this keys off `:hover` alone. React Aria writes
+   * `data-hovered` on a render tick, so on pointer leave the attribute outlives the native
+   * `:hover` by at least a frame; including it here keeps this background painted for that frame,
+   * after a custom `hover:bg-*` override has already stopped matching, and the default color
+   * flashes on top. `:hover` is the same signal Tailwind's `hover:` variant compiles to, so the
+   * default and any override switch in lockstep. `data-hovered` is still on the element for
+   * consumers who want to key their own styles off it.
    */
   @media (hover: hover) {
-    &:hover[data-hovered="true"]:not([aria-expanded="true"]) {
+    &:hover:not([aria-expanded="true"]) {
       background-color: color-mix(in oklab, var(--foreground) 3%, transparent 90%);
     }
   }
@@ -125,9 +127,9 @@
   border-radius: min(32px, var(--radius-3xl));
 
   .accordion__trigger {
-    /* See the base trigger hover state for why both hover signals are required. */
+    /* See the base trigger hover state for why `data-hovered` is left out here. */
     @media (hover: hover) {
-      &:hover[data-hovered="true"]:not([aria-expanded="true"]) {
+      &:hover:not([aria-expanded="true"]) {
         @apply bg-default;
       }
     }

@@ -1,3 +1,5 @@
+import type {ComponentProps} from "react";
+
 import {render} from "@heroui/testing/browser";
 import {page, userEvent} from "vitest/browser";
 
@@ -10,45 +12,54 @@ import "@/styles.css";
 
 const TRIGGER_LABEL = "Set up notifications";
 
-const CustomHoverAccordion = () => (
-  <Accordion data-testid="accordion" variant="surface">
-    <Accordion.Item id="notifications">
-      <Accordion.Heading>
-        {/* `transition-none` mirrors the docs customization example, so the background under
-            test is whatever the cascade resolves to rather than an interpolated value. */}
-        <Accordion.Trigger className="transition-none hover:bg-surface">
-          {TRIGGER_LABEL}
-          <Accordion.Indicator />
-        </Accordion.Trigger>
-      </Accordion.Heading>
-      <Accordion.Panel>
-        <Accordion.Body>Receive account activity updates.</Accordion.Body>
-      </Accordion.Panel>
-    </Accordion.Item>
-  </Accordion>
-);
+const VARIANTS = ["default", "surface"] as const;
 
-const DefaultHoverAccordion = () => (
-  <Accordion data-testid="accordion" variant="surface">
-    <Accordion.Item id="notifications">
-      <Accordion.Heading>
-        <Accordion.Trigger>
-          {TRIGGER_LABEL}
-          <Accordion.Indicator />
-        </Accordion.Trigger>
-      </Accordion.Heading>
-      <Accordion.Panel>
-        <Accordion.Body>Receive account activity updates.</Accordion.Body>
-      </Accordion.Panel>
-    </Accordion.Item>
-  </Accordion>
-);
+type RenderOptions = ComponentProps<typeof Accordion> & {triggerClassName?: string};
+
+// `vitest-browser-react` cannot render a fragment, so the probe shares a plain wrapper with the
+// accordion instead.
+const renderAccordion = ({triggerClassName, ...props}: RenderOptions = {}) =>
+  render(
+    <div>
+      <Accordion {...props}>
+        <Accordion.Item id="notifications">
+          <Accordion.Heading>
+            {/* `transition-none` mirrors the docs customization example, so the background under
+                test is whatever the cascade resolves to rather than an interpolated value. */}
+            <Accordion.Trigger
+              className={["transition-none", triggerClassName].filter(Boolean).join(" ")}
+            >
+              {TRIGGER_LABEL}
+              <Accordion.Indicator />
+            </Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Accordion.Body>Receive account activity updates.</Accordion.Body>
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
+      {/* `hover:bg-surface` resolves to whatever `bg-surface` paints, so the expected color comes
+          from the token itself rather than from another component that happens to share it. */}
+      <div className="bg-surface" data-testid="surface-probe" />
+    </div>,
+  );
 
 const backgroundOf = (element: Element) => getComputedStyle(element).backgroundColor;
 
 const triggerElement = () => page.getByRole("button", {name: TRIGGER_LABEL}).element();
 
-const accordionElement = () => page.getByTestId("accordion").element();
+const surfaceBackground = () => backgroundOf(page.getByTestId("surface-probe").element());
+
+/**
+ * The pointer keeps the position an earlier test left it at, so it can already sit over a freshly
+ * rendered trigger. Moving it off first makes the sampled background a real baseline instead of a
+ * hover background in disguise.
+ */
+const restingBackgroundOf = async (element: Element) => {
+  await userEvent.unhover(element);
+
+  return backgroundOf(element);
+};
 
 /**
  * React Aria writes `data-hovered` from a React render, so the attribute outlives the native
@@ -64,38 +75,43 @@ const staleHoverAttribute = (element: Element) => {
 describe("Accordion (browser)", () => {
   describe("trigger hover background", () => {
     it("supports a custom hover background over the default one", async () => {
-      await render(<CustomHoverAccordion />);
+      await renderAccordion({triggerClassName: "hover:bg-surface", variant: "surface"});
 
       const trigger = triggerElement();
 
       await userEvent.hover(trigger);
 
-      // `hover:bg-surface` resolves to the same token the surface accordion paints itself with.
-      expect(backgroundOf(trigger)).toBe(backgroundOf(accordionElement()));
+      expect(backgroundOf(trigger)).toBe(surfaceBackground());
     });
 
-    it("renders no default hover background while the pointer is away", async () => {
-      await render(<CustomHoverAccordion />);
+    it.each(VARIANTS)(
+      "renders no hover background on a stale data-hovered with variant=%s",
+      async (variant) => {
+        await renderAccordion({variant});
 
-      const trigger = triggerElement();
-      const resting = backgroundOf(trigger);
+        const trigger = triggerElement();
+        const resting = await restingBackgroundOf(trigger);
 
-      staleHoverAttribute(trigger);
+        staleHoverAttribute(trigger);
 
-      expect(backgroundOf(trigger)).toBe(resting);
-    });
+        expect(backgroundOf(trigger)).toBe(resting);
+      },
+    );
 
-    it("renders the default hover background while the pointer is over the trigger", async () => {
-      await render(<DefaultHoverAccordion />);
+    it.each(VARIANTS)(
+      "renders the default hover background while the pointer is over the trigger with variant=%s",
+      async (variant) => {
+        await renderAccordion({variant});
 
-      const trigger = triggerElement();
-      const resting = backgroundOf(trigger);
+        const trigger = triggerElement();
+        const resting = await restingBackgroundOf(trigger);
 
-      await userEvent.hover(trigger);
-      await expect.poll(() => backgroundOf(trigger)).not.toBe(resting);
+        await userEvent.hover(trigger);
+        await expect.poll(() => backgroundOf(trigger)).not.toBe(resting);
 
-      await userEvent.unhover(trigger);
-      await expect.poll(() => backgroundOf(trigger)).toBe(resting);
-    });
+        await userEvent.unhover(trigger);
+        await expect.poll(() => backgroundOf(trigger)).toBe(resting);
+      },
+    );
   });
 });
