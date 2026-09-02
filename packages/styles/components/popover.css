@@ -5,6 +5,11 @@
   @apply origin-(--trigger-anchor-point) bg-overlay p-0 text-sm;
   border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
+  max-width: min(var(--popover-max-width, 22rem), calc(100vw - 1.5rem));
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  overflow-clip-margin: 12px;
 
   /* Entering animations */
   &[data-entering="true"] {
@@ -60,6 +65,9 @@
 /* Popover dialog */
 .popover__dialog {
   @apply p-4 outline-none;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-wrap: break-word;
 }
 
 /* Popover heading */
