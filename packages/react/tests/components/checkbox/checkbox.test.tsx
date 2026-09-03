@@ -41,6 +41,17 @@ describe("Checkbox", () => {
     expect(document.querySelector('[data-slot="checkbox-indicator"]')).not.toBeNull();
   });
 
+  it("renders a nested Label as a span so the content label has no descendant label", () => {
+    renderCheckbox();
+
+    const label = screen.getByText("Accept terms");
+    const content = document.querySelector('[data-slot="checkbox-content"]');
+
+    expect(label.tagName).toBe("SPAN");
+    expect(content?.tagName).toBe("LABEL");
+    expect(content?.querySelector("label")).toBeNull();
+  });
+
   it("supports data attribute passthrough on the field", () => {
     render(
       <Checkbox data-testid="terms">

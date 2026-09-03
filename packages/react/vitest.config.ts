@@ -3,6 +3,7 @@ import {fileURLToPath} from "node:url";
 
 import {browserConfig} from "@heroui/testing/configs/browser";
 import {uiConfig} from "@heroui/testing/configs/react";
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import {defineConfig, mergeConfig} from "vitest/config";
 
@@ -61,7 +62,9 @@ export default defineConfig({
       mergeConfig(
         browserConfig,
         defineConfig({
-          plugins: [react()],
+          // Tailwind compiles `src/styles.css` so suites that assert on the design system's
+          // own CSS (stacking, pointer-events) run against the real stylesheet.
+          plugins: [react(), tailwindcss()],
           resolve: {
             alias: {
               "@": srcDir,

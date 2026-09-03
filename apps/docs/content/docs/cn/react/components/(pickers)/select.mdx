@@ -26,6 +26,7 @@ export default () => (
     <Label />
     <Select.Trigger>
       <Select.Value />
+      <Select.ClearButton />
       <Select.Indicator />
     </Select.Trigger>
     <Description />
@@ -107,6 +108,14 @@ Select 组件支持两种视觉变体：
 
 <ComponentPreview name="select-custom-indicator" />
 
+### 带清除按钮
+
+`Select.Trigger` 本身是 button，因此不能再嵌套 `<button>` 来实现清除。请在触发器内组合 `Select.ClearButton` — 它渲染为非 button 控件，且不会打开菜单。
+
+<ComponentPreview name="select-with-clear-button" />
+
+由于 ARIA 将 button 的子节点视为纯展示内容，清除控件无法获得焦点，因此它带有 `aria-hidden`，仅作为指针操作的可视入口。当组合了 `Select.ClearButton` 时，触发器同时支持按 `Backspace` 或 `Delete` 清除，这是键盘与屏幕阅读器用户的清除方式。两种方式都会调用 `onClear`。
+
 ### 自定义展示值
 
 <ComponentPreview name="select-custom-value" />
@@ -170,6 +179,7 @@ Select 组件使用以下 CSS 类（[查看源码样式](https://github.com/hero
 - `.select` - Select 根容器
 - `.select__trigger` - 打开下拉的触发按钮
 - `.select__value` - 当前显示的值或占位符
+- `.select__clear-button` - 触发器内的可选清除控件
 - `.select__indicator` - 下拉指示图标
 - `.select__popover` - 弹出层容器
 
@@ -184,6 +194,7 @@ Select 组件使用以下 CSS 类（[查看源码样式](https://github.com/hero
 - `.select__trigger[data-focus-visible="true"]` - 触发器聚焦状态
 - `.select__trigger[data-disabled="true"]` - 触发器禁用状态
 - `.select__value[data-placeholder="true"]` - 占位符状态
+- `.select__clear-button[data-empty="true"]` - 无选中项时隐藏清除控件
 - `.select__indicator[data-open="true"]` - 展开时的指示器状态
 
 ### 交互状态
@@ -210,6 +221,7 @@ Select 组件使用以下 CSS 类（[查看源码样式](https://github.com/hero
 | `value`         | `Key \| Key[] \| null`                  | -                 | 当前值（受控）。                                  |
 | `defaultValue`  | `Key \| Key[] \| null`                  | -                 | 默认值（非受控）。                                |
 | `onChange`      | `(value: Key \| Key[] \| null) => void` | -                 | 值变化时的事件处理函数。                          |
+| `onClear`       | `() => void`                            | -                 | 清除选择时的事件处理函数。                        |
 | `isRequired`    | `boolean`                               | -                 | 用户输入是否必填。                                |
 | `isInvalid`     | `boolean`                               | -                 | Select 的值是否无效。                             |
 | `name`          | `string`                                | -                 | 输入框名称，用于提交 HTML 表单。                  |
@@ -238,6 +250,15 @@ Select 组件使用以下 CSS 类（[查看源码样式](https://github.com/hero
 | ----------- | ----------- | ------ | ----------------- |
 | `className` | `string`    | -      | 额外的 CSS 类。   |
 | `children`  | `ReactNode` | -      | 自定义指示器内容。 |
+
+### Select.ClearButton
+| Prop        | 类型                      | 默认值 | 描述                            |
+| ----------- | ------------------------- | ------ | ------------------------------- |
+| `className` | `string`                  | -      | 额外的 CSS 类。                 |
+| `children`  | `ReactNode`               | -      | 自定义内容，替代默认图标。      |
+| `onClick`   | `(e: MouseEvent) => void` | -      | 点击清除控件时的事件处理函数。  |
+
+`Select.ClearButton` 渲染为 `span`，因此可以放在 `Select.Trigger`（button）内部而不会形成嵌套 button。选择为空时会自动隐藏。
 
 ### Select.Popover
 | Prop        | 类型                                                                                                                                                                                                                                                                                                                     | 默认值    | 描述                                      |

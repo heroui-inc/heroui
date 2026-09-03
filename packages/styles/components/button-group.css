@@ -61,7 +61,7 @@
 }
 
 /* Raise focused button so its outward focus ring + gap shows above adjacent buttons */
-.button-group .button:focus-visible:not(:focus),
+.button-group .button:focus-visible,
 .button-group .button[data-focus-visible="true"] {
   @apply z-10;
 }

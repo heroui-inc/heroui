@@ -38,6 +38,7 @@
     "typecheck:react": "turbo typecheck --filter=@heroui/react",
     "typecheck:storybook": "dotenv -- turbo typecheck --filter=@heroui/storybook",
     "test": "turbo test",
+    "test:browser": "turbo test:browser --filter=@heroui/react",
     "test:coverage": "turbo test:coverage --filter=@heroui/react",
     "typegen:docs": "dotenv -- pnpm --filter @heroui/docs typegen",
     "typegen:docs-cn": "dotenv -- pnpm --filter @heroui/docs-cn typegen",

@@ -6,6 +6,7 @@ import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
+import {Modal} from "../modal";
 
 import {
   Toast,
@@ -45,8 +46,6 @@ const meta: Meta<ToastStoryProps> = {
 
 export default meta;
 
-const noop = () => {};
-
 const Template = () => {
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
@@ -57,10 +56,10 @@ const Template = () => {
           size="sm"
           variant="tertiary"
           onPress={() => {
-            toast("You have been invited to join a team", {
+            const id = toast("You have been invited to join a team", {
               actionProps: {
                 children: "Dismiss",
-                onPress: () => toast.clear(),
+                onPress: () => toast.close(id),
                 variant: "tertiary",
               },
               description: "Bob sent you an invitation to join HeroUI team",
@@ -74,12 +73,12 @@ const Template = () => {
         <Button
           size="sm"
           variant="secondary"
-          onPress={() =>
-            toast.info("You have 2 credits left", {
-              actionProps: {children: "Upgrade", onPress: noop},
+          onPress={() => {
+            const id = toast.info("You have 2 credits left", {
+              actionProps: {children: "Upgrade", onPress: () => toast.close(id)},
               description: "Get a paid plan for more credits",
-            })
-          }
+            });
+          }}
         >
           Accent toast
         </Button>
@@ -87,16 +86,16 @@ const Template = () => {
           className="text-success"
           size="sm"
           variant="tertiary"
-          onPress={() =>
-            toast.success("You have upgraded your plan", {
+          onPress={() => {
+            const id = toast.success("You have upgraded your plan", {
               actionProps: {
                 children: "Billing",
                 className: "bg-success text-success-foreground",
-                onPress: noop,
+                onPress: () => toast.close(id),
               },
               description: "You can continue using HeroUI Chat",
-            })
-          }
+            });
+          }}
         >
           Success toast
         </Button>
@@ -104,30 +103,30 @@ const Template = () => {
           className="text-warning"
           size="sm"
           variant="tertiary"
-          onPress={() =>
-            toast.warning("You have no credits left", {
+          onPress={() => {
+            const id = toast.warning("You have no credits left", {
               actionProps: {
                 children: "Upgrade",
                 className: "bg-warning text-warning-foreground",
-                onPress: noop,
+                onPress: () => toast.close(id),
               },
               description: "Upgrade to a paid plan to continue",
-            })
-          }
+            });
+          }}
         >
           Warning toast
         </Button>
         <Button
           size="sm"
           variant="danger-soft"
-          onPress={() =>
-            toast.danger("Storage is full", {
-              actionProps: {children: "Remove", onPress: noop, variant: "danger"},
+          onPress={() => {
+            const id = toast.danger("Storage is full", {
+              actionProps: {children: "Remove", onPress: () => toast.close(id), variant: "danger"},
               description:
                 "Remove files to release space. Adding more text to demonstrate longer content display",
               indicator: <Icon icon="gravity-ui:hard-drive" />,
-            })
-          }
+            });
+          }}
         >
           Danger toast
         </Button>
@@ -176,6 +175,50 @@ const PlacementsTemplate = () => {
 
 export const Placements = {
   render: PlacementsTemplate,
+};
+
+// Expanded - Keep the stack open at natural height
+const expandedQueue = new ToastQueue();
+
+const ExpandedTemplate = () => {
+  return (
+    <div className="flex h-full max-w-xl flex-col items-center justify-center">
+      <Toast.Provider
+        isExpanded
+        aria-label="Expanded notifications"
+        placement="bottom"
+        queue={expandedQueue}
+      />
+      <Button
+        size="sm"
+        variant="secondary"
+        onPress={() => {
+          expandedQueue.add({
+            title: "Simple message",
+            variant: "default",
+          });
+          setTimeout(() => {
+            expandedQueue.add({
+              title: "Operation completed",
+              variant: "success",
+            });
+          }, 400);
+          setTimeout(() => {
+            expandedQueue.add({
+              title: "New update available",
+              variant: "accent",
+            });
+          }, 800);
+        }}
+      >
+        Show 3 toasts
+      </Button>
+    </div>
+  );
+};
+
+export const Expanded = {
+  render: ExpandedTemplate,
 };
 
 // Simple Toast - Title only, minimal examples
@@ -350,9 +393,9 @@ const LoadingStateTemplate = () => {
             });
 
             setTimeout(() => {
-              toast.close(loadingId);
-              toast.success("File uploaded", {
+              toast.update(loadingId, "File uploaded", {
                 description: "Your file has been uploaded successfully",
+                variant: "success",
               });
             }, 3000);
           }}
@@ -369,9 +412,9 @@ const LoadingStateTemplate = () => {
             });
 
             setTimeout(() => {
-              toast.close(loadingId);
-              toast.success("Payment processed", {
+              toast.update(loadingId, "Payment processed", {
                 description: "Your payment has been processed successfully",
+                variant: "success",
               });
             }, 2500);
           }}
@@ -388,9 +431,9 @@ const LoadingStateTemplate = () => {
             });
 
             setTimeout(() => {
-              toast.close(loadingId);
-              toast.danger("Failed to save", {
+              toast.update(loadingId, "Failed to save", {
                 description: "Please try again",
+                variant: "danger",
               });
             }, 2000);
           }}
@@ -660,4 +703,51 @@ const CustomQueueTemplate = () => {
 
 export const CustomQueue = {
   render: CustomQueueTemplate,
+};
+
+// Toast in Modal - toasts stay visible above a full-screen overlay (modal)
+const ToastInModalTemplate = () => {
+  return (
+    <div className="flex h-full flex-col items-center justify-center">
+      <Toast.Provider placement="bottom" />
+      <Modal>
+        <Button size="sm" variant="secondary">
+          Open modal
+        </Button>
+        <Modal.Backdrop>
+          <Modal.Container>
+            <Modal.Dialog className="sm:max-w-90">
+              <Modal.CloseTrigger />
+              <Modal.Header>
+                <Modal.Icon className="bg-default text-foreground">
+                  <Icon className="size-5" icon="gravity-ui:bell" />
+                </Modal.Icon>
+                <Modal.Heading>Notifications</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>
+                <p>Trigger a toast from inside the modal to see it render above the backdrop.</p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  className="w-full"
+                  variant="secondary"
+                  onPress={() =>
+                    toast.success("Settings saved", {
+                      description: "Your changes have been applied",
+                    })
+                  }
+                >
+                  Show toast
+                </Button>
+              </Modal.Footer>
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
+      </Modal>
+    </div>
+  );
+};
+
+export const ToastInModal = {
+  render: ToastInModalTemplate,
 };

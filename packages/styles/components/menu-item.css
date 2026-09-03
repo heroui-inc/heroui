@@ -13,7 +13,7 @@
     transform 250ms var(--ease-out-quart),
     box-shadow 150ms var(--ease-out);
 
-  @apply will-change-transform motion-reduce:transition-none;
+  @apply motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -41,7 +41,7 @@
   }
 
   /* Focus visible state (keyboard focus only) */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -54,6 +54,7 @@
   /* Pressed state */
   &:active,
   &[data-pressed="true"] {
+    @apply will-change-transform;
     transform: scale(0.98);
   }
 

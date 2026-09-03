@@ -1,4 +1,5 @@
 import type {Key} from "@react-types/shared";
+import type {ReactNode} from "react";
 
 import {FieldError} from "@/components/field-error";
 import {Label} from "@/components/label";
@@ -8,10 +9,14 @@ import {Select} from "@/components/select";
 export type SelectFixtureProps = {
   defaultOpen?: boolean;
   isDisabled?: boolean;
+  isTriggerDisabled?: boolean;
   isInvalid?: boolean;
   value?: string;
   defaultValue?: string;
   onChange?: (key: Key | null) => void;
+  onClear?: () => void;
+  withClearButton?: boolean;
+  clearButtonChildren?: ReactNode;
 };
 
 export const SelectFixture = (props: SelectFixtureProps = {}) => (
@@ -24,10 +29,16 @@ export const SelectFixture = (props: SelectFixtureProps = {}) => (
     placeholder="Select one"
     value={props.value}
     onChange={props.onChange}
+    onClear={props.onClear}
   >
     <Label>State</Label>
-    <Select.Trigger>
+    <Select.Trigger isDisabled={props.isTriggerDisabled}>
       <Select.Value />
+      {props.withClearButton ? (
+        <Select.ClearButton data-testid="select-clear-button">
+          {props.clearButtonChildren}
+        </Select.ClearButton>
+      ) : null}
       <Select.Indicator />
     </Select.Trigger>
     <Select.Popover>

@@ -9,6 +9,16 @@ description: HeroUI v3 的所有更新与变更，包含新功能、修复以及
 
 ## 最新版本
 
+### v3.2.5
+
+**2026 年 8 月 13 日**
+
+补丁版本：React Aria 升级到 `1.21.0`（`react-aria@3.52.0`），[Toast](/docs/components/toast) 支持堆叠并在悬停时展开，[Select](/docs/components/select) 新增 `ClearButton`，[Tabs](/docs/components/tabs) 新增 `align` 变体，[Accordion](/docs/components/accordion) 自定义悬停背景不再被默认触发器悬停色闪一下；嵌套 `data-theme` 作用域会级联 overlay 与表单 token，导出的变体也会应用原生 `:focus-visible` 焦点环；[Checkbox](/docs/components/checkbox)、[Switch](/docs/components/switch) 与 [Radio](/docs/components/radio) 内容中的 [Label](/docs/components/label) 会渲染为 `span`；Modal 级浮层会保持在关闭中的 Popover 之上，[Tag](/docs/components/tag) 的移除目标达到 24px，[ScrollShadow](/docs/components/scroll-shadow) 通过滚动时间线驱动淡出以避免 SSR 闪烁，并在内容尺寸变化时保持滚动属性同步；[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；Toast 在传入自定义样式时也会保留区域 CSS 变量。
+
+[阅读完整发布说明 →](/docs/react/releases/v3-2-5)
+
+---
+
 ### v3.2.4
 
 **2026 年 8 月 4 日**

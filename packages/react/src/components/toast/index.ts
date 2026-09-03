@@ -76,6 +76,17 @@ export {ToastQueue, toast, toastQueue};
 /* -------------------------------------------------------------------------------------------------
  * Constants
  * -----------------------------------------------------------------------------------------------*/
-export {DEFAULT_MAX_VISIBLE_TOAST, DEFAULT_GAP, DEFAULT_TOAST_TIMEOUT} from "./constants";
+export {
+  DEFAULT_EXIT_DURATION,
+  DEFAULT_GAP,
+  DEFAULT_HOTKEY,
+  DEFAULT_MAX_VISIBLE_TOAST,
+  DEFAULT_TOAST_TIMEOUT,
+} from "./constants";
 
-export type {ToastQueueOptions, ToastContentValue} from "./toast-queue";
+export type {
+  HeroUIToastOptions,
+  ToastContentValue,
+  ToastPromiseOptions,
+  ToastQueueOptions,
+} from "./toast-queue";

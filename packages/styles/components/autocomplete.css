@@ -37,7 +37,7 @@
   }
 
   /* Focus visible state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
     border-color: var(--field-border-focus);
@@ -85,7 +85,7 @@
     }
   }
 
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     background-color: var(--autocomplete-trigger-bg-focus);
   }
@@ -132,11 +132,10 @@
 .autocomplete__popover {
   @apply flex w-(--trigger-width) max-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 flex-col overflow-hidden overscroll-contain bg-overlay p-0 pt-2 text-sm outline-none;
   border-radius: min(32px, var(--radius-3xl));
-  box-shadow: var(--shadow-overlay);
+  box-shadow: var(--overlay-shadow);
 
   &:focus,
   &:focus-visible,
-  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply outline-none;
   }
@@ -166,6 +165,8 @@
   /* Exiting animations */
   &[data-exiting="true"] {
     @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
+    /* Stays non-interactive while closing, even if the exit animation is interrupted. */
+    @apply pointer-events-none;
   }
 
   &[data-exiting="true"],

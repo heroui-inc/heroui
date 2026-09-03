@@ -50,6 +50,38 @@ interface RangeCalendarContext {
 
 const RangeCalendarContext = createContext<RangeCalendarContext>({});
 
+interface RangeCalendarContextProviderProps {
+  children: ReactNode;
+  dayViewBase?: Pick<RangeCalendarDayViewContext, "days" | "firstDayOfWeek">;
+  slots: ReturnType<typeof rangeCalendarVariants>;
+  timeZone: string;
+  visibleRange: {end: DateValue; start: DateValue};
+}
+
+/**
+ * Provides RangeCalendarContext from inside the RangeCalendar render prop,
+ * where hooks cannot be called directly.
+ */
+const RangeCalendarContextProvider = ({
+  children,
+  dayViewBase,
+  slots,
+  timeZone,
+  visibleRange,
+}: RangeCalendarContextProviderProps) => {
+  // React Aria rebuilds visibleRange on every render, but the start/end dates it
+  // holds are stable, so keying off those keeps the value stable in day view too.
+  // Outside day view this collapses to undefined, which is stable either way.
+  const {end, start} = visibleRange;
+  const dayView = React.useMemo(
+    () => (dayViewBase ? {...dayViewBase, timeZone, visibleRange: {end, start}} : undefined),
+    [dayViewBase, timeZone, end, start],
+  );
+  const value = React.useMemo<RangeCalendarContext>(() => ({dayView, slots}), [dayView, slots]);
+
+  return <RangeCalendarContext value={value}>{children}</RangeCalendarContext>;
+};
+
 /* -------------------------------------------------------------------------------------------------
 | * RangeCalendar Root
 | * -----------------------------------------------------------------------------------------------*/
@@ -93,22 +125,36 @@ function RangeCalendarRoot<T extends DateValue = DateValue>({
     () => getGregorianYearOffset(calendarProp.identifier),
     [calendarProp.identifier],
   );
-  const minValue =
-    minValueProp ??
-    (new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1) as unknown as T);
-  const maxValue =
-    maxValueProp ??
-    (new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31) as unknown as T);
+  // React Aria memoizes calendar state against minValue/maxValue identity, so
+  // these bounds must be stable across renders.
+  const minValue = React.useMemo(
+    () =>
+      minValueProp ??
+      (new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1) as unknown as T),
+    [minValueProp, calendarProp, gregorianYearOffset],
+  );
+  const maxValue = React.useMemo(
+    () =>
+      maxValueProp ??
+      (new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31) as unknown as T),
+    [maxValueProp, calendarProp, gregorianYearOffset],
+  );
+  const dayViewBase = React.useMemo(
+    () => (isDayView && visibleDays != null ? {days: visibleDays, firstDayOfWeek} : undefined),
+    [isDayView, visibleDays, firstDayOfWeek],
+  );
+  const yearPickerContext = React.useMemo(
+    () => ({
+      calendarGridSlot: "range-calendar-grid" as const,
+      isYearPickerOpen,
+      setIsYearPickerOpen,
+      calendarRef,
+    }),
+    [isYearPickerOpen, setIsYearPickerOpen],
+  );
 
   return (
-    <YearPickerContext
-      value={{
-        calendarGridSlot: "range-calendar-grid",
-        isYearPickerOpen,
-        setIsYearPickerOpen,
-        calendarRef,
-      }}
-    >
+    <YearPickerContext value={yearPickerContext}>
       <RangeCalendarPrimitive
         ref={calendarRef}
         data-slot="range-calendar"
@@ -127,22 +173,14 @@ function RangeCalendarRoot<T extends DateValue = DateValue>({
         )}
       >
         {(values) => (
-          <RangeCalendarContext
-            value={{
-              dayView:
-                isDayView && visibleDays != null
-                  ? {
-                      days: visibleDays,
-                      firstDayOfWeek,
-                      timeZone: values.state.timeZone,
-                      visibleRange: values.state.visibleRange,
-                    }
-                  : undefined,
-              slots,
-            }}
+          <RangeCalendarContextProvider
+            dayViewBase={dayViewBase}
+            slots={slots}
+            timeZone={values.state.timeZone}
+            visibleRange={values.state.visibleRange}
           >
             {typeof children === "function" ? children(values) : children}
-          </RangeCalendarContext>
+          </RangeCalendarContextProvider>
         )}
       </RangeCalendarPrimitive>
     </YearPickerContext>

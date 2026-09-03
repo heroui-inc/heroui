@@ -2154,6 +2154,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./select/custom-indicator").then((m) => m.CustomIndicator),
     file: "en/select/custom-indicator.tsx",
   },
+  "select-with-clear-button": {
+    loader: () => import("./select/with-clear-button").then((m) => m.WithClearButton),
+    file: "en/select/with-clear-button.tsx",
+  },
   "select-custom-value": {
     loader: () => import("./select/custom-value").then((m) => m.CustomValue),
     file: "en/select/custom-value.tsx",
@@ -2446,6 +2450,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./tabs/secondary-vertical").then((m) => m.SecondaryVertical),
     file: "en/tabs/secondary-vertical.tsx",
   },
+  "tabs-vertical-alignment": {
+    loader: () => import("./tabs/vertical-alignment").then((m) => m.VerticalAlignment),
+    file: "en/tabs/vertical-alignment.tsx",
+  },
   "tabs-render-function": {
     loader: () => import("./tabs/render-function").then((m) => m.RenderFunction),
     file: "en/tabs/render-function.tsx",
@@ -2663,6 +2671,10 @@ export const demos: Record<string, DemoItem> = {
   "toast-placements": {
     loader: () => import("./toast/placements").then((m) => m.Placements),
     file: "en/toast/placements.tsx",
+  },
+  "toast-expanded": {
+    loader: () => import("./toast/expanded").then((m) => m.Expanded),
+    file: "en/toast/expanded.tsx",
   },
   "toast-simple": {
     loader: () => import("./toast/simple").then((m) => m.Simple),

@@ -7,7 +7,12 @@ import {cn} from "tailwind-variants";
 import {Tabs} from "./index";
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    align: {
+      control: {type: "select"},
+      options: ["start", "center", "end"],
+    },
+  },
   component: Tabs,
   parameters: {
     layout: "centered",
@@ -503,6 +508,16 @@ export const Vertical: Story = {
   args: {
     children: null,
     orientation: "vertical",
+  },
+  render: VerticalTemplate,
+};
+
+export const VerticalAlign: Story = {
+  args: {
+    align: "end",
+    children: null,
+    orientation: "vertical",
+    variant: "secondary",
   },
   render: VerticalTemplate,
 };

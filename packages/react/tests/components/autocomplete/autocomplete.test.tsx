@@ -9,6 +9,8 @@ import {Label} from "@/components/label";
 import {ListBox} from "@/components/list-box";
 import {SearchField} from "@/components/search-field";
 
+import {AutocompleteMultipleFixture} from "./fixtures";
+
 const animals = [
   {id: "cat", name: "Cat"},
   {id: "dog", name: "Dog"},
@@ -170,5 +172,28 @@ describe("Autocomplete", () => {
     expect(screen.getByText("Please choose an animal")).toBeInTheDocument();
     expect(document.querySelector('[data-slot="field-error"]')).not.toBeNull();
     expect(screen.getByTestId("autocomplete")).toHaveAttribute("data-invalid", "true");
+  });
+
+  describe("multiple selection with tags", () => {
+    it("removes the tag on the first press without opening the popover", async () => {
+      const onRemove = vi.fn();
+
+      render(<AutocompleteMultipleFixture onRemove={onRemove} />);
+
+      expect(screen.getAllByRole("row")).toHaveLength(3);
+
+      await user.click(screen.getByRole("button", {name: "Remove tag Dog"}));
+      runAllTimers();
+
+      expect(onRemove).toHaveBeenCalledTimes(1);
+      expect(screen.queryByRole("row", {name: "Dog"})).toBeNull();
+      expect(screen.getByRole("row", {name: "Cat"})).toBeInTheDocument();
+      expect(screen.getByRole("row", {name: "Panda"})).toBeInTheDocument();
+
+      // A press on a control inside the trigger must not toggle the dropdown, otherwise the
+      // next press is swallowed dismissing the popover instead of removing a tag.
+      expect(screen.queryByRole("listbox")).toBeNull();
+      expect(document.querySelector('[data-slot="autocomplete-popover"]')).toBeNull();
+    });
   });
 });

@@ -1,0 +1,96 @@
+---
+title: v3.2.5
+description: 补丁版本：将 React Aria 升级到 1.21.0，Toast 支持堆叠并在悬停时展开，新增 Select.ClearButton，Tabs 新增 align 变体，Accordion 自定义悬停背景不再被默认触发器悬停色闪一下，嵌套 data-theme 作用域会级联主题 token，恢复原生 :focus-visible 焦点环，Checkbox/Switch/Radio 内容中的嵌套 Label 渲染为 span，确保 Modal 级浮层位于关闭中的 Popover 之上，扩大 Tag 移除按钮触摸目标，通过滚动时间线驱动 ScrollShadow 淡出以避免 SSR 闪烁并在内容尺寸变化时保持滚动属性同步，将动画合成器提示限制在动画状态，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，在没有步进按钮时不再为 NumberField 预留侧栏空间，并在传入自定义样式时保留 Toast 区域 CSS 变量。
+github:
+  pull: 6792
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 8 月 13 日</span>
+</div>
+
+补丁版本：React Aria 升级到 `1.21.0`（`react-aria@3.52.0`），[Toast](/docs/components/toast) 支持堆叠并在悬停时展开，[Select](/docs/components/select) 新增 `ClearButton`，[Tabs](/docs/components/tabs) 新增 `align` 变体，[Accordion](/docs/components/accordion) 自定义悬停背景不再被默认触发器悬停色闪一下；嵌套 `data-theme` 作用域会级联 overlay 与表单 token，导出的变体也会应用原生 `:focus-visible` 焦点环；[Checkbox](/docs/components/checkbox)、[Switch](/docs/components/switch) 与 [Radio](/docs/components/radio) 内容中的 [Label](/docs/components/label) 会渲染为 `span`；Modal 级浮层会保持在关闭中的 Popover 之上，[Tag](/docs/components/tag) 的移除目标达到 24px，[ScrollShadow](/docs/components/scroll-shadow) 通过滚动时间线驱动淡出以避免 SSR 闪烁，并在内容尺寸变化时保持滚动属性同步；[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；Toast 在传入自定义样式时也会保留区域 CSS 变量。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新功能
+
+### Toast
+
+[Toast](/docs/components/toast) 现在会折叠成堆叠布局：最新的 Toast 以完整尺寸显示在最前，较旧的会缩小并按间距错开。悬停或聚焦堆叠时会展开所有可见 Toast；离开后再次折叠。自动关闭计时器在堆叠被悬停或聚焦时暂停，页面处于后台标签页时也会暂停。
+
+- **堆叠**：将较旧的 Toast 折叠到最前方 Toast 之后，支持悬停/聚焦展开、`isExpanded` 强制展开、`toast.update()` 原地更新内容、`exitDuration` 控制退场动画，以及 `Alt+T` / `Escape` / `F6` 键盘操作 ([#6773](https://github.com/heroui-inc/heroui/pull/6773))。
+
+### Select
+
+[Select](/docs/components/select) 新增清除交互，且不会在 `Select.Trigger` 内嵌套按钮。将 `Select.ClearButton` 与 Value、Indicator 一起组合，并通过根组件的 `onClear` 监听清除。该控件渲染为仅指针可用的 `span`（`aria-hidden`）；键盘与读屏用户在组合了清除按钮且弹层关闭时，可用 `Backspace` 或 `Delete` 清除。
+
+- **清除按钮**：新增 `Select.ClearButton` 与根组件 `onClear`，无需非法嵌套按钮即可清除选中项 ([#6796](https://github.com/heroui-inc/heroui/pull/6796))。
+
+### Tabs
+
+[Tabs](/docs/components/tabs) 可通过 `align="start" | "center" | "end"` 为整组标签设置对齐。默认仍为 `center`，现有 Tabs 外观不变。对齐使用逻辑属性（`text-start` / `justify-start`）以正确支持 RTL，并限定在标签列表上，使嵌套 Tabs 保持各自的对齐。
+
+- **对齐**：在 `Tabs` 上设置 `align`，无需在每个标签上重复 `className` 即可控制文本与内容对齐 ([#6813](https://github.com/heroui-inc/heroui/pull/6813))。
+
+## 错误修复
+
+- **Accordion**：默认触发器悬停背景需同时满足 `:hover` 与 `data-hovered`，自定义 `hover:bg-*` 在鼠标离开时不再闪一下默认颜色 ([#6817](https://github.com/heroui-inc/heroui/pull/6817))。
+- **主题**：补全嵌套 `data-theme` 作用域中缺失的 token（`--surface-*-foreground`、`--field-placeholder`），并将浮层阴影改为 `--overlay-shadow`，使局部深色/浅色区域能级联到组件 ([#6803](https://github.com/heroui-inc/heroui/pull/6803))。
+- **焦点**：将无法匹配的 `:focus-visible:not(:focus)` 替换为原生 `:focus-visible`，使使用 HeroUI 变体的原生锚点与按钮也能显示键盘焦点环，同时 React Aria 仍使用 `[data-focus-visible="true"]` ([#6805](https://github.com/heroui-inc/heroui/pull/6805))。
+- **Label**：在 `Checkbox.Content`、`Switch.Content` 与 `Radio.Content` 内将 `Label` 渲染为 `span`，避免嵌套 `<label>` 或复用分组标签的 `id` ([#6807](https://github.com/heroui-inc/heroui/pull/6807))。
+- **浮层**：将 `Modal`、`AlertDialog` 与 `Drawer` 提升到共享的 overlay z-index，并在 Popover 级浮层退出动画期间禁用指针事件，避免关闭中的 `Dropdown` / `Select` / `Popover` 盖住或拦截新打开 Modal 的点击 ([#6798](https://github.com/heroui-inc/heroui/pull/6798))。
+- **Tag**：将移除按钮的可点击区域扩大到 24×24，同时保持 12×12 图标，使多选 `Autocomplete` 芯片上的点击更可靠 ([#6797](https://github.com/heroui-inc/heroui/pull/6797))。
+- **ScrollShadow**：在支持的浏览器中通过 CSS 滚动时间线驱动淡出，使首屏绘制即正确、无需 hydration 后测量，从而避免闪烁；不支持的引擎与受控模式仍使用属性驱动，并合并消费者 `style` 以保留 `--scroll-shadow-size` / `--scroll-shadow-offset` ([#6800](https://github.com/heroui-inc/heroui/pull/6800))。
+- **ScrollShadow**：在内容尺寸变化后重新测量溢出，使 `data-*-scroll` 保持同步（包括 [Tabs](/docs/components/tabs) 箭头），并且 `onVisibilityChange` 只在真实状态变化时触发，而不是每次渲染 ([#6812](https://github.com/heroui-inc/heroui/pull/6812))。
+- **Calendar / RangeCalendar**：对默认的 `minValue` 与 `maxValue` 做 memoize，避免日历状态在每次渲染时失效 ([#6812](https://github.com/heroui-inc/heroui/pull/6812))。
+- **Button、Menu 与 Dropdown**：将 `will-change` 合成器提示限制在按下和进出场动画状态，使静态文本在带有 transform 的浮层中保持清晰，包括 `Modal` 关闭后重新打开的场景 ([#6779](https://github.com/heroui-inc/heroui/pull/6779))。
+- **Drawer**：将拖拽手势限制在最近的所属 `Drawer.Dialog`，使嵌套抽屉的把手只关闭自身抽屉，而父抽屉保持打开且不发生位移 ([#6780](https://github.com/heroui-inc/heroui/pull/6780))。
+- **Table**：防止 typeahead 抢走嵌套可编辑控件的按键输入与焦点。`keyboardNavigationBehavior` 现已作为 prop 暴露，并默认设为 `"tab"`，同时保留非可编辑单元格中的 typeahead ([#6781](https://github.com/heroui-inc/heroui/pull/6781))。
+- **NumberField**：根据实际存在的步进槽位调整输入网格，没有递增或递减按钮时不再预留空白侧栏 ([#6778](https://github.com/heroui-inc/heroui/pull/6778))。
+- **Toast**：将自定义 `style` 与区域 CSS 变量及 Toast 堆叠样式合并，避免传入如 `zIndex` 等样式时丢失 `--toast-width` 导致 Toast 宽度塌缩 ([#6794](https://github.com/heroui-inc/heroui/pull/6794))。
+
+## 依赖
+
+- **React Aria**：升级到 [React Aria 1.21.0](https://react-aria.adobe.com/releases/v1-21-0)——`react-aria-components@1.21.0`、`react-aria@3.52.0` 以及 `@internationalized/date@3.12.4` ([#6819](https://github.com/heroui-inc/heroui/pull/6819))。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6792](https://github.com/heroui-inc/heroui/pull/6792)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />
