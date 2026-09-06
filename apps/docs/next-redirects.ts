@@ -329,6 +329,25 @@ export async function getRedirects(): Promise<Redirect[]> {
 
   redirects.push(...generateRedirects(components, "components"));
 
+  // Legacy v2 component URLs should prefer a current React component page.
+  // If no current component uses that slug, route to its v2 migration guide.
+  // Keep this after the component redirects so current pages win when both exist.
+  const migrationComponentsDir = join(rootDir, "migration/(components)");
+  const migrationComponents = await getMdxFiles(migrationComponentsDir);
+  const currentComponents = new Set(components);
+  const migrationOnlyComponents = migrationComponents.filter(
+    (component) => !currentComponents.has(component),
+  );
+
+  redirects.push(
+    ...localizedDocsRedirects(
+      migrationOnlyComponents.map((component) => ({
+        destination: `/docs/react/migration/${component}`,
+        source: `/docs/components/${component}`,
+      })),
+    ),
+  );
+
   // Component name redirects - backward compatibility for renamed components
   redirects.push(
     ...localizedDocsRedirects([
@@ -361,6 +380,18 @@ export async function getRedirects(): Promise<Redirect[]> {
         source: "/docs/components/taggroup",
       },
     ]),
+  );
+
+  // The beta docs exposed source MDX URLs. Point the indexed calendar URL to
+  // its current canonical page rather than allowing the raw path to 404.
+  redirects.push(
+    ...localizedDocsRedirect("/docs/components/calendar.mdx", "/docs/react/components/calendar"),
+  );
+
+  // Unknown legacy component slugs should fail in the current React namespace,
+  // never under the removed `/docs/components/*` namespace.
+  redirects.push(
+    ...localizedDocsRedirect("/docs/components/:path*", "/docs/react/components/:path*"),
   );
 
   // Handbook migration: redirect old handbook paths to new getting-started paths

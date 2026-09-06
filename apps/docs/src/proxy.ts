@@ -32,6 +32,7 @@ const PUBLIC_FILE_PATTERN = /\.[a-z0-9]+$/i;
 const UNRESOLVED_TEMPLATE_PATTERN = /(?:\{[^/{}]+\}|%7B[^/]+%7D)/i;
 const PERMANENT_LOCALIZED_PREFIXES = ["/blog", "/docs", "/showcase", "/themes"];
 const TRUST_PATHS = new Set(["/about", "/contact", "/privacy"]);
+const GONE_BUILD_PATHS = new Set(["/en/node_modules/heroui-native/lib", "/en/src/uniwind.d.ts"]);
 
 // Routes that live outside `app/[lang]` and must never receive a locale prefix.
 const LOCALE_REDIRECT_EXCLUDED_PREFIXES = [
@@ -91,6 +92,17 @@ function addHomepageDiscoveryHeaders(response: NextResponse, pathname: string): 
 
 export function proxy(request: NextRequest) {
   const {pathname} = request.nextUrl;
+
+  if (GONE_BUILD_PATHS.has(pathname.replace(/\/$/, ""))) {
+    return new NextResponse("Gone", {
+      headers: {
+        "Cache-Control": "public, max-age=0, s-maxage=86400",
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow",
+      },
+      status: 410,
+    });
+  }
 
   if (UNRESOLVED_TEMPLATE_PATTERN.test(pathname)) {
     return new NextResponse("Not Found", {
