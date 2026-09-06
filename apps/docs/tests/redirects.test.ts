@@ -11,57 +11,98 @@ function findRedirect(redirects: Redirect[], source: string): Redirect | undefin
   return redirects.find((redirect) => redirect.source === source);
 }
 
-describe("Docs redirects", () => {
-  it.each(["navbar", "progress"])(
-    "redirects the legacy %s component URL to its migration guide",
-    async (component) => {
-      const redirects = await getRedirects();
-      const destination = `/docs/react/migration/${component}`;
+function expectLegacyDocsRedirect(
+  redirects: Redirect[],
+  source: string,
+  destination: string,
+): void {
+  expect(findRedirect(redirects, source)).toMatchObject({
+    destination: `/en${destination}`,
+    permanent: true,
+  });
+  expect(findRedirect(redirects, `/:lang(en|cn)${source}`)).toMatchObject({
+    destination: `/:lang${destination}`,
+    permanent: true,
+  });
+}
 
-      expect(findRedirect(redirects, `/docs/components/${component}`)).toMatchObject({
-        destination: `/en${destination}`,
-        permanent: true,
-      });
-      expect(findRedirect(redirects, `/:lang(en|cn)/docs/components/${component}`)).toMatchObject({
-        destination: `/:lang${destination}`,
-        permanent: true,
-      });
+describe("Docs redirects", () => {
+  it.each([
+    ["navbar", "/docs/react/migration/navbar"],
+    ["progress", "/docs/react/migration/progress"],
+    ["divider", "/docs/react/migration/divider"],
+    ["snippet", "/docs/react/migration/snippet"],
+    ["date-input", "/docs/react/migration/dateinput"],
+    ["time-input", "/docs/react/migration/timeinput"],
+  ])(
+    "redirects the legacy %s component URL to its migration guide",
+    async (component, destination) => {
+      const redirects = await getRedirects();
+
+      expectLegacyDocsRedirect(redirects, `/docs/components/${component}`, destination);
     },
   );
 
   it("prefers an existing React component page over its migration guide", async () => {
     const redirects = await getRedirects();
 
-    expect(findRedirect(redirects, "/docs/components/calendar")).toMatchObject({
-      destination: "/en/docs/react/components/calendar",
-      permanent: true,
-    });
+    expectLegacyDocsRedirect(
+      redirects,
+      "/docs/components/calendar",
+      "/docs/react/components/calendar",
+    );
+    expectLegacyDocsRedirect(
+      redirects,
+      "/docs/components/listbox",
+      "/docs/react/components/list-box",
+    );
   });
 
-  it("redirects the leaked beta calendar MDX URL to the current component page", async () => {
+  it("redirects leaked component MDX URLs to the current HTML page", async () => {
     const redirects = await getRedirects();
 
-    expect(findRedirect(redirects, "/docs/components/calendar.mdx")).toMatchObject({
-      destination: "/en/docs/react/components/calendar",
-      permanent: true,
-    });
+    expectLegacyDocsRedirect(
+      redirects,
+      "/docs/components/calendar.mdx",
+      "/docs/react/components/calendar",
+    );
+    expectLegacyDocsRedirect(
+      redirects,
+      "/docs/components/alert-dialog.mdx",
+      "/docs/react/components/alert-dialog",
+    );
+    expectLegacyDocsRedirect(
+      redirects,
+      "/docs/components/skeleton.mdx",
+      "/docs/react/components/skeleton",
+    );
+  });
+
+  it.each([
+    ["/docs/frameworks/vite", "/docs/react/getting-started/frameworks"],
+    ["/docs/frameworks/nextjs", "/docs/react/getting-started/frameworks"],
+    ["/docs/customization/create-theme", "/docs/react/getting-started/theming"],
+    ["/docs/customization/theme", "/docs/react/getting-started/theming"],
+    ["/docs/guide/nextui-to-heroui", "/docs/react/migration"],
+  ])("maps legacy %s into the React docs namespace", async (source, destination) => {
+    const redirects = await getRedirects();
+
+    expectLegacyDocsRedirect(redirects, source, destination);
   });
 
   it("maps unknown legacy component URLs into the current namespace", async () => {
     const redirects = await getRedirects();
 
-    expect(findRedirect(redirects, "/docs/components/:path*")).toMatchObject({
-      destination: "/en/docs/react/components/:path*",
-      permanent: true,
-    });
-    expect(findRedirect(redirects, "/:lang(en|cn)/docs/components/:path*")).toMatchObject({
-      destination: "/:lang/docs/react/components/:path*",
-      permanent: true,
-    });
+    expectLegacyDocsRedirect(redirects, "/docs/components/:path*", "/docs/react/components/:path*");
+    expectLegacyDocsRedirect(
+      redirects,
+      "/docs/components/:path*.mdx",
+      "/docs/react/components/:path*",
+    );
   });
 });
 
-describe("Leaked build paths", () => {
+describe("Leaked and placeholder paths", () => {
   it.each(["/en/src/uniwind.d.ts", "/en/node_modules/heroui-native/lib"])(
     "returns 410 for %s",
     (pathname) => {
@@ -71,4 +112,15 @@ describe("Leaked build paths", () => {
       expect(response.headers.get("x-robots-tag")).toBe("noindex, nofollow");
     },
   );
+
+  it.each([
+    "/docs/react/getting-started/{topic}.mdx",
+    "/en/docs/react/getting-started/{topic}.mdx",
+    "/docs/react/getting-started/%7Btopic%7D.mdx",
+  ])("returns 410 for the unresolved template URL %s", (pathname) => {
+    const response = proxy(new NextRequest(`https://heroui.com${pathname}`));
+
+    expect(response.status).toBe(410);
+    expect(response.headers.get("x-robots-tag")).toBe("noindex, nofollow");
+  });
 });

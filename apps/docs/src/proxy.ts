@@ -105,13 +105,13 @@ export function proxy(request: NextRequest) {
   }
 
   if (UNRESOLVED_TEMPLATE_PATTERN.test(pathname)) {
-    return new NextResponse("Not Found", {
+    return new NextResponse("Gone", {
       headers: {
-        "Cache-Control": "public, max-age=0, s-maxage=3600",
+        "Cache-Control": "public, max-age=0, s-maxage=86400",
         "Content-Type": "text/plain; charset=utf-8",
         "X-Robots-Tag": "noindex, nofollow",
       },
-      status: 404,
+      status: 410,
     });
   }
 
