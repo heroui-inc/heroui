@@ -314,13 +314,6 @@
   }
 }
 
-/* Fumadocs paints the scroll thumb with `bg-fd-border`, which is too faint to notice on hover.
-   `--scrollbar` is the theme-aware thumb color the rest of the docs already scroll with. */
-#nd-sidebar [data-radix-scroll-area-viewport] ~ [data-orientation="vertical"] > *,
-#nd-sidebar-mobile [data-radix-scroll-area-viewport] ~ [data-orientation="vertical"] > * {
-  background-color: var(--scrollbar, var(--color-fd-border));
-}
-
 /* Keep CJK phrases together so they wrap as a whole word instead of breaking between characters. 
    Safe for non-CJK locales since `keep-all` behaves like `normal` for non-CJK text. */
 #nd-sidebar a,
