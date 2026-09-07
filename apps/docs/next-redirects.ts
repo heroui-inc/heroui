@@ -82,7 +82,7 @@ function localizedDocsRedirect(source: string, destination: string): Redirect[] 
     );
   }
 
-  return [
+  const redirects: Redirect[] = [
     // Locale-prefixed (preserves the visitor's current language).
     {
       destination: `/:lang${destination}`,
@@ -96,6 +96,30 @@ function localizedDocsRedirect(source: string, destination: string): Redirect[] 
       source,
     },
   ];
+
+  // Beta and crawler URLs often append `.mdx`. Send those to the HTML page,
+  // never to a locale-prefixed copy of the removed path.
+  if (!source.includes(":") && !source.endsWith(".mdx")) {
+    redirects.push(...localizedDocsRedirect(`${source}.mdx`, destination));
+  }
+
+  return redirects;
+}
+
+function compactSlug(slug: string): string {
+  return slug.replace(/-/g, "");
+}
+
+const COMPOUND_SUFFIXES = ["input", "box", "group", "field", "button", "picker"] as const;
+
+function hyphenatedSuffixAliases(slug: string): string[] {
+  if (slug.includes("-")) return [];
+
+  return COMPOUND_SUFFIXES.flatMap((suffix) =>
+    slug.endsWith(suffix) && slug.length > suffix.length
+      ? [`${slug.slice(0, -suffix.length)}-${suffix}`]
+      : [],
+  );
 }
 
 /**
@@ -329,6 +353,50 @@ export async function getRedirects(): Promise<Redirect[]> {
 
   redirects.push(...generateRedirects(components, "components"));
 
+  // Legacy v2 component URLs should prefer a current React component page.
+  // If no current component uses that slug, route to its v2 migration guide.
+  // Keep this after the component redirects so current pages win when both exist.
+  const migrationComponentsDir = join(rootDir, "migration/(components)");
+  const migrationComponents = await getMdxFiles(migrationComponentsDir);
+  const currentComponents = new Set(components);
+  const currentByCompact = new Map(
+    components.map((component) => [compactSlug(component), component]),
+  );
+  const migrationOnlyComponents = migrationComponents.filter(
+    (component) =>
+      !currentComponents.has(component) && !currentByCompact.has(compactSlug(component)),
+  );
+
+  redirects.push(
+    ...localizedDocsRedirects(
+      migrationOnlyComponents.flatMap((component) => {
+        const destination = `/docs/react/migration/${component}`;
+
+        return [component, ...hyphenatedSuffixAliases(component)].map((source) => ({
+          destination,
+          source: `/docs/components/${source}`,
+        }));
+      }),
+    ),
+  );
+
+  // Compact legacy slugs whose hyphenated form is a live component
+  // (e.g. /docs/components/listbox -> /docs/react/components/list-box).
+  redirects.push(
+    ...localizedDocsRedirects(
+      [...currentByCompact.entries()].flatMap(([compact, current]) => {
+        if (compact === current || currentComponents.has(compact)) return [];
+
+        return [
+          {
+            destination: `/docs/react/components/${current}`,
+            source: `/docs/components/${compact}`,
+          },
+        ];
+      }),
+    ),
+  );
+
   // Component name redirects - backward compatibility for renamed components
   redirects.push(
     ...localizedDocsRedirects([
@@ -361,6 +429,64 @@ export async function getRedirects(): Promise<Redirect[]> {
         source: "/docs/components/taggroup",
       },
     ]),
+  );
+
+  // Unknown legacy component slugs should fail in the current React namespace,
+  // never under the removed `/docs/components/*` namespace.
+  redirects.push(
+    ...localizedDocsRedirect("/docs/components/:path*.mdx", "/docs/react/components/:path*"),
+    ...localizedDocsRedirect("/docs/components/:path*", "/docs/react/components/:path*"),
+  );
+
+  // Pre-v3 docs namespaces that have no `/react` prefix. Catch-alls must come
+  // after more specific mappings (e.g. /docs/customization/colors).
+  redirects.push(
+    ...localizedDocsRedirects([
+      {
+        destination: "/docs/react/getting-started/frameworks",
+        source: "/docs/frameworks",
+      },
+      {
+        destination: "/docs/react/getting-started/frameworks",
+        source: "/docs/frameworks/vite",
+      },
+      {
+        destination: "/docs/react/getting-started/frameworks",
+        source: "/docs/frameworks/nextjs",
+      },
+      {
+        destination: "/docs/react/getting-started/theming",
+        source: "/docs/customization",
+      },
+      {
+        destination: "/docs/react/getting-started/theming",
+        source: "/docs/customization/create-theme",
+      },
+      {
+        destination: "/docs/react/getting-started/theming",
+        source: "/docs/customization/theme",
+      },
+      {
+        destination: "/docs/react/migration",
+        source: "/docs/guide",
+      },
+      {
+        destination: "/docs/react/migration",
+        source: "/docs/guide/nextui-to-heroui",
+      },
+    ]),
+    ...localizedDocsRedirect(
+      "/docs/frameworks/:path*.mdx",
+      "/docs/react/getting-started/frameworks",
+    ),
+    ...localizedDocsRedirect("/docs/frameworks/:path*", "/docs/react/getting-started/frameworks"),
+    ...localizedDocsRedirect(
+      "/docs/customization/:path*.mdx",
+      "/docs/react/getting-started/theming",
+    ),
+    ...localizedDocsRedirect("/docs/customization/:path*", "/docs/react/getting-started/theming"),
+    ...localizedDocsRedirect("/docs/guide/:path*.mdx", "/docs/react/migration"),
+    ...localizedDocsRedirect("/docs/guide/:path*", "/docs/react/migration"),
   );
 
   // Handbook migration: redirect old handbook paths to new getting-started paths
