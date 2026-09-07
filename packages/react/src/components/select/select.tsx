@@ -7,7 +7,8 @@ import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {selectVariants} from "@heroui/styles";
-import React, {createContext, use} from "react";
+import {mergeRefs} from "@react-aria/utils";
+import React, {createContext, use, useEffect, useRef} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -160,9 +161,35 @@ const SelectPopover = ({
   children,
   className,
   placement = "bottom",
+  ref,
   ...props
 }: SelectPopoverProps) => {
   const {slots} = use(SelectContext);
+  const state = use(SelectStateContext);
+  const popoverRef = useRef<HTMLElement>(null);
+  const mergedRef = mergeRefs(ref, popoverRef);
+
+  useEffect(() => {
+    if (!state?.isOpen || !popoverRef.current) return;
+
+    let rafId = 0;
+
+    const timerId = window.setTimeout(() => {
+      rafId = window.requestAnimationFrame(() => {
+        const selectedItems = popoverRef.current?.querySelectorAll<HTMLElement>(
+          '[data-slot="list-box-item"][aria-selected="true"]',
+        );
+        const selectedItem = selectedItems?.[selectedItems.length - 1];
+
+        selectedItem?.scrollIntoView({block: "nearest"});
+      });
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timerId);
+      window.cancelAnimationFrame(rafId);
+    };
+  }, [state?.isOpen]);
 
   return (
     <SurfaceContext
@@ -172,6 +199,7 @@ const SelectPopover = ({
     >
       <PopoverPrimitive
         {...props}
+        ref={mergedRef}
         className={composeTwRenderProps(className, slots?.popover())}
         data-slot="select-popover"
         placement={placement}

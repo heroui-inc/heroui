@@ -137,7 +137,7 @@
 
 /* Similar to popover content styles */
 .select__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 text-sm scrollbar;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scrollbar bg-overlay p-0 text-sm;
   border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
@@ -199,7 +199,8 @@
 
   /* Listbox styles */
   [data-slot="list-box"] {
-    @apply p-1.5 outline-none;
+    @apply scroll-py-1 scrollbar overflow-y-auto overscroll-contain p-1.5 outline-none;
+    max-height: inherit;
   }
 
   [data-slot="list-box-item"] {
