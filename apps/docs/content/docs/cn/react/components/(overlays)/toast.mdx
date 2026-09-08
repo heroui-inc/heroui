@@ -288,9 +288,10 @@ const eventId = toast("Event has been created", {
   indicator: <CustomIcon />,
 });
 
-// 原地更新已有 Toast（保持其在堆叠中的位置）
+// 原地更新已有 Toast（保持其在堆叠中的位置）。
+// 省略的选项会被继承，因此若原 Toast 是持久的，需要显式传入 `timeout` 才会开始倒计时。
 const id = toast("Saving…", { timeout: 0 });
-toast.update(id, "Saved", { variant: "success" });
+toast.update(id, "Saved", { variant: "success", timeout: 4000 });
 
 // Promise 支持（自动显示加载指示）。Promise 结束时加载 Toast 会原地更新 —
 // 同一个 Toast、同一个堆叠位置；自动关闭倒计时从这一刻开始。
@@ -309,8 +310,8 @@ const loadingId = toast("Creating event...", {
   timeout: 0, // 持久 toast：不自动消失
 });
 
-// 随后原地更新
-toast.update(loadingId, "Event created", { variant: "success" });
+// 随后原地更新，并开始自动关闭倒计时
+toast.update(loadingId, "Event created", { variant: "success", timeout: 4000 });
 
 // 队列方法
 toast.close(key);

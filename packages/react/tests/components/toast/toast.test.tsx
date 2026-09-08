@@ -10,7 +10,13 @@ import {
   setupUser,
 } from "@heroui/testing/helpers";
 
-import {DEFAULT_EXIT_DURATION, DEFAULT_TOAST_TIMEOUT, Toast, ToastQueue} from "@/components/toast";
+import {
+  DEFAULT_EXIT_DURATION,
+  DEFAULT_TOAST_TIMEOUT,
+  Toast,
+  ToastQueue,
+  toast,
+} from "@/components/toast";
 
 describe("Toast", () => {
   let user: ReturnType<typeof setupUser>;
@@ -202,6 +208,76 @@ describe("Toast", () => {
     });
 
     expect(screen.queryByRole("alertdialog")).toBeNull();
+  });
+
+  it("supports updating a persistent toast without starting a countdown", () => {
+    render(<Toast.Provider />);
+
+    let id = "";
+
+    act(() => {
+      id = toast("Saving", {timeout: 0});
+    });
+
+    act(() => {
+      toast.update(id, "Saved", {variant: "success"});
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(DEFAULT_TOAST_TIMEOUT * 2);
+    });
+
+    expect(screen.getByRole("alertdialog")).toHaveTextContent("Saved");
+
+    act(() => {
+      toast.clear();
+    });
+    advanceTimersByTime(DEFAULT_EXIT_DURATION);
+  });
+
+  it("calls the original onClose when an update omits it", () => {
+    const onClose = vi.fn();
+
+    render(<Toast.Provider />);
+
+    let id = "";
+
+    act(() => {
+      id = toast("Saving", {onClose, timeout: 0});
+    });
+
+    act(() => {
+      toast.update(id, "Saved");
+    });
+
+    act(() => {
+      toast.close(id);
+    });
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+
+    advanceTimersByTime(DEFAULT_EXIT_DURATION);
+  });
+
+  it("supports auto-dismiss once a promise toast settles", async () => {
+    render(<Toast.Provider />);
+
+    await act(async () => {
+      toast.promise(Promise.resolve("ok"), {
+        error: "Failed",
+        loading: "Uploading",
+        success: "Uploaded",
+      });
+    });
+
+    expect(screen.getByRole("alertdialog")).toHaveTextContent("Uploaded");
+
+    act(() => {
+      vi.advanceTimersByTime(DEFAULT_TOAST_TIMEOUT);
+    });
+    advanceTimersByTime(DEFAULT_EXIT_DURATION);
+
+    expect(screen.queryByRole("alertdialog", {hidden: true})).toBeNull();
   });
 
   it("calls each onClose at dismissal and removes all toasts after clear", () => {

@@ -296,9 +296,11 @@ const eventId = toast("Event has been created", {
   indicator: <CustomIcon />,
 });
 
-// Update an existing toast in place (keeps its position in the stack)
+// Update an existing toast in place (keeps its position in the stack).
+// Options you omit are inherited, so pass `timeout` to start a countdown
+// on a toast that was created persistent.
 const id = toast("Saving…", { timeout: 0 });
-toast.update(id, "Saved", { variant: "success" });
+toast.update(id, "Saved", { variant: "success", timeout: 4000 });
 
 // Promise support (automatically shows loading spinner). The loading toast
 // updates in place when the promise settles — same toast, same stack
@@ -318,8 +320,8 @@ const loadingId = toast("Creating event...", {
   timeout: 0, // Persistent toast that doesn't auto-dismiss
 });
 
-// Later, update in place
-toast.update(loadingId, "Event created", { variant: "success" });
+// Later, update in place and start the auto-dismiss countdown
+toast.update(loadingId, "Event created", { variant: "success", timeout: 4000 });
 
 // Queue methods
 toast.close(key);

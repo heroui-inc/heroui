@@ -458,13 +458,22 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
     isLoading: options?.isLoading,
   });
 
-  const createQueueOptions = (options?: HeroUIToastOptions) => ({
+  const createAddOptions = (options?: HeroUIToastOptions) => ({
     timeout: options?.timeout ?? DEFAULT_TOAST_TIMEOUT,
     onClose: options?.onClose,
   });
 
+  // update() distinguishes an absent key from an explicit undefined: it keeps the
+  // current countdown and the current onClose for anything the caller left out. So
+  // only forward keys that were actually passed, rather than resolving defaults the
+  // way createAddOptions does.
+  const createUpdateOptions = (options?: HeroUIToastOptions) => ({
+    ...(options && "timeout" in options ? {timeout: options.timeout} : null),
+    ...(options && "onClose" in options ? {onClose: options.onClose} : null),
+  });
+
   const toastFn = (message: ReactNode, options?: HeroUIToastOptions): string => {
-    return queue.add(createContent(message, options), createQueueOptions(options));
+    return queue.add(createContent(message, options), createAddOptions(options));
   };
 
   toastFn.success = (message: ReactNode, options?: Omit<HeroUIToastOptions, "variant">): string => {
@@ -485,15 +494,16 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
   };
 
   // Updates a toast in place (same key, same stack position); falls back to a new toast when the id no longer exists.
+  // Omitting timeout keeps the existing countdown; omitting onClose keeps the existing handler.
   toastFn.update = (id: string, message: ReactNode, options?: HeroUIToastOptions): string => {
     const content = createContent(message, options);
-    const queueOptions = createQueueOptions(options);
 
-    if (queue.update(id, content, queueOptions)) {
+    if (queue.update(id, content, createUpdateOptions(options))) {
       return id;
     }
 
-    return queue.add(content, queueOptions);
+    // A brand new toast has nothing to inherit, so it resolves the defaults instead.
+    return queue.add(content, createAddOptions(options));
   };
 
   // Shows a loading toast that settles in place when the promise resolves or rejects; the auto-dismiss countdown starts at that point.
@@ -509,12 +519,22 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
         const message =
           typeof options.success === "function" ? options.success(data) : options.success;
 
-        return toastFn.update(loadingId, message, {isLoading: false, variant: "success"});
+        // The loading toast was added persistent, so settling has to start the
+        // countdown explicitly now that an omitted timeout is inherited.
+        return toastFn.update(loadingId, message, {
+          isLoading: false,
+          timeout: DEFAULT_TOAST_TIMEOUT,
+          variant: "success",
+        });
       })
       .catch((error: Error) => {
         const message = typeof options.error === "function" ? options.error(error) : options.error;
 
-        return toastFn.update(loadingId, message, {isLoading: false, variant: "danger"});
+        return toastFn.update(loadingId, message, {
+          isLoading: false,
+          timeout: DEFAULT_TOAST_TIMEOUT,
+          variant: "danger",
+        });
       });
 
     return loadingId;
