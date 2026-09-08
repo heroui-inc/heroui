@@ -282,11 +282,8 @@ const Toast = <T extends object = ToastContentValue>({
       viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
       zIndex: isExiting ? 0 : visibleToasts.length - fullIndex,
 
-      ...(frontHeight != null
-        ? ({
-            "--front-height": `${frontHeight}px`,
-          } as CSSProperties)
-        : null),
+      // frontHeight always resolves to a number, so this is unconditional.
+      "--front-height": `${frontHeight}px`,
 
       ...(typeof toastHeight === "number"
         ? ({
