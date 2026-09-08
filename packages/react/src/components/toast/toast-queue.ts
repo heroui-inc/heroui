@@ -22,7 +22,7 @@ export interface ToastQueueOptions {
   /**
    * How long a closing toast stays mounted for its exit animation, in
    * milliseconds. Set to 0 to remove toasts immediately.
-   * @default 350
+   * @default 300
    */
   exitDuration?: number;
   /**
