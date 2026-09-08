@@ -48,6 +48,23 @@ const VisibilityHarness = ({
   );
 };
 
+/** Re-renders without touching anything inside the scroll container. */
+const InertRerenderHarness = () => {
+  const [renderCount, setRenderCount] = useState(0);
+
+  return (
+    <>
+      <button type="button" onClick={() => setRenderCount((count) => count + 1)}>
+        Re-render
+      </button>
+      <span data-testid="render-count">{renderCount}</span>
+      <ScrollShadow data-testid="scroll-shadow">
+        <p>Static content</p>
+      </ScrollShadow>
+    </>
+  );
+};
+
 const ContentGrowthHarness = () => {
   const [rows, setRows] = useState(1);
 
@@ -160,6 +177,34 @@ describe("ScrollShadow", () => {
       await flushFrames();
 
       expect(scrollShadow).toHaveAttribute("data-bottom-scroll", "true");
+    });
+
+    it("does not measure the container on a render that leaves the content alone", async () => {
+      const user = setupUser();
+
+      render(<InertRerenderHarness />);
+      await flushFrames();
+
+      const scrollShadow = screen.getByTestId("scroll-shadow");
+      let scrollHeightReads = 0;
+
+      Object.defineProperty(scrollShadow, "scrollHeight", {
+        configurable: true,
+        get() {
+          scrollHeightReads += 1;
+
+          return 300;
+        },
+      });
+
+      await user.click(screen.getByRole("button", {name: "Re-render"}));
+      await flushFrames();
+
+      expect(screen.getByTestId("render-count")).toHaveTextContent("1");
+      // Measuring per render forces a layout read on every unrelated update, and
+      // lets an onVisibilityChange handler that shifts the container's own
+      // metrics drive an unbounded render loop.
+      expect(scrollHeightReads).toBe(0);
     });
   });
 
