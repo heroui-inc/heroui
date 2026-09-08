@@ -181,7 +181,7 @@ The component supports various states:
 | `gap` | `number` | `12` | The gap between toasts in pixels |
 | `isExpanded` | `boolean` | `false` | Force the stack into its expanded layout (does not pause timers) |
 | `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
-| `hotkey` | `string[]` | `["altKey", "KeyT"]` | Hotkey that moves focus to the toast region and expands the stack. Modifiers match `KeyboardEvent` boolean properties (e.g. `"altKey"`), other keys match `event.code` (e.g. `"KeyT"`); pass `[]` to disable |
+| `hotkey` | `string[]` | `["altKey", "KeyT"]` | Hotkey that moves focus to the toast region and expands the stack. Modifiers match `KeyboardEvent` boolean properties (e.g. `"altKey"`), other keys match `event.code` (e.g. `"KeyT"`). Modifiers you leave out must be up, so `Alt`+`T` does not also fire on `Ctrl`+`Alt`+`T`. Pass `[]` to disable |
 | `scaleFactor` | `number` | `0.05` | Scale factor for stacked toasts (0-1) |
 | `width` | `number \| string` | `460` | Width of the toast in pixels or CSS value |
 | `queue` | `ToastQueue<T>` | - | Custom toast queue instance |

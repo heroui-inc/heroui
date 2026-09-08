@@ -68,6 +68,9 @@ type ToastContext = {
 
 const ToastContext = createContext<ToastContext>({});
 
+// The KeyboardEvent boolean props a hotkey entry can name; anything else is an event.code.
+const MODIFIER_PROPS = ["altKey", "ctrlKey", "metaKey", "shiftKey"] as const;
+
 const EMPTY_EXITING_KEYS: ReadonlySet<string> = new Set();
 const getEmptyExitingKeys = (): ReadonlySet<string> => EMPTY_EXITING_KEYS;
 const subscribeToNothing = (): (() => void) => () => {};
@@ -533,7 +536,7 @@ interface ToastProviderProps<T extends object = ToastContentValue> extends Omit<
    */
   maxVisibleToasts?: number;
   /**
-   * Hotkey that focuses the toast region. Modifiers match KeyboardEvent boolean props, other keys match event.code. Pass [] to disable.
+   * Hotkey that focuses the toast region. Modifiers match KeyboardEvent boolean props, other keys match event.code. Modifiers left out must be up, so Alt+T does not fire on Ctrl+Alt+T. Pass [] to disable.
    * @default ["altKey", "KeyT"]
    */
   hotkey?: string[];
@@ -705,16 +708,29 @@ const ToastProvider = <T extends object = ToastContentValue>({
       const handleDocumentKeyDown = (event: KeyboardEvent) => {
         const hotkey = hotkeyRef.current;
 
-        // Modifiers match KeyboardEvent boolean props; other keys match event.code.
-        const isHotkeyPressed =
-          hotkey.length > 0 &&
-          hotkey.every(
-            (key) => (event as unknown as Record<string, unknown>)[key] || event.code === key,
-          );
-
-        if (isHotkeyPressed) {
-          node.focus();
+        if (hotkey.length === 0) {
+          return;
         }
+
+        // Modifiers match KeyboardEvent boolean props; other keys match event.code.
+        // Modifiers left out of the hotkey have to be up, so Alt+T does not also
+        // fire on Ctrl+Alt+T or Shift+Alt+T.
+        const hasExpectedModifiers = MODIFIER_PROPS.every(
+          (modifier) => event[modifier] === hotkey.includes(modifier),
+        );
+        const hasExpectedCodes = hotkey.every(
+          (key) =>
+            MODIFIER_PROPS.includes(key as (typeof MODIFIER_PROPS)[number]) || event.code === key,
+        );
+
+        if (!hasExpectedModifiers || !hasExpectedCodes) {
+          return;
+        }
+
+        // Claim the combination so the browser doesn't also act on it (Alt+letter
+        // opens the menu bar on Windows and Linux).
+        event.preventDefault();
+        node.focus();
       };
 
       node.addEventListener("pointerenter", handlePointerEnterOrMove);

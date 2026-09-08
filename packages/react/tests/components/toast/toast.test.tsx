@@ -501,6 +501,26 @@ describe("Toast", () => {
     expect(screen.getByRole("region")).toHaveAttribute("data-expanded", "true");
   });
 
+  it("does not focus the region when extra modifiers are held", async () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} />);
+
+    act(() => {
+      queue.add({title: "First"});
+      queue.add({title: "Second"});
+    });
+
+    await user.keyboard("{Control>}{Alt>}t{/Alt}{/Control}");
+    expect(screen.getByRole("region")).not.toHaveFocus();
+
+    await user.keyboard("{Shift>}{Alt>}t{/Alt}{/Shift}");
+    expect(screen.getByRole("region")).not.toHaveFocus();
+
+    await user.keyboard("{Alt>}t{/Alt}");
+    expect(screen.getByRole("region")).toHaveFocus();
+  });
+
   it("does not focus the region when the hotkey is disabled", async () => {
     const queue = new ToastQueue();
 
