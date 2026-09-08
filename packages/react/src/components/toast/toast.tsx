@@ -278,11 +278,14 @@ const Toast = <T extends object = ToastContentValue>({
       heightsBefore += (key ? heightsByKey?.[key] : undefined) ?? frontHeight;
     }
 
+    // Deliberately unnamed for view transitions: stacking is animated with CSS
+    // transitions, so a name would only opt toasts into unrelated document-level
+    // transitions with no animation of their own. Consumers who set `wrapUpdate`
+    // can supply a `viewTransitionName` through the `style` prop, which merges.
     return {
       "--offset-collapsed": `${index * gap}px`,
       "--offset-expanded": `${heightsBefore + index * gap}px`,
       "--scale-collapsed": `${1 - index * finalScaleFactor}`,
-      viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
       zIndex: isExiting ? 0 : visibleToasts.length - fullIndex,
 
       ...(frontHeight != null
@@ -305,7 +308,6 @@ const Toast = <T extends object = ToastContentValue>({
     index,
     isExiting,
     layoutToasts,
-    toast,
     toastHeight,
     visibleToasts.length,
   ]);
