@@ -56,18 +56,28 @@ export const useMeasuredHeight = (ref: RefObject<HTMLDivElement | null>) => {
       subtree: true,
     });
 
-    let resizeTimeoutId: ReturnType<typeof setTimeout> | undefined;
-    const handleWindowResize = () => {
-      clearTimeout(resizeTimeoutId);
-      resizeTimeoutId = setTimeout(calculateHeight, 150);
-    };
+    // Content reflowing at a new width changes the measured height without
+    // touching the DOM, so the mutation observer above cannot see it. Only the
+    // inline axis is watched: consumers transition the block axis, and reacting
+    // to it would re-measure on every frame of that animation.
+    let lastWidth = element.getBoundingClientRect().width;
 
-    window.addEventListener("resize", handleWindowResize);
+    const resizeObserver = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+
+      if (width === undefined || Math.abs(width - lastWidth) < 0.5) {
+        return;
+      }
+
+      lastWidth = width;
+      scheduleMeasure();
+    });
+
+    resizeObserver.observe(element);
 
     return () => {
       mutationObserver.disconnect();
-      window.removeEventListener("resize", handleWindowResize);
-      clearTimeout(resizeTimeoutId);
+      resizeObserver.disconnect();
       cancelAnimationFrame(measureFrame);
     };
   }, [ref, calculateHeight]);
