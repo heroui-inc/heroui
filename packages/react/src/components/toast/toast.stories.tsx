@@ -9,6 +9,7 @@ import {Button} from "../button";
 import {Modal} from "../modal";
 
 import {
+  DEFAULT_TOAST_TIMEOUT,
   Toast,
   ToastContent,
   ToastDescription,
@@ -395,6 +396,7 @@ const LoadingStateTemplate = () => {
             setTimeout(() => {
               toast.update(loadingId, "File uploaded", {
                 description: "Your file has been uploaded successfully",
+                timeout: DEFAULT_TOAST_TIMEOUT,
                 variant: "success",
               });
             }, 3000);
@@ -414,6 +416,7 @@ const LoadingStateTemplate = () => {
             setTimeout(() => {
               toast.update(loadingId, "Payment processed", {
                 description: "Your payment has been processed successfully",
+                timeout: DEFAULT_TOAST_TIMEOUT,
                 variant: "success",
               });
             }, 2500);
@@ -433,6 +436,7 @@ const LoadingStateTemplate = () => {
             setTimeout(() => {
               toast.update(loadingId, "Failed to save", {
                 description: "Please try again",
+                timeout: DEFAULT_TOAST_TIMEOUT,
                 variant: "danger",
               });
             }, 2000);
