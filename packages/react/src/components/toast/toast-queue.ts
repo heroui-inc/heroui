@@ -40,7 +40,7 @@ export interface ToastQueueOptions {
 // The underlying react-stately queue passed to ToastRegion (not the HeroUI wrapper).
 export type StatelyToastQueue<T extends object = ToastContentValue> = ToastQueuePrimitiveType<T>;
 
-// Runtime shape of react-stately's unexported Timer. Its resume() has no running guard, which guardTimerResume() compensates for.
+// Runtime shape of react-stately's unexported Timer. Neither resume() nor reset() guards against an already-running timeout, which guardTimer() compensates for.
 type StatelyTimer = {
   pause(): void;
   reset(delay: number): void;
@@ -149,7 +149,7 @@ class ExitAwareToastQueue<T extends object> extends ToastQueuePrimitive<T> {
 
   // React Aria starts timers itself (useToast calls timer.reset on mount).
   // The wrap parks a timer while suspended and stops a resume-while-running from scheduling a second, orphaned timeout.
-  private guardTimerResume(timer: StatelyTimer): void {
+  private guardTimer(timer: StatelyTimer): void {
     if (guardedTimers.has(timer)) {
       return;
     }
@@ -157,6 +157,7 @@ class ExitAwareToastQueue<T extends object> extends ToastQueuePrimitive<T> {
     guardedTimers.add(timer);
 
     const originalResume = timer.resume.bind(timer);
+    const originalReset = timer.reset.bind(timer);
 
     timer.resume = () => {
       if (this.suspensions.size > 0 || timer.timerId != null) {
@@ -165,6 +166,14 @@ class ExitAwareToastQueue<T extends object> extends ToastQueuePrimitive<T> {
 
       originalResume();
     };
+
+    // reset() ends with resume(), but it does not clear a running timeout first,
+    // so the guard above would refuse to start the new delay and the old one would
+    // stick. Pausing makes reset mean "restart on this delay" in every case.
+    timer.reset = (delay: number) => {
+      timer.pause();
+      originalReset(delay);
+    };
   }
 
   override add(content: T, options?: RACToastOptions): string {
@@ -172,7 +181,7 @@ class ExitAwareToastQueue<T extends object> extends ToastQueuePrimitive<T> {
     const timer = this.visibleToasts.find((t) => t.key === key)?.timer as StatelyTimer | undefined;
 
     if (timer) {
-      this.guardTimerResume(timer);
+      this.guardTimer(timer);
     }
 
     return key;
@@ -209,7 +218,7 @@ class ExitAwareToastQueue<T extends object> extends ToastQueuePrimitive<T> {
       if (options.timeout > 0) {
         const timer = new ManagedToastTimer(() => this.close(key), options.timeout);
 
-        this.guardTimerResume(timer);
+        this.guardTimer(timer);
         // Stately's Timer type is unexported and nominally typed.
         queuedToast.timer = timer as unknown as typeof queuedToast.timer;
       } else {

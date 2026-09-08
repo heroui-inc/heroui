@@ -280,6 +280,40 @@ describe("Toast", () => {
     expect(screen.queryByRole("alertdialog", {hidden: true})).toBeNull();
   });
 
+  it("supports restarting a running timer through reset", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} />);
+
+    act(() => {
+      queue.add({title: "Auto dismiss"}, {timeout: 1_000});
+    });
+
+    // React Aria owns the timers and calls reset() whenever the timeout changes,
+    // so reset has to restart the countdown even while one is already running.
+    const {timer} = queue.getQueue().visibleToasts[0]! as unknown as {
+      timer: {reset: (delay: number) => void};
+    };
+
+    act(() => {
+      vi.advanceTimersByTime(500);
+      timer.reset(4_000);
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(1_000);
+    });
+
+    expect(screen.getByRole("alertdialog")).toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(3_000);
+    });
+    advanceTimersByTime(DEFAULT_EXIT_DURATION);
+
+    expect(screen.queryByRole("alertdialog", {hidden: true})).toBeNull();
+  });
+
   it("calls each onClose at dismissal and removes all toasts after clear", () => {
     const queue = new ToastQueue();
     const onCloseA = vi.fn();
