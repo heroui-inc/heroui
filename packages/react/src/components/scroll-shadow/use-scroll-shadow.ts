@@ -137,9 +137,26 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
 
     resizeObserver.observe(el);
 
+    // The observer above only reports the container's own box, so content growing
+    // or shrinking inside a fixed-size container fires neither resize nor scroll
+    // and would leave the shadows stale. Watch the subtree for the DOM and style
+    // changes that cause it. Measuring on every render would also cover this, but
+    // it forces a layout read per render and lets an onVisibilityChange handler
+    // that shifts the container's own metrics drive an unbounded render loop.
+    const mutationObserver = new MutationObserver(checkOverflow);
+
+    mutationObserver.observe(el, {
+      attributeFilter: ["class", "style"],
+      attributes: true,
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+
     return () => {
       el.removeEventListener("scroll", checkOverflow);
       resizeObserver.disconnect();
+      mutationObserver.disconnect();
 
       // Cancel pending RAF and cleanup cache
       if (rafIdRef.current !== null) {
@@ -149,14 +166,4 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
       prevStateRef.current = null;
     };
   }, [containerRef, visibility, isEnabled, checkOverflow]);
-
-  // ResizeObserver only reports the container's own box, so content growing or
-  // shrinking inside a fixed-size container fires neither resize nor scroll and
-  // would leave the shadows stale. Re-measuring after every render covers that;
-  // the prevStateRef guard keeps it a no-op unless the measurement changed.
-  useEffect(() => {
-    if (!isEnabled || visibility !== "auto") return;
-
-    checkOverflow();
-  });
 };
