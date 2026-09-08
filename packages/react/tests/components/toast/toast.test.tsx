@@ -360,6 +360,16 @@ describe("Toast", () => {
     expect(region).not.toHaveFocus();
   });
 
+  it("exposes the react-stately method that in-place updates notify through", () => {
+    const inner = new ToastQueue().getQueue() as unknown as Record<string, unknown>;
+
+    // update() mutates a queued toast and then calls this method so React
+    // re-reads the queue. It is TypeScript-private and unstable upstream, and
+    // losing it silently downgrades updates to a partial re-render, so fail on
+    // the next React Aria bump rather than in a consumer's app.
+    expect(typeof inner["updateVisibleToasts"]).toBe("function");
+  });
+
   it("exposes data-swapped on the indicator after a promise-style update", () => {
     const queue = new ToastQueue();
 
