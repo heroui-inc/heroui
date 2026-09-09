@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: Patch release that stacks Toast notifications with expand-on-hover, adds Select.ClearButton and a Tabs align variant, re-exports Pressable, Focusable, OverlayTriggerStateContext, and DisclosureStateContext from @heroui/react, and upgrades React Aria to 1.21.0, plus fixes for nested data-theme tokens, native :focus-visible rings, overlay stacking, ScrollShadow, Table, Drawer, NumberField, Accordion, Label, and Tag.
+description: Patch release that stacks Toast notifications with expand-on-hover, adds Select.ClearButton and a Tabs align variant, re-exports Pressable, Focusable, OverlayTriggerStateContext, and DisclosureStateContext from @heroui/react, and upgrades React Aria to 1.21.0, plus fixes for nested data-theme tokens, shadow DOM theming, native :focus-visible rings, overlay stacking, ScrollShadow, Table, Drawer, NumberField, Accordion, Label, and Tag.
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">September 8, 2026</span>
 </div>
 
-Patch release: [Toast](/docs/components/toast) collapses notifications into a stack that expands on hover, [Select](/docs/components/select) gains a `ClearButton`, [Tabs](/docs/components/tabs) adds an `align` variant, `@heroui/react` re-exports `Pressable`, `Focusable`, `OverlayTriggerStateContext`, and `DisclosureStateContext`, and React Aria is upgraded to `1.21.0` (`react-aria@3.52.0`). Also fixes theme tokens in nested `data-theme` scopes, native `:focus-visible` rings on exported variants, and modal-level overlays being covered by closing popovers, plus [ScrollShadow](/docs/components/scroll-shadow), [Table](/docs/components/table), [Drawer](/docs/components/drawer), [NumberField](/docs/components/number-field), [Accordion](/docs/components/accordion), [Label](/docs/components/label), and [Tag](/docs/components/tag).
+Patch release: [Toast](/docs/components/toast) collapses notifications into a stack that expands on hover, [Select](/docs/components/select) gains a `ClearButton`, [Tabs](/docs/components/tabs) adds an `align` variant, `@heroui/react` re-exports `Pressable`, `Focusable`, `OverlayTriggerStateContext`, and `DisclosureStateContext`, and React Aria is upgraded to `1.21.0` (`react-aria@3.52.0`). Also fixes theme tokens in nested `data-theme` scopes and shadow DOM, native `:focus-visible` rings on exported variants, and modal-level overlays being covered by closing popovers, plus [ScrollShadow](/docs/components/scroll-shadow), [Table](/docs/components/table), [Drawer](/docs/components/drawer), [NumberField](/docs/components/number-field), [Accordion](/docs/components/accordion), [Label](/docs/components/label), and [Tag](/docs/components/tag).
 
 ## Installation
 
@@ -74,6 +74,8 @@ Libraries built on `@heroui/react` can import RAC primitives from HeroUI instead
 
 ## Bug Fixes
 
+- **Theming**: Resolve theme tokens inside Shadow DOM by declaring them on `:root, :host` so radii, colors, and dark mode still apply when the stylesheet is adopted into a shadow tree ([#6841](https://github.com/heroui-inc/heroui/pull/6841)).
+- **Toast**: Keep omitted `timeout` and `onClose` on `toast.update`, restart a running countdown on `reset`, require an exact hotkey modifier match, drop unused `viewTransitionName`, and re-measure stacked height when a toast's width changes ([#6829](https://github.com/heroui-inc/heroui/pull/6829), [#6830](https://github.com/heroui-inc/heroui/pull/6830), [#6831](https://github.com/heroui-inc/heroui/pull/6831), [#6834](https://github.com/heroui-inc/heroui/pull/6834), [#6832](https://github.com/heroui-inc/heroui/pull/6832)).
 - **Accordion**: Require both `:hover` and `data-hovered` for the default trigger hover background so a custom `hover:bg-*` no longer flashes the default color on mouse leave ([#6817](https://github.com/heroui-inc/heroui/pull/6817)).
 - **Theming**: Define missing nested `data-theme` tokens (`--surface-*-foreground`, `--field-placeholder`) and point overlay shadows at `--overlay-shadow` so scoped dark or light sections cascade into components ([#6803](https://github.com/heroui-inc/heroui/pull/6803)).
 - **Focus**: Replace the impossible `:focus-visible:not(:focus)` selector with native `:focus-visible` so keyboard focus rings apply to native anchors and buttons using HeroUI variants, while React Aria still uses `[data-focus-visible="true"]` ([#6805](https://github.com/heroui-inc/heroui/pull/6805)).
@@ -82,6 +84,7 @@ Libraries built on `@heroui/react` can import RAC primitives from HeroUI instead
 - **Tag**: Expand the remove-button pressable area to 24×24 while keeping the 12×12 glyph, so taps on multi-select `Autocomplete` chips land reliably ([#6797](https://github.com/heroui-inc/heroui/pull/6797)).
 - **ScrollShadow**: Derive the fade from a CSS scroll timeline where supported so it is correct on first paint without a post-hydration measurement flicker, keep attribute-driven fades for unsupported engines and controlled modes, and merge consumer `style` props so `--scroll-shadow-size` / `--scroll-shadow-offset` are preserved ([#6800](https://github.com/heroui-inc/heroui/pull/6800)).
 - **ScrollShadow**: Re-measure overflow after content resizes so `data-*-scroll` stays in sync (including [Tabs](/docs/components/tabs) chevrons), and fire `onVisibilityChange` only on real transitions instead of every render ([#6812](https://github.com/heroui-inc/heroui/pull/6812)).
+- **ScrollShadow**: Observe content mutations instead of measuring overflow on every render ([#6833](https://github.com/heroui-inc/heroui/pull/6833)).
 - **Calendar / RangeCalendar**: Memoize default `minValue` and `maxValue` so calendar state is not invalidated on every render ([#6812](https://github.com/heroui-inc/heroui/pull/6812)).
 - **Button, Menu, and Dropdown**: Scope `will-change` compositor hints to pressed and enter/exit animation states so static labels remain sharp inside transformed overlays, including after a `Modal` closes and reopens ([#6779](https://github.com/heroui-inc/heroui/pull/6779)).
 - **Drawer**: Scope drag gestures to the nearest owning `Drawer.Dialog` so a nested drawer handle closes only its own drawer while the parent stays open and unshifted ([#6780](https://github.com/heroui-inc/heroui/pull/6780)).

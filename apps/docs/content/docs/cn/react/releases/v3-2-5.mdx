@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: 补丁版本：Toast 支持堆叠并在悬停时展开，新增 Select.ClearButton 与 Tabs align 变体，从 @heroui/react 再导出 Pressable、Focusable、OverlayTriggerStateContext 与 DisclosureStateContext，并将 React Aria 升级到 1.21.0；同时修复嵌套 data-theme token、原生 :focus-visible 焦点环、浮层层级，以及 ScrollShadow、Table、Drawer、NumberField、Accordion、Label 与 Tag 的问题。
+description: 补丁版本：Toast 支持堆叠并在悬停时展开，新增 Select.ClearButton 与 Tabs align 变体，从 @heroui/react 再导出 Pressable、Focusable、OverlayTriggerStateContext 与 DisclosureStateContext，并将 React Aria 升级到 1.21.0；同时修复嵌套 data-theme token、Shadow DOM 主题、原生 :focus-visible 焦点环、浮层层级，以及 ScrollShadow、Table、Drawer、NumberField、Accordion、Label 与 Tag 的问题。
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 9 月 8 日</span>
 </div>
 
-补丁版本：[Toast](/docs/components/toast) 支持堆叠并在悬停时展开，[Select](/docs/components/select) 新增 `ClearButton`，[Tabs](/docs/components/tabs) 新增 `align` 变体，`@heroui/react` 再导出 `Pressable`、`Focusable`、`OverlayTriggerStateContext` 与 `DisclosureStateContext`，React Aria 升级到 `1.21.0`（`react-aria@3.52.0`）。同时修复了嵌套 `data-theme` 作用域中的主题 token、导出变体上的原生 `:focus-visible` 焦点环、Modal 级浮层被关闭中的 Popover 遮挡等问题，以及 [ScrollShadow](/docs/components/scroll-shadow)、[Table](/docs/components/table)、[Drawer](/docs/components/drawer)、[NumberField](/docs/components/number-field)、[Accordion](/docs/components/accordion)、[Label](/docs/components/label) 与 [Tag](/docs/components/tag) 的若干问题。
+补丁版本：[Toast](/docs/components/toast) 支持堆叠并在悬停时展开，[Select](/docs/components/select) 新增 `ClearButton`，[Tabs](/docs/components/tabs) 新增 `align` 变体，`@heroui/react` 再导出 `Pressable`、`Focusable`、`OverlayTriggerStateContext` 与 `DisclosureStateContext`，React Aria 升级到 `1.21.0`（`react-aria@3.52.0`）。同时修复了嵌套 `data-theme` 作用域与 Shadow DOM 中的主题 token、导出变体上的原生 `:focus-visible` 焦点环、Modal 级浮层被关闭中的 Popover 遮挡等问题，以及 [ScrollShadow](/docs/components/scroll-shadow)、[Table](/docs/components/table)、[Drawer](/docs/components/drawer)、[NumberField](/docs/components/number-field)、[Accordion](/docs/components/accordion)、[Label](/docs/components/label) 与 [Tag](/docs/components/tag) 的若干问题。
 
 ## 安装
 
@@ -74,6 +74,8 @@ github:
 
 ## 错误修复
 
+- **主题**：在 Shadow DOM 中通过 `:root, :host` 声明主题 token，使样式表被 adopt 进 shadow tree 后仍能应用圆角、颜色与深色模式 ([#6841](https://github.com/heroui-inc/heroui/pull/6841))。
+- **Toast**：`toast.update` 会保留未传入的 `timeout` 与 `onClose`，`reset` 会重启正在进行的倒计时，区域快捷键需精确匹配修饰键，去掉未使用的 `viewTransitionName`，并在 Toast 宽度变化时重新测量堆叠高度 ([#6829](https://github.com/heroui-inc/heroui/pull/6829)、[#6830](https://github.com/heroui-inc/heroui/pull/6830)、[#6831](https://github.com/heroui-inc/heroui/pull/6831)、[#6834](https://github.com/heroui-inc/heroui/pull/6834)、[#6832](https://github.com/heroui-inc/heroui/pull/6832))。
 - **Accordion**：默认触发器悬停背景需同时满足 `:hover` 与 `data-hovered`，自定义 `hover:bg-*` 在鼠标离开时不再闪一下默认颜色 ([#6817](https://github.com/heroui-inc/heroui/pull/6817))。
 - **主题**：补全嵌套 `data-theme` 作用域中缺失的 token（`--surface-*-foreground`、`--field-placeholder`），并将浮层阴影改为 `--overlay-shadow`，使局部深色/浅色区域能级联到组件 ([#6803](https://github.com/heroui-inc/heroui/pull/6803))。
 - **焦点**：将无法匹配的 `:focus-visible:not(:focus)` 替换为原生 `:focus-visible`，使使用 HeroUI 变体的原生锚点与按钮也能显示键盘焦点环，同时 React Aria 仍使用 `[data-focus-visible="true"]` ([#6805](https://github.com/heroui-inc/heroui/pull/6805))。
@@ -82,6 +84,7 @@ github:
 - **Tag**：将移除按钮的可点击区域扩大到 24×24，同时保持 12×12 图标，使多选 `Autocomplete` 芯片上的点击更可靠 ([#6797](https://github.com/heroui-inc/heroui/pull/6797))。
 - **ScrollShadow**：在支持的浏览器中通过 CSS 滚动时间线驱动淡出，使首屏绘制即正确、无需 hydration 后测量，从而避免闪烁；不支持的引擎与受控模式仍使用属性驱动，并合并消费者 `style` 以保留 `--scroll-shadow-size` / `--scroll-shadow-offset` ([#6800](https://github.com/heroui-inc/heroui/pull/6800))。
 - **ScrollShadow**：在内容尺寸变化后重新测量溢出，使 `data-*-scroll` 保持同步（包括 [Tabs](/docs/components/tabs) 箭头），并且 `onVisibilityChange` 只在真实状态变化时触发，而不是每次渲染 ([#6812](https://github.com/heroui-inc/heroui/pull/6812))。
+- **ScrollShadow**：通过观察内容变更来测量溢出，而不是在每次渲染时测量 ([#6833](https://github.com/heroui-inc/heroui/pull/6833))。
 - **Calendar / RangeCalendar**：对默认的 `minValue` 与 `maxValue` 做 memoize，避免日历状态在每次渲染时失效 ([#6812](https://github.com/heroui-inc/heroui/pull/6812))。
 - **Button、Menu 与 Dropdown**：将 `will-change` 合成器提示限制在按下和进出场动画状态，使静态文本在带有 transform 的浮层中保持清晰，包括 `Modal` 关闭后重新打开的场景 ([#6779](https://github.com/heroui-inc/heroui/pull/6779))。
 - **Drawer**：将拖拽手势限制在最近的所属 `Drawer.Dialog`，使嵌套抽屉的把手只关闭自身抽屉，而父抽屉保持打开且不发生位移 ([#6780](https://github.com/heroui-inc/heroui/pull/6780))。
