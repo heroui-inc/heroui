@@ -103,7 +103,7 @@
     "turbo": "2.9.14",
     "typescript": "5.9.3",
     "typescript-eslint": "8.50.1",
-    "vitest": "4.1.10"
+    "vitest": "4.1.11"
   },
   "engines": {
     "node": ">=22.x",
