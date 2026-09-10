@@ -29,11 +29,17 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": [],
+      "dependsOn": ["^build"],
+      "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
+      "outputs": []
+    },
+    "test:browser": {
+      "dependsOn": ["^build"],
+      "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "outputs": []
     },
     "test:coverage": {
-      "dependsOn": [],
+      "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     },
     "typecheck": {

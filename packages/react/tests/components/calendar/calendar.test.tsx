@@ -174,6 +174,23 @@ describe("Calendar", () => {
     });
   });
 
+  describe("day view", () => {
+    it("renders a weekday header and day cells when visibleDuration is set in days", () => {
+      renderCalendar({visibleDuration: {days: 7}});
+
+      expect(document.querySelector('[data-slot="calendar"]')?.className).toEqual(
+        expect.stringContaining("calendar--day-view"),
+      );
+      expect(document.querySelectorAll('[data-slot="calendar-grid-header"] th')).toHaveLength(7);
+
+      // The visible range is centered on the selected day, so its edges prove the
+      // range reached the day view grid through the calendar context.
+      expect(getDayCell("August 12, 2026")).toBeInTheDocument();
+      expect(getDayCell("August 15, 2026")).toBeInTheDocument();
+      expect(getDayCell("August 18, 2026")).toBeInTheDocument();
+    });
+  });
+
   describe("navigation", () => {
     it("supports next and previous month via NavButton", async () => {
       renderCalendar();

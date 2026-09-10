@@ -6,6 +6,7 @@ import type {RadioButtonRenderProps, RadioFieldRenderProps} from "react-aria-com
 
 import {radioVariants} from "@heroui/styles";
 import React, {createContext, use} from "react";
+import {LabelContext} from "react-aria-components/Label";
 import {
   RadioButton as RadioButtonPrimitive,
   RadioField as RadioFieldPrimitive,
@@ -64,7 +65,11 @@ const RadioContent = ({children, className, ...props}: RadioContentProps) => {
       {...props}
       className={composeTwRenderProps(className, slots?.content())}
     >
-      {children}
+      {(state) => (
+        <LabelContext value={{elementType: "span"}}>
+          {typeof children === "function" ? children(state) : children}
+        </LabelContext>
+      )}
     </RadioButtonPrimitive>
   );
 };

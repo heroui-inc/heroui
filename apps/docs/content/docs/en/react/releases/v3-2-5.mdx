@@ -1,0 +1,109 @@
+---
+title: v3.2.5
+description: Patch release that stacks Toast notifications with expand-on-hover, adds Select.ClearButton and a Tabs align variant, re-exports Pressable, Focusable, OverlayTriggerStateContext, and DisclosureStateContext from @heroui/react, and upgrades React Aria to 1.21.0, plus fixes for nested data-theme tokens, shadow DOM theming, native :focus-visible rings, overlay stacking, ScrollShadow, Table, Drawer, NumberField, Accordion, Label, and Tag.
+github:
+  pull: 6792
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">September 8, 2026</span>
+</div>
+
+Patch release: [Toast](/docs/components/toast) collapses notifications into a stack that expands on hover, [Select](/docs/components/select) gains a `ClearButton`, [Tabs](/docs/components/tabs) adds an `align` variant, `@heroui/react` re-exports `Pressable`, `Focusable`, `OverlayTriggerStateContext`, and `DisclosureStateContext`, and React Aria is upgraded to `1.21.0` (`react-aria@3.52.0`). Also fixes theme tokens in nested `data-theme` scopes and shadow DOM, native `:focus-visible` rings on exported variants, and modal-level overlays being covered by closing popovers, plus [ScrollShadow](/docs/components/scroll-shadow), [Table](/docs/components/table), [Drawer](/docs/components/drawer), [NumberField](/docs/components/number-field), [Accordion](/docs/components/accordion), [Label](/docs/components/label), and [Tag](/docs/components/tag).
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warning">
+  **Peer dependencies changed.** This release requires `react-aria-components@^1.21.0` and `react-aria@^3.52.0`. If you pin either package, update it in the same install or your package manager will report a peer dependency conflict.
+</Callout>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Features
+
+### Toast
+
+[Toast](/docs/components/toast) now collapses into a stacked layout: the newest toast sits at full size in front, while older ones scale down and stay offset by a gap. Hovering or focusing the stack expands every visible toast; leaving it collapses the stack again. Auto-dismiss timers pause while the stack is hovered or focused, and when the page is in a background tab.
+
+- **Stacking**: Collapse older toasts behind the frontmost one, with expand-on-hover/focus, an `isExpanded` override, `toast.update()` to replace content in place, `exitDuration` for exit animations, and `Alt+T` / `Escape` / `F6` keyboard support ([#6773](https://github.com/heroui-inc/heroui/pull/6773)).
+
+### Select
+
+[Select](/docs/components/select) adds a clear affordance without nesting buttons inside `Select.Trigger`. Compose `Select.ClearButton` next to the value and indicator, and listen with the root `onClear` prop. The control renders as a pointer-only `span` (`aria-hidden`); keyboard and screen reader users clear with `Backspace` or `Delete` when the clear button is composed and the popover is closed.
+
+- **Clear button**: Add `Select.ClearButton` and root `onClear` so selections can be cleared without invalid nested buttons ([#6796](https://github.com/heroui-inc/heroui/pull/6796)).
+
+### Tabs
+
+[Tabs](/docs/components/tabs) can align tab content for the whole list with `align="start" | "center" | "end"`. The default remains `center`, so existing tabs are unchanged. Alignment uses logical properties (`text-start` / `justify-start`) for RTL, and is scoped to the list so nested tabs keep their own alignment.
+
+- **Align**: Set `align` on `Tabs` to control tab text and content alignment without repeating a `className` on every tab ([#6813](https://github.com/heroui-inc/heroui/pull/6813)).
+
+### Exports
+
+Libraries built on `@heroui/react` can import RAC primitives from HeroUI instead of `react-aria-components` directly. That keeps a single Vite-optimized instance so contexts stay shared and SSR markup matches the client.
+
+- **RAC primitives**: Re-export `Pressable`, `Focusable`, `OverlayTriggerStateContext`, and `DisclosureStateContext` from `@heroui/react` ([#6828](https://github.com/heroui-inc/heroui/pull/6828)).
+
+## Bug Fixes
+
+- **Theming**: Resolve theme tokens inside Shadow DOM by declaring them on `:root, :host` so radii, colors, and dark mode still apply when the stylesheet is adopted into a shadow tree ([#6841](https://github.com/heroui-inc/heroui/pull/6841)).
+- **Toast**: Keep omitted `timeout` and `onClose` on `toast.update`, restart a running countdown on `reset`, require an exact hotkey modifier match, drop unused `viewTransitionName`, and re-measure stacked height when a toast's width changes ([#6829](https://github.com/heroui-inc/heroui/pull/6829), [#6830](https://github.com/heroui-inc/heroui/pull/6830), [#6831](https://github.com/heroui-inc/heroui/pull/6831), [#6834](https://github.com/heroui-inc/heroui/pull/6834), [#6832](https://github.com/heroui-inc/heroui/pull/6832)).
+- **Accordion**: Require both `:hover` and `data-hovered` for the default trigger hover background so a custom `hover:bg-*` no longer flashes the default color on mouse leave ([#6817](https://github.com/heroui-inc/heroui/pull/6817)).
+- **Theming**: Define missing nested `data-theme` tokens (`--surface-*-foreground`, `--field-placeholder`) and point overlay shadows at `--overlay-shadow` so scoped dark or light sections cascade into components ([#6803](https://github.com/heroui-inc/heroui/pull/6803)).
+- **Focus**: Replace the impossible `:focus-visible:not(:focus)` selector with native `:focus-visible` so keyboard focus rings apply to native anchors and buttons using HeroUI variants, while React Aria still uses `[data-focus-visible="true"]` ([#6805](https://github.com/heroui-inc/heroui/pull/6805)).
+- **Label**: Render `Label` as a `span` inside `Checkbox.Content`, `Switch.Content`, and `Radio.Content` so it no longer nests `<label>` elements or reuse the group label `id` ([#6807](https://github.com/heroui-inc/heroui/pull/6807)).
+- **Overlays**: Raise `Modal`, `AlertDialog`, and `Drawer` to the shared overlay z-index and disable pointer events on exiting popover-level overlays so closing `Dropdown` / `Select` / `Popover` layers no longer cover or intercept clicks on a newly opened modal ([#6798](https://github.com/heroui-inc/heroui/pull/6798)).
+- **Tag**: Expand the remove-button pressable area to 24×24 while keeping the 12×12 glyph, so taps on multi-select `Autocomplete` chips land reliably ([#6797](https://github.com/heroui-inc/heroui/pull/6797)).
+- **ScrollShadow**: Derive the fade from a CSS scroll timeline where supported so it is correct on first paint without a post-hydration measurement flicker, keep attribute-driven fades for unsupported engines and controlled modes, and merge consumer `style` props so `--scroll-shadow-size` / `--scroll-shadow-offset` are preserved ([#6800](https://github.com/heroui-inc/heroui/pull/6800)).
+- **ScrollShadow**: Re-measure overflow after content resizes so `data-*-scroll` stays in sync (including [Tabs](/docs/components/tabs) chevrons), and fire `onVisibilityChange` only on real transitions instead of every render ([#6812](https://github.com/heroui-inc/heroui/pull/6812)).
+- **ScrollShadow**: Observe content mutations instead of measuring overflow on every render ([#6833](https://github.com/heroui-inc/heroui/pull/6833)).
+- **Calendar / RangeCalendar**: Memoize default `minValue` and `maxValue` so calendar state is not invalidated on every render ([#6812](https://github.com/heroui-inc/heroui/pull/6812)).
+- **Button, Menu, and Dropdown**: Scope `will-change` compositor hints to pressed and enter/exit animation states so static labels remain sharp inside transformed overlays, including after a `Modal` closes and reopens ([#6779](https://github.com/heroui-inc/heroui/pull/6779)).
+- **Drawer**: Scope drag gestures to the nearest owning `Drawer.Dialog` so a nested drawer handle closes only its own drawer while the parent stays open and unshifted ([#6780](https://github.com/heroui-inc/heroui/pull/6780)).
+- **Table**: Keep typeahead from stealing keystrokes and focus from nested editable controls. `keyboardNavigationBehavior` is now exposed as a prop and defaults to `"tab"`, while typeahead remains available in non-editable cells ([#6781](https://github.com/heroui-inc/heroui/pull/6781)).
+- **NumberField**: Size the input grid from the stepper slots that are present, so fields without increment or decrement buttons no longer reserve empty side columns ([#6778](https://github.com/heroui-inc/heroui/pull/6778)).
+- **Toast**: Merge custom `style` props with region CSS variables and toast stacking styles so passing styles such as `zIndex` no longer drops `--toast-width` and collapses the toast ([#6794](https://github.com/heroui-inc/heroui/pull/6794)).
+
+## Dependencies
+
+- **React Aria**: Upgrade to [React Aria 1.21.0](https://react-aria.adobe.com/releases/v1-21-0) — `react-aria-components@1.21.0`, `react-aria@3.52.0`, and `@internationalized/date@3.12.4` ([#6819](https://github.com/heroui-inc/heroui/pull/6819)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6792](https://github.com/heroui-inc/heroui/pull/6792)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

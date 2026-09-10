@@ -70,9 +70,14 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
   const triggerRef = useRef<HTMLElement | null>(null);
   const clearButtonRef = useRef<HTMLButtonElement | null>(null);
 
+  const context = React.useMemo<AutocompleteContext>(
+    () => ({slots, triggerRef, clearButtonRef, onClear, isDisabled}),
+    [slots, onClear, isDisabled],
+  );
+
   return (
     <FieldSlotsGate>
-      <AutocompleteContext value={{slots, triggerRef, clearButtonRef, onClear, isDisabled}}>
+      <AutocompleteContext value={context}>
         <SelectPrimitive
           data-slot="autocomplete"
           {...props}

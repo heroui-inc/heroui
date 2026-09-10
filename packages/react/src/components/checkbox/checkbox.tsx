@@ -14,6 +14,7 @@ import {
   CheckboxButton as CheckboxButtonPrimitive,
   CheckboxField as CheckboxFieldPrimitive,
 } from "react-aria-components/Checkbox";
+import {LabelContext} from "react-aria-components/Label";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -75,7 +76,11 @@ const CheckboxContent = ({children, className, ...props}: CheckboxContentProps) 
       {...props}
       className={composeTwRenderProps(className, slots?.content())}
     >
-      {children}
+      {(state) => (
+        <LabelContext value={{elementType: "span"}}>
+          {typeof children === "function" ? children(state) : children}
+        </LabelContext>
+      )}
     </CheckboxButtonPrimitive>
   );
 };

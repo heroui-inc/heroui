@@ -24,6 +24,21 @@
 /* Keeps main page content interactive during view transitions */
 :root {
   view-transition-name: none;
+
+  /**
+   * Stacking level shared by every overlay that React Aria portals to the body.
+   *
+   * React Aria positions popover-level overlays (Dropdown, Popover, Select, Tooltip, …)
+   * with a hard-coded `z-index: 100000`, so modal-level overlays (Modal, AlertDialog,
+   * Drawer) have to match it rather than sit below it. Because the values are equal, the
+   * portal mount order decides what paints on top, which is what we want in both
+   * directions: a Modal opened from a Dropdown covers the closing dropdown, and a Select
+   * opened inside a Modal still renders above the Modal.
+   */
+  --z-index-overlay: 100000;
+
+  /* Toasts stay reachable while a modal-level overlay is open. */
+  --z-index-toast: calc(var(--z-index-overlay) + 1);
 }
 
 ::view-transition {

@@ -61,19 +61,28 @@ const ButtonGroupRoot = ({
   );
 
   // Wrap only direct children with context provider
-  const wrappedChildren = Children.map(children as React.ReactNode, (child) => {
-    if (!isValidElement(child)) {
-      return child;
-    }
+  const wrappedChildren = React.useMemo(
+    () =>
+      Children.map(children as React.ReactNode, (child) => {
+        if (!isValidElement(child)) {
+          return child;
+        }
 
-    // Clone the child and add the special prop
-    return React.cloneElement(child, {
-      [BUTTON_GROUP_CHILD]: true,
-    } as any);
-  });
+        // Clone the child and add the special prop
+        return React.cloneElement(child, {
+          [BUTTON_GROUP_CHILD]: true,
+        } as any);
+      }),
+    [children],
+  );
+
+  const context = React.useMemo<ButtonGroupContext>(
+    () => ({slots, size, variant, isDisabled, fullWidth}),
+    [slots, size, variant, isDisabled, fullWidth],
+  );
 
   return (
-    <ButtonGroupContext value={{slots, size, variant, isDisabled, fullWidth}}>
+    <ButtonGroupContext value={context}>
       <Group
         className={composeTwRenderProps(className, slots.base())}
         data-slot="button-group"

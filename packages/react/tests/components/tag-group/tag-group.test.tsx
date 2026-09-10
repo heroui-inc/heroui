@@ -166,6 +166,27 @@ describe("TagGroup", () => {
     expect(removedKeys === "all" ? null : [...removedKeys]).toEqual(["news"]);
   });
 
+  it("supports removing a focused tag with the keyboard", async () => {
+    const onRemove = vi.fn();
+
+    render(
+      <TagGroup aria-label="Categories" selectionMode="single" onRemove={onRemove}>
+        <TagGroup.List>
+          <Tag id="news">News</Tag>
+          <Tag id="travel">Travel</Tag>
+        </TagGroup.List>
+      </TagGroup>,
+    );
+
+    screen.getByRole("row", {name: "News"}).focus();
+    await user.keyboard("{Delete}");
+
+    expect(onRemove).toHaveBeenCalledTimes(1);
+    const removedKeys = onRemove.mock.calls[0]?.[0] as Selection;
+
+    expect(removedKeys === "all" ? null : [...removedKeys]).toEqual(["news"]);
+  });
+
   it("exposes size and variant Tag BEM modifiers", () => {
     render(
       <TagGroup aria-label="Categories" selectionMode="single" size="lg" variant="surface">

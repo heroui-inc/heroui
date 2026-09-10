@@ -55,6 +55,7 @@ export const ScrollShadowRoot = ({
   orientation = "vertical",
   ref,
   size = 40,
+  style: styleProp,
   variant = "fade",
   visibility = "auto",
   ...props
@@ -104,7 +105,8 @@ export const ScrollShadowRoot = ({
 
   const style = {
     "--scroll-shadow-size": `${size}px`,
-    ...props.style,
+    "--scroll-shadow-offset": `${offset}px`,
+    ...styleProp,
   } as React.CSSProperties;
 
   return (
@@ -112,6 +114,9 @@ export const ScrollShadowRoot = ({
       ref={mergeRefs(internalRef, ref)}
       className={slots.base({className})}
       data-orientation={orientation}
+      // Selects the scroll-driven fade where supported. Controlled and disabled modes stay
+      // attribute-driven, matching what the hook does for the same combination of props.
+      data-scroll-shadow-mode={isEnabled && visibility === "auto" ? "auto" : "manual"}
       data-scroll-shadow-size={size}
       data-slot="scroll-shadow"
       style={style}

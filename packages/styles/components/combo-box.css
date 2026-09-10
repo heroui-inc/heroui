@@ -70,7 +70,7 @@
   }
 
   /* Focus visible state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply rounded ring-2 ring-focus ring-offset-2 ring-offset-background outline-none;
   }
@@ -101,10 +101,10 @@
 .combo-box__popover {
   @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 scrollbar overflow-y-auto overscroll-contain bg-overlay p-0 text-sm;
   border-radius: min(32px, var(--radius-3xl));
-  box-shadow: var(--shadow-overlay);
+  box-shadow: var(--overlay-shadow);
 
   /* Focus state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply outline-none;
   }
@@ -134,6 +134,8 @@
   /* Exiting animations */
   &[data-exiting="true"] {
     @apply animate-out duration-100 ease-smooth zoom-out-95 fade-out;
+    /* Stays non-interactive while closing, even if the exit animation is interrupted. */
+    @apply pointer-events-none;
   }
 
   &[data-exiting="true"],

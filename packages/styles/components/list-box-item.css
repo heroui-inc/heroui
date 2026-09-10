@@ -32,7 +32,7 @@
   }
 
   /* Focus visible state (keyboard focus only) */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -72,7 +72,7 @@
    ========================================================================== */
 
 .list-box-item__indicator {
-  @apply absolute top-1/2 end-2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center text-default-foreground;
+  @apply absolute end-2 top-1/2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center text-default-foreground;
 
   /**
    * Transitions

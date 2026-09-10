@@ -17,6 +17,15 @@ export interface UseScrollShadowProps {
 export const useScrollShadow = (props: UseScrollShadowProps) => {
   const {containerRef, isEnabled, offset, onVisibilityChange, orientation, visibility} = props;
 
+  // Consumers usually pass an inline callback. Reading it through a ref keeps
+  // checkOverflow stable, so the scroll listener and ResizeObserver are not
+  // torn down and rebuilt on every render.
+  const onVisibilityChangeRef = useRef(onVisibilityChange);
+
+  useEffect(() => {
+    onVisibilityChangeRef.current = onVisibilityChange;
+  }, [onVisibilityChange]);
+
   // Cache previous state to avoid unnecessary DOM updates
   const prevStateRef = useRef<{
     hasScrollBefore: boolean;
@@ -62,25 +71,27 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
     rafIdRef.current = requestAnimationFrame(() => {
       rafIdRef.current = null;
 
+      const notify = onVisibilityChangeRef.current;
+
       if (isVertical) {
         if (hasScrollBefore && hasScrollAfter) {
           el.dataset["topBottomScroll"] = "true";
           delete el.dataset["topScroll"];
           delete el.dataset["bottomScroll"];
 
-          onVisibilityChange?.("both");
+          notify?.("both");
         } else {
           el.dataset["topScroll"] = String(hasScrollBefore);
           el.dataset["bottomScroll"] = String(hasScrollAfter);
           delete el.dataset["topBottomScroll"];
 
-          if (onVisibilityChange) {
+          if (notify) {
             if (hasScrollBefore) {
-              onVisibilityChange("top");
+              notify("top");
             } else if (hasScrollAfter) {
-              onVisibilityChange("bottom");
+              notify("bottom");
             } else {
-              onVisibilityChange("none");
+              notify("none");
             }
           }
         }
@@ -90,25 +101,25 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
           delete el.dataset["leftScroll"];
           delete el.dataset["rightScroll"];
 
-          onVisibilityChange?.("both");
+          notify?.("both");
         } else {
           el.dataset["leftScroll"] = String(hasScrollBefore);
           el.dataset["rightScroll"] = String(hasScrollAfter);
           delete el.dataset["leftRightScroll"];
 
-          if (onVisibilityChange) {
+          if (notify) {
             if (hasScrollBefore) {
-              onVisibilityChange("left");
+              notify("left");
             } else if (hasScrollAfter) {
-              onVisibilityChange("right");
+              notify("right");
             } else {
-              onVisibilityChange("none");
+              notify("none");
             }
           }
         }
       }
     });
-  }, [containerRef, orientation, offset, onVisibilityChange]);
+  }, [containerRef, orientation, offset]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -126,9 +137,26 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
 
     resizeObserver.observe(el);
 
+    // The observer above only reports the container's own box, so content growing
+    // or shrinking inside a fixed-size container fires neither resize nor scroll
+    // and would leave the shadows stale. Watch the subtree for the DOM and style
+    // changes that cause it. Measuring on every render would also cover this, but
+    // it forces a layout read per render and lets an onVisibilityChange handler
+    // that shifts the container's own metrics drive an unbounded render loop.
+    const mutationObserver = new MutationObserver(checkOverflow);
+
+    mutationObserver.observe(el, {
+      attributeFilter: ["class", "style"],
+      attributes: true,
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+
     return () => {
       el.removeEventListener("scroll", checkOverflow);
       resizeObserver.disconnect();
+      mutationObserver.disconnect();
 
       // Cancel pending RAF and cleanup cache
       if (rafIdRef.current !== null) {

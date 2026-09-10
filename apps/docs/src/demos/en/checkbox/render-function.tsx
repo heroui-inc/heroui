@@ -1,18 +1,16 @@
 "use client";
 
-import {Checkbox, Label} from "@heroui/react";
+import {Checkbox} from "@heroui/react";
 
 export function RenderFunction() {
   return (
-    <div className="flex items-center gap-3">
-      <Checkbox id="basic-terms" render={(props) => <div {...props} data-custom="bar" />}>
-        <Checkbox.Content>
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
-        </Checkbox.Content>
-      </Checkbox>
-      <Label htmlFor="basic-terms">Accept terms and conditions</Label>
-    </div>
+    <Checkbox render={(props) => <div {...props} data-custom="bar" />}>
+      <Checkbox.Content>
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        Accept terms and conditions
+      </Checkbox.Content>
+    </Checkbox>
   );
 }

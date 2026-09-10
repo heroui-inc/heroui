@@ -12,7 +12,7 @@
     transform 250ms var(--ease-smooth),
     background-color 100ms var(--ease-out),
     box-shadow 100ms var(--ease-out);
-  @apply transform-gpu will-change-transform motion-reduce:transition-none;
+  @apply transform-gpu motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -27,7 +27,7 @@
   color: var(--button-fg);
 
   /* Focus state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -46,6 +46,7 @@
   /* Active / pressed */
   &:active,
   &[data-pressed="true"] {
+    @apply will-change-transform;
     background-color: var(--button-bg-pressed);
     transform: scale(0.97);
   }

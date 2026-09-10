@@ -115,9 +115,9 @@ export function PromiseDemo() {
               });
 
               setTimeout(() => {
-                toast.close(loadingId);
-                toast.success("文件已上传", {
+                toast.update(loadingId, "文件已上传", {
                   description: "您的文件已成功上传",
+                  variant: "success",
                 });
               }, 3000);
             }}
@@ -134,9 +134,9 @@ export function PromiseDemo() {
               });
 
               setTimeout(() => {
-                toast.close(loadingId);
-                toast.success("付款已处理", {
+                toast.update(loadingId, "付款已处理", {
                   description: "您的付款已成功处理",
+                  variant: "success",
                 });
               }, 2500);
             }}
@@ -153,9 +153,9 @@ export function PromiseDemo() {
               });
 
               setTimeout(() => {
-                toast.close(loadingId);
-                toast.danger("保存失败", {
+                toast.update(loadingId, "保存失败", {
                   description: "请重试",
+                  variant: "danger",
                 });
               }, 2000);
             }}

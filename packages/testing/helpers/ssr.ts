@@ -1,4 +1,5 @@
 import type {ReactElement, ReactNode} from "react";
+import type {Root} from "react-dom/client";
 
 import {act} from "@testing-library/react";
 import {createElement, isValidElement} from "react";
@@ -44,9 +45,32 @@ export const ssrSmoke = async (ui: ReactElement, options: SsrSmokeOptions = {}) 
     originalError(...args);
   };
 
+  // Clear timers scheduled during hydrate before jsdom teardown.
+  const originalSetTimeout = globalThis.setTimeout;
+  const originalSetInterval = globalThis.setInterval;
+  const strayTimers: ReturnType<typeof setTimeout>[] = [];
+
+  globalThis.setTimeout = ((...args: Parameters<typeof setTimeout>) => {
+    const timer = originalSetTimeout(...args);
+
+    strayTimers.push(timer);
+
+    return timer;
+  }) as typeof setTimeout;
+
+  globalThis.setInterval = ((...args: Parameters<typeof setInterval>) => {
+    const timer = originalSetInterval(...args);
+
+    strayTimers.push(timer);
+
+    return timer;
+  }) as typeof setInterval;
+
+  let root: Root | undefined;
+
   try {
     await act(async () => {
-      hydrateRoot(container, wrap(ui, options.wrapper));
+      root = hydrateRoot(container, wrap(ui, options.wrapper));
     });
 
     const hydrationErrors = errors.filter((entry) => {
@@ -57,8 +81,21 @@ export const ssrSmoke = async (ui: ReactElement, options: SsrSmokeOptions = {}) 
 
     expect(hydrationErrors).toEqual([]);
   } finally {
+    globalThis.setTimeout = originalSetTimeout;
+    globalThis.setInterval = originalSetInterval;
+
+    for (const timer of strayTimers) {
+      clearTimeout(timer);
+      clearInterval(timer);
+    }
+
     // eslint-disable-next-line no-console
     console.error = originalError;
+
+    await act(async () => {
+      root?.unmount();
+    });
+
     container.remove();
   }
 

@@ -9,6 +9,7 @@ export const selectVariants = tv({
   },
   slots: {
     base: "select",
+    clearButton: "select__clear-button",
     indicator: "select__indicator",
     popover: "select__popover",
     trigger: "select__trigger",

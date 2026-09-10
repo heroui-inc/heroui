@@ -67,6 +67,22 @@ describe("Tabs", () => {
     );
   });
 
+  it("exposes align BEM modifier", async () => {
+    await renderTabs({align: "start"});
+
+    expect(screen.getByTestId("tabs").className).toEqual(
+      expect.stringContaining("tabs--align-start"),
+    );
+  });
+
+  it("omits the align BEM modifier when centered by default", async () => {
+    await renderTabs();
+
+    expect(screen.getByTestId("tabs").className).toEqual(
+      expect.not.stringContaining("tabs--align-"),
+    );
+  });
+
   it("supports selecting tabs via createTester", async () => {
     const onSelectionChange = vi.fn();
 

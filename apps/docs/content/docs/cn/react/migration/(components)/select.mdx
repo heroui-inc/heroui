@@ -59,7 +59,7 @@ export default function App() {
 ### 1. 组件结构
 
 **v2：** 简单的 Select，子节点为 `SelectItem`  
-**v3：** 复合组件（`Select.Trigger`、`Select.Value`、`Select.Indicator`、`Select.Popover`）与用于菜单项的 `ListBox`
+**v3：** 复合组件（`Select.Trigger`、`Select.Value`、`Select.ClearButton`、`Select.Indicator`、`Select.Popover`）与用于菜单项的 `ListBox`
 
 ### 2. 菜单项组件
 
@@ -84,7 +84,7 @@ export default function App() {
 | `startContent` | — | 直接自定义 `Select.Trigger` |
 | `endContent` | — | 直接自定义 `Select.Trigger` |
 | `selectorIcon` | — | 自定义 `Select.Indicator` 的 children |
-| `isClearable` | — | 手动实现清除按钮 |
+| `isClearable` | `Select.ClearButton` | 内置子组件；不要在 `Select.Trigger` 内嵌套 `<button>` |
 | `renderValue` | — | 使用 `Select.Value` 的渲染 prop |
 | `labelPlacement` | — | 标签始终在外部 |
 | `isRequired` | `isRequired` | 仍然可用 |
@@ -483,6 +483,7 @@ Select (Root)
   ├── Label (optional)
   ├── Select.Trigger
   │   ├── Select.Value
+  │   ├── Select.ClearButton（可选）
   │   └── Select.Indicator
   ├── Description (optional)
   ├── Select.Popover
@@ -512,15 +513,15 @@ Select (Root)
 
 ### 清除按钮
 
-`isClearable` prop 已移除。若要实现清除按钮：
+`isClearable` prop 已移除。请在 `Select.Trigger` 内使用 `Select.ClearButton`。不要在触发器内嵌套 `<button>` — `Select.Trigger` 本身已经是 button。
+
+清除控件面向指针操作；触发器同时支持按 `Backspace` 或 `Delete` 清除，以便键盘与屏幕阅读器用户使用。
 
 ```tsx
 <Select value={value} onChange={setValue}>
   <Select.Trigger>
     <Select.Value />
-    {value && (
-      <button onClick={() => setValue(null)}>Clear</button>
-    )}
+    <Select.ClearButton />
     <Select.Indicator />
   </Select.Trigger>
   {/* ... */}
@@ -529,7 +530,7 @@ Select (Root)
 
 ## 总结
 
-1. **组件结构**：必须使用复合组件（`Select.Trigger`、`Select.Value`、`Select.Indicator`、`Select.Popover`）。  
+1. **组件结构**：必须使用复合组件（`Select.Trigger`、`Select.Value`、`Select.ClearButton`、`Select.Indicator`、`Select.Popover`）。  
 2. **菜单项组件**：`SelectItem` → `ListBox.Item`，`SelectSection` → `ListBox.Section`（分组标题用 `Header`，分组之间用 `Separator`）。  
 3. **标签 / 描述 / 错误**：使用独立组件，而不是对应 prop。  
 4. **选择相关 prop**：`selectedKeys` / `onSelectionChange` → `value` / `onChange`。  
@@ -539,5 +540,5 @@ Select (Root)
 8. **样式**：`variant` 仅保留 `primary` \| `secondary`；`color`、`size`、`radius` 已移除，请用 Tailwind CSS 扩展。  
 9. **classNames 已移除**：在各子组件上使用 `className` prop。  
 10. **内容类 prop 已移除**：`startContent`、`endContent` 需通过自定义触发器实现。  
-11. **清除按钮**：`isClearable` 已移除，需手动实现。  
+11. **清除按钮**：`isClearable` 已移除，请在 `Select.Trigger` 内使用 `Select.ClearButton`（不要嵌套 `<button>`）。  
 12. **自定义值**：用 `Select.Value` 的渲染 prop 替代 `renderValue`。

@@ -25,4 +25,35 @@ describe("Select (browser)", () => {
     await expect.element(listbox).not.toBeInTheDocument();
     await expect.element(trigger).toHaveFocus();
   });
+
+  describe("clear button", () => {
+    it("clears on click, leaves the listbox closed, and focuses the trigger", async () => {
+      await render(<SelectFixture withClearButton defaultValue="california" />);
+
+      const trigger = page.getByRole("button", {name: "State"});
+
+      await expect.element(trigger).toHaveTextContent("California");
+
+      await page.getByTestId("select-clear-button").click();
+
+      await expect.element(trigger).toHaveTextContent("Select one");
+      await expect.element(page.getByRole("listbox")).not.toBeInTheDocument();
+      await expect.element(trigger).toHaveFocus();
+    });
+
+    it("clears with the Backspace shortcut", async () => {
+      await render(<SelectFixture withClearButton defaultValue="california" />);
+
+      const trigger = page.getByRole("button", {name: "State"});
+
+      await trigger.click();
+      await userEvent.keyboard("{Escape}");
+      await expect.element(trigger).toHaveFocus();
+
+      await userEvent.keyboard("{Backspace}");
+
+      await expect.element(trigger).toHaveTextContent("Select one");
+      await expect.element(page.getByRole("listbox")).not.toBeInTheDocument();
+    });
+  });
 });

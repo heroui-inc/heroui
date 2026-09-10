@@ -7,6 +7,7 @@ import type {SwitchButtonRenderProps, SwitchFieldRenderProps} from "react-aria-c
 
 import {switchVariants} from "@heroui/styles";
 import React, {createContext, use} from "react";
+import {LabelContext} from "react-aria-components/Label";
 import {
   SwitchButton as SwitchButtonPrimitive,
   SwitchField as SwitchFieldPrimitive,
@@ -63,7 +64,11 @@ const SwitchContent = ({children, className, ...props}: SwitchContentProps) => {
       {...props}
       className={composeTwRenderProps(className, slots?.content())}
     >
-      {children}
+      {(state) => (
+        <LabelContext value={{elementType: "span"}}>
+          {typeof children === "function" ? children(state) : children}
+        </LabelContext>
+      )}
     </SwitchButtonPrimitive>
   );
 };

@@ -31,7 +31,7 @@
   }
 
   /* Focus visible state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
   }
 
@@ -75,7 +75,7 @@
   }
 
   /* Focus visible state */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
   }
 

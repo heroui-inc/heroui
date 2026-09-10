@@ -1,14 +1,13 @@
 @layer base {
   /* HeroUI Default Theme */
+
+  /*
+   * == Common Variables ==
+   * Identical in every theme, so they are also declared on `:host`: `:root` matches
+   * nothing inside a shadow tree, and the theme blocks below never re-declare these.
+   */
   :root,
-  .light,
-  .default,
-  [data-theme="light"],
-  [data-theme="default"] {
-    color-scheme: light;
-
-    /* == Common Variables == */
-
+  :host {
     /* Primitive Colors (Do not change between light and dark) */
     --white: oklch(100% 0 0);
     --black: oklch(0% 0 0);
@@ -33,6 +32,35 @@
     /* Radius */
     --radius: 0.5rem;
     --field-radius: calc(var(--radius) * 1.5);
+
+    /* Accent and status hues (shared with the dark theme) */
+    --accent: oklch(0.6204 0.195 253.83);
+    --accent-foreground: var(--snow);
+
+    --success: oklch(0.7329 0.1935 150.81);
+    --success-foreground: var(--eclipse);
+
+    /* no border by default on form fields */
+    --field-border: transparent;
+
+    /* Skeleton Default Global Animation */
+    --skeleton-animation: shimmer; /* shimmer, pulse, none */
+
+    /* Tooltip Default Delays */
+    --tooltip-delay: 1500ms;
+    --tooltip-close-delay: 500ms;
+  }
+
+  :root,
+  .light,
+  .default,
+  [data-theme="light"],
+  [data-theme="default"],
+  :host(.light),
+  :host(.default),
+  :host([data-theme="light"]),
+  :host([data-theme="default"]) {
+    color-scheme: light;
 
     /* == Light Theme Variables == */
 
@@ -66,19 +94,12 @@
     --default: oklch(94% 0.001 286.375);
     --default-foreground: var(--eclipse);
 
-    --accent: oklch(0.6204 0.195 253.83);
-    --accent-foreground: var(--snow);
-
     /* Form Fields */
     --field-background: var(--white);
     --field-foreground: oklch(0.2103 0.0059 285.89);
     --field-placeholder: var(--muted);
-    --field-border: transparent; /* no border by default on form fields */
 
     /* Status Colors */
-    --success: oklch(0.7329 0.1935 150.81);
-    --success-foreground: var(--eclipse);
-
     --warning: oklch(0.7819 0.1585 72.33);
     --warning-foreground: var(--eclipse);
 
@@ -166,16 +187,12 @@
     --field-shadow:
       0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
       0 0 1px 0 rgba(0, 0, 0, 0.06);
-    /* Skeleton Default Global Animation */
-    --skeleton-animation: shimmer; /* shimmer, pulse, none */
-
-    /* Tooltip Default Delays */
-    --tooltip-delay: 1500ms;
-    --tooltip-close-delay: 500ms;
   }
 
   .dark,
-  [data-theme="dark"] {
+  [data-theme="dark"],
+  :host(.dark),
+  :host([data-theme="dark"]) {
     color-scheme: dark;
     /* == Dark Theme Variables == */
 
@@ -188,7 +205,10 @@
     --surface-foreground: var(--foreground);
 
     --surface-secondary: oklch(0.257 0.0037 286.14);
+    --surface-secondary-foreground: var(--foreground);
+
     --surface-tertiary: oklch(0.2721 0.0024 247.91);
+    --surface-tertiary-foreground: var(--foreground);
 
     /* Overlay: Used for floating/overlay components (tooltips, popovers, modals, menus) - lighter for contrast */
     --overlay: oklch(0.2103 0.0059 285.89);
@@ -209,6 +229,7 @@
     /* Form Fields */
     --field-background: oklch(0.2103 0.0059 285.89);
     --field-foreground: var(--foreground);
+    --field-placeholder: var(--muted);
 
     /* Status Colors */
     --warning: oklch(0.8203 0.1388 76.34);

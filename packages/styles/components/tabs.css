@@ -164,10 +164,22 @@
   }
 
   /* Focus states - comprehensive fallback */
-  &:focus-visible:not(:focus),
+  &:focus-visible,
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
+}
+
+/* Tab content alignment - center is the default, handled by .tabs__tab.
+   Scoped to the direct child holding the tab list (the list container, or the
+   list itself when Tabs.ListContainer is omitted) so a nested Tabs inside a
+   panel keeps its own alignment. */
+.tabs--align-start > :is(.tabs__list-container, .tabs__list) .tabs__tab {
+  @apply justify-start text-start;
+}
+
+.tabs--align-end > :is(.tabs__list-container, .tabs__list) .tabs__tab {
+  @apply justify-end text-end;
 }
 
 /* Tab separator */

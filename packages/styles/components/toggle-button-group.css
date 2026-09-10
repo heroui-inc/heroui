@@ -73,7 +73,7 @@
 }
 
 /* Override focus ring to use inset style so it stays within button bounds */
-.toggle-button-group .toggle-button:focus-visible:not(:focus),
+.toggle-button-group .toggle-button:focus-visible,
 .toggle-button-group .toggle-button[data-focus-visible="true"] {
   --tw-ring-offset-width: 0px;
   @apply ring-inset;

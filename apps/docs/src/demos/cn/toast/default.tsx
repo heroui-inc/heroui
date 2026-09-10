@@ -10,10 +10,10 @@ export function Default() {
         size="sm"
         variant="secondary"
         onPress={() => {
-          toast("您已被邀请加入团队", {
+          const id = toast("您已被邀请加入团队", {
             actionProps: {
               children: "忽略",
-              onPress: () => toast.clear(),
+              onPress: () => toast.close(id),
               variant: "tertiary",
             },
             description: "Bob 邀请您加入 HeroUI 团队",

@@ -117,9 +117,9 @@ export function PromiseDemo() {
               });
 
               setTimeout(() => {
-                toast.close(loadingId);
-                toast.success("File uploaded", {
+                toast.update(loadingId, "File uploaded", {
                   description: "Your file has been uploaded successfully",
+                  variant: "success",
                 });
               }, 3000);
             }}
@@ -136,9 +136,9 @@ export function PromiseDemo() {
               });
 
               setTimeout(() => {
-                toast.close(loadingId);
-                toast.success("Payment processed", {
+                toast.update(loadingId, "Payment processed", {
                   description: "Your payment has been processed successfully",
+                  variant: "success",
                 });
               }, 2500);
             }}
@@ -155,9 +155,9 @@ export function PromiseDemo() {
               });
 
               setTimeout(() => {
-                toast.close(loadingId);
-                toast.danger("Failed to save", {
+                toast.update(loadingId, "Failed to save", {
                   description: "Please try again",
+                  variant: "danger",
                 });
               }, 2000);
             }}

@@ -10,7 +10,7 @@ export function CustomStyles() {
           <Switch.Thumb />
         </Switch.Control>
         <div className="flex flex-col gap-0.5">
-          <Label htmlFor="autosave">自动保存草稿</Label>
+          <Label>自动保存草稿</Label>
           <Description>输入时会自动保存更改。</Description>
         </div>
       </Switch.Content>

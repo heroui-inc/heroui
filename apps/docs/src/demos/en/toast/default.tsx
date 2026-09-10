@@ -10,10 +10,10 @@ export function Default() {
         size="sm"
         variant="secondary"
         onPress={() => {
-          toast("You have been invited to join a team", {
+          const id = toast("You have been invited to join a team", {
             actionProps: {
               children: "Dismiss",
-              onPress: () => toast.clear(),
+              onPress: () => toast.close(id),
               variant: "tertiary",
             },
             description: "Bob sent you an invitation to join HeroUI team",
