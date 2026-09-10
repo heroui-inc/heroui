@@ -85,14 +85,14 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.2.0",
-    "@vitest/coverage-v8": "4.1.10",
+    "@vitest/coverage-v8": "4.1.11",
     "fs-extra": "11.3.3",
     "react": "19.2.6",
     "react-aria": "3.52.0",
     "react-aria-components": "1.21.0",
     "react-dom": "19.2.6",
     "tailwindcss": "4.1.18",
-    "vitest": "4.1.10"
+    "vitest": "4.1.11"
   },
   "peerDependencies": {
     "@react-aria/i18n": "^3.13.1",
