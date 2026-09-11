@@ -1,6 +1,10 @@
 packages:
-  - "apps/**/**"
-  - "packages/**/**"
+  - "apps/*"
+  - "packages/*"
+  - "!apps/*/.contentlayer"
+  - "!apps/*/.next"
+  - "!apps/*/.source"
+  - "!apps/*/.turbo"
 
 overrides:
   shiki: 3.20.0
