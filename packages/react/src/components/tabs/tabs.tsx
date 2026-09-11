@@ -57,9 +57,10 @@ const TabsRoot = ({
   ...props
 }: TabsRootProps) => {
   const slots = React.useMemo(() => tabsVariants({align, variant}), [align, variant]);
+  const contextValue = React.useMemo(() => ({orientation, slots}), [orientation, slots]);
 
   return (
-    <TabsContext value={{orientation, slots}}>
+    <TabsContext value={contextValue}>
       <TabsPrimitive
         {...props}
         className={composeTwRenderProps(className, slots.base())}

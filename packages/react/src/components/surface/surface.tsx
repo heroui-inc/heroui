@@ -36,8 +36,10 @@ const SurfaceRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
   variant = "default",
   ...rest
 }: SurfaceRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SurfaceRootProps<E>>) => {
+  const contextValue = React.useMemo(() => ({variant}), [variant]);
+
   return (
-    <SurfaceContext value={{variant}}>
+    <SurfaceContext value={contextValue}>
       <dom.div
         className={surfaceVariants({variant, className})}
         data-slot="surface"

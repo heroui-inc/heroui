@@ -41,6 +41,11 @@ const CardRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
   ...props
 }: CardRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardRootProps<E>>) => {
   const slots = React.useMemo(() => cardVariants({variant}), [variant]);
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
+  const surfaceContextValue = React.useMemo(
+    () => ({variant: variant as SurfaceVariants["variant"]}),
+    [variant],
+  );
 
   const content = (
     <dom.div className={slots.base({className})} data-slot="card" {...(props as any)}>
@@ -49,18 +54,12 @@ const CardRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 
   return (
-    <CardContext value={{slots}}>
+    <CardContext value={contextValue}>
       {variant === "transparent" ? (
         content
       ) : (
         // Allows inner components to apply "on-surface" colors for proper contrast
-        <SurfaceContext
-          value={{
-            variant: variant as SurfaceVariants["variant"],
-          }}
-        >
-          {content}
-        </SurfaceContext>
+        <SurfaceContext value={surfaceContextValue}>{content}</SurfaceContext>
       )}
     </CardContext>
   );

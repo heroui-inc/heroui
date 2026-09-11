@@ -52,9 +52,10 @@ const ColorSwatchPickerRoot = ({
     () => colorSwatchPickerVariants({layout, size, variant}),
     [layout, size, variant],
   );
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <ColorSwatchPickerContext value={{slots}}>
+    <ColorSwatchPickerContext value={contextValue}>
       <ColorSwatchPickerPrimitive
         data-slot="color-swatch-picker"
         {...props}

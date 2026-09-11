@@ -1,5 +1,7 @@
 import {useCallback, useMemo} from "react";
 
+const EMPTY_ITEM_IDS: string[] = [];
+
 export interface UseDisclosureGroupNavigationProps {
   expandedKeys: Set<string | number>;
   itemIds: string[];
@@ -18,7 +20,7 @@ export interface UseDisclosureGroupNavigationReturn {
 export function useDisclosureGroupNavigation({
   allowsMultipleExpanded = false,
   expandedKeys,
-  itemIds = [],
+  itemIds = EMPTY_ITEM_IDS,
   onExpandedChange,
 }: UseDisclosureGroupNavigationProps): UseDisclosureGroupNavigationReturn {
   const currentIndex = useMemo(() => {

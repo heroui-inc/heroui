@@ -40,9 +40,10 @@ const SearchFieldRoot = ({
     () => searchFieldVariants({fullWidth, variant}),
     [fullWidth, variant],
   );
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <SearchFieldContext value={{slots}}>
+    <SearchFieldContext value={contextValue}>
       <SearchFieldPrimitive
         data-slot="search-field"
         {...props}

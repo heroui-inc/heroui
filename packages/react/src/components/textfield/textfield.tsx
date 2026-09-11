@@ -32,6 +32,7 @@ interface TextFieldRootProps
 
 const TextFieldRoot = ({children, className, fullWidth, variant, ...props}: TextFieldRootProps) => {
   const styles = React.useMemo(() => textFieldVariants({fullWidth}), [fullWidth]);
+  const contextValue = React.useMemo(() => ({variant}), [variant]);
 
   return (
     <TextFieldPrimitive
@@ -40,7 +41,7 @@ const TextFieldRoot = ({children, className, fullWidth, variant, ...props}: Text
       className={composeTwRenderProps(className, styles)}
     >
       {(values) => (
-        <TextFieldContext value={{variant}}>
+        <TextFieldContext value={contextValue}>
           <>{typeof children === "function" ? children(values) : children}</>
         </TextFieldContext>
       )}

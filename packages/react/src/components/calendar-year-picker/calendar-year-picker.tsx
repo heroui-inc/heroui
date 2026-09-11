@@ -244,6 +244,7 @@ interface CalendarYearPickerGridContextValue {
   slots: ReturnType<typeof calendarYearPickerVariants>;
   isYearPickerOpen: boolean;
   activeYear: number;
+  currentYear: number;
   focusedYear: number;
   years: number[];
   getFormattedYear: (year: number) => string;
@@ -454,9 +455,12 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
     }
   };
 
+  const currentYear = React.useMemo(() => new Date().getFullYear(), []);
+
   const contextValue = React.useMemo(
     () => ({
       activeYear,
+      currentYear,
       focusedYear,
       getFormattedYear,
       isYearPickerOpen,
@@ -465,7 +469,16 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
       slots,
       years,
     }),
-    [activeYear, focusedYear, getFormattedYear, handleYearSelect, isYearPickerOpen, slots, years],
+    [
+      activeYear,
+      currentYear,
+      focusedYear,
+      getFormattedYear,
+      handleYearSelect,
+      isYearPickerOpen,
+      slots,
+      years,
+    ],
   );
 
   return (
@@ -494,9 +507,8 @@ CalendarYearPickerGrid.displayName = "HeroUI.CalendarYearPicker.Grid";
  * CalendarYearPickerGridBody
  * -----------------------------------------------------------------------------------------------*/
 const CalendarYearPickerGridBody = ({children}: CalendarYearPickerGridBodyProps) => {
-  const {focusedYear, getFormattedYear, isYearPickerOpen, selectYear, years} =
+  const {currentYear, focusedYear, getFormattedYear, isYearPickerOpen, selectYear, years} =
     useCalendarYearPickerGridContext();
-  const currentYear = new Date().getFullYear();
 
   return (
     <>
@@ -542,6 +554,7 @@ const CalendarYearPickerCell = ({
 }: CalendarYearPickerCellProps) => {
   const {
     activeYear,
+    currentYear,
     focusedYear,
     getFormattedYear,
     isYearPickerOpen,
@@ -554,7 +567,7 @@ const CalendarYearPickerCell = ({
   const formattedYear = getFormattedYear(year);
   const values: CalendarYearPickerCellRenderProps = {
     formattedYear,
-    isCurrentYear: year === new Date().getFullYear(),
+    isCurrentYear: year === currentYear,
     isOpen: isYearPickerOpen,
     isSelected,
     selectYear: () => selectYear(year),
