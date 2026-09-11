@@ -54,10 +54,14 @@ async function generateExports() {
 
   console.log(`📦 Found ${components.length} components`);
 
+  // `types` must be the first key in every condition object, and `default` must be
+  // the last, otherwise resolvers under `moduleResolution: node16`/`nodenext` pick
+  // the wrong target. See https://nodejs.org/api/packages.html#conditional-exports
   const exports = {
     ".": {
-      import: "./dist/index.js",
       types: "./dist/index.d.ts",
+      import: "./dist/index.js",
+      default: "./dist/index.js",
     },
     "./package.json": "./package.json",
     "./styles": {
@@ -68,8 +72,9 @@ async function generateExports() {
 
   for (const name of components) {
     exports[`./${name}`] = {
-      import: `./dist/components/${name}/index.js`,
       types: `./dist/components/${name}/index.d.ts`,
+      import: `./dist/components/${name}/index.js`,
+      default: `./dist/components/${name}/index.js`,
     };
   }
 

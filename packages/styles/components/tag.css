@@ -4,6 +4,9 @@
 
   @apply relative inline-flex items-center gap-1 rounded-xl font-medium select-none no-highlight;
 
+  /* Default size - matches .tag--md */
+  @apply px-2 py-1 text-xs;
+
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
@@ -57,7 +60,7 @@
 }
 
 .tag--md {
-  @apply px-2 py-1 text-xs;
+  /* No styles as this is the default size */
 }
 
 .tag--lg {
