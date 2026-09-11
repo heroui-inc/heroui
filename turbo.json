@@ -45,11 +45,13 @@
       "outputs": []
     },
     "test": {
+      "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.*"],
       "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "outputs": []
     },
     "test:browser": {
+      "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.*"],
       "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "outputs": []

@@ -14,6 +14,9 @@ async function generateTypes() {
   // Extend the shared React tsconfig so declaration emit uses the same strictness
   // as `pnpm typecheck` (verbatimModuleSyntax, noUncheckedIndexedAccess, etc.).
   // The shared base sets noEmit: true; override it here for emit-only.
+  // `jsx` is deliberately inherited rather than set to "react-jsx": under the
+  // automatic runtime the `React` imports that only exist for JSX become unused
+  // locals, and the inherited noUnusedLocals then fails the emit.
   const tsconfigBuild = {
     extends: "@heroui/standard/tsconfig/react.json",
     compilerOptions: {
@@ -23,7 +26,6 @@ async function generateTypes() {
       declarationMap: false,
       outDir: "./dist",
       rootDir: "./src",
-      jsx: "react-jsx",
       baseUrl: ".",
     },
     include: ["src"],
