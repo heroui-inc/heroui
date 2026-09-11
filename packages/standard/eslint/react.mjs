@@ -46,7 +46,7 @@ const config = defineConfig([
       "jsx-a11y/click-events-have-key-events": "warn",
       "jsx-a11y/interactive-supports-focus": "warn",
       "jsx-a11y/no-autofocus": "off",
-      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/exhaustive-deps": "warn",
       "react-refresh/only-export-components": ["warn", {allowConstantExport: true}],
       "react/jsx-boolean-value": [
         "error",

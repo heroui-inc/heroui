@@ -48,7 +48,7 @@
     "build": "node scripts/build.mjs --tsc",
     "build:fast": "node scripts/build.mjs",
     "add:component": "node scripts/add-component.mjs",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
