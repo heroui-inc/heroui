@@ -224,11 +224,6 @@
   @apply flex size-full items-center justify-center;
 }
 
-/* Switch label */
-.switch__label {
-  @apply text-base font-medium text-foreground;
-}
-
 .switch [data-slot="label"] {
   @apply select-none;
 }

@@ -9,7 +9,7 @@
   @apply text-base font-medium text-foreground;
 }
 
-.fieldset__field_group {
+.fieldset__field-group {
   @apply w-full space-y-4;
 }
 
