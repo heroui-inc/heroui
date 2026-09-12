@@ -1,5 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    ".nvmrc",
+    "eslint.config.mjs",
+    "prettier.config.mjs",
+    "pnpm-lock.yaml",
+    "package.json"
+  ],
   "globalEnv": [
     "VERCEL_ENV",
     "STORYBOOK_READY_ONLY",
@@ -15,13 +22,22 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", ".source/**", "dist/**", "storybook-static/**"]
+      "outputs": [
+        ".next/**",
+        ".source/**",
+        "dist/**",
+        "storybook-static/**",
+        "bundle-sizes.json",
+        "public/skills/**"
+      ]
     },
     "start": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "cache": false,
+      "persistent": true
     },
     "lint": {
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.*", "!**/*.md", "!**/*.mdx"],
       "outputs": []
     },
     "format": {
@@ -30,21 +46,23 @@
     },
     "test": {
       "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.*"],
       "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "outputs": []
     },
     "test:browser": {
       "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.*"],
       "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "outputs": []
     },
     "test:coverage": {
-      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.*"],
       "outputs": ["coverage/**"]
     },
     "typecheck": {
-      "dependsOn": [],
-      "outputs": []
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.*"],
+      "outputs": ["tsconfig.tsbuildinfo", "*.tsbuildinfo"]
     }
   }
 }
