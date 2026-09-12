@@ -88,8 +88,8 @@
     "@vitest/coverage-v8": "4.1.11",
     "fs-extra": "11.3.3",
     "react": "19.2.6",
-    "react-aria": "3.52.0",
-    "react-aria-components": "1.21.0",
+    "react-aria": "3.52.1",
+    "react-aria-components": "1.21.1",
     "react-dom": "19.2.6",
     "tailwindcss": "4.1.18",
     "vitest": "4.1.11"
@@ -99,8 +99,8 @@
     "@react-aria/ssr": "^3.10.1",
     "@react-aria/utils": "^3.34.1",
     "react": ">=19.0.0",
-    "react-aria": "^3.52.0",
-    "react-aria-components": "^1.21.0",
+    "react-aria": "^3.52.1",
+    "react-aria-components": "^1.21.1",
     "react-dom": ">=19.0.0",
     "tailwindcss": ">=4.0.0"
   }
