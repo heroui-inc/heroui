@@ -20,6 +20,9 @@ const disableTransitions = () => {
 const ringOf = (name: string) =>
   getComputedStyle(page.getByRole("option", {name}).element()).boxShadow;
 
+const triggerRing = () =>
+  getComputedStyle(page.getByRole("button", {name: "State"}).element()).boxShadow;
+
 describe("Select (browser)", () => {
   it("opens the listbox, shows options, and restores focus to the trigger after Escape", async () => {
     await renderSelect();
@@ -114,6 +117,56 @@ describe("Select (browser)", () => {
           .toHaveAttribute("data-focus-visible", "true");
         expect(ringOf("California")).not.toBe("none");
         expect(ringOf("Florida")).toBe("none");
+      } finally {
+        restore();
+      }
+    });
+  });
+
+  describe("trigger focus ring", () => {
+    // Focus is restored to the trigger when the listbox closes, which is a
+    // second path into the browser's focus-visible heuristic.
+    it("supports selecting with the mouse without ringing the trigger", async () => {
+      const restore = disableTransitions();
+
+      try {
+        await render(<SelectFixture defaultValue="california" />);
+
+        const trigger = page.getByRole("button", {name: "State"});
+        const unringed = triggerRing();
+
+        await trigger.click();
+        await expect.element(page.getByRole("listbox")).toBeInTheDocument();
+
+        await page.getByRole("option", {name: "Texas"}).click();
+        await expect.element(page.getByRole("listbox")).not.toBeInTheDocument();
+
+        await expect.element(trigger).toHaveFocus();
+        await expect.element(trigger).not.toHaveAttribute("data-focus-visible");
+        expect(triggerRing()).toBe(unringed);
+      } finally {
+        restore();
+      }
+    });
+
+    it("supports selecting with the keyboard and rings the trigger", async () => {
+      const restore = disableTransitions();
+
+      try {
+        await render(<SelectFixture defaultValue="california" />);
+
+        const trigger = page.getByRole("button", {name: "State"});
+        const unringed = triggerRing();
+
+        await trigger.click();
+        await expect.element(page.getByRole("listbox")).toBeInTheDocument();
+
+        await userEvent.keyboard("{ArrowDown}");
+        await userEvent.keyboard("{Enter}");
+        await expect.element(page.getByRole("listbox")).not.toBeInTheDocument();
+
+        await expect.element(trigger).toHaveAttribute("data-focus-visible", "true");
+        expect(triggerRing()).not.toBe(unringed);
       } finally {
         restore();
       }
