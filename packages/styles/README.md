@@ -45,40 +45,42 @@ The package exports CSS files organized into:
 @heroui/styles/
 ├── index.css          # Main entry point
 ├── base/              # Base styles and CSS variables
-│   └── base.css       # Layout tokens, typography, scrollbar
-├── components/        # Component-specific styles
-│   ├── accordion.css
-│   ├── avatar.css
+│   ├── base.css       # Layout tokens, typography
+│   └── scrollbar.css  # Scrollbar base styles
+├── components/        # Component-specific styles (one file per component)
 │   ├── button.css
 │   ├── chip.css
-│   ├── link.css
-│   ├── popover.css
-│   └── tooltip.css
+│   └── …
 ├── themes/            # Theme definitions
 │   ├── default/       # Default theme
 │   │   ├── index.css  # Theme entry point
 │   │   └── variables.css  # Theme variables (light/dark)
 │   └── shared/        # Shared theme utilities
 │       └── theme.css  # Calculated variables and utilities
-└── utilities/         # Utility classes
-    ├── backdrop.css
+├── utilities/         # Shared @utility helpers (status-focused, status-disabled, …)
+│   └── index.css
+└── variants/          # Custom Tailwind variants (motion-reduce, …)
     └── index.css
 ```
 
 ### Importing Specific Components
 
-Instead of importing everything, you can import only what you need:
+Component CSS files are not self-contained: they `@apply` shared utilities
+(`status-focused`, `status-disabled`, `no-highlight`, …) and use custom
+variants (`motion-reduce:`). Import the utilities and variants prelude
+alongside the theme, then add only the components you need:
 
 ```css
-/* Import Tailwind CSS base */
 @import "tailwindcss";
 
-/* Import only specific components */
+/* Required prelude — component CSS depends on these */
+@import "@heroui/styles/utilities";
+@import "@heroui/styles/variants";
+@import "@heroui/styles/themes/default" layer(theme);
+
+/* Only the components you use */
 @import "@heroui/styles/components/button.css" layer(components);
 @import "@heroui/styles/components/chip.css" layer(components);
-
-/* Import theme */
-@import "@heroui/styles/themes/default" layer(base);
 ```
 
 ### Component Classes

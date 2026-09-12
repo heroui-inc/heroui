@@ -39,7 +39,7 @@
   }
 
   /* Focus state */
-  &:focus-visible,
+  &:focus-visible:not([data-focused]),
   &[data-focus-visible="true"] {
     @apply status-focused;
 

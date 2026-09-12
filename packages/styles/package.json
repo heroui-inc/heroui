@@ -30,6 +30,14 @@
       "import": "./src/components/*/index.ts",
       "default": "./src/components/*/index.ts"
     },
+    "./base": "./base/base.css",
+    "./base/*.css": "./base/*.css",
+    "./components/*.css": "./components/*.css",
+    "./themes/default": "./themes/default/index.css",
+    "./themes/*/*.css": "./themes/*/*.css",
+    "./themes/*.css": "./themes/*.css",
+    "./utilities": "./utilities/index.css",
+    "./variants": "./variants/index.css",
     "./package.json": "./package.json"
   },
   "sideEffects": [
