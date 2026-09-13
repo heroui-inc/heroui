@@ -36,8 +36,24 @@ export const {
   SidebarFolder,
   SidebarProvider: Sidebar,
   SidebarTrigger,
-  SidebarViewport,
 } = Base;
+
+/** Native overflow — Radix ScrollArea's overlay thumb lags behind the scroll offset. */
+export function SidebarViewport({children, className, ...props}: ComponentProps<"div">) {
+  return (
+    <div
+      data-docs-sidebar-viewport=""
+      className={cn(
+        "min-h-0 flex-1 overflow-y-auto overscroll-contain p-4",
+        "mask-[linear-gradient(to_bottom,transparent,white_12px,white_calc(100%-12px),transparent)]",
+        className,
+      )}
+      {...props}
+    >
+      <div className="flex w-full flex-col gap-0.5">{children}</div>
+    </div>
+  );
+}
 
 export function SidebarContent({
   children,

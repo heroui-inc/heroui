@@ -242,8 +242,8 @@
     border-top: none;
   }
 
-  [data-radix-scroll-area-viewport] {
-    @apply px-1 pt-2;
+  [data-docs-sidebar-viewport] {
+    @apply ps-1 pe-4 pt-2;
 
     p {
       @apply font-medium;
@@ -307,10 +307,22 @@
 }
 
 #nd-sidebar-mobile {
-  [data-radix-scroll-area-viewport] {
+  [data-docs-sidebar-viewport] {
     p {
       @apply font-medium;
     }
+  }
+}
+
+/* Native sidebar scrollbar: hidden until hover/focus so it stays discoverable
+   without the delayed overlay thumb from Radix ScrollArea. */
+[data-docs-sidebar-viewport] {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  &:hover,
+  &:focus-within {
+    scrollbar-color: var(--scrollbar) transparent;
   }
 }
 
