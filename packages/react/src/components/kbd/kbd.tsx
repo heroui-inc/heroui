@@ -42,9 +42,10 @@ const KbdRoot = <E extends keyof React.JSX.IntrinsicElements = "kbd">({
   ...props
 }: KbdRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof KbdRootProps<E>>) => {
   const slots = React.useMemo(() => kbdVariants({variant}), [variant]);
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <KbdContext value={{slots}}>
+    <KbdContext value={contextValue}>
       <dom.kbd {...(props as any)} className={slots.base({className})}>
         {children}
       </dom.kbd>

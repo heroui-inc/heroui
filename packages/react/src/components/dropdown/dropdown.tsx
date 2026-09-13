@@ -38,9 +38,10 @@ interface DropdownRootProps
 
 const DropdownRoot = ({children, ...props}: DropdownRootProps) => {
   const slots = React.useMemo(() => dropdownVariants(), []);
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <DropdownContext value={{slots}}>
+    <DropdownContext value={contextValue}>
       <MenuTriggerPrimitive {...props}>{children}</MenuTriggerPrimitive>
     </DropdownContext>
   );

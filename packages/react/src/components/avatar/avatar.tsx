@@ -26,9 +26,10 @@ interface AvatarRootProps
 
 const AvatarRoot = ({children, className, color, size, variant, ...props}: AvatarRootProps) => {
   const slots = React.useMemo(() => avatarVariants({color, size, variant}), [color, size, variant]);
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <AvatarContext value={{slots}}>
+    <AvatarContext value={contextValue}>
       <AvatarPrimitive.Root className={slots.base({className})} {...props}>
         {children}
       </AvatarPrimitive.Root>

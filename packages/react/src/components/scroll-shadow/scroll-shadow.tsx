@@ -109,9 +109,11 @@ export const ScrollShadowRoot = ({
     ...styleProp,
   } as React.CSSProperties;
 
+  const mergedRef = useMemo(() => mergeRefs(internalRef, ref), [internalRef, ref]);
+
   return (
     <div
-      ref={mergeRefs(internalRef, ref)}
+      ref={mergedRef}
       className={slots.base({className})}
       data-orientation={orientation}
       // Selects the scroll-driven fade where supported. Controlled and disabled modes stay

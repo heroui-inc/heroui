@@ -79,8 +79,10 @@ const DateRangePickerRoot = <T extends DateValue>({
     onOpenChange?.(nextIsOpen);
   };
 
+  const contextValue = React.useMemo(() => ({slots, triggerRef}), [slots, triggerRef]);
+
   return (
-    <DateRangePickerContext value={{slots, triggerRef}}>
+    <DateRangePickerContext value={contextValue}>
       <DateRangePickerPrimitive
         data-required={dataAttr(props.isRequired)}
         data-slot="date-range-picker"
@@ -115,7 +117,10 @@ const DateRangePickerTrigger = ({
     },
     [triggerRef],
   );
-  const mergedRef = mergeRefs(contextRefCallback, ref);
+  const mergedRef = React.useMemo(
+    () => mergeRefs(contextRefCallback, ref),
+    [contextRefCallback, ref],
+  );
 
   return (
     <ButtonPrimitive

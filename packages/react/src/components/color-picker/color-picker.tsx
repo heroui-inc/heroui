@@ -39,9 +39,10 @@ interface ColorPickerRootProps
 
 const ColorPickerRoot = ({children, className, ...props}: ColorPickerRootProps) => {
   const slots = React.useMemo(() => colorPickerVariants(), []);
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <ColorPickerContext value={{slots}}>
+    <ColorPickerContext value={contextValue}>
       <ColorPickerPrimitive {...props}>
         <DialogTriggerPrimitive>
           <div className={composeSlotClassName(slots?.base, className)} data-slot="color-picker">

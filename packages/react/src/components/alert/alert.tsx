@@ -23,6 +23,8 @@ type AlertContext = {
 
 const AlertContext = createContext<AlertContext>({});
 
+const DEFAULT_SURFACE_CONTEXT = {variant: "default" as SurfaceVariants["variant"]};
+
 /* ------------------------------------------------------------------------------------------------
  * Alert Root
  * --------------------------------------------------------------------------------------------- */
@@ -42,14 +44,11 @@ const AlertRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
   ...rest
 }: AlertRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertRootProps<E>>) => {
   const slots = React.useMemo(() => alertVariants({status}), [status]);
+  const contextValue = React.useMemo(() => ({slots, status}), [slots, status]);
 
   return (
-    <AlertContext value={{slots, status}}>
-      <SurfaceContext
-        value={{
-          variant: "default" as SurfaceVariants["variant"],
-        }}
-      >
+    <AlertContext value={contextValue}>
+      <SurfaceContext value={DEFAULT_SURFACE_CONTEXT}>
         <dom.div className={slots?.base({className})} data-slot="alert-root" {...(rest as any)}>
           {children}
         </dom.div>

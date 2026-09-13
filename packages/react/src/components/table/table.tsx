@@ -50,9 +50,10 @@ const TableRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
   ...props
 }: TableRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TableRootProps<E>>) => {
   const slots = React.useMemo(() => tableVariants({variant}), [variant]);
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <TableContext value={{slots}}>
+    <TableContext value={contextValue}>
       <dom.div className={slots.base({className})} data-slot="table" {...(props as any)}>
         {children}
       </dom.div>
