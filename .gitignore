@@ -79,6 +79,7 @@ storybook-static
 
 # bundle size reports
 bundle-sizes.json
+bundle-size.json
 
 # clean-package backups
 .package.json.backup

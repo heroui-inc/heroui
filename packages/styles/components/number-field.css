@@ -152,7 +152,7 @@
   }
 
   /* Focus visible state */
-  &:focus-visible,
+  &:focus-visible:not([data-focused]),
   &[data-focus-visible="true"] {
   }
 

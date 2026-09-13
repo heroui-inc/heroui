@@ -40,8 +40,10 @@
     @apply ps-2 pe-7;
   }
 
-  /* Focus visible state (keyboard focus only) */
-  &:focus-visible,
+  /* Focus visible state (keyboard focus only).
+     React Aria always sets data-focused when it owns the item, so the native
+     fallback is scoped to consumers rendering this class outside React Aria. */
+  &:focus-visible:not([data-focused]),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
