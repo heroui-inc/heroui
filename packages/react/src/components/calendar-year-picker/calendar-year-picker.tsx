@@ -302,6 +302,12 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
   // key so effects don't re-run and steal focus back to the selected year.
   const itemsKey = items.map((item) => `${item.id}:${item.date.year}`).join("|");
 
+  // `item.formatted` depends on locale, time zone and the `format` prop, none of which
+  // `itemsKey` encodes — so anything serving `formatted` needs its own key, or it keeps
+  // rendering year labels in the previous format. Kept separate from `itemsKey` so a
+  // locale change cannot perturb the focus effects below.
+  const labelsKey = items.map((item) => item.formatted).join("|");
+
   // Keyed on `itemsKey` rather than `items` because `items` is a fresh array every
   // render; `itemsKey` captures the same content with a stable identity. Without this
   // the effects below re-run on every render and steal focus back to the selected year.
@@ -310,7 +316,7 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
   const itemByYear = React.useMemo(
     () => new Map(items.map((item) => [item.date.year, item])),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [itemsKey],
+    [itemsKey, labelsKey],
   );
   const focusedYear = items[focusedItemId as number]?.date.year ?? state.focusedDate.year;
 
