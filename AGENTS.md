@@ -307,7 +307,7 @@ calendar-year-picker
 
 ## Non-obvious Gotchas
 
-1. **`pnpm i` triggers builds** — The `postinstall` hook builds `@heroui/styles` and runs `typegen:docs` and `typegen:docs-cn`. If it fails, run `pnpm --filter @heroui/styles build` manually.
+1. **`pnpm i` runs docs typegen only** — The `postinstall` hook is just `pnpm typegen:docs`. It does **not** build `@heroui/styles` (and there is no `@heroui/docs-cn` package — Chinese docs live under `apps/docs`). Run `pnpm build` (or `pnpm --filter @heroui/styles build`) when you need `styles/dist/`, or rely on `pnpm test` / Turbo `^build`.
 
 2. **Build order matters** — `@heroui/styles` must build before `@heroui/react`. Running `pnpm build` from root handles this via Turbo's `^build` dependency.
 

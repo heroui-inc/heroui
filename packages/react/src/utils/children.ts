@@ -19,7 +19,7 @@ export const pickChildren = <T = ReactNode>(
     return item;
   })?.filter(Boolean) as T;
 
-  const targetChildren = target.length >= 0 ? target : undefined;
+  const targetChildren = target.length > 0 ? target : undefined;
 
   return [withoutTargetChildren, targetChildren];
 };

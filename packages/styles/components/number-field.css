@@ -146,16 +146,6 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  /* Hover state */
-  &:hover,
-  &[data-hovered="true"] {
-  }
-
-  /* Focus visible state */
-  &:focus-visible:not([data-focused]),
-  &[data-focus-visible="true"] {
-  }
-
   /* Pressed state */
   &:active,
   &[data-pressed="true"] {

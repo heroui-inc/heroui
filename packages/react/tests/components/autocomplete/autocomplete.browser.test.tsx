@@ -1,11 +1,10 @@
 import {render} from "@heroui/testing/browser";
 import {page} from "vitest/browser";
 
-// Tags are removed by pressing an area that only exists in compiled CSS, so this suite needs the
-// built stylesheet. Every `pnpm test*` entry point builds `@heroui/styles` first.
-import "../../../../styles/dist/heroui.min.css";
-
 import {AutocompleteMultipleFixture} from "./fixtures";
+
+// Tag remove hit-targets and focus rings live in CSS; Vite Tailwind compiles `@/styles.css`.
+import "@/styles.css";
 
 /** Offset from the glyph centre that a finger routinely lands on, inside the 24px target. */
 const OFF_CENTRE = 11;

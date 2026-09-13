@@ -33,11 +33,6 @@
     background-color: var(--field-focus);
   }
 
-  /* Focus visible state */
-  &:focus-visible:not([data-focused]),
-  &[data-focus-visible="true"] {
-  }
-
   &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--field-focus);
@@ -74,11 +69,6 @@
   &:focus,
   &[data-focused="true"] {
     background-color: var(--textarea-bg-focus);
-  }
-
-  /* Focus visible state */
-  &:focus-visible:not([data-focused]),
-  &[data-focus-visible="true"] {
   }
 
   /* Invalid state */
