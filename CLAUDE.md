@@ -239,21 +239,22 @@ export {componentVariants, type ComponentVariants} from "./component.styles";
 // Context for sharing state/styles
 const ComponentContext = createContext<{slots?: ReturnType<typeof componentVariants>}>({});
 
-// Root component wraps with context
-const ComponentRoot = React.forwardRef<...>(({children, className, ...props}, ref) => {
+// Root component wraps with context (React 19: ref is a regular prop)
+const ComponentRoot = ({children, className, ref, ...props}: ComponentPropsWithRef<"div">) => {
   const slots = React.useMemo(() => componentVariants({...}), [...]);
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <ComponentContext value={{slots}}>
+    <ComponentContext value={contextValue}>
       <ReactAriaComponent ref={ref} className={composeTwRenderProps(className, slots.base())}>
         {children}
       </ReactAriaComponent>
     </ComponentContext>
   );
-});
+};
 
 // Child components consume context
-const ComponentItem = React.forwardRef<...>(({className, ...props}, ref) => {
+const ComponentItem = ({className, ref, ...props}: ComponentPropsWithRef<"div">) => {
   const {slots} = useContext(ComponentContext);
 
   return (
@@ -261,7 +262,7 @@ const ComponentItem = React.forwardRef<...>(({className, ...props}, ref) => {
       {props.children}
     </ReactAriaComponent>
   );
-});
+};
 
 // Export pattern
 export {ComponentRoot as Root, ComponentItem as Item, ...};
@@ -286,7 +287,7 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 
 2. **Component Features**:
    - Built on React Aria Components for accessibility
-   - Use `forwardRef` for all components
+   - Accept `ref` as a regular prop (React 19) — do not use `forwardRef`
    - Display names follow: `HeroUI.ComponentName` or `HeroUI.Component.SubPart`
    - Support render props from React Aria when available
 

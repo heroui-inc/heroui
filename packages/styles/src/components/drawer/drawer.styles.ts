@@ -23,12 +23,15 @@ export const drawerVariants = tv({
     placement: {
       bottom: {
         content: "drawer__content--bottom",
+        dialog: "drawer__dialog--bottom",
       },
       left: {
         content: "drawer__content--left",
+        dialog: "drawer__dialog--left",
       },
       right: {
         content: "drawer__content--right",
+        dialog: "drawer__dialog--right",
       },
       top: {
         content: "drawer__content--top",
