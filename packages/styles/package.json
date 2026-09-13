@@ -52,6 +52,7 @@
     "dev": "rollup -c rollup.config.mjs --watch",
     "measure-size": "node scripts/measure-bundle-size.mjs",
     "clean": "rm -rf dist .turbo tsconfig.tsbuildinfo",
+    "lint": "eslint . --max-warnings=0",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit"

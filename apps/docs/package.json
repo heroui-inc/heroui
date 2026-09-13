@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "lint": "eslint",
+    "lint": "eslint --max-warnings=0",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit",
     "typegen": "next typegen",

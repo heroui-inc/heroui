@@ -62,14 +62,7 @@ export function useDisclosureGroupNavigation({
     } else {
       onExpandedChange(new Set([nextItem]));
     }
-  }, [
-    currentIndex,
-    itemIds.length,
-    itemIds,
-    expandedKeys,
-    onExpandedChange,
-    allowsMultipleExpanded,
-  ]);
+  }, [currentIndex, itemIds, expandedKeys, onExpandedChange, allowsMultipleExpanded]);
 
   const isPrevDisabled = currentIndex <= 0;
   const isNextDisabled = currentIndex >= itemIds.length - 1;
