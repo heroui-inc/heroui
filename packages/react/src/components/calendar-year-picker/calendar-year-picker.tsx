@@ -455,7 +455,10 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
     }
   };
 
-  const currentYear = React.useMemo(() => new Date().getFullYear(), []);
+  // Hoisted out of the cells so a grid renders one Date instead of one per year, and
+  // read per render rather than memoized on [] so it stays correct across midnight on
+  // Dec 31. It's a number, so the context memo below still compares it by value.
+  const currentYear = new Date().getFullYear();
 
   const contextValue = React.useMemo(
     () => ({
