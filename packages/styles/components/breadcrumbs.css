@@ -1,10 +1,10 @@
 /* Base breadcrumbs container */
 .breadcrumbs {
-  @apply flex items-center;
+  @apply flex items-center gap-1.5;
 
   /* Breadcrumb link */
   .breadcrumbs__link {
-    @apply relative px-0.5 text-sm leading-5 font-medium text-muted no-underline opacity-100;
+    @apply relative text-sm leading-5 font-medium text-muted no-underline opacity-100;
 
     &:hover,
     &[data-hovered="true"] {
@@ -18,7 +18,7 @@
 
   /* Breadcrumb item wrapper */
   .breadcrumbs__item {
-    @apply flex shrink-0 items-center justify-center gap-0.5 px-0.5;
+    @apply flex shrink-0 items-center justify-center gap-1;
   }
 
   /* Separator icon */
