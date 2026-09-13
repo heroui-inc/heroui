@@ -146,7 +146,7 @@ export function DocsLayout(props: DocsLayoutProps) {
       // Fumadocs defaults the scroll area to `type="scroll"`, which only reveals the thumb while
       // the user is actively scrolling. `hover` matches the v2 docs sidebar so the scrollbar is
       // discoverable by pointing at the nav.
-      <SidebarViewport area={{type: "hover"}}>
+      <SidebarViewport area={{className: "pe-2", type: "hover"}}>
         {links
           .filter((item) => item.type !== "icon")
           .map((item, i, arr) => (
