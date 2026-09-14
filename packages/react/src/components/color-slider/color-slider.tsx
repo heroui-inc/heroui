@@ -63,6 +63,17 @@ const CHANNEL_TO_REQUIRED_COLORSPACE: Partial<Record<string, ColorSpace>> = {
 const HSL_HSB_ONLY_CHANNELS = new Set(["hue", "saturation"]);
 
 /**
+ * `getValidColorSpace` runs in the render body, so an unguarded warning would fire on
+ * every render of a misconfigured slider in production builds.
+ */
+function warnInDev(message: string) {
+  if (typeof process !== "undefined" && process.env?.["NODE_ENV"] !== "production") {
+    // eslint-disable-next-line no-console
+    console.warn(message);
+  }
+}
+
+/**
  * Validates and returns a valid colorSpace for the given channel.
  * If an invalid combination is detected, logs a warning and returns the correct colorSpace.
  */
@@ -71,8 +82,7 @@ function getValidColorSpace(channel: string, colorSpace?: ColorSpace): ColorSpac
   const requiredSpace = CHANNEL_TO_REQUIRED_COLORSPACE[channel];
 
   if (requiredSpace && colorSpace && colorSpace !== requiredSpace) {
-    // eslint-disable-next-line no-console
-    console.warn(
+    warnInDev(
       `[HeroUI ColorSlider] Invalid combination: channel="${channel}" requires colorSpace="${requiredSpace}", ` +
         `but received colorSpace="${colorSpace}". Auto-correcting to "${requiredSpace}".`,
     );
@@ -82,8 +92,7 @@ function getValidColorSpace(channel: string, colorSpace?: ColorSpace): ColorSpac
 
   // Check if channel is HSL/HSB only (hue, saturation) but RGB was specified
   if (HSL_HSB_ONLY_CHANNELS.has(channel) && colorSpace === "rgb") {
-    // eslint-disable-next-line no-console
-    console.warn(
+    warnInDev(
       `[HeroUI ColorSlider] Invalid combination: channel="${channel}" is not available in RGB color space. ` +
         `Use colorSpace="hsl" or colorSpace="hsb" instead. Auto-correcting to "hsl".`,
     );

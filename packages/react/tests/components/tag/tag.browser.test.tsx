@@ -6,9 +6,8 @@ import {page} from "vitest/browser";
 import {Tag} from "@/components/tag";
 import {TagGroup} from "@/components/tag-group";
 
-// The remove button's pressable area lives in CSS, so this suite needs the compiled stylesheet
-// rather than the Tailwind sources. Every `pnpm test*` entry point builds `@heroui/styles` first.
-import "../../../../styles/dist/heroui.min.css";
+// The remove button's pressable area lives in CSS; Vite Tailwind compiles `@/styles.css`.
+import "@/styles.css";
 
 /** WCAG 2.5.8 (Target Size, Minimum). */
 const MIN_TARGET_SIZE = 24;

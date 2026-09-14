@@ -4,6 +4,8 @@ import {NextRequest} from "next/server";
 import {isValidElement} from "react";
 import {describe, expect, it, vi} from "vitest";
 
+import {GET as getMcpHandshake} from "@/app/.well-known/mcp/route";
+
 import AboutPage from "@/app/[lang]/(home)/about/page";
 import ContactPage from "@/app/[lang]/(home)/contact/page";
 import HomePage from "@/app/[lang]/(home)/page";
@@ -15,8 +17,6 @@ import {GET as searchAgentDocs} from "@/app/api/agent/search/route";
 import {GET as getOpenApi} from "@/app/openapi.json/route";
 import {getOrganizationJsonLd} from "@/lib/json-ld";
 import {generateIndexHeader} from "@/lib/llms-utils";
-
-import {GET as getMcpHandshake} from "@/app/.well-known/mcp/route";
 
 vi.mock("@/lib/get-llm-text", () => ({
   getLLMText: vi.fn(),

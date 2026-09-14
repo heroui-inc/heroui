@@ -29,31 +29,3 @@
 .separator--tertiary {
   @apply bg-separator-tertiary;
 }
-
-.separator__container {
-  @apply flex items-center gap-3;
-}
-
-.separator__container--horizontal {
-  @apply w-full flex-row;
-}
-
-.separator__container--vertical {
-  @apply h-full flex-col justify-center;
-}
-
-.separator__line {
-  @apply shrink-0 grow;
-}
-
-.separator__content {
-  @apply inline-flex items-center justify-center text-center whitespace-nowrap text-muted;
-}
-
-.separator__content--horizontal {
-  @apply text-center;
-}
-
-.separator__content--vertical {
-  @apply text-center;
-}

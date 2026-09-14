@@ -118,7 +118,10 @@ const AutocompleteTrigger = ({
   );
 
   // Merge context ref callback with user-provided ref
-  const mergedRef = mergeRefs(contextRefCallback, ref);
+  const mergedRef = React.useMemo(
+    () => mergeRefs(contextRefCallback, ref),
+    [contextRefCallback, ref],
+  );
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // Don't toggle if clicking the clear button
@@ -308,7 +311,10 @@ const AutocompleteClearButton = <E extends keyof React.JSX.IntrinsicElements = "
   );
 
   // Merge context ref callback with user-provided ref
-  const mergedRef = mergeRefs(clearButtonRefCallback, ref as any);
+  const mergedRef = React.useMemo(
+    () => mergeRefs(clearButtonRefCallback, ref as any),
+    [clearButtonRefCallback, ref],
+  );
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     state?.selectionManager.setSelectedKeys(new Set());

@@ -141,125 +141,169 @@ async function measureBundleSizes() {
   const sizes = {
     components: {},
     css: {},
+    hooks: null,
     main: {},
+    note: "Per-component figures are the sum of every .js file under that component directory (preserveModules). They do not include shared utils/hooks or a reachable-graph bundling of transitive imports. `total` is the gzip of every unique .js under dist/.",
     plugin: {},
-    total: {gzip: 0, min: 0},
+    total: {gzip: "0.00", min: "0.00"},
+    utils: null,
   };
 
-  // Helper function to measure file size
+  function measureBytes(content) {
+    return {
+      gzip: zlib.gzipSync(content, {level: 9}).length / 1000,
+      min: Buffer.byteLength(content) / 1000,
+    };
+  }
+
+  function fileCount(count) {
+    return `${count} file${count === 1 ? "" : "s"}`;
+  }
+
   async function measureFile(filePath) {
     if (!(await fs.pathExists(filePath))) {
       return null;
     }
 
-    const content = await fs.readFile(filePath);
-    const minSize = Buffer.byteLength(content) / 1000;
-    const gzipSize = zlib.gzipSync(content, {level: 9}).length / 1000;
+    const measured = measureBytes(await fs.readFile(filePath));
 
     return {
-      gzip: gzipSize.toFixed(2),
-      min: minSize.toFixed(2),
+      gzip: measured.gzip.toFixed(2),
+      min: measured.min.toFixed(2),
     };
   }
 
-  // Measure main bundle
-  const mainPath = path.join(distDir, "index.js");
-  const mainSize = await measureFile(mainPath);
+  async function collectJsFiles(dir) {
+    if (!(await fs.pathExists(dir))) {
+      return [];
+    }
+
+    const entries = await fs.readdir(dir, {withFileTypes: true});
+    const files = [];
+
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+
+      if (entry.isDirectory()) {
+        files.push(...(await collectJsFiles(fullPath)));
+      } else if (entry.isFile() && entry.name.endsWith(".js")) {
+        files.push(fullPath);
+      }
+    }
+
+    return files;
+  }
+
+  async function measureDirectory(dir) {
+    const files = await collectJsFiles(dir);
+
+    if (files.length === 0) {
+      return null;
+    }
+
+    // Concatenate then gzip once so the figure reflects shared dictionary across
+    // the directory's modules, rather than summing independently-gzipped files.
+    const concatenated = Buffer.concat(await Promise.all(files.map((f) => fs.readFile(f))));
+    const measured = measureBytes(concatenated);
+
+    return {
+      files: files.length,
+      gzip: measured.gzip.toFixed(2),
+      min: measured.min.toFixed(2),
+    };
+  }
+
+  const mainSize = await measureFile(path.join(distDir, "index.js"));
 
   if (mainSize) {
     sizes.main = mainSize;
-    sizes.total.min += parseFloat(mainSize.min);
-    sizes.total.gzip += parseFloat(mainSize.gzip);
   }
 
-  // Measure plugin bundle
-  const pluginPath = path.join(distDir, "plugin.js");
-  const pluginSize = await measureFile(pluginPath);
+  const pluginSize = await measureFile(path.join(distDir, "plugin.js"));
 
   if (pluginSize) {
     sizes.plugin = pluginSize;
-    sizes.total.min += parseFloat(pluginSize.min);
-    sizes.total.gzip += parseFloat(pluginSize.gzip);
   }
 
-  // Measure individual components
   const componentsDir = path.join(distDir, "components");
 
   if (await fs.pathExists(componentsDir)) {
     const componentDirs = await fs.readdir(componentsDir);
 
     for (const componentDir of componentDirs) {
-      const componentPath = path.join(componentsDir, componentDir, "index.js");
-      const componentSize = await measureFile(componentPath);
+      const componentPath = path.join(componentsDir, componentDir);
+      const stat = await fs.stat(componentPath);
+
+      if (!stat.isDirectory()) continue;
+
+      const componentSize = await measureDirectory(componentPath);
 
       if (componentSize) {
         sizes.components[componentDir] = componentSize;
-        sizes.total.min += parseFloat(componentSize.min);
-        sizes.total.gzip += parseFloat(componentSize.gzip);
       }
     }
   }
 
-  // Measure CSS files
-  const cssPath = path.join(distDir, "index.css");
+  sizes.utils = await measureDirectory(path.join(distDir, "utils"));
+  sizes.hooks = await measureDirectory(path.join(distDir, "hooks"));
+
+  const cssPath = path.join(distDir, "styles.css");
   const cssSize = await measureFile(cssPath);
 
   if (cssSize) {
-    sizes.css.main = cssSize;
-    sizes.total.min += parseFloat(cssSize.min);
-    sizes.total.gzip += parseFloat(cssSize.gzip);
+    sizes.css.styles = cssSize;
   }
 
-  // Measure styles.css
-  const stylesCssPath = path.join(distDir, "styles.css");
-  const stylesCssSize = await measureFile(stylesCssPath);
+  // Unique-file total across the whole dist tree — the only non-overlapping figure.
+  const allJs = await collectJsFiles(distDir);
+  const allContent = Buffer.concat(await Promise.all(allJs.map((f) => fs.readFile(f))));
+  const totalMeasured = measureBytes(allContent);
 
-  if (stylesCssSize) {
-    sizes.css.styles = stylesCssSize;
-    sizes.total.min += parseFloat(stylesCssSize.min);
-    sizes.total.gzip += parseFloat(stylesCssSize.gzip);
-  }
+  sizes.total = {
+    files: allJs.length,
+    gzip: totalMeasured.gzip.toFixed(2),
+    min: totalMeasured.min.toFixed(2),
+  };
 
-  // Round totals
-  sizes.total.min = sizes.total.min.toFixed(2);
-  sizes.total.gzip = sizes.total.gzip.toFixed(2);
-
-  // Save sizes to JSON file
   const sizesPath = path.join(rootDir, "bundle-sizes.json");
 
   await fs.writeJson(sizesPath, sizes, {spaces: 2});
 
-  // Print size report
   console.log("\n📦 Bundle Size Report");
   console.log("═".repeat(50));
-  console.log(`Total: ${sizes.total.min}kb (${sizes.total.gzip}kb gzipped)`);
+  console.log(
+    `Total across ${fileCount(sizes.total.files)}: ${sizes.total.min}kb (${sizes.total.gzip}kb gzipped)`,
+  );
   console.log("─".repeat(50));
-
-  console.log("\n📄 Main Bundles:");
+  console.log("\n📄 Entry:");
   console.log(`  index.js: ${sizes.main.min}kb (${sizes.main.gzip}kb gzipped)`);
   if (sizes.plugin.min) {
     console.log(`  plugin.js: ${sizes.plugin.min}kb (${sizes.plugin.gzip}kb gzipped)`);
   }
-
-  if (sizes.css.main || sizes.css.styles) {
-    console.log("\n🎨 CSS:");
-    if (sizes.css.main) {
-      console.log(`  index.css: ${sizes.css.main.min}kb (${sizes.css.main.gzip}kb gzipped)`);
-    }
-    if (sizes.css.styles) {
-      console.log(`  styles.css: ${sizes.css.styles.min}kb (${sizes.css.styles.gzip}kb gzipped)`);
-    }
+  if (sizes.utils) {
+    console.log(
+      `  utils/ (${fileCount(sizes.utils.files)}): ${sizes.utils.min}kb (${sizes.utils.gzip}kb gzipped)`,
+    );
   }
-
-  console.log("\n🧩 Components:");
+  if (sizes.hooks) {
+    console.log(
+      `  hooks/ (${fileCount(sizes.hooks.files)}): ${sizes.hooks.min}kb (${sizes.hooks.gzip}kb gzipped)`,
+    );
+  }
+  if (sizes.css.styles) {
+    console.log("\n🎨 CSS:");
+    console.log(`  styles.css: ${sizes.css.styles.min}kb (${sizes.css.styles.gzip}kb gzipped)`);
+  }
+  console.log("\n🧩 Components (own modules only — excludes shared utils/hooks):");
   const sortedComponents = Object.entries(sizes.components).sort(
     (a, b) => parseFloat(b[1].gzip) - parseFloat(a[1].gzip),
   );
 
   for (const [component, size] of sortedComponents) {
-    console.log(`  ${component}: ${size.min}kb (${size.gzip}kb gzipped)`);
+    console.log(
+      `  ${component} (${fileCount(size.files)}): ${size.min}kb (${size.gzip}kb gzipped)`,
+    );
   }
-
   console.log("═".repeat(50));
   console.log(`\n💾 Size report saved to: ${sizesPath}`);
 

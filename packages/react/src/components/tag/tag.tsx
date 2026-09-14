@@ -55,6 +55,8 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
     return pickChildren(children, TagRemoveButton);
   }, [children]);
 
+  const contextValue = useMemo(() => ({slots}), [slots]);
+
   return (
     <TagPrimitive
       className={composeTwRenderProps(className, slots.base())}
@@ -63,7 +65,7 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
       {...restProps}
     >
       {(renderProps) => (
-        <TagContext value={{slots}}>
+        <TagContext value={contextValue}>
           {typeof children === "function" ? (
             children(renderProps)
           ) : (

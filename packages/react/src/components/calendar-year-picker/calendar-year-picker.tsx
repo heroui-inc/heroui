@@ -244,6 +244,7 @@ interface CalendarYearPickerGridContextValue {
   slots: ReturnType<typeof calendarYearPickerVariants>;
   isYearPickerOpen: boolean;
   activeYear: number;
+  currentYear: number;
   focusedYear: number;
   years: number[];
   getFormattedYear: (year: number) => string;
@@ -301,8 +302,23 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
   // useCalendarYearPicker returns a new `items` array every render — derive a stable
   // key so effects don't re-run and steal focus back to the selected year.
   const itemsKey = items.map((item) => `${item.id}:${item.date.year}`).join("|");
-  const years = items.map((item) => item.date.year);
-  const itemByYear = new Map(items.map((item) => [item.date.year, item]));
+
+  // `item.formatted` depends on locale, time zone and the `format` prop, none of which
+  // `itemsKey` encodes — so anything serving `formatted` needs its own key, or it keeps
+  // rendering year labels in the previous format. Kept separate from `itemsKey` so a
+  // locale change cannot perturb the focus effects below.
+  const labelsKey = items.map((item) => item.formatted).join("|");
+
+  // Keyed on `itemsKey` rather than `items` because `items` is a fresh array every
+  // render; `itemsKey` captures the same content with a stable identity. Without this
+  // the effects below re-run on every render and steal focus back to the selected year.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const years = React.useMemo(() => items.map((item) => item.date.year), [itemsKey]);
+  const itemByYear = React.useMemo(
+    () => new Map(items.map((item) => [item.date.year, item])),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [itemsKey, labelsKey],
+  );
   const focusedYear = items[focusedItemId as number]?.date.year ?? state.focusedDate.year;
 
   const getFormattedYear = React.useCallback(
@@ -366,7 +382,7 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
     return () => {
       cancelAnimationFrame(rafId);
     };
-  }, [focusYearCell, focusedYear, isYearPickerOpen, itemsKey, years.length]);
+  }, [focusYearCell, focusedYear, isYearPickerOpen, itemsKey, years]);
 
   React.useEffect(() => {
     if (!isYearPickerOpen || years.length === 0) return;
@@ -454,9 +470,15 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
     }
   };
 
+  // Hoisted out of the cells so a grid renders one Date instead of one per year, and
+  // read per render rather than memoized on [] so it stays correct across midnight on
+  // Dec 31. It's a number, so the context memo below still compares it by value.
+  const currentYear = new Date().getFullYear();
+
   const contextValue = React.useMemo(
     () => ({
       activeYear,
+      currentYear,
       focusedYear,
       getFormattedYear,
       isYearPickerOpen,
@@ -465,7 +487,16 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
       slots,
       years,
     }),
-    [activeYear, focusedYear, getFormattedYear, handleYearSelect, isYearPickerOpen, slots, years],
+    [
+      activeYear,
+      currentYear,
+      focusedYear,
+      getFormattedYear,
+      handleYearSelect,
+      isYearPickerOpen,
+      slots,
+      years,
+    ],
   );
 
   return (
@@ -494,9 +525,8 @@ CalendarYearPickerGrid.displayName = "HeroUI.CalendarYearPicker.Grid";
  * CalendarYearPickerGridBody
  * -----------------------------------------------------------------------------------------------*/
 const CalendarYearPickerGridBody = ({children}: CalendarYearPickerGridBodyProps) => {
-  const {focusedYear, getFormattedYear, isYearPickerOpen, selectYear, years} =
+  const {currentYear, focusedYear, getFormattedYear, isYearPickerOpen, selectYear, years} =
     useCalendarYearPickerGridContext();
-  const currentYear = new Date().getFullYear();
 
   return (
     <>
@@ -542,6 +572,7 @@ const CalendarYearPickerCell = ({
 }: CalendarYearPickerCellProps) => {
   const {
     activeYear,
+    currentYear,
     focusedYear,
     getFormattedYear,
     isYearPickerOpen,
@@ -554,7 +585,7 @@ const CalendarYearPickerCell = ({
   const formattedYear = getFormattedYear(year);
   const values: CalendarYearPickerCellRenderProps = {
     formattedYear,
-    isCurrentYear: year === new Date().getFullYear(),
+    isCurrentYear: year === currentYear,
     isOpen: isYearPickerOpen,
     isSelected,
     selectYear: () => selectYear(year),

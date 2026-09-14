@@ -50,9 +50,10 @@ const FieldsetRoot = <E extends keyof React.JSX.IntrinsicElements = "fieldset">(
   // cascade disabled styling to descendant fields, just like a direct
   // `isDisabled` prop on TextField/Checkbox/etc. would.
   const isDisabled = "disabled" in props && props.disabled === true;
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <FieldsetContext value={{slots}}>
+    <FieldsetContext value={contextValue}>
       <dom.fieldset
         className={slots?.base({className})}
         data-disabled={isDisabled || undefined}
