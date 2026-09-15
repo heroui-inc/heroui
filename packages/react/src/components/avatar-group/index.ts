@@ -1,45 +1,40 @@
 import type {ComponentProps} from "react";
 
-import {AVATAR_GROUP_CHILD} from "../avatar-group/avatar-group-context";
-
-import {AvatarFallback, AvatarImage, AvatarRoot} from "./avatar";
+import {AvatarGroupCount, AvatarGroupRoot} from "./avatar-group";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
-export const Avatar = Object.assign(AvatarRoot, {
-  Root: AvatarRoot,
-  Image: AvatarImage,
-  Fallback: AvatarFallback,
+export const AvatarGroup = Object.assign(AvatarGroupRoot, {
+  Root: AvatarGroupRoot,
+  Count: AvatarGroupCount,
 });
 
-export type Avatar = {
-  Props: ComponentProps<typeof AvatarRoot>;
-  RootProps: ComponentProps<typeof AvatarRoot>;
-  ImageProps: ComponentProps<typeof AvatarImage>;
-  FallbackProps: ComponentProps<typeof AvatarFallback>;
+export type AvatarGroup = {
+  Props: ComponentProps<typeof AvatarGroupRoot>;
+  RootProps: ComponentProps<typeof AvatarGroupRoot>;
+  CountProps: ComponentProps<typeof AvatarGroupCount>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {AvatarRoot, AvatarImage, AvatarFallback};
+export {AvatarGroupRoot, AvatarGroupCount};
 
 export type {
-  AvatarRootProps,
-  AvatarRootProps as AvatarProps,
-  AvatarImageProps,
-  AvatarFallbackProps,
-} from "./avatar";
+  AvatarGroupRootProps,
+  AvatarGroupRootProps as AvatarGroupProps,
+  AvatarGroupCountProps,
+} from "./avatar-group";
 
 /* -------------------------------------------------------------------------------------------------
- * Re-export AVATAR_GROUP_CHILD for type declarations
+ * Context
  * -----------------------------------------------------------------------------------------------*/
-export {AVATAR_GROUP_CHILD};
+export {AvatarGroupContext, AVATAR_GROUP_CHILD} from "./avatar-group";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {avatarVariants} from "@heroui/styles";
+export {avatarGroupVariants} from "@heroui/styles";
 
-export type {AvatarVariants} from "@heroui/styles";
+export type {AvatarGroupVariants} from "@heroui/styles";
