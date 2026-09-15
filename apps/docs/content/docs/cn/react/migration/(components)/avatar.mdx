@@ -67,7 +67,7 @@ export default function App() {
 | — | `Avatar.Image` | 新增：`srcSet`、`sizes`、`loading`（响应式图片） |
 | — | `Avatar.Fallback` | 新增：`delayMs` 延迟显示后备（减少闪烁） |
 | `classNames` | — | 请在各部分使用 `className` |
-| `AvatarGroup` | — | 无 v3 等价组件；请用 CSS 自行成组 |
+| `AvatarGroup` | `AvatarGroup` | 已重新提供 — 复合 `Avatar` 子组件，支持 `max` / `color` / `variant` / `isGrid` / `overlap`（`clip`\|`ring`）与可选的 `AvatarGroup.Count`；v2 `total` → 显式 `Count`；参见 [AvatarGroup](/docs/react/components/avatar-group) |
 
 ### 3. `variant` prop（v3 新增）
 
@@ -127,10 +127,33 @@ export default function App() {
 | `warning` | `warning` | 相同 |
 | `danger` | `danger` | 相同 |
 
-### 8. `AvatarGroup` 已移除
+### 8. `AvatarGroup`（v3 已提供）
 
-**v2：** 提供独立的 `AvatarGroup` 组件  
-**v3：** 无 `AvatarGroup` — 请用 CSS 类手动成组
+**v2：** 独立 `AvatarGroup`，支持 `isBordered`、`max`、`total` 等 props  
+**v3：** `AvatarGroup` 再次作为独立组件提供。包裹复合 `Avatar` 子组件，通过 Context 继承 `size` / `color` / `variant`，并支持 `max`、`isGrid`、`overlap`（默认 `"clip"`，或 `"ring"`）。v2 的 `total` 已移除 — 已知服务端总量时渲染显式的 `AvatarGroup.Count`（会抑制 `max` 的自动计数）。`isBordered` 已移除；可用 Tailwind 或 `overlap="ring"`。参见 [AvatarGroup 文档](/docs/react/components/avatar-group)。
+
+```tsx
+import { Avatar, AvatarGroup } from "@heroui/react";
+
+<AvatarGroup max={3} size="md">
+  <Avatar>
+    <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
+    <Avatar.Fallback>U1</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
+    <Avatar.Fallback>U2</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
+    <Avatar.Fallback>U3</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Image src="https://example.com/4.jpg" alt="User 4" />
+    <Avatar.Fallback>U4</Avatar.Fallback>
+  </Avatar>
+</AvatarGroup>
+```
 
 ## 迁移示例
 
@@ -199,22 +222,22 @@ export default function App() {
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Avatar } from "@heroui/react";
+    import { Avatar, AvatarGroup } from "@heroui/react";
 
-    <div className="flex -space-x-2">
-      <Avatar className="ring-2 ring-background">
+    <AvatarGroup>
+      <Avatar>
         <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
         <Avatar.Fallback>U1</Avatar.Fallback>
       </Avatar>
-      <Avatar className="ring-2 ring-background">
+      <Avatar>
         <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
         <Avatar.Fallback>U2</Avatar.Fallback>
       </Avatar>
-      <Avatar className="ring-2 ring-background">
+      <Avatar>
         <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
         <Avatar.Fallback>U3</Avatar.Fallback>
       </Avatar>
-    </div>
+    </AvatarGroup>
     ```
   </Tab>
 </Tabs>
@@ -237,31 +260,67 @@ export default function App() {
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Avatar } from "@heroui/react";
+    import { Avatar, AvatarGroup } from "@heroui/react";
 
-    const users = [
-      { id: 1, src: "https://example.com/1.jpg", name: "User 1" },
-      { id: 2, src: "https://example.com/2.jpg", name: "User 2" },
-      { id: 3, src: "https://example.com/3.jpg", name: "User 3" },
-      { id: 4, src: "https://example.com/4.jpg", name: "User 4" },
-      { id: 5, src: "https://example.com/5.jpg", name: "User 5" },
-    ];
-
-    <div className="flex -space-x-2">
-      {users.slice(0, 3).map((user) => (
-        <Avatar key={user.id} className="ring-2 ring-background">
-          <Avatar.Image src={user.src} alt={user.name} />
-          <Avatar.Fallback>
-            {user.name.split(" ").map(n => n[0]).join("")}
-          </Avatar.Fallback>
-        </Avatar>
-      ))}
-      <Avatar className="ring-2 ring-background">
-        <Avatar.Fallback className="border-none">
-          +{users.length - 3}
-        </Avatar.Fallback>
+    <AvatarGroup max={3}>
+      <Avatar>
+        <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
+        <Avatar.Fallback>U1</Avatar.Fallback>
       </Avatar>
-    </div>
+      <Avatar>
+        <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
+        <Avatar.Fallback>U2</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
+        <Avatar.Fallback>U3</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/4.jpg" alt="User 4" />
+        <Avatar.Fallback>U4</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/5.jpg" alt="User 5" />
+        <Avatar.Fallback>U5</Avatar.Fallback>
+      </Avatar>
+    </AvatarGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### AvatarGroup：`total` → `Count`
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Avatar, AvatarGroup } from "@heroui/react";
+
+    <AvatarGroup max={3} total={12}>
+      <Avatar src="https://example.com/1.jpg" />
+      <Avatar src="https://example.com/2.jpg" />
+      <Avatar src="https://example.com/3.jpg" />
+    </AvatarGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar, AvatarGroup } from "@heroui/react";
+
+    <AvatarGroup max={3} overlap="clip">
+      <Avatar>
+        <Avatar.Image src="https://example.com/1.jpg" alt="用户 1" />
+        <Avatar.Fallback>U1</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/2.jpg" alt="用户 2" />
+        <Avatar.Fallback>U2</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/3.jpg" alt="用户 3" />
+        <Avatar.Fallback>U3</Avatar.Fallback>
+      </Avatar>
+      <AvatarGroup.Count>+9</AvatarGroup.Count>
+    </AvatarGroup>
     ```
   </Tab>
 </Tabs>
@@ -352,6 +411,6 @@ function getInitials(name: string): string {
 8. **`isBordered` 已移除**：请使用 Tailwind `ring-2 ring-background` 等类
 9. **`radius` 已移除**：请使用 Tailwind `rounded-*` 类
 10. **`isDisabled` 等已移除**：请使用 Tailwind `opacity-50` 等类
-11. **`AvatarGroup` 已移除**：请用 CSS 手动成组
+11. **`AvatarGroup` 已提供**：使用独立的 `AvatarGroup` 组件（[文档](/docs/react/components/avatar-group)），配合复合 `Avatar` 子组件与 `max` / `overlap` / `isGrid`，以及可选的 `AvatarGroup.Count`（替代 v2 `total`）
 12. **`icon` prop 已移除**：请将图标内容放入 `Avatar.Fallback`
 13. **`classNames` 已移除**：请在各子组件上使用 `className` prop

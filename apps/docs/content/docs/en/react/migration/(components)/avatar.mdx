@@ -67,7 +67,7 @@ export default function App() {
 | - | `Avatar.Image` | New: `srcSet`, `sizes`, `loading` for responsive images |
 | - | `Avatar.Fallback` | New: `delayMs` to delay fallback display (prevents flash) |
 | `classNames` | - | Use `className` on parts |
-| AvatarGroup | - | No v3 equivalent; create groups with CSS |
+| AvatarGroup | `AvatarGroup` | Available again — compound `Avatar` children with `max` / `color` / `variant` / `isGrid` / `overlap` (`clip`\|`ring`) and optional `AvatarGroup.Count`; v2 `total` → explicit `Count`; see [AvatarGroup](/docs/react/components/avatar-group) |
 
 ### 3. Variant Prop (New in v3)
 
@@ -127,10 +127,33 @@ export default function App() {
 | `warning` | `warning` | Same |
 | `danger` | `danger` | Same |
 
-### 8. AvatarGroup Removed
+### 8. AvatarGroup (Available in v3)
 
-**v2:** Had a dedicated `AvatarGroup` component  
-**v3:** No `AvatarGroup` component - create groups manually with CSS classes
+**v2:** Dedicated `AvatarGroup` with props like `isBordered`, `max`, and `total`  
+**v3:** `AvatarGroup` is available again as a dedicated component. Wrap compound `Avatar` children, inherit `size` / `color` / `variant` via context, and use `max`, `isGrid`, and `overlap` (`"clip"` default, or `"ring"`). v2 `total` is removed — render an explicit `AvatarGroup.Count` child for a known server total (it suppresses the auto count from `max`). `isBordered` is removed; use Tailwind or `overlap="ring"`. See the [AvatarGroup docs](/docs/react/components/avatar-group).
+
+```tsx
+import { Avatar, AvatarGroup } from "@heroui/react";
+
+<AvatarGroup max={3} size="md">
+  <Avatar>
+    <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
+    <Avatar.Fallback>U1</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
+    <Avatar.Fallback>U2</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
+    <Avatar.Fallback>U3</Avatar.Fallback>
+  </Avatar>
+  <Avatar>
+    <Avatar.Image src="https://example.com/4.jpg" alt="User 4" />
+    <Avatar.Fallback>U4</Avatar.Fallback>
+  </Avatar>
+</AvatarGroup>
+```
 
 ## Migration Examples
 
@@ -199,22 +222,22 @@ export default function App() {
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Avatar } from "@heroui/react";
+    import { Avatar, AvatarGroup } from "@heroui/react";
 
-    <div className="flex -space-x-2">
-      <Avatar className="ring-2 ring-background">
+    <AvatarGroup>
+      <Avatar>
         <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
         <Avatar.Fallback>U1</Avatar.Fallback>
       </Avatar>
-      <Avatar className="ring-2 ring-background">
+      <Avatar>
         <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
         <Avatar.Fallback>U2</Avatar.Fallback>
       </Avatar>
-      <Avatar className="ring-2 ring-background">
+      <Avatar>
         <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
         <Avatar.Fallback>U3</Avatar.Fallback>
       </Avatar>
-    </div>
+    </AvatarGroup>
     ```
   </Tab>
 </Tabs>
@@ -237,31 +260,67 @@ export default function App() {
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Avatar } from "@heroui/react";
+    import { Avatar, AvatarGroup } from "@heroui/react";
 
-    const users = [
-      { id: 1, src: "https://example.com/1.jpg", name: "User 1" },
-      { id: 2, src: "https://example.com/2.jpg", name: "User 2" },
-      { id: 3, src: "https://example.com/3.jpg", name: "User 3" },
-      { id: 4, src: "https://example.com/4.jpg", name: "User 4" },
-      { id: 5, src: "https://example.com/5.jpg", name: "User 5" },
-    ];
-
-    <div className="flex -space-x-2">
-      {users.slice(0, 3).map((user) => (
-        <Avatar key={user.id} className="ring-2 ring-background">
-          <Avatar.Image src={user.src} alt={user.name} />
-          <Avatar.Fallback>
-            {user.name.split(" ").map(n => n[0]).join("")}
-          </Avatar.Fallback>
-        </Avatar>
-      ))}
-      <Avatar className="ring-2 ring-background">
-        <Avatar.Fallback className="border-none">
-          +{users.length - 3}
-        </Avatar.Fallback>
+    <AvatarGroup max={3}>
+      <Avatar>
+        <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
+        <Avatar.Fallback>U1</Avatar.Fallback>
       </Avatar>
-    </div>
+      <Avatar>
+        <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
+        <Avatar.Fallback>U2</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
+        <Avatar.Fallback>U3</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/4.jpg" alt="User 4" />
+        <Avatar.Fallback>U4</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/5.jpg" alt="User 5" />
+        <Avatar.Fallback>U5</Avatar.Fallback>
+      </Avatar>
+    </AvatarGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### Avatar Group Total → Count
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Avatar, AvatarGroup } from "@heroui/react";
+
+    <AvatarGroup max={3} total={12}>
+      <Avatar src="https://example.com/1.jpg" />
+      <Avatar src="https://example.com/2.jpg" />
+      <Avatar src="https://example.com/3.jpg" />
+    </AvatarGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar, AvatarGroup } from "@heroui/react";
+
+    <AvatarGroup max={3} overlap="clip">
+      <Avatar>
+        <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
+        <Avatar.Fallback>U1</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
+        <Avatar.Fallback>U2</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
+        <Avatar.Fallback>U3</Avatar.Fallback>
+      </Avatar>
+      <AvatarGroup.Count>+9</AvatarGroup.Count>
+    </AvatarGroup>
     ```
   </Tab>
 </Tabs>
@@ -352,6 +411,6 @@ function getInitials(name: string): string {
 8. **Bordered Removed**: Use Tailwind `ring-2 ring-background` classes
 9. **Radius Removed**: Use Tailwind `rounded-*` classes
 10. **Disabled Removed**: Use Tailwind `opacity-50` classes
-11. **AvatarGroup Removed**: Create groups manually with CSS
+11. **AvatarGroup Available**: Use the dedicated `AvatarGroup` component ([docs](/docs/react/components/avatar-group)) with compound `Avatar` children, `max` / `overlap` / `isGrid`, and optional `AvatarGroup.Count` (replaces v2 `total`)
 12. **Icon Prop Removed**: Place icon content in `Avatar.Fallback`
 13. **ClassNames Removed**: Use `className` props on individual components
