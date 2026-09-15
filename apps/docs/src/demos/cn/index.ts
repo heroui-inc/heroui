@@ -230,10 +230,6 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./avatar/fallback").then((m) => m.Fallback),
     file: "cn/avatar/fallback.tsx",
   },
-  "avatar-group": {
-    loader: () => import("./avatar/group").then((m) => m.Group),
-    file: "cn/avatar/group.tsx",
-  },
   "avatar-custom-styles": {
     loader: () => import("./avatar/custom-styles").then((m) => m.CustomStyles),
     file: "cn/avatar/custom-styles.tsx",
@@ -242,6 +238,38 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./avatar/custom-image-component").then((m) => m.CustomImageComponent),
     file: "cn/avatar/custom-image-component.tsx",
   },
+
+  // AvatarGroup Demo
+  "avatar-group-basic": {
+    loader: () => import("./avatar-group/basic").then((m) => m.Basic),
+    file: "cn/avatar-group/basic.tsx",
+  },
+  "avatar-group-max": {
+    loader: () => import("./avatar-group/max").then((m) => m.Max),
+    file: "cn/avatar-group/max.tsx",
+  },
+  "avatar-group-count": {
+    loader: () => import("./avatar-group/count").then((m) => m.Count),
+    file: "cn/avatar-group/count.tsx",
+  },
+  "avatar-group-sizes": {
+    loader: () => import("./avatar-group/sizes").then((m) => m.Sizes),
+    file: "cn/avatar-group/sizes.tsx",
+  },
+  "avatar-group-grid": {
+    loader: () => import("./avatar-group/grid").then((m) => m.Grid),
+    file: "cn/avatar-group/grid.tsx",
+  },
+  "avatar-group-custom-styles": {
+    loader: () => import("./avatar-group/custom-styles").then((m) => m.CustomStyles),
+    file: "cn/avatar-group/custom-styles.tsx",
+  },
+
+  "avatar-group-overlap": {
+    loader: () => import("./avatar-group/overlap").then((m) => m.Overlap),
+    file: "cn/avatar-group/overlap.tsx",
+  },
+
   // Badge Demo
   "badge-basic": {
     loader: () => import("./badge/basic").then((m) => m.BadgeBasic),

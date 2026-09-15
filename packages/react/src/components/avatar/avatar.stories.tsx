@@ -28,62 +28,6 @@ export default {
 
 const defaultArgs: Avatar["RootProps"] = {};
 
-const users = [
-  {
-    id: 1,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
-    name: "John",
-  },
-  {
-    id: 2,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=5",
-    name: "Kate",
-  },
-  {
-    id: 3,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=20",
-    name: "Emily",
-  },
-  {
-    id: 4,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=23",
-    name: "Michael",
-  },
-  {
-    id: 5,
-    image_url: "https://img.heroui.chat/image/avatar?w=400&h=400&u=16",
-    name: "Olivia",
-  },
-];
-
-const circles = [
-  {
-    id: 1,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg",
-    name: "R",
-  },
-  {
-    id: 2,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg",
-    name: "O",
-  },
-  {
-    id: 3,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
-    name: "G",
-  },
-  {
-    id: 4,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/white.jpg",
-    name: "W",
-  },
-  {
-    id: 5,
-    image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/black.jpg",
-    name: "B",
-  },
-];
-
 const Template = ({color, size}: Avatar["RootProps"]) => (
   <div className="flex items-start gap-4">
     <div className="flex flex-col gap-4">
@@ -243,35 +187,6 @@ const FallbackTemplate = () => {
   );
 };
 
-const AvatarGroupTemplate = () => {
-  return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-center -space-x-2">
-        {users.map((user) => (
-          <Avatar key={user.id} className="ring-2 ring-background">
-            <Avatar.Image src={user.image_url} />
-            <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
-          </Avatar>
-        ))}
-        <Avatar className="ring-2 ring-background">
-          <Avatar.Fallback className="border-none">+5</Avatar.Fallback>
-        </Avatar>
-      </div>
-      <div className="flex items-center justify-center -space-x-2">
-        {circles.map((circle) => (
-          <Avatar key={circle.id} className="ring-2 ring-background">
-            <Avatar.Image src={circle.image_url} />
-            <Avatar.Fallback>{circle.name}</Avatar.Fallback>
-          </Avatar>
-        ))}
-        <Avatar className="ring-2 ring-background">
-          <Avatar.Fallback className="border-none">+5</Avatar.Fallback>
-        </Avatar>
-      </div>
-    </div>
-  );
-};
-
 export const Default = {
   args: defaultArgs,
   render: Template,
@@ -288,10 +203,6 @@ export const WithColors = {
 
 export const Fallback = {
   render: FallbackTemplate,
-};
-
-export const Group = {
-  render: AvatarGroupTemplate,
 };
 
 export const Sizes = {

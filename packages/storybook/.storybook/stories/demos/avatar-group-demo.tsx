@@ -1,4 +1,4 @@
-import {Avatar} from "@heroui/react";
+import {Avatar, AvatarGroup} from "@heroui/react";
 import React from "react";
 
 const avatars = [
@@ -35,9 +35,9 @@ const avatars = [
 export function AvatarGroupDemo() {
   return (
     <div className="flex w-full justify-center">
-      <div className="flex -space-x-2">
-        {avatars.slice(0, 5).map((item, index) => (
-          <Avatar key={`${item.name}-${index}`} className="ring-2 ring-background">
+      <AvatarGroup max={5}>
+        {avatars.map((item, index) => (
+          <Avatar key={`${item.name}-${index}`}>
             <Avatar.Image alt={item.name} src={item.image} />
             <Avatar.Fallback>
               {item.name
@@ -47,12 +47,7 @@ export function AvatarGroupDemo() {
             </Avatar.Fallback>
           </Avatar>
         ))}
-        <Avatar className="ring-2 ring-background">
-          <Avatar.Fallback className="bg-surface text-xs font-medium text-muted">
-            +{avatars.length - 2}
-          </Avatar.Fallback>
-        </Avatar>
-      </div>
+      </AvatarGroup>
     </div>
   );
 }
