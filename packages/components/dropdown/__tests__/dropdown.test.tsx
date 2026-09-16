@@ -718,7 +718,7 @@ describe("Dropdown", () => {
 
       await user.keyboard("{Enter}");
 
-      expect(onAction).toHaveBeenCalledWith("new");
+      expect(onAction).toHaveBeenCalledWith("new", null);
     });
 
     it("should press the item on keyDown (Space)", async () => {
@@ -762,7 +762,7 @@ describe("Dropdown", () => {
 
       await user.keyboard(" ");
 
-      expect(onAction).toHaveBeenCalledWith("new");
+      expect(onAction).toHaveBeenCalledWith("new", null);
     });
 
     it("should respect closeOnSelect setting of DropdownItem (static)", async () => {
