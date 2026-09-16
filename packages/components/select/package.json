@@ -36,7 +36,7 @@
   "peerDependencies": {
     "@heroui/system": ">=2.4.18",
     "@heroui/theme": ">=2.4.24",
-    "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
+    "framer-motion": ">=12.0.10",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
@@ -59,7 +59,7 @@
     "@react-aria/overlays": "3.32.1",
     "@react-aria/interactions": "3.28.1",
     "@react-aria/visually-hidden": "3.9.1",
-    "@react-types/shared": "3.36.0"
+    "@react-types/shared": "3.36.1"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",
@@ -71,7 +71,7 @@
     "@heroui/theme": "workspace:*",
     "@heroui/use-infinite-scroll": "workspace:*",
     "clean-package": "2.2.0",
-    "framer-motion": "11.18.2",
+    "framer-motion": "13.4.0",
     "react": "18.3.0",
     "react-dom": "18.3.0",
     "react-hook-form": "^7.51.3"

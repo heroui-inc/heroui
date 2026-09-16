@@ -1,3 +1,9 @@
 packages:
   - "apps/**/**"
   - "packages/**/**"
+
+overrides:
+  react: 18.3.0
+  react-dom: 18.3.0
+  "@internationalized/date": 3.12.4
+  "@react-types/shared": 3.36.1

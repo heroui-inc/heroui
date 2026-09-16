@@ -80,7 +80,7 @@ export const useSandpack = ({
   }, {});
 
   let dependencies = {
-    "framer-motion": "11.18.2",
+    "framer-motion": "13.4.0",
     "@heroui/react": "latest",
   };
 
@@ -153,7 +153,7 @@ export const useSandpack = ({
 
   // const dependencies = useMemo(() => {
   //   let deps = {
-  //     "framer-motion": "11.18.2",
+  //     "framer-motion": "13.4.0",
   //   };
 
   //   if (hasComponents) {
