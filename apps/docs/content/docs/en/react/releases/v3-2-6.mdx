@@ -1,6 +1,6 @@
 ---
 title: v3.2.6
-description: Patch release that restores keyboard-only focus rings on list box, menu, and overlay triggers, corrects @heroui/react dependency declarations (@internationalized/date is now a peer dependency), stops ColorSlider warnings from running in production, restores default Tag padding, re-aligns Breadcrumbs spacing, memoizes context values across the component tree, and upgrades React Aria to 1.21.1.
+description: Patch release that adds the AvatarGroup component, restores keyboard-only focus rings on list box, menu, and overlay triggers, corrects @heroui/react dependency declarations (@internationalized/date is now a peer dependency), stops ColorSlider warnings from running in production, restores default Tag padding, re-aligns Breadcrumbs spacing, memoizes context values across the component tree, and upgrades React Aria to 1.21.1.
 github:
   pull: 6850
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">September 13, 2026</span>
 </div>
 
-Patch release: focus rings are keyboard-only again on [ListBox](/docs/components/list-box), [Dropdown](/docs/components/dropdown), [Select](/docs/components/select), and overlay triggers after a mouse-driven open, `@internationalized/date` moves to `peerDependencies` while `tailwind-merge` and `@react-aria/i18n` are dropped, [ColorSlider](/docs/components/color-slider) no longer warns on every render in production, bare `.tag` markup keeps its default padding, [Breadcrumbs](/docs/components/breadcrumbs) sit back on the spacing grid, and React Aria is upgraded to `1.21.1` (`react-aria@3.52.1`). Context values are also memoized across 43 components, so consumers no longer re-render on every root render.
+Patch release: [AvatarGroup](/docs/components/avatar-group) returns as a dedicated component, focus rings are keyboard-only again on [ListBox](/docs/components/list-box), [Dropdown](/docs/components/dropdown), [Select](/docs/components/select), and overlay triggers after a mouse-driven open, `@internationalized/date` moves to `peerDependencies` while `tailwind-merge` and `@react-aria/i18n` are dropped, [ColorSlider](/docs/components/color-slider) no longer warns on every render in production, bare `.tag` markup keeps its default padding, [Breadcrumbs](/docs/components/breadcrumbs) sit back on the spacing grid, and React Aria is upgraded to `1.21.1` (`react-aria@3.52.1`). Context values are also memoized across 43 components, so consumers no longer re-render on every root render.
 
 ## Installation
 
@@ -45,6 +45,14 @@ Update to the latest version:
 <Callout type="info">
   **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
 </Callout>
+
+## Features
+
+### AvatarGroup
+
+[AvatarGroup](/docs/components/avatar-group) stacks compound [Avatar](/docs/components/avatar) children and passes `size`, `color`, and `variant` down to its direct children, so a group is styled in one place. `max` truncates the visible avatars and counts the rest, `isGrid` swaps the overlap for a wrapping grid, and `overlap` chooses between the default crescent clip (`"clip"`) and a solid outline (`"ring"`). For a known total from the server, render an explicit `AvatarGroup.Count` — it is not truncated by `max` and replaces the v2 `total` prop. The group carries no implicit `role="group"`; add `role` and a label when the stack is meaningful.
+
+- **AvatarGroup**: Add the `AvatarGroup` component with `max`, `isGrid`, `overlap`, context-driven `size` / `color` / `variant`, and an `AvatarGroup.Count` overflow indicator ([#6861](https://github.com/heroui-inc/heroui/pull/6861)).
 
 ## Bug Fixes
 

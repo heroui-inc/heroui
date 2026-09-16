@@ -1,6 +1,6 @@
 ---
 title: v3.2.6
-description: 补丁版本：恢复 ListBox、Menu 与浮层触发器上仅键盘触发的焦点环，修正 @heroui/react 的依赖声明（@internationalized/date 改为对等依赖），避免 ColorSlider 在生产构建中反复告警，恢复 Tag 的默认内边距，调整 Breadcrumbs 间距，并对组件树中的 context 值做 memoize，同时将 React Aria 升级到 1.21.1。
+description: 补丁版本：新增 AvatarGroup 组件，恢复 ListBox、Dropdown、Select 与浮层触发器上仅键盘触发的焦点环，修正 @heroui/react 的依赖声明（@internationalized/date 改为对等依赖），避免 ColorSlider 在生产构建中反复告警，恢复 Tag 的默认内边距，调整 Breadcrumbs 间距，并对组件树中的 context 值做 memoize，同时将 React Aria 升级到 1.21.1。
 github:
   pull: 6850
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 9 月 13 日</span>
 </div>
 
-补丁版本：鼠标打开浮层后，[ListBox](/docs/components/list-box)、[Dropdown](/docs/components/dropdown)、[Select](/docs/components/select) 与浮层触发器上的焦点环重新变为仅键盘触发；`@internationalized/date` 移入 `peerDependencies`，同时移除 `tailwind-merge` 与 `@react-aria/i18n`；[ColorSlider](/docs/components/color-slider) 不再在生产构建中每次渲染都告警；裸 `.tag` 标记保留默认内边距；[Breadcrumbs](/docs/components/breadcrumbs) 重新对齐到间距网格；React Aria 升级到 `1.21.1`（`react-aria@3.52.1`）。此外，43 个组件的 context 值做了 memoize，消费者不再随根组件的每次渲染而重渲染。
+补丁版本：[AvatarGroup](/docs/components/avatar-group) 作为独立组件回归；鼠标打开浮层后，[ListBox](/docs/components/list-box)、[Dropdown](/docs/components/dropdown)、[Select](/docs/components/select) 与浮层触发器上的焦点环重新变为仅键盘触发；`@internationalized/date` 移入 `peerDependencies`，同时移除 `tailwind-merge` 与 `@react-aria/i18n`；[ColorSlider](/docs/components/color-slider) 不再在生产构建中每次渲染都告警；裸 `.tag` 标记保留默认内边距；[Breadcrumbs](/docs/components/breadcrumbs) 重新对齐到间距网格；React Aria 升级到 `1.21.1`（`react-aria@3.52.1`）。此外，43 个组件的 context 值做了 memoize，消费者不再随根组件的每次渲染而重渲染。
 
 ## 安装
 
@@ -45,6 +45,14 @@ github:
 <Callout type="info">
   **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
 </Callout>
+
+## 新功能
+
+### AvatarGroup
+
+[AvatarGroup](/docs/components/avatar-group) 用于堆叠展示复合式的 [Avatar](/docs/components/avatar) 子组件，并把 `size`、`color` 与 `variant` 传递给直接子级，从而在一处统一控制整组样式。`max` 会截断可见头像并对其余项计数，`isGrid` 用可换行的网格布局替代重叠布局，`overlap` 则在默认的月牙裁切（`"clip"`）与实心描边（`"ring"`）之间切换。若总数由服务端给出，可显式渲染 `AvatarGroup.Count`——它不受 `max` 截断，用于替代 v2 的 `total` 属性。该组件不会隐式添加 `role="group"`；当这组头像本身承载语义时，请自行传入 `role` 与对应的标签。
+
+- **AvatarGroup**：新增 `AvatarGroup` 组件，支持 `max`、`isGrid`、`overlap`、通过 context 下发的 `size` / `color` / `variant`，以及用于溢出计数的 `AvatarGroup.Count` ([#6861](https://github.com/heroui-inc/heroui/pull/6861))。
 
 ## 错误修复
 
