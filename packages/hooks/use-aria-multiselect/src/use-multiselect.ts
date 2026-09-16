@@ -124,6 +124,12 @@ export function useMultiSelect<T>(
 
   const valueId = useId();
 
+  // useMenuTrigger returns AriaMenuOptions; this hook exposes AriaListBoxOptions.
+  // Drop menu-only onAction ((key, value) => void) so it does not conflict with
+  // listbox onAction ((key) => void). Selection is handled by the listbox state.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {onAction: _onAction, ...listBoxMenuProps} = menuProps;
+
   return {
     labelProps: {
       ...labelProps,
@@ -172,7 +178,7 @@ export function useMultiSelect<T>(
       id: valueId,
     },
     menuProps: {
-      ...menuProps,
+      ...listBoxMenuProps,
       disallowEmptySelection,
       autoFocus: state.focusStrategy || true,
       shouldSelectOnPressUp: true,
@@ -188,7 +194,7 @@ export function useMultiSelect<T>(
         state.setFocused(false);
       },
       // @ts-ignore
-      onFocus: menuProps?.onFocus,
+      onFocus: listBoxMenuProps?.onFocus,
       "aria-labelledby": [
         fieldProps["aria-labelledby"],
         triggerProps["aria-label"] && !fieldProps["aria-labelledby"] ? triggerProps.id : null,
