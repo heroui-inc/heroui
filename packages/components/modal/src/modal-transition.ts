@@ -16,7 +16,7 @@ export const scaleInOut = {
         ease: TRANSITION_EASINGS.ease,
       },
       y: {
-        type: "spring",
+        type: "spring" as const,
         bounce: 0,
         duration: 0.6,
       },

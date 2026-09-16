@@ -66,7 +66,8 @@ export const TRANSITION_VARIANTS: Variants = {
       transform: "scale(0.85)",
       opacity: 0,
       transition: {
-        type: "easeOut",
+        type: "tween",
+        ease: "easeOut",
         duration: 0.15,
       },
     },
@@ -89,8 +90,8 @@ export const TRANSITION_VARIANTS: Variants = {
       opacity: 0,
       transform: "scale(0.96)",
       transition: {
-        type: "easeOut",
-        bounce: 0,
+        type: "tween",
+        ease: "easeOut",
         duration: 0.15,
       },
     },
@@ -162,7 +163,7 @@ export const TRANSITION_VARIANTS: Variants = {
           duration: 0.3,
         },
         opacity: {
-          easings: "ease",
+          ease: TRANSITION_EASINGS.ease,
           duration: 0.4,
         },
       },
@@ -171,7 +172,7 @@ export const TRANSITION_VARIANTS: Variants = {
       opacity: 0,
       height: 0,
       transition: {
-        easings: "ease",
+        ease: TRANSITION_EASINGS.ease,
         duration: 0.3,
       },
     },
