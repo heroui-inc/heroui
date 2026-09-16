@@ -42,6 +42,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "avatar",
     title: "Avatar",
   },
+  avatargroup: {
+    category: "display",
+    description: "Display a stacked or grid group of avatars",
+    href: "/docs/components/avatar-group",
+    name: "avatargroup",
+    title: "AvatarGroup",
+  },
   badge: {
     category: "display",
     description: "Small indicator positioned relative to another element",
@@ -531,7 +538,8 @@ const componentRelationships: Record<string, string[]> = {
     "avatar",
     "button",
   ],
-  avatar: ["separator", "badge"],
+  avatar: ["avatargroup", "separator", "badge"],
+  avatargroup: ["avatar", "badge", "chip"],
   badge: ["avatar", "chip"],
   breadcrumbs: ["link", "separator", "tabs"],
   button: [

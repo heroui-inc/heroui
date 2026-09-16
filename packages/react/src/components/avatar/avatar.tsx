@@ -5,9 +5,10 @@ import type {ComponentPropsWithRef} from "react";
 
 import {avatarVariants} from "@heroui/styles";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import React, {createContext} from "react";
+import React, {createContext, use} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
+import {AVATAR_GROUP_CHILD, AvatarGroupContext} from "../avatar-group/avatar-group-context";
 
 /* ------------------------------------------------------------------------------------------------
  * Avatar Context
@@ -22,10 +23,33 @@ const AvatarContext = createContext<AvatarContext>({});
  * Avatar Root
  * -----------------------------------------------------------------------------------------------*/
 interface AvatarRootProps
-  extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Root>, "color">, AvatarVariants {}
+  extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Root>, "color">, AvatarVariants {
+  [AVATAR_GROUP_CHILD]?: boolean;
+}
 
-const AvatarRoot = ({children, className, color, size, variant, ...props}: AvatarRootProps) => {
-  const slots = React.useMemo(() => avatarVariants({color, size, variant}), [color, size, variant]);
+const AvatarRoot = ({
+  children,
+  className,
+  color,
+  size,
+  variant,
+  [AVATAR_GROUP_CHILD]: isAvatarGroupChild,
+  ...props
+}: AvatarRootProps) => {
+  const avatarGroupContext = use(AvatarGroupContext);
+
+  // Only use group context when this avatar is a direct child of AvatarGroup
+  const shouldUseContext = isAvatarGroupChild === true;
+
+  // Merge props with precedence: direct props > context props
+  const finalSize = size ?? (shouldUseContext ? avatarGroupContext?.size : undefined);
+  const finalColor = color ?? (shouldUseContext ? avatarGroupContext?.color : undefined);
+  const finalVariant = variant ?? (shouldUseContext ? avatarGroupContext?.variant : undefined);
+
+  const slots = React.useMemo(
+    () => avatarVariants({color: finalColor, size: finalSize, variant: finalVariant}),
+    [finalColor, finalSize, finalVariant],
+  );
   const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
