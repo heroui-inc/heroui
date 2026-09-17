@@ -27,6 +27,16 @@ npx skills add heroui-inc/heroui
 支持 Claude Code、Cursor、OpenCode 等。
 </span>
 
+### 安装范围
+
+默认情况下，安装脚本会把 skill 安装到用户主目录，因此在所有项目中都可用。如果只想安装到当前项目，请在项目根目录下运行安装脚本并加上 `HEROUI_SKILL_SCOPE=project` —— 当只有部分项目使用 HeroUI Native 时，这样可以避免让 skill 出现在每个项目的 agent 上下文中。
+
+```bash
+curl -fsSL https://heroui.com/install | HEROUI_SKILL_SCOPE=project bash -s heroui-native
+```
+
+每个被检测到的工具都会使用它自己读取的项目目录：Claude Code 使用 `.claude/skills/`，Cursor 使用 `.cursor/skills/`，OpenCode 使用 `.opencode/skills/`，Codex 和 Antigravity 使用 `.agents/skills/`。
+
 ### 用法
 
 Skills 会被 AI **自动发现**，也可通过 `/heroui-native` 显式调用。
