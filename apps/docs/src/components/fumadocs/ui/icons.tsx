@@ -20,14 +20,7 @@ const defaultAttributes: LucideProps = {
 };
 
 type SVGElementType =
-  | "circle"
-  | "ellipse"
-  | "g"
-  | "line"
-  | "path"
-  | "polygon"
-  | "polyline"
-  | "rect";
+  "circle" | "ellipse" | "g" | "line" | "path" | "polygon" | "polyline" | "rect";
 
 export interface LucideProps extends ComponentProps<"svg"> {
   size?: string | number;

@@ -27,6 +27,8 @@ const AccordionContext = createContext<{
   hideSeparator?: boolean;
 }>({});
 
+const DEFAULT_SURFACE_CONTEXT = {variant: "default" as const};
+
 /* -------------------------------------------------------------------------------------------------
  * Accordion Root
  * -----------------------------------------------------------------------------------------------*/
@@ -53,12 +55,13 @@ const AccordionRoot = ({
       {(values) => <>{typeof children === "function" ? children(values) : children}</>}
     </DisclosureGroup>
   );
+  const contextValue = React.useMemo(() => ({slots, hideSeparator}), [slots, hideSeparator]);
 
   return (
-    <AccordionContext value={{slots, hideSeparator}}>
+    <AccordionContext value={contextValue}>
       {variant === "surface" ? (
         // Allows inner components to apply "on-surface" colors for proper contrast
-        <SurfaceContext value={{variant: "default"}}>{content}</SurfaceContext>
+        <SurfaceContext value={DEFAULT_SURFACE_CONTEXT}>{content}</SurfaceContext>
       ) : (
         content
       )}

@@ -1,0 +1,136 @@
+---
+title: AvatarGroup
+description: Display a stacked or grid group of avatars with overflow counting
+icon: new
+links:
+  source: avatar-group/avatar-group.tsx
+  styles: avatar-group.css
+  storybook: Components/Media/AvatarGroup
+---
+
+## Usage
+
+```tsx
+import { AvatarGroup, Avatar } from '@heroui/react';
+```
+
+<ComponentPreview name="avatar-group-basic" />
+
+## Anatomy
+
+```tsx
+import { AvatarGroup, Avatar } from '@heroui/react';
+
+export default () => (
+  <AvatarGroup>
+    <Avatar>
+      <Avatar.Image />
+      <Avatar.Fallback />
+    </Avatar>
+    <AvatarGroup.Count /> {/* Optional explicit child */}
+  </AvatarGroup>
+);
+```
+
+## Examples
+
+### Max
+
+<ComponentPreview name="avatar-group-max" />
+
+### With Count
+
+<ComponentPreview name="avatar-group-count" />
+
+### Sizes
+
+<ComponentPreview name="avatar-group-sizes" />
+
+### Grid
+
+<ComponentPreview name="avatar-group-grid" />
+
+### Overlap
+
+<ComponentPreview name="avatar-group-overlap" />
+
+## Customization
+
+### Tailwind CSS
+
+<ComponentPreview name="avatar-group-custom-styles" />
+
+### Global CSS
+
+To customize the AvatarGroup component classes, you can use the `@layer components` directive.
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .avatar-group {
+    --avatar-group-overlap: 0.75rem;
+    --avatar-group-seam: 2px;
+  }
+
+  .avatar-group__count {
+    @apply font-semibold;
+  }
+}
+```
+
+## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The AvatarGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/avatar-group.css)):
+
+#### Base Classes [!toc]
+- `.avatar-group` - Base avatar group container
+- `.avatar-group--grid` - Grid layout modifier (no overlap)
+- `.avatar-group--clip` - Crescent mask / transparent seam (default stacked overlap)
+- `.avatar-group--ring` - Solid box-shadow outline via `--background`
+- `.avatar-group__count` - Overflow count avatar
+
+Stacked layout uses negative margin between siblings (`--avatar-group-overlap`, default `0.5rem`). Clip mode masks overlapped avatars (not the last child / Count) and optically nudges fallback glyphs; ring mode uses a thin box-shadow outline via `--background`.
+
+## API Reference
+
+### AvatarGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size applied to child Avatars (and the overflow count) when they omit `size` (synced with Avatar) |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | - | Color applied to child Avatars (and the overflow count) when they omit `color` |
+| `variant` | `'default' \| 'soft'` | - | Variant applied to child Avatars (and the overflow count) when they omit `variant` |
+| `max` | `number` | - | Maximum number of avatar children to render; omit to show all |
+| `isGrid` | `boolean` | `false` | Whether to use a wrapping grid layout without overlap |
+| `overlap` | `'clip' \| 'ring'` | `'clip'` | Stacked overlap style: crescent clip (default) or box-shadow ring; ignored when `isGrid` |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Avatar components (and optional `AvatarGroup.Count`) to group together |
+
+### AvatarGroup.Count
+
+Composes `Avatar` + `Avatar.Fallback` for the overflow indicator. Not truncated by `max`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Count content (e.g. `+3`) |
+| `size` | `'sm' \| 'md' \| 'lg'` | - | Override size from the group |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | - | Override color from the group |
+| `variant` | `'default' \| 'soft'` | - | Override variant from the group |
+| `className` | `string` | - | Additional CSS classes |
+
+## Note
+
+- AvatarGroup uses React Context to pass `size`, `color`, and `variant` to **direct Avatar children only**
+- `max` truncates visible avatars when set and auto-counts remaining children; omit to show all
+- For a known total (e.g. from the server), render an explicit `AvatarGroup.Count` — it is not truncated by `max` and suppresses the auto count. Prefer `Count` over the removed v2 `total` prop
+- `isGrid` disables overlap and uses a wrapping grid layout instead
+- `overlap` defaults to `"clip"` (crescent seam); use `"ring"` for the solid outline; no effect with `isGrid`
+- No default `role="group"` — when the stack is meaningful (assignees, viewers), pass `role="group"` with `aria-label` or `aria-labelledby`
+
+## Related Components
+
+<RelatedComponents component="avatar-group" />

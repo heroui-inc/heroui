@@ -15,6 +15,8 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
+const LABEL_SPAN_CONTEXT = {elementType: "span" as const};
+
 interface RadioContext {
   slots?: ReturnType<typeof radioVariants>;
   state?: RadioFieldRenderProps;
@@ -66,7 +68,7 @@ const RadioContent = ({children, className, ...props}: RadioContentProps) => {
       className={composeTwRenderProps(className, slots?.content())}
     >
       {(state) => (
-        <LabelContext value={{elementType: "span"}}>
+        <LabelContext value={LABEL_SPAN_CONTEXT}>
           {typeof children === "function" ? children(state) : children}
         </LabelContext>
       )}

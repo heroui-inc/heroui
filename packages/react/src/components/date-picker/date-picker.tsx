@@ -79,8 +79,10 @@ const DatePickerRoot = <T extends DateValue>({
     onOpenChange?.(nextIsOpen);
   };
 
+  const contextValue = React.useMemo(() => ({slots, triggerRef}), [slots, triggerRef]);
+
   return (
-    <DatePickerContext value={{slots, triggerRef}}>
+    <DatePickerContext value={contextValue}>
       <DatePickerPrimitive
         data-required={dataAttr(props.isRequired)}
         data-slot="date-picker"
@@ -110,7 +112,10 @@ const DatePickerTrigger = ({children, className, ref, ...props}: DatePickerTrigg
     },
     [triggerRef],
   );
-  const mergedRef = mergeRefs(contextRefCallback, ref);
+  const mergedRef = React.useMemo(
+    () => mergeRefs(contextRefCallback, ref),
+    [contextRefCallback, ref],
+  );
 
   return (
     <ButtonPrimitive

@@ -11,11 +11,6 @@ export const linkVariants = tv({
 
 // Render props that should be excluded from LinkVariants (framework-specific)
 type LinkRenderPropsKeys =
-  | "isCurrent"
-  | "isHovered"
-  | "isPressed"
-  | "isFocused"
-  | "isFocusVisible"
-  | "isDisabled";
+  "isCurrent" | "isHovered" | "isPressed" | "isFocused" | "isFocusVisible" | "isDisabled";
 
 export type LinkVariants = Omit<VariantProps<typeof linkVariants>, LinkRenderPropsKeys>;

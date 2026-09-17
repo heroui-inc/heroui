@@ -146,27 +146,28 @@ HeroUI uses a compound component pattern. Each component exports its sub-parts s
 // Context shares state/styles across parts
 const ComponentContext = createContext<{slots?: ReturnType<typeof componentVariants>}>({});
 
-// Root wraps children with context
-const ComponentRoot = forwardRef(({children, className, ...props}, ref) => {
+// Root wraps children with context (React 19: ref is a regular prop)
+const ComponentRoot = ({children, className, ref, ...props}: ComponentPropsWithRef<"div">) => {
   const slots = useMemo(() => componentVariants({...}), [...]);
+  const contextValue = useMemo(() => ({slots}), [slots]);
   return (
-    <ComponentContext value={{slots}}>
+    <ComponentContext value={contextValue}>
       <ReactAriaPrimitive ref={ref} className={composeTwRenderProps(className, slots.base())}>
         {children}
       </ReactAriaPrimitive>
     </ComponentContext>
   );
-});
+};
 
 // Child parts consume context
-const ComponentItem = forwardRef(({className, ...props}, ref) => {
+const ComponentItem = ({className, ref, ...props}: ComponentPropsWithRef<"div">) => {
   const {slots} = useContext(ComponentContext);
   return (
     <ReactAriaPrimitive ref={ref} className={composeTwRenderProps(className, slots?.item())}>
       {props.children}
     </ReactAriaPrimitive>
   );
-});
+};
 ```
 
 Compound components are exported via `Object.assign` as the default export:
@@ -306,7 +307,7 @@ calendar-year-picker
 
 ## Non-obvious Gotchas
 
-1. **`pnpm i` triggers builds** — The `postinstall` hook builds `@heroui/styles` and runs `typegen:docs` and `typegen:docs-cn`. If it fails, run `pnpm --filter @heroui/styles build` manually.
+1. **`pnpm i` runs docs typegen only** — The `postinstall` hook is just `pnpm typegen:docs`. It does **not** build `@heroui/styles` (and there is no `@heroui/docs-cn` package — Chinese docs live under `apps/docs`). Run `pnpm build` (or `pnpm --filter @heroui/styles build`) when you need `styles/dist/`, or rely on `pnpm test` / Turbo `^build`.
 
 2. **Build order matters** — `@heroui/styles` must build before `@heroui/react`. Running `pnpm build` from root handles this via Turbo's `^build` dependency.
 

@@ -1,5 +1,7 @@
 import {useCallback, useMemo} from "react";
 
+const EMPTY_ITEM_IDS: string[] = [];
+
 export interface UseDisclosureGroupNavigationProps {
   expandedKeys: Set<string | number>;
   itemIds: string[];
@@ -18,7 +20,7 @@ export interface UseDisclosureGroupNavigationReturn {
 export function useDisclosureGroupNavigation({
   allowsMultipleExpanded = false,
   expandedKeys,
-  itemIds = [],
+  itemIds = EMPTY_ITEM_IDS,
   onExpandedChange,
 }: UseDisclosureGroupNavigationProps): UseDisclosureGroupNavigationReturn {
   const currentIndex = useMemo(() => {
@@ -62,14 +64,7 @@ export function useDisclosureGroupNavigation({
     } else {
       onExpandedChange(new Set([nextItem]));
     }
-  }, [
-    currentIndex,
-    itemIds.length,
-    itemIds,
-    expandedKeys,
-    onExpandedChange,
-    allowsMultipleExpanded,
-  ]);
+  }, [currentIndex, itemIds, expandedKeys, onExpandedChange, allowsMultipleExpanded]);
 
   const isPrevDisabled = currentIndex <= 0;
   const isNextDisabled = currentIndex >= itemIds.length - 1;

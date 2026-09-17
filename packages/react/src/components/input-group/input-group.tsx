@@ -55,8 +55,10 @@ const InputGroupRoot = ({
     onClick?.(e);
   };
 
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
+
   return (
-    <InputGroupContext value={{slots}}>
+    <InputGroupContext value={contextValue}>
       <GroupPrimitive
         {...props}
         ref={groupRef}

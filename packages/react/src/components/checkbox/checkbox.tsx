@@ -20,6 +20,8 @@ import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {CheckboxGroupContext} from "../checkbox-group/checkbox-group";
 
+const LABEL_SPAN_CONTEXT = {elementType: "span" as const};
+
 interface CheckboxContext {
   slots?: ReturnType<typeof checkboxVariants>;
   state?: CheckboxFieldRenderProps;
@@ -77,7 +79,7 @@ const CheckboxContent = ({children, className, ...props}: CheckboxContentProps) 
       className={composeTwRenderProps(className, slots?.content())}
     >
       {(state) => (
-        <LabelContext value={{elementType: "span"}}>
+        <LabelContext value={LABEL_SPAN_CONTEXT}>
           {typeof children === "function" ? children(state) : children}
         </LabelContext>
       )}

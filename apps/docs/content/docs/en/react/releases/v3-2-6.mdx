@@ -1,0 +1,99 @@
+---
+title: v3.2.6
+description: Patch release that adds the AvatarGroup component, restores keyboard-only focus rings on list box, menu, and overlay triggers, corrects @heroui/react dependency declarations (@internationalized/date is now a peer dependency), stops ColorSlider warnings from running in production, restores default Tag padding, re-aligns Breadcrumbs spacing, memoizes context values across the component tree, and upgrades React Aria to 1.21.1.
+github:
+  pull: 6850
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">September 17, 2026</span>
+</div>
+
+Patch release: [AvatarGroup](/docs/components/avatar-group) returns as a dedicated component, focus rings are keyboard-only again on [ListBox](/docs/components/list-box), [Dropdown](/docs/components/dropdown), [Select](/docs/components/select), and overlay triggers after a mouse-driven open, `@internationalized/date` moves to `peerDependencies` while `tailwind-merge` and `@react-aria/i18n` are dropped, [ColorSlider](/docs/components/color-slider) no longer warns on every render in production, bare `.tag` markup keeps its default padding, [Breadcrumbs](/docs/components/breadcrumbs) sit back on the spacing grid, and React Aria is upgraded to `1.21.1` (`react-aria@3.52.1`). Context values are also memoized across 43 components, so consumers no longer re-render on every root render.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warning">
+  **Peer dependencies changed.** `@internationalized/date@^3.12.4` is now a peer dependency — it was always imported at runtime by [Calendar](/docs/components/calendar), [RangeCalendar](/docs/components/range-calendar), and the date utilities, and only resolved by accident through `react-aria-components`. Install it explicitly if your package manager does not hoist it. This release also requires `react-aria-components@^1.21.1` and `react-aria@^3.52.1`, and no longer requires `@react-aria/i18n`.
+</Callout>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Features
+
+### AvatarGroup
+
+[AvatarGroup](/docs/components/avatar-group) stacks compound [Avatar](/docs/components/avatar) children and passes `size`, `color`, and `variant` down to its direct children, so a group is styled in one place. `max` truncates the visible avatars and counts the rest, `isGrid` swaps the overlap for a wrapping grid, and `overlap` chooses between the default crescent clip (`"clip"`) and a solid outline (`"ring"`). For a known total from the server, render an explicit `AvatarGroup.Count` — it is not truncated by `max` and replaces the v2 `total` prop. The group carries no implicit `role="group"`; add `role` and a label when the stack is meaningful.
+
+- **AvatarGroup**: Add the `AvatarGroup` component with `max`, `isGrid`, `overlap`, context-driven `size` / `color` / `variant`, and an `AvatarGroup.Count` overflow indicator ([#6861](https://github.com/heroui-inc/heroui/pull/6861)).
+
+## Bug Fixes
+
+- **Focus**: Show focus rings only on real keyboard focus again. v3.2.5 replaced `:focus-visible:not(:focus)` with native `:focus-visible` across 37 selectors, which made [ListBox](/docs/components/list-box), [Dropdown](/docs/components/dropdown), and [Select](/docs/components/select) items ring when a mouse click opened the collection, and made triggers ring when React Aria restored focus on overlay close. The native fallback is now scoped to elements React Aria does not own, while React Aria surfaces keep using `[data-focus-visible="true"]` ([#6849](https://github.com/heroui-inc/heroui/pull/6849)).
+- **ColorSlider**: Gate the `channel` and `colorSpace` validation warnings behind `NODE_ENV`. `getValidColorSpace` runs in the render body, so a misconfigured slider logged on every render in production builds ([#6847](https://github.com/heroui-inc/heroui/pull/6847)).
+- **Tag**: Move the `md` padding and font size into the base `.tag` block so bare `class="tag"` markup renders with padding instead of collapsing, matching the default-size pattern used by the rest of the library. `.tag--md` is now an empty modifier ([#6847](https://github.com/heroui-inc/heroui/pull/6847)).
+- **Breadcrumbs**: Space crumbs with `gap` instead of per-item horizontal padding, so a stacked [Breadcrumbs](/docs/components/breadcrumbs) list sits on the spacing grid and lines up with surrounding content ([#6854](https://github.com/heroui-inc/heroui/pull/6854)).
+- **Package exports**: Put `types` first and add a `default` fallback in every generated export condition, so `@heroui/react` resolves correctly under `moduleResolution: node16` and `nextnode` ([#6847](https://github.com/heroui-inc/heroui/pull/6847)).
+- **Calendar**: Keep year picker labels in sync with locale, time zone, and `format` changes, and rebuild the year grid only when its inputs change instead of on every render ([#6851](https://github.com/heroui-inc/heroui/pull/6851)).
+
+## Performance
+
+- **Context values**: Memoize the context value in 43 components that were passing a fresh object literal on every render, so consumers re-render only when their slots actually change. The largest wins are the components with the most consumers: [Table](/docs/components/table), [Pagination](/docs/components/pagination), [Accordion](/docs/components/accordion), [Tabs](/docs/components/tabs), [Card](/docs/components/card), and [Slider](/docs/components/slider) ([#6852](https://github.com/heroui-inc/heroui/pull/6852)).
+- **Refs**: Memoize merged refs in [DatePicker](/docs/components/date-picker), [DateRangePicker](/docs/components/date-range-picker), [Autocomplete](/docs/components/autocomplete), and [ScrollShadow](/docs/components/scroll-shadow). Passing a fresh merged ref was detaching and reattaching the DOM node on every render ([#6852](https://github.com/heroui-inc/heroui/pull/6852)).
+- **Defaults**: Replace inline `[]` defaults that defeated their own memo dependencies in [InputOTP](/docs/components/input-otp), [DisclosureGroup](/docs/components/disclosure-group), and [ComboBox](/docs/components/combo-box) with shared empty constants ([#6852](https://github.com/heroui-inc/heroui/pull/6852)).
+
+## Styles
+
+- **Dead classes removed**: Drop CSS classes that were never applied by any component — the unused `separator__*` element classes, `.checkbox--disabled`, `.radio--disabled`, and `.switch__label` ([Switch](/docs/components/switch) composes the shared [Label](/docs/components/label)). If you targeted any of these in a custom stylesheet, they never had an effect ([#6853](https://github.com/heroui-inc/heroui/pull/6853)).
+- **Fieldset**: Rename `fieldset__field_group` to `fieldset__field-group` for BEM consistency. Update any CSS override that targets the old class name ([#6853](https://github.com/heroui-inc/heroui/pull/6853)).
+
+## Dependencies
+
+- **React Aria**: Upgrade to `react-aria-components@1.21.1` and `react-aria@3.52.1` ([#6848](https://github.com/heroui-inc/heroui/pull/6848)).
+- **Runtime dependencies**: Bump the packages that ship with `@heroui/react` — `@radix-ui/react-avatar` to `1.2.6`, which backs [Avatar](/docs/components/avatar) and [AvatarGroup](/docs/components/avatar-group), and `input-otp` to `1.5.0`, which backs [InputOTP](/docs/components/input-otp) ([#6866](https://github.com/heroui-inc/heroui/pull/6866)).
+- **Declarations**: Promote `@internationalized/date` to `peerDependencies`, drop the unused `tailwind-merge` dependency (it already ships transitively through `tailwind-variants`, and pinning it directly caused duplicate copies), and drop `@react-aria/i18n`, which nothing in the library referenced but every consumer had to install ([#6847](https://github.com/heroui-inc/heroui/pull/6847)).
+- **Security**: Pin the transitive `js-yaml` and `svgo` used by the build tooling to patched versions ([#6844](https://github.com/heroui-inc/heroui/pull/6844)).
+
+## @heroui/styles
+
+- **CSS subpath exports**: Ship `./components/*.css`, `./utilities`, `./variants`, `./themes/default`, and `./base` in the committed `package.json` so the published surface and monorepo consumers match ([#6846](https://github.com/heroui-inc/heroui/pull/6846)).
+- **Selective imports**: Fix the à-la-carte recipe in the README. Component CSS files `@apply` shared utilities and custom variants, so the utilities and variants prelude is required for the recipe to compile ([#6846](https://github.com/heroui-inc/heroui/pull/6846)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6850](https://github.com/heroui-inc/heroui/pull/6850)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

@@ -21,9 +21,7 @@
  * screen.
  */
 export type NativeQRPreviewTarget =
-  | {target: "auto"}
-  | {target: "home"}
-  | {target: "component"; slug: string};
+  {target: "auto"} | {target: "home"} | {target: "component"; slug: string};
 
 /**
  * Narrow a larger props object (e.g. wrapper-component props that also carry

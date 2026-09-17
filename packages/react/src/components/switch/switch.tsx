@@ -16,6 +16,8 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
+const LABEL_SPAN_CONTEXT = {elementType: "span" as const};
+
 interface SwitchContext {
   slots?: ReturnType<typeof switchVariants>;
   state?: SwitchFieldRenderProps;
@@ -65,7 +67,7 @@ const SwitchContent = ({children, className, ...props}: SwitchContentProps) => {
       className={composeTwRenderProps(className, slots?.content())}
     >
       {(state) => (
-        <LabelContext value={{elementType: "span"}}>
+        <LabelContext value={LABEL_SPAN_CONTEXT}>
           {typeof children === "function" ? children(state) : children}
         </LabelContext>
       )}

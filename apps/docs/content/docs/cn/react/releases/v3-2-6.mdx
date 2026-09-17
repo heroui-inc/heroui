@@ -1,0 +1,99 @@
+---
+title: v3.2.6
+description: 补丁版本：新增 AvatarGroup 组件，恢复 ListBox、Dropdown、Select 与浮层触发器上仅键盘触发的焦点环，修正 @heroui/react 的依赖声明（@internationalized/date 改为对等依赖），避免 ColorSlider 在生产构建中反复告警，恢复 Tag 的默认内边距，调整 Breadcrumbs 间距，并对组件树中的 context 值做 memoize，同时将 React Aria 升级到 1.21.1。
+github:
+  pull: 6850
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 9 月 17 日</span>
+</div>
+
+补丁版本：[AvatarGroup](/docs/components/avatar-group) 作为独立组件回归；鼠标打开浮层后，[ListBox](/docs/components/list-box)、[Dropdown](/docs/components/dropdown)、[Select](/docs/components/select) 与浮层触发器上的焦点环重新变为仅键盘触发；`@internationalized/date` 移入 `peerDependencies`，同时移除 `tailwind-merge` 与 `@react-aria/i18n`；[ColorSlider](/docs/components/color-slider) 不再在生产构建中每次渲染都告警；裸 `.tag` 标记保留默认内边距；[Breadcrumbs](/docs/components/breadcrumbs) 重新对齐到间距网格；React Aria 升级到 `1.21.1`（`react-aria@3.52.1`）。此外，43 个组件的 context 值做了 memoize，消费者不再随根组件的每次渲染而重渲染。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warning">
+  **对等依赖已变更。** `@internationalized/date@^3.12.4` 现在是对等依赖——它一直被 [Calendar](/docs/components/calendar)、[RangeCalendar](/docs/components/range-calendar) 与日期工具在运行时导入，此前只是碰巧通过 `react-aria-components` 的依赖树解析到。如果你的包管理器不做提升，请显式安装。本次发布同时要求 `react-aria-components@^1.21.1` 与 `react-aria@^3.52.1`，并且不再需要 `@react-aria/i18n`。
+</Callout>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新功能
+
+### AvatarGroup
+
+[AvatarGroup](/docs/components/avatar-group) 用于堆叠展示复合式的 [Avatar](/docs/components/avatar) 子组件，并把 `size`、`color` 与 `variant` 传递给直接子级，从而在一处统一控制整组样式。`max` 会截断可见头像并对其余项计数，`isGrid` 用可换行的网格布局替代重叠布局，`overlap` 则在默认的月牙裁切（`"clip"`）与实心描边（`"ring"`）之间切换。若总数由服务端给出，可显式渲染 `AvatarGroup.Count`——它不受 `max` 截断，用于替代 v2 的 `total` 属性。该组件不会隐式添加 `role="group"`；当这组头像本身承载语义时，请自行传入 `role` 与对应的标签。
+
+- **AvatarGroup**：新增 `AvatarGroup` 组件，支持 `max`、`isGrid`、`overlap`、通过 context 下发的 `size` / `color` / `variant`，以及用于溢出计数的 `AvatarGroup.Count` ([#6861](https://github.com/heroui-inc/heroui/pull/6861))。
+
+## 错误修复
+
+- **焦点**：焦点环重新只在真正的键盘聚焦时显示。v3.2.5 在 37 处选择器上把 `:focus-visible:not(:focus)` 替换为原生 `:focus-visible`，导致鼠标点击打开集合时 [ListBox](/docs/components/list-box)、[Dropdown](/docs/components/dropdown) 与 [Select](/docs/components/select) 的选项出现焦点环，浮层关闭后 React Aria 把焦点还回触发器时也会出现。现在原生回退仅作用于 React Aria 不接管的元素，React Aria 管理的组件继续使用 `[data-focus-visible="true"]` ([#6849](https://github.com/heroui-inc/heroui/pull/6849))。
+- **ColorSlider**：将 `channel` 与 `colorSpace` 的校验告警按 `NODE_ENV` 进行门控。`getValidColorSpace` 在渲染函数体中执行，配置有误的滑块会在生产构建中每次渲染都打印日志 ([#6847](https://github.com/heroui-inc/heroui/pull/6847))。
+- **Tag**：把 `md` 的内边距与字号移入基础 `.tag` 块，使裸 `class="tag"` 标记带有内边距而不会塌缩，与库中其余组件的默认尺寸规范一致。`.tag--md` 现在是空的修饰符 ([#6847](https://github.com/heroui-inc/heroui/pull/6847))。
+- **Breadcrumbs**：改用 `gap` 代替每项的水平内边距来控制间距，使换行堆叠的 [Breadcrumbs](/docs/components/breadcrumbs) 落在间距网格上，与周围内容对齐 ([#6854](https://github.com/heroui-inc/heroui/pull/6854))。
+- **包导出**：在生成的每个导出条件中将 `types` 放在首位并补上 `default` 回退，使 `@heroui/react` 在 `moduleResolution: node16` 与 `nextnode` 下解析正确 ([#6847](https://github.com/heroui-inc/heroui/pull/6847))。
+- **Calendar**：年份选择器的标签会随 locale、时区与 `format` 变化同步更新，并且只在输入变化时重建年份网格，而不是每次渲染都重建 ([#6851](https://github.com/heroui-inc/heroui/pull/6851))。
+
+## 性能
+
+- **Context 值**：为 43 个每次渲染都传入新对象字面量的组件 memoize context 值，使消费者只在 slots 真正变化时才重渲染。收益最大的是消费者最多的组件：[Table](/docs/components/table)、[Pagination](/docs/components/pagination)、[Accordion](/docs/components/accordion)、[Tabs](/docs/components/tabs)、[Card](/docs/components/card) 与 [Slider](/docs/components/slider) ([#6852](https://github.com/heroui-inc/heroui/pull/6852))。
+- **Ref**：对 [DatePicker](/docs/components/date-picker)、[DateRangePicker](/docs/components/date-range-picker)、[Autocomplete](/docs/components/autocomplete) 与 [ScrollShadow](/docs/components/scroll-shadow) 中合并后的 ref 做 memoize。每次渲染传入新的合并 ref 会导致 DOM 节点反复卸载与重新挂载 ([#6852](https://github.com/heroui-inc/heroui/pull/6852))。
+- **默认值**：将 [InputOTP](/docs/components/input-otp)、[DisclosureGroup](/docs/components/disclosure-group) 与 [ComboBox](/docs/components/combo-box) 中使自身 memo 依赖失效的内联 `[]` 默认值替换为共享的空常量 ([#6852](https://github.com/heroui-inc/heroui/pull/6852))。
+
+## 样式
+
+- **移除无效类名**：删除从未被任何组件应用的 CSS 类——未使用的 `separator__*` 元素类、`.checkbox--disabled`、`.radio--disabled` 与 `.switch__label`（[Switch](/docs/components/switch) 组合的是共享的 [Label](/docs/components/label)）。如果你在自定义样式表中定位过这些类，它们本来就不会生效 ([#6853](https://github.com/heroui-inc/heroui/pull/6853))。
+- **Fieldset**：将 `fieldset__field_group` 重命名为 `fieldset__field-group` 以符合 BEM 规范。若有 CSS 覆盖使用了旧类名，请一并更新 ([#6853](https://github.com/heroui-inc/heroui/pull/6853))。
+
+## 依赖
+
+- **React Aria**：升级到 `react-aria-components@1.21.1` 与 `react-aria@3.52.1` ([#6848](https://github.com/heroui-inc/heroui/pull/6848))。
+- **运行时依赖**：升级随 `@heroui/react` 一同发布的依赖——支撑 [Avatar](/docs/components/avatar) 与 [AvatarGroup](/docs/components/avatar-group) 的 `@radix-ui/react-avatar` 升级到 `1.2.6`，支撑 [InputOTP](/docs/components/input-otp) 的 `input-otp` 升级到 `1.5.0` ([#6866](https://github.com/heroui-inc/heroui/pull/6866))。
+- **依赖声明**：将 `@internationalized/date` 提升为 `peerDependencies`；移除未使用的 `tailwind-merge` 依赖（它已经通过 `tailwind-variants` 传递引入，直接锁定反而导致重复副本）；移除库中没有任何引用、却强制每个消费者安装的 `@react-aria/i18n` ([#6847](https://github.com/heroui-inc/heroui/pull/6847))。
+- **安全**：将构建工具链中传递引入的 `js-yaml` 与 `svgo` 锁定到已修复的版本 ([#6844](https://github.com/heroui-inc/heroui/pull/6844))。
+
+## @heroui/styles
+
+- **CSS 子路径导出**：在提交的 `package.json` 中补齐 `./components/*.css`、`./utilities`、`./variants`、`./themes/default` 与 `./base`，使发布产物与 monorepo 内的消费方保持一致 ([#6846](https://github.com/heroui-inc/heroui/pull/6846))。
+- **按需引入**：修正 README 中的按需引入示例。组件 CSS 会 `@apply` 共享的 utilities 与自定义 variants，因此示例必须包含 utilities 与 variants 的前置引入才能编译通过 ([#6846](https://github.com/heroui-inc/heroui/pull/6846))。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6850](https://github.com/heroui-inc/heroui/pull/6850)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />

@@ -16,7 +16,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     environment: npm-publish
-    timeout-minutes: 15
+    timeout-minutes: 30
     permissions:
       contents: write
       id-token: write
@@ -29,6 +29,18 @@ jobs:
 
       - name: Install
         uses: ./.github/common-actions/install
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Install Playwright Chromium
+        run: pnpm --filter @heroui/testing exec playwright install --with-deps chromium
+
+      - name: Test
+        run: pnpm test
 
       - name: Build packages
         run: pnpm build

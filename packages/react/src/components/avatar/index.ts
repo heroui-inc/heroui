@@ -1,5 +1,7 @@
 import type {ComponentProps} from "react";
 
+import {AVATAR_GROUP_CHILD} from "../avatar-group/avatar-group-context";
+
 import {AvatarFallback, AvatarImage, AvatarRoot} from "./avatar";
 
 /* -------------------------------------------------------------------------------------------------
@@ -29,6 +31,11 @@ export type {
   AvatarImageProps,
   AvatarFallbackProps,
 } from "./avatar";
+
+/* -------------------------------------------------------------------------------------------------
+ * Re-export AVATAR_GROUP_CHILD for type declarations
+ * -----------------------------------------------------------------------------------------------*/
+export {AVATAR_GROUP_CHILD};
 
 /* -------------------------------------------------------------------------------------------------
  * Variants

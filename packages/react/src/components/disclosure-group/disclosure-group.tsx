@@ -27,8 +27,10 @@ interface DisclosureGroupRootProps
 const DisclosureGroupRoot = ({children, className, ...props}: DisclosureGroupRootProps) => {
   const slots = React.useMemo(() => disclosureGroupVariants({}), []);
 
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
+
   return (
-    <DisclosureGroupContext value={{slots}}>
+    <DisclosureGroupContext value={contextValue}>
       <DisclosureGroupPrimitive
         data-slot="disclosure-group"
         {...props}

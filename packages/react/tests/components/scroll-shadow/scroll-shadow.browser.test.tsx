@@ -3,9 +3,8 @@ import {page} from "vitest/browser";
 
 import {ScrollShadow} from "@/components/scroll-shadow";
 
-// The fade lives entirely in CSS, so this suite needs the compiled stylesheet rather than
-// the Tailwind sources. Every `pnpm test*` entry point builds `@heroui/styles` first.
-import "../../../../styles/dist/heroui.min.css";
+// The fade lives in CSS; Vite Tailwind compiles `@/styles.css`.
+import "@/styles.css";
 
 const SHADOW_SIZE = 40;
 const VIEWPORT = 240;
