@@ -179,8 +179,192 @@ export default function Index() {
   The template loads styles with `import "./tailwind.css";` in `app/root.tsx`. HeroUI v3 does not require a provider. Components work directly after installation and style import.
 </Callout>
 
+## Other Frameworks
+
+`@heroui/react` requires React because its behavior is built on React Aria. The design system itself lives in `@heroui/styles` — a package with no React dependency that ships HeroUI's BEM classes and framework-agnostic variant functions. You can use it from Vue, Svelte, Angular, or plain HTML.
+
+<Callout type="warning">
+  This gives you HeroUI's visual design, not its behavior. Keyboard navigation, focus management, and ARIA attributes come from React Aria in `@heroui/react`, so you are responsible for them in your own components.
+</Callout>
+
+### 1. Install the styles package
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles
+    ```
+  </Tab>
+</Tabs>
+
+### 2. Import the styles
+
+<Tabs items={["Tailwind CSS v4", "Prebuilt CSS", "CDN"]}>
+  <Tab value="Tailwind CSS v4">
+    Add to your main CSS file:
+
+    ```css
+    @import "tailwindcss";
+    @import "@heroui/styles";
+    ```
+
+    This is the only option where Tailwind utility classes work alongside HeroUI classes.
+  </Tab>
+  <Tab value="Prebuilt CSS">
+    Import the compiled stylesheet from your entry file. No Tailwind build required:
+
+    ```ts
+    import "@heroui/styles/dist/heroui.min.css";
+    ```
+  </Tab>
+  <Tab value="CDN">
+    No build step at all:
+
+    ```html
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heroui/styles@3/dist/heroui.min.css" />
+    ```
+  </Tab>
+</Tabs>
+
+<Callout>
+  The prebuilt and CDN bundles contain HeroUI's component classes and theme tokens, but not Tailwind's utility classes. If you also want utilities like `flex` or `gap-4`, use the Tailwind CSS v4 option.
+</Callout>
+
+### 3. Use your first HeroUI component
+
+Apply the BEM classes directly, or generate them with a variant function for type safety.
+
+<Tabs items={["Vue", "Svelte", "Angular", "HTML"]}>
+  <Tab value="Vue">
+    ```vue
+    <script setup lang="ts">
+    import {buttonVariants} from "@heroui/styles";
+
+    const buttonClass = buttonVariants({variant: "primary"});
+    </script>
+
+    <template>
+      <button :class="buttonClass">Hello HeroUI</button>
+
+      <!-- Or with BEM classes directly -->
+      <button class="button button--primary">Hello HeroUI</button>
+    </template>
+    ```
+  </Tab>
+  <Tab value="Svelte">
+    ```svelte
+    <script lang="ts">
+      import {buttonVariants} from "@heroui/styles";
+
+      const buttonClass = buttonVariants({variant: "primary"});
+    </script>
+
+    <button class={buttonClass}>Hello HeroUI</button>
+
+    <!-- Or with BEM classes directly -->
+    <button class="button button--primary">Hello HeroUI</button>
+    ```
+  </Tab>
+  <Tab value="Angular">
+    ```ts
+    import {Component} from "@angular/core";
+    import {buttonVariants} from "@heroui/styles";
+
+    @Component({
+      selector: "app-example",
+      standalone: true,
+      template: `
+        <button [class]="buttonClass">Hello HeroUI</button>
+
+        <!-- Or with BEM classes directly -->
+        <button class="button button--primary">Hello HeroUI</button>
+      `,
+    })
+    export class ExampleComponent {
+      buttonClass = buttonVariants({variant: "primary"});
+    }
+    ```
+  </Tab>
+  <Tab value="HTML">
+    ```html
+    <button class="button button--primary">Hello HeroUI</button>
+    <button class="button button--secondary button--sm">Small</button>
+    <button class="button button--danger" disabled>Delete</button>
+    ```
+  </Tab>
+</Tabs>
+
+Every component follows the same [BEM](https://getbem.com/) convention: a block class, `--` modifiers for variants and sizes, and `__` elements for child parts. For `button`, the variants are `.button--primary`, `--secondary`, `--tertiary`, `--ghost`, `--outline`, `--danger`, and `--danger-soft`; the sizes are `.button--sm`, `--md`, and `--lg`; and `.button--icon-only` and `.button--full-width` are modifiers.
+
+See [Composition](/docs/react/getting-started/composition) for more on variant functions and applying HeroUI styles to arbitrary elements.
+
+### 4. Interactive states
+
+HeroUI's CSS targets both native pseudo-classes and `data-*` attributes, so semantic HTML elements pick up hover, press, focus, and disabled styling with no JavaScript:
+
+```css
+/* button.css */
+.button {
+  &:active,
+  &[data-pressed="true"] { ... }
+
+  &:disabled,
+  &[aria-disabled="true"] { ... }
+}
+```
+
+States the browser cannot infer must be set by you. The most common are:
+
+| Attribute | Purpose |
+| --- | --- |
+| `data-selected="true"` | Selected items in menus, list boxes, and tabs |
+| `data-entering="true"` / `data-exiting="true"` | Enter and exit animations for overlays |
+| `data-placement="top"` | Arrow and offset direction for popovers and tooltips |
+| `data-invalid="true"` | Validation styling on form fields |
+| `data-slot="..."` | Marks child parts of compound components |
+
+<Callout>
+  Stateless components such as button, chip, card, and skeleton work as drop-in markup. Overlays and collections (select, menu, popover, date picker) depend on state you would have to manage yourself — consider keeping those in React, or read the `data-*` selectors in the component's CSS file to see what is required.
+</Callout>
+
+### 5. Theming
+
+Dark mode is driven by a `.dark` class or a `data-theme="dark"` attribute on any ancestor element:
+
+```html
+<html class="dark">...</html>
+
+<!-- or -->
+<html data-theme="dark">...</html>
+```
+
+Override the theme by redefining CSS variables:
+
+```css
+:root {
+  --accent: oklch(0.62 0.19 253);
+  --radius: 0.5rem;
+}
+```
+
 ## Next steps
 
 - [Quick Start](/docs/react/getting-started/quick-start) for the fastest setup path
 - [Themes](/docs/react/getting-started/theming) to customize colors and tokens
+- [Composition](/docs/react/getting-started/composition) for variant functions and polymorphic styling
 - [Components](/docs/react/components) to explore all available components
