@@ -8,12 +8,21 @@ icon: layers
 
 ### 1. 创建 Next.js 项目
 
-```bash
-npx heroui-cli@latest init
-```
+<Tabs items={["App Router", "Pages Router"]}>
+  <Tab value="App Router">
+    ```bash
+    npx heroui-cli@latest init -t app
+    ```
+  </Tab>
+  <Tab value="Pages Router">
+    ```bash
+    npx heroui-cli@latest init -t pages
+    ```
+  </Tab>
+</Tabs>
 
 <Callout>
-  当出现提示时，选择 **App** 或 **Pages** 模板。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
+  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器 —— 直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t app -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
 </Callout>
 
 ### 2. 使用你的第一个 HeroUI 组件
@@ -109,11 +118,11 @@ export function ClientProviders({lang, children}) {
 ### 1. 创建 Vite 项目
 
 ```bash
-npx heroui-cli@latest init
+npx heroui-cli@latest init -t vite
 ```
 
 <Callout>
-  当出现提示时，选择 **Vite** 模板。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
+  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器 —— 直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t vite -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
 </Callout>
 
 ### 2. 使用你的第一个 HeroUI 组件
@@ -136,6 +145,38 @@ export default App;
 
 <Callout>
   HeroUI v3 无需 Provider。安装并导入样式后，组件即可直接使用。
+</Callout>
+
+## React Router
+
+### 1. 创建 React Router 项目
+
+```bash
+npx heroui-cli@latest init -t react-router
+```
+
+<Callout>
+  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器 —— 直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t react-router -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
+</Callout>
+
+### 2. 使用你的第一个 HeroUI 组件
+
+示例：`app/routes/_index.tsx`
+
+```tsx
+import {Button} from "@heroui/react";
+
+export default function Index() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button variant="tertiary">Hello HeroUI</Button>
+    </main>
+  );
+}
+```
+
+<Callout>
+  该模板在 `app/root.tsx` 中通过 `import "./tailwind.css";` 加载样式。HeroUI v3 无需 Provider，安装并导入样式后，组件即可直接使用。
 </Callout>
 
 ## 下一步

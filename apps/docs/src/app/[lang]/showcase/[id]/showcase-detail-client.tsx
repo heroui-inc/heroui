@@ -119,9 +119,8 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
                 <LinkRoot
                   key={component}
                   className={cn(
-                    chipVariants({
+                    chipVariants({variant: "tertiary"}).base({
                       class: "rounded-full text-muted hover:bg-default/50",
-                      variant: "tertiary",
                     }),
                   )}
                   href={
