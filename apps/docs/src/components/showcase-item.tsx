@@ -45,10 +45,9 @@ export function ShowcaseItem({
           <div className="absolute end-2 top-1.5 z-10">
             <span
               className={cn(
-                chipVariants({
-                  className: cn(
+                chipVariants().base({
+                  className:
                     "h-6 rounded-full border border-white/10 bg-black/30 px-1.5 text-[11px] text-white/80 shadow-sm saturate-200 backdrop-blur-md",
-                  ),
                 }),
                 "font-medium capitalize shadow-sm",
                 {"bg-white/10": item.defaultTheme === "dark" && !item.supportsThemeSwitching},
