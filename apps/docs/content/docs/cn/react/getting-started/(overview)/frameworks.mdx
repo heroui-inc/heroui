@@ -179,8 +179,192 @@ export default function Index() {
   该模板在 `app/root.tsx` 中通过 `import "./tailwind.css";` 加载样式。HeroUI v3 无需 Provider，安装并导入样式后，组件即可直接使用。
 </Callout>
 
+## 其他框架
+
+`@heroui/react` 的交互行为基于 React Aria 构建，因此必须在 React 中使用。但设计系统本身位于 `@heroui/styles` —— 这是一个不依赖 React 的包，提供 HeroUI 的 BEM 类名和与框架无关的变体函数。你可以在 Vue、Svelte、Angular 或纯 HTML 中使用它。
+
+<Callout type="warning">
+  这种方式只提供 HeroUI 的视觉样式，不包含交互行为。键盘导航、焦点管理和 ARIA 属性均由 `@heroui/react` 中的 React Aria 提供，因此在你自己的组件中需要自行实现。
+</Callout>
+
+### 1. 安装样式包
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles
+    ```
+  </Tab>
+</Tabs>
+
+### 2. 导入样式
+
+<Tabs items={["Tailwind CSS v4", "预编译 CSS", "CDN"]}>
+  <Tab value="Tailwind CSS v4">
+    在主 CSS 文件中添加：
+
+    ```css
+    @import "tailwindcss";
+    @import "@heroui/styles";
+    ```
+
+    只有这种方式才能让 Tailwind 工具类与 HeroUI 类名一起使用。
+  </Tab>
+  <Tab value="预编译 CSS">
+    在入口文件中导入已编译好的样式表，无需配置 Tailwind 构建：
+
+    ```ts
+    import "@heroui/styles/dist/heroui.min.css";
+    ```
+  </Tab>
+  <Tab value="CDN">
+    完全无需构建步骤：
+
+    ```html
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heroui/styles@3/dist/heroui.min.css" />
+    ```
+  </Tab>
+</Tabs>
+
+<Callout>
+  预编译产物和 CDN 产物包含 HeroUI 的组件类名和主题令牌，但不包含 Tailwind 的工具类。如果你还需要使用 `flex`、`gap-4` 这类工具类，请选择 Tailwind CSS v4 方式。
+</Callout>
+
+### 3. 使用你的第一个 HeroUI 组件
+
+你可以直接使用 BEM 类名，也可以通过变体函数生成类名以获得类型安全。
+
+<Tabs items={["Vue", "Svelte", "Angular", "HTML"]}>
+  <Tab value="Vue">
+    ```vue
+    <script setup lang="ts">
+    import {buttonVariants} from "@heroui/styles";
+
+    const buttonClass = buttonVariants({variant: "primary"});
+    </script>
+
+    <template>
+      <button :class="buttonClass">Hello HeroUI</button>
+
+      <!-- 或者直接使用 BEM 类名 -->
+      <button class="button button--primary">Hello HeroUI</button>
+    </template>
+    ```
+  </Tab>
+  <Tab value="Svelte">
+    ```svelte
+    <script lang="ts">
+      import {buttonVariants} from "@heroui/styles";
+
+      const buttonClass = buttonVariants({variant: "primary"});
+    </script>
+
+    <button class={buttonClass}>Hello HeroUI</button>
+
+    <!-- 或者直接使用 BEM 类名 -->
+    <button class="button button--primary">Hello HeroUI</button>
+    ```
+  </Tab>
+  <Tab value="Angular">
+    ```ts
+    import {Component} from "@angular/core";
+    import {buttonVariants} from "@heroui/styles";
+
+    @Component({
+      selector: "app-example",
+      standalone: true,
+      template: `
+        <button [class]="buttonClass">Hello HeroUI</button>
+
+        <!-- 或者直接使用 BEM 类名 -->
+        <button class="button button--primary">Hello HeroUI</button>
+      `,
+    })
+    export class ExampleComponent {
+      buttonClass = buttonVariants({variant: "primary"});
+    }
+    ```
+  </Tab>
+  <Tab value="HTML">
+    ```html
+    <button class="button button--primary">Hello HeroUI</button>
+    <button class="button button--secondary button--sm">Small</button>
+    <button class="button button--danger" disabled>Delete</button>
+    ```
+  </Tab>
+</Tabs>
+
+所有组件都遵循相同的 [BEM](https://getbem.com/) 约定：一个块级类名、用 `--` 表示变体和尺寸的修饰符、用 `__` 表示子元素。以 `button` 为例，变体为 `.button--primary`、`--secondary`、`--tertiary`、`--ghost`、`--outline`、`--danger` 和 `--danger-soft`；尺寸为 `.button--sm`、`--md` 和 `--lg`；`.button--icon-only` 和 `.button--full-width` 则是修饰符。
+
+关于变体函数以及如何将 HeroUI 样式应用到任意元素，请参阅 [组合](/docs/react/getting-started/composition)。
+
+### 4. 交互状态
+
+HeroUI 的 CSS 同时匹配原生伪类和 `data-*` 属性，因此语义化的 HTML 元素无需任何 JavaScript 即可获得悬停、按下、聚焦和禁用样式：
+
+```css
+/* button.css */
+.button {
+  &:active,
+  &[data-pressed="true"] { ... }
+
+  &:disabled,
+  &[aria-disabled="true"] { ... }
+}
+```
+
+浏览器无法自行推断的状态则需要你手动设置。常见的属性包括：
+
+| 属性 | 用途 |
+| --- | --- |
+| `data-selected="true"` | 菜单、列表框和标签页中的选中项 |
+| `data-entering="true"` / `data-exiting="true"` | 浮层的进入和退出动画 |
+| `data-placement="top"` | 弹出框和工具提示的箭头方向与偏移 |
+| `data-invalid="true"` | 表单字段的校验样式 |
+| `data-slot="..."` | 标记复合组件的子部件 |
+
+<Callout>
+  button、chip、card、skeleton 等无状态组件可以直接以标记形式使用。而浮层和集合类组件（select、menu、popover、date picker）依赖你自行管理的状态 —— 建议这类组件继续使用 React，或查阅对应组件 CSS 文件中的 `data-*` 选择器以了解所需的属性。
+</Callout>
+
+### 5. 主题
+
+深色模式由任意祖先元素上的 `.dark` 类名或 `data-theme="dark"` 属性控制：
+
+```html
+<html class="dark">...</html>
+
+<!-- 或 -->
+<html data-theme="dark">...</html>
+```
+
+通过重新定义 CSS 变量来覆盖主题：
+
+```css
+:root {
+  --accent: oklch(0.62 0.19 253);
+  --radius: 0.5rem;
+}
+```
+
 ## 下一步
 
 - [快速入门](/docs/react/getting-started/quick-start) — 最快上手的方式
 - [主题](/docs/react/getting-started/theming) — 自定义颜色和设计令牌
+- [组合](/docs/react/getting-started/composition) — 变体函数与多态样式
 - [组件](/docs/react/components) — 探索所有可用的组件
