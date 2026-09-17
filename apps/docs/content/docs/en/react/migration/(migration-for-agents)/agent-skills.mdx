@@ -21,6 +21,16 @@ npx skills add heroui-inc/heroui
 Support Claude Code, Cursor, OpenCode and more.
 </span>
 
+### Install Scope
+
+By default the install script writes to your home directory, so the skill is available in every project. Add `HEROUI_SKILL_SCOPE=project` and rerun it from the project you're migrating to install there instead — useful when you only need the migration skill for that codebase.
+
+```bash
+curl -fsSL https://heroui.com/install | HEROUI_SKILL_SCOPE=project bash -s heroui-migration
+```
+
+Each detected tool gets the directory it reads from, inside the project: `.claude/skills/` for Claude Code, `.cursor/skills/` for Cursor, `.opencode/skills/` for OpenCode, and `.agents/skills/` for Codex and Antigravity.
+
 ### Usage
 
 Skills are **automatically discovered** by your AI assistant, or call it directly using `/heroui-migration` command.
