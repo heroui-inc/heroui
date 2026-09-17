@@ -6,7 +6,7 @@ github:
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-muted">September 16, 2026</span>
+  <span className="text-sm text-muted">September 17, 2026</span>
 </div>
 
 Patch release: [AvatarGroup](/docs/components/avatar-group) returns as a dedicated component, focus rings are keyboard-only again on [ListBox](/docs/components/list-box), [Dropdown](/docs/components/dropdown), [Select](/docs/components/select), and overlay triggers after a mouse-driven open, `@internationalized/date` moves to `peerDependencies` while `tailwind-merge` and `@react-aria/i18n` are dropped, [ColorSlider](/docs/components/color-slider) no longer warns on every render in production, bare `.tag` markup keeps its default padding, [Breadcrumbs](/docs/components/breadcrumbs) sit back on the spacing grid, and React Aria is upgraded to `1.21.1` (`react-aria@3.52.1`). Context values are also memoized across 43 components, so consumers no longer re-render on every root render.
@@ -77,6 +77,7 @@ Update to the latest version:
 ## Dependencies
 
 - **React Aria**: Upgrade to `react-aria-components@1.21.1` and `react-aria@3.52.1` ([#6848](https://github.com/heroui-inc/heroui/pull/6848)).
+- **Runtime dependencies**: Bump the packages that ship with `@heroui/react` — `@radix-ui/react-avatar` to `1.2.6`, which backs [Avatar](/docs/components/avatar) and [AvatarGroup](/docs/components/avatar-group), and `input-otp` to `1.5.0`, which backs [InputOTP](/docs/components/input-otp) ([#6866](https://github.com/heroui-inc/heroui/pull/6866)).
 - **Declarations**: Promote `@internationalized/date` to `peerDependencies`, drop the unused `tailwind-merge` dependency (it already ships transitively through `tailwind-variants`, and pinning it directly caused duplicate copies), and drop `@react-aria/i18n`, which nothing in the library referenced but every consumer had to install ([#6847](https://github.com/heroui-inc/heroui/pull/6847)).
 - **Security**: Pin the transitive `js-yaml` and `svgo` used by the build tooling to patched versions ([#6844](https://github.com/heroui-inc/heroui/pull/6844)).
 

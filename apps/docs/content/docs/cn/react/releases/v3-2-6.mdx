@@ -6,7 +6,7 @@ github:
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-muted">2026 年 9 月 16 日</span>
+  <span className="text-sm text-muted">2026 年 9 月 17 日</span>
 </div>
 
 补丁版本：[AvatarGroup](/docs/components/avatar-group) 作为独立组件回归；鼠标打开浮层后，[ListBox](/docs/components/list-box)、[Dropdown](/docs/components/dropdown)、[Select](/docs/components/select) 与浮层触发器上的焦点环重新变为仅键盘触发；`@internationalized/date` 移入 `peerDependencies`，同时移除 `tailwind-merge` 与 `@react-aria/i18n`；[ColorSlider](/docs/components/color-slider) 不再在生产构建中每次渲染都告警；裸 `.tag` 标记保留默认内边距；[Breadcrumbs](/docs/components/breadcrumbs) 重新对齐到间距网格；React Aria 升级到 `1.21.1`（`react-aria@3.52.1`）。此外，43 个组件的 context 值做了 memoize，消费者不再随根组件的每次渲染而重渲染。
@@ -77,6 +77,7 @@ github:
 ## 依赖
 
 - **React Aria**：升级到 `react-aria-components@1.21.1` 与 `react-aria@3.52.1` ([#6848](https://github.com/heroui-inc/heroui/pull/6848))。
+- **运行时依赖**：升级随 `@heroui/react` 一同发布的依赖——支撑 [Avatar](/docs/components/avatar) 与 [AvatarGroup](/docs/components/avatar-group) 的 `@radix-ui/react-avatar` 升级到 `1.2.6`，支撑 [InputOTP](/docs/components/input-otp) 的 `input-otp` 升级到 `1.5.0` ([#6866](https://github.com/heroui-inc/heroui/pull/6866))。
 - **依赖声明**：将 `@internationalized/date` 提升为 `peerDependencies`；移除未使用的 `tailwind-merge` 依赖（它已经通过 `tailwind-variants` 传递引入，直接锁定反而导致重复副本）；移除库中没有任何引用、却强制每个消费者安装的 `@react-aria/i18n` ([#6847](https://github.com/heroui-inc/heroui/pull/6847))。
 - **安全**：将构建工具链中传递引入的 `js-yaml` 与 `svgo` 锁定到已修复的版本 ([#6844](https://github.com/heroui-inc/heroui/pull/6844))。
 
