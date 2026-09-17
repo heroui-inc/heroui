@@ -91,11 +91,7 @@ export interface CustomItemType extends Filterable {
 }
 
 export type LinkItemType =
-  | MainItemType
-  | IconItemType
-  | ButtonItemType
-  | MenuItemType
-  | CustomItemType;
+  MainItemType | IconItemType | ButtonItemType | MenuItemType | CustomItemType;
 
 export function LinkItem({
   item,
