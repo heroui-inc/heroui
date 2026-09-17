@@ -8,12 +8,21 @@ icon: layers
 
 ### 1. Create a Next.js project
 
-```bash
-npx heroui-cli@latest init
-```
+<Tabs items={["App Router", "Pages Router"]}>
+  <Tab value="App Router">
+    ```bash
+    npx heroui-cli@latest init -t app
+    ```
+  </Tab>
+  <Tab value="Pages Router">
+    ```bash
+    npx heroui-cli@latest init -t pages
+    ```
+  </Tab>
+</Tabs>
 
 <Callout>
-  When prompted, select the **App** or **Pages** template. Then open your new folder and install dependencies (for example `pnpm install`).
+  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t app -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
 </Callout>
 
 ### 2. Use your first HeroUI component
@@ -55,7 +64,7 @@ npx heroui-cli@latest init
   HeroUI v3 does not require a provider. Components work directly after installation and style import.
 </Callout>
 
-### 3 Locale Setup (Optional)
+### 3. Locale Setup (Optional)
 
 To integrate with Next.js, ensure the locale on the server matches the client.
 
@@ -109,11 +118,11 @@ If you are using a [Content Security Policy](https://developer.mozilla.org/en-US
 ### 1. Create a Vite project
 
 ```bash
-npx heroui-cli@latest init
+npx heroui-cli@latest init -t vite
 ```
 
 <Callout>
-  When prompted, select the **Vite** template. Then open your new folder and install dependencies (for example `pnpm install`).
+  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t vite -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
 </Callout>
 
 ### 2. Use your first HeroUI component
@@ -136,6 +145,38 @@ export default App;
 
 <Callout>
   HeroUI v3 does not require a provider. Components work directly after installation and style import.
+</Callout>
+
+## React Router
+
+### 1. Create a React Router project
+
+```bash
+npx heroui-cli@latest init -t react-router
+```
+
+<Callout>
+  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t react-router -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
+</Callout>
+
+### 2. Use your first HeroUI component
+
+Example: `app/routes/_index.tsx`
+
+```tsx
+import {Button} from "@heroui/react";
+
+export default function Index() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button variant="tertiary">Hello HeroUI</Button>
+    </main>
+  );
+}
+```
+
+<Callout>
+  The template loads styles with `import "./tailwind.css";` in `app/root.tsx`. HeroUI v3 does not require a provider. Components work directly after installation and style import.
 </Callout>
 
 ## Next steps
