@@ -42,6 +42,8 @@ const DisclosureGroupRoot = ({children, className, ...props}: DisclosureGroupRoo
   );
 };
 
+DisclosureGroupRoot.displayName = "HeroUI.DisclosureGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

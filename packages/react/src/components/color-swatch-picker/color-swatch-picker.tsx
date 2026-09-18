@@ -67,6 +67,8 @@ const ColorSwatchPickerRoot = ({
   );
 };
 
+ColorSwatchPickerRoot.displayName = "HeroUI.ColorSwatchPicker";
+
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Item
 | * -----------------------------------------------------------------------------------------------*/
@@ -97,6 +99,8 @@ const ColorSwatchPickerItem = ({children, className, ...props}: ColorSwatchPicke
   );
 };
 
+ColorSwatchPickerItem.displayName = "HeroUI.ColorSwatchPicker.Item";
+
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Swatch
 | * -----------------------------------------------------------------------------------------------*/
@@ -113,6 +117,8 @@ const ColorSwatchPickerSwatch = ({className, ...props}: ColorSwatchPickerSwatchP
     />
   );
 };
+
+ColorSwatchPickerSwatch.displayName = "HeroUI.ColorSwatchPicker.Swatch";
 
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Indicator
@@ -185,6 +191,8 @@ const ColorSwatchPickerIndicator = <E extends keyof React.JSX.IntrinsicElements 
     </dom.span>
   );
 };
+
+ColorSwatchPickerIndicator.displayName = "HeroUI.ColorSwatchPicker.Indicator";
 
 /* -------------------------------------------------------------------------------------------------
 | * Exports

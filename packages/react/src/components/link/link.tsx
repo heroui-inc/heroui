@@ -44,6 +44,8 @@ const LinkRoot = ({children, className, ...props}: LinkRootProps) => {
   );
 };
 
+LinkRoot.displayName = "HeroUI.Link";
+
 /* ------------------------------------------------------------------------------------------------
  * Link Icon
  * --------------------------------------------------------------------------------------------- */
@@ -72,6 +74,8 @@ const LinkIcon = <E extends keyof React.JSX.IntrinsicElements = "span">({
     </dom.span>
   );
 };
+
+LinkIcon.displayName = "HeroUI.Link.Icon";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

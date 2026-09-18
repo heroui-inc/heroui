@@ -38,6 +38,8 @@ const SkeletonRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
   return <dom.div className={slots.base({className})} {...(props as any)} />;
 };
 
+SkeletonRoot.displayName = "HeroUI.Skeleton";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

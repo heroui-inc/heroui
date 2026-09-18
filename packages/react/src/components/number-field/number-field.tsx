@@ -54,6 +54,8 @@ const NumberFieldRoot = ({
   );
 };
 
+NumberFieldRoot.displayName = "HeroUI.NumberField";
+
 /* -------------------------------------------------------------------------------------------------
  * NumberField Group
  * -----------------------------------------------------------------------------------------------*/
@@ -73,6 +75,8 @@ const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps
   );
 };
 
+NumberFieldGroup.displayName = "HeroUI.NumberField.Group";
+
 /* -------------------------------------------------------------------------------------------------
  * NumberField Input
  * -----------------------------------------------------------------------------------------------*/
@@ -89,6 +93,8 @@ const NumberFieldInput = ({className, ...props}: NumberFieldInputProps) => {
     />
   );
 };
+
+NumberFieldInput.displayName = "HeroUI.NumberField.Input";
 
 /* -------------------------------------------------------------------------------------------------
  * NumberField Increment Button
@@ -118,6 +124,8 @@ const NumberFieldIncrementButton = ({
   );
 };
 
+NumberFieldIncrementButton.displayName = "HeroUI.NumberField.IncrementButton";
+
 /* -------------------------------------------------------------------------------------------------
  * NumberField Decrement Button
  * -----------------------------------------------------------------------------------------------*/
@@ -145,6 +153,8 @@ const NumberFieldDecrementButton = ({
     </ButtonPrimitive>
   );
 };
+
+NumberFieldDecrementButton.displayName = "HeroUI.NumberField.DecrementButton";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

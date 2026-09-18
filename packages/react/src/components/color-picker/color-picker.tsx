@@ -54,6 +54,8 @@ const ColorPickerRoot = ({children, className, ...props}: ColorPickerRootProps) 
   );
 };
 
+ColorPickerRoot.displayName = "HeroUI.ColorPicker";
+
 /* -------------------------------------------------------------------------------------------------
  * ColorPicker Trigger
  * -----------------------------------------------------------------------------------------------*/
@@ -72,6 +74,8 @@ const ColorPickerTrigger = ({children, className, ...props}: ColorPickerTriggerP
     </ButtonPrimitive>
   );
 };
+
+ColorPickerTrigger.displayName = "HeroUI.ColorPicker.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
  * ColorPicker Popover
@@ -108,6 +112,8 @@ const ColorPickerPopover = ({
     </SurfaceContext>
   );
 };
+
+ColorPickerPopover.displayName = "HeroUI.ColorPicker.Popover";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
