@@ -36,7 +36,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
+    "framer-motion": ">=12.0.10",
     "@heroui/theme": ">=2.4.24",
     "@heroui/system": ">=2.4.18"
   },
@@ -49,13 +49,13 @@
     "@react-aria/interactions": "3.28.1",
     "@react-aria/tabs": "3.12.1",
     "@react-stately/tabs": "3.9.1",
-    "@react-types/shared": "3.36.0",
+    "@react-types/shared": "3.36.1",
     "scroll-into-view-if-needed": "3.0.10"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
     "@heroui/system": "workspace:*",
-    "framer-motion": "11.18.2",
+    "framer-motion": "13.4.0",
     "react-lorem-component": "0.13.0",
     "@heroui/card": "workspace:*",
     "@heroui/input": "workspace:*",

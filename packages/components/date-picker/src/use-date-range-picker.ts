@@ -22,8 +22,10 @@ import {dateRangePicker, dateInput, cn} from "@heroui/theme";
 import {FormContext, useSlottedContext} from "@heroui/form";
 
 import {useDatePickerBase} from "./use-date-picker-base";
-interface Props<T extends DateValue>
-  extends Omit<UseDatePickerBaseProps<T>, keyof AriaDateRangePickerProps<T>> {
+interface Props<T extends DateValue> extends Omit<
+  UseDatePickerBaseProps<T>,
+  keyof AriaDateRangePickerProps<T>
+> {
   /**
    * Classname or List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.
@@ -98,7 +100,14 @@ export function useDateRangePicker<T extends DateValue>({
     hasMultipleMonths,
     selectorButtonProps,
     selectorIconProps,
-  } = useDatePickerBase({...originalProps, validationBehavior});
+  } = useDatePickerBase({
+    ...originalProps,
+    validationBehavior,
+    // Range picker API: (date, anchorDate) → calendar/base API: (date)
+    isDateUnavailable: originalProps.isDateUnavailable
+      ? (date) => originalProps.isDateUnavailable?.(date, null) ?? false
+      : undefined,
+  });
 
   let state: DateRangePickerState = useDateRangePickerState({
     ...originalProps,

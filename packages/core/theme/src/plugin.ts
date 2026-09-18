@@ -5,10 +5,6 @@
 
 import type {ConfigTheme, ConfigThemes, DefaultThemeType, HeroUIPluginConfig} from "./types";
 
-import Color from "color";
-// @ts-ignore
-import plugin from "tailwindcss/plugin.js";
-import deepMerge from "deepmerge";
 import {omit, kebabCase, mapKeys} from "@heroui/shared-utils";
 
 import {semanticColors, commonColors} from "./colors";
@@ -18,6 +14,12 @@ import {flattenThemeObject} from "./utils/object";
 import {isBaseTheme} from "./utils/theme";
 import {lightLayout, darkLayout, defaultLayout} from "./default-layout";
 import {baseStyles} from "./utils/classes";
+
+// These deps are pure CJS (`module.exports = fn`). Use require so tsup does not
+// wrap them with __toESM — Tailwind/jiti then breaks `.default` access.
+const deepMerge = require("deepmerge");
+const plugin = require("tailwindcss/plugin.js");
+const Color = require("color");
 
 const DEFAULT_PREFIX = "heroui";
 

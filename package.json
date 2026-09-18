@@ -133,7 +133,8 @@
   "pnpm": {
     "overrides": {
       "react": "18.3.0",
-      "react-dom": "18.3.0"
+      "react-dom": "18.3.0",
+      "@internationalized/date": "3.12.4"
     }
   },
   "engines": {
