@@ -69,7 +69,8 @@ pnpm typecheck
 - Intentional skips: internals (`rac`, `icons`), non-exported helpers (`color-input-group`, `date-input-group`), in-progress `calendar-year-picker`, parent-covered parts (`list-box-item`, `menu-item`, …), Toast SSR (client portal — jsdom + browser). Public `input-group` has its own suite. SSR/browser are risk-based
 - Browser setup (once locally): `playwright install chromium` before `pnpm test`. CI: `--with-deps`, then `test:browser` + `test:coverage`
 - Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`
-- Coverage: jsdom-only floors — green ≠ depth. `test:changed`: local jsdom shortcut only, not a merge gate
+- Coverage: jsdom-only floors — green ≠ depth. Browser suites contribute nothing to the coverage number. Floors are a ratchet kept ~1pt under the measured run: raise them as coverage improves, never lower them to go green. `test:changed`: local jsdom shortcut only, not a merge gate
+- SSR/browser suites are risk-based — see "When a component needs an SSR or browser suite" in `AGENTS.md`. Add a browser suite when correctness depends on real layout, pointer capture, portal focus containment, or transitions; do not fake geometry in jsdom to chase coverage
 
 ### Package-Specific Commands
 
