@@ -315,10 +315,14 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - Switch, RadioGroup, Radio, Slider (and Track, Thumb, Output)
    - Popover, Tooltip, Tabs (and Tab, TabList, TabPanel)
    - Link, Menu, MenuItem, Accordion (DisclosureGroup)
+   - Input, TextArea, Label, Text, OverlayArrow
 
    **Components that ONLY accept string className** (pass className directly):
-   - Label, Text, Input, TextArea
-   - Heading, Dialog, OverlayArrow
+   - Heading, Dialog
+
+   As of RAC 1.21.1, `Input` and `TextArea` type `className` as `ClassNameOrFunction`, and `Label`
+   and `Text` extend `DOMRenderProps` — all four accept render props. Upstream keeps widening this,
+   so check the installed `react-aria-components` types instead of trusting this list.
 
    **Usage examples**:
 

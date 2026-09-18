@@ -248,8 +248,10 @@ All interactive components must support both pseudo-classes and data attributes:
 
 React Aria components differ in how they accept `className`:
 
-- **Render-prop components** (Button, Checkbox, Switch, Popover, Tooltip, Tabs, Link, Menu, etc.) — use `composeTwRenderProps(className, slots.foo())`.
-- **String-only components** (Label, Text, Input, TextArea, Heading, Dialog) — pass `className` directly: `slots?.label({className})`.
+- **Render-prop components** (Button, Checkbox, Switch, Popover, Tooltip, Tabs, Link, Menu, Input, TextArea, Label, Text, OverlayArrow, etc.) — use `composeTwRenderProps(className, slots.foo())`.
+- **String-only components** (Heading, Dialog) — pass `className` directly: `slots?.heading({className})`.
+
+Verify against the installed `react-aria-components` types rather than this list: a component accepts render props when its `className` is typed `ClassNameOrFunction<…>`, or when its props extend `StyleRenderProps` / `DOMRenderProps`. Upstream has been widening render-prop support over time, so treat this list as a snapshot of RAC 1.21.1.
 
 ### Composition Over Duplication
 
