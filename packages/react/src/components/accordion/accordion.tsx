@@ -69,6 +69,8 @@ const AccordionRoot = ({
   );
 };
 
+AccordionRoot.displayName = "HeroUI.Accordion";
+
 /* -------------------------------------------------------------------------------------------------
  * AccordionItem
  * -----------------------------------------------------------------------------------------------*/
@@ -88,6 +90,8 @@ const AccordionItem = ({className, ...props}: AccordionItemProps) => {
     </Disclosure>
   );
 };
+
+AccordionItem.displayName = "HeroUI.Accordion.Item";
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionIndicator
@@ -134,6 +138,8 @@ const AccordionIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">
   );
 };
 
+AccordionIndicator.displayName = "HeroUI.Accordion.Indicator";
+
 /* -------------------------------------------------------------------------------------------------
  * AccordionHeading
  * -----------------------------------------------------------------------------------------------*/
@@ -152,6 +158,8 @@ const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
     />
   );
 };
+
+AccordionHeading.displayName = "HeroUI.Accordion.Heading";
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionTrigger
@@ -174,6 +182,8 @@ const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
     </Button>
   );
 };
+
+AccordionTrigger.displayName = "HeroUI.Accordion.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionBody
@@ -199,6 +209,8 @@ const AccordionBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+AccordionBody.displayName = "HeroUI.Accordion.Body";
+
 /* -------------------------------------------------------------------------------------------------
  * AccordionPanel
  * -----------------------------------------------------------------------------------------------*/
@@ -219,6 +231,8 @@ const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) =>
     </DisclosurePanel>
   );
 };
+
+AccordionPanel.displayName = "HeroUI.Accordion.Panel";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

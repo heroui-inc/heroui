@@ -73,6 +73,8 @@ const TabsRoot = ({
   );
 };
 
+TabsRoot.displayName = "HeroUI.Tabs";
+
 /* -------------------------------------------------------------------------------------------------
  * Tabs List Container
  * -----------------------------------------------------------------------------------------------*/
@@ -98,6 +100,8 @@ const TabListContainer = <E extends keyof React.JSX.IntrinsicElements = "div">({
     </listContainerSlot.Injector>
   );
 };
+
+TabListContainer.displayName = "HeroUI.Tabs.ListContainer";
 
 /* -------------------------------------------------------------------------------------------------
  * Tabs List
@@ -229,6 +233,8 @@ const TabList = ({children, className, ...props}: TabListProps) => {
   );
 };
 
+TabList.displayName = "HeroUI.Tabs.List";
+
 /* -------------------------------------------------------------------------------------------------
  * Tab
  * -----------------------------------------------------------------------------------------------*/
@@ -269,6 +275,8 @@ const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
   );
 };
 
+TabIndicator.displayName = "HeroUI.Tabs.Indicator";
+
 /* -------------------------------------------------------------------------------------------------
  * Tab Panel
  * -----------------------------------------------------------------------------------------------*/
@@ -290,6 +298,8 @@ const TabPanel = ({children, className, ...props}: TabPanelProps) => {
     </TabPanelPrimitive>
   );
 };
+
+TabPanel.displayName = "HeroUI.Tabs.Panel";
 
 /* -------------------------------------------------------------------------------------------------
  * Tab Separator
@@ -315,6 +325,8 @@ const TabSeparator = <E extends keyof React.JSX.IntrinsicElements = "span">({
     />
   );
 };
+
+TabSeparator.displayName = "HeroUI.Tabs.Separator";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

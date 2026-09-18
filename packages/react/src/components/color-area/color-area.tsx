@@ -52,6 +52,8 @@ const ColorAreaRoot = ({children, className, showDots, style, ...props}: ColorAr
   );
 };
 
+ColorAreaRoot.displayName = "HeroUI.ColorArea";
+
 /* -------------------------------------------------------------------------------------------------
  * ColorArea Thumb
  * -----------------------------------------------------------------------------------------------*/
@@ -76,6 +78,8 @@ const ColorAreaThumb = ({className, style, ...props}: ColorAreaThumbProps) => {
     />
   );
 };
+
+ColorAreaThumb.displayName = "HeroUI.ColorArea.Thumb";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

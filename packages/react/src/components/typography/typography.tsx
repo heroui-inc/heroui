@@ -64,6 +64,8 @@ const TypographyRoot = ({
   );
 };
 
+TypographyRoot.displayName = "HeroUI.Typography";
+
 interface HeadingProps extends Omit<TypographyRootProps, "type"> {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 }

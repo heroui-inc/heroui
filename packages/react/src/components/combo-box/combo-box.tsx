@@ -90,6 +90,8 @@ const ComboBoxRoot = <T extends object = object, M extends "single" | "multiple"
   );
 };
 
+ComboBoxRoot.displayName = "HeroUI.ComboBox";
+
 /* -------------------------------------------------------------------------------------------------
  * ComboBox InputGroup
  * -----------------------------------------------------------------------------------------------*/
@@ -130,6 +132,8 @@ const ComboBoxInputGroup = <E extends keyof React.JSX.IntrinsicElements = "div">
   );
 };
 
+ComboBoxInputGroup.displayName = "HeroUI.ComboBox.InputGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Value
  * -----------------------------------------------------------------------------------------------*/
@@ -154,6 +158,8 @@ const ComboBoxValue = <T extends object = object>({
     </ComboBoxValuePrimitive>
   );
 };
+
+ComboBoxValue.displayName = "HeroUI.ComboBox.Value";
 
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Trigger
@@ -230,6 +236,8 @@ const ComboBoxTrigger = ({children, className, ...props}: ComboBoxTriggerProps) 
   );
 };
 
+ComboBoxTrigger.displayName = "HeroUI.ComboBox.Trigger";
+
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Popover
  * -----------------------------------------------------------------------------------------------*/
@@ -265,6 +273,8 @@ const ComboBoxPopover = ({
     </SurfaceContext>
   );
 };
+
+ComboBoxPopover.displayName = "HeroUI.ComboBox.Popover";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
