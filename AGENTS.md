@@ -78,26 +78,8 @@ HeroUI v3 is a modern React UI library built with **Tailwind CSS v4**, organized
 - Intentional skips (no dedicated suite required): internals (`rac`, `icons`), non-exported helpers (`color-input-group`, `date-input-group`), in-progress `calendar-year-picker`, parent-covered parts (`list-box-item`, `menu-item`, `menu-section`, `list-box-section`), Toast SSR (client portal only — covered by jsdom + browser). Public `input-group` has its own suite. SSR and browser are risk-based, not universal.
 - Browser setup (once locally): `pnpm --filter @heroui/testing exec playwright install chromium` before `pnpm test`. CI uses `playwright install --with-deps chromium`, then `test:browser` + `test:coverage` (not a single `pnpm test`).
 - Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`.
-- Coverage (`pnpm test:coverage`): jsdom only; `src/components/**` minus barrels. Thresholds are **CI floors** (statements/lines can pass with thin smoke). Green coverage ≠ sufficient depth — still require role/callback/focus (and browser for high-risk portals). Browser suites contribute **nothing** to the coverage number, so a component can be well covered by Playwright and still read as a gap in the report.
-- Floors are a **ratchet**: they sit ~1pt under the current measured run. Raise them when coverage improves; never lower them to make a red build pass.
+- Coverage (`pnpm test:coverage`): jsdom only; `src/components/**` minus barrels. Thresholds are **CI floors** (statements/lines can pass with thin smoke). Green coverage ≠ sufficient depth — still require role/callback/focus (and browser for high-risk portals).
 - `test:changed`: local jsdom-only shortcut (`vitest related --changed`). Does **not** run browser suites; never use it as the merge gate — use `pnpm test` / CI.
-
-### When a component needs an SSR or browser suite
-
-SSR and browser suites are risk-based. Add one only when a criterion below applies, and skip it deliberately otherwise.
-
-Add a `*.ssr.test.tsx` when the component renders on the server path: it is exported for use outside `"use client"` boundaries, reads `document`/`window` during render, generates ids, or has previously hydrated inconsistently.
-
-Add a `*.browser.test.tsx` when correctness depends on something jsdom does not implement:
-
-| Trigger | Why jsdom is not enough | Example |
-|---|---|---|
-| Real layout / measurement | `offsetWidth`, `offsetHeight`, and scroll sizes are always `0` | Tabs overflow chevrons, `scroll-shadow` |
-| Pointer capture / drag | `setPointerCapture` and pointer event sequencing are not simulated | Drawer swipe-to-dismiss, `color-area` |
-| Portals with focus containment | Focus trap and dismiss ordering differ from a real browser | Modal, popover, toast |
-| Actual paint or transitions | `transitionend` and animation timing do not fire | Drawer snap-back |
-
-If a coverage gap traces to one of those rows, write the browser test — do **not** contort a jsdom test with mocked geometry just to move the coverage number.
 
 ## Git Commit Convention
 
