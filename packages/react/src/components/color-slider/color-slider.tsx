@@ -155,6 +155,8 @@ const ColorSliderRoot = ({
   );
 };
 
+ColorSliderRoot.displayName = "HeroUI.ColorSlider";
+
 /* -------------------------------------------------------------------------------------------------
  * ColorSlider Output
  * -----------------------------------------------------------------------------------------------*/
@@ -175,6 +177,8 @@ const ColorSliderOutput = ({children, className, ...props}: ColorSliderOutputPro
     </SliderOutputPrimitive>
   );
 };
+
+ColorSliderOutput.displayName = "HeroUI.ColorSlider.Output";
 
 /* -------------------------------------------------------------------------------------------------
  * ColorSlider Track
@@ -231,6 +235,8 @@ const ColorSliderTrack = ({children, className, style, ...props}: ColorSliderTra
   );
 };
 
+ColorSliderTrack.displayName = "HeroUI.ColorSlider.Track";
+
 /* -------------------------------------------------------------------------------------------------
  * ColorSlider Thumb
  * -----------------------------------------------------------------------------------------------*/
@@ -254,6 +260,8 @@ const ColorSliderThumb = ({children, className, style, ...props}: ColorSliderThu
     </ColorThumbPrimitive>
   );
 };
+
+ColorSliderThumb.displayName = "HeroUI.ColorSlider.Thumb";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

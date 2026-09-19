@@ -47,6 +47,8 @@ const TagGroupRoot = ({children, className, size, variant, ...restProps}: TagGro
   );
 };
 
+TagGroupRoot.displayName = "HeroUI.TagGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * TagGroup List
  * -----------------------------------------------------------------------------------------------*/
@@ -69,6 +71,8 @@ const TagGroupList = <T extends object>({
     </TagListPrimitive>
   );
 };
+
+TagGroupList.displayName = "HeroUI.TagGroup.List";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

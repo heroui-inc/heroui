@@ -74,6 +74,69 @@ describe("Popover", () => {
     expect(screen.queryByRole("dialog")).toBeNull();
   });
 
+  describe("Arrow", () => {
+    it("renders a default arrow when no child is provided", () => {
+      render(
+        <Popover defaultOpen>
+          <Button>Open popover</Button>
+          <Popover.Content>
+            <Popover.Arrow />
+            <Popover.Dialog>Content</Popover.Dialog>
+          </Popover.Content>
+        </Popover>,
+      );
+
+      runAllTimers();
+
+      expect(document.querySelector('[data-slot="popover-overlay-arrow-group"]')).not.toBeNull();
+      expect(document.querySelector('svg[data-slot="popover-overlay-arrow"]')).not.toBeNull();
+    });
+
+    it("tags a custom arrow child with the arrow slot", () => {
+      render(
+        <Popover defaultOpen>
+          <Button>Open popover</Button>
+          <Popover.Content>
+            <Popover.Arrow>
+              <span data-testid="custom-arrow">▲</span>
+            </Popover.Arrow>
+            <Popover.Dialog>Content</Popover.Dialog>
+          </Popover.Content>
+        </Popover>,
+      );
+
+      runAllTimers();
+
+      const custom = screen.getByTestId("custom-arrow");
+
+      expect(custom).toHaveAttribute("data-slot", "popover-overlay-arrow");
+      expect(document.querySelector('svg[data-slot="popover-overlay-arrow"]')).toBeNull();
+    });
+  });
+
+  describe("Trigger", () => {
+    it("exposes the trigger slot and opens the popover on press", async () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Open</Popover.Trigger>
+          <Popover.Content>
+            <Popover.Dialog>Trigger content</Popover.Dialog>
+          </Popover.Content>
+        </Popover>,
+      );
+
+      const trigger = screen.getByRole("button", {name: "Open"});
+
+      expect(trigger).toHaveAttribute("data-slot", "popover-trigger");
+      expect(trigger.className).toEqual(expect.stringContaining("popover__trigger"));
+
+      await user.click(trigger);
+      runAllTimers();
+
+      expect(screen.getByText("Trigger content")).toBeInTheDocument();
+    });
+  });
+
   it("exposes heading slot", async () => {
     render(
       <Popover defaultOpen>

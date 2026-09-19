@@ -65,6 +65,8 @@ const SliderRoot = ({
   );
 };
 
+SliderRoot.displayName = "HeroUI.Slider";
+
 /* -------------------------------------------------------------------------------------------------
  * Slider Output
  * -----------------------------------------------------------------------------------------------*/
@@ -85,6 +87,8 @@ const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
     </SliderOutputPrimitive>
   );
 };
+
+SliderOutput.displayName = "HeroUI.Slider.Output";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Track
@@ -125,6 +129,8 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
     </SliderTrackPrimitive>
   );
 };
+
+SliderTrack.displayName = "HeroUI.Slider.Track";
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Fill
@@ -173,6 +179,8 @@ const SliderFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+SliderFill.displayName = "HeroUI.Slider.Fill";
+
 /* -------------------------------------------------------------------------------------------------
  * Slider Thumb
  * -----------------------------------------------------------------------------------------------*/
@@ -191,6 +199,8 @@ const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
     </SliderThumbPrimitive>
   );
 };
+
+SliderThumb.displayName = "HeroUI.Slider.Thumb";
 
 /* -------------------------------------------------------------------------------------------------
  * TODO: Slider Marks
@@ -215,6 +225,8 @@ const SliderMarks = <E extends keyof React.JSX.IntrinsicElements = "div">({
     />
   );
 };
+
+SliderMarks.displayName = "HeroUI.Slider.Marks";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

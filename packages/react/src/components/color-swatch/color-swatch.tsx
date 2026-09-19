@@ -32,6 +32,8 @@ const ColorSwatchRoot = ({className, shape, size, style, ...props}: ColorSwatchR
   );
 };
 
+ColorSwatchRoot.displayName = "HeroUI.ColorSwatch";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

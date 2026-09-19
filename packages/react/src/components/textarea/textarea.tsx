@@ -32,6 +32,8 @@ const TextAreaRoot = ({className, fullWidth, variant, ...rest}: TextAreaRootProp
   );
 };
 
+TextAreaRoot.displayName = "HeroUI.TextArea";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
