@@ -184,6 +184,9 @@ describe("HeroUI agent readiness", () => {
       "/en/docs/react/releases",
     );
     expect(resolveSameOriginPath("https://example.com/docs", "https://heroui.com")).toBeNull();
+    expect(
+      docsAgentTools.every((tool) => !JSON.stringify(tool.parameters).includes('"locale"')),
+    ).toBe(true);
   });
 
   it("keeps documentation tool results below the Agent receipt limit", () => {
@@ -199,18 +202,17 @@ describe("HeroUI agent readiness", () => {
     expect(result.truncated).toBe(true);
   });
 
-  it("builds compact localized page context for the docs Agent", () => {
+  it("builds compact English page context for the docs Agent", () => {
     expect(
       createDocsPageContext({
         description: "Button component documentation",
-        fallbackLocale: "en",
         hash: "#usage",
         heading: "Button",
-        href: "https://heroui.com/cn/docs/react/components/button?tab=usage",
+        href: "https://heroui.com/en/docs/react/components/button?tab=usage",
         title: "Button | HeroUI",
       }),
     ).toEqual({
-      locale: "cn",
+      locale: "en",
       page: {
         description: "Button component documentation",
         heading: "Button",
@@ -219,7 +221,7 @@ describe("HeroUI agent readiness", () => {
       platform: "react",
       route: {
         hash: "#usage",
-        pathname: "/cn/docs/react/components/button",
+        pathname: "/en/docs/react/components/button",
         query: {tab: "usage"},
       },
     });

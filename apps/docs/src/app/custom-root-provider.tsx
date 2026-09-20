@@ -41,7 +41,7 @@ export function CustomRootProvider({
         <Toast.Provider />
 
         <WebMCPProvider />
-        <HeroUIDocsAgent lang={lang} />
+        {lang === "en" ? <HeroUIDocsAgent /> : null}
       </RootProvider>
     </DictionaryProvider>
   );

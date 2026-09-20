@@ -25,11 +25,11 @@ const getAuthToken: GetAuthToken = async (context) => {
   return response.json();
 };
 
-export function HeroUIDocsAgent({lang}: {lang: string}) {
+export function HeroUIDocsAgent() {
   const router = useRouter();
   const context = useMemo<DocsAgentContext>(
-    () => ({navigate: (url) => router.push(url as Route), page: () => getDocsPageContext(lang)}),
-    [lang, router],
+    () => ({navigate: (url) => router.push(url as Route), page: getDocsPageContext}),
+    [router],
   );
 
   return (
@@ -37,7 +37,7 @@ export function HeroUIDocsAgent({lang}: {lang: string}) {
       agentId={HEROUI_DOCS_AGENT_ID}
       context={context}
       getAuthToken={getAuthToken}
-      locale={lang === "cn" ? "zh-CN" : "en"}
+      locale="en"
       permissions={{defaultMode: "auto", showPicker: false}}
       tools={docsAgentTools}
     />

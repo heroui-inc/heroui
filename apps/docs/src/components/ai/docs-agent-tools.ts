@@ -8,7 +8,7 @@ export type DocsAgentContext = {
 };
 
 export type DocsPageContext = {
-  locale: "cn" | "en";
+  locale: "en";
   page: {
     description: string;
     heading: string;
@@ -54,14 +54,6 @@ function getPlatform(input: DocsToolInput, fallback: "all" | "native" | "react" 
   if (platform === "react" || platform === "native" || platform === "all") return platform;
 
   return fallback;
-}
-
-function getLocale(input: DocsToolInput, context?: DocsAgentContext): "cn" | "en" {
-  const locale = getString(input, "locale");
-
-  if (locale === "cn" || locale === "en") return locale;
-
-  return context?.page().locale ?? (window.location.pathname.startsWith("/cn/") ? "cn" : "en");
 }
 
 async function fetchJson(path: string, signal?: AbortSignal): Promise<unknown> {
@@ -130,14 +122,12 @@ export function sliceMarkdownResult(
 
 export function createDocsPageContext({
   description,
-  fallbackLocale,
   hash,
   heading,
   href,
   title,
 }: {
   description: string;
-  fallbackLocale: string;
   hash: string;
   heading: string;
   href: string;
@@ -145,14 +135,6 @@ export function createDocsPageContext({
 }): DocsPageContext {
   const url = new URL(href);
   const segments = url.pathname.split("/").filter(Boolean);
-  const locale =
-    segments[0] === "cn"
-      ? "cn"
-      : segments[0] === "en"
-        ? "en"
-        : fallbackLocale === "cn"
-          ? "cn"
-          : "en";
   const platformSegment = segments.find((segment) => segment === "native" || segment === "react");
   const query = Object.fromEntries(
     Array.from(url.searchParams.entries())
@@ -161,7 +143,7 @@ export function createDocsPageContext({
   );
 
   return {
-    locale,
+    locale: "en",
     page: {
       description: description.trim().slice(0, 500),
       heading: heading.trim().slice(0, 200),
@@ -176,10 +158,9 @@ export function createDocsPageContext({
   };
 }
 
-export function getDocsPageContext(fallbackLocale: string): DocsPageContext {
+export function getDocsPageContext(): DocsPageContext {
   return createDocsPageContext({
     description: document.querySelector<HTMLMetaElement>('meta[name="description"]')?.content ?? "",
-    fallbackLocale,
     hash: window.location.hash,
     heading: document.querySelector("h1")?.textContent ?? "",
     href: window.location.href,
@@ -192,16 +173,15 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
     description:
       "Search the official HeroUI React and Native documentation by keyword. Returns at most 20 concise page matches.",
     displayName: "Search HeroUI docs",
-    execute(input, context, execution) {
+    execute(input, _context, execution) {
       const query = getString(input, "query").trim();
       const platform = getPlatform(input);
       const limit = Math.min(Math.max(getInteger(input, "limit", 10), 1), 20);
-      const locale = getLocale(input, context);
 
       if (!query) throw new Error("query is required");
 
       return fetchJson(
-        `/api/agent/search?q=${encodeURIComponent(query)}&platform=${platform}&limit=${limit}&locale=${locale}`,
+        `/api/agent/search?q=${encodeURIComponent(query)}&platform=${platform}&limit=${limit}&locale=en`,
         execution?.signal,
       );
     },
@@ -211,7 +191,6 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
       additionalProperties: false,
       properties: {
         limit: {default: 10, maximum: 20, minimum: 1, type: "integer"},
-        locale: {enum: ["en", "cn"], type: "string"},
         platform: {default: "all", enum: ["all", "react", "native"], type: "string"},
         query: {
           description: "Search query, such as button, theming, migration, or native colors.",
@@ -226,13 +205,10 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
     description:
       "Retrieve one official HeroUI documentation page as markdown from a same-origin /docs/ path.",
     displayName: "Read HeroUI doc",
-    async execute(input, context, execution) {
+    async execute(input, _context, execution) {
       const url = resolveSameOriginPath(getString(input, "url"), window.location.origin);
       const pathname = url ? new URL(url, window.location.origin).pathname : null;
-      const pathLocale = pathname?.match(/^\/(en|cn)(?=\/docs(?:\/|$))/)?.[1];
-      const unlocalizedUrl = pathname?.replace(/^\/(?:en|cn)(?=\/docs(?:\/|$))/, "");
-      const locale =
-        pathLocale === "cn" || pathLocale === "en" ? pathLocale : getLocale(input, context);
+      const unlocalizedUrl = pathname?.replace(/^\/en(?=\/docs(?:\/|$))/, "");
       const start = Math.max(getInteger(input, "start", 0), 0);
       const maxCharacters = Math.min(
         Math.max(getInteger(input, "maxCharacters", DEFAULT_PAGE_CHARACTERS), 1_000),
@@ -244,7 +220,7 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
       }
 
       const result = await fetchJson(
-        `/api/agent/page?url=${encodeURIComponent(unlocalizedUrl)}&locale=${locale}`,
+        `/api/agent/page?url=${encodeURIComponent(unlocalizedUrl)}&locale=en`,
         execution?.signal,
       );
 
@@ -255,7 +231,6 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
     parameters: {
       additionalProperties: false,
       properties: {
-        locale: {enum: ["en", "cn"], type: "string"},
         maxCharacters: {
           default: DEFAULT_PAGE_CHARACTERS,
           maximum: MAX_PAGE_CHARACTERS,
@@ -306,13 +281,12 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
     description:
       "List official HeroUI component documentation pages for React or Native. Returns at most 20 entries.",
     displayName: "List HeroUI components",
-    execute(input, context, execution) {
+    execute(input, _context, execution) {
       const platform = getPlatform(input, "react") === "native" ? "native" : "react";
       const limit = Math.min(Math.max(getInteger(input, "limit", 20), 1), 20);
-      const locale = getLocale(input, context);
 
       return fetchJson(
-        `/api/agent/search?q=${encodeURIComponent("/components/")}&platform=${platform}&limit=${limit}&locale=${locale}`,
+        `/api/agent/search?q=${encodeURIComponent("/components/")}&platform=${platform}&limit=${limit}&locale=en`,
         execution?.signal,
       );
     },
@@ -322,7 +296,6 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
       additionalProperties: false,
       properties: {
         limit: {default: 20, maximum: 20, minimum: 1, type: "integer"},
-        locale: {enum: ["en", "cn"], type: "string"},
         platform: {default: "react", enum: ["react", "native"], type: "string"},
       },
       type: "object",
