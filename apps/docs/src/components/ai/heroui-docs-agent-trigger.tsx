@@ -33,15 +33,15 @@ export function HeroUIDocsAgentTrigger({
   return (
     <Button
       aria-keyshortcuts="Meta+I"
-      aria-label="Ask assistant"
+      aria-label="Ask AI"
       className={cn("shrink-0", className)}
       size="sm"
-      variant="ghost"
+      variant="tertiary"
       onPress={() => agent.show()}
       {...props}
     >
       <Sparkles className="size-4" />
-      <span className="hidden lg:inline">Ask assistant</span>
+      <span className="hidden lg:inline">Ask AI</span>
       <Kbd className="hidden xl:inline-flex">
         <Kbd.Content>⌘ I</Kbd.Content>
       </Kbd>

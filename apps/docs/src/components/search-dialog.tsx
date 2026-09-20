@@ -302,14 +302,14 @@ export default function CustomSearchDialog(props: SharedProps) {
     if (!prompt || locale !== "en") return null;
 
     return {
-      id: "ask-assistant",
+      id: "ask-ai",
       node: (
         <div className="flex w-full items-center gap-3">
           <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent-soft-foreground">
             <Sparkles className="size-4" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="text-fd-muted-foreground block text-xs">Ask assistant</span>
+            <span className="text-fd-muted-foreground block text-xs">Ask AI</span>
             <span className="block truncate font-medium">Ask “{prompt}”</span>
           </span>
         </div>
