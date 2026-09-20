@@ -38,9 +38,12 @@ export function HeroUIDocsAgentTrigger({
           isIconOnly
           aria-keyshortcuts="Meta+I Control+I"
           aria-label="Ask AI"
-          className={cn("size-[34px] shrink-0 border-none", className)}
           size="sm"
           variant="tertiary"
+          className={cn(
+            "size-[34px] shrink-0 border-none active:scale-100 data-[pressed=true]:scale-100",
+            className,
+          )}
           onPress={() => agent.toggle()}
         >
           <Sparkles className="size-4" />
