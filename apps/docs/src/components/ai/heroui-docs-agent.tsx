@@ -5,7 +5,7 @@ import type {ThemeId} from "@/app/[lang]/themes/theme-values";
 import type {GetAuthToken} from "@heroui/agent";
 import type {Route} from "next";
 
-import {HeroUIAgent} from "@heroui/agent/next";
+import {HeroUIAgent, useAgent} from "@heroui/agent/next";
 import {useRouter} from "next/navigation";
 import {useTheme} from "next-themes";
 import {useEffect, useMemo, useState} from "react";
@@ -30,6 +30,7 @@ const getAuthToken: GetAuthToken = async (context) => {
 };
 
 export function HeroUIDocsAgent() {
+  const agent = useAgent(HEROUI_DOCS_AGENT_ID);
   const router = useRouter();
   const {setTheme, theme} = useTheme();
   const [designTheme, setDesignTheme] = useState<ThemeId>("default");
@@ -58,6 +59,20 @@ export function HeroUIDocsAgent() {
 
     return () => window.removeEventListener(DESIGN_THEME_CHANGE_EVENT, syncDesignTheme);
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.repeat || event.altKey || event.shiftKey) return;
+      if ((!event.metaKey && !event.ctrlKey) || event.key.toLowerCase() !== "i") return;
+
+      event.preventDefault();
+      agent.toggle();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [agent]);
 
   return (
     <HeroUIAgent
