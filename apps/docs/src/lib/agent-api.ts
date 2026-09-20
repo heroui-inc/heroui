@@ -11,6 +11,7 @@ import {
 import {source} from "@/lib/source";
 
 export type AgentSearchPlatform = "react" | "native" | "all";
+export type AgentDocsLocale = "cn" | "en";
 
 export type AgentSearchResult = {
   description: string;
@@ -60,12 +61,13 @@ export function searchAgentDocs(
   query: string,
   platform: AgentSearchPlatform = "all",
   limit = DEFAULT_LIMIT,
+  locale: AgentDocsLocale = "en",
 ): AgentSearchResult[] {
   const normalizedQuery = normalizeSearchText(query);
 
   if (!normalizedQuery) return [];
 
-  const pages = filterPagesByPlatform(filterExcludedPages(source.getPages()), platform);
+  const pages = filterPagesByPlatform(filterExcludedPages(source.getPages(locale)), platform);
 
   return pages
     .filter((page) => {
@@ -87,8 +89,9 @@ export function searchAgentDocs(
 export function listAgentComponents(
   platform: Exclude<AgentSearchPlatform, "all"> = "react",
   limit = MAX_LIMIT,
+  locale: AgentDocsLocale = "en",
 ): AgentSearchResult[] {
-  return filterPagesByPlatform(filterExcludedPages(source.getPages()), platform)
+  return filterPagesByPlatform(filterExcludedPages(source.getPages(locale)), platform)
     .filter(isComponentPage)
     .slice(0, limit)
     .map(pageToSearchResult);
@@ -118,7 +121,10 @@ export function normalizeDocsUrl(value: string): string | null {
   return pathname;
 }
 
-export async function getAgentDocPage(value: string): Promise<AgentPageResult | null> {
+export async function getAgentDocPage(
+  value: string,
+  locale: AgentDocsLocale = "en",
+): Promise<AgentPageResult | null> {
   const pathname = normalizeDocsUrl(value);
 
   if (!pathname) return null;
@@ -127,7 +133,7 @@ export async function getAgentDocPage(value: string): Promise<AgentPageResult | 
     .replace(/^\/docs\//, "")
     .split("/")
     .filter(Boolean);
-  const page = source.getPage(slug);
+  const page = source.getPage(slug, locale);
 
   if (!page) return null;
 

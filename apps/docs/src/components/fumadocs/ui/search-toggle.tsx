@@ -1,47 +1,63 @@
 "use client";
 
-import type {ButtonProps} from "fumadocs-ui/components/ui/button";
+import type {ButtonProps} from "@heroui/react";
 import type {ComponentProps} from "react";
 
-import {buttonVariants} from "fumadocs-ui/components/ui/button";
+import {Button, Kbd, Tooltip} from "@heroui/react";
 import {useI18n} from "fumadocs-ui/contexts/i18n";
 import {useSearchContext} from "fumadocs-ui/contexts/search";
 
 import {Search} from "@/components/fumadocs/ui/icons";
 import {cn} from "@/utils/cn";
 
-interface SearchToggleProps extends Omit<ComponentProps<"button">, "color">, ButtonProps {
+interface SearchToggleProps extends Omit<ButtonProps, "className" | "onPress"> {
+  className?: string;
   hideIfDisabled?: boolean;
 }
 
 export function SearchToggle({
-  color = "ghost",
+  className,
   hideIfDisabled,
-  size = "icon-sm",
+  size = "sm",
+  variant = "tertiary",
   ...props
 }: SearchToggleProps) {
-  const {enabled, setOpenSearch} = useSearchContext();
+  const {enabled, hotKey, setOpenSearch} = useSearchContext();
 
   if (hideIfDisabled && !enabled) return null;
 
   return (
-    <button
-      aria-label="Open Search"
-      data-search=""
-      type="button"
-      className={cn(
-        buttonVariants({
-          color,
-          size,
-        }),
-        props.className,
-      )}
-      onClick={() => {
-        setOpenSearch(true);
-      }}
-    >
-      <Search />
-    </button>
+    <Tooltip delay={300}>
+      <Tooltip.Trigger role="presentation" tabIndex={-1}>
+        <Button
+          {...props}
+          isIconOnly
+          aria-label="Open Search"
+          className={cn("size-[34px] border-none", className)}
+          data-search=""
+          size={size}
+          type="button"
+          variant={variant}
+          onPress={() => {
+            setOpenSearch(true);
+          }}
+        >
+          <Search />
+        </Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content placement="bottom">
+        <span className="flex items-center gap-2">
+          Search
+          <Kbd className="h-5 rounded-md px-1.5 text-[11px]">
+            {hotKey.map((shortcut) => (
+              <Kbd.Content key={typeof shortcut.key === "string" ? shortcut.key : "modifier"}>
+                {shortcut.display}
+              </Kbd.Content>
+            ))}
+          </Kbd>
+        </span>
+      </Tooltip.Content>
+    </Tooltip>
   );
 }
 

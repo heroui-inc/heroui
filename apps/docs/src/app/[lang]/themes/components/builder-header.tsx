@@ -13,6 +13,7 @@ import {Button, Kbd, Separator, Tabs, Tooltip, toast} from "@heroui/react";
 import Link from "next/link";
 import {useParams} from "next/navigation";
 
+import {HeroUIDocsAgentTrigger} from "@/components/ai/heroui-docs-agent-trigger";
 import {HeroUILogo} from "@/components/heroui-logo";
 import {useCodePanel} from "@/hooks/use-code-panel";
 import {useDictionary} from "@/hooks/use-dictionary";
@@ -134,6 +135,7 @@ export function BuilderHeader() {
           <div className="flex h-auto items-center">
             <SwitchMode />
           </div>
+          {lang === "en" ? <HeroUIDocsAgentTrigger /> : null}
           <Tooltip closeDelay={0} delay={100}>
             <Tooltip.Trigger>
               <Button isIconOnly size="md" variant="tertiary" onPress={handleShare}>

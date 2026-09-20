@@ -5,6 +5,8 @@ import type {Item, Node} from "fumadocs-core/page-tree";
 import type {SearchItemType, SharedProps} from "fumadocs-ui/components/dialog/search";
 import type {ComponentProps} from "react";
 
+import {Sparkles} from "@gravity-ui/icons";
+import {useAgent} from "@heroui/agent/next";
 import {Chip, Kbd, Tag, TagGroup} from "@heroui/react";
 import {useDocsSearch} from "fumadocs-core/search/client";
 import {
@@ -24,6 +26,7 @@ import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {tv} from "tailwind-variants";
 
 import {useDictionary} from "@/hooks/use-dictionary";
+import {HEROUI_DOCS_AGENT_ID} from "@/lib/heroui-agent";
 
 // Default suggested pages for each tag
 const DEFAULT_SUGGESTIONS: Record<"native" | "web", string[]> = {
@@ -111,6 +114,7 @@ const tagStyles = tv({
 });
 
 export default function CustomSearchDialog(props: SharedProps) {
+  const agent = useAgent(HEROUI_DOCS_AGENT_ID);
   const dict = useDictionary();
   const pathname = usePathname();
   const previousPathnameRef = useRef(pathname);
@@ -292,6 +296,29 @@ export default function CustomSearchDialog(props: SharedProps) {
     }));
   }, [proComponents, search]);
 
+  const assistantAction = useMemo<SearchItemType | null>(() => {
+    const prompt = search.trim();
+
+    if (!prompt || locale !== "en") return null;
+
+    return {
+      id: "ask-ai",
+      node: (
+        <div className="flex w-full items-center gap-3">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent-soft-foreground">
+            <Sparkles className="size-4" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="text-fd-muted-foreground block text-xs">Ask AI</span>
+            <span className="block truncate font-medium">Ask “{prompt}”</span>
+          </span>
+        </div>
+      ),
+      onSelect: () => agent.newConversation(prompt),
+      type: "action",
+    };
+  }, [agent, locale, search]);
+
   const releasesPath = useMemo(() => {
     return `/docs/${selectedTag === "web" ? "react" : "native"}/releases`;
   }, [selectedTag]);
@@ -355,6 +382,7 @@ export default function CustomSearchDialog(props: SharedProps) {
                 : null
               : queryData || pageTreeAction || proResults.length > 0
                 ? [
+                    ...(assistantAction ? [assistantAction] : []),
                     ...(pageTreeAction ? [pageTreeAction] : []),
                     ...proResults,
                     ...(Array.isArray(queryData) ? queryData : []),

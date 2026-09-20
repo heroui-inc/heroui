@@ -5,6 +5,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_APP_ENV: z.enum(["production", "preview", "development"]).default("development"),
     NEXT_PUBLIC_CDN_URL: z.url().min(1),
+    NEXT_PUBLIC_HEROUI_AGENT_ID: z.uuid().optional(),
     NEXT_PUBLIC_POSTHOG_HOST: z.url().min(1).optional(),
     NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
     NEXT_PUBLIC_PRO_API_URL: z.url().min(1).optional(),
@@ -17,10 +18,12 @@ export const env = createEnv({
   runtimeEnv: {
     FEATUREBASE_API_ENDPOINT: process.env["FEATUREBASE_API_ENDPOINT"],
     FEATUREBASE_API_KEY: process.env["FEATUREBASE_API_KEY"],
+    HEROUI_AGENT_API_KEY: process.env["HEROUI_AGENT_API_KEY"],
     LOOPS_API_ENDPOINT: process.env["LOOPS_API_ENDPOINT"],
     LOOPS_API_KEY: process.env["LOOPS_API_KEY"],
     NEXT_PUBLIC_APP_ENV: process.env["NEXT_PUBLIC_APP_ENV"],
     NEXT_PUBLIC_CDN_URL: process.env["NEXT_PUBLIC_CDN_URL"],
+    NEXT_PUBLIC_HEROUI_AGENT_ID: process.env["NEXT_PUBLIC_HEROUI_AGENT_ID"],
     NEXT_PUBLIC_POSTHOG_HOST: process.env["NEXT_PUBLIC_POSTHOG_HOST"],
     NEXT_PUBLIC_POSTHOG_KEY: process.env["NEXT_PUBLIC_POSTHOG_KEY"],
     NEXT_PUBLIC_PRO_API_URL: process.env["NEXT_PUBLIC_PRO_API_URL"],
@@ -31,6 +34,7 @@ export const env = createEnv({
   server: {
     FEATUREBASE_API_ENDPOINT: z.string().min(1).optional(),
     FEATUREBASE_API_KEY: z.string().min(1).optional(),
+    HEROUI_AGENT_API_KEY: z.string().min(1).optional(),
     LOOPS_API_ENDPOINT: z.string().min(1).optional(),
     LOOPS_API_KEY: z.string().min(1).optional(),
     NODE_ENV: z.enum(["development", "production"]).default("development"),
