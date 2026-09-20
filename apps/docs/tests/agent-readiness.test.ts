@@ -18,7 +18,9 @@ import {POST as getAgentAuthToken} from "@/app/api/heroui-agent/auth-token/route
 import {GET as getOpenApi} from "@/app/openapi.json/route";
 import {
   createDocsPageContext,
+  createThemeBuilderUrl,
   docsAgentTools,
+  getThemeBuilderState,
   resolveSameOriginPath,
   sliceMarkdownResult,
 } from "@/components/ai/docs-agent-tools";
@@ -176,6 +178,8 @@ describe("HeroUI agent readiness", () => {
       "get_heroui_doc",
       "navigate_heroui",
       "list_heroui_components",
+      "get_heroui_theme",
+      "set_heroui_theme",
     ]);
     expect(docsAgentTools.find((tool) => tool.name === "navigate_heroui")?.needsApproval).toBe(
       true,
@@ -225,6 +229,51 @@ describe("HeroUI agent readiness", () => {
         query: {tab: "usage"},
       },
     });
+  });
+
+  it("reads and updates shareable HeroUI theme builder state", () => {
+    expect(
+      getThemeBuilderState(
+        "https://heroui.com/en/themes?lightness=0.72&chroma=0.18&hue=210&vibrantPalette=true",
+        "dark",
+      ),
+    ).toMatchObject({
+      colorScheme: "dark",
+      isThemeBuilder: true,
+      preset: "custom",
+      values: {
+        chroma: 0.18,
+        hue: 210,
+        lightness: 0.72,
+        vibrantPalette: true,
+      },
+    });
+
+    const updated = new URL(
+      createThemeBuilderUrl(
+        {preset: "mint", radius: "large", vibrantPalette: true},
+        "https://heroui.com/en/docs/react/getting-started?tab=install",
+      ),
+      "https://heroui.com",
+    );
+
+    expect(updated.pathname).toBe("/en/themes");
+    expect(Object.fromEntries(updated.searchParams)).toMatchObject({
+      chroma: "0.12",
+      hue: "155",
+      lightness: "0.82",
+      radius: "large",
+      vibrantPalette: "true",
+    });
+  });
+
+  it("rejects unsafe theme builder values", () => {
+    expect(() => createThemeBuilderUrl({hue: 900}, "https://heroui.com/en/themes")).toThrow(
+      "hue must be a number between 0 and 360",
+    );
+    expect(() =>
+      createThemeBuilderUrl({fontFamily: "javascript:alert(1)"}, "https://heroui.com/en/themes"),
+    ).toThrow("fontFamily must be one of");
   });
 
   it("publishes a typed OpenAPI alias with unique documented operations", async () => {

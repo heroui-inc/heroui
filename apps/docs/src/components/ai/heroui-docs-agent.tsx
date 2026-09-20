@@ -6,6 +6,7 @@ import type {Route} from "next";
 
 import {HeroUIAgent} from "@heroui/agent/next";
 import {useRouter} from "next/navigation";
+import {useTheme} from "next-themes";
 import {useMemo} from "react";
 
 import {HEROUI_DOCS_AGENT_ID} from "@/lib/heroui-agent";
@@ -27,9 +28,17 @@ const getAuthToken: GetAuthToken = async (context) => {
 
 export function HeroUIDocsAgent() {
   const router = useRouter();
+  const {setTheme, theme} = useTheme();
   const context = useMemo<DocsAgentContext>(
-    () => ({navigate: (url) => router.push(url as Route), page: getDocsPageContext}),
-    [router],
+    () => ({
+      navigate: (url) => router.push(url as Route),
+      page: getDocsPageContext,
+      theme: {
+        getMode: () => theme,
+        setMode: setTheme,
+      },
+    }),
+    [router, setTheme, theme],
   );
 
   return (

@@ -1,10 +1,41 @@
 import type {ClientTool, ClientToolExecutionContext} from "@heroui/agent";
 
+import {fontIds} from "@/app/[lang]/themes/constants";
+import {
+  defaultThemeValues,
+  findMatchingTheme,
+  radiusIds,
+  themeIds,
+  themeValuesById,
+} from "@/app/[lang]/themes/theme-values";
+
 type DocsToolInput = Record<string, unknown>;
 
 export type DocsAgentContext = {
   navigate: (url: string) => void;
   page: () => DocsPageContext;
+  theme: {
+    getMode: () => string | undefined;
+    setMode: (mode: ThemeMode) => void;
+  };
+};
+
+export type ThemeMode = "dark" | "light" | "system";
+
+export type ThemeBuilderState = {
+  colorScheme: ThemeMode;
+  isThemeBuilder: boolean;
+  preset: (typeof themeIds)[number] | "custom";
+  values: {
+    base: number;
+    chroma: number;
+    fontFamily: string;
+    formRadius: (typeof radiusIds)[number];
+    hue: number;
+    lightness: number;
+    radius: (typeof radiusIds)[number];
+    vibrantPalette: boolean;
+  };
 };
 
 export type DocsPageContext = {
@@ -32,6 +63,19 @@ type DocsToolDefinition = Omit<ClientTool<DocsToolInput, DocsAgentContext>, "exe
 
 const DEFAULT_PAGE_CHARACTERS = 40_000;
 const MAX_PAGE_CHARACTERS = 40_000;
+const THEME_BUILDER_PATH = "/en/themes";
+const themeModes = ["light", "dark", "system"] as const;
+
+const themeValueKeys = [
+  "base",
+  "chroma",
+  "fontFamily",
+  "formRadius",
+  "hue",
+  "lightness",
+  "radius",
+  "vibrantPalette",
+] as const;
 
 function getString(input: DocsToolInput, key: string, fallback = ""): string {
   const value = input[key];
@@ -46,6 +90,124 @@ function getInteger(input: DocsToolInput, key: string, fallback: number): number
   if (!Number.isFinite(parsed)) return fallback;
 
   return Math.trunc(parsed);
+}
+
+function getOptionalNumber(
+  input: DocsToolInput,
+  key: string,
+  minimum: number,
+  maximum: number,
+): number | undefined {
+  const value = input[key];
+
+  if (value === undefined) return undefined;
+  if (typeof value !== "number" || !Number.isFinite(value) || value < minimum || value > maximum) {
+    throw new Error(`${key} must be a number between ${minimum} and ${maximum}`);
+  }
+
+  return value;
+}
+
+function getOptionalEnum<T extends string>(
+  input: DocsToolInput,
+  key: string,
+  values: readonly T[],
+): T | undefined {
+  const value = input[key];
+
+  if (value === undefined) return undefined;
+  if (typeof value !== "string" || !values.includes(value as T)) {
+    throw new Error(`${key} must be one of: ${values.join(", ")}`);
+  }
+
+  return value as T;
+}
+
+function getUrlNumber(searchParams: URLSearchParams, key: string, fallback: number): number {
+  const value = searchParams.get(key);
+  const parsed = value === null ? Number.NaN : Number(value);
+
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function isThemeBuilderPath(pathname: string): boolean {
+  return pathname === THEME_BUILDER_PATH || pathname === `${THEME_BUILDER_PATH}/`;
+}
+
+export function getThemeBuilderState(
+  href: string,
+  colorScheme: string | undefined = "system",
+): ThemeBuilderState {
+  const url = new URL(href);
+  const {searchParams} = url;
+  const formRadius = searchParams.get("formRadius");
+  const radius = searchParams.get("radius");
+  const mode = themeModes.includes(colorScheme as ThemeMode)
+    ? (colorScheme as ThemeMode)
+    : "system";
+  const values: ThemeBuilderState["values"] = {
+    base: getUrlNumber(searchParams, "base", defaultThemeValues.base),
+    chroma: getUrlNumber(searchParams, "chroma", defaultThemeValues.chroma),
+    fontFamily: searchParams.get("fontFamily") || defaultThemeValues.fontFamily,
+    formRadius: radiusIds.includes(formRadius as (typeof radiusIds)[number])
+      ? (formRadius as (typeof radiusIds)[number])
+      : defaultThemeValues.formRadius,
+    hue: getUrlNumber(searchParams, "hue", defaultThemeValues.hue),
+    lightness: getUrlNumber(searchParams, "lightness", defaultThemeValues.lightness),
+    radius: radiusIds.includes(radius as (typeof radiusIds)[number])
+      ? (radius as (typeof radiusIds)[number])
+      : defaultThemeValues.radius,
+    vibrantPalette: searchParams.get("vibrantPalette") === "true",
+  };
+
+  return {
+    colorScheme: mode,
+    isThemeBuilder: isThemeBuilderPath(url.pathname),
+    preset: findMatchingTheme(values) ?? "custom",
+    values,
+  };
+}
+
+export function createThemeBuilderUrl(input: DocsToolInput, href: string): string {
+  const current = getThemeBuilderState(href);
+  const preset = getOptionalEnum(input, "preset", themeIds);
+  const baseValues = preset ? themeValuesById[preset] : current.values;
+  const fontFamily = getOptionalEnum(input, "fontFamily", fontIds);
+  const formRadius = getOptionalEnum(input, "formRadius", radiusIds);
+  const radius = getOptionalEnum(input, "radius", radiusIds);
+  const vibrantPalette = input["vibrantPalette"];
+
+  if (vibrantPalette !== undefined && typeof vibrantPalette !== "boolean") {
+    throw new Error("vibrantPalette must be a boolean");
+  }
+
+  const values: ThemeBuilderState["values"] = {
+    base: getOptionalNumber(input, "base", 0, 0.02) ?? baseValues.base,
+    chroma: getOptionalNumber(input, "chroma", 0, 0.4) ?? baseValues.chroma,
+    fontFamily: fontFamily ?? baseValues.fontFamily,
+    formRadius: formRadius ?? baseValues.formRadius,
+    hue: getOptionalNumber(input, "hue", 0, 360) ?? baseValues.hue,
+    lightness: getOptionalNumber(input, "lightness", 0, 1) ?? baseValues.lightness,
+    radius: radius ?? baseValues.radius,
+    vibrantPalette: (vibrantPalette as boolean | undefined) ?? baseValues.vibrantPalette ?? false,
+  };
+  const url = new URL(href);
+
+  if (!isThemeBuilderPath(url.pathname)) url.search = "";
+  url.pathname = THEME_BUILDER_PATH;
+  url.hash = "";
+  url.searchParams.set("base", String(values.base));
+  url.searchParams.set("chroma", String(values.chroma));
+  url.searchParams.set("fontFamily", values.fontFamily);
+  url.searchParams.set("formRadius", values.formRadius);
+  url.searchParams.set("hue", String(values.hue));
+  url.searchParams.set("lightness", String(values.lightness));
+  url.searchParams.set("radius", values.radius);
+
+  if (values.vibrantPalette) url.searchParams.set("vibrantPalette", "true");
+  else url.searchParams.delete("vibrantPalette");
+
+  return `${url.pathname}${url.search}`;
 }
 
 function getPlatform(input: DocsToolInput, fallback: "all" | "native" | "react" = "all") {
@@ -297,6 +459,90 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
       properties: {
         limit: {default: 20, maximum: 20, minimum: 1, type: "integer"},
         platform: {default: "react", enum: ["react", "native"], type: "string"},
+      },
+      type: "object",
+    },
+  },
+  {
+    description:
+      "Read the current HeroUI theme builder values and light, dark, or system color scheme. Use this before changing a theme when the user asks to inspect or edit it.",
+    displayName: "Read HeroUI theme",
+    execute(_input, context) {
+      return getThemeBuilderState(window.location.href, context?.theme.getMode());
+    },
+    name: "get_heroui_theme",
+    parameters: {
+      additionalProperties: false,
+      properties: {},
+      type: "object",
+    },
+  },
+  {
+    description:
+      "Change the interactive HeroUI theme builder when the user explicitly asks. Apply a preset or any partial combination of accent, neutral tint, font, radius, vibrant palette, and light/dark/system mode. Theme values open the English theme builder and preserve unspecified settings.",
+    displayName: "Update HeroUI theme",
+    execute(input, context) {
+      const colorScheme = getOptionalEnum(input, "colorScheme", themeModes);
+      const hasThemeValues = themeValueKeys.some((key) => input[key] !== undefined);
+      const hasPreset = input["preset"] !== undefined;
+
+      if (!colorScheme && !hasThemeValues && !hasPreset) {
+        throw new Error("Provide a preset, theme value, or colorScheme to update");
+      }
+
+      if (colorScheme) {
+        if (!context) throw new Error("Theme controls are unavailable");
+        context.theme.setMode(colorScheme);
+      }
+
+      const url =
+        hasThemeValues || hasPreset ? createThemeBuilderUrl(input, window.location.href) : null;
+
+      if (url) {
+        if (context) context.navigate(url);
+        else window.location.assign(url);
+      }
+
+      return {
+        colorScheme: colorScheme ?? context?.theme.getMode() ?? "system",
+        navigating: Boolean(url),
+        url,
+      };
+    },
+    name: "set_heroui_theme",
+    parameters: {
+      additionalProperties: false,
+      properties: {
+        base: {
+          description: "Neutral color chroma from 0 to 0.02.",
+          maximum: 0.02,
+          minimum: 0,
+          type: "number",
+        },
+        chroma: {
+          description: "Accent color chroma from 0 to 0.4.",
+          maximum: 0.4,
+          minimum: 0,
+          type: "number",
+        },
+        colorScheme: {enum: themeModes, type: "string"},
+        fontFamily: {enum: fontIds, type: "string"},
+        formRadius: {enum: radiusIds, type: "string"},
+        hue: {
+          description: "Accent hue from 0 to 360.",
+          maximum: 360,
+          minimum: 0,
+          type: "number",
+        },
+        lightness: {
+          description: "Accent lightness from 0 to 1.",
+          maximum: 1,
+          minimum: 0,
+          type: "number",
+        },
+        preset: {enum: themeIds, type: "string"},
+        radius: {enum: radiusIds, type: "string"},
+        vibrantPalette: {type: "boolean"},
       },
       type: "object",
     },
