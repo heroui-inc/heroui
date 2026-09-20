@@ -1,6 +1,6 @@
 "use client";
 
-import type {DocsAgentContext} from "./docs-agent-tools";
+import type {DocsAgentContext, ThemeMode} from "./docs-agent-tools";
 import type {GetAuthToken} from "@heroui/agent";
 import type {Route} from "next";
 
@@ -29,16 +29,17 @@ const getAuthToken: GetAuthToken = async (context) => {
 export function HeroUIDocsAgent() {
   const router = useRouter();
   const {setTheme, theme} = useTheme();
+  const colorScheme: ThemeMode = theme === "dark" || theme === "light" ? theme : "system";
   const context = useMemo<DocsAgentContext>(
     () => ({
       navigate: (url) => router.push(url as Route),
       page: getDocsPageContext,
       theme: {
-        getMode: () => theme,
+        getMode: () => colorScheme,
         setMode: setTheme,
       },
     }),
-    [router, setTheme, theme],
+    [colorScheme, router, setTheme],
   );
 
   return (
@@ -46,7 +47,7 @@ export function HeroUIDocsAgent() {
       showLauncher
       startNewConversationOnOpen
       agentId={HEROUI_DOCS_AGENT_ID}
-      appearance={{viewMode: "sidebar"}}
+      appearance={{theme: {colorScheme}, viewMode: "sidebar"}}
       context={context}
       getAuthToken={getAuthToken}
       locale="en"
