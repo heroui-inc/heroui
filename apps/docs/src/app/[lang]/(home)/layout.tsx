@@ -4,6 +4,7 @@ import {HomeLayout} from "fumadocs-ui/layouts/home";
 import {notFound} from "next/navigation";
 
 import {baseOptions} from "@/app/[lang]/layout.config";
+import {HeroUIDocsAgentTrigger} from "@/components/ai/heroui-docs-agent-trigger";
 import {DesignThemeSelector} from "@/components/design-theme-selector";
 import {LanguageToggleSlot, LanguageToggleText} from "@/components/fumadocs/ui/language-toggle";
 import {SearchToggle} from "@/components/fumadocs/ui/search-toggle";
@@ -31,12 +32,7 @@ export default async function Layout({
       links={[
         ...getHomeLayoutLinks(dict, lang),
         {
-          children: (
-            <div className="flex items-center gap-1.5">
-              <DesignThemeSelector />
-              <GitHubLinkSmall />
-            </div>
-          ),
+          children: <GitHubLinkSmall />,
           on: "nav" as const,
           secondary: true,
           type: "custom" as const,
@@ -50,12 +46,19 @@ export default async function Layout({
       ]}
       searchToggle={{
         components: {
-          lg: <SearchToggle hideIfDisabled />,
-          sm: (
-            <>
-              <DesignThemeSelector triggerVariant="ghost" />
+          lg: (
+            <div className="flex items-center gap-1.5">
               <SearchToggle hideIfDisabled />
-            </>
+              {lang === "en" ? <HeroUIDocsAgentTrigger /> : null}
+              <DesignThemeSelector />
+            </div>
+          ),
+          sm: (
+            <div className="flex items-center gap-1.5">
+              <SearchToggle hideIfDisabled />
+              {lang === "en" ? <HeroUIDocsAgentTrigger /> : null}
+              <DesignThemeSelector triggerVariant="ghost" />
+            </div>
           ),
         },
       }}

@@ -4,7 +4,7 @@ import type {ComponentProps} from "react";
 
 import {Sparkles} from "@gravity-ui/icons";
 import {useAgent} from "@heroui/agent/next";
-import {Button, Kbd} from "@heroui/react";
+import {Button, Kbd, Tooltip} from "@heroui/react";
 import {useEffect} from "react";
 
 import {HEROUI_DOCS_AGENT_ID} from "@/lib/heroui-agent";
@@ -31,20 +31,29 @@ export function HeroUIDocsAgentTrigger({
   }, [agent]);
 
   return (
-    <Button
-      aria-keyshortcuts="Meta+I Control+I"
-      aria-label="Ask AI"
-      className={cn("shrink-0", className)}
-      size="sm"
-      variant="tertiary"
-      onPress={() => agent.toggle()}
-      {...props}
-    >
-      <Sparkles className="size-4" />
-      <span className="hidden lg:inline">Ask AI</span>
-      <Kbd className="hidden xl:inline-flex">
-        <Kbd.Content>⌘ I</Kbd.Content>
-      </Kbd>
-    </Button>
+    <Tooltip delay={300}>
+      <Tooltip.Trigger role="presentation" tabIndex={-1}>
+        <Button
+          {...props}
+          isIconOnly
+          aria-keyshortcuts="Meta+I Control+I"
+          aria-label="Ask AI"
+          className={cn("size-[34px] shrink-0 border-none", className)}
+          size="sm"
+          variant="tertiary"
+          onPress={() => agent.toggle()}
+        >
+          <Sparkles className="size-4" />
+        </Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content placement="bottom">
+        <span className="flex items-center gap-2">
+          Ask AI
+          <Kbd className="h-5 rounded-md px-1.5 text-[11px]">
+            <Kbd.Content>⌘ I</Kbd.Content>
+          </Kbd>
+        </span>
+      </Tooltip.Content>
+    </Tooltip>
   );
 }
