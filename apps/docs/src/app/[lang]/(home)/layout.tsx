@@ -50,10 +50,11 @@ export default async function Layout({
       ]}
       searchToggle={{
         components: {
+          lg: <SearchToggle hideIfDisabled />,
           sm: (
             <>
               <DesignThemeSelector triggerVariant="ghost" />
-              <SearchToggle hideIfDisabled className="p-2" />
+              <SearchToggle hideIfDisabled />
             </>
           ),
         },
