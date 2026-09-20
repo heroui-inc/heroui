@@ -34,11 +34,14 @@ export function HeroUIDocsAgent() {
 
   return (
     <HeroUIAgent
+      startNewConversationOnOpen
       agentId={HEROUI_DOCS_AGENT_ID}
+      appearance={{viewMode: "sidebar"}}
       context={context}
       getAuthToken={getAuthToken}
       locale="en"
       permissions={{defaultMode: "auto", showPicker: false}}
+      showLauncher={false}
       tools={docsAgentTools}
     />
   );

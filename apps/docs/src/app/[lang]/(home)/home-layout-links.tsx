@@ -1,6 +1,7 @@
 import type {LinkItemType} from "@/components/fumadocs/ui/link-item";
 import type {Dictionary} from "@/lib/dictionaries";
 
+import {HeroUIDocsAgentTrigger} from "@/components/ai/heroui-docs-agent-trigger";
 import {ExternalLink} from "@/components/external-link";
 import {Iconify} from "@/components/iconify";
 
@@ -107,5 +108,15 @@ export function getHomeLayoutLinks(dict: Dictionary, lang: string = "en"): LinkI
       on: "nav",
       type: "custom",
     },
+    ...(lang === "en"
+      ? [
+          {
+            children: <HeroUIDocsAgentTrigger />,
+            on: "nav" as const,
+            secondary: true,
+            type: "custom" as const,
+          },
+        ]
+      : []),
   ];
 }

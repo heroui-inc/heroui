@@ -5,6 +5,7 @@ import {Separator} from "@heroui/react";
 import {HeaderBanner, ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 import {SHOW_BANNER} from "@/app/[lang]/(home)/components/pro-constants";
 import {baseOptions} from "@/app/[lang]/layout.config";
+import {HeroUIDocsAgentTrigger} from "@/components/ai/heroui-docs-agent-trigger";
 import {DesignThemeSelector} from "@/components/design-theme-selector";
 import {FrameworksTabs} from "@/components/frameworks-tabs";
 import {DocsLayout} from "@/components/fumadocs/layouts/notebook";
@@ -86,6 +87,7 @@ export default async function Layout({
           ...baseOptions.nav,
           children: (
             <div className="me-2 flex items-center gap-3 md:me-0" id="nd-nav-actions">
+              {lang === "en" ? <HeroUIDocsAgentTrigger /> : null}
               <DesignThemeSelector />
               <GitHubLinkSmall />
             </div>
