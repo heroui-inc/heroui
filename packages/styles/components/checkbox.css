@@ -189,6 +189,10 @@
     )
     & {
     @apply status-invalid-field;
+
+    &::before {
+      @apply bg-danger;
+    }
   }
 
   /* Invalid + Selected */
