@@ -43,6 +43,7 @@ export function HeroUIDocsAgent() {
 
   return (
     <HeroUIAgent
+      showLauncher
       startNewConversationOnOpen
       agentId={HEROUI_DOCS_AGENT_ID}
       appearance={{viewMode: "sidebar"}}
@@ -50,7 +51,6 @@ export function HeroUIDocsAgent() {
       getAuthToken={getAuthToken}
       locale="en"
       permissions={{defaultMode: "auto", showPicker: false}}
-      showLauncher={false}
       tools={docsAgentTools}
     />
   );
