@@ -18,11 +18,11 @@ export function HeroUIDocsAgentTrigger({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (!event.metaKey || event.altKey || event.ctrlKey || event.shiftKey) return;
+      if ((!event.metaKey && !event.ctrlKey) || event.altKey || event.shiftKey) return;
       if (event.key.toLowerCase() !== "i") return;
 
       event.preventDefault();
-      agent.show();
+      agent.toggle();
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -32,12 +32,12 @@ export function HeroUIDocsAgentTrigger({
 
   return (
     <Button
-      aria-keyshortcuts="Meta+I"
+      aria-keyshortcuts="Meta+I Control+I"
       aria-label="Ask AI"
       className={cn("shrink-0", className)}
       size="sm"
       variant="tertiary"
-      onPress={() => agent.show()}
+      onPress={() => agent.toggle()}
       {...props}
     >
       <Sparkles className="size-4" />
