@@ -16,6 +16,7 @@ import {GET as getAgentPage} from "@/app/api/agent/page/route";
 import {GET as searchAgentDocs} from "@/app/api/agent/search/route";
 import {POST as getAgentAuthToken} from "@/app/api/heroui-agent/auth-token/route";
 import {GET as getOpenApi} from "@/app/openapi.json/route";
+import {getAgentThemeOptions} from "@/components/ai/docs-agent-theme";
 import {
   createDocsPageContext,
   createThemeBuilderUrl,
@@ -274,6 +275,18 @@ describe("HeroUI agent readiness", () => {
     expect(() =>
       createThemeBuilderUrl({fontFamily: "javascript:alert(1)"}, "https://heroui.com/en/themes"),
     ).toThrow("fontFamily must be one of");
+  });
+
+  it("maps docs presets to the Agent theme surface", () => {
+    const sky = getAgentThemeOptions("sky", "light");
+    const lavender = getAgentThemeOptions("lavender", "dark");
+
+    expect(sky.colorScheme).toBe("light");
+    expect(lavender.colorScheme).toBe("dark");
+    expect(sky.colors?.accent).not.toEqual(lavender.colors?.accent);
+    expect(sky.colors?.background).not.toEqual(lavender.colors?.background);
+    expect(sky.radius).toBe("round");
+    expect(sky.typography?.fontFamily).toBe('"Inter", sans-serif');
   });
 
   it("publishes a typed OpenAPI alias with unique documented operations", async () => {
