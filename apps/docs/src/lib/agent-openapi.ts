@@ -80,6 +80,7 @@ export function agentApiDocument(origin: string): OpenAPIDocument {
           additionalProperties: false,
           properties: {
             count: {minimum: 0, type: "integer"},
+            locale: {enum: ["en", "cn"], type: "string"},
             platform: {enum: ["all", "react", "native"], type: "string"},
             query: {type: "string"},
             results: {
@@ -87,7 +88,7 @@ export function agentApiDocument(origin: string): OpenAPIDocument {
               type: "array",
             },
           },
-          required: ["count", "platform", "query", "results"],
+          required: ["count", "locale", "platform", "query", "results"],
           type: "object",
         },
         SearchResult: {
@@ -135,6 +136,12 @@ export function agentApiDocument(origin: string): OpenAPIDocument {
               required: true,
               schema: {minLength: 1, type: "string"},
             },
+            {
+              description: "Documentation locale.",
+              in: "query",
+              name: "locale",
+              schema: {default: "en", enum: ["en", "cn"], type: "string"},
+            },
           ],
           responses: {
             "200": {
@@ -169,6 +176,12 @@ export function agentApiDocument(origin: string): OpenAPIDocument {
               in: "query",
               name: "platform",
               schema: {default: "all", enum: ["all", "react", "native"], type: "string"},
+            },
+            {
+              description: "Documentation locale.",
+              in: "query",
+              name: "locale",
+              schema: {default: "en", enum: ["en", "cn"], type: "string"},
             },
             {
               description: "Maximum number of matches to return.",

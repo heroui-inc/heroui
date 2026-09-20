@@ -183,6 +183,9 @@ importers:
       '@gravity-ui/icons':
         specifier: 2.22.0
         version: 2.22.0(react@19.3.0)
+      '@heroui/agent':
+        specifier: 1.0.0-beta.11
+        version: 1.0.0-beta.11(react@19.3.0)
       '@heroui/react':
         specifier: workspace:*
         version: link:../../packages/react
@@ -1433,6 +1436,15 @@ packages:
     resolution: {integrity: sha512-v304kVTXbtsq8b3Uq3ZnX9R3LnRdECToeLspDgCs92C9fcID4C7dJqS3PywHKEaM4PFEZO8LRp/6JQbIm9UjHA==}
     peerDependencies:
       react: '*'
+    peerDependenciesMeta:
+      react:
+        optional: true
+
+  '@heroui/agent@1.0.0-beta.11':
+    resolution: {integrity: sha512-9rhH3GMmbT8y4iZLJWWw1z3T1Fpk1bhxT407MHv2OCXMKLI+7E0yiQeLUAj4xzoPKBGUkLnUGTEpF3d+2amB2A==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      react: '>=19.0.0'
     peerDependenciesMeta:
       react:
         optional: true
@@ -8717,6 +8729,9 @@ packages:
     peerDependencies:
       zod: ^3.25.0 || ^4.0.0
 
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+
   zod@4.6.5:
     resolution: {integrity: sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==}
 
@@ -9523,6 +9538,12 @@ snapshots:
   '@gravity-ui/icons@2.22.0(react@19.3.0)':
     dependencies:
       tslib: 2.8.1
+    optionalDependencies:
+      react: 19.3.0
+
+  '@heroui/agent@1.0.0-beta.11(react@19.3.0)':
+    dependencies:
+      zod: 4.3.6
     optionalDependencies:
       react: 19.3.0
 
@@ -17570,6 +17591,8 @@ snapshots:
   zod-validation-error@4.0.2(zod@4.6.5):
     dependencies:
       zod: 4.6.5
+
+  zod@4.3.6: {}
 
   zod@4.6.5: {}
 

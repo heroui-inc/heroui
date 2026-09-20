@@ -14,10 +14,32 @@ import {GET as getMarkdown} from "@/app/agent-markdown/route";
 import {GET as getUnknownAgentEndpoint} from "@/app/api/agent/[...path]/route";
 import {GET as getAgentPage} from "@/app/api/agent/page/route";
 import {GET as searchAgentDocs} from "@/app/api/agent/search/route";
+import {POST as getAgentAuthToken} from "@/app/api/heroui-agent/auth-token/route";
 import {GET as getOpenApi} from "@/app/openapi.json/route";
+import {
+  createDocsPageContext,
+  docsAgentTools,
+  resolveSameOriginPath,
+  sliceMarkdownResult,
+} from "@/components/ai/docs-agent-tools";
+import {HEROUI_DOCS_AGENT_ID} from "@/lib/heroui-agent";
 import {getOrganizationJsonLd} from "@/lib/json-ld";
 import {generateIndexHeader} from "@/lib/llms-utils";
 
+const createAuthToken = vi.hoisted(() => vi.fn());
+const HeroUIAgentAuthError = vi.hoisted(
+  () =>
+    class extends Error {
+      status: number;
+
+      constructor(message: string, status: number) {
+        super(message);
+        this.status = status;
+      }
+    },
+);
+
+vi.mock("@heroui/agent/server", () => ({HeroUIAgentAuthError, createAuthToken}));
 vi.mock("@/lib/get-llm-text", () => ({
   getLLMText: vi.fn(),
 }));
@@ -60,6 +82,149 @@ function collectHeadingLevels(node: ReactNode): number[] {
 }
 
 describe("HeroUI agent readiness", () => {
+  it("keeps the docs Agent token exchange on the server", async () => {
+    createAuthToken.mockClear();
+    const previousApiKey = process.env["HEROUI_AGENT_API_KEY"];
+
+    process.env["HEROUI_AGENT_API_KEY"] = "test-server-key";
+    createAuthToken.mockResolvedValue({expiresAt: 123, token: "short-lived-token"});
+
+    try {
+      const response = await getAgentAuthToken(
+        new Request("https://heroui.com/api/heroui-agent/auth-token", {
+          body: JSON.stringify({agentId: HEROUI_DOCS_AGENT_ID, anonymousId: "visitor-1"}),
+          headers: {"Content-Type": "application/json"},
+          method: "POST",
+        }),
+      );
+
+      expect(response.status).toBe(200);
+      expect(response.headers.get("cache-control")).toBe("no-store");
+      expect(await response.json()).toEqual({expiresAt: 123, token: "short-lived-token"});
+      expect(createAuthToken).toHaveBeenCalledWith({
+        agentId: HEROUI_DOCS_AGENT_ID,
+        anonymousId: "visitor-1",
+        apiKey: "test-server-key",
+        identity: {id: "visitor-1", type: "anonymous"},
+        metadata: {surface: "heroui-docs"},
+      });
+    } finally {
+      if (previousApiKey === undefined) delete process.env["HEROUI_AGENT_API_KEY"];
+      else process.env["HEROUI_AGENT_API_KEY"] = previousApiKey;
+    }
+  });
+
+  it("rejects token requests for another Agent", async () => {
+    createAuthToken.mockClear();
+    const response = await getAgentAuthToken(
+      new Request("https://heroui.com/api/heroui-agent/auth-token", {
+        body: JSON.stringify({agentId: "another-agent", anonymousId: "visitor-1"}),
+        headers: {"Content-Type": "application/json"},
+        method: "POST",
+      }),
+    );
+
+    expect(response.status).toBe(400);
+    expect(createAuthToken).not.toHaveBeenCalled();
+  });
+
+  it("rejects invalid anonymous IDs before requesting an Agent token", async () => {
+    createAuthToken.mockClear();
+
+    for (const anonymousId of ["   ", "x".repeat(201)]) {
+      const response = await getAgentAuthToken(
+        new Request("https://heroui.com/api/heroui-agent/auth-token", {
+          body: JSON.stringify({agentId: HEROUI_DOCS_AGENT_ID, anonymousId}),
+          headers: {"Content-Type": "application/json"},
+          method: "POST",
+        }),
+      );
+
+      expect(response.status).toBe(400);
+    }
+
+    expect(createAuthToken).not.toHaveBeenCalled();
+  });
+
+  it("preserves SDK validation errors from the Agent token exchange", async () => {
+    createAuthToken.mockClear();
+    const previousApiKey = process.env["HEROUI_AGENT_API_KEY"];
+
+    process.env["HEROUI_AGENT_API_KEY"] = "test-server-key";
+    createAuthToken.mockRejectedValue(new HeroUIAgentAuthError("reserved identity", 400));
+
+    try {
+      const response = await getAgentAuthToken(
+        new Request("https://heroui.com/api/heroui-agent/auth-token", {
+          body: JSON.stringify({agentId: HEROUI_DOCS_AGENT_ID, anonymousId: "anonymous"}),
+          headers: {"Content-Type": "application/json"},
+          method: "POST",
+        }),
+      );
+
+      expect(response.status).toBe(400);
+      expect(await response.json()).toEqual({error: "Agent authentication failed"});
+    } finally {
+      if (previousApiKey === undefined) delete process.env["HEROUI_AGENT_API_KEY"];
+      else process.env["HEROUI_AGENT_API_KEY"] = previousApiKey;
+    }
+  });
+
+  it("exposes bounded docs tools and approval-gates navigation", () => {
+    expect(docsAgentTools.map((tool) => tool.name)).toEqual([
+      "search_heroui_docs",
+      "get_heroui_doc",
+      "navigate_heroui",
+      "list_heroui_components",
+    ]);
+    expect(docsAgentTools.find((tool) => tool.name === "navigate_heroui")?.needsApproval).toBe(
+      true,
+    );
+    expect(resolveSameOriginPath("/en/docs/react/releases", "https://heroui.com")).toBe(
+      "/en/docs/react/releases",
+    );
+    expect(resolveSameOriginPath("https://example.com/docs", "https://heroui.com")).toBeNull();
+  });
+
+  it("keeps documentation tool results below the Agent receipt limit", () => {
+    const result = sliceMarkdownResult({markdown: "a".repeat(92_000), title: "Large page"}) as {
+      markdown: string;
+      range: {end: number; start: number; totalCharacters: number};
+      title: string;
+      truncated: boolean;
+    };
+
+    expect(result.markdown).toHaveLength(40_000);
+    expect(result.range).toEqual({end: 40_000, start: 0, totalCharacters: 92_000});
+    expect(result.truncated).toBe(true);
+  });
+
+  it("builds compact localized page context for the docs Agent", () => {
+    expect(
+      createDocsPageContext({
+        description: "Button component documentation",
+        fallbackLocale: "en",
+        hash: "#usage",
+        heading: "Button",
+        href: "https://heroui.com/cn/docs/react/components/button?tab=usage",
+        title: "Button | HeroUI",
+      }),
+    ).toEqual({
+      locale: "cn",
+      page: {
+        description: "Button component documentation",
+        heading: "Button",
+        title: "Button | HeroUI",
+      },
+      platform: "react",
+      route: {
+        hash: "#usage",
+        pathname: "/cn/docs/react/components/button",
+        query: {tab: "usage"},
+      },
+    });
+  });
+
   it("publishes a typed OpenAPI alias with unique documented operations", async () => {
     const response = getOpenApi(new Request("https://heroui.com/openapi.json"));
     const document = (await response.json()) as {
@@ -95,6 +260,22 @@ describe("HeroUI agent readiness", () => {
         hint: expect.any(String),
         message: expect.any(String),
       });
+    }
+  });
+
+  it("rejects unsupported docs API locales", async () => {
+    const responses = [
+      await searchAgentDocs(
+        new NextRequest("https://heroui.com/api/agent/search?q=button&locale=fr"),
+      ),
+      await getAgentPage(
+        new NextRequest("https://heroui.com/api/agent/page?url=/docs/react&locale=fr"),
+      ),
+    ];
+
+    for (const response of responses) {
+      expect(response.status).toBe(400);
+      expect(await response.json()).toMatchObject({code: "INVALID_LOCALE", error: true});
     }
   });
 

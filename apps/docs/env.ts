@@ -17,6 +17,7 @@ export const env = createEnv({
   runtimeEnv: {
     FEATUREBASE_API_ENDPOINT: process.env["FEATUREBASE_API_ENDPOINT"],
     FEATUREBASE_API_KEY: process.env["FEATUREBASE_API_KEY"],
+    HEROUI_AGENT_API_KEY: process.env["HEROUI_AGENT_API_KEY"],
     LOOPS_API_ENDPOINT: process.env["LOOPS_API_ENDPOINT"],
     LOOPS_API_KEY: process.env["LOOPS_API_KEY"],
     NEXT_PUBLIC_APP_ENV: process.env["NEXT_PUBLIC_APP_ENV"],
@@ -31,6 +32,7 @@ export const env = createEnv({
   server: {
     FEATUREBASE_API_ENDPOINT: z.string().min(1).optional(),
     FEATUREBASE_API_KEY: z.string().min(1).optional(),
+    HEROUI_AGENT_API_KEY: z.string().min(1).optional(),
     LOOPS_API_ENDPOINT: z.string().min(1).optional(),
     LOOPS_API_KEY: z.string().min(1).optional(),
     NODE_ENV: z.enum(["development", "production"]).default("development"),

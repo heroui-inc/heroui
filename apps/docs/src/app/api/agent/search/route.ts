@@ -19,6 +19,16 @@ export async function GET(request: NextRequest) {
   }
 
   const platformParam = request.nextUrl.searchParams.get("platform");
+  const localeParam = request.nextUrl.searchParams.get("locale");
+
+  if (localeParam && !["en", "cn"].includes(localeParam)) {
+    return agentErrorResponse({
+      code: "INVALID_LOCALE",
+      hint: "Use one of: en, cn.",
+      message: `Unsupported locale: ${localeParam}.`,
+      status: 400,
+    });
+  }
 
   if (platformParam && !["all", "react", "native"].includes(platformParam)) {
     return agentErrorResponse({
@@ -46,10 +56,12 @@ export async function GET(request: NextRequest) {
 
   const platform = parseAgentSearchPlatform(platformParam);
   const limit = parseAgentLimit(limitParam);
-  const results = searchAgentDocs(query, platform, limit);
+  const locale = localeParam === "cn" ? "cn" : "en";
+  const results = searchAgentDocs(query, platform, limit, locale);
 
   return jsonResponse({
     count: results.length,
+    locale,
     platform,
     query,
     results,
