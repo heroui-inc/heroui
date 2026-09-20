@@ -5,7 +5,6 @@ import type {ComponentProps} from "react";
 import {Sparkles} from "@gravity-ui/icons";
 import {useAgent} from "@heroui/agent/next";
 import {Button, Kbd, Tooltip} from "@heroui/react";
-import {useEffect} from "react";
 
 import {HEROUI_DOCS_AGENT_ID} from "@/lib/heroui-agent";
 import {cn} from "@/utils/cn";
@@ -15,20 +14,6 @@ export function HeroUIDocsAgentTrigger({
   ...props
 }: Omit<ComponentProps<typeof Button>, "children" | "onPress">) {
   const agent = useAgent(HEROUI_DOCS_AGENT_ID);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if ((!event.metaKey && !event.ctrlKey) || event.altKey || event.shiftKey) return;
-      if (event.key.toLowerCase() !== "i") return;
-
-      event.preventDefault();
-      agent.toggle();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [agent]);
 
   return (
     <Tooltip delay={300}>
