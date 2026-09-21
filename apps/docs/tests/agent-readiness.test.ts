@@ -185,6 +185,9 @@ describe("HeroUI agent readiness", () => {
     expect(docsAgentTools.find((tool) => tool.name === "navigate_heroui")?.needsApproval).toBe(
       true,
     );
+    expect(docsAgentTools.find((tool) => tool.name === "set_heroui_theme")?.needsApproval).toBe(
+      true,
+    );
     expect(resolveSameOriginPath("/en/docs/react/releases", "https://heroui.com")).toBe(
       "/en/docs/react/releases",
     );
