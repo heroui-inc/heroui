@@ -16,7 +16,11 @@ export type DocsAgentContext = {
   page: () => DocsPageContext;
   theme: {
     getMode: () => string | undefined;
+    getPreset: () => (typeof themeIds)[number];
+    getVibrantPalette: () => boolean;
     setMode: (mode: ThemeMode) => void;
+    setPreset: (preset: (typeof themeIds)[number]) => void;
+    setVibrantPalette: (enabled: boolean) => void;
   };
 };
 
@@ -465,10 +469,23 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
   },
   {
     description:
-      "Read the current HeroUI theme builder values and light, dark, or system color scheme. Use this before changing a theme when the user asks to inspect or edit it.",
+      "Read the current HeroUI docs theme preset, theme-builder values, vibrant-palette setting, and light, dark, or system color scheme. Use this before changing a theme when the user asks to inspect or edit it.",
     displayName: "Read HeroUI theme",
     execute(_input, context) {
-      return getThemeBuilderState(window.location.href, context?.theme.getMode());
+      const state = getThemeBuilderState(window.location.href, context?.theme.getMode());
+
+      if (!context || state.isThemeBuilder) return state;
+
+      const preset = context.theme.getPreset();
+
+      return {
+        ...state,
+        preset,
+        values: {
+          ...themeValuesById[preset],
+          vibrantPalette: context.theme.getVibrantPalette(),
+        },
+      };
     },
     name: "get_heroui_theme",
     parameters: {
@@ -479,37 +496,48 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
   },
   {
     description:
-      "Change the interactive HeroUI theme builder when the user explicitly asks. Apply a preset or any partial combination of accent, neutral tint, font, radius, vibrant palette, and light/dark/system mode. Theme values open the English theme builder and preserve unspecified settings.",
+      "Change the current browser's HeroUI docs appearance when the user asks to switch or change the theme. For named themes, pass preset to apply it immediately on the current page (default, sky, lavender, mint, netflix, uber, spotify, coinbase, airbnb, discord, or rabbit). For example, 'change the docs theme to Sky' must call this tool with preset='sky'. Custom accent, neutral tint, font, or radius values open the English theme builder and preserve unspecified settings.",
     displayName: "Update HeroUI theme",
     execute(input, context) {
       const colorScheme = getOptionalEnum(input, "colorScheme", themeModes);
-      const hasThemeValues = themeValueKeys.some((key) => input[key] !== undefined);
-      const hasPreset = input["preset"] !== undefined;
+      const preset = getOptionalEnum(input, "preset", themeIds);
+      const vibrantPalette = input["vibrantPalette"];
+      const hasBuilderValues = themeValueKeys
+        .filter((key) => key !== "vibrantPalette")
+        .some((key) => input[key] !== undefined);
 
-      if (!colorScheme && !hasThemeValues && !hasPreset) {
+      if (!colorScheme && !hasBuilderValues && !preset && vibrantPalette === undefined) {
         throw new Error("Provide a preset, theme value, or colorScheme to update");
       }
 
+      if (!context) throw new Error("Theme controls are unavailable");
+
       if (colorScheme) {
-        if (!context) throw new Error("Theme controls are unavailable");
         context.theme.setMode(colorScheme);
       }
 
-      const url =
-        hasThemeValues || hasPreset ? createThemeBuilderUrl(input, window.location.href) : null;
+      if (preset) context.theme.setPreset(preset);
+      if (typeof vibrantPalette === "boolean") {
+        context.theme.setVibrantPalette(vibrantPalette);
+      }
+
+      const url = hasBuilderValues ? createThemeBuilderUrl(input, window.location.href) : null;
 
       if (url) {
-        if (context) context.navigate(url);
-        else window.location.assign(url);
+        context.navigate(url);
       }
 
       return {
-        colorScheme: colorScheme ?? context?.theme.getMode() ?? "system",
+        colorScheme: colorScheme ?? context.theme.getMode() ?? "system",
         navigating: Boolean(url),
+        preset: preset ?? context.theme.getPreset(),
         url,
+        vibrantPalette:
+          typeof vibrantPalette === "boolean" ? vibrantPalette : context.theme.getVibrantPalette(),
       };
     },
     name: "set_heroui_theme",
+    needsApproval: true,
     parameters: {
       additionalProperties: false,
       properties: {
@@ -540,7 +568,11 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
           minimum: 0,
           type: "number",
         },
-        preset: {enum: themeIds, type: "string"},
+        preset: {
+          description: "Named docs preset to apply immediately to the current page.",
+          enum: themeIds,
+          type: "string",
+        },
         radius: {enum: radiusIds, type: "string"},
         vibrantPalette: {type: "boolean"},
       },
