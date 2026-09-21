@@ -1,6 +1,7 @@
 ---
 title: Skeleton 骨架屏
 description: 展示加载占位，支持微光（shimmer）或脉冲（pulse）等动画效果。
+icon: updated
 links:
   source_native: skeleton/skeleton.tsx
   styles_native: skeleton/skeleton.styles.ts
@@ -57,6 +58,10 @@ Skeleton 为简单包装器，在内容加载时渲染占位，无子部件 API�
 <Skeleton variant="pulse" className="h-20 w-full rounded-lg" />
 <Skeleton variant="none" className="h-20 w-full rounded-lg" />
 ```
+
+<Callout type="info">
+  `variant="none"` 会跳过默认的 `FadeIn`/`FadeOut` 布局动画。若要为 `none` 骨架屏恢复进入/退出动画，请显式传入 `animation.entering` 与 `animation.exiting`。
+</Callout>
 
 ### 自定义微光
 
