@@ -212,7 +212,7 @@ describe("Table", () => {
       '[data-slot="checkbox-default-indicator--checkmark"]',
     );
 
-    await user.click(screen.getByRole("checkbox", {name: "Select Kate"}));
+    await user.click(screen.getByRole("checkbox", {name: /^Select Kate/}));
     runAllTimers();
 
     expect(headerField).toHaveAttribute("data-indeterminate", "true");
@@ -232,9 +232,9 @@ describe("Table", () => {
       headerField?.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]'),
     ).toBeNull();
 
-    await user.click(screen.getByRole("checkbox", {name: "Select Kate"}));
-    await user.click(screen.getByRole("checkbox", {name: "Select John"}));
-    await user.click(screen.getByRole("checkbox", {name: "Select Sara"}));
+    await user.click(screen.getByRole("checkbox", {name: /^Select Kate/}));
+    await user.click(screen.getByRole("checkbox", {name: /^Select John/}));
+    await user.click(screen.getByRole("checkbox", {name: /^Select Sara/}));
     runAllTimers();
 
     expect(headerField).not.toHaveAttribute("data-indeterminate");
