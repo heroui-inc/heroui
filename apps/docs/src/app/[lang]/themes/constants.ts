@@ -43,6 +43,7 @@ export const HEROUI_PRO_URL = env.NEXT_PUBLIC_PRO_URL ?? "https://heroui.pro";
 
 export const iframeTabs: Record<string, string> = {
   chat: `${HEROUI_PRO_URL}/templates/chat`,
+  crm: `${HEROUI_PRO_URL}/templates/crm`,
   dashboard: `${HEROUI_PRO_URL}/templates/dashboard`,
   finances: `${HEROUI_PRO_URL}/templates/finances`,
   mail: `${HEROUI_PRO_URL}/templates/email`,
