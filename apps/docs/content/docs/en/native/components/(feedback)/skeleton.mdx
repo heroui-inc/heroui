@@ -1,6 +1,7 @@
 ---
 title: Skeleton
 description: Displays a loading placeholder with shimmer or pulse animation effects.
+icon: updated
 links:
   source_native: skeleton/skeleton.tsx
   styles_native: skeleton/skeleton.styles.ts
@@ -57,6 +58,10 @@ Control the animation style with the `variant` prop.
 <Skeleton variant="pulse" className="h-20 w-full rounded-lg" />
 <Skeleton variant="none" className="h-20 w-full rounded-lg" />
 ```
+
+<Callout type="info">
+  `variant="none"` skips the default `FadeIn`/`FadeOut` layout animations. To restore enter/exit animations on a `none` skeleton, pass explicit `animation.entering` and `animation.exiting` values.
+</Callout>
 
 ### Custom Shimmer Configuration
 
