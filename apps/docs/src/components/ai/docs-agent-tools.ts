@@ -63,6 +63,9 @@ type DocsToolDefinition = Omit<ClientTool<DocsToolInput, DocsAgentContext>, "exe
 
 const DEFAULT_PAGE_CHARACTERS = 40_000;
 const MAX_PAGE_CHARACTERS = 40_000;
+const MAX_SEARCH_CONTENT_RESULTS = 3;
+const MAX_SEARCH_CONTENT_CHARACTERS = 9_000;
+const TRUNCATION_NOTICE = "\n\n[Content truncated. Request this page for more detail.]";
 const THEME_BUILDER_PATH = "/en/themes";
 const themeModes = ["light", "dark", "system"] as const;
 
@@ -252,6 +255,131 @@ export function resolveSameOriginPath(value: string, origin: string): string | n
   }
 }
 
+type SearchResultWithContent = {
+  contentError?: string;
+  excerpt?: string;
+  truncated?: boolean;
+  url: string;
+};
+
+type SearchResponse = {
+  results?: SearchResultWithContent[];
+};
+
+function searchTerms(query: string): string[] {
+  return [...new Set(query.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [])];
+}
+
+function mergeLineRanges(ranges: Array<{end: number; start: number}>) {
+  return [...ranges]
+    .sort((left, right) => left.start - right.start || left.end - right.end)
+    .reduce<Array<{end: number; start: number}>>((merged, range) => {
+      const previous = merged.at(-1);
+
+      if (previous && range.start <= previous.end) previous.end = Math.max(previous.end, range.end);
+      else merged.push({...range});
+
+      return merged;
+    }, []);
+}
+
+/** Return bounded matching Markdown windows so deep API details survive search. */
+export function excerptSearchMarkdown(markdown: string, query: string, maxCharacters: number) {
+  if (markdown.length <= maxCharacters) return {excerpt: markdown, truncated: false};
+
+  const lines = markdown.split("\n");
+  const terms = searchTerms(query);
+  const matches = lines
+    .map((line, index) => ({
+      index,
+      score: terms.reduce((score, term) => score + Number(line.toLowerCase().includes(term)), 0),
+    }))
+    .filter(({score}) => score > 0)
+    .sort((left, right) => right.score - left.score || left.index - right.index);
+  const notice = TRUNCATION_NOTICE.slice(0, maxCharacters);
+  const contentLimit = Math.max(0, maxCharacters - notice.length);
+  let ranges: Array<{end: number; start: number}> = [];
+
+  for (const {index} of matches) {
+    const candidate = {end: Math.min(lines.length, index + 7), start: Math.max(0, index - 5)};
+    const next = mergeLineRanges([...ranges, candidate]);
+    const length = next.reduce(
+      (total, range, rangeIndex) =>
+        total +
+        (rangeIndex ? "\n\n…\n\n".length : 0) +
+        lines.slice(range.start, range.end).join("\n").length,
+      0,
+    );
+
+    if (length <= contentLimit) ranges = next;
+  }
+
+  if (!ranges.length) {
+    const matchingLine = matches[0] ? (lines[matches[0].index] ?? markdown) : markdown;
+
+    return {excerpt: `${matchingLine.slice(0, contentLimit)}${notice}`, truncated: true};
+  }
+
+  return {
+    excerpt: `${ranges.map((range) => lines.slice(range.start, range.end).join("\n")).join("\n\n…\n\n")}${notice}`,
+    truncated: true,
+  };
+}
+
+async function enrichSearchResults(
+  response: unknown,
+  query: string,
+  signal?: AbortSignal,
+): Promise<unknown> {
+  if (!response || typeof response !== "object" || !("results" in response)) return response;
+
+  const results = (response as SearchResponse).results;
+
+  if (!Array.isArray(results) || !results.length) return response;
+
+  const selected = results.slice(0, MAX_SEARCH_CONTENT_RESULTS);
+  const maxCharacters = Math.floor(MAX_SEARCH_CONTENT_CHARACTERS / selected.length);
+  const content = await Promise.all(
+    selected.map(async (result) => {
+      const url = resolveSameOriginPath(result.url, window.location.origin);
+      const pathname = url ? new URL(url, window.location.origin).pathname : null;
+      const unlocalizedUrl = pathname?.replace(/^\/en(?=\/docs(?:\/|$))/, "");
+
+      if (!unlocalizedUrl?.startsWith("/docs/")) {
+        return {contentError: "Documentation content was unavailable."};
+      }
+
+      try {
+        const page = await fetchJson(
+          `/api/agent/page?url=${encodeURIComponent(unlocalizedUrl)}&locale=en`,
+          signal,
+        );
+        const markdown =
+          page &&
+          typeof page === "object" &&
+          "markdown" in page &&
+          typeof page.markdown === "string"
+            ? page.markdown
+            : "";
+
+        return markdown
+          ? excerptSearchMarkdown(markdown, query, maxCharacters)
+          : {contentError: "Documentation content was unavailable."};
+      } catch (error) {
+        return {
+          contentError:
+            error instanceof Error ? error.message : "Documentation content was unavailable.",
+        };
+      }
+    }),
+  );
+
+  return {
+    ...response,
+    results: results.map((result, index) => ({...result, ...(content[index] ?? {})})),
+  };
+}
+
 export function sliceMarkdownResult(
   value: unknown,
   start = 0,
@@ -333,25 +461,29 @@ export function getDocsPageContext(): DocsPageContext {
 export const docsToolDefinitions: DocsToolDefinition[] = [
   {
     description:
-      "Search the official HeroUI React and Native documentation by keyword. Returns at most 20 concise page matches.",
+      "Search the official HeroUI React and Native documentation by keyword. Returns page matches and concise relevant excerpts from up to three pages. Use get_heroui_doc when the exact page is already known or more detail is needed.",
     displayName: "Search HeroUI docs",
-    execute(input, _context, execution) {
+    async execute(input, _context, execution) {
       const query = getString(input, "query").trim();
       const platform = getPlatform(input);
+      const includeContent = input["includeContent"] !== false;
       const limit = Math.min(Math.max(getInteger(input, "limit", 10), 1), 20);
 
       if (!query) throw new Error("query is required");
 
-      return fetchJson(
+      const response = await fetchJson(
         `/api/agent/search?q=${encodeURIComponent(query)}&platform=${platform}&limit=${limit}&locale=en`,
         execution?.signal,
       );
+
+      return includeContent ? enrichSearchResults(response, query, execution?.signal) : response;
     },
     icon: "search",
     name: "search_heroui_docs",
     parameters: {
       additionalProperties: false,
       properties: {
+        includeContent: {default: true, type: "boolean"},
         limit: {default: 10, maximum: 20, minimum: 1, type: "integer"},
         platform: {default: "all", enum: ["all", "react", "native"], type: "string"},
         query: {
@@ -441,7 +573,7 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
   },
   {
     description:
-      "List official HeroUI component documentation pages for React or Native. Returns at most 20 entries.",
+      "Discover official HeroUI component documentation pages when the exact component is unknown. Returns at most 20 entries.",
     displayName: "List HeroUI components",
     execute(input, _context, execution) {
       const platform = getPlatform(input, "react") === "native" ? "native" : "react";
