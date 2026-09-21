@@ -34,6 +34,7 @@ const tabs = [
   {id: "mail"},
   {id: "chat"},
   {id: "finances"},
+  {id: "crm"},
 ] as const;
 
 const colors = [
