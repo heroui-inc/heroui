@@ -33,7 +33,7 @@ export {
   themeValuesById,
 } from "./theme-values";
 
-export const tabLabels = ["components", "dashboard", "mail", "chat", "finances"] as const;
+export const tabLabels = ["components", "dashboard", "mail", "chat", "finances", "crm"] as const;
 
 export type TabLabel = (typeof tabLabels)[number];
 
