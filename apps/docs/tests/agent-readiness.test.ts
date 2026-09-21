@@ -177,7 +177,7 @@ describe("HeroUI agent readiness", () => {
     }
   });
 
-  it("exposes bounded docs tools and approval-gates navigation", () => {
+  it("exposes bounded docs tools and only approval-gates explicit navigation", () => {
     expect(docsAgentTools.map((tool) => tool.name)).toEqual([
       "search_heroui_docs",
       "get_heroui_doc",
@@ -190,7 +190,7 @@ describe("HeroUI agent readiness", () => {
       true,
     );
     expect(docsAgentTools.find((tool) => tool.name === "set_heroui_theme")?.needsApproval).toBe(
-      true,
+      false,
     );
     expect(resolveSameOriginPath("/en/docs/react/releases", "https://heroui.com")).toBe(
       "/en/docs/react/releases",
