@@ -8,6 +8,7 @@ import {i18nProvider} from "fumadocs-ui/i18n";
 import {RootProvider} from "fumadocs-ui/provider/next";
 import dynamic from "next/dynamic";
 
+import {HeroUIDocsAgent} from "@/components/ai/heroui-docs-agent";
 import {WebMCPProvider} from "@/components/ai/webmcp-provider";
 import {LocaleLink} from "@/components/locale-link";
 import {DictionaryProvider} from "@/hooks/use-dictionary";
@@ -40,6 +41,7 @@ export function CustomRootProvider({
         <Toast.Provider />
 
         <WebMCPProvider />
+        {lang === "en" ? <HeroUIDocsAgent /> : null}
       </RootProvider>
     </DictionaryProvider>
   );

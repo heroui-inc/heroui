@@ -214,7 +214,8 @@
       "dashboard": "Dashboard",
       "mail": "Mail",
       "chat": "Chat",
-      "finances": "Finances"
+      "finances": "Finances",
+      "crm": "CRM"
     }
   },
   "demos": {

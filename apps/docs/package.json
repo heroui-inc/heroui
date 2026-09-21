@@ -23,6 +23,7 @@
   "dependencies": {
     "@fumadocs/language": "0.0.1",
     "@gravity-ui/icons": "2.22.0",
+    "@heroui/agent": "1.0.0-beta.12",
     "@heroui/react": "workspace:*",
     "@iconify-json/gravity-ui": "1.2.14",
     "@iconify/react": "6.0.2",

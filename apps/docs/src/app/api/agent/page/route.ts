@@ -8,6 +8,16 @@ export const revalidate = false;
 
 export async function GET(request: NextRequest) {
   const url = request.nextUrl.searchParams.get("url") ?? request.nextUrl.searchParams.get("path");
+  const localeParam = request.nextUrl.searchParams.get("locale");
+
+  if (localeParam && !["en", "cn"].includes(localeParam)) {
+    return agentErrorResponse({
+      code: "INVALID_LOCALE",
+      hint: "Use one of: en, cn.",
+      message: `Unsupported locale: ${localeParam}.`,
+      status: 400,
+    });
+  }
 
   if (!url) {
     return agentErrorResponse({
@@ -18,7 +28,7 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const page = await getAgentDocPage(url);
+  const page = await getAgentDocPage(url, localeParam === "cn" ? "cn" : "en");
 
   if (!page) {
     return agentErrorResponse({
