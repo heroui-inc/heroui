@@ -24,6 +24,7 @@ import {
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
+import {useScrollbarGutter} from "../../utils/use-scrollbar-gutter";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
 
@@ -120,10 +121,12 @@ const ModalBackdrop = ({
   className,
   isDismissable = true,
   onClick,
+  ref,
   variant,
   ...props
 }: ModalBackdropProps) => {
   const {slots: contextSlots} = use(ModalContext);
+  const backdropRef = useScrollbarGutter(ref);
 
   const updatedSlots = useMemo(() => modalVariants({variant}), [variant]);
 
@@ -134,6 +137,7 @@ const ModalBackdrop = ({
 
   return (
     <ModalOverlayPrimitive
+      ref={backdropRef}
       className={composeTwRenderProps(className, updatedSlots?.backdrop())}
       data-slot="modal-backdrop"
       isDismissable={isDismissable}
