@@ -60,25 +60,30 @@ beforeEach(() => {
 });
 
 describe("HeroUI docs theme client tools", () => {
-  it("applies a named preset to the current docs page without navigating", async () => {
+  it("applies a named preset immediately without approval or navigation", async () => {
     const {context, navigate} = createContext();
     const onChange = vi.fn();
     const setTheme = docsAgentTools.find(({name}) => name === "set_heroui_theme");
 
     window.addEventListener(DESIGN_THEME_CHANGE_EVENT, onChange);
 
-    const result = await setTheme?.execute({preset: "netflix"}, context, execution);
+    const result = await setTheme?.execute(
+      {base: 0.01, hue: 0, preset: "uber"},
+      context,
+      execution,
+    );
 
-    expect(result).toMatchObject({navigating: false, preset: "netflix", url: null});
-    expect(localStorage.getItem(DESIGN_THEME_STORAGE_KEY)).toBe("netflix");
-    expect(document.documentElement.dataset["designTheme"]).toBe("netflix");
+    expect(setTheme?.needsApproval).toBe(false);
+    expect(result).toMatchObject({navigating: false, preset: "uber", url: null});
+    expect(localStorage.getItem(DESIGN_THEME_STORAGE_KEY)).toBe("uber");
+    expect(document.documentElement.dataset["designTheme"]).toBe("uber");
     expect(onChange).toHaveBeenCalledOnce();
     expect(navigate).not.toHaveBeenCalled();
 
     const readTheme = docsAgentTools.find(({name}) => name === "get_heroui_theme");
     const current = await readTheme?.execute({}, context, execution);
 
-    expect(current).toMatchObject({isThemeBuilder: false, preset: "netflix"});
+    expect(current).toMatchObject({isThemeBuilder: false, preset: "uber"});
   });
 
   it("applies browser-local appearance values and only navigates for builder edits", async () => {

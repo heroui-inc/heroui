@@ -628,15 +628,17 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
   },
   {
     description:
-      "Change the current browser's HeroUI docs appearance when the user asks to switch or change the theme. For named themes, pass preset to apply it immediately on the current page (default, sky, lavender, mint, netflix, uber, spotify, coinbase, airbnb, discord, or rabbit). For example, 'change the docs theme to Sky' must call this tool with preset='sky'. Custom accent, neutral tint, font, or radius values open the English theme builder and preserve unspecified settings.",
+      "Change the current browser's HeroUI docs appearance when the user asks to switch or change the theme. For named themes, pass only preset to apply it immediately on the current page (default, sky, lavender, mint, netflix, uber, spotify, coinbase, airbnb, discord, or rabbit). For example, 'change the docs theme to Uber' must call this tool with preset='uber'. Never include custom theme values with a named preset. Custom accent, neutral tint, font, or radius values open the English theme builder and preserve unspecified settings.",
     displayName: "Update HeroUI theme",
     execute(input, context) {
       const colorScheme = getOptionalEnum(input, "colorScheme", themeModes);
       const preset = getOptionalEnum(input, "preset", themeIds);
       const vibrantPalette = input["vibrantPalette"];
-      const hasBuilderValues = themeValueKeys
-        .filter((key) => key !== "vibrantPalette")
-        .some((key) => input[key] !== undefined);
+      const hasBuilderValues =
+        !preset &&
+        themeValueKeys
+          .filter((key) => key !== "vibrantPalette")
+          .some((key) => input[key] !== undefined);
 
       if (!colorScheme && !hasBuilderValues && !preset && vibrantPalette === undefined) {
         throw new Error("Provide a preset, theme value, or colorScheme to update");
@@ -669,7 +671,7 @@ export const docsToolDefinitions: DocsToolDefinition[] = [
       };
     },
     name: "set_heroui_theme",
-    needsApproval: true,
+    needsApproval: false,
     parameters: {
       additionalProperties: false,
       properties: {
