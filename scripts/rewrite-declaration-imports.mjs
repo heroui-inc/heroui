@@ -111,6 +111,10 @@ async function rewriteDeclarationImports(directoryPath, {log = () => {}} = {}) {
   const declarationFiles = await collectDeclarationFiles(directoryPath);
   let rewrittenSpecifiers = 0;
 
+  if (declarationFiles.length === 0) {
+    throw new Error(`No declaration files found in ${directoryPath}`);
+  }
+
   for (const filePath of declarationFiles) {
     rewrittenSpecifiers += await rewriteDeclarationFile(filePath);
   }

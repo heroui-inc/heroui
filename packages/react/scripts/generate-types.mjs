@@ -29,6 +29,7 @@ async function generateTypes() {
       outDir: "./dist",
       rootDir: "./src",
       baseUrl: ".",
+      incremental: false,
     },
     include: ["src"],
     exclude: ["node_modules", "**/*.stories.*", "**/*.test.*", "dist", ".rollup.cache"],

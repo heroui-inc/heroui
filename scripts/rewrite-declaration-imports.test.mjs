@@ -66,3 +66,12 @@ test("rejects unresolved extensionless declaration imports", async () => {
     },
   );
 });
+
+test("rejects an empty declaration output directory", async () => {
+  await withDeclarations({}, async (directoryPath) => {
+    await assert.rejects(
+      rewriteDeclarationImports(directoryPath, {log: () => {}}),
+      /No declaration files found/,
+    );
+  });
+});
