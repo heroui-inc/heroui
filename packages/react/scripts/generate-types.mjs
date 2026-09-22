@@ -5,6 +5,8 @@ import {fileURLToPath} from "url";
 
 import fs from "fs-extra";
 
+import {rewriteDeclarationImports} from "../../../scripts/rewrite-declaration-imports.mjs";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 
@@ -42,6 +44,7 @@ async function generateTypes() {
       stdio: "inherit",
       cwd: rootDir,
     });
+    await rewriteDeclarationImports(path.join(rootDir, "dist"), {log: console.log});
 
     console.log("✅ TypeScript declarations generated successfully");
   } catch (error) {
