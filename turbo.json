@@ -22,6 +22,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/scripts/rewrite-declaration-imports.mjs"],
       "outputs": [
         ".next/**",
         ".source/**",
