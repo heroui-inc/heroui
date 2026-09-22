@@ -6,6 +6,15 @@ import ts from "typescript";
 const explicitEsmExtension = /\.[^/]+$/;
 const explicitJavaScriptExtension = /\.[cm]?jsx?$/i;
 
+function isRelativeSpecifier(specifier) {
+  return (
+    specifier === "." ||
+    specifier === ".." ||
+    specifier.startsWith("./") ||
+    specifier.startsWith("../")
+  );
+}
+
 async function pathIsFile(filePath) {
   try {
     return (await stat(filePath)).isFile();
@@ -42,7 +51,7 @@ async function collectDeclarationFiles(directoryPath) {
 }
 
 async function declarationReplacement(filePath, specifier) {
-  if (!specifier.startsWith("./") && !specifier.startsWith("../")) return null;
+  if (!isRelativeSpecifier(specifier)) return null;
   if (explicitJavaScriptExtension.test(specifier)) return null;
 
   const targetPath = path.resolve(path.dirname(filePath), specifier);
@@ -95,7 +104,7 @@ async function rewriteDeclarationFile(filePath) {
   for (const importedFile of declarationSpecifiers(content)) {
     const {fileName: specifier} = importedFile;
 
-    if (!specifier.startsWith("./") && !specifier.startsWith("../")) continue;
+    if (!isRelativeSpecifier(specifier)) continue;
 
     const replacement = await declarationReplacement(filePath, specifier);
 

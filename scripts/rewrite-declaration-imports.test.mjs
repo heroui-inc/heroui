@@ -32,11 +32,13 @@ test("adds JavaScript extensions to declaration imports without changing package
       "components/button/index.d.ts": [
         'export type {ButtonProps} from "./button";',
         'export type {GroupProps} from "../button-group";',
+        'export type {Components} from "..";',
         'export type Button = import("./button").ButtonProps;',
         'export type {ComponentProps} from "react";',
         'export type {ExistingProps} from "./existing.js";',
         "",
       ].join("\n"),
+      "components/index.d.ts": "export interface Components {}\n",
     },
     async (directoryPath) => {
       const result = await rewriteDeclarationImports(directoryPath, {log: () => {}});
@@ -45,9 +47,10 @@ test("adds JavaScript extensions to declaration imports without changing package
         "utf8",
       );
 
-      assert.deepEqual(result, {files: 4, specifiers: 3});
+      assert.deepEqual(result, {files: 5, specifiers: 4});
       assert.match(output, /from "\.\/button\.js"/);
       assert.match(output, /from "\.\.\/button-group\/index\.js"/);
+      assert.match(output, /from "\.\.\/index\.js"/);
       assert.match(output, /import\("\.\/button\.js"\)/);
       assert.match(output, /from "react"/);
       assert.match(output, /from "\.\/existing\.js"/);
