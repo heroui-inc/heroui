@@ -3,7 +3,7 @@
 import {Button, CloseButton, buttonVariants} from "@heroui/react";
 import {Calligraph} from "calligraph";
 import {AnimatePresence, motion} from "motion/react";
-import {useEffect, useState, useSyncExternalStore} from "react";
+import {useCallback, useEffect, useState, useSyncExternalStore} from "react";
 
 import {env} from "~env";
 
@@ -180,6 +180,8 @@ export function HeaderBanner() {
 }
 
 const PRO_BANNER_DISMISSED_KEY = "heroui-pro-banner-dismissed-session";
+const MOBILE_AGENT_QUERY = "(max-width: 639px)";
+const OPEN_AGENT_SELECTOR = '[data-heroui-agent][data-open="true"]';
 
 const subscribeToDismissed = (callback: () => void) => {
   window.addEventListener("storage", callback);
@@ -204,10 +206,34 @@ export function ProBanner() {
   const campaign = hasLiveDiscount ? DISCOUNT_CAMPAIGN : DEFAULT_CAMPAIGN;
   const copy = hasLiveDiscount ? DISCOUNT_PRO_COPY : DEFAULT_PRO_COPY;
 
-  const handleDismiss = () => {
+  const handleDismiss = useCallback(() => {
     setDismissed(true);
     sessionStorage.setItem(PRO_BANNER_DISMISSED_KEY, "true");
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+
+    const mobileQuery = window.matchMedia(MOBILE_AGENT_QUERY);
+    const dismissWhenAgentOverlaps = () => {
+      if (mobileQuery.matches && document.querySelector(OPEN_AGENT_SELECTOR)) handleDismiss();
+    };
+    const observer = new MutationObserver(dismissWhenAgentOverlaps);
+
+    observer.observe(document.documentElement, {
+      attributeFilter: ["data-open"],
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+    mobileQuery.addEventListener("change", dismissWhenAgentOverlaps);
+    dismissWhenAgentOverlaps();
+
+    return () => {
+      observer.disconnect();
+      mobileQuery.removeEventListener("change", dismissWhenAgentOverlaps);
+    };
+  }, [handleDismiss, visible]);
 
   return (
     <AnimatePresence>

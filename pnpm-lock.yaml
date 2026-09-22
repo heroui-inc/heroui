@@ -185,8 +185,8 @@ importers:
         specifier: 2.22.0
         version: 2.22.0(react@19.3.0)
       '@heroui/agent':
-        specifier: 1.0.0-beta.12
-        version: 1.0.0-beta.12(react@19.3.0)
+        specifier: 1.0.0-beta.13
+        version: 1.0.0-beta.13(react@19.3.0)
       '@heroui/react':
         specifier: workspace:*
         version: link:../../packages/react
@@ -1441,8 +1441,8 @@ packages:
       react:
         optional: true
 
-  '@heroui/agent@1.0.0-beta.12':
-    resolution: {integrity: sha512-EJrXbTAHWyQVoQRKgzxq2Ovt5CYzFCHqUkvLqvPWdRfOsMaqeib00fBQJt0wPmByztfGJfdjtAIS0LTA9L/hhQ==}
+  '@heroui/agent@1.0.0-beta.13':
+    resolution: {integrity: sha512-8O7MRafH8G499bqyrtFvWaLxCdsHOSJOxL3CKpx1C+wmkHTjKrKYw1SZe+geHij+rVlbASOYfS4gabi+WBoLPQ==}
     engines: {node: '>=20'}
     peerDependencies:
       react: '>=19.0.0'
@@ -9537,7 +9537,7 @@ snapshots:
     optionalDependencies:
       react: 19.3.0
 
-  '@heroui/agent@1.0.0-beta.12(react@19.3.0)':
+  '@heroui/agent@1.0.0-beta.13(react@19.3.0)':
     dependencies:
       zod: 4.3.6
     optionalDependencies:
