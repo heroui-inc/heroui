@@ -119,6 +119,32 @@
     "androidComingSoonLabel": "Android version coming soon",
     "androidComingSoon": "Android · Coming soon"
   },
+  "proBanner": {
+    "close": "Close",
+    "default": {
+      "headerTitle": "HeroUI Pro is live",
+      "headerDetail": "Components, templates & AI tooling",
+      "heroLabel": "Now available",
+      "cardTitle": "Build faster with HeroUI Pro",
+      "cardDescription": "Components, templates, and AI tooling for React and React Native. Made for teams that care about the details.",
+      "cta": "Explore Pro"
+    },
+    "discount": {
+      "headerTitle": "Launch discount is live!",
+      "headerCountdown": "{percent}% off ends in",
+      "headerCountdownCompact": "{percent}% off in",
+      "cardCountdown": "Ends in",
+      "cardTitle": "HeroUI Pro launch discount is live!",
+      "cardDescription": "More components, charts, advanced MCP & Skills, and a complete theme builder. Get your license now at a discounted price for a limited time.",
+      "cta": "Get Pro deal"
+    },
+    "units": {
+      "days": "d",
+      "hours": "h",
+      "minutes": "m",
+      "seconds": "s"
+    }
+  },
   "themes": {
     "heading": "Theme Builder",
     "metaTitle": "HeroUI Theme Builder – Customize React UI",
