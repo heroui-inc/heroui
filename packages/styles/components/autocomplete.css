@@ -203,6 +203,12 @@
 
   [data-slot="list-box-item"] {
     @apply px-2.5;
+
+    /* list-box-item.css is imported earlier and at equal specificity, so the shorthand above
+       would otherwise reset the room it reserves for the absolutely positioned indicator */
+    &:has(.list-box-item__indicator) {
+      @apply pe-7;
+    }
   }
 
   /* Virtualized rows: react-aria's Virtualizer wraps each row in an absolutely-positioned

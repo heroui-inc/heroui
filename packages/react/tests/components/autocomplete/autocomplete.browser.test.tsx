@@ -9,6 +9,17 @@ import "@/styles.css";
 /** Offset from the glyph centre that a finger routinely lands on, inside the 24px target. */
 const OFF_CENTRE = 11;
 
+/** How far the option's content box runs under its indicator, which is absolutely positioned
+ * and therefore only kept off the label by the item's inline-end padding. */
+const indicatorOverlapOf = (name: string) => {
+  const option = page.getByRole("option", {name}).element();
+  const indicator = option.querySelector('[data-slot="list-box-item-indicator"]')!;
+  const contentEnd =
+    option.getBoundingClientRect().right - parseFloat(getComputedStyle(option).paddingInlineEnd);
+
+  return contentEnd - indicator.getBoundingClientRect().left;
+};
+
 describe("Autocomplete (browser)", () => {
   describe("multiple selection with tags", () => {
     it("removes the tag on the first press landing off the glyph", async () => {
@@ -29,6 +40,16 @@ describe("Autocomplete (browser)", () => {
       // A press inside the trigger must not open the dropdown, otherwise the next press is
       // swallowed dismissing the popover instead of removing a tag.
       await expect.element(page.getByRole("listbox")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("item indicator", () => {
+    it("reserves room for the indicator so it never sits on the label", async () => {
+      await render(<AutocompleteMultipleFixture defaultOpen />);
+
+      await expect.element(page.getByRole("listbox")).toBeInTheDocument();
+
+      expect(indicatorOverlapOf("Dog")).toBeLessThanOrEqual(0);
     });
   });
 });
