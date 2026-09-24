@@ -127,7 +127,7 @@ Use the scale consistently. Inner media and nested surfaces should have a visibl
 
 ## Components
 
-- **Buttons:** Use semantic variants. `primary` is the main action, `secondary` is an alternative, `tertiary` is dismissive or low emphasis, and `danger` is destructive. Put label styling on `Button.Label` and prefer one primary action per context.
+- **Buttons:** Use semantic variants. `primary` is the main action, `secondary` is an alternative, `tertiary` is dismissive or low emphasis, `outline` is a bordered low-emphasis action, `ghost` is an unbordered low-emphasis action, `danger` is destructive, and `danger-soft` is a quieter destructive action. Put label styling on `Button.Label`, prefer one primary action per context, and reach for an existing variant instead of restyling a button.
 - **Cards and surfaces:** Use `Card`, `Surface`, and semantic surface utilities. Create hierarchy with surface levels and spacing before adding borders.
 - **Forms:** Use HeroUI Native field components so input, label, placeholder, validation, disabled, and keyboard behavior stay consistent.
 - **Status:** Use success, warning, and danger only for their semantic meanings. Pair color with text or an accessibility label.
