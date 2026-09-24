@@ -80,7 +80,7 @@ HeroUI is the modern UI library for web and mobile, built to help teams move fas
 - [Full LLM documentation](${baseUrl}/llms-full.txt)
 - [React LLM documentation](${baseUrl}/react/llms-full.txt)
 - [Native LLM documentation](${baseUrl}/native/llms-full.txt)
-- [HeroUI default theme DESIGN.md](${baseUrl}/react/DESIGN.md)
+- [HeroUI React default theme DESIGN.md](${baseUrl}/react/DESIGN.md)
 - [HeroUI Native default theme DESIGN.md](${baseUrl}/native/DESIGN.md)
 - [HeroUI OpenAPI specification](${baseUrl}/openapi.json)
 - [HeroUI Docs Agent API](${baseUrl}/api/agent)

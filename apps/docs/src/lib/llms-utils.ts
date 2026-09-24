@@ -89,7 +89,7 @@ export function generateIndexHeader(): string[] {
     ["HeroUI MCP discovery handshake", "/.well-known/mcp"],
     ["HeroUI MCP server card", "/.well-known/mcp/server-card.json"],
     ["HeroUI React MCP documentation", "/docs/react/getting-started/mcp-server"],
-    ["HeroUI default theme DESIGN.md", "/react/DESIGN.md"],
+    ["HeroUI React default theme DESIGN.md", "/react/DESIGN.md"],
     ["HeroUI Native MCP documentation", "/docs/native/getting-started/mcp-server"],
     ["HeroUI Native default theme DESIGN.md", "/native/DESIGN.md"],
     ["HeroUI CLI documentation", "/docs/react/getting-started/cli"],
