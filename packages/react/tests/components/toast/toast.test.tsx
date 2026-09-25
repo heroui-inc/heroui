@@ -654,4 +654,100 @@ describe("Toast", () => {
     await user.keyboard("{Alt>}t{/Alt}");
     expect(screen.getByRole("region")).not.toHaveFocus();
   });
+
+  it("renders a single SSR-safe action button as sibling of content", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} />);
+
+    act(() => {
+      queue.add({
+        actionProps: {children: "Undo"},
+        description: "Done",
+        title: "Saved",
+      });
+    });
+
+    const actions = screen.getAllByRole("button", {name: "Undo"});
+
+    expect(actions).toHaveLength(1);
+
+    const action = screen.getByRole("button", {name: "Undo"});
+
+    expect(action).toHaveAttribute("data-slot", "toast-action-button");
+    expect(action.className).toEqual(expect.stringContaining("toast__action"));
+
+    const content = document.querySelector('[data-slot="toast-content"]');
+
+    expect(content).not.toBeNull();
+    expect(content).not.toContainElement(action);
+    expect(action.parentElement).toHaveAttribute("data-slot", "toast");
+  });
+
+  it("calls action onPress when the action button is pressed", async () => {
+    const queue = new ToastQueue();
+    const onPress = vi.fn();
+
+    render(<Toast.Provider queue={queue} />);
+
+    act(() => {
+      queue.add({actionProps: {children: "Dismiss", onPress}, title: "Invite"});
+    });
+
+    await user.click(screen.getByRole("button", {name: "Dismiss"}));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders identical action placement regardless of matchMedia (SSR guard)", () => {
+    const matchMediaSpy = vi.spyOn(window, "matchMedia");
+
+    const mockMatchMedia = (matches: boolean) => {
+      matchMediaSpy.mockImplementation(((query: string) => ({
+        addEventListener: () => {},
+        addListener: () => {},
+        dispatchEvent: () => false,
+        matches,
+        media: query,
+        onchange: null,
+        removeEventListener: () => {},
+        removeListener: () => {},
+      })) as unknown as typeof window.matchMedia);
+    };
+
+    mockMatchMedia(true);
+
+    const mobileQueue = new ToastQueue();
+
+    const {unmount} = render(<Toast.Provider queue={mobileQueue} />);
+
+    act(() => {
+      mobileQueue.add({actionProps: {children: "Act"}, title: "A"});
+    });
+
+    expect(screen.getAllByRole("button", {name: "Act"})).toHaveLength(1);
+    expect(document.querySelector('[data-slot="toast-content"]')).not.toContainElement(
+      screen.getByRole("button", {name: "Act"}),
+    );
+
+    unmount();
+    cleanup();
+
+    mockMatchMedia(false);
+
+    const desktopQueue = new ToastQueue();
+
+    render(<Toast.Provider queue={desktopQueue} />);
+
+    act(() => {
+      desktopQueue.add({actionProps: {children: "Act"}, title: "A"});
+    });
+
+    expect(screen.getAllByRole("button", {name: "Act"})).toHaveLength(1);
+    expect(document.querySelector('[data-slot="toast-content"]')).not.toContainElement(
+      screen.getByRole("button", {name: "Act"}),
+    );
+
+    matchMediaSpy.mockRestore();
+  });
 });

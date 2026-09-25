@@ -40,6 +40,11 @@
 }
 
 /* Base */
+/* SSR-safe action placement: the action button is a single node (sibling of
+ * .toast__content). CSS grid — not JS — picks the responsive position, so
+ * server and client render identical DOM (fixes #6509 hydration mismatch).
+ * Desktop (sm+): indicator | content | action in one row.
+ * Mobile (<sm): indicator | content on row 1, action under content on row 2. */
 .toast {
   position: absolute;
   inset-inline-start: 0;
@@ -54,7 +59,10 @@
     scale(var(--toast-scale));
   height: var(--toast-height, auto);
 
-  @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 bg-surface px-4 py-3 shadow-overlay;
+  @apply pointer-events-auto grid gap-1.5 bg-surface px-4 py-3 shadow-overlay;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "indicator content action";
+  align-items: start;
 
   /* Timing tokens */
   --toast-ease: var(--ease-out-fluid);
@@ -184,11 +192,13 @@
 
 /* Content */
 .toast__content {
+  grid-area: content;
   @apply flex grow flex-col items-start self-center;
 }
 
 /* Indicator */
 .toast__indicator {
+  grid-area: indicator;
   @apply flex shrink-0 items-center justify-center p-1 text-overlay-foreground select-none;
 
   [data-slot="toast-default-icon"] {
@@ -260,9 +270,24 @@
   @apply pointer-events-none opacity-0;
 }
 
-/* Action */
+/* Action — single node, responsive via grid areas (no JS breakpoint) */
 .toast__action {
-  @apply mt-2 sm:mt-0;
+  grid-area: action;
+  @apply self-center justify-self-end;
+}
+
+@media (max-width: 639px) {
+  .toast {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "indicator content"
+      "indicator action";
+    row-gap: 0.5rem;
+  }
+
+  .toast__action {
+    @apply self-start justify-self-start;
+  }
 }
 
 /* Variants */

@@ -30,7 +30,6 @@ import {
 } from "react-aria-components/Toast";
 
 import {useMeasuredHeight} from "../../hooks/use-measured-height";
-import {useMediaQuery} from "../../hooks/use-media-query";
 import {useSafeLayoutEffect} from "../../hooks/use-safe-layout-effect";
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
@@ -574,7 +573,6 @@ const ToastProvider = <T extends object = ToastContentValue>({
   ...rest
 }: ToastProviderProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
-  const isMobile = useMediaQuery("(max-width: 768px)");
   const [toastHeights, setToastHeights] = useState<Record<string, number>>({});
 
   // Keeps the latest hotkey without re-registering the document listener.
@@ -863,18 +861,15 @@ const ToastProvider = <T extends object = ToastContentValue>({
           <ToastContent>
             {!!title && <ToastTitle>{title}</ToastTitle>}
             {!!description && <ToastDescription>{description}</ToastDescription>}
-            {isMobile && actionProps?.children ? (
-              <ToastActionButton {...actionProps}>{actionProps.children}</ToastActionButton>
-            ) : null}
           </ToastContent>
-          {!isMobile && actionProps?.children ? (
+          {actionProps?.children ? (
             <ToastActionButton {...actionProps}>{actionProps.children}</ToastActionButton>
           ) : null}
           <ToastCloseButton />
         </Toast>
       );
     },
-    [isMobile, placement, scaleFactor],
+    [placement, scaleFactor],
   );
 
   const contextValue = useMemo<ToastContext>(
