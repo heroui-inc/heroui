@@ -58,6 +58,15 @@ describe("Docs redirects", () => {
     );
   });
 
+  it.each([
+    ["/docs/native/getting-started/handbook/provider", "/docs/native/getting-started/provider"],
+    ["/docs/react/getting-started/handbook/composition", "/docs/react/getting-started/composition"],
+  ])("redirects leaked route groups from %s to %s", async (source, destination) => {
+    const redirects = await getRedirects();
+
+    expectLegacyDocsRedirect(redirects, source, destination);
+  });
+
   it("redirects leaked component MDX URLs to the current HTML page", async () => {
     const redirects = await getRedirects();
 
