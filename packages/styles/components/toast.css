@@ -43,12 +43,12 @@
 /* SSR-safe action placement: the action button is a single node (sibling of
  * .toast__content). CSS grid — not JS — picks the responsive position, so
  * server and client render identical DOM (fixes #6509 hydration mismatch).
- * Desktop (sm+, >=640px): indicator | content | action in one row.
- * Mobile (<sm, <=639px): indicator | content on row 1, action under content on row 2.
- * NOTE: previous JS used useMediaQuery("(max-width: 768px)"). Switched to sm (640px)
- * to match existing sm: rules in this file (region width, close-button). This keeps
- * action/close/region breakpoints in sync; 640-768px now uses side-action instead of
- * stacked-action. Revert to 767px here if zero visual change is preferred. */
+ * Desktop (>767px): indicator | content | action in one row.
+ * Mobile (<=767px): indicator | content on row 1, action under content on row 2.
+ * NOTE: preserves previous JS useMediaQuery("(max-width: 768px)") exactly for
+ * zero visual change. Other rules in this file use sm: (640px) for region width
+ * and close-button; action intentionally stays at 768px to avoid changing
+ * existing behavior in the 640-768px range. */
 .toast {
   position: absolute;
   inset-inline-start: 0;
@@ -280,7 +280,7 @@
   @apply self-center justify-self-end;
 }
 
-@media (max-width: 639px) {
+@media (max-width: 767px) {
   .toast {
     grid-template-columns: auto 1fr;
     grid-template-areas:
