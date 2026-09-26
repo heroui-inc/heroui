@@ -702,52 +702,54 @@ describe("Toast", () => {
   it("renders identical action placement regardless of matchMedia (SSR guard)", () => {
     const matchMediaSpy = vi.spyOn(window, "matchMedia");
 
-    const mockMatchMedia = (matches: boolean) => {
-      matchMediaSpy.mockImplementation(((query: string) => ({
-        addEventListener: () => {},
-        addListener: () => {},
-        dispatchEvent: () => false,
-        matches,
-        media: query,
-        onchange: null,
-        removeEventListener: () => {},
-        removeListener: () => {},
-      })) as unknown as typeof window.matchMedia);
-    };
+    try {
+      const mockMatchMedia = (matches: boolean) => {
+        matchMediaSpy.mockImplementation(((query: string) => ({
+          addEventListener: () => {},
+          addListener: () => {},
+          dispatchEvent: () => false,
+          matches,
+          media: query,
+          onchange: null,
+          removeEventListener: () => {},
+          removeListener: () => {},
+        })) as unknown as typeof window.matchMedia);
+      };
 
-    mockMatchMedia(true);
+      mockMatchMedia(true);
 
-    const mobileQueue = new ToastQueue();
+      const mobileQueue = new ToastQueue();
 
-    const {unmount} = render(<Toast.Provider queue={mobileQueue} />);
+      const {unmount} = render(<Toast.Provider queue={mobileQueue} />);
 
-    act(() => {
-      mobileQueue.add({actionProps: {children: "Act"}, title: "A"});
-    });
+      act(() => {
+        mobileQueue.add({actionProps: {children: "Act"}, title: "A"});
+      });
 
-    expect(screen.getAllByRole("button", {name: "Act"})).toHaveLength(1);
-    expect(document.querySelector('[data-slot="toast-content"]')).not.toContainElement(
-      screen.getByRole("button", {name: "Act"}),
-    );
+      expect(screen.getAllByRole("button", {name: "Act"})).toHaveLength(1);
+      expect(document.querySelector('[data-slot="toast-content"]')).not.toContainElement(
+        screen.getByRole("button", {name: "Act"}),
+      );
 
-    unmount();
-    cleanup();
+      unmount();
+      cleanup();
 
-    mockMatchMedia(false);
+      mockMatchMedia(false);
 
-    const desktopQueue = new ToastQueue();
+      const desktopQueue = new ToastQueue();
 
-    render(<Toast.Provider queue={desktopQueue} />);
+      render(<Toast.Provider queue={desktopQueue} />);
 
-    act(() => {
-      desktopQueue.add({actionProps: {children: "Act"}, title: "A"});
-    });
+      act(() => {
+        desktopQueue.add({actionProps: {children: "Act"}, title: "A"});
+      });
 
-    expect(screen.getAllByRole("button", {name: "Act"})).toHaveLength(1);
-    expect(document.querySelector('[data-slot="toast-content"]')).not.toContainElement(
-      screen.getByRole("button", {name: "Act"}),
-    );
-
-    matchMediaSpy.mockRestore();
+      expect(screen.getAllByRole("button", {name: "Act"})).toHaveLength(1);
+      expect(document.querySelector('[data-slot="toast-content"]')).not.toContainElement(
+        screen.getByRole("button", {name: "Act"}),
+      );
+    } finally {
+      matchMediaSpy.mockRestore();
+    }
   });
 });
