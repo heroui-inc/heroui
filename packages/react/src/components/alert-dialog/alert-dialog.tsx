@@ -21,6 +21,7 @@ import {
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
+import {useScrollbarGutter} from "../../utils/use-scrollbar-gutter";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 
@@ -58,6 +59,8 @@ const AlertDialogRoot = ({children, ...props}: AlertDialogRootProps) => {
   );
 };
 
+AlertDialogRoot.displayName = "HeroUI.AlertDialog";
+
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Trigger
  * -----------------------------------------------------------------------------------------------*/
@@ -79,6 +82,8 @@ const AlertDialogTrigger = ({children, className, ...props}: AlertDialogTriggerP
     </PressablePrimitive>
   );
 };
+
+AlertDialogTrigger.displayName = "HeroUI.AlertDialog.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Backdrop
@@ -105,10 +110,12 @@ const AlertDialogBackdrop = ({
   isDismissable = false,
   isKeyboardDismissDisabled = true,
   onClick,
+  ref,
   variant,
   ...props
 }: AlertDialogBackdropProps) => {
   const {slots: contextSlots} = use(AlertDialogContext);
+  const backdropRef = useScrollbarGutter(ref);
 
   const updatedSlots = useMemo(() => alertDialogVariants({variant}), [variant]);
 
@@ -119,6 +126,7 @@ const AlertDialogBackdrop = ({
 
   return (
     <ModalOverlayPrimitive
+      ref={backdropRef}
       className={composeTwRenderProps(className, updatedSlots?.backdrop())}
       data-slot="alert-dialog-backdrop"
       isDismissable={isDismissable}
@@ -137,6 +145,8 @@ const AlertDialogBackdrop = ({
     </ModalOverlayPrimitive>
   );
 };
+
+AlertDialogBackdrop.displayName = "HeroUI.AlertDialog.Backdrop";
 
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Container
@@ -185,6 +195,8 @@ const AlertDialogContainer = ({
   );
 };
 
+AlertDialogContainer.displayName = "HeroUI.AlertDialog.Container";
+
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Dialog
  * -----------------------------------------------------------------------------------------------*/
@@ -206,6 +218,8 @@ const AlertDialogDialog = ({children, className, ...props}: AlertDialogDialogPro
   );
 };
 
+AlertDialogDialog.displayName = "HeroUI.AlertDialog.Dialog";
+
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Header
  * -----------------------------------------------------------------------------------------------*/
@@ -224,6 +238,8 @@ const AlertDialogHeader = ({children, className, ...props}: AlertDialogHeaderPro
     </div>
   );
 };
+
+AlertDialogHeader.displayName = "HeroUI.AlertDialog.Header";
 
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Heading
@@ -245,6 +261,8 @@ const AlertDialogHeading = ({children, className, ...props}: AlertDialogHeadingP
   );
 };
 
+AlertDialogHeading.displayName = "HeroUI.AlertDialog.Heading";
+
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Body
  * -----------------------------------------------------------------------------------------------*/
@@ -264,6 +282,8 @@ const AlertDialogBody = ({children, className, ...props}: AlertDialogBodyProps) 
   );
 };
 
+AlertDialogBody.displayName = "HeroUI.AlertDialog.Body";
+
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Footer
  * -----------------------------------------------------------------------------------------------*/
@@ -282,6 +302,8 @@ const AlertDialogFooter = ({children, className, ...props}: AlertDialogFooterPro
     </div>
   );
 };
+
+AlertDialogFooter.displayName = "HeroUI.AlertDialog.Footer";
 
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Icon
@@ -331,6 +353,8 @@ const AlertDialogIcon = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+AlertDialogIcon.displayName = "HeroUI.AlertDialog.Icon";
+
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Close Trigger
  * -----------------------------------------------------------------------------------------------*/
@@ -348,6 +372,8 @@ const AlertDialogCloseTrigger = ({className, ...rest}: AlertDialogCloseTriggerPr
     />
   );
 };
+
+AlertDialogCloseTrigger.displayName = "HeroUI.AlertDialog.CloseTrigger";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

@@ -95,6 +95,8 @@ const ButtonGroupRoot = ({
   );
 };
 
+ButtonGroupRoot.displayName = "HeroUI.ButtonGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Separator
  * -----------------------------------------------------------------------------------------------*/
@@ -121,6 +123,8 @@ const ButtonGroupSeparator = <E extends keyof React.JSX.IntrinsicElements = "spa
     />
   );
 };
+
+ButtonGroupSeparator.displayName = "HeroUI.ButtonGroup.Separator";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

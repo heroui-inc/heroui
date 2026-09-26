@@ -159,4 +159,31 @@ describe("Drawer", () => {
     expect(isDrawerDragTargetOwnedBy(childHandle, childDialog)).toBe(true);
     expect(isDrawerDragTargetOwnedBy(childHandle, parentDialog)).toBe(false);
   });
+
+  describe("scrollbar gutter", () => {
+    afterEach(() => {
+      Reflect.deleteProperty(document.documentElement, "clientWidth");
+      document.documentElement.style.removeProperty("scrollbar-gutter");
+    });
+
+    it("exposes the reserved scrollbar gutter to the backdrop and content", () => {
+      // A classic scrollbar makes react-aria's scroll lock reserve the space with
+      // `scrollbar-gutter: stable` on <html>, shrinking the fixed backdrop's containing block.
+      window.innerWidth = 1024;
+      Object.defineProperty(document.documentElement, "clientWidth", {
+        configurable: true,
+        value: 1024 - 15,
+      });
+
+      renderDrawer({defaultOpen: true, placement: "right"});
+      runAllTimers();
+
+      const backdrop = document.querySelector<HTMLElement>('[data-slot="drawer-backdrop"]')!;
+      const content = document.querySelector<HTMLElement>('[data-slot="drawer-content"]')!;
+
+      expect(backdrop.style.getPropertyValue("--overlay-scrollbar-gutter")).toBe("15px");
+      // The content reads the same variable, so it has to stay inside the backdrop to inherit it.
+      expect(backdrop).toContainElement(content);
+    });
+  });
 });

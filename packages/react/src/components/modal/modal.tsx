@@ -24,6 +24,7 @@ import {
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
+import {useScrollbarGutter} from "../../utils/use-scrollbar-gutter";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
 
@@ -68,6 +69,8 @@ const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
   );
 };
 
+ModalRoot.displayName = "HeroUI.Modal";
+
 /* -------------------------------------------------------------------------------------------------
  * Modal Trigger
  * -----------------------------------------------------------------------------------------------*/
@@ -99,6 +102,8 @@ const ModalTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+ModalTrigger.displayName = "HeroUI.Modal.Trigger";
+
 /* -------------------------------------------------------------------------------------------------
  * Modal Backdrop
  * -----------------------------------------------------------------------------------------------*/
@@ -116,10 +121,12 @@ const ModalBackdrop = ({
   className,
   isDismissable = true,
   onClick,
+  ref,
   variant,
   ...props
 }: ModalBackdropProps) => {
   const {slots: contextSlots} = use(ModalContext);
+  const backdropRef = useScrollbarGutter(ref);
 
   const updatedSlots = useMemo(() => modalVariants({variant}), [variant]);
 
@@ -130,6 +137,7 @@ const ModalBackdrop = ({
 
   return (
     <ModalOverlayPrimitive
+      ref={backdropRef}
       className={composeTwRenderProps(className, updatedSlots?.backdrop())}
       data-slot="modal-backdrop"
       isDismissable={isDismissable}
@@ -147,6 +155,8 @@ const ModalBackdrop = ({
     </ModalOverlayPrimitive>
   );
 };
+
+ModalBackdrop.displayName = "HeroUI.Modal.Backdrop";
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Container
@@ -193,6 +203,8 @@ const ModalContainer = ({
   );
 };
 
+ModalContainer.displayName = "HeroUI.Modal.Container";
+
 /* -------------------------------------------------------------------------------------------------
  * Modal Dialog
  * -----------------------------------------------------------------------------------------------*/
@@ -214,6 +226,8 @@ const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
     </SurfaceContext>
   );
 };
+
+ModalDialog.displayName = "HeroUI.Modal.Dialog";
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Header
@@ -243,6 +257,8 @@ const ModalHeader = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+ModalHeader.displayName = "HeroUI.Modal.Header";
+
 /* -------------------------------------------------------------------------------------------------
  * Modal Body
  * -----------------------------------------------------------------------------------------------*/
@@ -270,6 +286,8 @@ const ModalBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
     </dom.div>
   );
 };
+
+ModalBody.displayName = "HeroUI.Modal.Body";
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Footer
@@ -299,6 +317,8 @@ const ModalFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+ModalFooter.displayName = "HeroUI.Modal.Footer";
+
 /* -------------------------------------------------------------------------------------------------
  * Modal Heading
  * -----------------------------------------------------------------------------------------------*/
@@ -318,6 +338,8 @@ const ModalHeading = ({children, className, ...props}: ModalHeadingProps) => {
     </HeadingPrimitive>
   );
 };
+
+ModalHeading.displayName = "HeroUI.Modal.Heading";
 
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Icon
@@ -347,6 +369,8 @@ const ModalIcon = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+ModalIcon.displayName = "HeroUI.Modal.Icon";
+
 /* -------------------------------------------------------------------------------------------------
  * Modal Close Trigger
  * -----------------------------------------------------------------------------------------------*/
@@ -367,6 +391,8 @@ const ModalCloseTrigger = ({className, ...rest}: ModalCloseTriggerProps) => {
     />
   );
 };
+
+ModalCloseTrigger.displayName = "HeroUI.Modal.CloseTrigger";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

@@ -85,6 +85,8 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
   );
 };
 
+TagRoot.displayName = "HeroUI.Tag";
+
 /* -------------------------------------------------------------------------------------------------
  * Tag Remove Button
  * -----------------------------------------------------------------------------------------------*/
@@ -107,6 +109,8 @@ const TagRemoveButton = ({children, className, ...restProps}: TagRemoveButtonPro
     </CloseButton>
   );
 };
+
+TagRemoveButton.displayName = "HeroUI.Tag.RemoveButton";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
