@@ -4,6 +4,7 @@ Hello!, I am very excited that you are interested in contributing with HeroUI. H
 
 - [Code of Conduct](https://github.com/heroui-inc/heroui/blob/canary/CODE_OF_CONDUCT.md)
 - [Extraction request guidelines](#pull-request-guidelines)
+- [AI-assisted contributions](#ai-assisted-contributions)
 - [Development Setup](#development-setup)
 - [Tests](#tests)
 - [Visual Changes](#visual-changes)
@@ -68,6 +69,9 @@ https://www.conventionalcommits.org/ or check out the
   - Provide a detailed description of the error in the PR. Favorite live demo.
   - Add the appropriate test coverage, if applicable.
 
+### AI-Assisted Contributions
+
+You may use AI tools to help prepare a contribution. You are responsible for everything you submit, including understanding the changes, reviewing them for correctness, and running the relevant tests. Disclose meaningful AI assistance in your pull request description, and do not submit generated changes that you have not reviewed and can explain.
 
 ### Steps to PR
 
