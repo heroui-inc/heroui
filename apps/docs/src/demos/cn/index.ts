@@ -2246,6 +2246,18 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./slider/range").then((m) => m.Range),
     file: "cn/slider/range.tsx",
   },
+  "slider-controlled": {
+    loader: () => import("./slider/controlled").then((m) => m.Controlled),
+    file: "cn/slider/controlled.tsx",
+  },
+  "slider-custom-value-formatting": {
+    loader: () => import("./slider/custom-value-formatting").then((m) => m.CustomValueFormatting),
+    file: "cn/slider/custom-value-formatting.tsx",
+  },
+  "slider-custom-output": {
+    loader: () => import("./slider/custom-output").then((m) => m.CustomOutput),
+    file: "cn/slider/custom-output.tsx",
+  },
   "slider-render-function": {
     loader: () => import("./slider/render-function").then((m) => m.RenderFunction),
     file: "cn/slider/render-function.tsx",
