@@ -949,6 +949,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./combo-box/custom-filtering").then((m) => m.CustomFiltering),
     file: "cn/combo-box/custom-filtering.tsx",
   },
+  "combo-box-custom-validation": {
+    loader: () => import("./combo-box/custom-validation").then((m) => m.CustomValidation),
+    file: "cn/combo-box/custom-validation.tsx",
+  },
   "combo-box-render-function": {
     loader: () => import("./combo-box/render-function").then((m) => m.RenderFunction),
     file: "cn/combo-box/render-function.tsx",
@@ -956,6 +960,18 @@ export const demos: Record<string, DemoItem> = {
   "combo-box-menu-trigger": {
     loader: () => import("./combo-box/menu-trigger").then((m) => m.MenuTrigger),
     file: "cn/combo-box/menu-trigger.tsx",
+  },
+  "combo-box-form-value": {
+    loader: () => import("./combo-box/form-value").then((m) => m.FormValue),
+    file: "cn/combo-box/form-value.tsx",
+  },
+  "combo-box-validation-behavior": {
+    loader: () => import("./combo-box/validation-behavior").then((m) => m.ValidationBehavior),
+    file: "cn/combo-box/validation-behavior.tsx",
+  },
+  "combo-box-read-only": {
+    loader: () => import("./combo-box/read-only").then((m) => m.ReadOnly),
+    file: "cn/combo-box/read-only.tsx",
   },
   "combo-box-multiple-selection": {
     loader: () => import("./combo-box/multiple-selection").then((m) => m.MultipleSelection),
