@@ -97,12 +97,15 @@ describe("Modal", () => {
     };
 
     afterEach(() => {
+      vi.restoreAllMocks();
       Reflect.deleteProperty(document.documentElement, "clientWidth");
       document.documentElement.style.removeProperty("scrollbar-gutter");
       document.documentElement.style.removeProperty("padding-right");
       document.documentElement.style.removeProperty("padding-left");
+      document.documentElement.style.removeProperty("background-color");
       document.body.style.removeProperty("margin-right");
       document.body.style.removeProperty("margin-left");
+      document.body.style.removeProperty("background-color");
     });
 
     const getBackdrop = () => document.querySelector<HTMLElement>('[data-slot="modal-backdrop"]')!;
@@ -115,6 +118,30 @@ describe("Modal", () => {
 
       expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("stable");
       expect(document.documentElement.style.paddingRight).toBe("");
+      expect(document.body.style.marginRight).toBe("");
+    });
+
+    it("paints the reserved gutter with the backdrop wash", () => {
+      setScrollbarWidth(15);
+      document.body.style.backgroundColor = "rgb(200, 200, 200)";
+      vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
+        fillStyle: "",
+        fillRect() {},
+        getImageData: () => ({data: new Uint8ClampedArray([9, 8, 7, 255])}),
+      } as unknown as CanvasRenderingContext2D);
+
+      render(
+        <ModalFixture
+          defaultOpen
+          onBackdropMount={(node) => {
+            node?.style.setProperty("background-color", "rgba(0, 0, 0, 0.5)");
+          }}
+        />,
+      );
+      runAllTimers();
+
+      expect(document.documentElement.style.backgroundColor).toBe("rgb(9, 8, 7)");
+      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("stable");
       expect(document.body.style.marginRight).toBe("");
     });
 
