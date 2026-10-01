@@ -85,9 +85,9 @@ describe("Modal", () => {
   describe("scrollbar gutter", () => {
     const VIEWPORT_WIDTH = 1024;
 
-    // A classic scrollbar of `scrollbarWidth` makes react-aria's scroll lock reserve the space
-    // with `scrollbar-gutter: stable` on <html>. The page lock stays; only the backdrop grows
-    // by that gap. Overlay scrollbars (width 0) leave the page untouched.
+    // A classic scrollbar of `scrollbarWidth` makes react-aria reserve `scrollbar-gutter: stable`.
+    // The lock drops that gutter so the backdrop can cover it, and keeps the width as body
+    // margin. Overlay scrollbars (width 0) leave the page untouched.
     const setScrollbarWidth = (scrollbarWidth: number) => {
       window.innerWidth = VIEWPORT_WIDTH;
       Object.defineProperty(document.documentElement, "clientWidth", {
@@ -101,18 +101,21 @@ describe("Modal", () => {
       document.documentElement.style.removeProperty("scrollbar-gutter");
       document.documentElement.style.removeProperty("padding-right");
       document.documentElement.style.removeProperty("padding-left");
+      document.body.style.removeProperty("margin-right");
+      document.body.style.removeProperty("margin-left");
     });
 
     const getBackdrop = () => document.querySelector<HTMLElement>('[data-slot="modal-backdrop"]')!;
 
-    it("widens the backdrop over the reserved gutter without shifting the page", () => {
+    it("removes the reserved scrollbar and keeps the page width", () => {
       setScrollbarWidth(15);
 
       renderModal({defaultOpen: true});
       runAllTimers();
 
-      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("stable");
+      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("auto");
       expect(document.documentElement.style.paddingRight).toBe("");
+      expect(document.body.style.marginRight).toBe("15px");
       expect(getBackdrop().style.getPropertyValue("--overlay-scrollbar-gutter")).toBe("15px");
     });
 
