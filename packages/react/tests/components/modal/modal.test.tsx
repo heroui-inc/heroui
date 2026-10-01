@@ -85,9 +85,9 @@ describe("Modal", () => {
   describe("scrollbar gutter", () => {
     const VIEWPORT_WIDTH = 1024;
 
-    // A classic scrollbar of `scrollbarWidth` makes react-aria reserve `scrollbar-gutter: stable`.
-    // The lock drops that gutter so the backdrop can cover it, and keeps the width as body
-    // margin. Overlay scrollbars (width 0) leave the page untouched.
+    // A classic scrollbar makes react-aria reserve `scrollbar-gutter: stable`. That
+    // reservation is what keeps the page from shifting, so the overlay must not clear it
+    // or pad the document. Overlay scrollbars (width 0) leave the page untouched.
     const setScrollbarWidth = (scrollbarWidth: number) => {
       window.innerWidth = VIEWPORT_WIDTH;
       Object.defineProperty(document.documentElement, "clientWidth", {
@@ -107,45 +107,25 @@ describe("Modal", () => {
 
     const getBackdrop = () => document.querySelector<HTMLElement>('[data-slot="modal-backdrop"]')!;
 
-    it("removes the reserved scrollbar and keeps the page width", () => {
+    it("keeps the reserved gutter so the page does not shift", () => {
       setScrollbarWidth(15);
 
       renderModal({defaultOpen: true});
       runAllTimers();
 
-      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("auto");
+      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("stable");
       expect(document.documentElement.style.paddingRight).toBe("");
-      expect(document.body.style.marginRight).toBe("15px");
-      expect(getBackdrop().style.getPropertyValue("--overlay-scrollbar-gutter")).toBe("15px");
+      expect(document.body.style.marginRight).toBe("");
     });
 
-    it("removes the gutter when innerWidth already matches the layout width", () => {
-      // Windows Chrome reports innerWidth === clientWidth while scrollbar-gutter is stable.
-      // Clearing it gives the scrollbar width back to clientWidth.
-      window.innerWidth = 1009;
-      document.documentElement.style.scrollbarGutter = "stable";
-      Object.defineProperty(document.documentElement, "clientWidth", {
-        configurable: true,
-        get() {
-          return document.documentElement.style.scrollbarGutter === "auto" ? 1024 : 1009;
-        },
-      });
-
-      renderModal({defaultOpen: true});
-      runAllTimers();
-
-      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("auto");
-      expect(document.body.style.marginRight).toBe("15px");
-      expect(getBackdrop().style.getPropertyValue("--overlay-scrollbar-gutter")).toBe("15px");
-    });
-
-    it("leaves the backdrop untouched when no gutter is reserved", () => {
+    it("does not inset the page when no gutter is reserved", () => {
       setScrollbarWidth(0);
 
       renderModal({defaultOpen: true});
       runAllTimers();
 
-      expect(getBackdrop().style.getPropertyValue("--overlay-scrollbar-gutter")).toBe("");
+      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("");
+      expect(document.body.style.marginRight).toBe("");
     });
 
     it("forwards the backdrop ref", () => {
