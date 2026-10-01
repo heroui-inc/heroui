@@ -21,6 +21,7 @@ import {
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
+import {useScrollbarGutter} from "../../utils/use-scrollbar-gutter";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 
@@ -114,6 +115,7 @@ const AlertDialogBackdrop = ({
   ...props
 }: AlertDialogBackdropProps) => {
   const {slots: contextSlots} = use(AlertDialogContext);
+  const backdropRef = useScrollbarGutter(ref);
 
   const updatedSlots = useMemo(() => alertDialogVariants({variant}), [variant]);
 
@@ -124,7 +126,7 @@ const AlertDialogBackdrop = ({
 
   return (
     <ModalOverlayPrimitive
-      ref={ref}
+      ref={backdropRef}
       className={composeTwRenderProps(className, updatedSlots?.backdrop())}
       data-slot="alert-dialog-backdrop"
       isDismissable={isDismissable}
