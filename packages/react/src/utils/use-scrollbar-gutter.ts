@@ -39,7 +39,27 @@ const readPageColor = (body: HTMLElement) => {
   return isClear(token) ? null : token;
 };
 
-const flattenWash = (base: string, wash: string) => {
+/**
+ * `fillStyle` silently keeps its old value when a color string is not supported, which
+ * would composite against the wrong base. Only paint colors the context accepted. Two
+ * sentinels, because the color itself may be the first one.
+ */
+const fill = (context: CanvasRenderingContext2D, color: string) => {
+  const accepted = ["#010203", "#040506"].some((sentinel) => {
+    context.fillStyle = sentinel;
+    context.fillStyle = color;
+
+    return context.fillStyle !== sentinel;
+  });
+
+  if (!accepted) return false;
+
+  context.fillRect(0, 0, 1, 1);
+
+  return true;
+};
+
+const flattenWash = (document: Document, base: string, wash: string) => {
   if (isClear(wash)) return base;
 
   const canvas = document.createElement("canvas");
@@ -50,11 +70,7 @@ const flattenWash = (base: string, wash: string) => {
   const context = canvas.getContext("2d");
 
   if (!context) return null;
-
-  context.fillStyle = base;
-  context.fillRect(0, 0, 1, 1);
-  context.fillStyle = wash;
-  context.fillRect(0, 0, 1, 1);
+  if (!fill(context, base) || !fill(context, wash)) return null;
 
   const [red, green, blue] = context.getImageData(0, 0, 1, 1).data;
 
@@ -118,7 +134,7 @@ const restoreGutter = (root: HTMLElement) => {
 };
 
 const syncGutterColor = (root: HTMLElement, body: HTMLElement) => {
-  const backdrop = openBackdrops[openBackdrops.length - 1];
+  const backdrop = openBackdrops.at(-1);
 
   if (!backdrop) {
     restoreGutter(root);
@@ -130,7 +146,7 @@ const syncGutterColor = (root: HTMLElement, body: HTMLElement) => {
 
   if (!base) return;
 
-  const color = flattenWash(base, getComputedStyle(backdrop).backgroundColor);
+  const color = flattenWash(body.ownerDocument, base, getComputedStyle(backdrop).backgroundColor);
 
   if (!color) return;
 
@@ -141,18 +157,23 @@ const syncGutterColor = (root: HTMLElement, body: HTMLElement) => {
 
 /**
  * React Aria keeps the backdrop mounted through its exit animation, so the unmount
- * cleanup lands after the fade. Fade the gutter back as soon as the exit starts.
+ * cleanup lands after the fade. Fade the gutter back as soon as the exit starts, and
+ * fade it in again if the overlay is reopened mid-exit — the element is reused, so the
+ * mount effect does not run a second time.
  */
 const watchExit = (backdrop: HTMLElement, root: HTMLElement, body: HTMLElement) => {
   if (typeof MutationObserver === "undefined") return () => {};
 
   const observer = new MutationObserver(() => {
-    if (backdrop.getAttribute("data-exiting") !== "true") return;
+    if (backdrop.getAttribute("data-exiting") === "true") {
+      const base = readPageColor(body);
 
-    const base = readPageColor(body);
+      if (base) fadeGutterTo(root, root.style.backgroundColor || base, base, backdrop);
 
-    if (base) fadeGutterTo(root, root.style.backgroundColor || base, base, backdrop);
-    observer.disconnect();
+      return;
+    }
+
+    if (openBackdrops.at(-1) === backdrop) syncGutterColor(root, body);
   });
 
   observer.observe(backdrop, {attributeFilter: ["data-exiting"]});
