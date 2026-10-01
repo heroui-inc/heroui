@@ -48,11 +48,10 @@
   @apply h-(--visual-viewport-height);
 
   /**
-   * React Aria keeps `scrollbar-gutter: stable` on `<html>` so the page does not shift.
-   * That also shrinks this fixed box. `--overlay-scrollbar-gutter` widens only the overlay
-   * over the gutter; the padding keeps the dialog centered on the content area.
+   * While open, the scrollbar is removed and the page keeps its width via body margin.
+   * This box fills the viewport, including where the scrollbar was. The padding keeps
+   * the dialog centered on the content area.
    */
-  width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
   padding-inline-end: var(--overlay-scrollbar-gutter, 0px);
 
   /* Entering animation */

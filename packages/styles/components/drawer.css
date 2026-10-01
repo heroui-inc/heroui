@@ -44,13 +44,6 @@
 .drawer__backdrop {
   @apply fixed inset-0 z-(--z-index-overlay);
   @apply h-(--visual-viewport-height);
-
-  /**
-   * React Aria keeps `scrollbar-gutter: stable` on `<html>` so the page does not shift.
-   * That also shrinks this fixed box. `--overlay-scrollbar-gutter` widens only the overlay
-   * over the gutter.
-   */
-  width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
   opacity: 1;
   transition: opacity 250ms cubic-bezier(0.32, 0.72, 0, 1);
 
@@ -102,10 +95,6 @@
   @apply pointer-events-none;
   @apply fixed inset-0 z-(--z-index-overlay) flex;
   @apply h-(--visual-viewport-height) min-w-0;
-
-  /* Spans the same gutter as the backdrop so an edge-anchored panel stays flush.
-     Inherits `--overlay-scrollbar-gutter` from `.drawer__backdrop`. */
-  width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
 }
 
 /**
