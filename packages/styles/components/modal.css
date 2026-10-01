@@ -47,8 +47,9 @@
   @apply h-(--visual-viewport-height);
 
   /**
-   * `0px` unless a scrollbar gutter is still reserved. Modal.Backdrop releases
-   * `scrollbar-gutter: stable` while open, so this stays at the full viewport.
+   * React Aria keeps `scrollbar-gutter: stable` on `<html>` so the page does not shift.
+   * That also shrinks this fixed box. `--overlay-scrollbar-gutter` widens only the overlay
+   * over the gutter; the padding keeps the dialog centered on the content area.
    */
   width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
   padding-inline-end: var(--overlay-scrollbar-gutter, 0px);

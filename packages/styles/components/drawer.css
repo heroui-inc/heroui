@@ -46,8 +46,9 @@
   @apply h-(--visual-viewport-height);
 
   /**
-   * `0px` unless a scrollbar gutter is still reserved. Drawer.Backdrop releases
-   * `scrollbar-gutter: stable` while open, so this stays at the full viewport.
+   * React Aria keeps `scrollbar-gutter: stable` on `<html>` so the page does not shift.
+   * That also shrinks this fixed box. `--overlay-scrollbar-gutter` widens only the overlay
+   * over the gutter.
    */
   width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
   opacity: 1;
@@ -102,7 +103,8 @@
   @apply fixed inset-0 z-(--z-index-overlay) flex;
   @apply h-(--visual-viewport-height) min-w-0;
 
-  /* Matches the backdrop when a gutter is still reserved. See `.drawer__backdrop`. */
+  /* Spans the same gutter as the backdrop so an edge-anchored panel stays flush.
+     Inherits `--overlay-scrollbar-gutter` from `.drawer__backdrop`. */
   width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
 }
 

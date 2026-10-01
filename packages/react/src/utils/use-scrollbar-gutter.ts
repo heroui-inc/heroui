@@ -9,36 +9,22 @@ const SCROLLBAR_GUTTER_VAR = "--overlay-scrollbar-gutter";
 
 /**
  * React Aria's scroll lock reserves a classic scrollbar with `scrollbar-gutter: stable`
- * on `<html>`. That shrinks the containing block of fixed overlays, and Chromium clips
- * them to the shrunken box, so a wider backdrop still leaves the gutter undimmed on
- * Windows. Docs Search does not: Radix removes the scrollbar and offsets the page.
+ * on `<html>`. That shrinks the containing block of fixed overlays, so a `100%` backdrop
+ * stops short of the viewport and leaves the gutter undimmed.
  *
- * While an overlay is open, release that gutter and reserve the same width as padding
- * on the scrollbar's side. In-flow content keeps its width, and `inset: 0` covers the
- * viewport. Overlay scrollbars never take that path (`scrollbar-gutter` stays `auto`).
- *
- * Padding is refcounted so stacked overlays restore it once. `scrollbar-gutter` itself
- * is left for React Aria to restore when the last scroll lock ends.
+ * Replacing the gutter with padding avoids the strip, but it also grows the layout
+ * viewport. Fixed and `100vw` page chrome then jump by the scrollbar width. Leave the
+ * gutter in place and only widen the overlay by `--overlay-scrollbar-gutter`.
+ * `padding-inline-end` on the backdrop keeps the dialog centered on the content area.
+ * Overlay scrollbars never reserve a gutter, so the variable stays unset.
  */
-let gutterHolders = 0;
-let restoreGutterPadding: (() => void) | null = null;
+const readReservedGutter = (element: HTMLElement, view: Window, root: HTMLElement) => {
+  const width = element.getBoundingClientRect().width;
 
-const releaseReservedGutter = (root: HTMLElement, backdrop: HTMLElement, gutter: number) => {
-  const isRTL = getComputedStyle(root).direction === "rtl";
-  const paddingProp = isRTL ? "paddingLeft" : "paddingRight";
-  const previousPadding = root.style[paddingProp];
-  const currentPadding = Number.parseFloat(getComputedStyle(root)[paddingProp]) || 0;
+  // jsdom does not lay out, so a zero rect falls back to the viewport gap the tests fake.
+  if (width > 0) return Math.max(Math.round(view.innerWidth - width), 0);
 
-  root.style.scrollbarGutter = "auto";
-  backdrop.style.removeProperty(SCROLLBAR_GUTTER_VAR);
-
-  if (gutter > 0) {
-    root.style[paddingProp] = `${currentPadding + gutter}px`;
-  }
-
-  return () => {
-    root.style[paddingProp] = previousPadding;
-  };
+  return Math.max(view.innerWidth - root.clientWidth, 0);
 };
 
 const useScrollbarGutter = <T extends HTMLElement>(forwardedRef?: Ref<T>) => {
@@ -57,25 +43,12 @@ const useScrollbarGutter = <T extends HTMLElement>(forwardedRef?: Ref<T>) => {
     const reserved =
       documentElement.style.scrollbarGutter ||
       defaultView.getComputedStyle(documentElement).scrollbarGutter;
-    const gutter = Math.max(defaultView.innerWidth - documentElement.clientWidth, 0);
-    const gutterActive = Boolean(reserved && reserved !== "auto");
 
-    if (!gutterActive && gutterHolders === 0) return;
+    if (!reserved || reserved === "auto") return;
 
-    gutterHolders += 1;
+    const gutter = readReservedGutter(element, defaultView, documentElement);
 
-    if (gutterHolders === 1 && gutterActive) {
-      restoreGutterPadding = releaseReservedGutter(documentElement, element, gutter);
-    }
-
-    return () => {
-      gutterHolders -= 1;
-
-      if (gutterHolders === 0) {
-        restoreGutterPadding?.();
-        restoreGutterPadding = null;
-      }
-    };
+    if (gutter > 0) element.style.setProperty(SCROLLBAR_GUTTER_VAR, `${gutter}px`);
   }, [element]);
 
   return useMemo(() => mergeRefs(forwardedRef, ref), [forwardedRef, ref]);
