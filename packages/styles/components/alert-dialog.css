@@ -48,10 +48,8 @@
   @apply h-(--visual-viewport-height);
 
   /**
-   * React Aria's scroll lock sets `scrollbar-gutter: stable` on <html>, which shrinks the
-   * containing block of fixed elements — `100%` and `100vw` both stop short of the reserved
-   * gutter and leave it undimmed. `--overlay-scrollbar-gutter` is set by AlertDialog.Backdrop and
-   * is `0px` unless a gutter is reserved; the padding keeps the dialog centered on the content area.
+   * `0px` unless a scrollbar gutter is still reserved. AlertDialog.Backdrop releases
+   * `scrollbar-gutter: stable` while open, so this stays at the full viewport.
    */
   width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
   padding-inline-end: var(--overlay-scrollbar-gutter, 0px);

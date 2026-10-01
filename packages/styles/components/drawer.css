@@ -46,10 +46,8 @@
   @apply h-(--visual-viewport-height);
 
   /**
-   * React Aria's scroll lock sets `scrollbar-gutter: stable` on <html>, which shrinks the
-   * containing block of fixed elements — `100%` and `100vw` both stop short of the reserved
-   * gutter and leave it undimmed. `--overlay-scrollbar-gutter` is set by Drawer.Backdrop and is
-   * `0px` unless a gutter is reserved.
+   * `0px` unless a scrollbar gutter is still reserved. Drawer.Backdrop releases
+   * `scrollbar-gutter: stable` while open, so this stays at the full viewport.
    */
   width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
   opacity: 1;
@@ -104,8 +102,7 @@
   @apply fixed inset-0 z-(--z-index-overlay) flex;
   @apply h-(--visual-viewport-height) min-w-0;
 
-  /* Spans the reserved scrollbar gutter too, so an edge-anchored panel stays flush with the
-     viewport edge instead of floating beside a dimmed strip. See `.drawer__backdrop`. */
+  /* Matches the backdrop when a gutter is still reserved. See `.drawer__backdrop`. */
   width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
 }
 
