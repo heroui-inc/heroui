@@ -44,3 +44,26 @@
 ::view-transition {
   pointer-events: none;
 }
+
+/*
+ * React Aria reserves a classic scrollbar with `scrollbar-gutter: stable`. That column
+ * sits outside every fixed backdrop, so it stays a blank strip. The layout viewport is
+ * left alone — clearing the gutter is what shifts the page. `body` covers the layout
+ * viewport, so this background only shows in the gutter: the same wash as the backdrop
+ * over the page, or the page color when the backdrop is transparent.
+ */
+html:has(.modal__backdrop--transparent),
+html:has(.alert-dialog__backdrop--transparent),
+html:has(.drawer__backdrop--transparent) {
+  background-color: var(--background);
+}
+
+html:has(.modal__backdrop--opaque),
+html:has(.modal__backdrop--blur),
+html:has(.alert-dialog__backdrop--opaque),
+html:has(.alert-dialog__backdrop--blur),
+html:has(.drawer__backdrop--opaque),
+html:has(.drawer__backdrop--blur) {
+  background-color: var(--background);
+  background-image: linear-gradient(var(--color-backdrop), var(--color-backdrop));
+}

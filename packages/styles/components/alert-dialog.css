@@ -47,13 +47,6 @@
   @apply flex flex-row items-center justify-center;
   @apply h-(--visual-viewport-height);
 
-  /**
-   * While open, the scrollbar is removed and the page keeps its width via body margin.
-   * This box fills the viewport, including where the scrollbar was. The padding keeps
-   * the dialog centered on the content area.
-   */
-  padding-inline-end: var(--overlay-scrollbar-gutter, 0px);
-
   /* Entering animation */
   &[data-entering="true"] {
     @apply animate-in duration-150 ease-out fade-in-0;

@@ -4,7 +4,6 @@ export * from "./compose";
 export * from "./collection-prop-injection";
 export * from "./field-slots-gate";
 export * from "./use-has-text-slot";
-export * from "./use-scrollbar-gutter";
 export * from "./logger";
 export * from "./dom";
 export * from "./variants";
