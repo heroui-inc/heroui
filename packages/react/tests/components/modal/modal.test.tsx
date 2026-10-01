@@ -119,6 +119,26 @@ describe("Modal", () => {
       expect(getBackdrop().style.getPropertyValue("--overlay-scrollbar-gutter")).toBe("15px");
     });
 
+    it("removes the gutter when innerWidth already matches the layout width", () => {
+      // Windows Chrome reports innerWidth === clientWidth while scrollbar-gutter is stable.
+      // Clearing it gives the scrollbar width back to clientWidth.
+      window.innerWidth = 1009;
+      document.documentElement.style.scrollbarGutter = "stable";
+      Object.defineProperty(document.documentElement, "clientWidth", {
+        configurable: true,
+        get() {
+          return document.documentElement.style.scrollbarGutter === "auto" ? 1024 : 1009;
+        },
+      });
+
+      renderModal({defaultOpen: true});
+      runAllTimers();
+
+      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("auto");
+      expect(document.body.style.marginRight).toBe("15px");
+      expect(getBackdrop().style.getPropertyValue("--overlay-scrollbar-gutter")).toBe("15px");
+    });
+
     it("leaves the backdrop untouched when no gutter is reserved", () => {
       setScrollbarWidth(0);
 
