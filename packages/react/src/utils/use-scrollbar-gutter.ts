@@ -21,10 +21,15 @@ let gutterHolders = 0;
 let reservedGutter = 0;
 let restorePage: (() => void) | null = null;
 
-const pinFixedElements = (body: HTMLElement, gap: number, isRTL: boolean) => {
-  const root = body.ownerDocument.documentElement;
-  const contentEdge = root.clientWidth;
-  const restores: Array<() => void> = [];
+type FixedPin = {
+  node: HTMLElement;
+  width: number | null;
+  side: "left" | "right" | null;
+  inset: number;
+};
+
+const collectFixedElements = (body: HTMLElement, contentEdge: number, isRTL: boolean) => {
+  const pins: FixedPin[] = [];
 
   for (const node of body.querySelectorAll("*")) {
     if (!(node instanceof HTMLElement) || node.closest(OVERLAY_SELECTOR)) continue;
@@ -37,17 +42,10 @@ const pinFixedElements = (body: HTMLElement, gap: number, isRTL: boolean) => {
 
     if (rect.width <= 0) continue;
 
-    const spansContent = rect.left <= 1 && rect.right >= contentEdge - 1;
-
     // `left` + `width: 100%` ignores `right`, so pin the used width. Other right-anchored
     // boxes keep their distance from the scrollbar edge.
-    if (spansContent) {
-      const previousWidth = node.style.width;
-
-      node.style.width = `${Math.round(rect.width)}px`;
-      restores.push(() => {
-        node.style.width = previousWidth;
-      });
+    if (rect.left <= 1 && rect.right >= contentEdge - 1) {
+      pins.push({inset: 0, node, side: null, width: Math.round(rect.width)});
       continue;
     }
 
@@ -60,11 +58,33 @@ const pinFixedElements = (body: HTMLElement, gap: number, isRTL: boolean) => {
 
     if (Math.abs(fromEdge - specified) > 1) continue;
 
-    const previousSide = node.style[side];
+    pins.push({inset: specified, node, side, width: null});
+  }
 
-    node.style[side] = `${specified + gap}px`;
+  return pins;
+};
+
+const applyFixedPins = (pins: FixedPin[], gap: number) => {
+  const restores: Array<() => void> = [];
+
+  for (const pin of pins) {
+    if (pin.width != null) {
+      const previousWidth = pin.node.style.width;
+
+      pin.node.style.width = `${pin.width}px`;
+      restores.push(() => {
+        pin.node.style.width = previousWidth;
+      });
+      continue;
+    }
+
+    if (!pin.side) continue;
+
+    const previousSide = pin.node.style[pin.side];
+
+    pin.node.style[pin.side] = `${pin.inset + gap}px`;
     restores.push(() => {
-      node.style[side] = previousSide;
+      pin.node.style[pin.side!] = previousSide;
     });
   }
 
@@ -73,20 +93,31 @@ const pinFixedElements = (body: HTMLElement, gap: number, isRTL: boolean) => {
   };
 };
 
-const holdPageGutter = (root: HTMLElement, body: HTMLElement, gap: number) => {
+const holdPageGutter = (root: HTMLElement, body: HTMLElement, view: Window) => {
   const isRTL = getComputedStyle(root).direction === "rtl";
   const marginProp = isRTL ? "marginLeft" : "marginRight";
   const previousMargin = body.style[marginProp];
   const currentMargin = Number.parseFloat(getComputedStyle(body)[marginProp]) || 0;
-  const restoreFixed = pinFixedElements(body, gap, isRTL);
+  const before = root.clientWidth;
+  // `innerWidth` often matches `clientWidth` once `scrollbar-gutter: stable` is set, so the
+  // reserved column is invisible to that subtraction. Clearing the gutter grows `clientWidth`
+  // by the real amount. The subtraction remains for environments that fake `clientWidth`.
+  const reservedGap = Math.max(view.innerWidth - before, 0);
+  const pins = collectFixedElements(body, before, isRTL);
 
   root.style.scrollbarGutter = "auto";
 
+  const gap = Math.max(root.clientWidth - before, reservedGap);
+  const restoreFixed = gap > 0 ? applyFixedPins(pins, gap) : () => {};
+
   if (gap > 0) body.style[marginProp] = `${currentMargin + gap}px`;
 
-  return () => {
-    restoreFixed();
-    body.style[marginProp] = previousMargin;
+  return {
+    gap,
+    restore: () => {
+      restoreFixed();
+      body.style[marginProp] = previousMargin;
+    },
   };
 };
 
@@ -110,20 +141,18 @@ const useScrollbarGutter = <T extends HTMLElement>(forwardedRef?: Ref<T>) => {
 
     if (!gutterActive && gutterHolders === 0) return;
 
-    const gutter = gutterActive
-      ? Math.max(defaultView.innerWidth - documentElement.clientWidth, 0)
-      : reservedGutter;
+    if (gutterHolders === 0) {
+      const held = holdPageGutter(documentElement, body, defaultView);
 
-    if (gutter <= 0) return;
+      reservedGutter = held.gap;
+      restorePage = held.restore;
+    }
 
     gutterHolders += 1;
 
-    if (gutterHolders === 1) {
-      reservedGutter = gutter;
-      restorePage = holdPageGutter(documentElement, body, gutter);
+    if (reservedGutter > 0) {
+      element.style.setProperty(SCROLLBAR_GUTTER_VAR, `${reservedGutter}px`);
     }
-
-    element.style.setProperty(SCROLLBAR_GUTTER_VAR, `${gutter}px`);
 
     return () => {
       element.style.removeProperty(SCROLLBAR_GUTTER_VAR);
