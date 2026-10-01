@@ -44,12 +44,6 @@
 .drawer__backdrop {
   @apply fixed inset-0 z-(--z-index-overlay);
   @apply h-(--visual-viewport-height);
-
-  /**
-   * `0px` unless a scrollbar gutter is still reserved. Drawer.Backdrop releases
-   * `scrollbar-gutter: stable` while open, so this stays at the full viewport.
-   */
-  width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
   opacity: 1;
   transition: opacity 250ms cubic-bezier(0.32, 0.72, 0, 1);
 
@@ -101,9 +95,6 @@
   @apply pointer-events-none;
   @apply fixed inset-0 z-(--z-index-overlay) flex;
   @apply h-(--visual-viewport-height) min-w-0;
-
-  /* Matches the backdrop when a gutter is still reserved. See `.drawer__backdrop`. */
-  width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
 }
 
 /**

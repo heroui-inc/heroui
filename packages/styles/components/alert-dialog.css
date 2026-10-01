@@ -47,13 +47,6 @@
   @apply flex flex-row items-center justify-center;
   @apply h-(--visual-viewport-height);
 
-  /**
-   * `0px` unless a scrollbar gutter is still reserved. AlertDialog.Backdrop releases
-   * `scrollbar-gutter: stable` while open, so this stays at the full viewport.
-   */
-  width: calc(100% + var(--overlay-scrollbar-gutter, 0px));
-  padding-inline-end: var(--overlay-scrollbar-gutter, 0px);
-
   /* Entering animation */
   &[data-entering="true"] {
     @apply animate-in duration-150 ease-out fade-in-0;
