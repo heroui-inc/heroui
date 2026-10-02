@@ -77,6 +77,10 @@ export default () => (
 
 <ComponentPreview name="modal-custom-backdrop" />
 
+在 Windows 等使用经典滚动条的平台上，模态框打开时页面会保留一列滚动条空间，而该区域只能显示纯色。
+若遮罩使用纯背景色，该颜色会自动匹配。当遮罩绘制渐变或图片时，请设置 `--backdrop-gutter-color`；
+设为 `none` 则保持该区域为页面背景色。
+
 ### 关闭行为
 
 <ComponentPreview name="modal-dismiss-behavior" />
@@ -145,6 +149,11 @@ Modal 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 - `.modal__backdrop--opaque` — 不透明有色遮罩（默认）
 - `.modal__backdrop--blur` — 带玻璃效果的模糊遮罩
 - `.modal__backdrop--transparent` — 透明遮罩（无叠加层）
+
+#### 自定义属性 [!toc]
+
+- `--backdrop-gutter-color` — 模态框打开时为滚动条保留区域的颜色。默认根据遮罩的背景色推断；
+  当背景为渐变或图片时请在遮罩上设置该属性，设为 `none` 则保持为页面背景色。
 
 #### 滚动变体 [!toc]
 - `.modal__container--scroll-outside` — 允许整个 Modal 滚动
