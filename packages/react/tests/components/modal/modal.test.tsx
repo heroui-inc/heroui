@@ -121,28 +121,78 @@ describe("Modal", () => {
       expect(document.body.style.marginRight).toBe("");
     });
 
-    it("paints the reserved gutter with the backdrop wash", () => {
-      setScrollbarWidth(15);
-      document.body.style.backgroundColor = "rgb(200, 200, 200)";
-      vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
+    // Records the colors composited onto the 1x1 canvas, so the wash the hook picked is
+    // observable. jsdom has no 2d context of its own.
+    const trackGutterFills = () => {
+      const fills: string[] = [];
+      const context = {
         fillStyle: "",
-        fillRect() {},
+        fillRect: () => fills.push(context.fillStyle),
         getImageData: () => ({data: new Uint8ClampedArray([9, 8, 7, 255])}),
-      } as unknown as CanvasRenderingContext2D);
+      };
 
+      vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(
+        context as unknown as CanvasRenderingContext2D,
+      );
+
+      return fills;
+    };
+
+    const renderBackdropWithStyle = (css: string) =>
       render(
         <ModalFixture
           defaultOpen
           onBackdropMount={(node) => {
-            node?.style.setProperty("background-color", "rgba(0, 0, 0, 0.5)");
+            if (node) node.style.cssText = css;
           }}
         />,
       );
+
+    it("paints the reserved gutter with the backdrop wash", () => {
+      setScrollbarWidth(15);
+      document.body.style.backgroundColor = "rgb(200, 200, 200)";
+
+      const fills = trackGutterFills();
+
+      renderBackdropWithStyle("background-color: rgba(0, 0, 0, 0.5)");
       runAllTimers();
 
+      expect(fills).toEqual(["rgb(200, 200, 200)", "rgba(0, 0, 0, 0.5)"]);
       expect(document.documentElement.style.backgroundColor).toBe("rgb(9, 8, 7)");
       expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("stable");
       expect(document.body.style.marginRight).toBe("");
+    });
+
+    it("prefers an explicit gutter color over the backdrop background", () => {
+      // A gradient or image backdrop has no single background color to infer from.
+      setScrollbarWidth(15);
+      document.body.style.backgroundColor = "rgb(200, 200, 200)";
+
+      const fills = trackGutterFills();
+
+      renderBackdropWithStyle(
+        "background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0));" +
+          "--backdrop-gutter-color: rgba(10, 20, 30, 0.7)",
+      );
+      runAllTimers();
+
+      expect(fills).toEqual(["rgb(200, 200, 200)", "rgba(10, 20, 30, 0.7)"]);
+      expect(document.documentElement.style.backgroundColor).toBe("rgb(9, 8, 7)");
+    });
+
+    it("leaves the gutter alone when the backdrop opts out", () => {
+      setScrollbarWidth(15);
+      document.body.style.backgroundColor = "rgb(200, 200, 200)";
+
+      const fills = trackGutterFills();
+
+      renderBackdropWithStyle(
+        "background-color: rgba(0, 0, 0, 0.5); --backdrop-gutter-color: none",
+      );
+      runAllTimers();
+
+      expect(fills).toEqual([]);
+      expect(document.documentElement.style.backgroundColor).toBe("");
     });
 
     it("does not inset the page when no gutter is reserved", () => {
