@@ -3,18 +3,13 @@ import {Modal} from "@/components/modal";
 
 export type ModalFixtureProps = {
   defaultOpen?: boolean;
-  onBackdropMount?: (node: HTMLDivElement | null) => void;
   onOpenChange?: (open: boolean) => void;
 };
 
-export const ModalFixture = ({
-  defaultOpen,
-  onBackdropMount,
-  onOpenChange,
-}: ModalFixtureProps = {}) => (
-  <Modal defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
+export const ModalFixture = (props: ModalFixtureProps = {}) => (
+  <Modal defaultOpen={props.defaultOpen} onOpenChange={props.onOpenChange}>
     <Button>Open modal</Button>
-    <Modal.Backdrop ref={onBackdropMount}>
+    <Modal.Backdrop>
       <Modal.Container>
         <Modal.Dialog>
           <Modal.CloseTrigger />

@@ -44,7 +44,7 @@
 .modal__backdrop {
   @apply fixed inset-0 z-(--z-index-overlay);
   @apply flex flex-row items-center justify-center;
-  @apply h-(--visual-viewport-height);
+  @apply h-(--visual-viewport-height) w-full;
 
   /* Entering animation */
   &[data-entering="true"] {
