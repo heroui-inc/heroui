@@ -14,7 +14,13 @@ import {useCallback, useMemo, useState} from "react";
  *
  * The color is transitioned with the backdrop's own duration and easing, otherwise the
  * gutter snaps to the wash a frame before the backdrop starts fading in.
+ *
+ * Only a flat color can reach the gutter, so a backdrop painted with a gradient or an
+ * image has nothing to infer from. Those set `--backdrop-gutter-color` to pick the color
+ * themselves, or `none` to leave the gutter alone.
  */
+const GUTTER_COLOR_VAR = "--backdrop-gutter-color";
+
 let openBackdrops: HTMLElement[] = [];
 let previousBackgroundColor: string | null = null;
 let previousTransition: string | null = null;
@@ -75,6 +81,20 @@ const flattenWash = (document: Document, base: string, wash: string) => {
   const [red, green, blue] = context.getImageData(0, 0, 1, 1).data;
 
   return `rgb(${red}, ${green}, ${blue})`;
+};
+
+/**
+ * The color the gutter should end up showing, or `null` to leave it as the page color.
+ * `background-color` covers plain and translucent backdrops; anything painted with a
+ * gradient or an image has to name its own color.
+ */
+const readWash = (backdrop: HTMLElement) => {
+  const computed = getComputedStyle(backdrop);
+  const override = computed.getPropertyValue(GUTTER_COLOR_VAR).trim();
+
+  if (override === "none") return null;
+
+  return override || computed.backgroundColor;
 };
 
 /**
@@ -142,11 +162,20 @@ const syncGutterColor = (root: HTMLElement, body: HTMLElement) => {
     return;
   }
 
+  const wash = readWash(backdrop);
+
+  // Opted out: leave the gutter however the page already paints it.
+  if (wash === null) {
+    restoreGutter(root);
+
+    return;
+  }
+
   const base = readPageColor(body);
 
   if (!base) return;
 
-  const color = flattenWash(body.ownerDocument, base, getComputedStyle(backdrop).backgroundColor);
+  const color = flattenWash(body.ownerDocument, base, wash);
 
   if (!color) return;
 
@@ -207,4 +236,4 @@ const useScrollbarGutter = <T extends HTMLElement>(forwardedRef?: Ref<T>) => {
   return useMemo(() => mergeRefs(forwardedRef, ref), [forwardedRef, ref]);
 };
 
-export {useScrollbarGutter};
+export {GUTTER_COLOR_VAR, useScrollbarGutter};
