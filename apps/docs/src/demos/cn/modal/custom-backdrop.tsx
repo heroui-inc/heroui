@@ -8,7 +8,7 @@ export function CustomBackdrop() {
     <Modal>
       <Button variant="secondary">自定义背景</Button>
       <Modal.Backdrop
-        className="bg-linear-to-t from-black/80 via-black/40 to-transparent [--backdrop-gutter-color:rgba(0,0,0,0.7)] dark:from-zinc-800/80 dark:via-zinc-800/40 dark:[--backdrop-gutter-color:rgba(21,21,22,0.76)]"
+        className="bg-linear-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
         variant="blur"
       >
         <Modal.Container>

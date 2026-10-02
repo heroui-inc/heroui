@@ -85,9 +85,9 @@ describe("Modal", () => {
   describe("scrollbar gutter", () => {
     const VIEWPORT_WIDTH = 1024;
 
-    // A classic scrollbar makes react-aria reserve `scrollbar-gutter: stable`. That
-    // reservation is what keeps the page from shifting, so the overlay must not clear it
-    // or pad the document. Overlay scrollbars (width 0) leave the page untouched.
+    // A classic scrollbar makes react-aria's scroll lock reserve the column with
+    // `scrollbar-gutter: stable`, which keeps the fixed backdrop out of it. Overlay
+    // scrollbars (width 0) never reserve anything, so the page is left untouched.
     const setScrollbarWidth = (scrollbarWidth: number) => {
       window.innerWidth = VIEWPORT_WIDTH;
       Object.defineProperty(document.documentElement, "clientWidth", {
@@ -97,102 +97,56 @@ describe("Modal", () => {
     };
 
     afterEach(() => {
-      vi.restoreAllMocks();
       Reflect.deleteProperty(document.documentElement, "clientWidth");
       document.documentElement.style.removeProperty("scrollbar-gutter");
       document.documentElement.style.removeProperty("padding-right");
       document.documentElement.style.removeProperty("padding-left");
-      document.documentElement.style.removeProperty("background-color");
-      document.body.style.removeProperty("margin-right");
-      document.body.style.removeProperty("margin-left");
-      document.body.style.removeProperty("background-color");
+      document.documentElement.style.removeProperty("direction");
     });
 
     const getBackdrop = () => document.querySelector<HTMLElement>('[data-slot="modal-backdrop"]')!;
 
-    it("keeps the reserved gutter so the page does not shift", () => {
+    it("releases the reserved gutter and pads the page instead", () => {
       setScrollbarWidth(15);
+
+      const {unmount} = renderModal({defaultOpen: true});
+
+      runAllTimers();
+
+      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("auto");
+      expect(document.documentElement.style.paddingRight).toBe("15px");
+
+      unmount();
+      runAllTimers();
+
+      expect(document.documentElement.style.paddingRight).toBe("");
+    });
+
+    it("pads the leading side when the page is right to left", () => {
+      setScrollbarWidth(15);
+      document.documentElement.style.direction = "rtl";
 
       renderModal({defaultOpen: true});
       runAllTimers();
 
-      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("stable");
+      expect(document.documentElement.style.paddingLeft).toBe("15px");
       expect(document.documentElement.style.paddingRight).toBe("");
-      expect(document.body.style.marginRight).toBe("");
     });
 
-    // Records the colors composited onto the 1x1 canvas, so the wash the hook picked is
-    // observable. jsdom has no 2d context of its own.
-    const trackGutterFills = () => {
-      const fills: string[] = [];
-      const context = {
-        fillStyle: "",
-        fillRect: () => fills.push(context.fillStyle),
-        getImageData: () => ({data: new Uint8ClampedArray([9, 8, 7, 255])}),
-      };
-
-      vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(
-        context as unknown as CanvasRenderingContext2D,
-      );
-
-      return fills;
-    };
-
-    const renderBackdropWithStyle = (css: string) =>
-      render(
-        <ModalFixture
-          defaultOpen
-          onBackdropMount={(node) => {
-            if (node) node.style.cssText = css;
-          }}
-        />,
-      );
-
-    it("paints the reserved gutter with the backdrop wash", () => {
+    it("adds the gutter to the padding the page already has", () => {
       setScrollbarWidth(15);
-      document.body.style.backgroundColor = "rgb(200, 200, 200)";
 
-      const fills = trackGutterFills();
+      const sheet = document.createElement("style");
 
-      renderBackdropWithStyle("background-color: rgba(0, 0, 0, 0.5)");
+      sheet.textContent = "html { padding-right: 4px; }";
+      document.head.append(sheet);
+
+      renderModal({defaultOpen: true});
       runAllTimers();
 
-      expect(fills).toEqual(["rgb(200, 200, 200)", "rgba(0, 0, 0, 0.5)"]);
-      expect(document.documentElement.style.backgroundColor).toBe("rgb(9, 8, 7)");
-      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("stable");
-      expect(document.body.style.marginRight).toBe("");
-    });
+      expect(document.documentElement.style.paddingRight).toBe("19px");
 
-    it("prefers an explicit gutter color over the backdrop background", () => {
-      // A gradient or image backdrop has no single background color to infer from.
-      setScrollbarWidth(15);
-      document.body.style.backgroundColor = "rgb(200, 200, 200)";
-
-      const fills = trackGutterFills();
-
-      renderBackdropWithStyle(
-        "background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0));" +
-          "--backdrop-gutter-color: rgba(10, 20, 30, 0.7)",
-      );
-      runAllTimers();
-
-      expect(fills).toEqual(["rgb(200, 200, 200)", "rgba(10, 20, 30, 0.7)"]);
-      expect(document.documentElement.style.backgroundColor).toBe("rgb(9, 8, 7)");
-    });
-
-    it("leaves the gutter alone when the backdrop opts out", () => {
-      setScrollbarWidth(15);
-      document.body.style.backgroundColor = "rgb(200, 200, 200)";
-
-      const fills = trackGutterFills();
-
-      renderBackdropWithStyle(
-        "background-color: rgba(0, 0, 0, 0.5); --backdrop-gutter-color: none",
-      );
-      runAllTimers();
-
-      expect(fills).toEqual([]);
-      expect(document.documentElement.style.backgroundColor).toBe("");
+      sheet.remove();
     });
 
     it("does not inset the page when no gutter is reserved", () => {
@@ -202,7 +156,7 @@ describe("Modal", () => {
       runAllTimers();
 
       expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("");
-      expect(document.body.style.marginRight).toBe("");
+      expect(document.documentElement.style.paddingRight).toBe("");
     });
 
     it("forwards the backdrop ref", () => {

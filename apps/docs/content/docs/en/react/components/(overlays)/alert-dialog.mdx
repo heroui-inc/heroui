@@ -75,11 +75,6 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-custom-backdrop" />
 
-On Windows and other platforms with classic scrollbars, the page reserves a scrollbar
-column while the dialog is open, and only a flat color can reach it. A backdrop with a
-plain background color is matched automatically. Set `--backdrop-gutter-color` when the
-backdrop paints a gradient or an image, or `none` to leave the column as the page color.
-
 ### Dismiss Behavior
 
 <ComponentPreview name="alert-dialog-dismiss-behavior" />
@@ -158,12 +153,6 @@ The AlertDialog component uses these CSS classes ([View source styles](https://g
 - `.alert-dialog__backdrop--opaque` - Opaque colored backdrop (default)
 - `.alert-dialog__backdrop--blur` - Blurred backdrop with glass effect
 - `.alert-dialog__backdrop--transparent` - Transparent backdrop (no overlay)
-
-#### Custom Properties [!toc]
-
-- `--backdrop-gutter-color` - Color for the reserved scrollbar column while the dialog is
-  open. Inferred from the backdrop's background color; set it on the backdrop when that is
-  a gradient or an image, or `none` to leave the column as the page color.
 
 #### Status Variants (Icon) [!toc]
 

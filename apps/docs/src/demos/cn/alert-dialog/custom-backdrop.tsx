@@ -8,7 +8,7 @@ export function CustomBackdrop() {
     <AlertDialog>
       <Button variant="danger">删除账户</Button>
       <AlertDialog.Backdrop
-        className="bg-linear-to-t from-red-950/90 via-red-950/50 to-transparent [--backdrop-gutter-color:rgba(70,8,9,0.75)] dark:from-red-950/95 dark:via-red-950/60 dark:[--backdrop-gutter-color:rgba(70,8,9,0.84)]"
+        className="bg-linear-to-t from-red-950/90 via-red-950/50 to-transparent dark:from-red-950/95 dark:via-red-950/60"
         variant="blur"
       >
         <AlertDialog.Container>

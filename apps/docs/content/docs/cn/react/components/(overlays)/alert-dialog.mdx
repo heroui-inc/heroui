@@ -75,10 +75,6 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-custom-backdrop" />
 
-在 Windows 等使用经典滚动条的平台上，对话框打开时页面会保留一列滚动条空间，而该区域只能显示纯色。
-若遮罩使用纯背景色，该颜色会自动匹配。当遮罩绘制渐变或图片时，请设置 `--backdrop-gutter-color`；
-设为 `none` 则保持该区域为页面背景色。
-
 ### 关闭行为
 
 <ComponentPreview name="alert-dialog-dismiss-behavior" />
@@ -157,11 +153,6 @@ AlertDialog 组件使用以下 CSS 类（[查看源码样式](https://github.com
 - `.alert-dialog__backdrop--opaque` - 不透明彩色遮罩（默认）
 - `.alert-dialog__backdrop--blur` - 带玻璃效果的模糊遮罩
 - `.alert-dialog__backdrop--transparent` - 透明遮罩（无覆盖层）
-
-#### 自定义属性 [!toc]
-
-- `--backdrop-gutter-color` — 对话框打开时为滚动条保留区域的颜色。默认根据遮罩的背景色推断；
-  当背景为渐变或图片时请在遮罩上设置该属性，设为 `none` 则保持为页面背景色。
 
 #### 状态变体（图标）[!toc]
 
