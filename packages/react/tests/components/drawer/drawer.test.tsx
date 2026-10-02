@@ -166,13 +166,11 @@ describe("Drawer", () => {
       document.documentElement.style.removeProperty("scrollbar-gutter");
       document.documentElement.style.removeProperty("padding-right");
       document.documentElement.style.removeProperty("padding-left");
-      document.body.style.removeProperty("margin-right");
-      document.body.style.removeProperty("margin-left");
     });
 
-    it("keeps the reserved gutter and the panel in the backdrop", () => {
-      // A classic scrollbar makes react-aria reserve `scrollbar-gutter: stable`. Clearing
-      // that gutter shifts the page, so the lock is left as react-aria set it.
+    it("releases the reserved scrollbar gutter and keeps the panel in the backdrop", () => {
+      // A classic scrollbar makes react-aria reserve `scrollbar-gutter: stable`. The backdrop
+      // releases it and pads the page, and the panel stays inside the backdrop.
       window.innerWidth = 1024;
       Object.defineProperty(document.documentElement, "clientWidth", {
         configurable: true,
@@ -185,8 +183,10 @@ describe("Drawer", () => {
       const backdrop = document.querySelector<HTMLElement>('[data-slot="drawer-backdrop"]')!;
       const content = document.querySelector<HTMLElement>('[data-slot="drawer-content"]')!;
 
-      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("stable");
-      expect(document.body.style.marginRight).toBe("");
+      expect(document.documentElement.style.getPropertyValue("scrollbar-gutter")).toBe("auto");
+      expect(document.documentElement.style.paddingRight).toBe("15px");
+      expect(backdrop.style.getPropertyValue("--overlay-scrollbar-gutter")).toBe("");
+      // The content reads the same variable, so it has to stay inside the backdrop to inherit it.
       expect(backdrop).toContainElement(content);
     });
   });
