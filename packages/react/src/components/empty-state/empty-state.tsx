@@ -1,3 +1,5 @@
+"use client";
+
 import type {DOMRenderProps} from "../../utils/dom";
 import type {ReactNode} from "react";
 
@@ -27,6 +29,8 @@ const EmptyStateRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
     </dom.div>
   );
 };
+
+EmptyStateRoot.displayName = "HeroUI.EmptyState";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

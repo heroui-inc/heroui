@@ -35,7 +35,8 @@
   @apply end-4 top-4;
 }
 
-.toast-region:focus-visible {
+.toast-region:focus-visible,
+.toast-region[data-focus-visible="true"] {
   @apply outline-2 outline-offset-2 outline-focus;
 }
 
@@ -178,7 +179,8 @@
   @apply pointer-events-none flex opacity-0;
 }
 
-.toast:focus-visible {
+.toast:focus-visible,
+.toast[data-focus-visible="true"] {
   @apply outline-2 outline-offset-2 outline-focus;
 }
 
@@ -251,7 +253,9 @@
 
 /* Reveal close button on hover */
 .toast[data-frontmost="true"]:hover .toast__close-button,
-.toast[data-expanded="true"]:hover .toast__close-button {
+.toast[data-expanded="true"]:hover .toast__close-button,
+.toast[data-frontmost="true"][data-hovered="true"] .toast__close-button,
+.toast[data-expanded="true"][data-hovered="true"] .toast__close-button {
   @apply pointer-events-auto opacity-100;
 }
 

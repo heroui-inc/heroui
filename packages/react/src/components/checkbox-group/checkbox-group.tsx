@@ -38,5 +38,7 @@ const CheckboxGroup = ({children, className, variant, ...props}: CheckboxGroupPr
   );
 };
 
+CheckboxGroup.displayName = "HeroUI.CheckboxGroup";
+
 export {CheckboxGroup, CheckboxGroupContext};
 export type {CheckboxGroupProps};

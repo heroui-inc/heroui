@@ -360,6 +360,8 @@ const ToastContent = ({children, className, ...rest}: ToastContentProps) => {
   );
 };
 
+ToastContent.displayName = "HeroUI.Toast.Content";
+
 /* ------------------------------------------------------------------------------------------------
  * Toast Indicator
  * --------------------------------------------------------------------------------------------- */
@@ -418,7 +420,7 @@ const ToastIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
-ToastIndicator.displayName = "HeroUI.ToastIndicator";
+ToastIndicator.displayName = "HeroUI.Toast.Indicator";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Title
@@ -440,7 +442,7 @@ const ToastTitle = ({children, className, ...rest}: ToastTitleProps) => {
   );
 };
 
-ToastTitle.displayName = "HeroUI.ToastTitle";
+ToastTitle.displayName = "HeroUI.Toast.Title";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Description
@@ -462,7 +464,7 @@ const ToastDescription = ({children, className, ...rest}: ToastDescriptionProps)
   );
 };
 
-ToastDescription.displayName = "HeroUI.ToastDescription";
+ToastDescription.displayName = "HeroUI.Toast.Description";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Close Button
@@ -482,7 +484,7 @@ const ToastCloseButton = ({className, ...rest}: ToastCloseButtonProps) => {
   );
 };
 
-ToastCloseButton.displayName = "HeroUI.ToastCloseButton";
+ToastCloseButton.displayName = "HeroUI.Toast.CloseButton";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Action Button
@@ -503,7 +505,7 @@ const ToastActionButton = ({children, className, ...rest}: ToastActionButtonProp
   );
 };
 
-ToastActionButton.displayName = "HeroUI.ToastActionButton";
+ToastActionButton.displayName = "HeroUI.Toast.ActionButton";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Region
@@ -947,7 +949,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
   );
 };
 
-ToastProvider.displayName = "HeroUI.ToastProvider";
+ToastProvider.displayName = "HeroUI.Toast.Provider";
 
 /* ------------------------------------------------------------------------------------------------
  * Exports

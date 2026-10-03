@@ -54,6 +54,8 @@ const ColorInputGroupRoot = ({
   );
 };
 
+ColorInputGroupRoot.displayName = "HeroUI.ColorInputGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Prefix
  * -----------------------------------------------------------------------------------------------*/
@@ -83,6 +85,8 @@ const ColorInputGroupPrefix = <E extends keyof React.JSX.IntrinsicElements = "di
   );
 };
 
+ColorInputGroupPrefix.displayName = "HeroUI.ColorInputGroup.Prefix";
+
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Input
  * -----------------------------------------------------------------------------------------------*/
@@ -101,6 +105,8 @@ const ColorInputGroupInput = ({className, ...props}: ColorInputGroupInputProps) 
     />
   );
 };
+
+ColorInputGroupInput.displayName = "HeroUI.ColorInputGroup.Input";
 
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Suffix
@@ -130,6 +136,8 @@ const ColorInputGroupSuffix = <E extends keyof React.JSX.IntrinsicElements = "di
     </dom.div>
   );
 };
+
+ColorInputGroupSuffix.displayName = "HeroUI.ColorInputGroup.Suffix";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

@@ -49,6 +49,8 @@ const MenuItemRoot = ({children, className, variant, ...props}: MenuItemRootProp
   );
 };
 
+MenuItemRoot.displayName = "HeroUI.MenuItem";
+
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Indicator
  * -----------------------------------------------------------------------------------------------*/
@@ -119,6 +121,8 @@ const MenuItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">
   );
 };
 
+MenuItemIndicator.displayName = "HeroUI.MenuItem.Indicator";
+
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Submenu Indicator
  * -----------------------------------------------------------------------------------------------*/
@@ -156,6 +160,8 @@ const MenuItemSubmenuIndicator = <E extends keyof React.JSX.IntrinsicElements = 
     </dom.span>
   );
 };
+
+MenuItemSubmenuIndicator.displayName = "HeroUI.MenuItem.SubmenuIndicator";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

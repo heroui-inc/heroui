@@ -53,6 +53,8 @@ const DisclosureRoot = ({children, className, ...props}: DisclosureRootProps) =>
   );
 };
 
+DisclosureRoot.displayName = "HeroUI.Disclosure";
+
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Heading
  * -----------------------------------------------------------------------------------------------*/
@@ -71,6 +73,8 @@ const DisclosureHeading = ({className, ...props}: DisclosureHeadingProps) => {
     />
   );
 };
+
+DisclosureHeading.displayName = "HeroUI.Disclosure.Heading";
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Trigger
@@ -94,6 +98,8 @@ const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
   );
 };
 
+DisclosureTrigger.displayName = "HeroUI.Disclosure.Trigger";
+
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Content
  * -----------------------------------------------------------------------------------------------*/
@@ -116,6 +122,8 @@ const DisclosureContent = ({children, className, ...props}: DisclosureContentPro
     </DisclosurePanel>
   );
 };
+
+DisclosureContent.displayName = "HeroUI.Disclosure.Content";
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Body
@@ -141,6 +149,8 @@ const DisclosureBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
     </dom.div>
   );
 };
+
+DisclosureBody.displayName = "HeroUI.Disclosure.Body";
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Indicator
@@ -186,6 +196,8 @@ const DisclosureIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg"
     />
   );
 };
+
+DisclosureIndicator.displayName = "HeroUI.Disclosure.Indicator";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

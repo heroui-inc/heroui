@@ -29,6 +29,8 @@ const RadioGroupRoot = ({children, className, variant, ...props}: RadioGroupRoot
   );
 };
 
+RadioGroupRoot.displayName = "HeroUI.RadioGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

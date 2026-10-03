@@ -64,6 +64,8 @@ const TypographyRoot = ({
   );
 };
 
+TypographyRoot.displayName = "HeroUI.Typography";
+
 interface HeadingProps extends Omit<TypographyRootProps, "type"> {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 }
@@ -71,6 +73,8 @@ interface HeadingProps extends Omit<TypographyRootProps, "type"> {
 const Heading = ({level = 1, ...props}: HeadingProps) => {
   return <TypographyRoot type={`h${level}` as TypographyType} {...props} />;
 };
+
+Heading.displayName = "HeroUI.Typography.Heading";
 
 interface ParagraphProps extends Omit<TypographyRootProps, "type"> {
   size?: "base" | "sm" | "xs";
@@ -82,11 +86,15 @@ const Paragraph = ({size = "base", ...props}: ParagraphProps) => {
   return <TypographyRoot type={type} {...props} />;
 };
 
+Paragraph.displayName = "HeroUI.Typography.Paragraph";
+
 interface CodeProps extends Omit<TypographyRootProps, "type"> {}
 
 const Code = (props: CodeProps) => {
   return <TypographyRoot type="code" {...props} />;
 };
+
+Code.displayName = "HeroUI.Typography.Code";
 
 interface ProseProps extends Omit<ComponentPropsWithRef<"div">, "color"> {
   children: ReactNode;
@@ -101,6 +109,8 @@ const Prose = ({children, className, ...props}: ProseProps) => {
     </div>
   );
 };
+
+Prose.displayName = "HeroUI.Typography.Prose";
 
 export {Code, Heading, Paragraph, Prose, TypographyRoot};
 

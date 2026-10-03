@@ -55,6 +55,8 @@ const SearchFieldRoot = ({
   );
 };
 
+SearchFieldRoot.displayName = "HeroUI.SearchField";
+
 /* -------------------------------------------------------------------------------------------------
  * SearchField Group
  * -----------------------------------------------------------------------------------------------*/
@@ -74,6 +76,8 @@ const SearchFieldGroup = ({children, className, ...props}: SearchFieldGroupProps
   );
 };
 
+SearchFieldGroup.displayName = "HeroUI.SearchField.Group";
+
 /* -------------------------------------------------------------------------------------------------
  * SearchField Input
  * -----------------------------------------------------------------------------------------------*/
@@ -90,6 +94,8 @@ const SearchFieldInput = ({className, ...props}: SearchFieldInputProps) => {
     />
   );
 };
+
+SearchFieldInput.displayName = "HeroUI.SearchField.Input";
 
 /* -------------------------------------------------------------------------------------------------
  * SearchField Search Icon
@@ -132,6 +138,8 @@ const SearchFieldSearchIcon = <E extends keyof React.JSX.IntrinsicElements = "sv
   );
 };
 
+SearchFieldSearchIcon.displayName = "HeroUI.SearchField.SearchIcon";
+
 /* -------------------------------------------------------------------------------------------------
  * SearchField Clear Button
  * -----------------------------------------------------------------------------------------------*/
@@ -149,6 +157,8 @@ const SearchFieldClearButton = ({className, ...props}: SearchFieldClearButtonPro
     />
   );
 };
+
+SearchFieldClearButton.displayName = "HeroUI.SearchField.ClearButton";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

@@ -74,6 +74,8 @@ const ToggleButtonGroupRoot = ({
   );
 };
 
+ToggleButtonGroupRoot.displayName = "HeroUI.ToggleButtonGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * ToggleButtonGroup Separator
  * -----------------------------------------------------------------------------------------------*/
@@ -99,6 +101,8 @@ const ToggleButtonGroupSeparator = <E extends keyof React.JSX.IntrinsicElements 
     />
   );
 };
+
+ToggleButtonGroupSeparator.displayName = "HeroUI.ToggleButtonGroup.Separator";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

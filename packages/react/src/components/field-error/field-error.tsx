@@ -27,6 +27,8 @@ const FieldErrorRoot = ({children, className, ...rest}: FieldErrorRootProps) => 
   );
 };
 
+FieldErrorRoot.displayName = "HeroUI.FieldError";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

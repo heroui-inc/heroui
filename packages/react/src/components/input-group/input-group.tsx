@@ -72,6 +72,8 @@ const InputGroupRoot = ({
   );
 };
 
+InputGroupRoot.displayName = "HeroUI.InputGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Input
  * -----------------------------------------------------------------------------------------------*/
@@ -88,6 +90,8 @@ const InputGroupInput = ({className, ...props}: InputGroupInputProps) => {
     />
   );
 };
+
+InputGroupInput.displayName = "HeroUI.InputGroup.Input";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Prefix
@@ -108,6 +112,8 @@ const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps
   );
 };
 
+InputGroupPrefix.displayName = "HeroUI.InputGroup.Prefix";
+
 /* -------------------------------------------------------------------------------------------------
  * InputGroup TextArea
  * -----------------------------------------------------------------------------------------------*/
@@ -124,6 +130,8 @@ const InputGroupTextArea = ({className, ...props}: InputGroupTextAreaProps) => {
     />
   );
 };
+
+InputGroupTextArea.displayName = "HeroUI.InputGroup.TextArea";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Suffix
@@ -143,6 +151,8 @@ const InputGroupSuffix = ({children, className, ...props}: InputGroupSuffixProps
     </div>
   );
 };
+
+InputGroupSuffix.displayName = "HeroUI.InputGroup.Suffix";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

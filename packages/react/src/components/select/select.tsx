@@ -113,6 +113,8 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
   );
 };
 
+SelectRoot.displayName = "HeroUI.Select";
+
 /* -------------------------------------------------------------------------------------------------
  * Select Trigger
  * -----------------------------------------------------------------------------------------------*/
@@ -159,6 +161,8 @@ const SelectTrigger = ({children, className, onKeyDown, ...props}: SelectTrigger
   );
 };
 
+SelectTrigger.displayName = "HeroUI.Select.Trigger";
+
 /* -------------------------------------------------------------------------------------------------
  * Select Value
  * -----------------------------------------------------------------------------------------------*/
@@ -177,6 +181,8 @@ const SelectValue = ({children, className, ...props}: SelectValueProps) => {
     </SelectValuePrimitive>
   );
 };
+
+SelectValue.displayName = "HeroUI.Select.Value";
 
 /* -------------------------------------------------------------------------------------------------
  * Select Indicator
@@ -222,6 +228,8 @@ const SelectIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
     />
   );
 };
+
+SelectIndicator.displayName = "HeroUI.Select.Indicator";
 
 /* -------------------------------------------------------------------------------------------------
  * Select Clear Button
@@ -289,6 +297,8 @@ const SelectClearButton = <E extends keyof React.JSX.IntrinsicElements = "span">
   );
 };
 
+SelectClearButton.displayName = "HeroUI.Select.ClearButton";
+
 /* -------------------------------------------------------------------------------------------------
  * Select Popover
  * -----------------------------------------------------------------------------------------------*/
@@ -324,6 +334,8 @@ const SelectPopover = ({
     </SurfaceContext>
   );
 };
+
+SelectPopover.displayName = "HeroUI.Select.Popover";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
