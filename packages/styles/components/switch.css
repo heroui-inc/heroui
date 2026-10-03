@@ -84,6 +84,9 @@
   height: 1.25rem; /* 20px on desktop (14px base), 20px on mobile (16px base) - scales with font-size */
   width: 2.5rem; /* 35px on desktop, 40px on mobile - scales with font-size */
 
+  /* Lets the thumb size its travel from the track width (cqi) */
+  container-type: inline-size;
+
   background-color: var(--switch-control-bg);
 
   /**
@@ -175,18 +178,30 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    margin 300ms var(--ease-out-fluid),
+    translate 300ms var(--ease-out-fluid),
     background-color 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  /* Selected/checked state - use margin instead of translate */
+  /**
+   * Selected/checked state
+   * Slide the thumb with translate rather than margin. An animated margin re-runs layout every
+   * frame and each edge of the thumb rounds to a device pixel on its own, so whenever the thumb
+   * is not a whole number of device pixels wide its width flickers while it moves.
+   * Travel = track width - thumb width - the 0.125rem inset on each side.
+   */
   .switch[aria-checked="true"] &,
   .switch[data-selected="true"] & {
-    @apply ms-[calc(100%-1.5rem)] bg-accent-foreground text-accent;
+    @apply bg-accent-foreground text-accent;
+    translate: calc(100cqi - 100% - 0.25rem) 0;
     box-shadow:
       0px 0px 5px 0px rgb(0 0 0 / 0.02),
       0px 2px 10px 0px rgb(0 0 0 / 0.06),
       0px 0px 1px 0px rgb(0 0 0 / 0.3);
+  }
+
+  .switch[aria-checked="true"]:dir(rtl) &,
+  .switch[data-selected="true"]:dir(rtl) & {
+    translate: calc(-1 * (100cqi - 100% - 0.25rem)) 0;
   }
 
   .switch:active &,
@@ -199,24 +214,12 @@
   @apply rounded-md;
   height: 0.75rem; /* ~10.5px on desktop, ~12px on mobile */
   width: 1.03125rem; /* ~14.4px on desktop, ~16.5px on mobile - maintains 1.375:1 ratio */
-
-  /* Small selected state positioning */
-  .switch[aria-checked="true"] &,
-  .switch[data-selected="true"] & {
-    @apply ms-[calc(100%-1.15625rem)];
-  }
 }
 
 .switch--lg .switch__thumb {
   @apply rounded-xl;
   height: 1.25rem; /* ~17.5px on desktop, ~20px on mobile */
   width: 1.71875rem; /* ~24px on desktop, ~27.5px on mobile - maintains 1.375:1 ratio */
-
-  /* Large selected state positioning */
-  .switch[aria-checked="true"] &,
-  .switch[data-selected="true"] & {
-    @apply ms-[calc(100%-1.84375rem)];
-  }
 }
 
 /* Switch thumb content container */
