@@ -55,7 +55,7 @@
     scale(var(--toast-scale));
   height: var(--toast-height, auto);
 
-  @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 bg-surface px-4 py-3 shadow-overlay;
+  @apply pointer-events-auto flex flex-row flex-wrap items-start justify-start gap-1.5 bg-surface px-4 py-3 shadow-overlay;
 
   /* Timing tokens */
   --toast-ease: var(--ease-out-fluid);
@@ -266,7 +266,9 @@
 
 /* Action */
 .toast__action {
-  @apply mt-2 sm:mt-0;
+  /* Below sm the action wraps onto its own line, indented past the indicator (size-4 box-content + p-1 = 24px, plus the 6px row gap) so it aligns with the title. The basis subtracts that indent because flex margins sit on top of the basis. */
+  @apply order-last ms-[1.875rem] mt-2 basis-[calc(100%-1.875rem)];
+  @apply sm:order-none sm:ms-0 sm:mt-0 sm:basis-auto;
 }
 
 /* Variants */
