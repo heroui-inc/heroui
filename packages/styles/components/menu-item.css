@@ -98,7 +98,7 @@
   /**
    * Transitions
    */
-  @apply transition-[opacity,transform] duration-250 motion-reduce:transition-none;
+  @apply transition-[opacity,transform,scale] duration-250 motion-reduce:transition-none;
 
   /* Position on the inline-end when menu item has submenu */
   .menu-item[data-has-submenu="true"] & {
@@ -113,7 +113,7 @@
       /**
        * Transitions
        */
-      @apply transition-[opacity,transform] duration-300 motion-reduce:transition-none;
+      @apply transition-[opacity,transform,scale] duration-300 motion-reduce:transition-none;
     }
   }
 
@@ -125,7 +125,7 @@
       /**
      * Transitions
      */
-      @apply transition-[opacity,transform] duration-250 motion-reduce:transition-none;
+      @apply transition-[opacity,transform,scale] duration-250 motion-reduce:transition-none;
     }
     /**
      * Default state: hidden and scaled down

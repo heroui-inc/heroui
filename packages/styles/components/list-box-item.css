@@ -73,7 +73,7 @@
   /**
    * Transitions
    */
-  @apply transition-[opacity,transform] duration-250 motion-reduce:transition-none;
+  @apply transition-[opacity,transform,scale] duration-250 motion-reduce:transition-none;
 
   /* Checkmark SVG indicator */
   [data-slot="list-box-item-indicator--checkmark"] {
@@ -82,7 +82,7 @@
     /**
      * Transitions
      */
-    @apply transition-[opacity,transform] duration-300 motion-reduce:transition-none;
+    @apply transition-[opacity,transform,scale] duration-300 motion-reduce:transition-none;
   }
 
   .list-box-item[aria-selected="true"] [data-slot="list-box-item-indicator--checkmark"],
