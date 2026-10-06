@@ -57,11 +57,6 @@
     transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
   }
 
-  &[data-exiting="true"],
-  &[data-entering="true"] {
-    will-change: opacity;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
@@ -86,6 +81,15 @@
  */
 .drawer__backdrop--blur {
   @apply bg-backdrop backdrop-blur-md;
+
+  /*
+   * A full-viewport backdrop-filter stalls mid-range mobile GPUs long enough
+   * that the open animation is skipped. Keep the dim scrim.
+   */
+  @media (hover: none) and (pointer: coarse) {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 /**
@@ -144,7 +148,6 @@
   --drawer-enter-ease: cubic-bezier(0.32, 0.72, 0, 1);
   --drawer-exit-ease: cubic-bezier(0.32, 0.72, 0, 1);
 
-  will-change: translate;
   transition: translate var(--drawer-enter-duration) var(--drawer-enter-ease);
 
   @media (prefers-reduced-motion: reduce) {

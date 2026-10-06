@@ -1,0 +1,41 @@
+/*
+ * Overlay enter/exit motion.
+ *
+ * tw-animate-css `enter` / `exit` keyframes always animate `filter`, even when
+ * the blur amount is 0. A filter animation on a popover — and especially on a
+ * full-viewport modal backdrop — is a main-thread / GPU filter pass. On
+ * mid-range devices (A14-class: iPhone 12, iPad 10) that pass often lasts
+ * longer than the 100–250ms animation, so the overlay appears late and the
+ * motion is skipped.
+ *
+ * These keyframes animate opacity and transform only. React Aria positions
+ * overlays with top/left, so a transform animation does not fight placement.
+ */
+
+@keyframes heroui-overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes heroui-overlay-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes heroui-overlay-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--heroui-enter-x, 0), var(--heroui-enter-y, 0), 0)
+      scale(var(--heroui-enter-scale, 1));
+  }
+}
+
+@keyframes heroui-overlay-exit {
+  to {
+    opacity: 0;
+    transform: translate3d(var(--heroui-exit-x, 0), var(--heroui-exit-y, 0), 0)
+      scale(var(--heroui-exit-scale, 1));
+  }
+}
