@@ -43,6 +43,7 @@
   /* Default active/pressed state - scale transform */
   &:active,
   &[data-pressed="true"] {
+    @apply will-change-transform;
     transform: scale(0.97);
   }
 }

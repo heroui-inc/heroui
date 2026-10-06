@@ -60,6 +60,7 @@
 
   &:active,
   &[data-pressed="true"] {
+    @apply will-change-transform;
     transform: scale(0.93);
   }
 }
