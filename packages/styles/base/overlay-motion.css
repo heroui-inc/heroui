@@ -12,6 +12,46 @@
  * overlays with top/left, so a transform animation does not fight placement.
  */
 
+/*
+ * Registered with inherits: false so an overlay's offsets and scale never leak
+ * into descendants that run their own overlay animation.
+ */
+@property --heroui-enter-x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --heroui-enter-y {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --heroui-enter-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --heroui-exit-x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --heroui-exit-y {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --heroui-exit-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
 @keyframes heroui-overlay-fade-in {
   from {
     opacity: 0;
