@@ -55,7 +55,9 @@
     scale(var(--toast-scale));
   height: var(--toast-height, auto);
 
-  @apply pointer-events-auto flex flex-row flex-wrap items-start justify-start gap-1.5 bg-surface px-4 py-3 shadow-overlay;
+  /* Grid, not flex-wrap: below sm the action sits in the content column, content-sized. A flex basis wide enough to wrap the button also stretched it to the row. */
+  @apply pointer-events-auto grid grid-cols-[auto_minmax(0,1fr)] items-start justify-start gap-x-1.5 gap-y-2 bg-surface px-4 py-3 shadow-overlay;
+  @apply sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-y-0;
 
   /* Timing tokens */
   --toast-ease: var(--ease-out-fluid);
@@ -176,7 +178,7 @@
 
 /* Hidden (beyond maxVisibleToasts) */
 .toast[data-hidden="true"] {
-  @apply pointer-events-none flex opacity-0;
+  @apply pointer-events-none grid opacity-0;
 }
 
 .toast:focus-visible,
@@ -186,13 +188,13 @@
 
 /* Content */
 .toast__content {
-  /* basis-0 keeps this on the indicator's row. With the default auto basis, flex-wrap measures the unwrapped text and drops the whole block onto the next line once it exceeds the toast width. min-w-0 lets that text wrap inside the row. */
-  @apply flex min-w-0 grow basis-0 flex-col items-start self-center;
+  /* min-w-0 lets the text wrap inside the track instead of widening it. */
+  @apply col-start-2 row-start-1 flex min-w-0 flex-col items-start self-center;
 }
 
 /* Indicator */
 .toast__indicator {
-  @apply flex shrink-0 items-center justify-center p-1 text-overlay-foreground select-none;
+  @apply col-start-1 row-start-1 flex shrink-0 items-center justify-center p-1 text-overlay-foreground select-none;
 
   [data-slot="toast-default-icon"] {
     @apply box-content size-4;
@@ -267,9 +269,22 @@
 
 /* Action */
 .toast__action {
-  /* Below sm the action wraps onto its own line, indented past the indicator (size-4 box-content + p-1 = 24px, plus the 6px row gap) so it aligns with the title. The basis subtracts that indent because flex margins sit on top of the basis. */
-  @apply order-last ms-[1.875rem] mt-2 basis-[calc(100%-1.875rem)];
-  @apply sm:order-none sm:ms-0 sm:mt-0 sm:basis-auto;
+  /* Same column as the content, so it lines up with the title and stays as wide as its label. */
+  @apply col-start-2 row-start-2 justify-self-start;
+  @apply sm:col-start-3 sm:row-start-1;
+}
+
+/* No indicator: the first track would stay, and so would the column gap. */
+.toast:not(:has(.toast__indicator)) {
+  @apply grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto];
+}
+
+.toast:not(:has(.toast__indicator)) .toast__content {
+  @apply col-start-1;
+}
+
+.toast:not(:has(.toast__indicator)) .toast__action {
+  @apply col-start-1 sm:col-start-2;
 }
 
 /* Variants */

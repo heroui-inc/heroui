@@ -117,6 +117,24 @@ describe("Toast action button (browser)", () => {
       },
     );
 
+    it("keeps the stacked action as wide as its label and aligned with the title", async () => {
+      await page.viewport(SM_BREAKPOINT - 100, 800);
+      await renderDangerToast();
+      await page.getByRole("button", {name: "Show toast"}).click();
+      await expect.element(page.getByRole("alertdialog")).toBeInTheDocument();
+
+      const action = page.getByRole("button", {name: "Remove"}).element().getBoundingClientRect();
+      const content = document
+        .querySelector('[data-slot="toast-content"]')!
+        .getBoundingClientRect();
+      const title = page.getByText("Storage is full").element().getBoundingClientRect();
+
+      expect(action.top).toBeGreaterThanOrEqual(content.bottom);
+      expect(action.left).toBeCloseTo(title.left, 0);
+      // A full-width basis ends at the content's trailing edge.
+      expect(content.right - action.right).toBeGreaterThan(16);
+    });
+
     it("keeps the action inline above 768px", async () => {
       await page.viewport(1024, 800);
       await renderToastWithAction();
