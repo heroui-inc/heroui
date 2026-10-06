@@ -186,7 +186,8 @@
 
 /* Content */
 .toast__content {
-  @apply flex grow flex-col items-start self-center;
+  /* basis-0 keeps this on the indicator's row. With the default auto basis, flex-wrap measures the unwrapped text and drops the whole block onto the next line once it exceeds the toast width. min-w-0 lets that text wrap inside the row. */
+  @apply flex min-w-0 grow basis-0 flex-col items-start self-center;
 }
 
 /* Indicator */

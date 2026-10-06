@@ -43,6 +43,33 @@ const showToast = async () => {
   };
 };
 
+const renderDangerToast = () => {
+  const queue = new ToastQueue();
+
+  return render(
+    <>
+      <button
+        type="button"
+        onClick={() =>
+          queue.add(
+            {
+              actionProps: {children: "Remove"},
+              description:
+                "Remove files to release space. Adding more text to demonstrate longer content display",
+              title: "Storage is full",
+              variant: "danger",
+            },
+            {timeout: 0},
+          )
+        }
+      >
+        Show toast
+      </button>
+      <Toast.Provider queue={queue} />
+    </>,
+  );
+};
+
 describe("Toast action button (browser)", () => {
   describe("placement", () => {
     it("stacks the action below the description under the sm breakpoint", async () => {
@@ -68,6 +95,27 @@ describe("Toast action button (browser)", () => {
       expect(action.left).toBeGreaterThanOrEqual(description.right);
       expect(action.top).toBeLessThan(description.bottom);
     });
+
+    // Regression: flex-wrap measured the unwrapped description and dropped the
+    // content block under the indicator, so a long danger toast put the icon
+    // and the title on separate rows.
+    it.each([SM_BREAKPOINT - 100, 700])(
+      "keeps the indicator beside a long title at %ipx",
+      async (width) => {
+        await page.viewport(width, 800);
+        await renderDangerToast();
+        await page.getByRole("button", {name: "Show toast"}).click();
+        await expect.element(page.getByRole("alertdialog")).toBeInTheDocument();
+
+        const indicator = document
+          .querySelector('[data-slot="toast-indicator"]')!
+          .getBoundingClientRect();
+        const title = page.getByText("Storage is full").element().getBoundingClientRect();
+
+        expect(title.left).toBeGreaterThanOrEqual(indicator.right);
+        expect(title.top).toBeLessThan(indicator.bottom);
+      },
+    );
 
     it("keeps the action inline above 768px", async () => {
       await page.viewport(1024, 800);
