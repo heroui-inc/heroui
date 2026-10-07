@@ -327,3 +327,17 @@
     scale: 0.92;
   }
 }
+
+/* For iOS Safari: Keep the fixed bottom anchor from painting the toolbar plate. */
+@supports (-webkit-touch-callout: none) {
+  .toast-region--bottom {
+    width: 0;
+    min-width: 0;
+
+    .toast {
+      width: min(var(--toast-width), calc(100vw - 2rem));
+      inset-inline-end: auto;
+      translate: -50% 0;
+    }
+  }
+}
