@@ -11,8 +11,7 @@ overrides:
   ts-morph: 27.0.2
   # Security patches for transitive dependencies (GHSA-2883-xcg3-v3hh,
   # GHSA-w27v-7q3p-w38r, GHSA-4vpr-x523-8j87). Drop once the parents
-  # (gray-matter, eslint, fumadocs-*, postcss-svgo) ship updated ranges.
-  js-yaml@3: "^3.15.2"
+  # (eslint, fumadocs-*, postcss-svgo) ship updated ranges.
   js-yaml@4: "^4.3.2"
   svgo@2: "^2.8.4"
 
