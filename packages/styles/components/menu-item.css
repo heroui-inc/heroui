@@ -30,14 +30,17 @@
     @apply size-3.5;
   }
 
-  /* Add inline-start padding when indicator is present */
-  &:has(.menu-item__indicator) {
+  /* Inline-start room for a start-side selection indicator.
+     Submenu rows are excluded: their indicator is placed on the inline-end,
+     and a hard-coded start value would beat contextual padding (dropdown items use `px-2.5`). */
+  &:has(.menu-item__indicator):not([data-has-submenu="true"]) {
     @apply ps-7;
   }
 
-  /* Add inline-end padding when indicator is present and has submenu */
+  /* Inline-end room for the submenu chevron.
+     Start padding is left to context (base `.menu-item` `px-2`, or a parent override). */
   &[data-has-submenu="true"]:has(.menu-item__indicator) {
-    @apply ps-2 pe-7;
+    @apply pe-7;
   }
 
   /* Focus visible state (keyboard focus only).
