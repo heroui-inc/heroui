@@ -10,47 +10,15 @@
  *
  * These keyframes animate opacity and transform only. React Aria positions
  * overlays with top/left, so a transform animation does not fight placement.
+ *
+ * Every keyframe uses literal values. Reading custom properties inside
+ * keyframes (`var(--x)`) can keep WebKit from running the animation on the
+ * compositor, so each scale / direction combination is spelled out instead.
+ *
+ * Enter keyframes are named `heroui-overlay-enter-<scale>[-<offset>]`:
+ *   scale   90 / 95 / 105 -> scale(0.9) / scale(0.95) / scale(1.05)
+ *   offset  y / ny / x / nx -> translate 0.25rem / -0.25rem on the Y / X axis
  */
-
-/*
- * Registered with inherits: false so an overlay's offsets and scale never leak
- * into descendants that run their own overlay animation.
- */
-@property --heroui-enter-x {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-@property --heroui-enter-y {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-@property --heroui-enter-scale {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 1;
-}
-
-@property --heroui-exit-x {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-@property --heroui-exit-y {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-@property --heroui-exit-scale {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 1;
-}
 
 @keyframes heroui-overlay-fade-in {
   from {
@@ -64,18 +32,100 @@
   }
 }
 
-@keyframes heroui-overlay-enter {
-  from {
-    opacity: 0;
-    transform: translate3d(var(--heroui-enter-x, 0), var(--heroui-enter-y, 0), 0)
-      scale(var(--heroui-enter-scale, 1));
-  }
-}
-
 @keyframes heroui-overlay-exit {
   to {
     opacity: 0;
-    transform: translate3d(var(--heroui-exit-x, 0), var(--heroui-exit-y, 0), 0)
-      scale(var(--heroui-exit-scale, 1));
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+}
+
+@keyframes heroui-overlay-enter-90 {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.9);
+  }
+}
+
+@keyframes heroui-overlay-enter-90-y {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.25rem, 0) scale(0.9);
+  }
+}
+
+@keyframes heroui-overlay-enter-90-ny {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -0.25rem, 0) scale(0.9);
+  }
+}
+
+@keyframes heroui-overlay-enter-90-x {
+  from {
+    opacity: 0;
+    transform: translate3d(0.25rem, 0, 0) scale(0.9);
+  }
+}
+
+@keyframes heroui-overlay-enter-90-nx {
+  from {
+    opacity: 0;
+    transform: translate3d(-0.25rem, 0, 0) scale(0.9);
+  }
+}
+
+@keyframes heroui-overlay-enter-95 {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+}
+
+@keyframes heroui-overlay-enter-95-y {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.25rem, 0) scale(0.95);
+  }
+}
+
+@keyframes heroui-overlay-enter-95-ny {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -0.25rem, 0) scale(0.95);
+  }
+}
+
+@keyframes heroui-overlay-enter-95-x {
+  from {
+    opacity: 0;
+    transform: translate3d(0.25rem, 0, 0) scale(0.95);
+  }
+}
+
+@keyframes heroui-overlay-enter-95-nx {
+  from {
+    opacity: 0;
+    transform: translate3d(-0.25rem, 0, 0) scale(0.95);
+  }
+}
+
+@keyframes heroui-overlay-enter-105 {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+}
+
+@keyframes heroui-overlay-enter-105-y {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.25rem, 0) scale(1.05);
+  }
+}
+
+@keyframes heroui-overlay-enter-105-ny {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -0.25rem, 0) scale(1.05);
   }
 }

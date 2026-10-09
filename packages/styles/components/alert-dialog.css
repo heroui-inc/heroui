@@ -109,33 +109,31 @@
 
   /* Entering animation */
   &[data-entering="true"] {
-    --heroui-enter-scale: 1.05;
-    animation: heroui-overlay-enter 250ms var(--ease-out-quad) both;
+    animation: heroui-overlay-enter-105 250ms var(--ease-out-quad) both;
 
     &[data-placement="auto"] {
-      --heroui-enter-y: 0.25rem;
+      animation-name: heroui-overlay-enter-105-y;
 
       @variant sm {
-        --heroui-enter-y: 0;
+        animation-name: heroui-overlay-enter-105;
       }
     }
 
     &[data-placement="top"] {
-      --heroui-enter-y: -0.25rem;
+      animation-name: heroui-overlay-enter-105-ny;
     }
 
     &[data-placement="center"] {
-      --heroui-enter-y: 0;
+      animation-name: heroui-overlay-enter-105;
     }
 
     &[data-placement="bottom"] {
-      --heroui-enter-y: 0.25rem;
+      animation-name: heroui-overlay-enter-105-y;
     }
   }
 
   /* Exiting animation */
   &[data-exiting="true"] {
-    --heroui-exit-scale: 0.95;
     animation: heroui-overlay-exit 100ms var(--ease-out-quad) both;
   }
 

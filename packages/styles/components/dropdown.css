@@ -62,30 +62,28 @@
 
   /* Entering animations */
   &[data-entering="true"] {
-    --heroui-enter-scale: 0.9;
-    animation: heroui-overlay-enter 150ms var(--ease-smooth) both;
+    animation: heroui-overlay-enter-90 150ms var(--ease-smooth) both;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
-      --heroui-enter-y: 0.25rem;
+      animation-name: heroui-overlay-enter-90-y;
     }
 
     &[data-placement="bottom"] {
-      --heroui-enter-y: -0.25rem;
+      animation-name: heroui-overlay-enter-90-ny;
     }
 
     &[data-placement="left"] {
-      --heroui-enter-x: 0.25rem;
+      animation-name: heroui-overlay-enter-90-x;
     }
 
     &[data-placement="right"] {
-      --heroui-enter-x: -0.25rem;
+      animation-name: heroui-overlay-enter-90-nx;
     }
   }
 
   /* Exiting animations */
   &[data-exiting="true"] {
-    --heroui-exit-scale: 0.95;
     animation: heroui-overlay-exit 100ms var(--ease-smooth) both;
     /* Stays non-interactive while closing, even if the exit animation is interrupted. */
     @apply pointer-events-none;
