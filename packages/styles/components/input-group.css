@@ -60,7 +60,9 @@
 }
 
 .input-group__input {
-  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 text-base shadow-none outline-none placeholder:text-field-placeholder sm:text-sm;
+  /* Rounded on every side, then squared where a prefix or suffix touches it (below). The group
+     does not clip, so a square outer corner would poke past the shell under the autofill cover. */
+  @apply flex-1 rounded-field border-0 bg-transparent px-3 py-2 text-base shadow-none outline-none placeholder:text-field-placeholder sm:text-sm;
 
   /* Remove border radius on left side when prefix is present */
   .input-group:has([data-slot="input-group-prefix"]) & {
@@ -83,8 +85,8 @@
    * lets that paint through, and a group-level `--field-focus` highlight
    * replaces the secondary fill with the primary field. Cover the UA paint
    * with the group's own fill (`--input-group-bg`, inherited) so prefix,
-   * suffix, and input stay one color. Sharp corners on the inner control
-   * disappear because they match the shell. Border stays on `.input-group`.
+   * suffix, and input stay one color. The inner control is rounded on its outer
+   * sides to match the shell (see above). Border stays on `.input-group`.
    * box-shadow is not transitioned: the 1000px inset must appear at once.
    */
   &:-webkit-autofill,
