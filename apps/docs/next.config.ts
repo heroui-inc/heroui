@@ -31,6 +31,7 @@ const noindexHeaders = [{key: "X-Robots-Tag", value: "noindex, nofollow"}];
 const config: NextConfig = {
   compress: true,
   experimental: {
+    agentUpgrade: "latest",
     optimizePackageImports: [
       "@heroui/react",
       "@gravity-ui/icons",

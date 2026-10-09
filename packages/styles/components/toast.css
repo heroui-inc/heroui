@@ -327,3 +327,55 @@
     scale: 0.92;
   }
 }
+
+/*
+ * iOS Safari paints a plate behind the floating toolbar when a wide fixed box
+ * sits on that edge. The centered rule is the verified workaround. Start and end
+ * need the same narrow anchor or they keep `calc(100vw - 2rem)`. The repeated
+ * `.toast-region` beats the `sm:` min-width above. `translate` stays off the
+ * stacking `transform`, and flips in RTL so the centered toast stays centered.
+ * Region offsets are untouched, so a safe-area override still moves the stack.
+ * The anchor has no box, so the focus ring moves to the frontmost toast.
+ */
+@supports (-webkit-touch-callout: none) {
+  .toast-region.toast-region--bottom,
+  .toast-region.toast-region--bottom-start,
+  .toast-region.toast-region--bottom-end {
+    @apply w-0 min-w-0;
+  }
+
+  .toast-region--bottom .toast {
+    @apply end-auto w-[min(var(--toast-width),calc(100vw-2rem))] -translate-x-1/2 rtl:translate-x-1/2;
+  }
+
+  .toast-region--bottom-start .toast,
+  .toast-region--bottom-end .toast {
+    @apply w-[min(var(--toast-width),calc(100vw-2rem))];
+  }
+
+  .toast-region--bottom-start .toast {
+    @apply end-auto;
+  }
+
+  .toast-region--bottom-end .toast {
+    @apply start-auto;
+  }
+
+  .toast-region--bottom:focus-visible,
+  .toast-region--bottom[data-focus-visible="true"],
+  .toast-region--bottom-start:focus-visible,
+  .toast-region--bottom-start[data-focus-visible="true"],
+  .toast-region--bottom-end:focus-visible,
+  .toast-region--bottom-end[data-focus-visible="true"] {
+    @apply outline-none;
+  }
+
+  .toast-region--bottom:focus-visible .toast[data-frontmost="true"],
+  .toast-region--bottom[data-focus-visible="true"] .toast[data-frontmost="true"],
+  .toast-region--bottom-start:focus-visible .toast[data-frontmost="true"],
+  .toast-region--bottom-start[data-focus-visible="true"] .toast[data-frontmost="true"],
+  .toast-region--bottom-end:focus-visible .toast[data-frontmost="true"],
+  .toast-region--bottom-end[data-focus-visible="true"] .toast[data-frontmost="true"] {
+    @apply outline-2 outline-offset-2 outline-focus;
+  }
+}
