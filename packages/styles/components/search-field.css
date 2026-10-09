@@ -101,19 +101,25 @@
    * Cover the UA autofill paint with the group's own fill so the icon, input,
    * and clear button stay one color. `--search-field-group-bg` is inherited
    * from `.search-field__group` and already tracks the variant.
+   * box-shadow is not transitioned: the 1000px inset must appear at once.
    */
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active,
-  &:autofill {
+  &:autofill,
+  &:autofill:hover,
+  &:autofill:focus,
+  &:autofill:active {
     -webkit-box-shadow: 0 0 0 1000px var(--search-field-group-bg) inset;
     box-shadow: 0 0 0 1000px var(--search-field-group-bg) inset;
     -webkit-text-fill-color: var(--field-foreground);
     caret-color: var(--field-foreground);
-    transition:
-      background-color 9999s ease-in-out 0s,
-      box-shadow 150ms var(--ease-out);
+    transition: background-color 9999s ease-in-out 0s;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: background-color 9999s ease-in-out 0s;
+    }
   }
 }
 
@@ -147,7 +153,8 @@
   @media (hover: hover) {
     &:hover:not(:focus-within),
     &[data-hovered="true"]:not([data-focus-within="true"]) {
-      background-color: var(--search-field-group-bg-hover);
+      --search-field-group-bg: var(--search-field-group-bg-hover);
+      background-color: var(--search-field-group-bg);
     }
   }
 
@@ -161,7 +168,8 @@
   &[data-invalid="true"] {
     @apply status-invalid-field;
     border-color: var(--color-field-border-invalid);
-    background-color: var(--search-field-group-bg-focus);
+    --search-field-group-bg: var(--search-field-group-bg-focus);
+    background-color: var(--search-field-group-bg);
   }
 
   [data-slot="search-field-input"] {

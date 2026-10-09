@@ -85,19 +85,25 @@
    * with the group's own fill (`--input-group-bg`, inherited) so prefix,
    * suffix, and input stay one color. Sharp corners on the inner control
    * disappear because they match the shell. Border stays on `.input-group`.
+   * box-shadow is not transitioned: the 1000px inset must appear at once.
    */
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active,
-  &:autofill {
+  &:autofill,
+  &:autofill:hover,
+  &:autofill:focus,
+  &:autofill:active {
     -webkit-box-shadow: 0 0 0 1000px var(--input-group-bg) inset;
     box-shadow: 0 0 0 1000px var(--input-group-bg) inset;
     -webkit-text-fill-color: var(--field-foreground);
     caret-color: var(--field-foreground);
-    transition:
-      background-color 9999s ease-in-out 0s,
-      box-shadow 150ms var(--ease-out);
+    transition: background-color 9999s ease-in-out 0s;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: background-color 9999s ease-in-out 0s;
+    }
   }
 }
 
@@ -175,20 +181,23 @@
   @media (hover: hover) {
     &:hover:not(:focus-within),
     &[data-hovered="true"]:not([data-focus-within="true"]) {
-      background-color: var(--input-group-bg-hover);
+      --input-group-bg: var(--input-group-bg-hover);
+      background-color: var(--input-group-bg);
     }
   }
 
   &:has([data-slot="input-group-input"]:focus),
   &:has([data-slot="input-group-textarea"]:focus) {
-    background-color: var(--input-group-bg-focus);
+    --input-group-bg: var(--input-group-bg-focus);
+    background-color: var(--input-group-bg);
   }
 
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
     border-color: var(--color-field-border-invalid);
-    background-color: var(--input-group-bg-focus);
+    --input-group-bg: var(--input-group-bg-focus);
+    background-color: var(--input-group-bg);
   }
 
   [data-slot="input-group-input"],

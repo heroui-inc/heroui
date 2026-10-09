@@ -21,25 +21,29 @@
       @apply pe-7;
     }
 
-    /* Focus state (input.css only has focus-visible, but combo-box also needs focus).
-       Use the input's fill token so a secondary input does not jump to the primary field. */
+    /* This rule is imported after `.input` and replaces its box-shadow with the focus ring.
+       Reassign the input fill so `[data-focus]` tracks the variant, not the primary field. */
     &:focus,
     &[data-focus] {
       @apply status-focused-field;
       border-color: var(--field-border-focus);
+      --input-bg: var(--input-bg-focus);
       background-color: var(--input-bg);
     }
 
     /**
-     * This rule is imported after `.input` and its focus ring replaces box-shadow.
      * Re-apply the input's autofill cover (variant fill + ring + field shadow) or
-     * the UA highlight shows through a focused combo-box input.
+     * the focus ring above drops it and the UA highlight shows through.
+     * box-shadow is not transitioned: the 1000px inset must appear at once.
      */
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active,
-    &:autofill {
+    &:autofill,
+    &:autofill:hover,
+    &:autofill:focus,
+    &:autofill:active {
       background-color: var(--input-bg);
       box-shadow: var(--input-autofill-shadow);
       -webkit-box-shadow: var(--input-autofill-shadow);
@@ -47,8 +51,11 @@
       caret-color: var(--field-foreground);
       transition:
         background-color 9999s ease-in-out 0s,
-        border-color 150ms var(--ease-smooth),
-        box-shadow 150ms var(--ease-out);
+        border-color 150ms var(--ease-smooth);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: background-color 9999s ease-in-out 0s;
+      }
     }
 
     /* Disabled state */
