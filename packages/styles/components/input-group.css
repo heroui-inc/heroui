@@ -15,16 +15,6 @@
     height: auto;
   }
 
-  /* Browsers may paint an autofilled control square (e.g. Edge on Windows), which would cover the
-     group's rounded corners and focus ring. Clip to the shell only while autofilled, so inner
-     focus rings (buttons in prefix/suffix) are not cut off the rest of the time. */
-  &:has([data-slot="input-group-input"]:-webkit-autofill),
-  &:has([data-slot="input-group-input"]:autofill),
-  &:has([data-slot="input-group-textarea"]:-webkit-autofill),
-  &:has([data-slot="input-group-textarea"]:autofill) {
-    overflow: clip;
-  }
-
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
@@ -98,6 +88,12 @@
    * suffix, and input stay one color. The inner control is rounded on its outer
    * sides to match the shell (see above). Border stays on `.input-group`.
    * box-shadow is not transitioned: the 1000px inset must appear at once.
+   *
+   * Some browsers (Edge on Windows) paint an autofilled control with a native, square text
+   * field that ignores `border-radius`, covering the shell's rounded corners and focus ring.
+   * `appearance: none` drops the native paint, and `clip-path` keeps whatever is painted
+   * inside the shell's rounded shape. Rounding the inner corners next to a prefix/suffix is
+   * invisible because the cover and the group share one fill.
    */
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
@@ -107,6 +103,9 @@
   &:autofill:hover,
   &:autofill:focus,
   &:autofill:active {
+    -webkit-appearance: none;
+    appearance: none;
+    clip-path: inset(0 round var(--radius-field));
     -webkit-box-shadow: 0 0 0 1000px var(--input-group-bg) inset;
     box-shadow: 0 0 0 1000px var(--input-group-bg) inset;
     -webkit-text-fill-color: var(--field-foreground);
