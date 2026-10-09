@@ -5,6 +5,16 @@
 .list-box-item {
   @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none no-highlight;
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    box-shadow 150ms var(--ease-out);
+
+  @apply motion-reduce:transition-none;
+
   /* Cursor */
   cursor: var(--cursor-interactive);
 
@@ -34,14 +44,10 @@
   &[data-focus="true"] {
   }
 
-  /* Pressed state.
-     The transform transition is applied only while pressed so idle rows are not
-     promoted to their own compositor layers when a list opens. */
+  /* Pressed state */
   &:active,
   &[data-pressed="true"] {
-    transition: transform 100ms var(--ease-out-quart);
     transform: scale(0.98);
-    @apply motion-reduce:transition-none;
   }
 
   /* Hover state */
@@ -73,7 +79,7 @@
   /**
    * Transitions
    */
-  @apply transition-[opacity,transform,scale] duration-250 motion-reduce:transition-none;
+  @apply transition duration-250 motion-reduce:transition-none;
 
   /* Checkmark SVG indicator */
   [data-slot="list-box-item-indicator--checkmark"] {
@@ -82,7 +88,7 @@
     /**
      * Transitions
      */
-    @apply transition-[opacity,transform,scale] duration-300 motion-reduce:transition-none;
+    @apply transition-all duration-300 motion-reduce:transition-none;
   }
 
   .list-box-item[aria-selected="true"] [data-slot="list-box-item-indicator--checkmark"],

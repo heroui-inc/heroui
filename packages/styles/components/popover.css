@@ -8,7 +8,7 @@
 
   /* Entering animations */
   &[data-entering="true"] {
-    animation: heroui-overlay-enter-90 150ms var(--ease-smooth) both;
+    animation: heroui-overlay-enter-90 150ms var(--ease-smooth);
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -30,15 +30,9 @@
 
   /* Exiting animations */
   &[data-exiting="true"] {
-    animation: heroui-overlay-exit 100ms var(--ease-smooth) both;
+    animation: heroui-overlay-exit 100ms var(--ease-smooth);
     /* Stays non-interactive while closing, even if the exit animation is interrupted. */
     @apply pointer-events-none;
-  }
-
-  &[data-exiting="true"],
-  &[data-entering="true"] {
-    /* motion-reduce must stay after the animation so it wins. */
-    @apply motion-reduce:animate-none;
   }
 
   /* Arrow styling */

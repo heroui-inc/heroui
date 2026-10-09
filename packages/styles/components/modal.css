@@ -48,12 +48,12 @@
 
   /* Entering animation */
   &[data-entering="true"] {
-    animation: heroui-overlay-fade-in 150ms ease-out both;
+    animation: heroui-overlay-fade-in 150ms var(--ease-out);
   }
 
   /* Exiting animation */
   &[data-exiting="true"] {
-    animation: heroui-overlay-fade-out 100ms ease-out both;
+    animation: heroui-overlay-fade-out 100ms var(--ease-out);
   }
 
   /**
@@ -108,7 +108,7 @@
 
   /* Entering animation */
   &[data-entering="true"] {
-    animation: heroui-overlay-enter-105 250ms var(--ease-out-quad) both;
+    animation: heroui-overlay-enter-105 250ms var(--ease-out-quad);
 
     &[data-placement="auto"] {
       animation-name: heroui-overlay-enter-105-y;
@@ -133,7 +133,7 @@
 
   /* Exiting animation */
   &[data-exiting="true"] {
-    animation: heroui-overlay-exit 100ms var(--ease-out-quad) both;
+    animation: heroui-overlay-exit 100ms var(--ease-out-quad);
   }
 
   /**
@@ -141,7 +141,8 @@
    * CRITICAL: motion-reduce must be AFTER animate for correct override specificity
    */
   &[data-exiting="true"],
-  &[data-entering="true"] {
+  &[data-entering="true"],
+  &[data-entering="true"][data-placement] {
     @apply motion-reduce:animate-none;
   }
 }
@@ -169,15 +170,41 @@
   @apply p-0 sm:p-0;
 
   /* Entering animation */
-  /* Fade only. The [data-placement] selector keeps this ahead of the placement offsets above. */
-  &[data-entering="true"],
-  &[data-entering="true"][data-placement] {
-    animation-name: heroui-overlay-fade-in;
+  &[data-entering="true"] {
+    animation-name: heroui-overlay-enter-100;
+
+    /* Same placement offsets as the base container, with no scale. */
+    &[data-placement="auto"] {
+      animation-name: heroui-overlay-enter-100-y;
+
+      @variant sm {
+        animation-name: heroui-overlay-enter-100;
+      }
+    }
+
+    &[data-placement="top"] {
+      animation-name: heroui-overlay-enter-100-ny;
+    }
+
+    &[data-placement="center"] {
+      animation-name: heroui-overlay-enter-100;
+    }
+
+    &[data-placement="bottom"] {
+      animation-name: heroui-overlay-enter-100-y;
+    }
   }
 
   /* Exiting animation */
   &[data-exiting="true"] {
     animation-name: heroui-overlay-fade-out;
+  }
+
+  /* The name overrides above outrank the base reduced-motion rule, so repeat it. */
+  &[data-exiting="true"],
+  &[data-entering="true"],
+  &[data-entering="true"][data-placement] {
+    @apply motion-reduce:animate-none;
   }
 }
 

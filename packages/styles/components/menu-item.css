@@ -5,6 +5,16 @@
 .menu-item {
   @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none no-highlight;
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    box-shadow 150ms var(--ease-out);
+
+  @apply motion-reduce:transition-none;
+
   /* Cursor */
   cursor: var(--cursor-interactive);
 
@@ -47,14 +57,11 @@
   &[data-focus="true"] {
   }
 
-  /* Pressed state.
-     The transform transition is applied only while pressed so idle rows are not
-     promoted to their own compositor layers when a menu opens. */
+  /* Pressed state */
   &:active,
   &[data-pressed="true"] {
-    transition: transform 100ms var(--ease-out-quart);
+    @apply will-change-transform;
     transform: scale(0.98);
-    @apply motion-reduce:transition-none;
   }
 
   /* Hover state */
@@ -102,7 +109,7 @@
   /**
    * Transitions
    */
-  @apply transition-[opacity,transform,scale] duration-250 motion-reduce:transition-none;
+  @apply transition duration-250 motion-reduce:transition-none;
 
   /* Checkmark SVG indicator */
   [data-slot="menu-item-indicator--checkmark"] {
@@ -112,7 +119,7 @@
       /**
        * Transitions
        */
-      @apply transition-[opacity,transform,scale] duration-300 motion-reduce:transition-none;
+      @apply transition-all duration-300 motion-reduce:transition-none;
     }
   }
 
@@ -124,7 +131,7 @@
       /**
      * Transitions
      */
-      @apply transition-[opacity,transform,scale] duration-250 motion-reduce:transition-none;
+      @apply transition-all duration-250 motion-reduce:transition-none;
     }
     /**
      * Default state: hidden and scaled down
