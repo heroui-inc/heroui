@@ -15,6 +15,16 @@
     height: auto;
   }
 
+  /* Browsers may paint an autofilled control square (e.g. Edge on Windows), which would cover the
+     group's rounded corners and focus ring. Clip to the shell only while autofilled, so inner
+     focus rings (buttons in prefix/suffix) are not cut off the rest of the time. */
+  &:has([data-slot="input-group-input"]:-webkit-autofill),
+  &:has([data-slot="input-group-input"]:autofill),
+  &:has([data-slot="input-group-textarea"]:-webkit-autofill),
+  &:has([data-slot="input-group-textarea"]:autofill) {
+    overflow: clip;
+  }
+
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
