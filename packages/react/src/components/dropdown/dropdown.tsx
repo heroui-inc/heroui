@@ -147,7 +147,7 @@ const DropdownPopover = ({
       popover.getAnimations().filter((animation): animation is CSSAnimation => {
         return (
           animation instanceof CSSAnimation &&
-          (animation.playState === "running" || animation.playState === "pending")
+          (animation.playState === "running" || String(animation.playState) === "pending")
         );
       });
     const waitForAnimations = (animations: CSSAnimation[]) => {
@@ -295,9 +295,11 @@ interface DropdownSubmenuTriggerProps extends ComponentPropsWithRef<
 
 const DropdownSubmenuTrigger = ({children, ...props}: DropdownSubmenuTriggerProps) => {
   return (
-    <SubmenuTriggerPrimitive data-slot="dropdown-submenu-trigger" {...props}>
-      <DropdownSubmenuContext value>{children}</DropdownSubmenuContext>
-    </SubmenuTriggerPrimitive>
+    <DropdownSubmenuContext value>
+      <SubmenuTriggerPrimitive data-slot="dropdown-submenu-trigger" {...props}>
+        {children}
+      </SubmenuTriggerPrimitive>
+    </DropdownSubmenuContext>
   );
 };
 
