@@ -80,9 +80,7 @@ export function LayoutBody({children, className, style, ...props}: ComponentProp
     <div
       id="nd-notebook-layout"
       className={cn(
-        /* `svh` stays put while the mobile toolbar shows and hides. `dvh` changes during
-           that animation and reflows this long page, so a menu open waits on the layout. */
-        "grid min-h-(--fd-docs-height) auto-cols-auto auto-rows-auto overflow-x-clip transition-[grid-template-columns] [--fd-docs-height:100svh] [--fd-header-height:0px] [--fd-sidebar-width:0px] [--fd-toc-popover-height:0px] [--fd-toc-width:0px]",
+        "grid min-h-(--fd-docs-height) auto-cols-auto auto-rows-auto overflow-x-clip transition-[grid-template-columns] [--fd-docs-height:100dvh] [--fd-header-height:0px] [--fd-sidebar-width:0px] [--fd-toc-popover-height:0px] [--fd-toc-width:0px]",
         className,
       )}
       style={

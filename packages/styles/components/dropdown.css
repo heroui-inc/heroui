@@ -49,8 +49,7 @@
 
 /* Similar to select popover styles */
 .dropdown__popover {
-  /* `vw`, not `svw`: the small viewport changes with the mobile toolbar and delays the first layout. */
-  @apply max-w-[48vw] origin-(--trigger-anchor-point) scroll-py-1 scrollbar overflow-y-auto overscroll-contain bg-overlay p-0 text-sm md:min-w-55;
+  @apply max-w-[48svw] origin-(--trigger-anchor-point) scroll-py-1 scrollbar overflow-y-auto overscroll-contain bg-overlay p-0 text-sm md:min-w-55;
   border-radius: min(32px, calc(var(--radius-2xl) + var(--spacing) * 1.5));
   box-shadow: var(--overlay-shadow);
 
