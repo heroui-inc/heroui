@@ -28,7 +28,7 @@ export default async function Layout({
   // offset sticky docs elements after the banner scrolls away. Reduce only the docs
   // viewport height to keep the sidebar scroll area inside the visible viewport.
   const layoutStyle = SHOW_BANNER
-    ? ({"--fd-docs-height": `calc(100dvh - ${DOCS_TOP_BANNER_HEIGHT})`} as CSSProperties)
+    ? ({"--fd-docs-height": `calc(100svh - ${DOCS_TOP_BANNER_HEIGHT})`} as CSSProperties)
     : undefined;
 
   const {lang} = await params;
