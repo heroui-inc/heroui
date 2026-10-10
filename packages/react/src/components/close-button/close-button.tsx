@@ -5,7 +5,8 @@ import type {ComponentPropsWithRef} from "react";
 
 import {closeButtonVariants} from "@heroui/styles";
 import {useMemo} from "react";
-import {Button as ButtonPrimitive} from "react-aria-components/Button";
+import {ButtonContext, Button as ButtonPrimitive} from "react-aria-components/Button";
+import {useSlottedContext} from "react-aria-components/slots";
 
 import {composeTwRenderProps} from "../../utils";
 import {CloseIcon} from "../icons";
@@ -17,6 +18,7 @@ interface CloseButtonRootProps
   extends ComponentPropsWithRef<typeof ButtonPrimitive>, CloseButtonVariants {}
 
 const CloseButtonRoot = ({
+  "aria-label": ariaLabel,
   children,
   className,
   slot,
@@ -25,10 +27,17 @@ const CloseButtonRoot = ({
   ...rest
 }: CloseButtonRootProps) => {
   const styles = useMemo(() => closeButtonVariants({variant}), [variant]);
+  const slotProps = useSlottedContext(ButtonContext, slot);
+  const resolvedAriaLabel =
+    ariaLabel ??
+    (rest["aria-labelledby"] != null ||
+    (slotProps != null && (slotProps["aria-label"] != null || slotProps["aria-labelledby"] != null))
+      ? undefined
+      : "Close");
 
   return (
     <ButtonPrimitive
-      aria-label="Close"
+      aria-label={resolvedAriaLabel}
       className={composeTwRenderProps(className, styles)}
       data-slot="close-button"
       slot={slot}
