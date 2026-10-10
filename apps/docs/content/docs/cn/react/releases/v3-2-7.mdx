@@ -1,0 +1,89 @@
+---
+title: v3.2.7
+description: React Aria 升级至 1.22.0（react-aria@3.53.0），并修复 CloseButton 的 aria-label、列表浮层圆角、选择指示器、AvatarGroup 裁切、Checkbox 动画、ScrollShadow 接缝、iOS Safari 上的 Toast、Calendar 星期标题列宽，以及 Dropdown 子菜单内边距。
+github:
+  pull: 6892
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 10 月 10 日</span>
+</div>
+
+React Aria 升级：HeroUI 将 `react-aria-components` 升级至 `1.22.0`（`react-aria@3.53.0`）。[CloseButton](/docs/components/close-button) 不再硬编码 `aria-label="Close"`，因此通过 slot 传入的标签（例如已本地化的 [Toast](/docs/components/toast) 关闭按钮）不会被覆盖。本版本还为 [Select](/docs/components/select)、[Dropdown](/docs/components/dropdown)、[Autocomplete](/docs/components/autocomplete) 与 [ComboBox](/docs/components/combo-box) 的浮层圆角与选项内边距对齐，避免选择指示器压住短标签，修正 [Dropdown](/docs/components/dropdown) 子菜单内边距与分区触发器图标，修复 iOS Safari 上的 [Toast](/docs/components/toast) 布局，让 [Calendar](/docs/components/calendar) 星期标题等宽分列，并包含针对 [AvatarGroup](/docs/components/avatar-group)、[Checkbox](/docs/components/checkbox) 与 [ScrollShadow](/docs/components/scroll-shadow) 的后续修复。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warning">
+  **对等依赖。** 本版本需要 `react-aria-components@^1.22.0` 与 `react-aria@^3.53.0`。升级时请与应用中已安装的版本对齐。
+</Callout>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 依赖
+
+- **React Aria**：升级至 [React Aria 1.22.0](https://react-aria.adobe.com/releases/v1-22-0) — `react-aria-components@1.22.0`、`react-aria@3.53.0`、`react-stately@3.51.0`、`@react-types/shared@3.37.0` 与 `@internationalized/number@3.6.9` ([#6939](https://github.com/heroui-inc/heroui/pull/6939))。
+- **安全**：修补传递依赖中的 Dependabot 告警 ([#6938](https://github.com/heroui-inc/heroui/pull/6938))。
+
+## 错误修复
+
+- **CloseButton**：不再在 React Aria `Button` 上硬编码 `aria-label="Close"`。显式传入的 `aria-label` 与 slot 上下文标签（Toast 的 `close`、SearchField 的 `clear`、Tag 的 `remove`）不再被覆盖 ([#6946](https://github.com/heroui-inc/heroui/pull/6946))。
+- **Toast**：在 iOS Safari 上收起底部区域锚点，使堆叠 Toast 与安全区域对齐 ([#6936](https://github.com/heroui-inc/heroui/pull/6936))。用 CSS Grid 布局替代 `useMediaQuery` 操作区定位 ([#6932](https://github.com/heroui-inc/heroui/pull/6932))。
+- **Dropdown**：子菜单项起始内边距与菜单内边距刻度对齐 ([#6941](https://github.com/heroui-inc/heroui/pull/6941))。居中 with-sections 示例中的触发器图标 ([#6944](https://github.com/heroui-inc/heroui/pull/6944))。
+- **Calendar**：星期标题标签保持等宽列 ([#6925](https://github.com/heroui-inc/heroui/pull/6925))。
+- **浮层**：Modal 或 Drawer 打开时释放 React Aria 预留的滚动条槽 ([#6924](https://github.com/heroui-inc/heroui/pull/6924))。
+- **列表浮层**：[Select](/docs/components/select)、[Dropdown](/docs/components/dropdown)、[Autocomplete](/docs/components/autocomplete) 与 [ComboBox](/docs/components/combo-box) 的外层圆角与选项内边距对齐 ([#6916](https://github.com/heroui-inc/heroui/pull/6916))。
+- **选择指示器**：[Select](/docs/components/select)、[ComboBox](/docs/components/combo-box) 与 [Autocomplete](/docs/components/autocomplete) 浮层中的勾选标记不再压住标签 ([#6908](https://github.com/heroui-inc/heroui/pull/6908))。
+- **AvatarGroup**：裁切重叠跟随头像圆角 ([#6884](https://github.com/heroui-inc/heroui/pull/6884))。
+- **Checkbox**：勾选 SVG 保持挂载，切换 [Table](/docs/components/table) 中不确定状态时绘制动画不再闪烁 ([#6890](https://github.com/heroui-inc/heroui/pull/6890))。
+- **ScrollShadow**：移除非整数设备像素比下的遮罩接缝 ([#6914](https://github.com/heroui-inc/heroui/pull/6914))。
+- **Radio**：为 [Radio](/docs/components/radio) 现有的 `data-*` 状态规则补上 `:focus-visible`、`:hover` 与 `:active` ([#6879](https://github.com/heroui-inc/heroui/pull/6879))。
+- **Toast 样式**：为现有的 `:focus-visible` 与 `:hover` 规则补上对应的 `data-*` 属性 ([#6879](https://github.com/heroui-inc/heroui/pull/6879))。
+
+## 样式
+
+- **Disclosure**：从 `disclosure.css` 中移除误放的 `.accordion__heading` 规则 ([#6904](https://github.com/heroui-inc/heroui/pull/6904))。
+- **Chip**：清空 `.chip--md` — 它重复声明了基础 `.chip` 上已有的 `text-xs` ([#6879](https://github.com/heroui-inc/heroui/pull/6879))。
+
+## 组件
+
+- **displayName**：将组件各部分的 `displayName` 设为 `HeroUI.Component.SubPart`，并修正 7 个不一致的名称 ([#6879](https://github.com/heroui-inc/heroui/pull/6879))。
+- **EmptyState**：补上缺失的 `"use client"` 指令 ([#6879](https://github.com/heroui-inc/heroui/pull/6879))。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6892](https://github.com/heroui-inc/heroui/pull/6892)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />

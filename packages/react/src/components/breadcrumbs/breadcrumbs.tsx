@@ -49,6 +49,8 @@ const BreadcrumbsRoot = ({children, className, separator, ...props}: Breadcrumbs
   );
 };
 
+BreadcrumbsRoot.displayName = "HeroUI.Breadcrumbs";
+
 /* -------------------------------------------------------------------------------------------------
  * Breadcrumbs Item
  * -----------------------------------------------------------------------------------------------*/
@@ -104,6 +106,8 @@ const BreadcrumbsItem = ({
     </BreadcrumbPrimitive>
   );
 };
+
+BreadcrumbsItem.displayName = "HeroUI.Breadcrumbs.Item";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

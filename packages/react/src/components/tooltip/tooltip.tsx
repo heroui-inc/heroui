@@ -97,6 +97,8 @@ const TooltipRoot = ({
   );
 };
 
+TooltipRoot.displayName = "HeroUI.Tooltip";
+
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Content
  * -----------------------------------------------------------------------------------------------*/
@@ -126,6 +128,8 @@ const TooltipContent = ({
     </TooltipPrimitive>
   );
 };
+
+TooltipContent.displayName = "HeroUI.Tooltip.Content";
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Arrow
@@ -167,6 +171,8 @@ const TooltipArrow = ({children, className, ...props}: TooltipArrowProps) => {
   );
 };
 
+TooltipArrow.displayName = "HeroUI.Tooltip.Arrow";
+
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Trigger
  * -----------------------------------------------------------------------------------------------*/
@@ -206,6 +212,8 @@ const TooltipTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
     </dom.div>
   );
 };
+
+TooltipTrigger.displayName = "HeroUI.Tooltip.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

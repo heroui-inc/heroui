@@ -29,6 +29,8 @@ function ListBoxRoot<T extends object>({className, variant, ...props}: ListBoxRo
   );
 }
 
+ListBoxRoot.displayName = "HeroUI.ListBox";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

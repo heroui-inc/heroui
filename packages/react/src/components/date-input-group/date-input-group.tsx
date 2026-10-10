@@ -62,6 +62,8 @@ const DateInputGroupRoot = ({
   );
 };
 
+DateInputGroupRoot.displayName = "HeroUI.DateInputGroup";
+
 /* -------------------------------------------------------------------------------------------------
  * DateInputGroup Prefix
  * -----------------------------------------------------------------------------------------------*/
@@ -91,6 +93,8 @@ const DateInputGroupPrefix = <E extends keyof React.JSX.IntrinsicElements = "div
   );
 };
 
+DateInputGroupPrefix.displayName = "HeroUI.DateInputGroup.Prefix";
+
 /* -------------------------------------------------------------------------------------------------
  * DateInputGroup Input
  * -----------------------------------------------------------------------------------------------*/
@@ -113,6 +117,8 @@ const DateInputGroupInput = ({className, ...props}: DateInputGroupInputProps) =>
     />
   );
 };
+
+DateInputGroupInput.displayName = "HeroUI.DateInputGroup.Input";
 
 /* -------------------------------------------------------------------------------------------------
  * DateInputGroup Segment
@@ -140,6 +146,8 @@ const DateInputGroupSegment = ({className, segment, ...props}: DateInputGroupSeg
     />
   );
 };
+
+DateInputGroupSegment.displayName = "HeroUI.DateInputGroup.Segment";
 
 /* -------------------------------------------------------------------------------------------------
  * DateInputGroup InputContainer
@@ -170,6 +178,8 @@ const DateInputGroupInputContainer = <E extends keyof React.JSX.IntrinsicElement
   );
 };
 
+DateInputGroupInputContainer.displayName = "HeroUI.DateInputGroup.InputContainer";
+
 /* -------------------------------------------------------------------------------------------------
  * DateInputGroup Suffix
  * -----------------------------------------------------------------------------------------------*/
@@ -198,6 +208,8 @@ const DateInputGroupSuffix = <E extends keyof React.JSX.IntrinsicElements = "div
     </dom.div>
   );
 };
+
+DateInputGroupSuffix.displayName = "HeroUI.DateInputGroup.Suffix";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

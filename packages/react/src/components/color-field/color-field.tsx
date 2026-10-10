@@ -32,6 +32,8 @@ function ColorFieldRoot({children, className, fullWidth, ...props}: ColorFieldRo
   );
 }
 
+ColorFieldRoot.displayName = "HeroUI.ColorField";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

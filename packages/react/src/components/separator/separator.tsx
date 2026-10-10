@@ -33,6 +33,8 @@ const SeparatorRoot = ({className, orientation, variant, ...props}: SeparatorRoo
   );
 };
 
+SeparatorRoot.displayName = "HeroUI.Separator";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

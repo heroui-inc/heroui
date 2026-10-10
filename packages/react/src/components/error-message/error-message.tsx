@@ -32,6 +32,8 @@ const ErrorMessageRoot = ({children, className, ...rest}: ErrorMessageRootProps)
   );
 };
 
+ErrorMessageRoot.displayName = "HeroUI.ErrorMessage";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/

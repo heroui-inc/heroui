@@ -54,6 +54,8 @@ const PopoverRoot = ({
   );
 };
 
+PopoverRoot.displayName = "HeroUI.Popover";
+
 /* -------------------------------------------------------------------------------------------------
  * Popover Content
  * -----------------------------------------------------------------------------------------------*/
@@ -76,6 +78,8 @@ const PopoverContent = ({children, className, ...props}: PopoverContentProps) =>
     </PopoverContext>
   );
 };
+
+PopoverContent.displayName = "HeroUI.Popover.Content";
 
 /* -------------------------------------------------------------------------------------------------
  * Popover Arrow
@@ -117,6 +121,8 @@ const PopoverArrow = ({children, className, ...props}: PopoverArrowProps) => {
   );
 };
 
+PopoverArrow.displayName = "HeroUI.Popover.Arrow";
+
 /* -------------------------------------------------------------------------------------------------
  * Popover Dialog
  * -----------------------------------------------------------------------------------------------*/
@@ -137,6 +143,8 @@ const PopoverDialog = ({children, className, ...props}: PopoverDialogProps) => {
     </DialogPrimitive>
   );
 };
+
+PopoverDialog.displayName = "HeroUI.Popover.Dialog";
 
 /* -------------------------------------------------------------------------------------------------
  * Popover Trigger
@@ -169,6 +177,8 @@ const PopoverTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+PopoverTrigger.displayName = "HeroUI.Popover.Trigger";
+
 /* -------------------------------------------------------------------------------------------------
  * Popover Heading
  * -----------------------------------------------------------------------------------------------*/
@@ -187,6 +197,8 @@ const PopoverHeading = ({children, className, ...props}: PopoverHeadingProps) =>
     </HeadingPrimitive>
   );
 };
+
+PopoverHeading.displayName = "HeroUI.Popover.Heading";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

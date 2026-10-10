@@ -30,7 +30,6 @@ import {
 } from "react-aria-components/Toast";
 
 import {useMeasuredHeight} from "../../hooks/use-measured-height";
-import {useMediaQuery} from "../../hooks/use-media-query";
 import {useSafeLayoutEffect} from "../../hooks/use-safe-layout-effect";
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
@@ -360,6 +359,8 @@ const ToastContent = ({children, className, ...rest}: ToastContentProps) => {
   );
 };
 
+ToastContent.displayName = "HeroUI.Toast.Content";
+
 /* ------------------------------------------------------------------------------------------------
  * Toast Indicator
  * --------------------------------------------------------------------------------------------- */
@@ -418,7 +419,7 @@ const ToastIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
-ToastIndicator.displayName = "HeroUI.ToastIndicator";
+ToastIndicator.displayName = "HeroUI.Toast.Indicator";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Title
@@ -440,7 +441,7 @@ const ToastTitle = ({children, className, ...rest}: ToastTitleProps) => {
   );
 };
 
-ToastTitle.displayName = "HeroUI.ToastTitle";
+ToastTitle.displayName = "HeroUI.Toast.Title";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Description
@@ -462,7 +463,7 @@ const ToastDescription = ({children, className, ...rest}: ToastDescriptionProps)
   );
 };
 
-ToastDescription.displayName = "HeroUI.ToastDescription";
+ToastDescription.displayName = "HeroUI.Toast.Description";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Close Button
@@ -482,7 +483,7 @@ const ToastCloseButton = ({className, ...rest}: ToastCloseButtonProps) => {
   );
 };
 
-ToastCloseButton.displayName = "HeroUI.ToastCloseButton";
+ToastCloseButton.displayName = "HeroUI.Toast.CloseButton";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Action Button
@@ -503,7 +504,7 @@ const ToastActionButton = ({children, className, ...rest}: ToastActionButtonProp
   );
 };
 
-ToastActionButton.displayName = "HeroUI.ToastActionButton";
+ToastActionButton.displayName = "HeroUI.Toast.ActionButton";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Region
@@ -574,7 +575,6 @@ const ToastProvider = <T extends object = ToastContentValue>({
   ...rest
 }: ToastProviderProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
-  const isMobile = useMediaQuery("(max-width: 768px)");
   const [toastHeights, setToastHeights] = useState<Record<string, number>>({});
 
   // Keeps the latest hotkey without re-registering the document listener.
@@ -863,18 +863,15 @@ const ToastProvider = <T extends object = ToastContentValue>({
           <ToastContent>
             {!!title && <ToastTitle>{title}</ToastTitle>}
             {!!description && <ToastDescription>{description}</ToastDescription>}
-            {isMobile && actionProps?.children ? (
-              <ToastActionButton {...actionProps}>{actionProps.children}</ToastActionButton>
-            ) : null}
           </ToastContent>
-          {!isMobile && actionProps?.children ? (
+          {actionProps?.children ? (
             <ToastActionButton {...actionProps}>{actionProps.children}</ToastActionButton>
           ) : null}
           <ToastCloseButton />
         </Toast>
       );
     },
-    [isMobile, placement, scaleFactor],
+    [placement, scaleFactor],
   );
 
   const contextValue = useMemo<ToastContext>(
@@ -947,7 +944,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
   );
 };
 
-ToastProvider.displayName = "HeroUI.ToastProvider";
+ToastProvider.displayName = "HeroUI.Toast.Provider";
 
 /* ------------------------------------------------------------------------------------------------
  * Exports

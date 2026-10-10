@@ -47,6 +47,8 @@ const DropdownRoot = ({children, ...props}: DropdownRootProps) => {
   );
 };
 
+DropdownRoot.displayName = "HeroUI.Dropdown";
+
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Trigger (Button wrapper)
  * -----------------------------------------------------------------------------------------------*/
@@ -65,6 +67,8 @@ const DropdownTrigger = ({children, className, ...props}: DropdownTriggerProps) 
     </Button>
   );
 };
+
+DropdownTrigger.displayName = "HeroUI.Dropdown.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Popover (Popover wrapper)
@@ -95,6 +99,8 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
   );
 };
 
+DropdownPopover.displayName = "HeroUI.Dropdown.Popover";
+
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Menu (Menu wrapper)
  * -----------------------------------------------------------------------------------------------*/
@@ -116,6 +122,8 @@ function DropdownMenu<T extends object>({className, ...props}: DropdownMenuProps
   );
 }
 
+DropdownMenu.displayName = "HeroUI.Dropdown.Menu";
+
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Item (MenuItem wrapper)
  * -----------------------------------------------------------------------------------------------*/
@@ -124,6 +132,8 @@ interface DropdownItemProps extends ComponentPropsWithRef<typeof MenuItemRoot> {
 const DropdownItem = (props: DropdownItemProps) => {
   return <MenuItemRoot {...props} />;
 };
+
+DropdownItem.displayName = "HeroUI.Dropdown.Item";
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Submenu Indicator (MenuItemSubmenuIndicator wrapper)
@@ -135,6 +145,8 @@ interface DropdownSubmenuIndicatorProps extends ComponentPropsWithRef<
 const DropdownSubmenuIndicator = (props: DropdownSubmenuIndicatorProps) => {
   return <MenuItemSubmenuIndicator {...props} />;
 };
+
+DropdownSubmenuIndicator.displayName = "HeroUI.Dropdown.SubmenuIndicator";
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Submenu Trigger
@@ -151,6 +163,8 @@ const DropdownSubmenuTrigger = ({children, ...props}: DropdownSubmenuTriggerProp
   );
 };
 
+DropdownSubmenuTrigger.displayName = "HeroUI.Dropdown.SubmenuTrigger";
+
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Item Indicator (MenuItemIndicator wrapper)
  * -----------------------------------------------------------------------------------------------*/
@@ -160,6 +174,8 @@ const DropdownItemIndicator = (props: DropdownItemIndicatorProps) => {
   return <MenuItemIndicator {...props} />;
 };
 
+DropdownItemIndicator.displayName = "HeroUI.Dropdown.ItemIndicator";
+
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Section (MenuSection wrapper)
  * -----------------------------------------------------------------------------------------------*/
@@ -168,6 +184,8 @@ interface DropdownSectionProps extends ComponentPropsWithRef<typeof MenuSectionR
 const DropdownSection = (props: DropdownSectionProps) => {
   return <MenuSectionRoot {...props} />;
 };
+
+DropdownSection.displayName = "HeroUI.Dropdown.Section";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

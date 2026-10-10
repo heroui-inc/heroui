@@ -48,6 +48,8 @@ const ListBoxItemRoot = ({children, className, variant, ...props}: ListBoxItemRo
   );
 };
 
+ListBoxItemRoot.displayName = "HeroUI.ListBoxItem";
+
 /* -------------------------------------------------------------------------------------------------
  * ListBox Item Indicator
  * -----------------------------------------------------------------------------------------------*/
@@ -102,6 +104,8 @@ const ListBoxItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "spa
     </dom.span>
   );
 };
+
+ListBoxItemIndicator.displayName = "HeroUI.ListBoxItem.Indicator";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

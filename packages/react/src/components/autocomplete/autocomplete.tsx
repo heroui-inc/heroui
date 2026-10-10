@@ -91,6 +91,8 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
   );
 };
 
+AutocompleteRoot.displayName = "HeroUI.Autocomplete";
+
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Trigger
  * -----------------------------------------------------------------------------------------------*/
@@ -150,7 +152,7 @@ const AutocompleteTrigger = ({
   );
 };
 
-AutocompleteTrigger.displayName = "AutocompleteTrigger";
+AutocompleteTrigger.displayName = "HeroUI.Autocomplete.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Value
@@ -170,6 +172,8 @@ const AutocompleteValue = ({children, className, ...props}: AutocompleteValuePro
     </SelectValuePrimitive>
   );
 };
+
+AutocompleteValue.displayName = "HeroUI.Autocomplete.Value";
 
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Indicator
@@ -216,6 +220,8 @@ const AutocompleteIndicator = <E extends keyof React.JSX.IntrinsicElements = "sv
 
   return <ButtonPrimitive>{indicator}</ButtonPrimitive>;
 };
+
+AutocompleteIndicator.displayName = "HeroUI.Autocomplete.Indicator";
 
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Popover
@@ -270,6 +276,8 @@ const AutocompletePopover = ({
   );
 };
 
+AutocompletePopover.displayName = "HeroUI.Autocomplete.Popover";
+
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Filter
  * -----------------------------------------------------------------------------------------------*/
@@ -282,6 +290,8 @@ const AutocompleteFilter = ({children, ...props}: AutocompleteFilterProps) => {
     </AutocompletePrimitive>
   );
 };
+
+AutocompleteFilter.displayName = "HeroUI.Autocomplete.Filter";
 
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Clear Button
@@ -342,6 +352,8 @@ const AutocompleteClearButton = <E extends keyof React.JSX.IntrinsicElements = "
     </dom.button>
   );
 };
+
+AutocompleteClearButton.displayName = "HeroUI.Autocomplete.ClearButton";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

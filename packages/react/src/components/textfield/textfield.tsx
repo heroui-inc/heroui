@@ -49,6 +49,8 @@ const TextFieldRoot = ({children, className, fullWidth, variant, ...props}: Text
   );
 };
 
+TextFieldRoot.displayName = "HeroUI.TextField";
+
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
