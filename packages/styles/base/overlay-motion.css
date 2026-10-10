@@ -32,7 +32,13 @@
   }
 }
 
+/* Both ends are set. An implicit `transform: none` start does not interpolate on WebKit,
+   so the close animation never becomes `running` and the overlay unmounts immediately. */
 @keyframes heroui-overlay-exit {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
   to {
     opacity: 0;
     transform: translate3d(0, 0, 0) scale(0.95);
