@@ -2,9 +2,9 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.7 — patch release",
+        "label": "HeroUI React v3.2.7 — React Aria 1.22.0 upgrade",
         "href": "/docs/react/releases/v3-2-7",
-        "date": "2026-09-27"
+        "date": "2026-10-10"
       },
       {
         "label": "HeroUI Native v1.0.10 — patch release",

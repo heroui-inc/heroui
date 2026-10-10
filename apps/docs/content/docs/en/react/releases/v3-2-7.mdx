@@ -1,15 +1,13 @@
 ---
 title: v3.2.7
-description: Patch release that nests list popover radii with item padding, keeps picker indicators off short labels, clips AvatarGroup to the avatar radius, preserves the Checkbox draw animation, and removes the ScrollShadow mask seam at fractional pixel ratios.
-github:
-  pull: 6892
+description: React Aria upgrade to 1.22.0 (react-aria@3.53.0), plus fixes for CloseButton aria-labels, list popover radii, picker indicators, AvatarGroup clipping, Checkbox animation, ScrollShadow seams, Toast on iOS Safari, Calendar weekday headers, and Dropdown submenu alignment.
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-muted">September 27, 2026</span>
+  <span className="text-sm text-muted">October 10, 2026</span>
 </div>
 
-Patch release: [Select](/docs/components/select), [Dropdown](/docs/components/dropdown), [Autocomplete](/docs/components/autocomplete), and [ComboBox](/docs/components/combo-box) popovers nest their corner radius with the item padding and keep the selection indicator off short labels. [AvatarGroup](/docs/components/avatar-group) clip overlap follows the avatar's own radius. [Checkbox](/docs/components/checkbox) keeps its checkmark mounted so the draw animation no longer flashes, and [ScrollShadow](/docs/components/scroll-shadow) no longer paints a seam at fractional device pixel ratios.
+React Aria upgrade: HeroUI bumps `react-aria-components` to `1.22.0` (`react-aria@3.53.0`). [CloseButton](/docs/components/close-button) no longer hardcodes `aria-label="Close"`, so slot-provided labels (for example the localized [Toast](/docs/components/toast) close control) are preserved. This release also nests [Select](/docs/components/select), [Dropdown](/docs/components/dropdown), [Autocomplete](/docs/components/autocomplete), and [ComboBox](/docs/components/combo-box) popover radii with item padding, keeps picker indicators off short labels, aligns [Dropdown](/docs/components/dropdown) submenu padding and section trigger icons, fixes [Toast](/docs/components/toast) layout on iOS Safari, keeps [Calendar](/docs/components/calendar) weekday headers in equal columns, and includes the v3.2.6 follow-up fixes for [AvatarGroup](/docs/components/avatar-group), [Checkbox](/docs/components/checkbox), and [ScrollShadow](/docs/components/scroll-shadow).
 
 ## Installation
 
@@ -38,28 +36,42 @@ Update to the latest version:
   </Tab>
 </Tabs>
 
+<Callout type="warning">
+  **Peer dependencies.** This release requires `react-aria-components@^1.22.0` and `react-aria@^3.53.0`. Align your app’s installed versions when upgrading.
+</Callout>
+
 <Callout type="info">
   **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
 </Callout>
 
+## Dependencies
+
+- **React Aria**: Upgrade to [React Aria 1.22.0](https://react-aria.adobe.com/releases/v1-22-0) — `react-aria-components@1.22.0`, `react-aria@3.53.0`, `react-stately@3.51.0`, `@react-types/shared@3.37.0`, and `@internationalized/number@3.6.9` ([#6939](https://github.com/heroui-inc/heroui/pull/6939)).
+- **Security**: Patch open Dependabot alerts in transitive dependencies ([#6938](https://github.com/heroui-inc/heroui/pull/6938)).
+
 ## Bug Fixes
 
-- **List popovers**: Nest the outer radius with the item padding. The popover used `--radius-3xl` (24px), which is rounder than a 16px item sitting inside 6px of list padding, so the corner gap was tighter than the gap along the sides. The radius is now the item radius plus that padding, still capped at 32px, on [Select](/docs/components/select), [Dropdown](/docs/components/dropdown), [Autocomplete](/docs/components/autocomplete), and [ComboBox](/docs/components/combo-box) ([#6916](https://github.com/heroui-inc/heroui/pull/6916)).
-- **Picker indicators**: Keep the checkmark off the label. `px-2.5` on [Select](/docs/components/select), [ComboBox](/docs/components/combo-box), and [Autocomplete](/docs/components/autocomplete) items was loaded after the `pe-7` that reserves room for `ListBox.ItemIndicator`, so a popover sized to its content painted the indicator on top of short labels. Items that contain an indicator now re-assert `pe-7` ([#6908](https://github.com/heroui-inc/heroui/pull/6908)).
-- **AvatarGroup**: Clip overlap follows the avatar radius. The default `clip` mask cut a circle of `--avatar-size / 2`, which only clears the middle of each flat edge when a themed `--radius` makes the avatars rounded squares. [Avatar](/docs/components/avatar) now publishes `--avatar-radius`, and the group cuts a rounded rect grown by the seam width. Circular avatars still resolve to the same circle ([#6884](https://github.com/heroui-inc/heroui/pull/6884)).
-- **Checkbox**: Keep the checkmark SVG mounted across state changes so its `strokeDashoffset` draw animation has a start frame. Clearing or toggling an indeterminate [Table](/docs/components/table) selection checkbox was replacing the line with a freshly mounted checkmark, which flashed. The indeterminate line is now overlaid only while indeterminate ([#6890](https://github.com/heroui-inc/heroui/pull/6890)).
-- **ScrollShadow**: Remove the 1px seam the fade mask paints through content at fractional device pixel ratios (for example 125% display scaling). The gradient layer and the opaque scrollbar lane split a device pixel, and the two partial coverages composited to less than full opacity. The gradient now covers the whole box and the lane stays opaque on top, in both orientations and in controlled mode ([#6914](https://github.com/heroui-inc/heroui/pull/6914)).
-- **Radio**: Pair `:focus-visible`, `:hover`, and `:active` with the existing `data-*` state rules, with hover behind `@media (hover: hover)`, so [Radio](/docs/components/radio) styling holds before hydration ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
-- **Toast**: Pair `data-*` attributes with the existing `:focus-visible` and `:hover` rules on [Toast](/docs/components/toast) ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
+- **CloseButton**: Stop hardcoding `aria-label="Close"` on the React Aria `Button`. Explicit `aria-label` props and slot context labels (toast `close`, search field `clear`, tag `remove`) are no longer overridden ([#6946](https://github.com/heroui-inc/heroui/pull/6946)).
+- **Toast**: Collapse the bottom-region anchor on iOS Safari so stacked toasts sit flush with the safe area ([#6936](https://github.com/heroui-inc/heroui/pull/6936)). Replace `useMediaQuery` action placement with a CSS grid layout ([#6932](https://github.com/heroui-inc/heroui/pull/6932)).
+- **Dropdown**: Align submenu item start padding with the menu padding scale ([#6941](https://github.com/heroui-inc/heroui/pull/6941)). Center the trigger icon in the with-sections example ([#6944](https://github.com/heroui-inc/heroui/pull/6944)).
+- **Calendar**: Keep weekday header labels in equal columns ([#6925](https://github.com/heroui-inc/heroui/pull/6925)).
+- **Overlays**: Release the scrollbar gutter React Aria reserves while a modal or drawer is open ([#6924](https://github.com/heroui-inc/heroui/pull/6924)).
+- **List popovers**: Nest the outer radius with the item padding on [Select](/docs/components/select), [Dropdown](/docs/components/dropdown), [Autocomplete](/docs/components/autocomplete), and [ComboBox](/docs/components/combo-box) ([#6916](https://github.com/heroui-inc/heroui/pull/6916)).
+- **Picker indicators**: Keep the checkmark off the label in [Select](/docs/components/select), [ComboBox](/docs/components/combo-box), and [Autocomplete](/docs/components/autocomplete) popovers ([#6908](https://github.com/heroui-inc/heroui/pull/6908)).
+- **AvatarGroup**: Clip overlap follows the avatar radius ([#6884](https://github.com/heroui-inc/heroui/pull/6884)).
+- **Checkbox**: Keep the checkmark SVG mounted so the draw animation no longer flashes when toggling indeterminate selection in [Table](/docs/components/table) ([#6890](https://github.com/heroui-inc/heroui/pull/6890)).
+- **ScrollShadow**: Remove the mask seam at fractional device pixel ratios ([#6914](https://github.com/heroui-inc/heroui/pull/6914)).
+- **Radio**: Pair `:focus-visible`, `:hover`, and `:active` with the existing `data-*` state rules on [Radio](/docs/components/radio) ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
+- **Toast styles**: Pair `data-*` attributes with `:focus-visible` and `:hover` rules ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
 
 ## Styles
 
-- **Disclosure**: Remove a stray `.accordion__heading` rule from `disclosure.css`. [Accordion](/docs/components/accordion) heading layout stays in `accordion.css` ([#6904](https://github.com/heroui-inc/heroui/pull/6904)).
-- **Chip**: Empty `.chip--md`. It re-declared the `text-xs` already set on the base `.chip` class ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
+- **Disclosure**: Remove a stray `.accordion__heading` rule from `disclosure.css` ([#6904](https://github.com/heroui-inc/heroui/pull/6904)).
+- **Chip**: Empty `.chip--md` — it re-declared the `text-xs` already on the base `.chip` class ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
 
 ## Components
 
-- **Display names**: Set `displayName` on component parts to `HeroUI.Component.SubPart`, matching the compound export path, and correct seven that did not (`HeroUI.ToastTitle` and the other flat Toast names, plus `AutocompleteTrigger`). Shared parts keep the name of the module that defines them. `toast.*`, `Toast.Queue`, and `Table.Collection` stay unnamed — the first two are not components, and `Table.Collection` is React Aria's `Collection` ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
+- **Display names**: Set `displayName` on component parts to `HeroUI.Component.SubPart` and correct seven mismatched names ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
 - **EmptyState**: Add the missing `"use client"` directive ([#6879](https://github.com/heroui-inc/heroui/pull/6879)).
 
 ## Links
