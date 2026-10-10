@@ -138,6 +138,12 @@ const DropdownPopover = ({
 
     if (!holdExit || !popover) return;
 
+    // The open path clips the popover until a keyboard check finishes. Closing
+    // before that check returns would play the exit inside an empty clip.
+    popover.style.clip = "auto";
+    popover.style.clipPath = "none";
+    popover.style.maskImage = "none";
+
     let settled = false;
     // Inside the layout effect, setState is already flushed before paint.
     const finish = () => {
@@ -227,6 +233,15 @@ const DropdownPopover = ({
     };
   }, [holdExit, endExit]);
 
+  // React Aria reveals the popover only after `runAfterKeyboard`. On a touch
+  // device that waits up to ~800ms when focus looks like a text field, which
+  // the docs page hits and the Storybook iframe does not. Skip the enter
+  // animation so that late reveal cannot play the menu in from opacity 0.
+  const skipEnterAnimation =
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
   return (
     <SurfaceContext
       value={{
@@ -244,6 +259,7 @@ const DropdownPopover = ({
         data-slot="dropdown-popover"
         isExiting={holdExit || isExitingProp}
         placement={placement}
+        shouldSkipAnimation={skipEnterAnimation || props.shouldSkipAnimation}
       >
         {children}
       </PopoverPrimitive>

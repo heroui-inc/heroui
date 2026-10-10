@@ -94,6 +94,22 @@
     @apply pointer-events-none;
   }
 
+  /*
+   * Touch devices hide this popover (inline opacity, clip, clip-path, mask) until
+   * React Aria decides a software keyboard is not opening. That wait is ~800ms, so
+   * a second tap closes the menu before it is ever shown. Once it has a placement,
+   * show it. The enter animation is skipped on these devices so the late callback
+   * cannot hide it again. The close animation still owns opacity while exiting.
+   */
+  @media (hover: none) and (pointer: coarse) {
+    &[data-placement]:not([data-exiting="true"]) {
+      opacity: 1 !important;
+      clip: auto !important;
+      clip-path: none !important;
+      mask-image: none !important;
+    }
+  }
+
   /* Arrow styling */
   & [data-slot="popover-overlay-arrow"] {
     fill: var(--overlay);
