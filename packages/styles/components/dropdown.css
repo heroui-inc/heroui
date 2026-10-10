@@ -18,7 +18,7 @@
     transform 250ms var(--ease-out-quart),
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
-  @apply motion-reduce:transition-none;
+  @apply transform-gpu motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -43,7 +43,6 @@
   /* Default active/pressed state - scale transform */
   &:active,
   &[data-pressed="true"] {
-    @apply will-change-transform;
     transform: scale(0.97);
   }
 }

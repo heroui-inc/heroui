@@ -57,6 +57,11 @@
     transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
   }
 
+  &[data-exiting="true"],
+  &[data-entering="true"] {
+    will-change: opacity;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
@@ -148,7 +153,6 @@
   --drawer-enter-ease: cubic-bezier(0.32, 0.72, 0, 1);
   --drawer-exit-ease: cubic-bezier(0.32, 0.72, 0, 1);
 
-  /* Kept: the drawer is dragged to dismiss, so it needs its layer ready before the first move. */
   will-change: translate;
   transition: translate var(--drawer-enter-duration) var(--drawer-enter-ease);
 

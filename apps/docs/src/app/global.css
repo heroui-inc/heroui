@@ -306,22 +306,6 @@
   opacity: 1;
 }
 
-/* Overlays like Dropdown/Select make the rest of the page `inert` while open, which forces a
-   style recalculation over every rendered element. Skip rendering work for subtrees the user
-   can't see so that recalculation stays cheap on mid-range mobile devices. */
-
-/* The closed mobile sidebar is already `invisible` (Fumadocs adds it once the exit animation ends). */
-#nd-sidebar-mobile.invisible {
-  content-visibility: hidden;
-}
-
-/* Code blocks are large token trees. `auto` skips them while off-screen and the intrinsic size
-   keeps the scroll height stable (the last rendered size is remembered). */
-#nd-page figure {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 240px;
-}
-
 #nd-sidebar-mobile {
   [data-docs-sidebar-viewport] {
     p {

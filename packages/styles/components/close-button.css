@@ -16,7 +16,7 @@
     color 150ms var(--ease-out),
     background-color 100ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
-  @apply motion-reduce:transition-none;
+  @apply transform-gpu motion-reduce:transition-none;
 
   /* Focus visible state */
   &:focus-visible:not([data-focused]),
@@ -60,7 +60,6 @@
 
   &:active,
   &[data-pressed="true"] {
-    @apply will-change-transform;
     transform: scale(0.93);
   }
 }
