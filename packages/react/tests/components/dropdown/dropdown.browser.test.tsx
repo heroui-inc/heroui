@@ -135,8 +135,8 @@ describe("Dropdown (browser)", () => {
       .find((item): item is CSSAnimation => item instanceof CSSAnimation);
 
     expect(animation?.animationName).toBe("heroui-overlay-exit");
-    // Holds the closed keyframe after the animation ends so WebKit cannot paint the menu again.
-    expect(getComputedStyle(popover).animationFillMode).toBe("both");
+    // `forwards` / `both` make WebKit skip the close animation.
+    expect(getComputedStyle(popover).animationFillMode).toBe("none");
 
     const animatedProperties = new Set(
       (animation?.effect as KeyframeEffect)

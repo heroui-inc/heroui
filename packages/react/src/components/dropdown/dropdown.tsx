@@ -13,6 +13,7 @@ import {
   Popover as PopoverPrimitive,
   SubmenuTrigger as SubmenuTriggerPrimitive,
 } from "react-aria-components/Menu";
+import {flushSync} from "react-dom";
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {MenuItemIndicator, MenuItemRoot, MenuItemSubmenuIndicator} from "../menu-item";
@@ -138,10 +139,20 @@ const DropdownPopover = ({
     if (!holdExit || !popover) return;
 
     let settled = false;
+    // Inside the layout effect, setState is already flushed before paint.
     const finish = () => {
       if (settled) return;
       settled = true;
       endExit();
+    };
+    // After the animation ends the fill is `none`, so computed opacity is already 1.
+    // Pin it and unmount before that frame is painted. A normal setState paints the
+    // fully visible menu once, which is the mobile flash.
+    const finishBeforePaint = () => {
+      if (settled) return;
+      settled = true;
+      popover.style.opacity = "0";
+      flushSync(endExit);
     };
     const exitAnimations = () =>
       popover.getAnimations().filter((animation): animation is CSSAnimation => {
@@ -157,7 +168,10 @@ const DropdownPopover = ({
         return;
       }
 
-      void Promise.all(animations.map((animation) => animation.finished)).then(finish, finish);
+      void Promise.all(animations.map((animation) => animation.finished)).then(
+        finishBeforePaint,
+        finishBeforePaint,
+      );
     };
 
     const current = exitAnimations();
@@ -189,12 +203,12 @@ const DropdownPopover = ({
     // reports nothing until the next frame. Hold until it is running, or until
     // its duration elapses if it never starts.
     const onAnimationDone = (event: AnimationEvent) => {
-      if (event.target === popover) finish();
+      if (event.target === popover) finishBeforePaint();
     };
 
     popover.addEventListener("animationend", onAnimationDone);
     popover.addEventListener("animationcancel", onAnimationDone);
-    const timeout = window.setTimeout(finish, animationDurationMs(popover) + 50);
+    const timeout = window.setTimeout(finishBeforePaint, animationDurationMs(popover) + 50);
     const frame = window.requestAnimationFrame(() => {
       const next = exitAnimations();
 
