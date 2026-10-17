@@ -23,7 +23,7 @@ import {
   Modal as ModalPrimitive,
 } from "react-aria-components/Modal";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, useResolvedClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
@@ -176,7 +176,10 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
 
       if (shouldDismiss && overlayState) {
         // Keep the inline transform — it compounds with the content exit animation
-        // so the drawer continues sliding from the dragged position
+        // so the drawer continues sliding from the dragged position.
+        // Drop the inline `transition: none` set while dragging, otherwise the exit
+        // `translate` transition never runs and the drawer disappears without sliding out.
+        el.style.transition = "";
         overlayState.close();
       } else {
         // Snap back with a spring-like ease
@@ -196,10 +199,35 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
     [isVertical, overlayState],
   );
 
+  const onPointerCancel = useCallback((e: React.PointerEvent) => {
+    // Normal pointer-up also releases capture; don't undo its exit animation.
+    if (!isDragging.current) return;
+
+    isDragging.current = false;
+    isActive.current = false;
+    currentOffset.current = 0;
+    velocity.current = 0;
+
+    const el = dialogRef.current;
+
+    if (!el) return;
+
+    // A cancelled gesture must restore the resting position without dismissing.
+    el.style.transform = "";
+    el.style.transition = "";
+    try {
+      el.releasePointerCapture(e.pointerId);
+    } catch {
+      // Cancellation or lost capture may have already released the pointer.
+    }
+  }, []);
+
   return {
     dialogRef,
     dragHandlers: isDismissable
       ? {
+          onLostPointerCapture: onPointerCancel,
+          onPointerCancel,
           onPointerDown,
           onPointerMove,
           onPointerUp,
@@ -258,7 +286,7 @@ const DrawerTrigger = ({children, className, ...props}: DrawerTriggerProps) => {
 
   return (
     <ButtonPrimitive
-      className={composeTwRenderProps(className, slots?.trigger())}
+      className={useResolvedClassName(className, slots?.trigger())}
       data-slot="drawer-trigger"
       {...props}
     >
@@ -299,7 +327,7 @@ const DrawerBackdrop = ({
 
   return (
     <ModalOverlayPrimitive
-      className={composeTwRenderProps(className, updatedSlots?.backdrop())}
+      className={useResolvedClassName(className, updatedSlots?.backdrop())}
       data-slot="drawer-backdrop"
       isDismissable={isDismissable}
       {...props}
@@ -342,7 +370,7 @@ const DrawerContent = ({
 
   return (
     <ModalPrimitive
-      className={composeTwRenderProps(className, updatedSlots?.content())}
+      className={useResolvedClassName(className, updatedSlots?.content())}
       data-placement={placement}
       data-slot="drawer-content"
       {...props}
@@ -542,7 +570,7 @@ const DrawerCloseTrigger = ({className, ...rest}: DrawerCloseTriggerProps) => {
 
   return (
     <CloseButton
-      className={composeTwRenderProps(className, slots?.closeTrigger())}
+      className={useResolvedClassName(className, slots?.closeTrigger())}
       data-slot="drawer-close-trigger"
       slot="close"
       {...rest}

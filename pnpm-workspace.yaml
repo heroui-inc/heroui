@@ -14,6 +14,7 @@ overrides:
   # @tailwindcss/typography) ship updated ranges.
   # GHSA-2883-xcg3-v3hh, GHSA-w27v-7q3p-w38r, GHSA-4vpr-x523-8j87
   js-yaml@4: "^4.3.2"
+  nanoid@3: "^3.3.18"
   svgo@2: "^2.8.4"
   # GHSA-wq5f-xc86-pv6w
   sharp: "^0.35.5"
