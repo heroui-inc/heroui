@@ -77,7 +77,7 @@
     "@react-aria/ssr": "3.10.1",
     "@react-aria/utils": "3.34.1",
     "@react-stately/data": "3.16.1",
-    "@storybook/react": "10.6.0",
+    "@storybook/react": "10.6.3",
     "@tailwindcss/vite": "4.3.3",
     "@types/fs-extra": "11.0.4",
     "@types/react": "19.3.0",
