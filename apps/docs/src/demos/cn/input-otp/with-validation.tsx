@@ -7,7 +7,7 @@ export function WithValidation() {
   const [value, setValue] = React.useState("");
   const [isInvalid, setIsInvalid] = React.useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const code = formData.get("code");

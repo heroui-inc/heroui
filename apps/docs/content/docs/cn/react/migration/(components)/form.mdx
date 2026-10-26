@@ -34,7 +34,7 @@ v2 与 v3 之间，Form 组件的 prop 大体保持不变，仅新增了一个�
 import { Form, Button } from "@heroui/react";
 
 export default function App() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted");
   };
@@ -54,7 +54,7 @@ export default function App() {
 import { Form, Button } from "@heroui/react";
 
 export default function App() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted");
   };

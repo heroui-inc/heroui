@@ -167,7 +167,7 @@ export const FormExample: Story = {
     const currentDate = today(getLocalTimeZone());
     const isInvalid = value != null && value.compare(currentDate) < 0;
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (!value || isInvalid) return;
 
