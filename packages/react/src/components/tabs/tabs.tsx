@@ -24,6 +24,7 @@ import {ScrollShadow} from "../scroll-shadow";
  * Tabs Context
  * -----------------------------------------------------------------------------------------------*/
 type TabsContext = {
+  isIndicatorReady?: boolean;
   orientation?: "horizontal" | "vertical";
   slots?: ReturnType<typeof tabsVariants>;
 };
@@ -56,8 +57,22 @@ const TabsRoot = ({
   variant,
   ...props
 }: TabsRootProps) => {
+  const [isIndicatorReady, setIsIndicatorReady] = React.useState(false);
+
+  React.useEffect(() => {
+    // RAC can replay the indicator's layout effects while hydrating its collection.
+    // Wait until the first client frame so those effects cannot retain an initial
+    // transition offset. Subsequent selections keep their normal animation.
+    const frame = requestAnimationFrame(() => setIsIndicatorReady(true));
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   const slots = React.useMemo(() => tabsVariants({align, variant}), [align, variant]);
-  const contextValue = React.useMemo(() => ({orientation, slots}), [orientation, slots]);
+  const contextValue = React.useMemo(
+    () => ({isIndicatorReady, orientation, slots}),
+    [isIndicatorReady, orientation, slots],
+  );
 
   return (
     <TabsContext value={contextValue}>
@@ -263,11 +278,12 @@ interface TabIndicatorProps extends ComponentPropsWithRef<typeof SelectionIndica
 }
 
 const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
-  const {slots} = use(TabsContext);
+  const {isIndicatorReady = false, slots} = use(TabsContext);
 
   return (
     <SelectionIndicatorPrimitive
       className={composeSlotClassName(slots?.tabIndicator, className)}
+      data-animation-ready={isIndicatorReady}
       data-slot="tabs-indicator"
       {...props}
     />
