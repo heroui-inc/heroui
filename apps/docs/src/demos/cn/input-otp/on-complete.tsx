@@ -14,7 +14,7 @@ export function OnComplete() {
     console.log("Code complete:", code);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsSubmitting(true);

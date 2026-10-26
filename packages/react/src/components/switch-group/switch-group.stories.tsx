@@ -82,7 +82,7 @@ export const Horizontal: Story = {
 
 export const Form: Story = {
   render: function FormExample() {
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
       const formData = new FormData(e.target as HTMLFormElement);
 

@@ -34,7 +34,7 @@ In v2, Form component usage:
 import { Form, Button } from "@heroui/react";
 
 export default function App() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted");
   };
@@ -54,7 +54,7 @@ In v3, Form component usage remains the same:
 import { Form, Button } from "@heroui/react";
 
 export default function App() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted");
   };

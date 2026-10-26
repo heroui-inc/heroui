@@ -21,7 +21,7 @@ export function FormExample() {
   const currentDate = today(getLocalTimeZone());
   const isInvalid = value != null && value.compare(currentDate) < 0;
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!value || isInvalid) {

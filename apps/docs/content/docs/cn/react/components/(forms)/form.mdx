@@ -84,9 +84,9 @@ Form 组件是 React Aria Form 原语的包裹层，提供表单校验与提交�
 | `children` | `React.ReactNode` | - | 表单内容（字段、按钮等） |
 | `encType` | `'application/x-www-form-urlencoded' \| 'multipart/form-data' \| 'text/plain'` | - | 表单数据提交的编码类型 |
 | `method` | `'get' \| 'post'` | - | 提交表单时使用的 HTTP 方法 |
-| `onInvalid` | `(event: FormEvent<HTMLFormElement>) => void` | - | 表单校验失败时调用。默认聚焦第一个无效字段。使用 `preventDefault()` 可自定义聚焦行为 |
-| `onReset` | `(event: FormEvent<HTMLFormElement>) => void` | - | 表单重置时调用 |
-| `onSubmit` | `(event: FormEvent<HTMLFormElement>) => void` | - | 表单提交时调用 |
+| `onInvalid` | `(event: SyntheticEvent<HTMLFormElement>) => void` | - | 表单校验失败时调用。默认聚焦第一个无效字段。使用 `preventDefault()` 可自定义聚焦行为 |
+| `onReset` | `(event: SyntheticEvent<HTMLFormElement>) => void` | - | 表单重置时调用 |
+| `onSubmit` | `(event: SyntheticEvent<HTMLFormElement>) => void` | - | 表单提交时调用 |
 | `target` | `'_self' \| '_blank' \| '_parent' \| '_top'` | - | 提交后显示响应的位置 |
 | `validationBehavior` | `'native' \| 'aria'` | `'native'` | 使用原生 HTML 校验还是 ARIA 校验。`native` 阻止提交，`aria` 实时显示错误 |
 | `validationErrors` | `ValidationErrors` | - | 按字段名映射的服务端校验错误。立即显示，用户修改字段时清除 |
@@ -124,7 +124,9 @@ Form 组件集成 React Aria 校验系统，支持：
 FormData 示例：
 
 ```tsx
-function handleSubmit(e: FormEvent<HTMLFormElement>) {
+import type {SyntheticEvent} from "react";
+
+function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
   const data = Object.fromEntries(formData);
