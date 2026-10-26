@@ -329,7 +329,7 @@ export const FormExample: Story = {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const isInvalid = value === null;
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       if (!value) {

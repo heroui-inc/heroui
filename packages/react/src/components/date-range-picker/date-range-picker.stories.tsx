@@ -216,7 +216,7 @@ export const FormExample: Story = {
     const isInvalid =
       value != null && (value.start.compare(currentDate) < 0 || value.end.compare(value.start) < 0);
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (!value || isInvalid) return;
 

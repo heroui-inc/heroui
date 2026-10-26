@@ -3,7 +3,7 @@
 import {Button, Card, Form, Input, Label, Link, TextField} from "@heroui/react";
 
 export function WithForm() {
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data: Record<string, string> = {};
