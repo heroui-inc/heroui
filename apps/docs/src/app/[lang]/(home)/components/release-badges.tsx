@@ -1,12 +1,20 @@
 "use client";
 
-import {Rocket} from "@gravity-ui/icons";
+import {ChevronRight, Globe, Smartphone} from "@gravity-ui/icons";
 import LinkRoot from "fumadocs-core/link";
-import {AnimatePresence, animate, motion, useMotionValue, useReducedMotion} from "motion/react";
+import {motion, useReducedMotion} from "motion/react";
 import {useEffect, useMemo, useState} from "react";
 
+import {cn} from "@/utils/cn";
+
 interface ReleaseBadge {
-  label: string;
+  /** "web" or "native". Picks the same icon and color as the docs framework tabs. */
+  framework: string;
+  /** Short product name, e.g. "React" or "Native". */
+  name: string;
+  version: string;
+  /** One-line summary of the release. */
+  highlight: string;
   href: string;
   /** ISO date string (e.g. "2026-06-30") used to order badges newest-first. */
   date?: string;
@@ -14,23 +22,74 @@ interface ReleaseBadge {
 
 interface ReleaseBadgesProps {
   badges: ReleaseBadge[];
-  /** Autoplay interval in milliseconds. */
+  /** Time each release spends in front before the stack cycles, in milliseconds. */
   intervalMs?: number;
 }
 
-// Soft, fluid settle for the badge slide (Apple-style spring, minimal bounce).
-const slideSpring = {bounce: 0.18, type: "spring", visualDuration: 0.4} as const;
-// Quick ease-out fade so opacity never lingers behind the movement.
-const fadeOut = {duration: 0.22, ease: [0.215, 0.61, 0.355, 1]} as const;
+// Card geometry (px). Resting: cards behind peek PEEK px above the front card.
+// Expanded: every card gets its own row, GAP px apart, fanning upward.
+const CARD_HEIGHT = 32;
+const PEEK = 8;
+const GAP = 8;
+// How much each card behind the front one shrinks while resting.
+const SCALE_STEP = 0.08;
+// Cards deeper than this are hidden while resting.
+const MAX_VISIBLE_BEHIND = 2;
 
-function BadgePill({badge}: {badge: ReleaseBadge}) {
+const stackSpring = {bounce: 0.15, type: "spring", visualDuration: 0.35} as const;
+
+const frameworkStyles = {
+  native: {
+    Icon: Smartphone,
+    iconClass: "bg-indigo-500/12 text-indigo-500 dark:text-indigo-400",
+  },
+  web: {
+    Icon: Globe,
+    iconClass: "bg-sky-400/15 text-sky-500 dark:text-sky-400",
+  },
+};
+
+const toTime = (badge: ReleaseBadge): number => {
+  if (!badge.date) return Number.NEGATIVE_INFINITY;
+
+  const time = new Date(badge.date).getTime();
+
+  return Number.isNaN(time) ? Number.NEGATIVE_INFINITY : time;
+};
+
+function BadgeCard({badge, isHidden}: {badge: ReleaseBadge; isHidden: boolean}) {
+  const {Icon, iconClass} =
+    badge.framework === "native" ? frameworkStyles.native : frameworkStyles.web;
+
   return (
     <LinkRoot
-      className="flex items-center gap-1 rounded-full bg-accent-soft px-2 py-1 text-xs text-accent-soft-foreground transition-colors hover:bg-accent-soft-hover"
+      className="group flex h-8 w-full items-center gap-2.5 rounded-full bg-surface py-1 ps-1 pe-3 text-start shadow-[0_1px_2px_rgba(24,24,27,0.06),0_8px_20px_-8px_rgba(24,24,27,0.16)] ring-1 ring-foreground/[0.07] outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
       href={badge.href}
     >
-      <Rocket className="size-3 shrink-0 text-accent-soft-foreground" />
-      <span className="max-w-60 truncate sm:max-w-full">{badge.label}</span>
+      <motion.span
+        animate={{opacity: isHidden ? 0 : 1}}
+        className="flex min-w-0 flex-1 items-center gap-2.5"
+        initial={false}
+        transition={{duration: 0.2}}
+      >
+        <span
+          className={cn("flex size-6 shrink-0 items-center justify-center rounded-full", iconClass)}
+        >
+          <Icon aria-hidden className="size-3.5" />
+        </span>
+        <span className="flex shrink-0 items-baseline gap-1.5 text-[13px] leading-4 whitespace-nowrap">
+          <span className="font-semibold text-foreground">{badge.name}</span>
+          <span className="font-medium text-muted tabular-nums">{badge.version}</span>
+        </span>
+        <span aria-hidden className="h-3 w-px shrink-0 bg-border" />
+        <span className="min-w-0 flex-1 truncate text-[13px] leading-4 text-foreground/70">
+          {badge.highlight}
+        </span>
+        <ChevronRight
+          aria-hidden
+          className="size-3 shrink-0 text-muted/70 transition-[color,translate] duration-150 group-hover:translate-x-0.5 group-hover:text-foreground rtl:-scale-x-100"
+        />
+      </motion.span>
     </LinkRoot>
   );
 }
@@ -38,87 +97,67 @@ function BadgePill({badge}: {badge: ReleaseBadge}) {
 export function ReleaseBadges({badges, intervalMs = 5000}: ReleaseBadgesProps) {
   const reduceMotion = useReducedMotion() ?? false;
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const progress = useMotionValue(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocusWithin, setIsFocusWithin] = useState(false);
 
-  // Order badges newest-first so the latest release is shown first. Badges
-  // without a valid date sink to the bottom while preserving their relative
-  // order (stable sort).
-  const sortedBadges = useMemo(() => {
-    const toTime = (badge: ReleaseBadge): number => {
-      if (!badge.date) return Number.NEGATIVE_INFINITY;
-
-      const time = new Date(badge.date).getTime();
-
-      return Number.isNaN(time) ? Number.NEGATIVE_INFINITY : time;
-    };
-
-    return [...badges].sort((a, b) => toTime(b) - toTime(a));
-  }, [badges]);
+  // Newest release first. Badges without a valid date sink to the bottom while
+  // keeping their relative order (stable sort).
+  const sortedBadges = useMemo(() => [...badges].sort((a, b) => toTime(b) - toTime(a)), [badges]);
 
   const count = sortedBadges.length;
+  const isExpanded = isHovered || isFocusWithin;
 
-  // Autoplay: drive a single progress value (transform-only fill) and advance
-  // on completion. Stopping retains the value, so hover/focus pause + resume
-  // and manual jumps stay in sync and interruptible.
+  // Cycle the front card while resting; hovering or focusing the stack pauses it.
   useEffect(() => {
-    if (count <= 1 || paused) return;
+    if (count <= 1 || isExpanded) return;
 
-    if (reduceMotion) {
-      const id = setInterval(() => setIndex((i) => (i + 1) % count), intervalMs);
+    const id = window.setTimeout(() => setIndex((i) => (i + 1) % count), intervalMs);
 
-      return () => clearInterval(id);
-    }
-
-    const remaining = (1 - progress.get()) * intervalMs;
-    const controls = animate(progress, 1, {
-      duration: remaining / 1000,
-      ease: "linear",
-      onComplete: () => {
-        progress.set(0);
-        setIndex((i) => (i + 1) % count);
-      },
-    });
-
-    return () => controls.stop();
-  }, [index, paused, reduceMotion, count, intervalMs, progress]);
+    return () => window.clearTimeout(id);
+  }, [index, isExpanded, count, intervalMs]);
 
   if (count === 0) return null;
 
-  // Single highlight: render the plain badge (no carousel chrome).
-  if (count === 1) {
-    const [only] = sortedBadges;
-
-    return only ? <BadgePill badge={only} /> : null;
-  }
-
-  const activeIndex = index % count;
-  const active = sortedBadges[activeIndex];
-
-  if (!active) return null;
-
   return (
     <div
-      className="flex h-6 items-center justify-center"
-      onBlurCapture={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      className="relative h-10 w-full max-w-96"
+      onFocusCapture={() => setIsFocusWithin(true)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsFocusWithin(false);
+        }
+      }}
     >
-      <AnimatePresence initial={false} mode="popLayout">
-        <motion.div
-          key={activeIndex}
-          animate={{opacity: 1, y: 0}}
-          exit={reduceMotion ? {opacity: 0} : {opacity: 0, y: -10}}
-          initial={reduceMotion ? {opacity: 0} : {opacity: 0, y: 10}}
-          style={{willChange: "transform, opacity"}}
-          transition={
-            reduceMotion ? {duration: 0} : {default: slideSpring, opacity: fadeOut, y: slideSpring}
-          }
-        >
-          <BadgePill badge={active} />
-        </motion.div>
-      </AnimatePresence>
+      {sortedBadges.map((badge, badgeIndex) => {
+        // 0 = front card, 1 = directly behind it, and so on.
+        const slot = (badgeIndex - (index % count) + count) % count;
+        const isHidden = !isExpanded && slot > 0;
+        const isBeyondStack = !isExpanded && slot > MAX_VISIBLE_BEHIND;
+
+        return (
+          <motion.div
+            key={badge.href}
+            initial={false}
+            style={{zIndex: count - slot}}
+            transition={reduceMotion ? {duration: 0} : stackSpring}
+            animate={{
+              opacity: isBeyondStack ? 0 : 1,
+              scale: isExpanded ? 1 : 1 - slot * SCALE_STEP,
+              y: isExpanded ? -slot * (CARD_HEIGHT + GAP) : -slot * PEEK,
+            }}
+            className={cn(
+              "absolute inset-x-0 bottom-0 origin-top",
+              // Bridge the gap below each raised card so moving the pointer
+              // between rows doesn't collapse the stack.
+              slot > 0 && "after:absolute after:inset-x-0 after:top-full after:h-2",
+            )}
+          >
+            <BadgeCard badge={badge} isHidden={isHidden} />
+          </motion.div>
+        );
+      })}
     </div>
   );
 }

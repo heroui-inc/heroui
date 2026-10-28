@@ -2,12 +2,18 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.7 — React Aria 1.22.1 升级",
+        "framework": "web",
+        "name": "React",
+        "version": "v3.2.7",
+        "highlight": "Sheet 组件与 Slider 刻度",
         "href": "/docs/react/releases/v3-2-7",
-        "date": "2026-10-18"
+        "date": "2026-10-28"
       },
       {
-        "label": "HeroUI Native v1.0.11 — Expo SDK 58 与 CSS 层叠层",
+        "framework": "native",
+        "name": "Native",
+        "version": "v1.0.11",
+        "highlight": "Expo SDK 58 与 CSS 层叠层",
         "href": "/docs/native/releases/v1-0-11",
         "date": "2026-10-20"
       }

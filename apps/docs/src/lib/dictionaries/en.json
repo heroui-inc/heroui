@@ -2,12 +2,18 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.7 — React Aria 1.22.1 upgrade",
+        "framework": "web",
+        "name": "React",
+        "version": "v3.2.7",
+        "highlight": "Sheet component & Slider marks",
         "href": "/docs/react/releases/v3-2-7",
-        "date": "2026-10-18"
+        "date": "2026-10-28"
       },
       {
-        "label": "HeroUI Native v1.0.11 — Expo SDK 58 & CSS layers",
+        "framework": "native",
+        "name": "Native",
+        "version": "v1.0.11",
+        "highlight": "Expo SDK 58 & CSS layers",
         "href": "/docs/native/releases/v1-0-11",
         "date": "2026-10-20"
       }
