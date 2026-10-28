@@ -1,13 +1,12 @@
 import type {Metadata} from "next";
 
+import {ArrowRight} from "@gravity-ui/icons";
 import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import {notFound} from "next/navigation";
 
 import {Footer} from "@/components/footer";
-import {StarsCount} from "@/components/github-link";
 import {siteConfig} from "@/config/site";
-import {GitHubIcon} from "@/icons/github";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
 import {absoluteUrl, getLocalizedAlternates} from "@/lib/seo";
@@ -70,38 +69,37 @@ export default async function HomePage({params}: {params: Promise<{lang: string}
   return (
     <main className="flex min-h-[calc(100vh-4rem)] flex-col">
       <section className="z-10 flex min-h-0 flex-1 flex-col items-center px-4 pt-12 text-center">
-        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
+        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center lg:max-w-[840px]">
           <ReleaseBadges badges={home.releaseBadges} />
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-5 lg:text-[64px] lg:leading-[68px] lg:tracking-[-0.035em]">
             {home.titleMain} <span className="block text-muted/70">{home.titleMuted}</span>
           </h1>
-          <p className="text-balance text-muted md:text-lg">{home.description}</p>
-          <div className="mt-4 flex gap-3">
+          <p className="mt-4 max-w-[600px] text-balance text-muted md:text-lg lg:mt-5">
+            {home.description}
+          </p>
+          <div className="mt-6 flex gap-3 lg:mt-8">
             <LinkRoot
-              className={buttonVariants({variant: "primary"})}
               href="/docs/react/getting-started"
+              className={buttonVariants({
+                className: "ps-5 pe-4 text-sm",
+                size: "lg",
+                variant: "primary",
+              })}
             >
               {home.getStarted}
+              <ArrowRight aria-hidden className="size-3.5 rtl:-scale-x-100" />
             </LinkRoot>
             <LinkRoot
-              className={buttonVariants({variant: "outline"})}
               href="/docs/react/components"
+              className={buttonVariants({
+                className: "px-5 text-sm [--button-bg:var(--surface)]",
+                size: "lg",
+                variant: "outline",
+              })}
             >
               {home.viewComponents}
             </LinkRoot>
           </div>
-          <a
-            className="mt-2 flex items-center justify-around gap-2 text-xs text-muted transition-colors hover:text-foreground lg:mt-4"
-            href="https://github.com/heroui-inc/heroui"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <GitHubIcon className="size-4" />
-            <span>
-              {home.githubStarsPrefix} <StarsCount className="p-0 font-normal" />{" "}
-              {home.githubStarsSuffix}
-            </span>
-          </a>
           <section
             aria-labelledby="heroui-overview"
             className="sr-only"

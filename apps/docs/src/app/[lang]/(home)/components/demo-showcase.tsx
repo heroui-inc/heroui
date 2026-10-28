@@ -216,7 +216,7 @@ export function DemoShowcase() {
   }, [sendMessageToIframe]);
 
   return (
-    <div className="flex min-h-0 w-full max-w-[1200px] flex-1 flex-col py-6 lg:py-10">
+    <div className="flex min-h-0 w-full max-w-[1200px] flex-1 flex-col pt-10 pb-6 lg:pt-16 lg:pb-10">
       <div className="mb-4 hidden w-full flex-col justify-between gap-4 px-2 lg:flex lg:flex-row lg:items-center">
         <Tabs selectedKey={selectedTab} onSelectionChange={(key) => setSelectedTab(key as string)}>
           <Tabs.ListContainer>
