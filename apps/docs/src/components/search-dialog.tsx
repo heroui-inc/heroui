@@ -28,6 +28,7 @@ import {tv} from "tailwind-variants";
 
 import {useDictionary} from "@/hooks/use-dictionary";
 import {HEROUI_DOCS_AGENT_ID} from "@/lib/heroui-agent";
+import {readsAsQuestion} from "@/lib/search-question";
 
 // Default suggested pages for each tag
 const DEFAULT_SUGGESTIONS: Record<"native" | "web", string[]> = {
@@ -347,6 +348,14 @@ export default function CustomSearchDialog(props: SharedProps) {
 
   if (search.length === 0) {
     searchItems = defaultSuggestions.length > 0 ? defaultSuggestions : null;
+  } else if (assistantAction && readsAsQuestion(search)) {
+    // Questions go to Ask AI first, since keyword hits rarely answer them.
+    searchItems = [
+      assistantAction,
+      ...(pageTreeAction ? [pageTreeAction] : []),
+      ...proResults,
+      ...(queryData ?? []),
+    ];
   } else if (hasResults) {
     searchItems = [
       ...(pageTreeAction ? [pageTreeAction] : []),
