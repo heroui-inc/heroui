@@ -340,6 +340,24 @@ export default function CustomSearchDialog(props: SharedProps) {
     });
   }, [query.data, releasesPath, migrationPath, stripLocale]);
 
+  const hasResults =
+    Boolean(pageTreeAction) || proResults.length > 0 || (queryData?.length ?? 0) > 0;
+
+  let searchItems: SearchItemType[] | null = null;
+
+  if (search.length === 0) {
+    searchItems = defaultSuggestions.length > 0 ? defaultSuggestions : null;
+  } else if (hasResults) {
+    searchItems = [
+      ...(pageTreeAction ? [pageTreeAction] : []),
+      ...proResults,
+      ...(queryData ?? []),
+    ];
+  } else if (queryData) {
+    // Search finished with no matches: offer Ask AI instead of the empty state
+    searchItems = assistantAction ? [assistantAction] : [];
+  }
+
   return (
     <SearchDialog
       isLoading={query.isLoading}
@@ -375,20 +393,7 @@ export default function CustomSearchDialog(props: SharedProps) {
         </SearchDialogHeader>
         <SearchDialogList
           className="**:aria-selected:bg-default **:aria-selected:text-foreground"
-          items={
-            search.length === 0
-              ? defaultSuggestions.length > 0
-                ? defaultSuggestions
-                : null
-              : queryData || pageTreeAction || proResults.length > 0
-                ? [
-                    ...(assistantAction ? [assistantAction] : []),
-                    ...(pageTreeAction ? [pageTreeAction] : []),
-                    ...proResults,
-                    ...(Array.isArray(queryData) ? queryData : []),
-                  ]
-                : null
-          }
+          items={searchItems}
         />
       </SearchDialogContent>
     </SearchDialog>
