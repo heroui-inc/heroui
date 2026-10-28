@@ -44,11 +44,9 @@ describe("Sheet", () => {
     await tester.open();
     expect(tester.getDialog()).toHaveAccessibleName("Details");
     await setupUser().click(screen.getByRole("button", {name: "Done"}));
+    // Exit can finish before the first poll on slow runners, so assert the settled state.
     await waitFor(() =>
-      expect(document.querySelector('[data-slot="sheet-overlay"]')).toHaveAttribute(
-        "data-exiting",
-        "true",
-      ),
+      expect(document.querySelector('[data-slot="sheet-overlay"]')).not.toBeInTheDocument(),
     );
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls).toEqual([[true], [false]]);
@@ -75,10 +73,7 @@ describe("Sheet", () => {
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     rerender(tree(false));
     await waitFor(() =>
-      expect(document.querySelector('[data-slot="sheet-overlay"]')).toHaveAttribute(
-        "data-exiting",
-        "true",
-      ),
+      expect(document.querySelector('[data-slot="sheet-overlay"]')).not.toBeInTheDocument(),
     );
   });
 
@@ -145,10 +140,7 @@ describe("Sheet", () => {
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     await setupUser().click(screen.getByRole("button", {name: "Dismiss sheet"}));
     await waitFor(() =>
-      expect(document.querySelector('[data-slot="sheet-overlay"]')).toHaveAttribute(
-        "data-exiting",
-        "true",
-      ),
+      expect(document.querySelector('[data-slot="sheet-overlay"]')).not.toBeInTheDocument(),
     );
   });
 
