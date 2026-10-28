@@ -45,8 +45,13 @@ jobs:
       - name: Build packages
         run: pnpm build
 
+      # Install into a separate prefix: upgrading npm in place crashes on Node 22.22
+      # (MODULE_NOT_FOUND 'promise-retry') because npm deletes its own files mid-run.
       - name: Ensure npm supports trusted publishing
-        run: npm install -g npm@11
+        run: |
+          npm install --global --prefix "$RUNNER_TEMP/npm" npm@11 --no-audit --no-fund
+          echo "$RUNNER_TEMP/npm/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/npm/bin/npm" --version
 
       - name: Determine previous tag
         id: prev-tag
