@@ -35,10 +35,10 @@
   }
 
   .slider__step {
-    @apply absolute size-1 rounded-full bg-muted;
+    @apply absolute size-[3px] rounded-full bg-muted/25;
 
     &[data-filled="true"] {
-      @apply bg-accent-foreground;
+      @apply bg-accent-foreground/25;
     }
   }
 
