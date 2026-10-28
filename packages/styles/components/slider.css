@@ -55,6 +55,10 @@
     grid-area: 1 / 1;
     justify-self: start;
 
+    /* Fade between muted and foreground as the mark enters or leaves the range */
+    transition: color 200ms var(--ease-smooth);
+    @apply motion-reduce:transition-none;
+
     &[data-filled="true"] {
       @apply text-foreground;
     }
