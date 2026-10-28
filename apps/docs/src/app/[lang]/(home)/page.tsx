@@ -69,9 +69,9 @@ export default async function HomePage({params}: {params: Promise<{lang: string}
   return (
     <main className="flex min-h-[calc(100vh-4rem)] flex-col">
       <section className="z-10 flex min-h-0 flex-1 flex-col items-center px-4 pt-12 text-center">
-        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center lg:max-w-[840px]">
+        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
           <ReleaseBadges badges={home.releaseBadges} />
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-5 lg:text-[64px] lg:leading-[68px] lg:tracking-[-0.035em]">
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-5 lg:text-[56px] lg:leading-[60px] lg:tracking-[-0.03em]">
             {home.titleMain} <span className="block text-muted/70">{home.titleMuted}</span>
           </h1>
           <p className="mt-4 max-w-[600px] text-balance text-muted md:text-lg lg:mt-5">
@@ -92,7 +92,7 @@ export default async function HomePage({params}: {params: Promise<{lang: string}
             <LinkRoot
               href="/docs/react/components"
               className={buttonVariants({
-                className: "px-5 text-sm [--button-bg:var(--surface)]",
+                className: "px-5 text-sm",
                 size: "lg",
                 variant: "outline",
               })}

@@ -63,7 +63,7 @@ function BadgeCard({badge, isHidden}: {badge: ReleaseBadge; isHidden: boolean}) 
 
   return (
     <LinkRoot
-      className="group flex h-8 w-full items-center gap-2.5 rounded-full bg-surface py-1 ps-1 pe-3 text-start shadow-[0_1px_2px_rgba(24,24,27,0.06),0_8px_20px_-8px_rgba(24,24,27,0.16)] ring-1 ring-foreground/[0.07] outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+      className="group flex h-8 w-full items-center gap-2.5 rounded-full bg-surface py-1 ps-1 pe-3 text-start shadow-surface outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
       href={badge.href}
     >
       <motion.span
