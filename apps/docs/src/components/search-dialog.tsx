@@ -376,8 +376,8 @@ export default function CustomSearchDialog(props: SharedProps) {
       {...restProps}
     >
       <SearchDialogOverlay />
-      <SearchDialogContent className="border-none bg-surface">
-        <div className="border-none px-2 pt-2">
+      <SearchDialogContent className="border-none bg-surface *:border-b-0">
+        <div className="px-2 pt-2">
           <TagGroup
             disallowEmptySelection
             aria-label={dict.frameworksTabs.ariaLabel}
@@ -395,7 +395,7 @@ export default function CustomSearchDialog(props: SharedProps) {
             </TagGroup.List>
           </TagGroup>
         </div>
-        <SearchDialogHeader className="border-b border-separator">
+        <SearchDialogHeader>
           <SearchDialogIcon />
           <SearchDialogInput placeholder={dict.searchDialog.placeholder} />
           <SearchDialogClose />
