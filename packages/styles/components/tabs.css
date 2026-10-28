@@ -237,6 +237,11 @@
   transition-property: translate, width, height;
   transition-timing-function: var(--ease-out-fluid);
   @apply motion-reduce:transition-none;
+
+  /* Avoid capturing transient collection positions during initial hydration. */
+  &[data-animation-ready="false"] {
+    @apply transition-none;
+  }
 }
 
 /* ==========================================================================

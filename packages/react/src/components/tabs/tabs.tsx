@@ -15,7 +15,7 @@ import {
 } from "react-aria-components/Tabs";
 
 import {createCollectionSlot} from "../../utils";
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, useResolvedClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {IconChevronDown, IconChevronLeft, IconChevronRight, IconChevronUp} from "../icons";
 import {ScrollShadow} from "../scroll-shadow";
@@ -24,6 +24,7 @@ import {ScrollShadow} from "../scroll-shadow";
  * Tabs Context
  * -----------------------------------------------------------------------------------------------*/
 type TabsContext = {
+  isIndicatorReady?: boolean;
   orientation?: "horizontal" | "vertical";
   slots?: ReturnType<typeof tabsVariants>;
 };
@@ -56,14 +57,28 @@ const TabsRoot = ({
   variant,
   ...props
 }: TabsRootProps) => {
+  const [isIndicatorReady, setIsIndicatorReady] = React.useState(false);
+
+  React.useEffect(() => {
+    // RAC can replay the indicator's layout effects while hydrating its collection.
+    // Wait until the first client frame so those effects cannot retain an initial
+    // transition offset. Subsequent selections keep their normal animation.
+    const frame = requestAnimationFrame(() => setIsIndicatorReady(true));
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   const slots = React.useMemo(() => tabsVariants({align, variant}), [align, variant]);
-  const contextValue = React.useMemo(() => ({orientation, slots}), [orientation, slots]);
+  const contextValue = React.useMemo(
+    () => ({isIndicatorReady, orientation, slots}),
+    [isIndicatorReady, orientation, slots],
+  );
 
   return (
     <TabsContext value={contextValue}>
       <TabsPrimitive
         {...props}
-        className={composeTwRenderProps(className, slots.base())}
+        className={useResolvedClassName(className, slots.base())}
         data-slot="tabs"
         orientation={orientation}
       >
@@ -72,6 +87,8 @@ const TabsRoot = ({
     </TabsContext>
   );
 };
+
+TabsRoot.displayName = "HeroUI.Tabs";
 
 /* -------------------------------------------------------------------------------------------------
  * Tabs List Container
@@ -99,6 +116,8 @@ const TabListContainer = <E extends keyof React.JSX.IntrinsicElements = "div">({
   );
 };
 
+TabListContainer.displayName = "HeroUI.Tabs.ListContainer";
+
 /* -------------------------------------------------------------------------------------------------
  * Tabs List
  * -----------------------------------------------------------------------------------------------*/
@@ -113,6 +132,7 @@ const TabList = ({children, className, ...props}: TabListProps) => {
   const isVertical = orientation === "vertical";
 
   const [listContainerProps, restProps] = listContainerSlot.useSlot(props);
+  const resolvedClassName = useResolvedClassName(className, slots?.tabList());
 
   const scrollBy = useCallback(
     (direction: 1 | -1) => {
@@ -151,11 +171,7 @@ const TabList = ({children, className, ...props}: TabListProps) => {
   // Without ListContainer, stay a thin RAC TabList
   if (!listContainerProps) {
     return (
-      <TabListPrimitive
-        {...restProps}
-        className={composeTwRenderProps(className, slots?.tabList())}
-        data-slot="tabs-list"
-      >
+      <TabListPrimitive {...restProps} className={resolvedClassName} data-slot="tabs-list">
         {children}
       </TabListPrimitive>
     );
@@ -170,7 +186,7 @@ const TabList = ({children, className, ...props}: TabListProps) => {
   return (
     <TabListPrimitive
       {...restProps}
-      className={composeTwRenderProps(className, slots?.tabList())}
+      className={resolvedClassName}
       data-slot="tabs-list"
       render={(renderProps) => {
         const {
@@ -229,6 +245,8 @@ const TabList = ({children, className, ...props}: TabListProps) => {
   );
 };
 
+TabList.displayName = "HeroUI.Tabs.List";
+
 /* -------------------------------------------------------------------------------------------------
  * Tab
  * -----------------------------------------------------------------------------------------------*/
@@ -242,13 +260,15 @@ const Tab = ({children, className, ...props}: TabProps) => {
   return (
     <TabPrimitive
       {...props}
-      className={composeTwRenderProps(className, slots?.tab())}
+      className={useResolvedClassName(className, slots?.tab())}
       data-slot="tabs-tab"
     >
       {children}
     </TabPrimitive>
   );
 };
+
+Tab.displayName = "HeroUI.Tabs.Tab";
 
 /* -------------------------------------------------------------------------------------------------
  * Tab Indicator
@@ -258,16 +278,19 @@ interface TabIndicatorProps extends ComponentPropsWithRef<typeof SelectionIndica
 }
 
 const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
-  const {slots} = use(TabsContext);
+  const {isIndicatorReady = false, slots} = use(TabsContext);
 
   return (
     <SelectionIndicatorPrimitive
       className={composeSlotClassName(slots?.tabIndicator, className)}
+      data-animation-ready={isIndicatorReady}
       data-slot="tabs-indicator"
       {...props}
     />
   );
 };
+
+TabIndicator.displayName = "HeroUI.Tabs.Indicator";
 
 /* -------------------------------------------------------------------------------------------------
  * Tab Panel
@@ -283,13 +306,15 @@ const TabPanel = ({children, className, ...props}: TabPanelProps) => {
   return (
     <TabPanelPrimitive
       {...props}
-      className={composeTwRenderProps(className, slots?.tabPanel())}
+      className={useResolvedClassName(className, slots?.tabPanel())}
       data-slot="tabs-panel"
     >
       {children}
     </TabPanelPrimitive>
   );
 };
+
+TabPanel.displayName = "HeroUI.Tabs.Panel";
 
 /* -------------------------------------------------------------------------------------------------
  * Tab Separator
@@ -315,6 +340,8 @@ const TabSeparator = <E extends keyof React.JSX.IntrinsicElements = "span">({
     />
   );
 };
+
+TabSeparator.displayName = "HeroUI.Tabs.Separator";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
