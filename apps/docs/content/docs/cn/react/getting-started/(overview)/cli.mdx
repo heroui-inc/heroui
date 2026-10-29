@@ -4,7 +4,7 @@ description: 使用命令行管理 HeroUI 依赖并初始化项目。
 icon: terminal
 ---
 
-`heroui-cli` 是官方命令行工具，提供一整套命令，用于初始化、管理和优化 HeroUI 项目。你可以 `install`、`uninstall` 或 `upgrade` HeroUI 包、在终端查看组件文档、检查项目健康状况、下载用于 AI 编程助手的文档，等等。
+`heroui-cli` 是官方命令行工具，提供一整套命令，用于初始化、管理和优化 HeroUI 项目。你可以 `install`、`uninstall` 或 `upgrade` HeroUI 包、在终端查看组件文档、检查项目健康状况、下载用于 AI 编程助手的文档与设计指南，等等。
 
 ## 安装
 
@@ -80,6 +80,7 @@ Commands:
   env [options]                 Displays debugging information for the local environment
   doctor [options]              Checks for issues in the project
   agents-md [options]           Download HeroUI documentation for AI coding agents
+  design-md [options]           Download HeroUI design guidance for AI coding agents
   help [command]                Display help for command
 ```
 
@@ -95,6 +96,12 @@ heroui agents-md --react --output AGENTS.md --json
 ```
 
 当项目中同时安装了 `@heroui/react` 与 `heroui-native`，或两者都未安装时，`agents-md --json` 还必须指定 `--react`、`--native` 或 `--migration` 之一。
+
+当无法明确检测平台时，`design-md --json` 必须指定 `--react` 或 `--native`。已存在的目标文件会被直接替换，不会询问确认：
+
+```bash
+heroui design-md --react --json
+```
 
 ## 缓存
 
@@ -419,6 +426,63 @@ Environment Info:
     tailwindcss: 4.1.11
 ```
 
+### design-md
+
+下载最新的 HeroUI React 或 Native 设计指南，供编程代理使用。明确指定平台时，无需 Git 或预先安装 HeroUI 包；命令会将已发布的 Markdown 原样保存。
+
+```bash
+heroui design-md [options]
+```
+
+**选项：**
+
+- `--react` 下载 React 设计指南（一次只能选择一个平台）
+- `--native` 下载 Native 设计指南
+- `--output <file>` 目标路径，默认为当前目录下的 `DESIGN.md`。支持相对和绝对路径；缺失的父目录会自动创建
+- `--json` 输出一个 JSON 结果，不显示提示或人类可读日志
+
+未指定平台标志时，命令会使用与 `agents-md` 相同的包与工作区检测逻辑。仅检测到 `@heroui/react` 时选择 React，仅检测到 `heroui-native` 时选择 Native。两者都存在或都不存在时，命令会进入交互式提示；JSON 与非交互式运行则必须明确指定平台。
+
+每次运行都会直接替换整个目标文件，包括 JSON 与非交互式模式，不会询问确认。成功下载后，本地的设计自定义将会丢失。取消平台选择或下载失败时，已存在的文件保持不变。
+
+**示例：**
+
+自动检测平台并保存为 `DESIGN.md`：
+
+```bash
+heroui design-md
+```
+
+明确下载 React 设计指南：
+
+```bash
+heroui design-md --react
+```
+
+将 Native 设计指南保存到自定义路径：
+
+```bash
+heroui design-md --native --output docs/DESIGN.md
+```
+
+通过编程代理或脚本刷新 React 设计指南：
+
+```bash
+heroui design-md --react --json
+```
+
+每次运行都会发起全新请求，直接从 [React DESIGN.md](/react/DESIGN.md) 或 [Native DESIGN.md](/native/DESIGN.md) 下载。命令成功下载前，对应端点必须已发布。
+
+该命令只会写入目标文件。它会输出建议的引用方式，但不会修改 `AGENTS.md`、`CLAUDE.md`、编辑器规则或 `.gitignore`。请根据路径调整下列内容，并将其加入代理指令：
+
+```md
+Follow [DESIGN.md](./DESIGN.md) for all visual and interaction decisions.
+```
+
+JSON 成功结果包含 `command`、`ok`、`selection`、绝对路径 `outputFile` 和 `sourceUrl`。失败时返回 `command`、`ok: false` 与 `error`，并以状态码 `1` 退出。
+
+更多详情请参阅 [DESIGN.md](/docs/react/getting-started/design-md)。
+
 ### agents-md
 
 下载用于 AI 编程助手（Claude、Cursor 等）的 HeroUI 文档。该命令会从 HeroUI 仓库克隆最新文档，并将一份精简索引注入到 `AGENTS.md` 或 `CLAUDE.md` 中，方便助手参考你项目中的 HeroUI 配置。
@@ -476,7 +540,7 @@ heroui agents-md --react --ssh --output AGENTS.md
 更多详情请参阅 [AGENTS.md](/docs/react/getting-started/agents-md)。
 
 <Callout>
-  `agents-md` 会收集匿名使用数据：所选文档类型（`react`、`native` 或 `migration`）、输出路径、写入文件数量、耗时、成功或失败（失败时包含错误信息）。不会收集项目内容。设置 `HEROUI_ANALYTICS_DISABLED=1` 可以选择不参与。
+  `agents-md` 与 `design-md` 会收集匿名使用数据：所选内容类型（在命令支持的范围内为 `react`、`native` 或 `migration`）、输出路径、写入文件数量、耗时、成功或失败（失败时包含错误信息）。不会收集项目内容。设置 `HEROUI_ANALYTICS_DISABLED=1` 可以选择不参与。
 </Callout>
 
 ### 从 NextUI 迁移
