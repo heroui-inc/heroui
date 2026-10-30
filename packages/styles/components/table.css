@@ -352,6 +352,15 @@
   /* Reset appearance */
   @apply border-none bg-clip-content outline-none;
 
+  /* Sit above the next column header so both sides of the line can be grabbed */
+  @apply z-10;
+
+  /* Transparent 24px-wide hit area spanning the header height (WCAG 2.5.8) */
+  &::before {
+    content: "";
+    @apply absolute top-1/2 left-1/2 h-9 w-6 -translate-x-1/2 -translate-y-1/2;
+  }
+
   &[data-hovered="true"],
   &:hover {
     @apply h-full w-0.5 bg-accent;
