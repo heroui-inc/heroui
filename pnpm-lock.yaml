@@ -304,8 +304,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       tailwind-variants:
-        specifier: 4.0.0
-        version: 4.0.0
+        specifier: 4.0.1
+        version: 4.0.1
       ts-morph:
         specifier: 27.0.2
         version: 27.0.2
@@ -386,8 +386,8 @@ importers:
         specifier: 1.5.0
         version: 1.5.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       tailwind-variants:
-        specifier: 4.0.0
-        version: 4.0.0
+        specifier: 4.0.1
+        version: 4.0.1
     devDependencies:
       '@heroui/standard':
         specifier: workspace:*
@@ -494,8 +494,8 @@ importers:
         specifier: 0.5.7
         version: 0.5.7(@opentelemetry/core@2.11.0(@opentelemetry/api@1.9.1))(esbuild@0.28.2)(eslint@9.39.5(jiti@2.7.0))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rolldown@1.2.15)(rollup@4.65.0)(vite@8.3.5(@types/node@25.9.9)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       tailwind-variants:
-        specifier: 4.0.0
-        version: 4.0.0
+        specifier: 4.0.1
+        version: 4.0.1
     devDependencies:
       '@heroui/standard':
         specifier: workspace:*
@@ -552,8 +552,8 @@ importers:
   packages/styles:
     dependencies:
       tailwind-variants:
-        specifier: 4.0.0
-        version: 4.0.0
+        specifier: 4.0.1
+        version: 4.0.1
       tw-animate-css:
         specifier: 1.4.0
         version: 1.4.0
@@ -8467,8 +8467,8 @@ packages:
     resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
     engines: {node: '>=20'}
 
-  tailwind-variants@4.0.0:
-    resolution: {integrity: sha512-fdtmgX6R9223QY0PBDD2sXIgmi2UEfjvaKLkxdRLv87XisT1XH+5f2Fd0oBFKkznsQHXIm+H92bmkUKSk5qbbg==}
+  tailwind-variants@4.0.1:
+    resolution: {integrity: sha512-VumzgPklIwpneDWtskGuhEqPlfZZ2DeN1nIb2um9DRhk9XBX580s4N84A533j+oHN+dLz274HkKvSjr+64fggA==}
     engines: {node: '>=16.9.x', pnpm: '>=7.x'}
 
   tailwindcss@4.3.3:
@@ -17383,7 +17383,7 @@ snapshots:
 
   tagged-tag@1.0.0: {}
 
-  tailwind-variants@4.0.0: {}
+  tailwind-variants@4.0.1: {}
 
   tailwindcss@4.3.3: {}
 
