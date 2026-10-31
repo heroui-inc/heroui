@@ -1,7 +1,7 @@
 import type {ClassValue} from "clsx";
 
 import clsx from "clsx";
-import {twMerge} from "tailwind-merge";
+import {twMerge} from "tailwind-variants";
 
 /**
  * We need to extend the tailwind merge to include HeroUI's custom classes.

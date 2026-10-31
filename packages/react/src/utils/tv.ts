@@ -8,13 +8,4 @@ export const tv: TV = (options, config) =>
   tvBase(options, {
     ...config,
     twMerge: config?.twMerge ?? false,
-    twMergeConfig: {
-      ...config?.twMergeConfig,
-      classGroups: {
-        ...config?.twMergeConfig?.classGroups,
-      },
-      theme: {
-        ...config?.twMergeConfig?.theme,
-      },
-    },
   });

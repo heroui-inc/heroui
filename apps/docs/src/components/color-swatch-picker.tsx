@@ -36,7 +36,7 @@ export function ColorSwatchPickerItem({
   outlineOffsetColor?: string;
 }) {
   return (
-    <AriaColorSwatchPickerItem {...props} className={itemStyles}>
+    <AriaColorSwatchPickerItem {...props} className={itemStyles()}>
       {({isSelected}) => (
         <>
           <ColorSwatch className={className} />
