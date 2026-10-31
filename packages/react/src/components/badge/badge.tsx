@@ -38,7 +38,7 @@ const BadgeAnchor = <E extends keyof React.JSX.IntrinsicElements = "span">({
   return (
     <dom.span
       {...(props as any)}
-      className={cx("badge-anchor", className) ?? undefined}
+      className={cx("badge-anchor", className)}
       data-slot="badge-anchor"
     >
       {children}

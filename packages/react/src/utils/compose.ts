@@ -15,7 +15,7 @@ function composeTwRenderProps<T>(
     const tw = typeof tailwind === "function" ? (tailwind(renderProps) ?? "") : (tailwind ?? "");
     const cls = className ?? "";
 
-    return cx(tw, cls) ?? "";
+    return cx(tw, cls);
   });
 }
 
@@ -40,7 +40,7 @@ function useResolvedClassName<T>(
       return className ?? "";
     }
 
-    return className ? (cx(styles, className) ?? styles) : styles;
+    return className ? cx(styles, className) : styles;
   }, [className, styles]);
 }
 
