@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  '@rollup/plugin-node-resolve@16.0.3>deepmerge': '-'
   js-yaml@4: ^4.3.2
   nanoid@3: ^3.3.18
   svgo@2: ^2.8.4
@@ -13,6 +14,11 @@ overrides:
   postcss-selector-parser: ^7.1.6
   brace-expansion@1: ^1.1.21
   brace-expansion@5: ^5.0.12
+
+patchedDependencies:
+  '@rollup/plugin-node-resolve@16.0.3':
+    hash: be62dc9211d95e5034b7dc50fcd1c89993757756796f2f0b4e9386f191d50e53
+    path: patches/@rollup__plugin-node-resolve@16.0.3.patch
 
 importers:
 
@@ -53,7 +59,7 @@ importers:
         version: 29.0.3(rollup@4.67.4)
       '@rollup/plugin-node-resolve':
         specifier: 16.0.3
-        version: 16.0.3(rollup@4.67.4)
+        version: 16.0.3(patch_hash=be62dc9211d95e5034b7dc50fcd1c89993757756796f2f0b4e9386f191d50e53)(rollup@4.67.4)
       '@rollup/plugin-typescript':
         specifier: 12.3.1
         version: 12.3.1(rollup@4.67.4)(tslib@2.8.1)(typescript@5.9.3)
@@ -5545,10 +5551,6 @@ packages:
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
-
-  deepmerge@4.3.1:
-    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
-    engines: {node: '>=0.10.0'}
 
   default-browser-id@5.0.1:
     resolution: {integrity: sha512-x1VCxdX4t+8wVfd1so/9w+vQ4vx7lKd2Qp5tDRutErwmR85OgmfX7RlLRMWafRMY7hbEiXIbudNrjOAPa/hL8Q==}
@@ -11932,11 +11934,10 @@ snapshots:
     optionalDependencies:
       rollup: 4.67.4
 
-  '@rollup/plugin-node-resolve@16.0.3(rollup@4.67.4)':
+  '@rollup/plugin-node-resolve@16.0.3(patch_hash=be62dc9211d95e5034b7dc50fcd1c89993757756796f2f0b4e9386f191d50e53)(rollup@4.67.4)':
     dependencies:
       '@rollup/pluginutils': 5.4.0(rollup@4.67.4)
       '@types/resolve': 1.20.2
-      deepmerge: 4.3.1
       is-module: 1.0.0
       resolve: 1.22.12
     optionalDependencies:
@@ -13717,8 +13718,6 @@ snapshots:
   deep-eql@5.0.2: {}
 
   deep-is@0.1.4: {}
-
-  deepmerge@4.3.1: {}
 
   default-browser-id@5.0.1: {}
 
