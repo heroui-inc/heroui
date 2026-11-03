@@ -348,7 +348,7 @@
   /* Match the ::after separator: absolute, right edge, short vertical line */
   @apply absolute end-0 top-1/2 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   /* Make it interactive — wider hit area with transparent padding */
-  @apply box-content translate-x-1/2 cursor-col-resize touch-none px-2;
+  @apply box-content translate-x-1/2 cursor-col-resize touch-none px-2 rtl:-translate-x-1/2;
   /* Reset appearance */
   @apply border-none bg-clip-content outline-none;
 
