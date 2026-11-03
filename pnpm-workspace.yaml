@@ -7,6 +7,10 @@ packages:
   - "!apps/*/.turbo"
 
 overrides:
+  # GHSA-gcqx-w48m-w2h4: the patch below replaces the resolver's only
+  # deepmerge call (cloning static defaults) with Node 22+ structuredClone.
+  # Remove this override and patch once upstream drops/fixes deepmerge.
+  "@rollup/plugin-node-resolve@16.0.3>deepmerge": "-"
   # Security patches for transitive dependencies. Drop once the parents
   # (eslint, fumadocs-*, postcss-svgo, next, postcss, css-tree, cssnano,
   # @tailwindcss/typography) ship updated ranges.
@@ -34,3 +38,6 @@ onlyBuiltDependencies:
   - "protobufjs"
   - "sharp"
   - "unrs-resolver"
+
+patchedDependencies:
+  "@rollup/plugin-node-resolve@16.0.3": patches/@rollup__plugin-node-resolve@16.0.3.patch
