@@ -1,3 +1,5 @@
+import {__BASE_URL__, __PROD__} from "@/utils/env";
+
 export const AGENT_DISCOVERY_CACHE_HEADERS = {
   "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
 } as const;
@@ -43,6 +45,9 @@ export function normalizeOrigin(origin: string): string {
 }
 
 export function getRequestOrigin(request: Request): string {
+  // The website proxies production requests through this zone's Vercel origin.
+  if (__PROD__) return __BASE_URL__.origin;
+
   const headers = request.headers;
   const forwardedHost = headers.get("x-forwarded-host");
   const host = forwardedHost ?? headers.get("host");
