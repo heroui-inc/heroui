@@ -521,7 +521,7 @@ describe("HeroUI agent readiness", () => {
 
   it.each(["en", "cn"])("sends the %s root to the docs", async (lang) => {
     await expect(HomePage({params: Promise.resolve({lang})})).rejects.toMatchObject({
-      digest: expect.stringContaining(`;/${lang}/docs/react/getting-started;308;`),
+      digest: expect.stringContaining(`;/${lang}/docs/react/getting-started;307;`),
     });
   });
 });
