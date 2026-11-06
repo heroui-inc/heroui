@@ -6,7 +6,7 @@ import {Iconify} from "@/components/iconify";
 
 export function getHomeLayoutLinks(dict: Dictionary): LinkItemType[] {
   const nav = dict.nav;
-  // The blog is part of the heroui.com website, not this app.
+  // The blog is another app, so custom items render plain links for cross-zone navigation.
   const blogUrl = "/blog";
 
   return [
@@ -45,9 +45,16 @@ export function getHomeLayoutLinks(dict: Dictionary): LinkItemType[] {
     {
       items: [
         {
-          icon: <Iconify icon="pen-line" />,
-          text: nav.blog,
-          url: blogUrl,
+          children: (
+            <a
+              className="hover:text-fd-popover-foreground/50 inline-flex items-center gap-2 py-1.5 transition-colors [&_svg]:size-4"
+              href={blogUrl}
+            >
+              <Iconify icon="pen-line" />
+              {nav.blog}
+            </a>
+          ),
+          type: "custom",
         },
         {
           external: true,
@@ -96,10 +103,18 @@ export function getHomeLayoutLinks(dict: Dictionary): LinkItemType[] {
       url: "/docs/native/getting-started",
     },
     {
-      active: "nested-url",
+      children: (
+        <li>
+          <a
+            className="text-fd-muted-foreground hover:text-fd-accent-foreground inline-flex items-center gap-1 p-2 text-sm transition-colors"
+            href={blogUrl}
+          >
+            {nav.blog}
+          </a>
+        </li>
+      ),
       on: "nav",
-      text: nav.blog,
-      url: blogUrl,
+      type: "custom",
     },
     {
       children: (
