@@ -1,6 +1,6 @@
 import type {BaseLayoutProps} from "fumadocs-ui/layouts/shared";
 
-import {HeroUILogo} from "@/components/heroui-logo";
+import {HomeNavTitle} from "@/components/home-nav-title";
 
 export {getHomeLayoutLinks} from "./(home)/home-layout-links";
 
@@ -13,7 +13,7 @@ export {getHomeLayoutLinks} from "./(home)/home-layout-links";
  */
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: <HeroUILogo />,
+    title: HomeNavTitle,
     transparentMode: "always",
   },
 };

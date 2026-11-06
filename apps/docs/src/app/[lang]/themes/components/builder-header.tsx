@@ -10,7 +10,6 @@ import {
   NodesRight,
 } from "@gravity-ui/icons";
 import {Button, Kbd, Separator, Tabs, Tooltip, toast} from "@heroui/react";
-import Link from "next/link";
 import {useParams} from "next/navigation";
 
 import {HeroUIDocsAgentTrigger} from "@/components/ai/heroui-docs-agent-trigger";
@@ -56,9 +55,10 @@ export function BuilderHeader() {
     <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 min-[1200px]:mb-4 min-[1200px]:px-0">
       <div className="flex h-14 w-full max-w-[1400px] items-center justify-between min-[1200px]:h-14">
         <div className="flex items-center gap-4">
-          <Link href={`/${lang}`}>
+          {/* Home is the heroui.com website, another app, so this is a plain link. */}
+          <a href="/">
             <HeroUILogo />
-          </Link>
+          </a>
           <div className="flex items-center gap-3">
             <Tooltip closeDelay={0} delay={100}>
               <Tooltip.Trigger className="hidden min-[1200px]:inline-flex">

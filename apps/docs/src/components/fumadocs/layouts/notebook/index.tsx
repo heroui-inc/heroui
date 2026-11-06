@@ -7,7 +7,6 @@ import type {SidebarTabWithProps} from "fumadocs-ui/components/sidebar/tabs/drop
 import type {BaseLayoutProps} from "fumadocs-ui/layouts/shared";
 import type {ComponentProps, FC, HTMLAttributes, ReactNode} from "react";
 
-import Link from "fumadocs-core/link";
 import {getSidebarTabs} from "fumadocs-ui/components/sidebar/tabs";
 import {buttonVariants} from "fumadocs-ui/components/ui/button";
 import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
@@ -137,7 +136,8 @@ export function DocsLayout(props: DocsLayoutProps) {
             </div>
           );
 
-    // Normalize nav.title to ReactNode
+    // Normalize nav.title to ReactNode. The title links home, which is the heroui.com website (a
+    // separate app), so it is a plain link rather than one Next.js would prefetch.
     const titleNode: ReactNode =
       typeof nav.title === "function"
         ? (nav.title({} as ComponentProps<"a">) as ReactNode)
@@ -166,21 +166,18 @@ export function DocsLayout(props: DocsLayoutProps) {
               <div className="flex justify-between">
                 {nav.titleSuffix ? (
                   <div className={cn("flex items-center", nav.titleSuffixGap ?? "gap-4")}>
-                    <Link
+                    <a
                       className="inline-flex items-center gap-2.5 font-medium"
                       href={nav.url ?? "/"}
                     >
                       {titleNode}
-                    </Link>
+                    </a>
                     {nav.titleSuffix}
                   </div>
                 ) : (
-                  <Link
-                    className="inline-flex items-center gap-2.5 font-medium"
-                    href={nav.url ?? "/"}
-                  >
+                  <a className="inline-flex items-center gap-2.5 font-medium" href={nav.url ?? "/"}>
                     {titleNode}
-                  </Link>
+                  </a>
                 )}
                 {!!collapsible && (
                   <SidebarCollapseTrigger
@@ -360,7 +357,7 @@ function DocsNavbar({
           )}
           {nav.titleSuffix ? (
             <div className={cn("flex items-center", nav.titleSuffixGap ?? "gap-4")}>
-              <Link
+              <a
                 href={nav.url ?? "/"}
                 className={cn(
                   "inline-flex items-center gap-2.5 font-semibold",
@@ -368,11 +365,11 @@ function DocsNavbar({
                 )}
               >
                 {titleNode}
-              </Link>
+              </a>
               {nav.titleSuffix}
             </div>
           ) : (
-            <Link
+            <a
               href={nav.url ?? "/"}
               className={cn(
                 "inline-flex items-center gap-2.5 font-semibold",
@@ -380,7 +377,7 @@ function DocsNavbar({
               )}
             >
               {titleNode}
-            </Link>
+            </a>
           )}
         </div>
         {searchToggle.enabled !== false &&
