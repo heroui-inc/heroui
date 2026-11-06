@@ -1,6 +1,5 @@
 import type {MetadataRoute} from "next";
 
-import {getAllBlogPosts, getBlogPost} from "@/lib/blog";
 import {filterExcludedPages} from "@/lib/llms-utils";
 import {LOCALES, absoluteUrl, getSitemapAlternates, localizedPath, stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
@@ -40,14 +39,6 @@ function toEntries(paths: LocalizedPaths, defaultLastModified: Date): SitemapEnt
   );
 }
 
-function parseDate(value: string | undefined): Date | undefined {
-  if (!value) return undefined;
-
-  const date = new Date(value);
-
-  return Number.isNaN(date.getTime()) ? undefined : date;
-}
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const generatedAt = new Date();
   const paths: LocalizedPaths = new Map();
@@ -57,19 +48,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   for (const locale of LOCALES) {
-    addPath(paths, "/", locale);
-    addPath(paths, "/blog", locale);
     addPath(paths, "/showcase", locale);
     addPath(paths, "/themes", locale);
 
     for (const page of filterExcludedPages(source.getPages(locale))) {
       addPath(paths, stripLocale(page.url), locale);
-    }
-
-    for (const post of getAllBlogPosts(locale)) {
-      if (getBlogPost(post.slug, locale)?.locale !== locale) continue;
-
-      addPath(paths, `/blog/${post.slug}`, locale, parseDate(post.date));
     }
 
     for (const showcase of getAllShowcases()) {

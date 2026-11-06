@@ -405,6 +405,36 @@ describe("HeroUI agent readiness", () => {
     expect(new Set(operationIds).size).toBe(operationIds.length);
   });
 
+  it.each([
+    {appEnv: "production", host: "heroui-heroui.vercel.app", origin: "https://heroui.com"},
+    {
+      appEnv: "preview",
+      host: "heroui-docs-preview.vercel.app",
+      origin: "https://heroui-docs-preview.vercel.app",
+    },
+  ])("publishes $appEnv discovery URLs on $origin", async ({appEnv, host, origin}) => {
+    vi.stubEnv("NEXT_PUBLIC_APP_ENV", appEnv);
+    vi.resetModules();
+
+    try {
+      const {GET} = await import("@/app/openapi.json/route");
+      const response = GET(
+        new Request(`https://${host}/openapi.json`, {
+          headers: {"x-forwarded-host": host, "x-forwarded-proto": "https"},
+        }),
+      );
+      const document = (await response.json()) as {servers: {url: string}[]};
+
+      expect(document.servers).toEqual([{url: `${origin}/api/agent`}]);
+      expect(response.headers.get("link")).toContain(
+        `<${origin}/.well-known/openapi/heroui-agent-api.json>`,
+      );
+    } finally {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    }
+  });
+
   it("returns structured JSON errors from agent API routes", async () => {
     const responses = [
       await searchAgentDocs(new NextRequest("https://heroui.com/api/agent/search")),
@@ -519,13 +549,9 @@ describe("HeroUI agent readiness", () => {
     expect(privacyText).toContain("IP address");
   });
 
-  it("server-renders meaningful homepage text with a hierarchical outline", async () => {
-    const page = await HomePage({params: Promise.resolve({lang: "en"})});
-    const text = extractText(page).replace(/\s+/g, " ").trim();
-    const headings = collectHeadingLevels(page);
-
-    expect(text.length).toBeGreaterThanOrEqual(500);
-    expect(headings).toEqual(expect.arrayContaining([1, 2, 3]));
-    expect(headings.filter((level) => level === 1)).toHaveLength(1);
+  it.each(["en", "cn"])("sends the %s root to the docs", async (lang) => {
+    await expect(HomePage({params: Promise.resolve({lang})})).rejects.toMatchObject({
+      digest: expect.stringContaining(`;/${lang}/docs/react/getting-started;307;`),
+    });
   });
 });

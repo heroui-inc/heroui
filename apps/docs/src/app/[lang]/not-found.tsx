@@ -1,4 +1,3 @@
-import LinkRoot from "fumadocs-core/link";
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 import Image from "next/image";
 
@@ -17,7 +16,7 @@ export default async function NotFound() {
     <HomeLayout
       {...baseOptions}
       i18n
-      links={getHomeLayoutLinks(dict, locale)}
+      links={getHomeLayoutLinks(dict)}
       themeSwitch={{
         mode: "light-dark-system",
       }}
@@ -45,9 +44,10 @@ export default async function NotFound() {
         </div>
         <h2 className="text-4xl font-bold">{notFound.title}</h2>
         <p className="mt-2 max-w-sm text-balance text-muted">{notFound.description}</p>
-        <LinkRoot className="button button--tertiary mt-4" href={`/${locale}`}>
+        {/* The home page is the heroui.com website, another app, so this is a plain link. */}
+        <a className="button button--tertiary mt-4" href="/">
           {notFound.returnHome}
-        </LinkRoot>
+        </a>
       </div>
       <Footer dict={dict.footer} />
     </HomeLayout>
