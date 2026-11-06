@@ -30,7 +30,7 @@ const MARKDOWN_EXCLUDED_PATHS = new Set([
 
 const PUBLIC_FILE_PATTERN = /\.[a-z0-9]+$/i;
 const UNRESOLVED_TEMPLATE_PATTERN = /(?:\{[^/{}]+\}|%7B[^/]+%7D)/i;
-const PERMANENT_LOCALIZED_PREFIXES = ["/blog", "/docs", "/showcase", "/themes"];
+const PERMANENT_LOCALIZED_PREFIXES = ["/docs", "/showcase", "/themes"];
 const TRUST_PATHS = new Set(["/about", "/contact", "/privacy"]);
 const GONE_BUILD_PATHS = new Set(["/en/node_modules/heroui-native/lib", "/en/src/uniwind.d.ts"]);
 
@@ -144,7 +144,7 @@ export function proxy(request: NextRequest) {
   // Routes under `app/[lang]` require a locale prefix. When none is provided:
   //   - the homepage (`/`) is internally rewritten to the default locale so the
   //     visible URL stays clean.
-  //   - all other localized paths (e.g. `/docs/...`, `/blog/...`, `/themes`) are
+  //   - all other localized paths (e.g. `/docs/...`, `/showcase/...`, `/themes`) are
   //     redirected to include the default locale prefix.
   if (!getLocaleFromPath(pathname) && !shouldSkipLocaleRedirect(pathname)) {
     const url = request.nextUrl.clone();
@@ -164,7 +164,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
+  // Matcher ignoring `/_next/`, this app's prefixed assets (`assetPrefix` in next.config.ts), and `/api/`
   // You may need to adjust it to ignore static assets in `/public` folder
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|docs-static/_next|favicon.ico).*)"],
 };

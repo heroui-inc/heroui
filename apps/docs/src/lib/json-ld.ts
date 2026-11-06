@@ -104,35 +104,3 @@ export function getTechArticleJsonLd(params: {
     ...(params.image && {image: params.image}),
   };
 }
-
-export function getBlogJsonLd(params: {
-  url: string;
-  posts: {title: string; url: string; datePublished: string; description: string}[];
-  description?: string;
-  name?: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    blogPost: params.posts.map((post) => ({
-      "@type": "BlogPosting",
-      datePublished: post.datePublished,
-      description: post.description,
-      headline: post.title,
-      url: post.url,
-    })),
-    description:
-      params.description ??
-      "Guides, tutorials, and resources for building modern React applications with HeroUI.",
-    name: params.name ?? "HeroUI Blog",
-    publisher: {
-      "@type": "Organization",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://heroui.com/icons/favicon.svg",
-      },
-      name: "HeroUI",
-    },
-    url: params.url,
-  };
-}

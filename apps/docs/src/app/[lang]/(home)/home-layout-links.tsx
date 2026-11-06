@@ -4,9 +4,10 @@ import type {Dictionary} from "@/lib/dictionaries";
 import {ExternalLink} from "@/components/external-link";
 import {Iconify} from "@/components/iconify";
 
-export function getHomeLayoutLinks(dict: Dictionary, lang: string = "en"): LinkItemType[] {
+export function getHomeLayoutLinks(dict: Dictionary): LinkItemType[] {
   const nav = dict.nav;
-  const blogUrl = `/${lang}/blog`;
+  // The blog is part of the heroui.com website, not this app.
+  const blogUrl = "/blog";
 
   return [
     {

@@ -1,32 +1,5 @@
 {
   "home": {
-    "releaseBadges": [
-      {
-        "framework": "web",
-        "name": "React",
-        "version": "v3.2.7",
-        "highlight": "Sheet 组件与 Slider 刻度",
-        "href": "/docs/react/releases/v3-2-7",
-        "date": "2026-10-28"
-      },
-      {
-        "framework": "native",
-        "name": "Native",
-        "version": "v1.0.11",
-        "highlight": "Expo SDK 58 与 CSS 层叠层",
-        "href": "/docs/native/releases/v1-0-11",
-        "date": "2026-10-20"
-      }
-    ],
-    "titleMain": "开箱即用",
-    "titleMuted": "设计灵活可定制",
-    "description": "HeroUI 是面向网页与移动端的现代 UI 库，助你快速迭代、保持一致，并打造令人愉悦的用户体验。",
-    "metaTitle": "HeroUI v3（前身为 NextUI）- 开箱即用，设计灵活可定制。",
-    "metaDescription": "基于 React Aria 和 Tailwind CSS v4 构建的精美、无障碍 React UI 组件。用于构建生产级应用的现代化 MUI、Chakra UI 和 shadcn/ui 替代方案。",
-    "getStarted": "快速开始",
-    "viewComponents": "查看组件",
-    "githubStarsPrefix": "开源项目，已有",
-    "githubStarsSuffix": "颗星",
     "demo": {
       "proTemplate": "Pro 模板可用",
       "themeBuilder": "在主题编辑器中打开"
@@ -50,23 +23,6 @@
     "title": "404",
     "description": "抱歉，找不到您要访问的页面。",
     "returnHome": "返回首页"
-  },
-  "blog": {
-    "heading": "博客",
-    "metaTitle": "博客 | HeroUI",
-    "metaDescription": "面向现代 React 应用的指南、教程与资源。包含对比、最佳实践等内容。",
-    "categoriesAriaLabel": "博客分类",
-    "categories": {
-      "all": "全部",
-      "tutorial": "教程",
-      "comparison": "对比",
-      "native": "Native",
-      "uiLibraries": "资源"
-    },
-    "latestPosts": "最新文章",
-    "emptyState": "该分类下暂无文章。",
-    "backToBlog": "返回博客",
-    "relatedPosts": "相关文章"
   },
   "showcase": {
     "heading": "相关案例",
