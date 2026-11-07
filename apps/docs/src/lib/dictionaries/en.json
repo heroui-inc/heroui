@@ -1,32 +1,5 @@
 {
   "home": {
-    "releaseBadges": [
-      {
-        "framework": "web",
-        "name": "React",
-        "version": "v3.2.7",
-        "highlight": "Sheet component & Slider marks",
-        "href": "/docs/react/releases/v3-2-7",
-        "date": "2026-10-28"
-      },
-      {
-        "framework": "native",
-        "name": "Native",
-        "version": "v1.0.11",
-        "highlight": "Expo SDK 58 & CSS layers",
-        "href": "/docs/native/releases/v1-0-11",
-        "date": "2026-10-20"
-      }
-    ],
-    "titleMain": "Beautiful by default.",
-    "titleMuted": "Customizable by design.",
-    "description": "HeroUI is the modern UI library for web and mobile, built to help you move fast, stay consistent, and deliver delightful user experiences.",
-    "metaTitle": "HeroUI v3 (Previously NextUI) - Beautiful by default, customizable by design.",
-    "metaDescription": "Beautiful, accessible React UI components built on React Aria and Tailwind CSS v4. The modern alternative to MUI, Chakra UI, and shadcn/ui for building production-ready applications.",
-    "getStarted": "Get started",
-    "viewComponents": "View components",
-    "githubStarsPrefix": "Open source with",
-    "githubStarsSuffix": "stars",
     "demo": {
       "proTemplate": "Available in Pro as template",
       "themeBuilder": "Open in theme builder"
@@ -50,23 +23,6 @@
     "title": "404",
     "description": "Sorry, the page you're looking for could not be found.",
     "returnHome": "Return Home"
-  },
-  "blog": {
-    "heading": "Blog",
-    "metaTitle": "Blog | HeroUI",
-    "metaDescription": "Guides, tutorials, and resources for building modern React applications with HeroUI. Comparisons, best practices, and more.",
-    "categoriesAriaLabel": "Blog categories",
-    "categories": {
-      "all": "All",
-      "tutorial": "Guides",
-      "comparison": "Comparisons",
-      "native": "Native",
-      "uiLibraries": "Resources"
-    },
-    "latestPosts": "Latest Posts",
-    "emptyState": "No posts found for this category.",
-    "backToBlog": "Back to Blog",
-    "relatedPosts": "Related Posts"
   },
   "showcase": {
     "heading": "Showcase",

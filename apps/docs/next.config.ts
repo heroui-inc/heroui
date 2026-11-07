@@ -30,7 +30,16 @@ const machineOnlyPaths = [
 ];
 const noindexHeaders = [{key: "X-Robots-Tag", value: "noindex, nofollow"}];
 
+/**
+ * heroui.com is served by the website app, which routes every path it doesn't own to this app
+ * (Next.js multi-zones). Both apps would answer `/_next/*`, so this one serves its assets, and its
+ * image optimizer, under its own prefix; Next rewrites `/docs-static/_next/*` back to `/_next/*`.
+ * Keep it in sync with the matcher in `src/proxy.ts`.
+ */
+const ASSET_PREFIX = "/docs-static";
+
 const config: NextConfig = {
+  assetPrefix: ASSET_PREFIX,
   compress: true,
   experimental: {
     agentUpgrade: "latest",
@@ -88,6 +97,7 @@ const config: NextConfig = {
   },
   images: {
     dangerouslyAllowLocalIP: true,
+    path: `${ASSET_PREFIX}/_next/image`,
     remotePatterns: [
       {
         hostname: "heroui-assets.nyc3.cdn.digitaloceanspaces.com",

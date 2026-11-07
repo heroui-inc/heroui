@@ -30,7 +30,7 @@ export default async function Layout({
     <HomeLayout
       {...baseOptions}
       links={[
-        ...getHomeLayoutLinks(dict, lang),
+        ...getHomeLayoutLinks(dict),
         {
           children: <GitHubLinkSmall />,
           on: "nav" as const,

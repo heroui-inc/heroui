@@ -4,7 +4,6 @@ import {join} from "node:path";
 import {Feed} from "feed";
 
 import {siteConfig} from "@/config/site";
-import {getAllBlogPosts} from "@/lib/blog";
 import {i18n} from "@/lib/i18n";
 import {source} from "@/lib/source";
 
@@ -34,32 +33,6 @@ export const getRSS = async (): Promise<string> => {
     link: baseUrl.toString(),
     title: siteConfig.fullName,
   });
-
-  const seenBlogIds = new Set<string>();
-
-  for (const locale of i18n.languages) {
-    for (const post of getAllBlogPosts(locale)) {
-      // Only emit each post once for its source locale, so fallback posts
-      // are not duplicated across the feed.
-      if (post.locale !== locale) continue;
-
-      const itemId = `/${locale}/blog/${post.slug}`;
-
-      if (seenBlogIds.has(itemId)) continue;
-      seenBlogIds.add(itemId);
-
-      const postUrl = new URL(itemId, baseUrl);
-
-      feed.addItem({
-        author: [{name: post.author}],
-        date: new Date(post.date),
-        description: post.description,
-        id: itemId,
-        link: postUrl.toString(),
-        title: post.title,
-      });
-    }
-  }
 
   for (const page of source.getPages()) {
     const pageUrl = new URL(page.url, baseUrl);
