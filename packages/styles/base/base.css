@@ -33,7 +33,7 @@
    *
    * React Aria positions popover-level overlays (Dropdown, Popover, Select, Tooltip, …)
    * with a hard-coded `z-index: 100000`, so modal-level overlays (Modal, AlertDialog,
-   * Drawer) have to match it rather than sit below it. Because the values are equal, the
+   * Drawer, Sheet) have to match it rather than sit below it. Because the values are equal, the
    * portal mount order decides what paints on top, which is what we want in both
    * directions: a Modal opened from a Dropdown covers the closing dropdown, and a Select
    * opened inside a Modal still renders above the Modal.

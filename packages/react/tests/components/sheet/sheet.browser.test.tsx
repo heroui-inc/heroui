@@ -6,7 +6,7 @@ import {cdp, page, userEvent} from "vitest/browser";
 import {Button} from "@/components/button";
 import {Sheet} from "@/components/sheet";
 
-import {SheetFixture} from "./fixtures";
+import {SheetFixture, SheetInModalFixture} from "./fixtures";
 
 import "@/styles.css";
 
@@ -925,5 +925,25 @@ describe("Sheet (browser)", () => {
     expect(scroller).not.toHaveAttribute("data-handle-dragging");
     expect(slot("dialog")).not.toBeNull();
     await expect.poll(() => isDocumentScrollLocked()).toBe(false);
+  });
+
+  // #7005: inert elements are skipped by hit-testing, so elementFromPoint cannot catch a sheet
+  // painted under the modal. Assert the stacking contract from base.css instead.
+  it("paints a Sheet opened inside a Modal above that Modal", async () => {
+    await render(<SheetInModalFixture />);
+
+    await page.getByRole("button", {name: "Open modal"}).click();
+    await expect.element(page.getByRole("dialog", {name: "Modal"})).toBeInTheDocument();
+    await page.getByRole("button", {name: "Open nested sheet"}).click();
+    await expect.element(page.getByRole("dialog", {name: "Nested sheet"})).toBeInTheDocument();
+
+    const backdrop = document.querySelector<HTMLElement>('[data-slot="modal-backdrop"]')!;
+    const overlay = slot("overlay");
+
+    expect(getComputedStyle(overlay).position).not.toBe("static");
+    expect(getComputedStyle(overlay).zIndex).toBe(getComputedStyle(backdrop).zIndex);
+    expect(
+      backdrop.compareDocumentPosition(overlay) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   });
 });
