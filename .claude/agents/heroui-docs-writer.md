@@ -233,7 +233,7 @@ To customize the ComponentName component classes, you can use the `@layer compon
 }
 ```
 
-HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+HeroUI follows the [BEM](https://bem.info/en/methodology/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### Adding custom variants # Optional - only if relevant
 
