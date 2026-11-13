@@ -2,13 +2,15 @@
 
 import type {Framework} from "@/hooks/use-current-framework";
 import type {Key} from "@heroui/react";
+import type {Route} from "next";
 
 import {Globe, Smartphone} from "@gravity-ui/icons";
 import {Tabs} from "@heroui/react";
+import {useTreeContext} from "fumadocs-ui/contexts/tree";
 import {usePathname, useRouter} from "next/navigation";
 import {useCallback, useEffect, useRef, useState} from "react";
 
-import {getDefaultRoute, useCurrentFramework} from "@/hooks/use-current-framework";
+import {getFrameworkSwitchRoute, useCurrentFramework} from "@/hooks/use-current-framework";
 import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
@@ -16,6 +18,7 @@ export function FrameworksTabs({className}: {className?: string}) {
   const dict = useDictionary().frameworksTabs;
   const pathname = usePathname();
   const router = useRouter();
+  const {full} = useTreeContext();
   const isNavigatingRef = useRef(false);
   const previousPathnameRef = useRef(pathname);
   const currentFramework = useCurrentFramework();
@@ -45,12 +48,17 @@ export function FrameworksTabs({className}: {className?: string}) {
       setSelectedKey(targetFramework);
       isNavigatingRef.current = true;
 
-      // Navigate to default route for target framework after a short delay to allow animation to play
+      const route = getFrameworkSwitchRoute(full, targetFramework, {
+        pathname,
+        search: window.location.search,
+      });
+
+      // Navigate after a short delay to allow animation to play
       setTimeout(() => {
-        router.push(getDefaultRoute(targetFramework, pathname) as any);
+        router.push(route as Route);
       }, 150); // Small delay to let animation start
     },
-    [currentFramework, pathname, router],
+    [currentFramework, full, pathname, router],
   );
 
   // Sync selectedKey with pathname changes (e.g., browser back/forward)
