@@ -51,6 +51,9 @@ const thumb = tv({
     isFocusVisible: {
       true: "ring-2 ring-offset-2 ring-offset-white",
     },
+    isPressed: {
+      true: "",
+    },
     isSelected: {
       false: "",
       true: "ms-8",

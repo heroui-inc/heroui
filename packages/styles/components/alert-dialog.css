@@ -300,7 +300,7 @@
  * Element: footer - the bottom action section
  */
 .alert-dialog__footer {
-  @apply flex flex-row items-center justify-end gap-2;
+  @apply flex flex-row flex-wrap items-center justify-end gap-2;
   @apply mt-0;
 }
 

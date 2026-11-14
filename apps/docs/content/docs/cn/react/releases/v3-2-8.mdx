@@ -1,0 +1,78 @@
+---
+title: v3.2.8
+description: tailwind-variants 4、ToggleButton fullWidth、Sheet 在模态框内的层级、可换行的浮层底部操作、更易操作的 Table 列宽调整手柄，以及 ScrollShadow 渐隐修复。
+github:
+  pull: 6998
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 11 月 14 日</span>
+</div>
+
+补丁版本：`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。[ToggleButton](/docs/components/toggle-button) 新增 `fullWidth` 属性；[Sheet](/docs/components/sheet) 改用共享的浮层 z-index，因此可以显示在 [Modal](/docs/components/modal) 之上；[Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在空间不足时会换行而不再溢出。本版本还加宽了 [Table](/docs/components/table) 列宽调整手柄的点击区域，并修复内容不再溢出时 [ScrollShadow](/docs/components/scroll-shadow) 残留的渐隐效果。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 依赖
+
+- **tailwind-variants**：将 `@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。HeroUI 内部的 `tv` 封装改用 `createTV` 与内置的 `twMerge` 配置，并移除不再使用的 `tailwind-merge` Rollup external。如果你的应用直接引入 `tailwind-variants` 并传入 `twMergeConfig`，请注意 v4 已将该选项移至 `tailwind-variants/config`（[#6996](https://github.com/heroui-inc/heroui/pull/6996)、[#7010](https://github.com/heroui-inc/heroui/pull/7010)）。
+- **工具链**：将 Tailwind CSS 升级至 `4.3.5`、Vitest 升级至 `5.1.0`、Storybook 升级至 `10.6.6`，并更新其他开发依赖（[#7004](https://github.com/heroui-inc/heroui/pull/7004)、[d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5)）。
+- **安全**：从构建工具链中移除存在漏洞的 `deepmerge`（GHSA-gcqx-w48m-w2h4），并从文档站移除未使用的 `@vercel/og` 依赖（GHSA-wx4j-mvgx-mqwp）（[#6997](https://github.com/heroui-inc/heroui/pull/6997)）。
+
+## 新功能
+
+- **ToggleButton**：新增 `fullWidth`，让按钮撑满容器宽度。适用于所有 `variant` 与 `size`，对应 `toggle-button--full-width` 修饰符（[#7012](https://github.com/heroui-inc/heroui/pull/7012)）。
+
+## 错误修复
+
+- **Sheet**：浮层改用与 [Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 共享的 `--z-index-overlay`，取代 `z-50`，使在 Modal 内打开的 Sheet 显示在其上方（[#7006](https://github.com/heroui-inc/heroui/pull/7006)）。
+- **浮层底部**：[AlertDialog](/docs/components/alert-dialog)、[Modal](/docs/components/modal)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在一行放不下时自动换行，不再溢出面板（[#7001](https://github.com/heroui-inc/heroui/pull/7001)）。
+- **Table**：列宽调整手柄改为 24px 宽、全高的点击区域，并提升至下一个表头之上，远端一半不再被遮挡。可见的分隔线改由 `::before` 绘制，并在 RTL 下保持在列边缘居中（[#7007](https://github.com/heroui-inc/heroui/pull/7007)）。
+- **ScrollShadow**：当内容曾经溢出并被滚动、随后缩小到不再溢出时，清除滚动驱动的渐隐效果。此前 Chromium 与 WebKit 会在失效的滚动时间线上保留最后的渐隐值，导致边缘残留渐隐（[#7015](https://github.com/heroui-inc/heroui/pull/7015)）。
+
+## 文档
+
+- **DESIGN.md**：发布 React 与 Native 的默认主题 `DESIGN.md` 文件，并为 CLI 的 `design-md` 命令补充文档。参见 [DESIGN.md](/docs/react/getting-started/design-md) 与 [CLI](/docs/react/getting-started/cli)（[#6905](https://github.com/heroui-inc/heroui/pull/6905)、[#6992](https://github.com/heroui-inc/heroui/pull/6992)、[#6994](https://github.com/heroui-inc/heroui/pull/6994)）。
+- **Web 与 Native 切换**：在 Web 与 Native 文档之间切换时保留当前页面（[#7011](https://github.com/heroui-inc/heroui/pull/7011)）。
+- **搜索**：当搜索内容像一个问题时优先列出 Ask AI，并移除搜索对话框中的分隔线（[#6990](https://github.com/heroui-inc/heroui/pull/6990)、[#6991](https://github.com/heroui-inc/heroui/pull/6991)）。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6998](https://github.com/heroui-inc/heroui/pull/6998)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />
