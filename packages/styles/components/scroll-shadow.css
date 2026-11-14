@@ -156,7 +156,8 @@
    Where scroll timelines are available the fade is derived from the real scroll state,
    so it is already correct on the first paint and needs no measurement or hydration.
    A container without overflow has an inactive timeline, which leaves both fades at 0px
-   and collapses the mask to a no-op. The attribute-driven rules above remain the
+   and collapses the mask to a no-op (see the no-overflow rule at the end of this block for
+   timelines that become inactive later). The attribute-driven rules above remain the
    fallback for engines without scroll timelines, and keep serving controlled mode.
 
    Two consequences of deriving the mask from CSS alone:
@@ -199,5 +200,15 @@
         270deg, transparent 0, #000 var(--scroll-shadow-start-fade),
         #000 calc(100% - var(--scroll-shadow-end-fade)), transparent 100%;
     }
+  }
+
+  /* A timeline that goes inactive after it was active (content that overflowed, was
+     scrolled, then shrank to fit) keeps its last fade values in Chromium and WebKit instead
+     of falling back to 0px. Once the hook has measured no overflow, drop the animation so
+     both fades return to their 0px initial value. First paint carries no state attributes,
+     so it stays measurement-free. */
+  .scroll-shadow.scroll-shadow--fade.scroll-shadow--vertical[data-scroll-shadow-mode="auto"][data-top-scroll="false"][data-bottom-scroll="false"],
+  .scroll-shadow.scroll-shadow--fade.scroll-shadow--horizontal[data-scroll-shadow-mode="auto"][data-left-scroll="false"][data-right-scroll="false"] {
+    animation: none;
   }
 }
