@@ -1,0 +1,170 @@
+---
+title: Theming with Agents
+description: Let coding agents customize HeroUI globally and author complete themes with CSS
+---
+
+The `heroui-theming` skill teaches your coding agent to restyle HeroUI across your whole app, or to build a complete light and dark theme from a description of the look you want.
+
+<Callout>
+  **Prefer a visual tool?** The [Theme Builder](/themes) lets you tune colors, radius, and fonts by hand and export the CSS. Use an agent when you want to go further: reshaped components, new variants, or a full visual identity.
+</Callout>
+
+## Why It Works
+
+HeroUI keeps its look and its behavior in separate packages. `@heroui/react` handles behavior and accessibility; everything visual lives in `@heroui/styles` as plain CSS:
+
+- **Theme tokens**: CSS variables such as `--accent`, `--radius`, and `--surface-shadow`
+- **Component classes**: readable [BEM](https://bem.info/) names such as `.button`, `.button--primary`, and `.card__header`
+- **Cascade layers**: `theme`, `base`, `components`, `utilities`, so overrides land in a predictable place
+
+An agent can read that CSS from your `node_modules`, see exactly which tokens and selectors exist, and change them globally. There are no component wrappers to write, nothing to fork, and no JavaScript to touch. Because it is only CSS, the same theme also works on [plain HTML and other frameworks](/docs/react/getting-started/frameworks#other-frameworks).
+
+## Install the Skill
+
+```bash
+curl -fsSL https://heroui.com/install | bash -s heroui-theming
+```
+
+To install it for a single project, run this from the project root:
+
+```bash
+curl -fsSL https://heroui.com/install | HEROUI_SKILL_SCOPE=project bash -s heroui-theming
+```
+
+Your agent discovers the skill automatically, or you can call it with `/heroui-theming`. See [Agent Skills](/docs/react/getting-started/agent-skills) for supported tools and the `heroui-react` skill, which covers building UIs with the components.
+
+## Prompts to Try
+
+### Customize globally
+
+```text
+Globally make all HeroUI buttons uppercase with wider letter spacing, and give every card a 1px border. Keep hover, pressed, focus, and disabled states working in light and dark mode.
+```
+
+```text
+Change the HeroUI brand color to a deep violet, make everything less rounded, and flatten the shadows. Use theme tokens only.
+```
+
+```text
+Add a "brand" button variant with a green background that I can use next to the existing variants.
+```
+
+### Create a theme
+
+```text
+Create a HeroUI theme called "arcade": chunky and playful, thick dark outlines, hard offset shadows instead of soft ones, saturated candy colors, and buttons that press down like keys. Include light and dark variants.
+```
+
+```text
+Create a HeroUI theme called "ledger" for a finance dashboard: calm, dense, low contrast surfaces, hairline borders, almost no shadows, a single navy accent. Light and dark.
+```
+
+The more you say about the feel (shape, depth, color, motion), the better the result. Screenshots and brand guidelines work as input too.
+
+### Without React
+
+```text
+Style this plain HTML page with HeroUI's CSS from the CDN. Use the button, card, input, and switch classes, and theme it with our brand color.
+```
+
+## What the Agent Produces
+
+Small changes go straight into your main CSS file, after the HeroUI import:
+
+```css title="app/globals.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@layer theme {
+  :root {
+    --accent: oklch(0.55 0.2 300);
+    --radius: 0.375rem;
+  }
+}
+
+@layer components {
+  .button {
+    @apply font-semibold tracking-wide uppercase;
+  }
+}
+```
+
+A named theme becomes a folder with one fixed structure:
+
+```
+src/themes/arcade/
+├── index.css             # Imports the two parts into the right layers
+├── variables.css         # Light and dark tokens
+└── components/
+    ├── index.css         # Imports each override file
+    ├── button.css        # One file per restyled component
+    ├── card.css
+    └── switch.css
+```
+
+Themes can also define their own tokens, prefixed with the theme name (`--arcade-outline`, `--arcade-depth`), and reuse them across component files.
+
+## Apply the Theme
+
+Import the theme after HeroUI:
+
+```css title="app/globals.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "../themes/arcade/index.css";
+```
+
+Then activate it on the `<html>` element:
+
+```html
+<html data-theme="arcade-light">
+  <body class="bg-background text-foreground">
+    <!-- Your app -->
+  </body>
+</html>
+```
+
+Switch to the dark variant with `data-theme="arcade-dark"`. To wire the switch to a toggle or the system preference, see [Using custom theme names](/docs/react/getting-started/dark-mode#using-custom-theme-names) in the Dark Mode guide.
+
+<Callout type="info">
+  Apply themes on `<html>`, not on a nested element. Overlays such as modals, popovers, and tooltips render outside your app's root, and hover and soft colors are calculated on the root element.
+</Callout>
+
+## What the Skill Teaches
+
+The agent picks the smallest change that solves your request:
+
+| Request | What the agent changes |
+| --- | --- |
+| "Change the brand color", "make everything rounder" | Theme tokens |
+| "Primary buttons should be black" | That component's CSS variables, such as `--button-bg` |
+| "All buttons uppercase", "cards get a border" | BEM classes in `@layer components` |
+| "Add a gradient button" | A new modifier class, such as `.button--brand` |
+| "Create a theme called X" | A named theme folder with light and dark variants |
+
+It also carries the rules that keep a theme solid: read tokens and selectors from the installed version instead of guessing, define both color modes, keep foreground pairs readable, style every state, and never break focus rings or reduced-motion handling.
+
+### Structure
+
+```
+skills/heroui-theming/
+├── SKILL.md              # Mental model, decision ladder, rules
+├── LICENSE.txt           # Apache License 2.0
+├── references/
+│   ├── tokens.md         # Every theme token and what it affects
+│   ├── components.md     # BEM conventions, states, component variables
+│   ├── theme-recipe.md   # Step-by-step theme process and a full example
+│   └── any-framework.md  # Plain HTML, Vue, Svelte, CDN
+└── scripts/              # Read tokens and classes from your installed version
+    ├── list_tokens.mjs
+    └── list_component_classes.mjs
+```
+
+## Related Documentation
+
+- [Theming](/docs/react/getting-started/theming) - Theme variables, custom themes, and the full token reference
+- [Colors](/docs/react/getting-started/colors) - The semantic color palette
+- [Styling](/docs/react/getting-started/styling) - Ways to style individual components
+- [Dark Mode](/docs/react/getting-started/dark-mode) - Theme switching setup
+- [DESIGN.md](/docs/react/getting-started/design-md) - Give agents HeroUI's default visual language
+- [Agent Skills](/docs/react/getting-started/agent-skills) - The `heroui-react` skill for building UIs

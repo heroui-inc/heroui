@@ -1,0 +1,328 @@
+---
+title: Agent Bridge
+description: Let an AI agent read and operate your HeroUI app through its components instead of screenshots and clicks
+---
+
+The agent bridge gives an AI agent three tools for your running app: `snapshot` to see the components on the page, `act` to use them, and `query` to search them. The agent works with labels, values, and actions such as `setValue`, so it fills a form in one call instead of clicking through it.
+
+It needs no changes to your components. The bridge reads what HeroUI already renders for accessibility: roles, labels, and state.
+
+```tsx
+import {createAgent} from "@heroui/react/agent";
+
+const agent = createAgent();
+
+agent.snapshot();
+// [
+//   {ref: "c1", component: "text-field", label: "Project name", value: "", actions: ["clear", "setValue"]},
+//   {ref: "c2", component: "select", label: "Region", value: "us", items: [{value: "us", label: "United States"}, …], actions: ["setValue"]},
+//   {ref: "c3", component: "switch", label: "Public", checked: false, actions: ["setChecked", "toggle"]},
+//   {ref: "c4", component: "button", label: "Save", actions: ["press"]},
+// ]
+
+await agent.act({
+  steps: [
+    {ref: "Project name", action: "setValue", args: ["Apollo"]},
+    {ref: "Region", action: "setValue", args: ["Europe"]},
+    {ref: "Public", action: "setChecked", args: [true]},
+    {ref: "Save", action: "press"},
+  ],
+});
+```
+
+<Callout>
+  The bridge is for the agent that operates your app for the person using it. To help a coding agent write HeroUI code, see [Agent Skills](/docs/react/getting-started/agent-skills), the [MCP Server](/docs/react/getting-started/mcp-server), and [LLMs.txt](/docs/react/getting-started/llms-txt).
+</Callout>
+
+## Set it up
+
+The bridge ships with `@heroui/react`. Create one agent in the browser, after your app has rendered, and keep it for the life of the page.
+
+```tsx
+"use client";
+
+import {createAgent} from "@heroui/react/agent";
+
+export const agent = createAgent({
+  allow: (action) => action.component !== "link",
+});
+```
+
+`createAgent` takes three options, all optional:
+
+- `allow` decides whether each action may run. See [Permissions](#permissions).
+- `root` limits the bridge to part of the page, such as your app shell without the chat panel.
+- `timeout` is how long a step waits for `allow`, in milliseconds. The default is 5 minutes.
+
+## Give the tools to a model
+
+`agentTools` holds the definitions of the three tools, with descriptions and JSON Schemas, in the shape most model SDKs take. Pass them to your model, then run each call it makes in the browser with `callAgentTool`.
+
+```tsx
+import {agentTools, callAgentTool} from "@heroui/react/agent";
+
+import {agent} from "./agent";
+
+// 1. Send the definitions with your model request.
+const tools = agentTools.map(({name, description, inputSchema}) => ({
+  name,
+  description,
+  inputSchema,
+}));
+
+// 2. When the model calls a tool, run it against the page and return the output.
+async function onToolCall(call: {name: string; input: unknown}) {
+  return callAgentTool(agent, call.name, call.input);
+}
+```
+
+The tools run in the browser, because that is where the page is. With a server-side model loop, forward each tool call to the client and send its output back.
+
+Tool results are page content. They can include text other people wrote, such as a comment or a customer name. The tool descriptions tell the model to treat results as data, and each definition carries `untrustedContentHint` so your SDK can do the same.
+
+## Read the page
+
+`snapshot()` returns one entry per component, in page order. Each entry has a `ref`, the component kind, its label, its current state, and the actions it takes right now.
+
+```tsx
+agent.snapshot();
+// {ref: "c5", component: "radio-group", label: "Plan", value: "pro",
+//  items: [{value: "free", label: "Free"}, {value: "pro", label: "Pro"}], actions: ["setValue"]}
+```
+
+A snapshot stays small on purpose:
+
+- A component is one entry. A select does not also list its trigger button, and a number field does not list its stepper buttons.
+- Lists show their choices when there are 10 or fewer. Longer lists report `itemCount`; read them with `query({within})`.
+- A page with more than 100 components is cut off, fields first, with a final entry that says how many were left out.
+- Disabled, invalid, required, and read-only state is included only when it is true.
+
+Refs stay stable while a component is on the page, so an agent can keep using `c2` across calls.
+
+## Act on components
+
+`act()` runs steps in order. A step names a component by its `ref` or its label, an action from that component's `actions`, and arguments.
+
+```tsx
+const result = await agent.act({
+  steps: [
+    {ref: "Owner", action: "setValue", args: ["Ada Lovelace"]},
+    {ref: "Due date", action: "setValue", args: ["2026-03-01"]},
+    {ref: "Volume", action: "setValue", args: [40]},
+    {ref: "More actions", action: "press", args: ["Duplicate"]},
+  ],
+});
+```
+
+Lists take a choice's label or its value. Popups are handled for you: `press` with a menu item's label opens the menu, presses the item, and lets the menu close. Dates and times are ISO text, whatever format the field shows: a select, a date picker, or a date range is set without opening its popup.
+
+The result says what happened, so the agent rarely needs a second snapshot:
+
+```tsx
+{
+  ok: true,
+  steps: [{step: 0, ref: "c6", changes: [{ref: "c6", key: "value", previous: "", value: "Ada Lovelace"}]}, …],
+  values: {"c1 Project name": "Apollo", "c6 Owner": "Ada Lovelace", …},
+  appeared: [{ref: "c21", component: "modal", label: "Invite a member", …}],
+  gone: ["c14"],
+}
+```
+
+- `steps[].changes` lists the state each step changed, including changes on other components.
+- `values` is the current value of every field on the page.
+- `appeared` and `gone` report components that entered or left, such as a dialog that opened.
+
+When a step fails, `act` stops. Earlier steps stay applied, `ok` is `false`, and `error` names the step with a message written for the model to act on:
+
+```tsx
+{ok: false, error: {step: 1, message: 'No item "Mars" in Region. Its items: United States, Europe, Asia.'}, …}
+```
+
+### Actions by component
+
+| Component | Actions |
+| --- | --- |
+| `text-field`, `textarea`, `input`, `search-field`, `number-field`, `color-field`, `input-otp` | `setValue(text)`, `clear()` |
+| `select`, `autocomplete`, `list-box`, `radio-group`, `tabs` | `setValue(labelOrValue)`. Multiple selection takes several arguments. Select adds `clear()` when it has a clear button. |
+| `combo-box` | `setValue(label)`, `clear()` |
+| `checkbox`, `switch`, `radio` | `setChecked(boolean)`, `toggle()` |
+| `slider` | `setValue(number)` |
+| `date-field`, `date-picker` | `setValue("2026-03-01")`, or `"2026-03-01T09:30"` when the field has a time |
+| `date-range-picker` | `setValue({start: "2026-04-02", end: "2026-04-09"})` |
+| `time-field` | `setValue("14:05")` |
+| `menu` (a dropdown trigger) | `press(itemLabel)`, `setOpen(boolean)` |
+| `accordion`, `disclosure` | `setOpen(boolean)`, `press()` |
+| `toggle-button` | `setPressed(boolean)`, `press()` |
+| `button`, `link` | `press()` |
+| `modal`, `alert-dialog`, `drawer`, `sheet`, `popover`, `toast` | `close()` |
+| `alert`, `status` | Read only |
+
+Always trust the `actions` array in the snapshot over this table: a read-only field lists none, and a disabled component refuses every action.
+
+## Find things without a snapshot
+
+`query()` answers narrow questions without listing the whole page.
+
+```tsx
+// The choices of one long list
+await agent.query({within: "Country", text: "united"});
+
+// Components whose label, group, or row matches
+await agent.query({text: "billing"});
+
+// Every component of one kind
+await agent.query({kind: "switch"});
+```
+
+`text` matches whole words, ignoring case and accents. Results are capped at 50, with a count of the rest.
+
+## Permissions
+
+Three layers decide what an agent may do. Use all of them.
+
+### Decide each action with `allow`
+
+`allow` runs before every step with the resolved action. Return `false` to refuse it. It can be async, so it is also where you ask the person.
+
+```tsx
+const agent = createAgent({
+  allow: async (action, {signal}) => {
+    if (action.component === "link") return false;
+    if (action.confirm) return askPerson(action.confirm, {signal});
+
+    return true;
+  },
+});
+```
+
+`action` has the component's `ref`, `component`, `label`, the `action` name, its `args`, and `confirm` when the target is marked for confirmation. List arguments arrive as values, not labels, so the check sees what will really be set.
+
+Without `allow`, every action runs except those that need confirmation.
+
+### Mark the markup
+
+Add these attributes to any element. They apply to everything inside it.
+
+| Attribute | Effect |
+| --- | --- |
+| `data-agent-confirm="Deletes the project"` | Steps on it need a person. `allow` receives the text as `action.confirm`. With no `allow`, the step is refused and the agent is told to ask the person. |
+| `data-agent-hidden` | The agent never sees it, and cannot act on it. |
+| `data-agent-secret` | The agent sees the field and can fill it, but never reads its value. |
+
+```tsx
+<Button data-agent-confirm="Permanently deletes this project" variant="danger" onPress={remove}>
+  Delete project
+</Button>
+
+<TextField data-agent-secret name="taxId">
+  <Label>Tax ID</Label>
+  <Input />
+</TextField>
+
+<section data-agent-hidden>
+  <RecoveryCodes />
+</section>
+```
+
+Password fields, one-time codes, and credit card fields are secret without any attribute. Their value shows as `"[redacted]"`.
+
+### Tell agent changes from the person's
+
+`getChangeSource()` returns `"agent"` while a handler runs for a bridge action, and `"user"` otherwise. Read it synchronously inside the handler.
+
+```tsx
+import {getChangeSource} from "@heroui/react/agent";
+
+<Switch
+  onChange={(isSelected) => {
+    audit.log({field: "public", value: isSelected, by: getChangeSource()});
+    setPublic(isSelected);
+  }}
+/>
+```
+
+<Callout type="warning">
+  The bridge is a convenience layer, not a security boundary. Anything the person can do in the page, a script in the page can do too. Enforce permissions on your server, as you already do.
+</Callout>
+
+## Watch for changes
+
+`subscribe()` reports state changes from everyone: the person, your app, and the agent. Use it to keep the model's context current, or to show what the agent just did.
+
+```tsx
+const unsubscribe = agent.subscribe((change) => {
+  // {ref: "c3", component: "switch", label: "Public", key: "checked", previous: false, value: true, source: "user"}
+  console.log(change);
+});
+```
+
+## Make your own components usable
+
+HeroUI components work without setup, and so do native elements such as `<input>`, `<select>`, and `<button>`. For a component you built from other parts, describe it with `useAgentComponent`.
+
+```tsx
+import {useRef, useState} from "react";
+
+import {useAgentComponent} from "@heroui/react/agent";
+
+function Rating() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState(0);
+
+  useAgentComponent(ref, {
+    component: "rating",
+    state: () => ({value, max: 5}),
+    actions: {
+      rate: (next: number) => setValue(next),
+    },
+  });
+
+  return (
+    <div ref={ref} aria-label="Your rating" role="group">
+      {/* stars */}
+    </div>
+  );
+}
+```
+
+The agent now sees one `rating` component with a `rate` action, in place of five unlabeled buttons. The label comes from the element's accessible name, or pass `label`.
+
+More options:
+
+- `items` lists choices, and `closed: true` refuses values outside them.
+- `secret: true` hides the value.
+- `shown: () => boolean` hides the component from the agent for now.
+- `exposeChildren: true` also lists the controls inside the element.
+
+Outside React, call `registerAgentComponent(element, options)`. It returns a function that removes the component.
+
+## Publish the tools to the browser's agent
+
+[WebMCP](https://github.com/webmachinelearning/webmcp) is a proposal that lets a page offer tools to the agent built into the browser. `registerTools` publishes `snapshot`, `act`, and `query` there. In a browser without WebMCP it does nothing.
+
+```tsx
+import {registerTools} from "@heroui/react/agent";
+
+const unregister = registerTools(agent, {
+  allow: (action) => !action.confirm && action.component !== "link",
+});
+```
+
+`allow` is required here. You did not write the browser's agent, so state what it may do. It runs after the agent's own `allow`. Pass `prefix` when the page registers other tools with the same names.
+
+## Good labels make a good agent
+
+The bridge sees what assistive technology sees. A component with a clear accessible name is easy for an agent to find; an icon button with no `aria-label` is a nameless `button`.
+
+- Give every field a `Label`, and every icon-only button an `aria-label`.
+- Group related fields in a `Fieldset` with a legend. It shows up as `group`, which tells two "Email" fields apart.
+- Put help and error text in `Description` and `FieldError`. The agent reads them as `description`.
+
+## Limits
+
+- Dates and times are read and written in the Gregorian calendar.
+- Rich text editors and other `contenteditable` regions are not covered. Wrap them with `useAgentComponent`.
+- Canvas content, drag and drop, and file uploads are out of scope.
+- The bridge needs a rendered page. It is not available during server rendering.
+
+See the [Agent Bridge Reference](/docs/react/getting-started/agent-bridge-reference) for every type and option.

@@ -37,6 +37,7 @@ const componentEntries = componentDirs.reduce((acc, dir) => {
 
 // All entry points
 const input = {
+  "agent/index": "src/agent/index.ts",
   index: "src/index.ts",
   ...componentEntries,
 };

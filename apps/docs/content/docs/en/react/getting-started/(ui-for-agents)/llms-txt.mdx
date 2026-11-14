@@ -21,6 +21,25 @@ We provide [LLMs.txt](https://llmstxt.org/) files to make HeroUI v3 documentatio
 - [/llms-components.txt](/llms-components.txt) — All component documentation
 - [/llms-patterns.txt](/llms-patterns.txt) — All patterns and recipes
 
+## Inside the Package
+
+`@heroui/react` also ships its docs as Markdown, so a coding agent reads the docs for the version installed in your project, with no network access.
+
+```
+node_modules/@heroui/react/docs/llms.txt
+node_modules/@heroui/react/docs/components/button.md
+node_modules/@heroui/react/docs/guides/theming.md
+```
+
+`llms.txt` is the index: it routes a task ("build a theme", "set up a project") to the page to read, and lists every component and guide. Point your agent at it from `AGENTS.md` or `CLAUDE.md`:
+
+```md
+Before using a HeroUI component, read `node_modules/@heroui/react/docs/llms.txt`
+and the page it links for that component.
+```
+
+The hosted files above always describe the latest release. Prefer the package copy when your project is on an older version.
+
 ## Integration
 
 **Claude Code:** Tell Claude to reference the documentation:

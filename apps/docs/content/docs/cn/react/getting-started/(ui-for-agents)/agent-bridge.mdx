@@ -1,0 +1,328 @@
+---
+title: Agent Bridge
+description: 让 AI 智能体通过组件来读取和操作你的 HeroUI 应用，而不是依靠截图和点击
+---
+
+Agent Bridge 为 AI 智能体提供三个面向运行中应用的工具：`snapshot` 用于查看页面上的组件，`act` 用于操作它们，`query` 用于搜索它们。智能体使用的是标签、值以及 `setValue` 这样的操作，因此一次调用就能填好一个表单，而不必逐项点击。
+
+你的组件无需任何改动。桥接层读取的是 HeroUI 为无障碍已经渲染出来的信息：角色、标签和状态。
+
+```tsx
+import {createAgent} from "@heroui/react/agent";
+
+const agent = createAgent();
+
+agent.snapshot();
+// [
+//   {ref: "c1", component: "text-field", label: "Project name", value: "", actions: ["clear", "setValue"]},
+//   {ref: "c2", component: "select", label: "Region", value: "us", items: [{value: "us", label: "United States"}, …], actions: ["setValue"]},
+//   {ref: "c3", component: "switch", label: "Public", checked: false, actions: ["setChecked", "toggle"]},
+//   {ref: "c4", component: "button", label: "Save", actions: ["press"]},
+// ]
+
+await agent.act({
+  steps: [
+    {ref: "Project name", action: "setValue", args: ["Apollo"]},
+    {ref: "Region", action: "setValue", args: ["Europe"]},
+    {ref: "Public", action: "setChecked", args: [true]},
+    {ref: "Save", action: "press"},
+  ],
+});
+```
+
+<Callout>
+  桥接层面向的是替用户操作你的应用的智能体。若要帮助编码智能体编写 HeroUI 代码，请参阅 [Agent Skills](/docs/react/getting-started/agent-skills)、[MCP 服务器](/docs/react/getting-started/mcp-server) 和 [LLMs.txt](/docs/react/getting-started/llms-txt)。
+</Callout>
+
+## 设置
+
+桥接层随 `@heroui/react` 一同发布。在浏览器中、应用渲染完成之后创建一个智能体实例，并在页面的整个生命周期内保留它。
+
+```tsx
+"use client";
+
+import {createAgent} from "@heroui/react/agent";
+
+export const agent = createAgent({
+  allow: (action) => action.component !== "link",
+});
+```
+
+`createAgent` 接受三个选项，均为可选：
+
+- `allow` 决定每个操作是否可以执行。参见[权限](#权限)。
+- `root` 将桥接层限定在页面的某一部分，例如不含聊天面板的应用外壳。
+- `timeout` 是一个步骤等待 `allow` 的时长，单位为毫秒。默认值为 5 分钟。
+
+## 把工具交给模型
+
+`agentTools` 包含这三个工具的定义，带有描述和 JSON Schema，其结构与大多数模型 SDK 所接受的一致。把它们传给你的模型，然后用 `callAgentTool` 在浏览器中执行模型发起的每一次调用。
+
+```tsx
+import {agentTools, callAgentTool} from "@heroui/react/agent";
+
+import {agent} from "./agent";
+
+// 1. 随模型请求一起发送工具定义。
+const tools = agentTools.map(({name, description, inputSchema}) => ({
+  name,
+  description,
+  inputSchema,
+}));
+
+// 2. 当模型调用工具时，在页面上执行它并返回输出。
+async function onToolCall(call: {name: string; input: unknown}) {
+  return callAgentTool(agent, call.name, call.input);
+}
+```
+
+工具在浏览器中运行，因为页面就在那里。如果模型循环运行在服务端，请把每次工具调用转发给客户端，再把输出发送回去。
+
+工具结果属于页面内容，其中可能包含其他人撰写的文本，例如一条评论或一个客户名称。工具描述会告诉模型把结果当作数据对待，并且每个定义都带有 `untrustedContentHint`，以便你的 SDK 也能这样处理。
+
+## 读取页面
+
+`snapshot()` 按页面顺序为每个组件返回一个条目。每个条目包含一个 `ref`、组件类型、标签、当前状态，以及它此刻支持的操作。
+
+```tsx
+agent.snapshot();
+// {ref: "c5", component: "radio-group", label: "Plan", value: "pro",
+//  items: [{value: "free", label: "Free"}, {value: "pro", label: "Pro"}], actions: ["setValue"]}
+```
+
+快照有意保持精简：
+
+- 一个组件对应一个条目。选择器不会另外列出它的触发按钮，数字输入框也不会列出它的步进按钮。
+- 选项不超过 10 个的列表会显示其选项。更长的列表只报告 `itemCount`；用 `query({within})` 读取它们。
+- 组件超过 100 个的页面会被截断，字段优先保留，最后一个条目会说明省略了多少个。
+- 禁用、无效、必填和只读状态仅在为 true 时才会包含。
+
+只要组件还在页面上，ref 就保持稳定，因此智能体可以在多次调用之间持续使用 `c2`。
+
+## 操作组件
+
+`act()` 按顺序执行步骤。每个步骤通过 `ref` 或标签指定一个组件，并给出该组件 `actions` 中的一个操作以及参数。
+
+```tsx
+const result = await agent.act({
+  steps: [
+    {ref: "Owner", action: "setValue", args: ["Ada Lovelace"]},
+    {ref: "Due date", action: "setValue", args: ["2026-03-01"]},
+    {ref: "Volume", action: "setValue", args: [40]},
+    {ref: "More actions", action: "press", args: ["Duplicate"]},
+  ],
+});
+```
+
+列表接受选项的标签或值。弹出层会替你处理：带上菜单项标签的 `press` 会打开菜单、按下该项，并让菜单关闭。无论字段以何种格式显示，日期和时间都使用 ISO 文本：选择器、日期选择器或日期范围无需打开弹出层即可设置。
+
+结果会说明发生了什么，因此智能体很少需要再取一次快照：
+
+```tsx
+{
+  ok: true,
+  steps: [{step: 0, ref: "c6", changes: [{ref: "c6", key: "value", previous: "", value: "Ada Lovelace"}]}, …],
+  values: {"c1 Project name": "Apollo", "c6 Owner": "Ada Lovelace", …},
+  appeared: [{ref: "c21", component: "modal", label: "Invite a member", …}],
+  gone: ["c14"],
+}
+```
+
+- `steps[].changes` 列出每个步骤改变的状态，包括其他组件上的变化。
+- `values` 是页面上每个字段的当前值。
+- `appeared` 和 `gone` 报告进入或离开页面的组件，例如打开的对话框。
+
+当某个步骤失败时，`act` 会停止。此前的步骤保持已应用状态，`ok` 为 `false`，`error` 会指出是哪个步骤，并附带一条供模型据以行动的消息：
+
+```tsx
+{ok: false, error: {step: 1, message: 'No item "Mars" in Region. Its items: United States, Europe, Asia.'}, …}
+```
+
+### 各组件支持的操作
+
+| 组件 | 操作 |
+| --- | --- |
+| `text-field`、`textarea`、`input`、`search-field`、`number-field`、`color-field`、`input-otp` | `setValue(text)`、`clear()` |
+| `select`、`autocomplete`、`list-box`、`radio-group`、`tabs` | `setValue(labelOrValue)`。多选时接受多个参数。Select 带有清除按钮时还会提供 `clear()`。 |
+| `combo-box` | `setValue(label)`、`clear()` |
+| `checkbox`、`switch`、`radio` | `setChecked(boolean)`、`toggle()` |
+| `slider` | `setValue(number)` |
+| `date-field`、`date-picker` | `setValue("2026-03-01")`，字段包含时间时为 `"2026-03-01T09:30"` |
+| `date-range-picker` | `setValue({start: "2026-04-02", end: "2026-04-09"})` |
+| `time-field` | `setValue("14:05")` |
+| `menu`（下拉菜单触发器） | `press(itemLabel)`、`setOpen(boolean)` |
+| `accordion`、`disclosure` | `setOpen(boolean)`、`press()` |
+| `toggle-button` | `setPressed(boolean)`、`press()` |
+| `button`、`link` | `press()` |
+| `modal`、`alert-dialog`、`drawer`、`sheet`、`popover`、`toast` | `close()` |
+| `alert`、`status` | 只读 |
+
+请始终以快照中的 `actions` 数组为准，而不是这张表：只读字段不会列出任何操作，被禁用的组件会拒绝所有操作。
+
+## 无需快照即可查找
+
+`query()` 用于回答范围较窄的问题，无需列出整个页面。
+
+```tsx
+// 某个长列表的选项
+await agent.query({within: "Country", text: "united"});
+
+// 标签、分组或行匹配的组件
+await agent.query({text: "billing"});
+
+// 某一类型的所有组件
+await agent.query({kind: "switch"});
+```
+
+`text` 按整词匹配，忽略大小写和重音符号。结果最多返回 50 条，并附带其余结果的数量。
+
+## 权限
+
+智能体可以做什么由三层机制决定。请把它们全部用上。
+
+### 用 `allow` 决定每个操作
+
+`allow` 会在每个步骤之前运行，并收到解析后的操作。返回 `false` 即可拒绝该操作。它可以是异步的，因此也是向用户询问的地方。
+
+```tsx
+const agent = createAgent({
+  allow: async (action, {signal}) => {
+    if (action.component === "link") return false;
+    if (action.confirm) return askPerson(action.confirm, {signal});
+
+    return true;
+  },
+});
+```
+
+`action` 包含组件的 `ref`、`component`、`label`、`action` 名称、其 `args`，以及当目标被标记为需要确认时的 `confirm`。列表参数传入的是值而不是标签，因此检查时看到的就是真正要设置的内容。
+
+未提供 `allow` 时，除需要确认的操作外，所有操作都会执行。
+
+### 在标记中添加属性
+
+可以把这些属性添加到任意元素上。它们对该元素内部的所有内容生效。
+
+| 属性 | 效果 |
+| --- | --- |
+| `data-agent-confirm="Deletes the project"` | 对它执行的步骤需要由用户确认。`allow` 会以 `action.confirm` 收到这段文本。未提供 `allow` 时，该步骤会被拒绝，并告知智能体去询问用户。 |
+| `data-agent-hidden` | 智能体永远看不到它，也无法操作它。 |
+| `data-agent-secret` | 智能体能看到该字段并可以填写，但永远读不到它的值。 |
+
+```tsx
+<Button data-agent-confirm="Permanently deletes this project" variant="danger" onPress={remove}>
+  Delete project
+</Button>
+
+<TextField data-agent-secret name="taxId">
+  <Label>Tax ID</Label>
+  <Input />
+</TextField>
+
+<section data-agent-hidden>
+  <RecoveryCodes />
+</section>
+```
+
+密码字段、一次性验证码和信用卡字段无需任何属性即为保密。它们的值显示为 `"[redacted]"`。
+
+### 区分智能体的更改与用户的更改
+
+当处理函数因桥接操作而运行时，`getChangeSource()` 返回 `"agent"`，其他情况下返回 `"user"`。请在处理函数内同步读取它。
+
+```tsx
+import {getChangeSource} from "@heroui/react/agent";
+
+<Switch
+  onChange={(isSelected) => {
+    audit.log({field: "public", value: isSelected, by: getChangeSource()});
+    setPublic(isSelected);
+  }}
+/>
+```
+
+<Callout type="warning">
+  桥接层是一个便利层，而不是安全边界。用户能在页面中做的任何事，页面中的脚本同样能做。请像现在一样，在你的服务端强制执行权限。
+</Callout>
+
+## 监听变化
+
+`subscribe()` 会报告来自所有来源的状态变化：用户、你的应用以及智能体。可以用它让模型的上下文保持最新，或者展示智能体刚刚做了什么。
+
+```tsx
+const unsubscribe = agent.subscribe((change) => {
+  // {ref: "c3", component: "switch", label: "Public", key: "checked", previous: false, value: true, source: "user"}
+  console.log(change);
+});
+```
+
+## 让你自己的组件可用
+
+HeroUI 组件无需配置即可使用，`<input>`、`<select>` 和 `<button>` 等原生元素也是如此。对于你用其他部件构建的组件，请用 `useAgentComponent` 来描述它。
+
+```tsx
+import {useRef, useState} from "react";
+
+import {useAgentComponent} from "@heroui/react/agent";
+
+function Rating() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState(0);
+
+  useAgentComponent(ref, {
+    component: "rating",
+    state: () => ({value, max: 5}),
+    actions: {
+      rate: (next: number) => setValue(next),
+    },
+  });
+
+  return (
+    <div ref={ref} aria-label="Your rating" role="group">
+      {/* 星星 */}
+    </div>
+  );
+}
+```
+
+现在智能体看到的是一个带有 `rate` 操作的 `rating` 组件，而不是五个没有标签的按钮。标签来自元素的无障碍名称，也可以传入 `label`。
+
+更多选项：
+
+- `items` 列出选项，`closed: true` 会拒绝选项之外的值。
+- `secret: true` 隐藏值。
+- `shown: () => boolean` 暂时对智能体隐藏该组件。
+- `exposeChildren: true` 同时列出元素内部的控件。
+
+在 React 之外，请调用 `registerAgentComponent(element, options)`。它返回一个用于移除该组件的函数。
+
+## 把工具发布给浏览器的智能体
+
+[WebMCP](https://github.com/webmachinelearning/webmcp) 是一项提案，让页面可以向浏览器内置的智能体提供工具。`registerTools` 会把 `snapshot`、`act` 和 `query` 发布到那里。在不支持 WebMCP 的浏览器中，它什么也不做。
+
+```tsx
+import {registerTools} from "@heroui/react/agent";
+
+const unregister = registerTools(agent, {
+  allow: (action) => !action.confirm && action.component !== "link",
+});
+```
+
+`allow` 在这里是必填的。浏览器的智能体不是你编写的，所以要明确说明它可以做什么。它在智能体实例自身的 `allow` 之后运行。当页面注册了其他同名工具时，请传入 `prefix`。
+
+## 好标签成就好智能体
+
+桥接层看到的就是辅助技术看到的内容。拥有清晰无障碍名称的组件很容易被智能体找到；没有 `aria-label` 的图标按钮只是一个没有名称的 `button`。
+
+- 为每个字段提供 `Label`，为每个仅含图标的按钮提供 `aria-label`。
+- 用带有 legend 的 `Fieldset` 将相关字段分组。它会显示为 `group`，可以用来区分两个“Email”字段。
+- 把帮助文本和错误文本放在 `Description` 和 `FieldError` 中。智能体会把它们读作 `description`。
+
+## 限制
+
+- 日期和时间以公历读写。
+- 富文本编辑器和其他 `contenteditable` 区域不在支持范围内。请用 `useAgentComponent` 包装它们。
+- Canvas 内容、拖放和文件上传不在支持范围内。
+- 桥接层需要已渲染的页面。它在服务端渲染期间不可用。
+
+所有类型和选项请参阅 [Agent Bridge 参考](/docs/react/getting-started/agent-bridge-reference)。

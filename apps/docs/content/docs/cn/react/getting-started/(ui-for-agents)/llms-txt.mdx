@@ -21,6 +21,25 @@ description: 让 Claude、Cursor、Windsurf 等 AI 助手理解 HeroUI v3
 - [/llms-components.txt](/llms-components.txt) — 全部组件文档
 - [/llms-patterns.txt](/llms-patterns.txt) — 全部模式与代码片段
 
+## 包内文档
+
+`@heroui/react` 还会以 Markdown 形式随包附带文档，因此编码代理读取的是你项目中已安装版本的文档，且无需访问网络。
+
+```
+node_modules/@heroui/react/docs/llms.txt
+node_modules/@heroui/react/docs/components/button.md
+node_modules/@heroui/react/docs/guides/theming.md
+```
+
+`llms.txt` 是索引：它把任务（“构建主题”“搭建项目”）引导到应该阅读的页面，并列出所有组件和指南。在 `AGENTS.md` 或 `CLAUDE.md` 中让你的代理指向它：
+
+```md
+Before using a HeroUI component, read `node_modules/@heroui/react/docs/llms.txt`
+and the page it links for that component.
+```
+
+上方的托管文件始终描述最新发布的版本。当你的项目使用较旧的版本时，请优先使用包内的副本。
+
 ## 集成
 
 **Claude Code：** 让 Claude 参考文档：
