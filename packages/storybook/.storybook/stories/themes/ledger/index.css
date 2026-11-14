@@ -1,0 +1,6 @@
+/* Ledger theme for HeroUI
+   Editorial and precise: square corners, hairline rules, no elevation, one deep green.
+   Almost everything is done with tokens; only two components need a file. */
+
+@import "./variables.css" layer(theme);
+@import "./components/index.css" layer(components);

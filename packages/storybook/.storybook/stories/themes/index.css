@@ -1,0 +1,13 @@
+/* Example themes for the "Theming" stories. Each one is a self-contained folder,
+   exactly as an app would write it after `@import "@heroui/styles"`. */
+
+@import "./arcade/index.css";
+@import "./ledger/index.css";
+
+/* Storybook only: its own globals set --background and --foreground outside any layer,
+   which would beat a layered theme. Hand those two back to the theme layer. */
+html[data-theme^="arcade-"],
+html[data-theme^="ledger-"] {
+  --background: revert-layer;
+  --foreground: revert-layer;
+}
