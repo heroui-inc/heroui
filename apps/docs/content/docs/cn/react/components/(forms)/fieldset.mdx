@@ -90,12 +90,14 @@ Fieldset 复合组件暴露以下 CSS 选择器：
 
 ### Fieldset
 
-继承 `React.HTMLAttributes<HTMLFieldSetElement>`。
+继承 `React.FieldsetHTMLAttributes<HTMLFieldSetElement>`。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 应用于根元素的 Tailwind CSS 类 |
 | `children` | `React.ReactNode` | - | Fieldset 内容（图例、分组、描述、操作） |
+| `disabled` | `boolean` | `false` | 禁用 fieldset 内的所有控件，包括以 `<div>` 渲染的 React Aria 组件（RadioGroup、CheckboxGroup、Slider） |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | 使用自定义渲染函数覆盖默认 DOM 元素 |
 
 ### Fieldset.Legend
 
@@ -105,6 +107,7 @@ Fieldset 复合组件暴露以下 CSS 选择器：
 |------|------|--------|------|
 | `className` | `string` | - | 图例元素的 Tailwind 类 |
 | `children` | `React.ReactNode` | - | 图例内容，通常为纯文本 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | 使用自定义渲染函数覆盖默认 DOM 元素 |
 
 ### Fieldset.Group
 
@@ -114,6 +117,7 @@ Fieldset 复合组件暴露以下 CSS 选择器：
 |------|------|--------|------|
 | `className` | `string` | - | 分组字段的布局与间距类 |
 | `children` | `React.ReactNode` | - | fieldset 内要分组的表单控件 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | 使用自定义渲染函数覆盖默认 DOM 元素 |
 
 ### Fieldset.Actions
 
@@ -123,6 +127,7 @@ Fieldset 复合组件暴露以下 CSS 选择器：
 |------|------|--------|------|
 | `className` | `string` | - | 对齐操作按钮或文本的 Tailwind 类 |
 | `children` | `React.ReactNode` | - | 操作按钮或辅助文本 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | 使用自定义渲染函数覆盖默认 DOM 元素 |
 
 ## 相关案例
 

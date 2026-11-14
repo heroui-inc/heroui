@@ -90,12 +90,14 @@ The Fieldset compound component exposes these CSS selectors:
 
 ### Fieldset
 
-Extends `React.HTMLAttributes<HTMLFieldSetElement>`.
+Extends `React.FieldsetHTMLAttributes<HTMLFieldSetElement>`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind CSS classes applied to the root element. |
 | `children` | `React.ReactNode` | - | Fieldset content (legend, groups, descriptions, actions). |
+| `disabled` | `boolean` | `false` | Disables every control in the fieldset, including React Aria primitives that render as `<div>` (RadioGroup, CheckboxGroup, Slider). |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function. |
 
 ### Fieldset.Legend
 
@@ -105,6 +107,7 @@ Extends `React.HTMLAttributes<HTMLLegendElement>`.
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes for the legend element. |
 | `children` | `React.ReactNode` | - | Legend content, usually plain text. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function. |
 
 ### Fieldset.Group
 
@@ -114,6 +117,7 @@ Extends `React.HTMLAttributes<HTMLDivElement>`.
 |------|------|---------|-------------|
 | `className` | `string` | - | Layout and spacing classes for grouped fields. |
 | `children` | `React.ReactNode` | - | Form controls to group inside the fieldset. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function. |
 
 ### Fieldset.Actions
 
@@ -123,6 +127,7 @@ Extends `React.HTMLAttributes<HTMLDivElement>`.
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes to align action buttons or text. |
 | `children` | `React.ReactNode` | - | Action buttons or helper text. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function. |
 
 ## Related Showcases
 
