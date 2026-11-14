@@ -26,6 +26,8 @@
     "(ui-for-agents)/agent-skills",
     "(ui-for-agents)/agents-md",
     "(ui-for-agents)/design-md",
-    "(ui-for-agents)/theming-for-agents"
+    "(ui-for-agents)/theming-for-agents",
+    "(ui-for-agents)/agent-bridge",
+    "(ui-for-agents)/agent-bridge-reference"
   ]
 }
