@@ -19,6 +19,7 @@ interface ToggleButtonRootProps
 const ToggleButtonRoot = ({
   children,
   className,
+  fullWidth,
   isIconOnly,
   size,
   style,
@@ -33,11 +34,12 @@ const ToggleButtonRoot = ({
   const styles = useMemo(
     () =>
       toggleButtonVariants({
+        fullWidth,
         isIconOnly,
         size: finalSize,
         variant,
       }),
-    [finalSize, isIconOnly, variant],
+    [finalSize, fullWidth, isIconOnly, variant],
   );
   const resolvedClassName = useResolvedClassName(className, styles);
 

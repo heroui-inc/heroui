@@ -147,3 +147,8 @@
 .toggle-button--icon-only.toggle-button--lg {
   @apply w-11 md:w-10;
 }
+
+/* Full width modifier */
+.toggle-button--full-width {
+  @apply w-full;
+}
