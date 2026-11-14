@@ -1,0 +1,78 @@
+---
+title: v3.2.8
+description: tailwind-variants 4, ToggleButton fullWidth, Sheet stacking inside modals, wrapping overlay footers, an easier Table column resizer, and a ScrollShadow fade fix.
+github:
+  pull: 6998
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">November 14, 2026</span>
+</div>
+
+Patch release: `@heroui/react` and `@heroui/styles` move to `tailwind-variants@4.0.2`. [ToggleButton](/docs/components/toggle-button) gains a `fullWidth` prop, [Sheet](/docs/components/sheet) now stacks on the shared overlay z-index so it opens above a [Modal](/docs/components/modal), and footer actions in [Modal](/docs/components/modal), [AlertDialog](/docs/components/alert-dialog), [Drawer](/docs/components/drawer), and [Sheet](/docs/components/sheet) wrap instead of overflowing. This release also widens the [Table](/docs/components/table) column resizer hit area and clears a stale [ScrollShadow](/docs/components/scroll-shadow) fade when content stops overflowing.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Dependencies
+
+- **tailwind-variants**: Upgrade `@heroui/react` and `@heroui/styles` to `tailwind-variants@4.0.2`. HeroUI's internal `tv` wrapper now uses `createTV` with the built-in `twMerge` config, and the unused `tailwind-merge` Rollup external is removed. If your app imports `tailwind-variants` directly and passes `twMergeConfig`, note that v4 moves that option to `tailwind-variants/config` ([#6996](https://github.com/heroui-inc/heroui/pull/6996), [#7010](https://github.com/heroui-inc/heroui/pull/7010)).
+- **Tooling**: Bump Tailwind CSS to `4.3.5`, Vitest to `5.1.0`, Storybook to `10.6.6`, and other development dependencies ([#7004](https://github.com/heroui-inc/heroui/pull/7004), [d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5)).
+- **Security**: Remove the vulnerable `deepmerge` package from the build toolchain (GHSA-gcqx-w48m-w2h4) and the unused `@vercel/og` dependency from the docs (GHSA-wx4j-mvgx-mqwp) ([#6997](https://github.com/heroui-inc/heroui/pull/6997)).
+
+## What's New
+
+- **ToggleButton**: Add `fullWidth` to stretch the button to the width of its container. It works with every `variant` and `size`, and maps to the `toggle-button--full-width` modifier ([#7012](https://github.com/heroui-inc/heroui/pull/7012)).
+
+## Bug Fixes
+
+- **Sheet**: Stack the overlay on the shared `--z-index-overlay` value used by [Modal](/docs/components/modal), [AlertDialog](/docs/components/alert-dialog), and [Drawer](/docs/components/drawer) instead of `z-50`, so a Sheet opened from inside a Modal renders above it ([#7006](https://github.com/heroui-inc/heroui/pull/7006)).
+- **Overlay footers**: Wrap footer actions that do not fit on one row in [AlertDialog](/docs/components/alert-dialog), [Modal](/docs/components/modal), [Drawer](/docs/components/drawer), and [Sheet](/docs/components/sheet) instead of overflowing the panel ([#7001](https://github.com/heroui-inc/heroui/pull/7001)).
+- **Table**: Make the column resizer a 24px-wide, full-height hit area lifted above the next header, so its far half is no longer covered. The visible line now draws with `::before` and stays centered on the column edge in RTL ([#7007](https://github.com/heroui-inc/heroui/pull/7007)).
+- **ScrollShadow**: Clear the scroll-driven fade when content that overflowed, was scrolled, and then shrank to fit stops overflowing. Chromium and WebKit kept the last fade values on the inactive scroll timeline, leaving a stale edge fade ([#7015](https://github.com/heroui-inc/heroui/pull/7015)).
+
+## Documentation
+
+- **DESIGN.md**: Publish default-theme `DESIGN.md` files for React and Native, and document the CLI's `design-md` command. See [DESIGN.md](/docs/react/getting-started/design-md) and [CLI](/docs/react/getting-started/cli) ([#6905](https://github.com/heroui-inc/heroui/pull/6905), [#6992](https://github.com/heroui-inc/heroui/pull/6992), [#6994](https://github.com/heroui-inc/heroui/pull/6994)).
+- **Web and Native switch**: Keep the current page when switching between Web and Native docs ([#7011](https://github.com/heroui-inc/heroui/pull/7011)).
+- **Search**: List Ask AI first when a search reads as a question, and remove separators from the search dialog ([#6990](https://github.com/heroui-inc/heroui/pull/6990), [#6991](https://github.com/heroui-inc/heroui/pull/6991)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6998](https://github.com/heroui-inc/heroui/pull/6998)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
