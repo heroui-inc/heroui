@@ -66,6 +66,7 @@ Use the lowest rung that solves the request. Each rung up costs more to maintain
 | 3   | "All buttons uppercase / cards get a border" (shape, type, layout, states) | BEM override in `@layer components` | [components.md](references/components.md)     |
 | 4   | "Add a gradient button next to the existing ones"                          | New modifier class                  | [components.md](references/components.md)     |
 | 5   | "Create a theme called X" / a full visual identity with light + dark       | Named theme folder                  | [theme-recipe.md](references/theme-recipe.md) |
+| 6   | "Use preset X but in our colors" (a theme someone else wrote)              | Brand palette layered over it       | [theme-recipe.md](references/theme-recipe.md#restyling-a-theme-you-didnt-write) |
 
 A one-off tweak on a single element is not theming: use `className` utilities there.
 
@@ -202,6 +203,12 @@ src/themes/<name>/
 
 Switch to dark with `data-theme="<name>-dark"` (a class of the same name also works). **Read [theme-recipe.md](references/theme-recipe.md) before writing a theme**: it has the step-by-step process and a complete worked example with light + dark variables and five component files.
 
+A theme with a tactile look (raised, pressed, outlined) applies that **material** to every "on" state, not only buttons: switch, checkbox, radio, toggle button, tab indicator, slider, progress and meter fills, selected calendar days. The recipe's [Material](references/theme-recipe.md#material-one-look-for-every-on-state) section lists each selector and the pseudo-elements already in use.
+
+### 6. Restyle a theme you didn't write
+
+Keep the preset's material and swap its palette: import the preset, then your `brand.css` with `layer(theme)`, keyed on the **preset's** selectors. Point every token the preset tints at your palette (`--overlay: var(--surface)`, `--field-border: var(--border)`) instead of copying its component CSS. Steps: [Restyling a theme you didn't write](references/theme-recipe.md#restyling-a-theme-you-didnt-write).
+
 ## Without React
 
 `@heroui/styles` works on plain HTML and any framework: load the CSS, put the BEM classes on real elements, set state attributes yourself.
@@ -236,6 +243,8 @@ With a Tailwind v4 build, use `@import "tailwindcss"; @import "@heroui/styles";`
 12. **Complete class names only.** In `@apply`, `className`, and variant maps, write full names (`button--brand`); never build them from strings.
 13. **Never edit `node_modules`** or copy HeroUI's CSS wholesale; override the smallest part.
 14. **Remove conflicting leftovers.** An old unlayered `:root { --accent: … }` silently beats a named theme.
+15. **One material for every "on" state.** If filled buttons are raised, so are the checked switch, the slider fill and the selected day.
+16. **Text in rem, shape in px** when the app has a text-size setting: set `--radius` and `--spacing` in px so only text scales.
 
 ## Verification Checklist
 
@@ -247,6 +256,8 @@ Build the CSS first (an unknown utility in `@apply` fails the build). Then, in *
 - [ ] Surfaces: Card variants, Accordion, Table, Tabs
 - [ ] Overlays: Popover/Dropdown/Select list, Tooltip + arrow, Modal + backdrop, Toast — background, shadow, radius
 - [ ] Soft colors: Chip/Badge/Alert in accent, success, warning, danger
+- [ ] "On" states share the material: primary button, switch, checkbox, radio, toggle button, tab indicator, slider, progress/meter, selected day
+- [ ] Over a preset: no token still carries its tint (overlay, field border, backdrop, scrollbar, charts)
 - [ ] Reduced motion still disables new transitions
 - [ ] If the project has a `DESIGN.md`, update it to the new tokens
 

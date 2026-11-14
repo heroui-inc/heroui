@@ -27,11 +27,14 @@ Write these down before touching CSS. Every answer maps to tokens.
 | Status    | Keep defaults or re-tune to the palette?         | `--success`, `--warning`, `--danger` (+ `-foreground`)                                                              |
 | Shape     | Sharp, soft, or pill?                            | `--radius`, `--field-radius`                                                                                        |
 | Elevation | Soft shadows, hard shadows, borders, or flat?    | `--surface-shadow`, `--overlay-shadow`, `--field-shadow`                                                            |
+| Material  | How do "on" states feel: flat, raised, pressed-in, outlined? | `--<name>-raised`, `--<name>-pressed` on every "on" selector ([Material](#material-one-look-for-every-on-state)) |
 | Fields    | Filled or outlined?                              | `--field-background`, `--field-border`, `--field-border-width`                                                      |
 | Type      | Custom font?                                     | `--font-sans` (Tailwind's token)                                                                                    |
 | Signature | The one or two details that make it recognizable | theme tokens `--<name>-*` + component overrides                                                                     |
 
 Work **tokens first**. Most of a theme is `variables.css`; add a component file only when a token cannot do it.
+
+**Tinted neutrals.** Pick one hue for every neutral and let chroma do the tinting: roughly `0.008–0.012` for the page and surfaces, `0.015–0.02` for borders and field outlines, `0.03` for `--muted`. Status colors stay untinted. Point the derived neutrals at a few base ones (`--overlay: var(--surface)`), so whoever brands the theme later changes three values instead of twelve.
 
 ## Step 1 — Scaffold
 
@@ -148,6 +151,105 @@ Build the app's CSS (a wrong utility name in `@apply` fails the build), then che
 - [ ] Reduced motion: new transitions stop with `prefers-reduced-motion`
 - [ ] No leftover unlayered `:root { --token }` overrides fighting the theme
 
+## Material: one look for every "on" state
+
+A theme feels designed when everything that is **on** looks made of the same stuff: the primary button, a checked switch, a selected day, a slider's fill, a progress bar. Pick the treatment once, as tokens, and apply it to every "on" selector.
+
+**1. Define the material per mode.** Shadows that read in light vanish in dark, so dark needs a different structure, not just darker values: a light inner edge on top and a black ring around, instead of a soft drop.
+
+```css
+/* variables.css */
+.<name>-light,
+[data-theme="<name>-light"] {
+  /* raised: a lit top edge plus a short drop */
+  --<name>-raised: inset 0 1px 0 0 oklch(100% 0 0 / 0.2), 0 1px 2px oklch(0% 0 0 / 0.08), 0 3px 6px -2px oklch(0% 0 0 / 0.06);
+  /* pressed: pushed into the surface */
+  --<name>-pressed: inset 0 1px 2px oklch(0% 0 0 / 0.08), inset 0 0 4px oklch(0% 0 0 / 0.06);
+}
+
+.<name>-dark,
+[data-theme="<name>-dark"] {
+  --<name>-raised: inset 0 1px 0 0 oklch(100% 0 0 / 0.2), 0 0 0 1px oklch(0% 0 0 / 0.4), 0 3px 6px -2px oklch(0% 0 0 / 0.3);
+  --<name>-pressed: inset 0 1px 1px oklch(100% 0 0 / 0.08);
+}
+```
+
+**2. Apply it to every "on" selector.** These are the ones in `@heroui/styles` 3.2.x (re-run `list_component_classes.mjs` for your version):
+
+| "On" state                | Selector                                                                                                           | Watch out for                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| Filled buttons            | `.button--primary`, `.button--danger`                                                                              | Focusable: use shadow utilities                                  |
+| Switch on                 | `.switch[data-selected="true"] .switch__control` (+ `[aria-checked="true"]`)                                       | Focusable                                                        |
+| Checkbox on               | `.checkbox[data-selected="true"] .checkbox__control` (+ `[aria-checked="true"]`)                                   | The control draws its fill with `::before`                       |
+| Radio on                  | `.radio[data-selected] .radio__control`                                                                            | The indicator draws its dot with `::before`                      |
+| Toggle button on          | `.toggle-button[data-selected="true"]`                                                                             | Focusable                                                        |
+| Selected tab              | `.tabs__indicator`                                                                                                 | Line-style tabs reuse it as an underline                         |
+| Slider                    | `.slider__fill`, `.slider__thumb`                                                                                  | The thumb draws its knob with `::after`: style the `::after`     |
+| Progress and meter        | `.progress-bar__fill`, `.meter__fill`                                                                              | The track clips: set `overflow: visible` on the track for shadow |
+| Progress circle           | `.progress-circle__fill-circle`                                                                                    | SVG: use `stroke`, not `box-shadow`                              |
+| Selected day              | `.calendar__cell[data-selected="true"]`                                                                            | Focusable                                                        |
+| Range ends                | `.range-calendar__cell[data-selection-start="true"] .range-calendar__cell-button` (and `data-selection-end`)       | Skip `[data-outside-month="true"]`                               |
+| Pressed (not filled)      | `.button--secondary`, `--tertiary`, `--ghost` with `:active, [data-pressed="true"]`                                | Not inside `.button-group`, whose buttons share edges            |
+
+```css
+/* components/button.css */
+.button--primary,
+.button--danger {
+  @apply shadow-(--<name>-raised);
+}
+
+.button--secondary,
+.button--tertiary,
+.button--ghost {
+  &:active,
+  &[data-pressed="true"] {
+    @apply shadow-(--<name>-pressed);
+  }
+}
+
+.button-group .button {
+  &:active,
+  &[data-pressed="true"] {
+    @apply shadow-none;
+  }
+}
+```
+
+**3. Light the fill with a gradient, not a pseudo-element.** `background-image: linear-gradient(oklch(1 0 0 / 0.14), transparent)` sits on top of `background-color` without adding a `::before`, which the checkbox, radio indicator and slider thumb already use. Keep the gradient in a token (`--<name>-light`) so dark can dim it. Inside a track that clips (progress, meter, slider fill), use only the inset half of the material: the outer drop is cut off.
+
+**4. Check the list in both modes.** A material applied to buttons only looks like a bug on the switch next to them.
+
+## Restyling a theme you didn't write
+
+Presets (HeroUI Pro's themes, a design team's package) give you the **material**; your product supplies the **palette**. Keep them in two files and let the palette load last:
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "<preset>/index.css";      /* tokens in layer(theme), overrides in layer(components) */
+@import "./brand.css" layer(theme); /* your palette, after the preset in the same layer */
+```
+
+1. **Use the preset's selectors.** Same layer and same specificity means the later file wins. If the preset keys its tokens on `[data-theme="<preset>-light"]`, so does `brand.css`. A bare `:root` block only wins by accident.
+2. **Replace the palette, keep the material.** Override the colors (`--background`, `--surface*`, `--default`, `--accent`, `--muted`, `--border`, `--separator`, `--radius`) and leave the preset's `--<preset>-*` material tokens alone. To tune the material, redefine those tokens; don't copy the component overrides.
+3. **Find every token the preset tints.** A purple preset tints more than the obvious ones: `--overlay`, `--surface-tertiary`, `--field-background`, `--field-border`, `--backdrop`, `--scrollbar-thumb`, `--chart-*`. Run `list_tokens.mjs` and diff it against the preset's file. Point them at your palette instead of giving each a value:
+
+```css
+[data-theme="<preset>-light"],
+[data-theme="<preset>-dark"] {
+  --overlay: var(--surface);
+  --surface-tertiary: var(--default);
+  --field-background: var(--surface);
+  --field-border: var(--border);
+  --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+}
+```
+
+   One block covers both modes because the `var()`s resolve on the element that holds the mode. Declare it on the theme's own selectors, not on `:root` (see "Calculated tokens resolve where they are declared" in [tokens.md](tokens.md)).
+
+4. **Unlayered works, at a price.** Importing `brand.css` without `layer()` also beats the preset, since unlayered CSS beats every layer. Nothing in a layer can adjust those tokens afterwards, and a later named theme silently loses to them.
+
 ## Optional pieces
 
 ### Fonts
@@ -175,6 +277,43 @@ Set Tailwind's `--font-sans` in both theme blocks: `--font-sans: "Inter", ui-san
 @import "./variables.css" layer(theme);
 @import "./components/index.css" layer(components);
 ```
+
+### Text that scales, corners that don't
+
+For a text-size setting (Small / Default / Large), change the root `font-size` and keep **text in rem, shape in px**. HeroUI's defaults are rem, so set `--radius` and `--spacing` in px to keep corners and padding fixed while the text grows:
+
+```css
+@theme {
+  --spacing: 4px;
+}
+
+[data-theme="<name>-light"],
+[data-theme="<name>-dark"] {
+  --radius: 8px;
+}
+
+html[data-text-size="large"] {
+  font-size: 17px;
+}
+```
+
+Line heights follow the spacing unit (`leading-5` is `5 × --spacing`), so pin the ones you use in rem in the same `@theme` block (`--leading-5: 1.25rem`).
+
+### More text steps and status text
+
+HeroUI has `--foreground` and `--muted`. Dense UIs often need one or two more steps, and status colors that are readable as **text**, not only as fills:
+
+```css
+[data-theme="<name>-light"] {
+  --subtle: oklch(52% 0.01 285); /* ≥ 4.5:1 on --surface and --background */
+  --faint: oklch(72% 0.01 285); /* placeholders and disabled only: may fall below 4.5:1 */
+  --danger-text: oklch(55% 0.2 25); /* --danger darkened until it passes as text */
+}
+```
+
+Give dark its own values (status text usually lightens there), write the measured ratio in a comment next to each, and map them once with `@theme inline` (`--color-subtle: var(--subtle);`) to get `text-subtle`.
+
+**Name custom tokens so `tailwind-merge` understands them.** HeroUI merges a `className` with its own classes, and `tailwind-merge` sorts classes by name. A custom font size called `text-caption` reads as a color, so `text-caption text-muted` keeps only one of them. Use t-shirt names for sizes (`--text-2xs`, `--text-2sm`, `--text-md`), and write custom shadows and radii as variables (`shadow-(--menu-shadow)`, `rounded-(--radius-panel)`) so they are recognized as shadows and radii.
 
 ### Several themes in one app
 

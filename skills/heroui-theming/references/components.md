@@ -101,6 +101,7 @@ All HeroUI component CSS is in `@layer components`. Put overrides in the same la
 4. **Do not write raw `box-shadow` in a state rule of a focusable component.** The focus ring is a `box-shadow`. Use shadow utilities (`@apply shadow-[…]`), which set `--tw-shadow` and compose with the ring, or check that the ring still shows.
 5. **Keep reduced motion.** If you add or replace a `transition`, follow it with `@apply motion-reduce:transition-none;` (after, not before).
 6. **Do not put overrides outside a layer.** Unlayered CSS beats `utilities`, so per-instance `className` overrides would stop working.
+7. **Check for pseudo-elements before adding one.** Several parts already draw with `::before` or `::after` (the checkbox control's fill, the radio indicator's dot, the slider thumb's knob). Grep the component's file first; a second `::before` rule replaces the first.
 
 ## Representative components
 

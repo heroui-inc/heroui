@@ -59,6 +59,14 @@ Create a HeroUI theme called "arcade": chunky and playful, thick dark outlines, 
 Create a HeroUI theme called "ledger" for a finance dashboard: calm, dense, low contrast surfaces, hairline borders, almost no shadows, a single navy accent. Light and dark.
 ```
 
+```text
+Give our theme a tactile feel: everything that is on (primary buttons, checked switches, slider fills, selected days) looks raised and lit from above, and secondary buttons press in. Keep our current colors, in light and dark.
+```
+
+```text
+We use the "<preset>" theme. Keep how its controls look, but switch it to our palette: neutral grays instead of its tint, #6466E9 as the accent, 8px corners.
+```
+
 你对风格的描述越具体（形状、层次、颜色、动效），结果就越好。截图和品牌规范同样可以作为输入。
 
 ### 不使用 React
@@ -141,8 +149,9 @@ src/themes/arcade/
 | “所有按钮大写”、“卡片加上边框” | `@layer components` 中的 BEM 类 |
 | “添加一个渐变按钮” | 新的修饰符类，例如 `.button--brand` |
 | “创建一个名为 X 的主题” | 包含浅色与深色变体的具名主题文件夹 |
+| “用我们的配色使用预设主题 X” | 在预设之上叠加品牌配色，保留它的控件质感 |
 
-它还包含让主题保持可靠的规则：从已安装的版本中读取 token 和选择器而不是凭空猜测，同时定义两种颜色模式，保持前景色配对的可读性，为每一种状态设置样式，并且绝不破坏焦点环和减弱动态效果的处理。
+它还包含让主题保持可靠的规则：从已安装的版本中读取 token 和选择器而不是凭空猜测，同时定义两种颜色模式，保持前景色配对的可读性，为每一种状态设置样式，让所有“开启”状态保持同一种质感，并且绝不破坏焦点环和减弱动态效果的处理。
 
 ### 结构
 

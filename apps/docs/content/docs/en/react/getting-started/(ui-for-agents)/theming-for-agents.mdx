@@ -59,6 +59,14 @@ Create a HeroUI theme called "arcade": chunky and playful, thick dark outlines, 
 Create a HeroUI theme called "ledger" for a finance dashboard: calm, dense, low contrast surfaces, hairline borders, almost no shadows, a single navy accent. Light and dark.
 ```
 
+```text
+Give our theme a tactile feel: everything that is on (primary buttons, checked switches, slider fills, selected days) looks raised and lit from above, and secondary buttons press in. Keep our current colors, in light and dark.
+```
+
+```text
+We use the "<preset>" theme. Keep how its controls look, but switch it to our palette: neutral grays instead of its tint, #6466E9 as the accent, 8px corners.
+```
+
 The more you say about the feel (shape, depth, color, motion), the better the result. Screenshots and brand guidelines work as input too.
 
 ### Without React
@@ -141,8 +149,9 @@ The agent picks the smallest change that solves your request:
 | "All buttons uppercase", "cards get a border" | BEM classes in `@layer components` |
 | "Add a gradient button" | A new modifier class, such as `.button--brand` |
 | "Create a theme called X" | A named theme folder with light and dark variants |
+| "Use preset X in our colors" | A brand palette layered over the preset, keeping its look |
 
-It also carries the rules that keep a theme solid: read tokens and selectors from the installed version instead of guessing, define both color modes, keep foreground pairs readable, style every state, and never break focus rings or reduced-motion handling.
+It also carries the rules that keep a theme solid: read tokens and selectors from the installed version instead of guessing, define both color modes, keep foreground pairs readable, style every state, give every "on" state the same look, and never break focus rings or reduced-motion handling.
 
 ### Structure
 
