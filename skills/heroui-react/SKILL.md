@@ -73,6 +73,16 @@ import { Card } from "@heroui/react";
 
 **For component details, examples, props, and implementation patterns, always fetch documentation:**
 
+### Installed Docs First
+
+`@heroui/react` ships its docs inside the package. When the project has it installed, they match the installed version, so read them before anything else:
+
+- `node_modules/@heroui/react/docs/llms.txt` — index: which page to read for a task, plus every component and guide
+- `node_modules/@heroui/react/docs/components/<name>.md` — one component (kebab-case, e.g. `date-picker.md`)
+- `node_modules/@heroui/react/docs/guides/<name>.md` — guides (`theming.md`, `styling.md`, `agent-bridge.md`…)
+
+The scripts below do this for you: `get_component_docs.mjs` and `get_docs.mjs` read the installed docs when they exist and fall back to the network (latest version) when they don't. Run them from inside the project.
+
 ### Using Scripts
 
 ```bash
@@ -201,6 +211,29 @@ HeroUI uses semantic naming to communicate functional intent:
 
 ---
 
+## Letting an AI Agent Operate the App
+
+When the task is to let an in-app assistant or browser agent **use** the UI (fill forms, pick options, press buttons), do not script clicks or add `data-testid` hooks. Use the bridge in `@heroui/react/agent`: it reads HeroUI components from their accessible roles and labels, with no changes to the components.
+
+```tsx
+import {agentTools, callAgentTool, createAgent} from "@heroui/react/agent";
+
+const agent = createAgent({allow: (action) => !action.confirm});
+
+agent.snapshot(); // [{ref: "c1", component: "select", label: "Region", value: "us", items: [...], actions: ["setValue"]}, ...]
+await agent.act({steps: [{ref: "Region", action: "setValue", args: ["Europe"]}]});
+
+// With a model: pass `agentTools` as tool definitions, run each call with callAgentTool(agent, name, input)
+```
+
+- Mark risky controls with `data-agent-confirm="reason"`, private regions with `data-agent-hidden`, private values with `data-agent-secret`.
+- Custom components join with `useAgentComponent(ref, {component, state, actions})`.
+- Every field needs a `Label` (or `aria-label`): the label is how the agent finds it.
+
+Full guide: `node_modules/@heroui/react/docs/guides/agent-bridge.md` or `https://heroui.com/docs/react/getting-started/agent-bridge.mdx`.
+
+---
+
 ## Theming
 
 HeroUI v3 uses CSS variables with `oklch` color space:
@@ -232,3 +265,9 @@ node scripts/get_theme.mjs
 ```
 
 For detailed theming, fetch: `https://heroui.com/docs/react/getting-started/theming.mdx`
+
+**Global customization and custom themes:** to restyle components app-wide (tokens, BEM class overrides, new variants) or author a complete named light/dark theme, use the `heroui-theming` skill. If it is not installed:
+
+```bash
+curl -fsSL https://heroui.com/install | bash -s heroui-theming
+```

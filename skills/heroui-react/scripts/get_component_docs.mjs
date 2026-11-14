@@ -7,8 +7,13 @@
  *   node get_component_docs.mjs Button Card TextField
  *
  * Output:
- *   MDX documentation including imports, usage, variants, props, examples
+ *   Documentation including imports, usage, variants, props, examples.
+ *   Read from node_modules/@heroui/react/docs when the installed package ships it
+ *   (matches the installed version), otherwise fetched from the network (latest).
  */
+
+import {existsSync, readFileSync} from "node:fs";
+import {dirname, join} from "node:path";
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
 const FALLBACK_BASE = "https://heroui.com";
@@ -22,6 +27,63 @@ function toKebabCase(name) {
     .replace(/([a-z])([A-Z])/g, "$1-$2")
     .replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
     .toLowerCase();
+}
+
+/**
+ * Find the docs that ship inside the installed `@heroui/react` package.
+ * They match the project's installed version, so they are preferred over the network.
+ * Set HEROUI_DOCS_SOURCE=remote to skip them.
+ */
+function findLocalDocs() {
+  if (process.env.HEROUI_DOCS_SOURCE === "remote") return null;
+
+  for (let dir = process.cwd(); ; dir = dirname(dir)) {
+    const docsDir = join(dir, "node_modules", "@heroui", "react", "docs");
+
+    if (existsSync(join(docsDir, "llms.txt"))) {
+      let version = "unknown";
+
+      try {
+        version = JSON.parse(readFileSync(join(docsDir, "..", "package.json"), "utf-8")).version;
+      } catch {
+        // The docs are still usable without the version.
+      }
+
+      return {docsDir, version};
+    }
+
+    if (dirname(dir) === dir) return null;
+  }
+}
+
+/**
+ * Read docs for every requested component from the installed package.
+ * Returns null unless all of them are found, so one source answers the whole request.
+ */
+function readLocal(components) {
+  const local = findLocalDocs();
+
+  if (!local) return null;
+
+  const results = [];
+
+  for (const component of components) {
+    const file = join(local.docsDir, "components", `${toKebabCase(component)}.md`);
+
+    if (!existsSync(file)) return null;
+
+    results.push({
+      component,
+      content: readFileSync(file, "utf-8"),
+      contentType: "markdown",
+      source: "installed",
+      version: local.version,
+    });
+  }
+
+  console.error(`# Using docs from the installed @heroui/react ${local.version}`);
+
+  return results;
 }
 
 /**
@@ -102,7 +164,20 @@ async function main() {
 
   const components = args;
 
-  // Try API first - use POST /v1/components/docs for batch requests
+  // Prefer the docs that ship with the installed version
+  const localResults = readLocal(components);
+
+  if (localResults) {
+    if (localResults.length === 1) {
+      console.log(localResults[0].content);
+    } else {
+      console.log(JSON.stringify({results: localResults}, null, 2));
+    }
+
+    return;
+  }
+
+  // Otherwise ask the API - use POST /v1/components/docs for batch requests
   console.error(`# Fetching docs for: ${components.join(", ")}...`);
   const data = await fetchApi("/v1/components/docs", "POST", {components});
 

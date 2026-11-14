@@ -2,7 +2,7 @@
 # HeroUI Skill Installer
 # Usage: curl -sSL https://heroui.com/install | bash -s [skill-name]
 # Default: heroui-react
-# Available skills: heroui-react, heroui-native, heroui-migration
+# Available skills: heroui-react, heroui-native, heroui-migration, heroui-theming
 # Scope: HEROUI_SKILL_SCOPE=global (default, installs for every project) or
 #        HEROUI_SKILL_SCOPE=project (installs into the current directory only)
 # https://heroui.com

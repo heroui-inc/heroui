@@ -1,0 +1,249 @@
+---
+title: Agent Bridge Reference
+description: Every function, option, and type in @heroui/react/agent
+---
+
+Everything on this page is imported from `@heroui/react/agent`. For a walkthrough, start with the [Agent Bridge](/docs/react/getting-started/agent-bridge) guide.
+
+```tsx
+import {
+  createAgent,
+  agentTools,
+  callAgentTool,
+  registerTools,
+  useAgentComponent,
+  registerAgentComponent,
+  getChangeSource,
+} from "@heroui/react/agent";
+```
+
+## createAgent
+
+```tsx
+const agent = createAgent(options?);
+```
+
+Creates a bridge to the page. Call it in the browser.
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `allow` | `(action: AgentAction, context: {signal: AbortSignal}) => boolean \| Promise<boolean>` | Allow all, except steps that need confirmation | Decides whether a resolved action may run. |
+| `timeout` | `number` | `300000` | How long a step waits for `allow`, in milliseconds. The `signal` aborts when it runs out. |
+| `root` | `Element \| (() => Element \| null \| undefined)` | `document` | Limits the bridge to part of the page. |
+
+It returns an `Agent` with four methods.
+
+### agent.snapshot
+
+```tsx
+agent.snapshot(): AgentComponent[]
+```
+
+Lists the components on the page in page order. At most 100 are returned; when there are more, the last entry has `component: "more"` and a `more` count.
+
+### agent.act
+
+```tsx
+agent.act(input: {steps: AgentStep[]}, options?: {allow?: AgentAllow}): Promise<AgentActResult>
+```
+
+Runs steps in order and stops at the first failure. Earlier steps stay applied. Calls are queued, so two `act` calls never interleave. The per-call `allow` runs after the agent's own.
+
+### agent.query
+
+```tsx
+agent.query(input: AgentQuery): Promise<AgentComponent[] | {error: string}>
+```
+
+Finds components, or the choices of one list. At most 50 results are returned, followed by a `more` entry.
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `text` | `string` | Words to look for in labels, groups, rows, and list choices. Matches whole words, ignoring case and accents. |
+| `within` | `string` | Ref or label of one list. Returns its choices, filtered by `text`. |
+| `kind` | `string` | Keeps one kind of component, such as `"select"`. |
+
+### agent.subscribe
+
+```tsx
+agent.subscribe(listener: (change: AgentChange) => void): () => void
+```
+
+Reports changes to `value`, `checked`, `open`, and `pressed`, whoever made them. Returns a function that stops the subscription.
+
+## Tools for models
+
+### agentTools
+
+An array of three tool definitions: `snapshot`, `act`, and `query`. Each has a `name`, a `description`, an `inputSchema` (JSON Schema), and `annotations`.
+
+| Tool | `readOnlyHint` | `consequentialHint` | `untrustedContentHint` |
+| --- | --- | --- | --- |
+| `snapshot` | `true` | | `true` |
+| `act` | `false` | `true` | `true` |
+| `query` | `true` | | `true` |
+
+### callAgentTool
+
+```tsx
+callAgentTool(agent: Agent, name: string, input: unknown, options?: {allow?: AgentAllow}): Promise<unknown>
+```
+
+Runs one tool call from a model and returns its output. Throws for a name other than `snapshot`, `act`, or `query`.
+
+### registerTools
+
+```tsx
+registerTools(agent: Agent, options: {allow: AgentAllow; prefix?: string}): () => void
+```
+
+Publishes the three tools to the browser's agent through WebMCP (`document.modelContext` or `navigator.modelContext`). Does nothing where WebMCP is missing. Returns a function that removes the tools.
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `allow` | `AgentAllow` | Required. Decides each step the browser's agent asks for. |
+| `prefix` | `string` | Prefix for the tool names, such as `"settings_"`. |
+
+## Custom components
+
+### useAgentComponent
+
+```tsx
+useAgentComponent(ref: RefObject<Element | null>, options: AgentComponentOptions): void
+```
+
+Describes a component you built to the bridge. The options are read fresh on every snapshot, so `state` always sees the current render.
+
+### registerAgentComponent
+
+```tsx
+registerAgentComponent(element: Element, options: AgentComponentOptions | (() => AgentComponentOptions)): () => void
+```
+
+The same, without React. Returns a function that removes the component.
+
+### AgentComponentOptions
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `component` | `string` | Required. The kind reported in snapshots, such as `"rating"`. |
+| `label` | `string` | Accessible name. Defaults to the element's own. |
+| `state` | `() => Record<string, unknown>` | Current state. `value`, `checked`, `open`, and `pressed` are tracked for changes. |
+| `actions` | `Record<string, (...args) => unknown>` | Methods an agent may call. A returned value is passed back as the step's `result`. |
+| `items` | `() => AgentItem[]` | Choices, when the component is a list. |
+| `closed` | `boolean` | The value is always one of `items`. Other values are refused, and labels are resolved to values. |
+| `secret` | `boolean` | The value is never shown to the agent. |
+| `shown` | `() => boolean` | Whether the agent sees the component right now. |
+| `exposeChildren` | `boolean` | Also list the controls inside the element. By default they are part of the component. |
+
+## getChangeSource
+
+```tsx
+getChangeSource(): "agent" | "user"
+```
+
+Returns `"agent"` while a handler runs for a bridge action. Read it synchronously inside the handler; after an `await` it is `"user"` again.
+
+## Markup attributes
+
+| Attribute | Effect |
+| --- | --- |
+| `data-agent-confirm="reason"` | Steps on the element, or anything inside it, need a person. The text reaches `allow` as `action.confirm`. |
+| `data-agent-hidden` | The element and everything inside it is kept from the agent. |
+| `data-agent-secret` | Values inside can be set but never read. They show as `"[redacted]"`. |
+
+Password inputs, inputs with a credit card or one-time-code `autocomplete`, and `InputOTP` are secret without the attribute.
+
+## Types
+
+### AgentComponent
+
+One entry of a snapshot or query result.
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `ref` | `string` | Stable while the component stays on the page, such as `"c3"`. |
+| `component` | `string` | The kind, such as `"select"` or a custom name. |
+| `label` | `string` | Accessible name. |
+| `group` | `string` | Label of the fieldset or group around it. |
+| `row` | `string` | Text of the table row or list item around it. |
+| `value` | `unknown` | Current value. Dates and times are ISO text. |
+| `checked` | `boolean \| "mixed"` | For checkboxes, switches, and radios. |
+| `open` | `boolean` | For menus, accordions, disclosures, and dialogs. |
+| `pressed` | `boolean` | For toggle buttons. |
+| `items` | `AgentItem[]` | Choices, when there are 10 or fewer. |
+| `itemCount` | `number` | How many choices exist when they are not listed. |
+| `description` | `string` | Help and error text connected to the component. |
+| `text` | `string` | Visible text of a dialog, alert, or toast. |
+| `placeholder`, `href`, `min`, `max`, `step` | | Included when the component has them. |
+| `multiple`, `required`, `readOnly`, `invalid`, `disabled` | `boolean` | Included only when true. |
+| `confirm` | `string` | Text of a `data-agent-confirm` mark. |
+| `note` | `string` | Extra guidance for the agent. |
+| `actions` | `string[]` | Action names available right now. |
+
+Custom components may add their own state keys.
+
+### AgentItem
+
+```tsx
+{value: string; label: string; disabled?: boolean}
+```
+
+### AgentStep
+
+```tsx
+{ref: string; action: string; args?: unknown[]}
+```
+
+`ref` is a ref from a snapshot, or words from the component's label. Whole words are matched, ignoring case and accents, against the label, then the group or row around the component, then the component kind. When several components match, the step fails and lists them with their refs.
+
+### AgentAction
+
+What `allow` receives.
+
+```tsx
+{ref: string; component: string; label?: string; action: string; args: unknown[]; confirm?: string}
+```
+
+### AgentActResult
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `ok` | `boolean` | Whether every step ran. |
+| `error` | `{step: number; message: string}` | The failing step and why. |
+| `steps` | `AgentStepResult[]` | Steps that ran: `{step, ref, result?, changes}`. |
+| `values` | `Record<string, unknown>` | Current field values, keyed by ref and label, such as `"c1 Project name"`. |
+| `appeared` | `AgentComponent[]` | Components that appeared during the call and are still on the page. |
+| `gone` | `string[]` | Refs of components that left the page. |
+
+### AgentChange
+
+```tsx
+{
+  ref: string;
+  component: string;
+  label?: string;
+  key: string; // "value" | "checked" | "open" | "pressed"
+  previous: unknown;
+  value: unknown;
+  source: "agent" | "user";
+}
+```
+
+## Error messages
+
+Errors are written for the model, with what to do next.
+
+| Situation | Message |
+| --- | --- |
+| No component matches | `No component "Regoin" on the page. Take a snapshot to see what is there.` Names closed sections it may be behind. |
+| Several components match | `"Email" names 2 components: c3 text-field Email (Billing), c9 text-field Email (Shipping). Use a ref.` |
+| Choice not in a list | `No item "Mars" in Region. Its items: United States, Europe, Asia.` |
+| Wrong action | `Save (c4) takes no setValue now. It takes: press.` |
+| Disabled | `Save (c4) is disabled.` |
+| Refused by the person | `The person said no to "Deletes the project".` |
+| Nobody answered `allow` in time | `Nobody answered within 300s.` |
+| Needs confirmation, no `allow` | `Needs a person: "Deletes the project". Ask them to use "Delete project" themselves.` |
+| Refused by `allow` | `The app doesn't allow press on "Delete project".` |
+| Hidden from agents | `"Recovery code" is kept from agents. Ask the person to do this themselves.` |
+| Bad date or time | `Due date takes a date such as 2026-01-31.` |

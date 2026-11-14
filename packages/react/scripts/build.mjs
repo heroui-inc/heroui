@@ -65,7 +65,7 @@ async function logComponentCount() {
 async function addUseClientDirective() {
   console.log("🔧 Adding directives to files...");
 
-  // Find all JS files in the components and hooks directories
+  // Find all JS files in the components, hooks, and agent directories
   const jsFiles = [];
   const componentsDir = path.join(distDir, "components");
   const hooksDir = path.join(distDir, "hooks");
@@ -94,6 +94,13 @@ async function addUseClientDirective() {
     await findJsFiles(hooksDir);
   }
 
+  // The agent bridge is plain DOM code; only its React hook is a client module.
+  const agentDir = path.join(distDir, "agent");
+
+  if (await fs.pathExists(agentDir)) {
+    await findJsFiles(agentDir);
+  }
+
   let useClientCount = 0;
   let useStrictCount = 0;
 
@@ -120,7 +127,12 @@ async function addUseClientDirective() {
     const isTsx = await fs.pathExists(sourcePathTsx);
     const isTs = await fs.pathExists(sourcePathTs);
 
-    if (isTsx) {
+    // A .ts source that declares "use client" itself (a hook module) keeps it: Rollup
+    // strips module-level directives, so it has to be put back here.
+    const declaresClient =
+      isTs && /^\s*["']use client["']/.test(await fs.readFile(sourcePathTs, "utf-8"));
+
+    if (isTsx || declaresClient) {
       // .tsx files get "use client"
       await fs.writeFile(jsFile, `"use client";\n${content}`);
       useClientCount++;

@@ -63,6 +63,11 @@ async function generateExports() {
       import: "./dist/index.js",
       default: "./dist/index.js",
     },
+    "./agent": {
+      types: "./dist/agent/index.d.ts",
+      import: "./dist/agent/index.js",
+      default: "./dist/agent/index.js",
+    },
     "./package.json": "./package.json",
     "./styles": {
       style: "./dist/styles.css",

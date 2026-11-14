@@ -1,0 +1,170 @@
+---
+title: 使用代理定制主题
+description: 让编码代理通过 CSS 全局定制 HeroUI，并创建完整的主题
+---
+
+`heroui-theming` skill 让你的编码代理学会在整个应用范围内重新设计 HeroUI 的样式，或者根据你描述的视觉风格构建一套完整的浅色与深色主题。
+
+<Callout>
+  **更喜欢可视化工具？** [主题构建器](/themes) 可以让你手动调整颜色、圆角和字体，并导出 CSS。当你想更进一步时再使用代理：重塑组件外观、添加新的变体，或打造完整的视觉风格。
+</Callout>
+
+## 为什么可行
+
+HeroUI 将外观与行为放在不同的包中。`@heroui/react` 负责行为与无障碍；所有视觉内容都以纯 CSS 的形式存放在 `@heroui/styles` 中：
+
+- **主题 token**：CSS 变量，例如 `--accent`、`--radius` 和 `--surface-shadow`
+- **组件类名**：可读的 [BEM](https://bem.info/) 命名，例如 `.button`、`.button--primary` 和 `.card__header`
+- **级联层**：`theme`、`base`、`components`、`utilities`，覆盖样式会落在可预期的位置
+
+代理可以直接从你的 `node_modules` 中读取这些 CSS，准确了解有哪些 token 和选择器，并进行全局修改。无需编写组件包装器，无需 fork，也无需改动任何 JavaScript。由于它只是 CSS，同一套主题也适用于[纯 HTML 和其他框架](/docs/react/getting-started/frameworks#其他框架)。
+
+## 安装 Skill
+
+```bash
+curl -fsSL https://heroui.com/install | bash -s heroui-theming
+```
+
+如果只想安装到单个项目，请在项目根目录下运行：
+
+```bash
+curl -fsSL https://heroui.com/install | HEROUI_SKILL_SCOPE=project bash -s heroui-theming
+```
+
+你的代理会自动发现该 skill，你也可以通过 `/heroui-theming` 直接调用。支持的工具以及用于构建 UI 的 `heroui-react` skill，请参见 [Agent Skills](/docs/react/getting-started/agent-skills)。
+
+## 可以尝试的提示词
+
+### 全局定制
+
+```text
+Globally make all HeroUI buttons uppercase with wider letter spacing, and give every card a 1px border. Keep hover, pressed, focus, and disabled states working in light and dark mode.
+```
+
+```text
+Change the HeroUI brand color to a deep violet, make everything less rounded, and flatten the shadows. Use theme tokens only.
+```
+
+```text
+Add a "brand" button variant with a green background that I can use next to the existing variants.
+```
+
+### 创建主题
+
+```text
+Create a HeroUI theme called "arcade": chunky and playful, thick dark outlines, hard offset shadows instead of soft ones, saturated candy colors, and buttons that press down like keys. Include light and dark variants.
+```
+
+```text
+Create a HeroUI theme called "ledger" for a finance dashboard: calm, dense, low contrast surfaces, hairline borders, almost no shadows, a single navy accent. Light and dark.
+```
+
+你对风格的描述越具体（形状、层次、颜色、动效），结果就越好。截图和品牌规范同样可以作为输入。
+
+### 不使用 React
+
+```text
+Style this plain HTML page with HeroUI's CSS from the CDN. Use the button, card, input, and switch classes, and theme it with our brand color.
+```
+
+## 代理会生成什么
+
+小的改动会直接写入你的主 CSS 文件，位于 HeroUI 导入之后：
+
+```css title="app/globals.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@layer theme {
+  :root {
+    --accent: oklch(0.55 0.2 300);
+    --radius: 0.375rem;
+  }
+}
+
+@layer components {
+  .button {
+    @apply font-semibold tracking-wide uppercase;
+  }
+}
+```
+
+具名主题则是一个结构固定的文件夹：
+
+```
+src/themes/arcade/
+├── index.css             # Imports the two parts into the right layers
+├── variables.css         # Light and dark tokens
+└── components/
+    ├── index.css         # Imports each override file
+    ├── button.css        # One file per restyled component
+    ├── card.css
+    └── switch.css
+```
+
+主题还可以定义自己的 token，并以主题名作为前缀（`--arcade-outline`、`--arcade-depth`），在各个组件文件中复用。
+
+## 应用主题
+
+在 HeroUI 之后导入主题：
+
+```css title="app/globals.css"
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "../themes/arcade/index.css";
+```
+
+然后在 `<html>` 元素上启用它：
+
+```html
+<html data-theme="arcade-light">
+  <body class="bg-background text-foreground">
+    <!-- Your app -->
+  </body>
+</html>
+```
+
+使用 `data-theme="arcade-dark"` 切换到深色变体。如需将切换接入开关或系统偏好，请参见深色模式指南中的[使用自定义主题名称](/docs/react/getting-started/dark-mode#使用自定义主题名称)。
+
+<Callout type="info">
+  请在 `<html>` 上应用主题，而不是嵌套元素。模态框、弹出框和工具提示等浮层会渲染在应用根节点之外，并且悬停色与柔和色是在根元素上计算的。
+</Callout>
+
+## Skill 教会代理什么
+
+代理会选择能满足需求的最小改动：
+
+| 需求 | 代理修改的内容 |
+| --- | --- |
+| “更换品牌色”、“让所有元素更圆润” | 主题 token |
+| “主按钮改成黑色” | 该组件的 CSS 变量，例如 `--button-bg` |
+| “所有按钮大写”、“卡片加上边框” | `@layer components` 中的 BEM 类 |
+| “添加一个渐变按钮” | 新的修饰符类，例如 `.button--brand` |
+| “创建一个名为 X 的主题” | 包含浅色与深色变体的具名主题文件夹 |
+
+它还包含让主题保持可靠的规则：从已安装的版本中读取 token 和选择器而不是凭空猜测，同时定义两种颜色模式，保持前景色配对的可读性，为每一种状态设置样式，并且绝不破坏焦点环和减弱动态效果的处理。
+
+### 结构
+
+```
+skills/heroui-theming/
+├── SKILL.md              # Mental model, decision ladder, rules
+├── LICENSE.txt           # Apache License 2.0
+├── references/
+│   ├── tokens.md         # Every theme token and what it affects
+│   ├── components.md     # BEM conventions, states, component variables
+│   ├── theme-recipe.md   # Step-by-step theme process and a full example
+│   └── any-framework.md  # Plain HTML, Vue, Svelte, CDN
+└── scripts/              # Read tokens and classes from your installed version
+    ├── list_tokens.mjs
+    └── list_component_classes.mjs
+```
+
+## 相关文档
+
+- [主题](/docs/react/getting-started/theming) — 主题变量、自定义主题与完整的 token 参考
+- [颜色](/docs/react/getting-started/colors) — 语义化调色板
+- [样式](/docs/react/getting-started/styling) — 为单个组件设置样式的方式
+- [深色模式](/docs/react/getting-started/dark-mode) — 主题切换配置
+- [DESIGN.md](/docs/react/getting-started/design-md) — 为代理提供 HeroUI 的默认视觉语言
+- [Agent Skills](/docs/react/getting-started/agent-skills) — 用于构建 UI 的 `heroui-react` skill

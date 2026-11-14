@@ -20,7 +20,8 @@
     "react ui"
   ],
   "files": [
-    "dist"
+    "dist",
+    "docs"
   ],
   "publishConfig": {
     "access": "public"
@@ -28,6 +29,9 @@
   "exports": {
     ".": {
       "import": "./src/index.ts"
+    },
+    "./agent": {
+      "import": "./src/agent/index.ts"
     },
     "./package.json": "./package.json",
     "./styles": {
@@ -47,6 +51,7 @@
     "dev": "rollup -c rollup.config.mjs --watch",
     "build": "node scripts/build.mjs --tsc",
     "build:fast": "node scripts/build.mjs",
+    "build:agent-docs": "node scripts/build-docs.mjs",
     "add:component": "node scripts/add-component.mjs",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
@@ -56,7 +61,7 @@
     "test:browser": "vitest run --project react-browser",
     "test:coverage": "vitest run --coverage --project react-jsdom",
     "test:changed": "vitest related --changed --project react-jsdom",
-    "prepack": "clean-package && node scripts/update-exports.mjs",
+    "prepack": "node scripts/build-docs.mjs && clean-package && node scripts/update-exports.mjs",
     "postpack": "clean-package restore"
   },
   "clean-package": "./clean-package.config.json",
