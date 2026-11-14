@@ -90,35 +90,39 @@ Fieldset 复合组件暴露以下 CSS 选择器：
 
 ### Fieldset
 
+继承 `React.HTMLAttributes<HTMLFieldSetElement>`。
+
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 应用于根元素的 Tailwind CSS 类 |
 | `children` | `React.ReactNode` | - | Fieldset 内容（图例、分组、描述、操作） |
-| `nativeProps` | `React.HTMLAttributes<HTMLFieldSetElement>` | 支持原生 fieldset 属性与事件 |
 
 ### Fieldset.Legend
+
+继承 `React.HTMLAttributes<HTMLLegendElement>`。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 图例元素的 Tailwind 类 |
 | `children` | `React.ReactNode` | - | 图例内容，通常为纯文本 |
-| `nativeProps` | `React.HTMLAttributes<HTMLLegendElement>` |  - | 原生 legend 属性 |
 
 ### Fieldset.Group
+
+继承 `React.HTMLAttributes<HTMLDivElement>`。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 分组字段的布局与间距类 |
 | `children` | `React.ReactNode` | - | fieldset 内要分组的表单控件 |
-| `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | 原生 div 属性 |
 
 ### Fieldset.Actions
+
+继承 `React.HTMLAttributes<HTMLDivElement>`。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 对齐操作按钮或文本的 Tailwind 类 |
 | `children` | `React.ReactNode` | - | 操作按钮或辅助文本 |
-| `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | 原生 div 属性 |
 
 ## 相关案例
 

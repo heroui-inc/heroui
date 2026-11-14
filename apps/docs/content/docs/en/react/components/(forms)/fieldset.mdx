@@ -90,35 +90,39 @@ The Fieldset compound component exposes these CSS selectors:
 
 ### Fieldset
 
+Extends `React.HTMLAttributes<HTMLFieldSetElement>`.
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind CSS classes applied to the root element. |
 | `children` | `React.ReactNode` | - | Fieldset content (legend, groups, descriptions, actions). |
-| `nativeProps` | `React.HTMLAttributes<HTMLFieldSetElement>` | Supports native fieldset attributes and events. |
 
 ### Fieldset.Legend
+
+Extends `React.HTMLAttributes<HTMLLegendElement>`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes for the legend element. |
 | `children` | `React.ReactNode` | - | Legend content, usually plain text. |
-| `nativeProps` | `React.HTMLAttributes<HTMLLegendElement>` |  - | Native legend attributes. |
 
 ### Fieldset.Group
+
+Extends `React.HTMLAttributes<HTMLDivElement>`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Layout and spacing classes for grouped fields. |
 | `children` | `React.ReactNode` | - | Form controls to group inside the fieldset. |
-| `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |
 
 ### Fieldset.Actions
+
+Extends `React.HTMLAttributes<HTMLDivElement>`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes to align action buttons or text. |
 | `children` | `React.ReactNode` | - | Action buttons or helper text. |
-| `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |
 
 ## Related Showcases
 
