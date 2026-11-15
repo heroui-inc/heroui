@@ -137,7 +137,6 @@ const CheckboxIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">
   const {slots, state} = use(CheckboxContext);
 
   const isSelected = state?.isSelected;
-  const isIndeterminate = state?.isIndeterminate;
 
   const content =
     typeof children === "function" ? (
@@ -161,20 +160,18 @@ const CheckboxIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">
         >
           <polyline points="1 9 7 14 15 4" />
         </svg>
-        {isIndeterminate ? (
-          <svg
-            aria-hidden="true"
-            data-slot="checkbox-default-indicator--indeterminate"
-            fill="none"
-            role="presentation"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeWidth={3}
-            viewBox="0 0 24 24"
-          >
-            <line x1="21" x2="3" y1="12" y2="12" />
-          </svg>
-        ) : null}
+        <svg
+          aria-hidden="true"
+          data-slot="checkbox-default-indicator--indeterminate"
+          fill="none"
+          role="presentation"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeWidth={3}
+          viewBox="0 0 24 24"
+        >
+          <line x1="21" x2="3" y1="12" y2="12" />
+        </svg>
       </>
     );
 
