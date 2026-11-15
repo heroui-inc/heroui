@@ -3,7 +3,7 @@
 import type {HighlightedDemoCode} from "./demo-controls";
 import type {DemoControlValue, DemoControlValues, DemoControls} from "@/lib/demo-controls";
 
-import React, {useCallback, useEffect, useId, useMemo, useRef, useState} from "react";
+import React, {Activity, useCallback, useEffect, useId, useMemo, useRef, useState} from "react";
 
 import {
   getChangedProps,
@@ -61,7 +61,7 @@ export function ComponentPreviewContainer({
 }: React.PropsWithChildren<ComponentPreviewContainerProps>) {
   const [Demo, StaticCode] = React.Children.toArray(children) as React.ReactElement[];
 
-  // Controls state lives here, above the off-screen unmount, so values survive scrolling.
+  // Controls state lives here so the demo, the panel, and the live code share it.
   const controlsId = useId();
   const [isControlsOpen, setIsControlsOpen] = useState(false);
   const [values, setValues] = useState<DemoControlValues>(() =>
@@ -105,7 +105,7 @@ export function ComponentPreviewContainer({
     return ["breadcrumbs-", "card-", "link-"].some((pattern) => name.includes(pattern));
   }, [name]);
   const containerRef = useRef<HTMLDivElement>(null);
-  // Off-screen examples stay mounted otherwise. Opening a menu marks the rest
+  // Hide off-screen examples, keeping their state. Otherwise opening a menu marks the rest
   // of the page inert, and WebKit then styles every preview before the popover
   // can paint. Storybook only has the one open example, so it toggles immediately.
   const [showContent, setShowContent] = useState(true);
@@ -150,10 +150,10 @@ export function ComponentPreviewContainer({
       style={{
         ...style,
         contain: style?.contain ?? "content",
-        ...(reservedHeight != null ? {minHeight: reservedHeight} : null),
+        ...(showContent ? null : {minHeight: reservedHeight}),
       }}
     >
-      {showContent ? (
+      <Activity mode={showContent ? "visible" : "hidden"}>
         <>
           {!!description && (
             <p className="mb-3 text-sm leading-5 text-(--docs-fg-muted)">{description}</p>
@@ -220,7 +220,7 @@ export function ComponentPreviewContainer({
             ) : null}
           </div>
         </>
-      ) : null}
+      </Activity>
     </div>
   );
 }
