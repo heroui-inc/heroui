@@ -1,6 +1,6 @@
 ---
 title: v3.2.8
-description: tailwind-variants 4、ToggleButton fullWidth、Sheet 在模态框内的层级、可换行的浮层底部操作、更易操作的 Table 列宽调整手柄，以及 ScrollShadow 渐隐修复。
+description: @heroui/react 内置与版本匹配的文档、heroui-theming 代理技能、tailwind-variants 4、ToggleButton fullWidth、Sheet 在模态框内的层级、可换行的浮层底部操作、更易操作的 Table 列宽调整手柄，以及 ScrollShadow 渐隐修复。
 github:
   pull: 6998
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 11 月 14 日</span>
 </div>
 
-补丁版本：`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。[ToggleButton](/docs/components/toggle-button) 新增 `fullWidth` 属性；[Sheet](/docs/components/sheet) 改用共享的浮层 z-index，因此可以显示在 [Modal](/docs/components/modal) 之上；[Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在空间不足时会换行而不再溢出。本版本还加宽了 [Table](/docs/components/table) 列宽调整手柄的点击区域，并修复内容不再溢出时 [ScrollShadow](/docs/components/scroll-shadow) 残留的渐隐效果。
+补丁版本：`@heroui/react` 现在随包附带与版本匹配的 Markdown 文档，供编码代理读取；全新的 `heroui-theming` 技能让代理可以重新设计 HeroUI 样式或创建完整主题（[使用代理定制主题](/docs/react/getting-started/theming-for-agents)）。`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。[ToggleButton](/docs/components/toggle-button) 新增 `fullWidth` 属性；[Sheet](/docs/components/sheet) 改用共享的浮层 z-index，因此可以显示在 [Modal](/docs/components/modal) 之上；[Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在空间不足时会换行而不再溢出。本版本还加宽了 [Table](/docs/components/table) 列宽调整手柄的点击区域，并修复内容不再溢出时 [ScrollShadow](/docs/components/scroll-shadow) 残留的渐隐效果。
 
 ## 安装
 
@@ -50,6 +50,9 @@ github:
 
 ## 新功能
 
+- **包内文档**：`@heroui/react` 现在在 `node_modules/@heroui/react/docs/` 下以 Markdown 形式附带文档，包括 `llms.txt` 索引以及组件和指南页面，在发布时由文档站生成。编码代理可以离线读取与项目所装版本一致的文档。在 `AGENTS.md` 或 `CLAUDE.md` 中让代理先读取 `docs/llms.txt`；参见 [LLMs.txt](/docs/react/getting-started/llms-txt)（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
+- **heroui-theming 技能**：新的代理技能，支持通过令牌、BEM 覆盖以及具名的亮色与暗色主题进行全局定制和完整主题创作，适用于 React 或任意框架。使用 `curl -fsSL https://heroui.com/install | bash -s heroui-theming` 安装；参见 [使用代理定制主题](/docs/react/getting-started/theming-for-agents)（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
+- **heroui-react 技能**：当项目依赖 `@heroui/react` 时，从已安装的包中读取组件文档与指南，否则回退到 heroui.com（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
 - **ToggleButton**：新增 `fullWidth`，让按钮撑满容器宽度。适用于所有 `variant` 与 `size`，对应 `toggle-button--full-width` 修饰符（[#7012](https://github.com/heroui-inc/heroui/pull/7012)）。
 
 ## 错误修复
@@ -61,9 +64,14 @@ github:
 
 ## 文档
 
+- **使用代理定制主题**：新增指南，介绍如何借助编码代理全局定制 HeroUI 并创建完整主题，并在 [LLMs.txt](/docs/react/getting-started/llms-txt) 与 [Agent Skills](/docs/react/getting-started/agent-skills) 页面中说明包内文档（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
 - **DESIGN.md**：发布 React 与 Native 的默认主题 `DESIGN.md` 文件，并为 CLI 的 `design-md` 命令补充文档。参见 [DESIGN.md](/docs/react/getting-started/design-md) 与 [CLI](/docs/react/getting-started/cli)（[#6905](https://github.com/heroui-inc/heroui/pull/6905)、[#6992](https://github.com/heroui-inc/heroui/pull/6992)、[#6994](https://github.com/heroui-inc/heroui/pull/6994)）。
 - **Web 与 Native 切换**：在 Web 与 Native 文档之间切换时保留当前页面（[#7011](https://github.com/heroui-inc/heroui/pull/7011)）。
 - **搜索**：当搜索内容像一个问题时优先列出 Ask AI，并移除搜索对话框中的分隔线（[#6990](https://github.com/heroui-inc/heroui/pull/6990)、[#6991](https://github.com/heroui-inc/heroui/pull/6991)）。
+
+## Storybook
+
+- **主题示例**：新增 Theming/Themes 故事，提供 Arcade 与 Ledger 两套示例主题，通过令牌与 BEM 覆盖重新设计组件样式（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
 
 ## 链接
 
