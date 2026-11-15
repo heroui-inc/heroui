@@ -1,3 +1,4 @@
+import type {DemoControls} from "@/lib/demo-controls";
 import type {ComponentType} from "react";
 
 import {demos as cnDemos} from "./cn";
@@ -8,13 +9,16 @@ export type Lang = "en" | "cn";
 export const DEFAULT_LANG: Lang = "en";
 
 export interface DemoItem {
-  loader: () => Promise<ComponentType>;
+  /** Props are optional, except ones a controlled demo always gets from its panel (`channel`). */
+  loader: () => Promise<ComponentType<any>>;
   /**
    * Source file path relative to `src/demos`, used by `ComponentSource` to
    * load the raw code from disk. Always lang-prefixed, e.g.
    * `en/accordion/basic.tsx` or `cn/accordion/basic.tsx`.
    */
   file: string;
+  /** Prop controls shown beside the preview. The demo spreads `props` onto its target. */
+  controls?: DemoControls;
 }
 
 const registries: Record<Lang, Record<string, DemoItem>> = {

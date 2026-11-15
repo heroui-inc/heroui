@@ -1,8 +1,10 @@
+import type {CheckboxProps} from "@heroui/react";
+
 import {Checkbox} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: CheckboxProps) {
   return (
-    <Checkbox name="basic-terms">
+    <Checkbox {...props} name="basic-terms">
       <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />

@@ -8,20 +8,21 @@ import {createRelativeLink} from "fumadocs-ui/mdx";
 import {notFound} from "next/navigation";
 import {Suspense, cache} from "react";
 
-import {CopyNativeSetupPrompt, CopySetupPrompt} from "@/components/ai/copy-setup-prompt";
-import {ViewOptions} from "@/components/ai/page-actions";
-import {ComponentLinks} from "@/components/component-links";
+import {PageActions} from "@/components/ai/page-actions";
+import {NATIVE_SETUP_PROMPT, REACT_SETUP_PROMPT, buildPagePrompt} from "@/components/ai/prompts";
+import {ComponentLinks, ComponentResources} from "@/components/component-links";
 import {ComponentPreview, ComponentPreviewFallback} from "@/components/component-preview";
 import {ComponentsCategory} from "@/components/components-category";
+import {TocProCard} from "@/components/docs-shell/toc-pro-card";
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
   DocsTitle,
 } from "@/components/fumadocs/layouts/notebook/page";
+import {PageNavButtons} from "@/components/fumadocs/layouts/notebook/page/client";
 import {LocaleLink} from "@/components/locale-link";
 import {ComponentsCategory as NativeComponentsCategory} from "@/components/native/components-category";
-import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
@@ -61,12 +62,19 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
 
   const MDXContent = page.data.body;
   const isComponentStatusIcon = page.data.icon && componentStatusIcons.includes(page.data.icon);
-  const showCopyPrompt =
-    page.url.endsWith("/react/getting-started") ||
-    page.url.endsWith("/react/getting-started/quick-start");
-  const showNativeCopyPrompt =
-    page.url.endsWith("/native/getting-started") ||
-    page.url.endsWith("/native/getting-started/quick-start");
+  const isSetupPage = /\/(react|native)\/getting-started(\/quick-start)?$/.test(page.url);
+  const framework = page.url.includes("/docs/native") ? "native" : "react";
+  const markdownUrl = `${page.url}.mdx`;
+  const prompt = isSetupPage
+    ? framework === "native"
+      ? NATIVE_SETUP_PROMPT
+      : REACT_SETUP_PROMPT
+    : buildPagePrompt({
+        framework,
+        isComponent: page.url.includes("/components/"),
+        markdownUrl: absoluteUrl(markdownUrl),
+        title: page.data.title,
+      });
 
   // TODO: add github last edit
   // const lastEditTime = await getGithubLastEdit({
@@ -125,28 +133,33 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
         // TODO: add github last edit
         // lastUpdate={lastEditTime}
         tableOfContent={{
-          footer: <NewsletterForm />,
+          footer: (
+            <>
+              {links ? <ComponentResources links={links} /> : null}
+              <TocProCard />
+            </>
+          ),
+          single: true,
           style: "normal",
         }}
       >
-        <section className="flex flex-col gap-2">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <DocsTitle className="flex items-center gap-2">
+        <section className="mb-6 flex flex-col gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+            <DocsTitle className="flex items-center gap-3">
               {page.data.title}
               {!!isComponentStatusIcon && (
                 <StatusChip className="w-fit" status={page.data.icon as StatusChipStatus} />
               )}
             </DocsTitle>
             {page.data.toc.length > 0 && (
-              <div className="flex flex-wrap items-center justify-start gap-2">
-                {!!showCopyPrompt && <CopySetupPrompt />}
-                {!!showNativeCopyPrompt && <CopyNativeSetupPrompt />}
-                <ViewOptions markdownUrl={`${page.url}.mdx`} />
+              <div className="flex items-center gap-2">
+                <PageActions markdownUrl={markdownUrl} prompt={prompt} />
+                <PageNavButtons />
               </div>
             )}
           </div>
-          <DocsDescription className="text-md mt-2 mb-4">{page.data.description}</DocsDescription>
-          {!!links && <ComponentLinks links={links} />}
+          <DocsDescription>{page.data.description}</DocsDescription>
+          {!!links && <ComponentLinks className="mt-2 xl:hidden" links={links} />}
         </section>
         <DocsBody className="prose-sm">
           <MDXContent

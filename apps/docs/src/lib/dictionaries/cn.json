@@ -24,10 +24,6 @@
     "description": "抱歉，找不到您要访问的页面。",
     "returnHome": "返回首页"
   },
-  "showcase": {
-    "heading": "相关案例",
-    "description": "探索展示 HeroUI 组件在真实场景中应用的互动示例。"
-  },
   "footer": {
     "about": "关于",
     "allRightsReserved": "保留所有权利。",
@@ -55,12 +51,32 @@
   },
   "searchDialog": {
     "placeholder": "你想搜索什么？",
-    "jumpTo": "跳转到"
+    "jumpTo": "跳转到",
+    "filters": {
+      "all": "全部",
+      "components": "组件",
+      "guides": "指南",
+      "pro": "Pro"
+    },
+    "groups": {
+      "components": "组件",
+      "guides": "指南",
+      "sections": "章节",
+      "pro": "Pro",
+      "suggested": "推荐"
+    },
+    "askAiAbout": "询问 AI：",
+    "noResults": "未找到结果",
+    "hintNavigate": "导航",
+    "hintOpen": "打开",
+    "hintAskAi": "询问 AI",
+    "switchFramework": "改为搜索 {framework} 文档"
   },
   "componentLinks": {
     "source": "源代码",
     "stylesSource": "样式源代码",
-    "themeSource": "主题源代码"
+    "themeSource": "主题源代码",
+    "resources": "资源"
   },
   "copyPrompt": {
     "copy": "复制提示词",
@@ -308,6 +324,10 @@
     "askWithUrl": "请阅读 {url}，我想就此进行提问。",
     "askFallback": "我想就这份文档进行提问。",
     "items": {
+      "copyPage": {
+        "title": "复制页面",
+        "description": "以 Markdown 格式复制页面，供 LLM 使用"
+      },
       "markdown": {
         "title": "查看 Markdown",
         "description": "以 Markdown 格式查看页面"
@@ -329,5 +349,16 @@
         "description": "就此页面进行提问"
       }
     }
+  },
+  "codeBlock": {
+    "viewCode": "查看代码",
+    "hideCode": "收起代码"
+  },
+  "demoControls": {
+    "show": "显示控件",
+    "hide": "隐藏控件",
+    "label": "控件",
+    "reset": "重置",
+    "unset": "默认"
   }
 }

@@ -24,10 +24,6 @@
     "description": "Sorry, the page you're looking for could not be found.",
     "returnHome": "Return Home"
   },
-  "showcase": {
-    "heading": "Showcase",
-    "description": "Explore interactive examples showcasing HeroUI components in real-world scenarios."
-  },
   "footer": {
     "about": "About",
     "allRightsReserved": "All rights reserved.",
@@ -55,15 +51,35 @@
   },
   "searchDialog": {
     "placeholder": "What are you searching for?",
-    "jumpTo": "Jump to"
+    "jumpTo": "Jump to",
+    "filters": {
+      "all": "All",
+      "components": "Components",
+      "guides": "Guides",
+      "pro": "Pro"
+    },
+    "groups": {
+      "components": "Components",
+      "guides": "Guides",
+      "sections": "Sections",
+      "pro": "Pro",
+      "suggested": "Suggested"
+    },
+    "askAiAbout": "Ask AI about",
+    "noResults": "No results found",
+    "hintNavigate": "Navigate",
+    "hintOpen": "Open",
+    "hintAskAi": "Ask AI",
+    "switchFramework": "Search {framework} docs instead"
   },
   "componentLinks": {
     "source": "Source",
     "stylesSource": "Styles source",
-    "themeSource": "Theme source"
+    "themeSource": "Theme source",
+    "resources": "Resources"
   },
   "copyPrompt": {
-    "copy": "Copy Prompt",
+    "copy": "Copy prompt",
     "copied": "Copied",
     "ariaLabelCopy": "Copy prompt to clipboard",
     "ariaLabelCopied": "Prompt copied to clipboard"
@@ -308,6 +324,10 @@
     "askWithUrl": "Read {url}, I want to ask questions about it.",
     "askFallback": "I want to ask questions about this documentation.",
     "items": {
+      "copyPage": {
+        "title": "Copy page",
+        "description": "Copy page as Markdown for LLMs"
+      },
       "markdown": {
         "title": "View as Markdown",
         "description": "View page as Markdown format"
@@ -329,5 +349,16 @@
         "description": "Ask questions about this page"
       }
     }
+  },
+  "codeBlock": {
+    "viewCode": "View code",
+    "hideCode": "Hide code"
+  },
+  "demoControls": {
+    "show": "Show controls",
+    "hide": "Hide controls",
+    "label": "Controls",
+    "reset": "Reset",
+    "unset": "Default"
   }
 }

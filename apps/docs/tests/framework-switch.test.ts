@@ -16,7 +16,6 @@ const tree: Root = {
             page("/en/docs/react/getting-started"),
             page("/en/docs/react/getting-started/quick-start"),
             page("/en/docs/react/getting-started/frameworks"),
-            {name: "Showcase", type: "page", url: "/showcase"},
           ],
           name: "Getting Started",
           root: true,
@@ -253,7 +252,7 @@ describe("getFrameworkSwitchRoute", () => {
       "",
       "/en/docs/native/getting-started",
     ],
-    ["non-docs page", "web", "/en/showcase", "", "/en/docs/react/getting-started"],
+    ["non-docs page", "web", "/en/themes", "", "/en/docs/react/getting-started"],
     [
       "unknown locale",
       "native",

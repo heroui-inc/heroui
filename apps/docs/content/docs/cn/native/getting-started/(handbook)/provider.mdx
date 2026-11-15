@@ -421,7 +421,7 @@ HeroUINativeProviderRaw
 始终在应用根部使用单个 `HeroUINativeProvider`。不要嵌套多个 provider：
 
 ```tsx
-// ❌ 不推荐
+// ✗ 不推荐
 <HeroUINativeProvider>
   <SomeComponent>
     <HeroUINativeProvider> {/* 不要这样做 */}
@@ -430,7 +430,7 @@ HeroUINativeProviderRaw
   </SomeComponent>
 </HeroUINativeProvider>
 
-// ✅ 推荐
+// ✓ 推荐
 <HeroUINativeProvider>
   <SomeComponent>
     <AnotherComponent />
@@ -443,7 +443,7 @@ HeroUINativeProviderRaw
 在组件外部定义你的配置，以避免每次渲染时重新创建：
 
 ```tsx
-// ❌ 不推荐
+// ✗ 不推荐
 function App() {
   return (
     <HeroUINativeProvider
@@ -458,7 +458,7 @@ function App() {
   );
 }
 
-// ✅ 推荐
+// ✓ 推荐
 const config: HeroUINativeConfig = {
   textProps: {
     maxFontSizeMultiplier: 1.5,

@@ -1,10 +1,12 @@
 "use client";
 
+import type {DateRangePickerProps, DateValue} from "@heroui/react";
+
 import {DateField, DateRangePicker, Label, RangeCalendar} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: DateRangePickerProps<DateValue>) {
   return (
-    <DateRangePicker className="w-80" endName="endDate" startName="startDate">
+    <DateRangePicker {...props} className="w-80" endName="endDate" startName="startDate">
       <Label>Trip dates</Label>
       <DateField.Group fullWidth>
         <DateField.Input slot="start">

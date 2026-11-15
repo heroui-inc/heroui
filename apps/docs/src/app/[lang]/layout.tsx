@@ -4,7 +4,7 @@ import type {ReactNode} from "react";
 import {Analytics} from "@vercel/analytics/next";
 import {NextProvider} from "fumadocs-core/framework/next";
 import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
-import {Inter} from "next/font/google";
+import {Geist_Mono, Inter} from "next/font/google";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
@@ -23,6 +23,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+});
+
 export default async function Layout({
   children,
   params,
@@ -34,7 +39,11 @@ export default async function Layout({
   const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
 
   return (
-    <html suppressHydrationWarning className={inter.variable} lang={getLanguageTag(lang)}>
+    <html
+      suppressHydrationWarning
+      className={`${inter.variable} ${geistMono.variable}`}
+      lang={getLanguageTag(lang)}
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{__html: JSON.stringify(getOrganizationJsonLd())}}

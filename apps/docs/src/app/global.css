@@ -61,6 +61,36 @@
 
   /* Default font - can be overridden by theme builder */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Docs shell tokens. Mapped onto HeroUI theme variables so light mode and the
+     design themes (data-design-theme) keep working. */
+  --docs-sidebar-width: 264px;
+  --docs-main-width: 892px;
+  --docs-toc-width: 228px; /* 192px content + ps-4/pe-5 (pe matches the sidebar inset) */
+  --docs-fg: color-mix(in oklab, var(--foreground) 90%, var(--background));
+  --docs-fg-muted: var(--muted);
+  --docs-fg-subtle: color-mix(in oklab, var(--muted) 82%, var(--background));
+  --docs-fg-faint: color-mix(in oklab, var(--muted) 62%, var(--background));
+  --docs-item-hover: color-mix(in oklab, var(--foreground) 3%, var(--background));
+  --docs-item-active: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --docs-code-inline: color-mix(in oklab, var(--foreground) 7%, var(--background));
+  /* Related component cards, TOC promo */
+  --docs-card: color-mix(in oklab, var(--foreground) 4.5%, var(--background));
+  --docs-control: var(--default);
+  --docs-control-hover: var(--default-hover);
+  --docs-control-open: color-mix(in oklab, var(--default) 80%, var(--foreground) 12%);
+  --docs-track: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --docs-divider: color-mix(in oklab, var(--foreground) 12%, transparent);
+  --docs-popover: var(--overlay);
+  /* Search dialog footer: a shade off the popover. */
+  --docs-search-footer: color-mix(in oklab, var(--foreground) 2.5%, var(--overlay));
+  /* Demo frame, code panel inside it, and standalone code blocks (same shade as the TOC promo) */
+  --docs-demo: var(--docs-card);
+  --docs-code: color-mix(in oklab, var(--foreground) 1.5%, var(--background));
+  --docs-line-number: color-mix(in oklab, var(--foreground) 24%, var(--background));
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -86,6 +116,17 @@
   --color-fd-popover: #383435;
   --color-fd-border: rgba(255, 255, 255, 0.1);
   --color-backdrop: rgba(0, 0, 0, 0.4);
+
+  /* Docs shell tokens (dark) */
+  --docs-item-hover: color-mix(in oklab, var(--foreground) 6%, var(--background));
+  --docs-item-active: color-mix(in oklab, var(--foreground) 11%, var(--background));
+  --docs-code-inline: color-mix(in oklab, var(--foreground) 11%, var(--background));
+  --docs-card: color-mix(in oklab, var(--foreground) 6.5%, var(--background));
+  --docs-track: color-mix(in oklab, var(--foreground) 6%, var(--background));
+  --docs-popover: color-mix(in oklab, var(--foreground) 8%, var(--background));
+  --docs-search-footer: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --docs-code: color-mix(in oklab, var(--foreground) 1.5%, var(--background));
+  --docs-line-number: color-mix(in oklab, var(--foreground) 22%, var(--background));
 }
 
 /* ============================================================================
@@ -100,10 +141,6 @@
 /* ============================================================================
    FUMADOCS UI - NAVIGATION COMPONENTS
    ============================================================================ */
-
-#nd-notebook-layout {
-  transition: none;
-}
 
 [data-theme-toggle] {
   @apply border-none bg-default/80;
@@ -131,10 +168,6 @@
       @apply px-6;
     }
   }
-}
-
-.showcase-detail-page #nd-home-layout {
-  padding-top: 0;
 }
 
 /* Main Navigation */
@@ -170,146 +203,95 @@
   }
 }
 
-/* Sub Navigation */
-#nd-subnav {
-  @apply gap-0 bg-background md:gap-1;
-  backdrop-filter: none;
+/* ============================================================================
+   DOCS SHELL
+   ============================================================================ */
 
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 1px;
-    z-index: 1;
-    background: var(--separator);
+#nd-notebook-layout {
+  transition: none;
+}
+
+/* Pills in the docs top bar, mobile bar and drawer. Unlayered so they win over
+   HeroUI button variant backgrounds. */
+.docs-pill {
+  border: none;
+  border-radius: 9999px;
+  background-color: var(--docs-control);
+  color: var(--docs-fg-muted);
+}
+
+.docs-pill .docs-pill-segment {
+  background-color: transparent;
+}
+
+.docs-pill-segment {
+  border-radius: 9999px;
+  color: var(--docs-fg-muted);
+  transition:
+    background-color 150ms var(--ease-smooth),
+    color 150ms var(--ease-smooth);
+
+  &:hover,
+  &[data-hovered="true"] {
+    background-color: var(--docs-control-hover);
+    color: var(--docs-fg);
   }
 
-  [data-header-body] {
-    @apply h-13 border-none md:h-14;
+  &[data-open="true"],
+  &[aria-expanded="true"] {
+    background-color: var(--docs-control-open);
+    color: var(--docs-fg);
   }
 
-  [data-header-tabs] {
-    @apply gap-1 border-none px-4 md:gap-3 md:px-6;
-
-    a {
-      @apply px-1 pb-2;
-    }
-
-    .border-fd-primary {
-      border-color: var(--color-accent);
-    }
-
-    [data-frameworks-tabs] {
-      @apply flex items-center;
-
-      .tabs__list-container {
-        @apply w-auto;
-      }
-
-      .tabs__list {
-        @apply w-auto;
-      }
-    }
-  }
-
-  [data-search-full] {
-    @apply rounded-field border-none bg-field shadow-field sm:max-w-[300px] md:max-w-[400px] lg:mr-12 dark:bg-field/80 dark:backdrop-blur-md;
-
-    kbd {
-      @apply border-none bg-default dark:bg-surface;
-    }
+  /* Primary label or icon (Copy prompt, prev / next) */
+  &[data-strong] {
+    color: var(--foreground);
   }
 }
 
 /* Sidebar */
-#nd-sidebar {
-  @apply items-start pt-4 pl-3 transition-none;
-
-  @media (min-width: 600px) {
-    --fd-sidebar-width: 220px;
-  }
-
-  & > div {
-    width: 100% !important;
-    max-width: var(--fd-sidebar-width);
-  }
-
-  & > :last-child {
-    border-top: none;
-  }
-
-  [data-docs-sidebar-viewport] {
-    @apply ps-1 pe-4 pt-2;
-
-    p {
-      @apply font-medium;
-    }
-
-    p:not(:first-child) {
-      @apply mt-4;
-    }
-  }
-
-  [data-fd-if-empty] {
-    @apply hidden;
-  }
-}
-
-#nd-sidebar a {
-  @apply rounded-field;
-
-  transition: none;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.04);
-  }
-
-  &[data-active="true"] {
-    @apply bg-surface shadow-surface;
-  }
-}
-
-/* Nested items inside open groups */
-#nd-sidebar [data-state="open"] > [data-state="open"] {
-  padding: 4px 16px;
-
-  a {
-    padding-left: 14px;
-    &::before {
-      display: none;
-    }
-  }
-}
-
-/* External link icon for sidebar links */
-#nd-sidebar a[rel="noreferrer noopener"]::after {
-  content: "";
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-left: -6px;
-  margin-bottom: 8px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  vertical-align: middle;
-  opacity: 0.5;
-  transition: opacity 0.2s;
-}
-
-#nd-sidebar a[rel="noreferrer noopener"]:hover::after {
-  opacity: 1;
-}
-
+#nd-sidebar,
 #nd-sidebar-mobile {
-  [data-docs-sidebar-viewport] {
-    p {
-      @apply font-medium;
+  /* External links (meta.json `[icon][Title](https://…)`) get a trailing arrow */
+  a[rel="noreferrer noopener"]::after {
+    content: "";
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    background-color: currentColor;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>')
+      center / contain no-repeat;
+    opacity: 0.45;
+  }
+
+  a[rel="noreferrer noopener"]:hover::after {
+    opacity: 0.8;
+  }
+
+  [data-sidebar-section]:first-child {
+    margin-top: 0;
+  }
+
+  /* Status frontmatter (new / updated / preview) renders a StatusChip as the item
+     icon; in the sidebar it reads as a muted tag in the right slot. */
+  a > .chip {
+    margin-inline-start: auto;
+    height: auto;
+    padding: 0 0 0 8px;
+    border: none;
+    background: none;
+    color: var(--docs-fg-faint);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    line-height: 1;
+    text-transform: uppercase;
+
+    * {
+      color: inherit;
+      font: inherit;
+      letter-spacing: inherit;
+      padding: 0;
     }
   }
 }
@@ -336,60 +318,190 @@
   overflow-wrap: break-word;
 }
 
-/* ============================================================================
-   FUMADOCS UI - LAYOUT COMPONENTS
-   ============================================================================ */
+/* Soft pill on a tinted panel: "View code" and the TOC Pro card CTA. Light uses
+   surface, since default is about the same gray as the panel there. */
+.docs-soft-pill {
+  border: none;
+  background-color: var(--surface);
+  box-shadow: none;
+  color: var(--muted);
+  transition:
+    background-color 150ms var(--ease-smooth),
+    color 150ms var(--ease-smooth);
 
-#nd-docs-layout {
-  position: relative;
-
-  @media (min-width: 48rem) {
-    --fd-sidebar-width: 220px;
+  &:hover,
+  &[data-hovered="true"] {
+    background-color: color-mix(in oklab, var(--surface) 94%, var(--surface-foreground));
+    color: var(--surface-foreground);
   }
 }
 
-#nd-notebook-layout {
-  @media (min-width: 48rem) {
-    --fd-sidebar-width: 220px;
+:is(.dark, [data-theme="dark"]) .docs-soft-pill {
+  background-color: var(--default);
+
+  &:hover,
+  &[data-hovered="true"] {
+    background-color: var(--default-hover);
+    color: var(--default-foreground);
   }
-  grid-template:
-    ". header header header ."
-    ". sidebar toc-popover toc-popover ."
-    ". sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(
-      0,
-      calc(var(--fd-layout-width, 97rem) - var(--fd-sidebar-col) - var(--fd-toc-width))
-    )
-    var(--fd-toc-width) minmax(min-content, 1fr) !important;
 }
 
-#nd-page {
-  @apply mt-4 gap-4 p-4 px-6 sm:px-4 md:px-6 md:pt-0 xl:px-12 xl:pt-8;
+/* Inside a link card (`data-soft-pill-host`) the pill keeps its resting fill —
+   the hover tint matches the card in light mode — and hovering the card only
+   switches the text from muted to foreground, instantly. */
+[data-soft-pill-host] .docs-soft-pill {
+  transition: none;
+}
 
-  > article {
-    @apply p-8;
+[data-soft-pill-host]:hover .docs-soft-pill {
+  background-color: var(--surface);
+  color: var(--surface-foreground);
+}
 
-    position: static;
+:is(.dark, [data-theme="dark"]) [data-soft-pill-host]:hover .docs-soft-pill {
+  background-color: var(--default);
+  color: var(--default-foreground);
+}
+
+/* Demo prop controls: the sliders toggle in the preview's corner and the panel
+   it opens beside the demo (`demo-controls.tsx`). */
+.docs-demo-controls-toggle {
+  color: var(--docs-fg-subtle);
+
+  &:hover,
+  &[data-hovered="true"],
+  &[data-open] {
+    background-color: var(--docs-control);
+    color: var(--docs-fg);
   }
+}
 
-  @media (min-width: 80rem) {
-    margin-top: 0;
+/*
+ * Demo + controls stage. Below md the panel stacks under the demo and only renders
+ * while open. From md, both share one grid cell: the panel stays mounted (hidden and
+ * inert while closed), so the stage is always as tall as the panel and opening it
+ * never pushes the page down. The demo eases aside to make room instead of jumping.
+ */
+.docs-demo-stage {
+  --docs-demo-panel-width: 240px;
+  --docs-demo-ease: cubic-bezier(0.23, 1, 0.32, 1);
+
+  display: grid;
+}
+
+/* The demo keeps the stage's min height (220px, or 340px for the hero) when the panel opens below it. */
+.docs-demo-stage,
+.docs-demo-stage__demo {
+  min-height: inherit;
+}
+
+.docs-demo-controls:not([data-open]) {
+  @media (max-width: 767px) {
+    display: none;
   }
+}
 
-  @media (max-width: 48rem) {
-    > article {
-      @apply p-2;
+.docs-demo-controls[data-open] {
+  @media (max-width: 767px) {
+    animation: docs-demo-controls-in 200ms var(--docs-demo-ease);
+  }
+}
+
+@media (min-width: 768px) {
+  .docs-demo-stage {
+    grid-template-areas: "stage";
+
+    > * {
+      grid-area: stage;
     }
   }
 
-  .component-preview-container {
-    /* Preview and code are now displayed vertically */
+  .docs-demo-stage__demo {
+    transition: padding-inline-end 300ms var(--docs-demo-ease);
+  }
 
-    .code-section {
-      .code-block-wrapper {
-        @apply rounded-none rounded-b-xl;
-      }
+  .preview[data-controls-open] .docs-demo-stage__demo {
+    padding-inline-end: var(--docs-demo-panel-width);
+  }
+
+  .docs-demo-stage__panel {
+    justify-self: end;
+    width: var(--docs-demo-panel-width);
+    transition:
+      opacity 200ms var(--docs-demo-ease),
+      transform 300ms var(--docs-demo-ease),
+      visibility 0s linear 0s;
+
+    &:not([data-open]) {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(8px);
+      /* Hide only after the fade out. */
+      transition:
+        opacity 150ms ease-out,
+        transform 150ms ease-out,
+        visibility 0s linear 150ms;
     }
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-demo-stage__demo,
+  .docs-demo-stage__panel,
+  .docs-demo-stage__panel:not([data-open]),
+  .docs-demo-controls[data-open] {
+    transition: none;
+    animation: none;
+  }
+}
+
+@keyframes docs-demo-controls-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Segmented control: a soft track with the selected option raised. */
+.docs-demo-segmented {
+  padding: 2px;
+  border-radius: 16px;
+  background-color: var(--docs-control);
+
+  .toggle-button {
+    --toggle-button-bg: transparent;
+    --toggle-button-bg-hover: transparent;
+    --toggle-button-bg-pressed: transparent;
+    --toggle-button-fg: var(--docs-fg-muted);
+    --toggle-button-bg-selected: var(--surface);
+    --toggle-button-bg-selected-hover: var(--surface);
+    --toggle-button-bg-selected-pressed: var(--surface);
+    --toggle-button-fg-selected: var(--foreground);
+
+    height: 28px;
+    border-radius: 14px;
+    font-size: 12px;
+
+    &:hover,
+    &[data-hovered="true"] {
+      --toggle-button-fg: var(--docs-fg);
+    }
+
+    &[data-selected="true"] {
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+    }
+  }
+}
+
+:is(.dark, [data-theme="dark"]) .docs-demo-segmented .toggle-button {
+  --toggle-button-bg-selected: color-mix(in oklab, var(--default) 88%, var(--foreground));
+  --toggle-button-bg-selected-hover: var(--toggle-button-bg-selected);
+  --toggle-button-bg-selected-pressed: var(--toggle-button-bg-selected);
+}
+
+/* The page's first demo is the hero example */
+#nd-page .prose > .component-preview-container:first-of-type .preview {
+  min-height: 340px;
 }
 
 /* ============================================================================
@@ -397,48 +509,13 @@
    ============================================================================ */
 
 #nd-toc {
-  @apply right-0 pt-6 pl-4 transition-none;
-  --fd-toc-width: 220px;
-  --color-fd-foreground: transparent;
-  /* Disables the active indicator */
-  [role="none"] {
-    display: none;
-    background: transparent;
-  }
-
-  /* Selects all links inside the toc (active and not active)*/
-  [data-active] {
-    @apply truncate pr-2 text-[13px];
-  }
-
-  @media (min-width: 600px) {
-    --fd-toc-width: 240px;
-  }
-}
-
-#nd-tocnav {
-  border-radius: 0rem;
-  top: calc(var(--fd-banner-height) + var(--fd-nav-height) - 12px) !important;
-  margin-right: 0rem;
-  margin-left: 0rem;
-  margin-top: 0px;
-  background: var(--background);
-  backdrop-filter: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-top: 1px solid var(--border) !important;
-  border-bottom: 1px solid var(--separator) !important;
-
-  @media (min-width: 600px) {
-    margin-right: 1rem;
-    border-bottom: 0px solid var(--separator) !important;
-  }
+  @apply transition-none;
 }
 
 [data-toc-popover] {
-  @apply top-[93px] z-2 md:top-[101px];
+  @apply z-20;
+
   header {
-    @apply border-b border-separator md:border-b-0;
     padding: 0 0.5rem;
     background: var(--background) !important;
     backdrop-filter: none !important;
@@ -449,42 +526,101 @@
    PROSE & CONTENT STYLES
    ============================================================================ */
 
-.prose {
-  .shiki {
-    @apply border-none;
-    background: transparent;
-    box-shadow: none;
+/* Docs page typography: muted body, foreground headings.
+   Every rule skips `.not-prose` subtrees (component demos, code blocks), the
+   same way the fumadocs prose rules do, so component styles stay untouched. */
+#nd-page .prose {
+  --tw-prose-bold: var(--docs-fg);
 
-    /* Code block wrapper */
-    figure {
-      padding: 0;
-    }
+  :where(p, li, blockquote, td):not(:where(.not-prose, .not-prose *)) {
+    color: var(--docs-fg-muted);
+  }
 
-    /* Copy button */
-    div:first-of-type {
-      border: none;
-      background: transparent;
+  :where(h2):not(:where(.not-prose, .not-prose *)) {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 28px;
+  }
 
-      button:hover {
-        background: transparent;
-      }
-    }
+  :where(h3):not(:where(.not-prose, .not-prose *)) {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 24px;
+  }
 
-    /* Scroll container */
-    .fd-scroll-container {
-      @apply border-none px-1;
+  > :is(h2, h3):first-child {
+    margin-top: 0;
+  }
 
-      background: rgba(0, 0, 0, 0.04);
-    }
-
-    li > code {
-      @apply bg-default;
-    }
+  :where(:not(pre) > code):not(:where(.not-prose *)) {
+    padding: 1px 5px;
+    border: none;
+    border-radius: 6px;
+    background: var(--docs-code-inline);
+    color: var(--docs-fg);
+    font-family: var(--font-mono);
+    font-size: 0.9286em;
   }
 }
 
-.prose .shiki .fd-scroll-container {
-  max-height: fit-content;
+/* Prose links (neutral): foreground, medium-weight text against the muted body
+   copy. Underlined only on hover / keyboard focus. No transition. */
+.prose :where(a:not([data-card])):not(:where(.not-prose, .not-prose *)) {
+  color: var(--foreground);
+  font-weight: 500;
+  text-decoration-line: none;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: none;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+    text-decoration-line: underline;
+  }
+}
+
+/* Standalone code blocks (MDX fences, Usage imports): one flat panel. */
+#nd-page .shiki:not(:where(.preview *)) {
+  margin-block: 1rem;
+  border: none;
+  border-radius: 16px;
+  background: var(--docs-demo);
+  box-shadow: none;
+  font-size: 13px;
+
+  /* Lines carry the inline padding, so text starts 16px in and highlights span the panel. */
+  .fd-scroll-container {
+    max-height: fit-content;
+    padding: 14px 0;
+    background: transparent;
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    line-height: 22px;
+  }
+
+  pre > code {
+    padding-inline: 0;
+  }
+
+  .line {
+    padding-inline: 16px;
+  }
+
+  li > code {
+    @apply bg-default;
+  }
 }
 
 [role="tabpanel"] .mdx-code-block {
@@ -495,36 +631,35 @@ code {
   @apply border-separator bg-transparent px-[3px];
 }
 
-/* Table styles for .prose-no-margin */
+/* Markdown tables (API reference, CSS classes): plain header, hairline row
+   dividers, first column flush with the text. */
 .prose-no-margin {
   table {
     @apply border-none bg-transparent;
-    border-collapse: separate;
+    width: 100%;
+    border-collapse: collapse;
     border-spacing: 0;
+  }
 
-    thead {
-      tr {
-        th {
-          @apply border-none bg-default dark:bg-default/50;
+  th,
+  td {
+    border: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--foreground) 6%, transparent);
+    border-radius: 0;
+    background: transparent;
+    padding: 12px 16px 12px 0;
+    text-align: start;
+    vertical-align: top;
+  }
 
-          &:first-child {
-            @apply rounded-tl-xl rounded-bl-xl;
-          }
+  th {
+    padding-block: 10px;
+    color: var(--foreground);
+    font-weight: 500;
+  }
 
-          &:last-child {
-            @apply rounded-tr-xl rounded-br-xl;
-          }
-        }
-      }
-    }
-
-    tbody {
-      tr {
-        td {
-          @apply border-none;
-        }
-      }
-    }
+  :is(th, td):last-child {
+    padding-inline-end: 0;
   }
 }
 
@@ -532,11 +667,106 @@ code {
    CODE BLOCK STYLES
    ============================================================================ */
 
-.docs-code-block {
-  @apply m-0 rounded-none border-none pt-4 pr-2 pl-2;
+/* Tab groups (fumadocs Tabs, remark-npm installs): one flat panel, tabs on top. */
+#nd-page .prose div:has(> [role="tablist"]):has(> [role="tabpanel"]):not(:where(.not-prose *)) {
+  border: none;
+  border-radius: 16px;
+  background: var(--docs-demo);
+
+  /* Soft pill tabs; label text lines up with the code below (16px in). */
+  > [role="tablist"] {
+    gap: 2px;
+    padding: 8px 6px 0;
+  }
+
+  > [role="tablist"] > [role="tab"] {
+    height: 28px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 9999px;
+    color: var(--docs-fg-subtle);
+    font-size: 13px;
+
+    &:hover {
+      color: var(--docs-fg);
+    }
+
+    /* Same surface as the "View code" pill: white in light, default in dark. */
+    &[data-state="active"] {
+      background: var(--surface);
+      color: var(--foreground);
+    }
+
+    /* remark-npm tabs (fumadocs CodeBlockTabs) draw an underline indicator inside each tab. */
+    > div:empty {
+      display: none;
+    }
+  }
+
+  > [role="tabpanel"] {
+    background: transparent;
+  }
+
+  /* Code-only panels: the code fills the panel. fumadocs Tabs pad their panels, CodeBlockTabs don't. */
+  > [role="tabpanel"]:has(> figure.shiki:only-child) {
+    padding: 0;
+  }
+
+  > [role="tabpanel"] > figure.shiki:only-child {
+    margin: 0;
+    background: transparent;
+  }
+}
+
+:is(.dark, [data-theme="dark"])
+  #nd-page
+  .prose
+  div:has(> [role="tablist"]):has(> [role="tabpanel"])
+  > [role="tablist"]
+  > [role="tab"][data-state="active"] {
+  background: var(--default);
+}
+
+/* Demo code: the `.code-section` panel draws the background. */
+#nd-page .code-section .shiki {
+  margin: 0;
+  border-radius: 0;
+  background: transparent;
 
   .fd-scroll-container {
-    @apply rounded-none border-none bg-transparent! p-0;
+    padding: 16px;
+  }
+}
+
+/* Code block scrollbars (fumadocs `.fd-scroll-container`, drawn via ::-webkit-scrollbar): hidden
+   until the block is hovered or keyboard-focused. The thumb reads a custom property set on the
+   container itself: Chromium only repaints scrollbar parts when the element's own style changes,
+   so a `:hover::-webkit-scrollbar-thumb` rule would leave the thumb visible after the pointer leaves. */
+.fd-scroll-container {
+  --code-scrollbar-thumb: transparent;
+
+  &:is(:hover, :focus-visible) {
+    --code-scrollbar-thumb: var(--scrollbar);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--code-scrollbar-thumb);
+  }
+}
+
+/* Firefox has no ::-webkit-scrollbar; use the standard properties instead. */
+@supports not selector(::-webkit-scrollbar) {
+  .fd-scroll-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--code-scrollbar-thumb) transparent;
+  }
+}
+
+.docs-code-block {
+  @apply m-0 rounded-none border-none bg-transparent;
+
+  .fd-scroll-container {
+    @apply rounded-none border-none bg-transparent! px-4 pt-4 pb-4;
   }
 
   .line {
@@ -548,15 +778,6 @@ code {
   }
 }
 
-/* Apply !important only for isolated code blocks (not code-block-wrapper) */
-.is-isolated .docs-code-block {
-  background: rgba(0, 0, 0, 0.04) !important;
-}
-
-.code-block-wrapper {
-  @apply rounded-xl;
-}
-
 .docs-code-block-line-numbers {
   code {
     counter-reset: step;
@@ -566,27 +787,20 @@ code {
   code .line::before {
     content: counter(step);
     counter-increment: step;
-    width: 1rem;
-    margin-right: 1.5rem;
+    width: 0.75rem;
+    margin-right: 1.25rem;
     display: inline-block;
     text-align: right;
-    color: rgba(115, 138, 148, 0.4);
+    color: var(--docs-line-number);
   }
 }
 
 .shiki:not(.not-fumadocs-codeblock *) code .highlighted {
   border-radius: 4px;
-  background-color: #d6d8e3 !important;
-}
+  background-color: color-mix(in oklab, var(--foreground) 3.5%, transparent) !important;
 
-.showcase-source-wrapper {
-  .code-block-wrapper {
-    background: transparent !important;
-  }
-
-  .fd-scroll-container {
-    max-height: 100%;
-    background: transparent;
+  &::after {
+    border-color: color-mix(in oklab, var(--foreground) 15%, transparent);
   }
 }
 
@@ -705,60 +919,8 @@ code {
 }
 
 /* ============================================================================
-   DARK THEME OVERRIDES
+   DEMO OVERRIDES
    ============================================================================ */
-
-[data-theme="dark"],
-.dark {
-  /* Navigation Components */
-
-  #nd-sidebar a {
-    &:hover {
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    &[data-active="true"] {
-      background: rgba(255, 255, 255, 0.08);
-    }
-  }
-
-  #nd-sidebar a[rel="noreferrer noopener"]::after {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>');
-  }
-
-  /* Prose & Code Blocks */
-  .prose {
-    .shiki {
-      background: transparent;
-
-      figure {
-        padding: 0;
-      }
-
-      /* Scroll container */
-      .fd-scroll-container {
-        background: rgba(40, 40, 40, 0.4);
-      }
-    }
-  }
-
-  .docs-code-block {
-    background: rgba(40, 40, 40, 0.4);
-
-    .fd-scroll-container {
-      background: transparent !important;
-    }
-  }
-
-  /* Apply !important only for isolated code blocks (not code-block-wrapper) */
-  .is-isolated .docs-code-block {
-    background: rgba(40, 40, 40, 0.4) !important;
-  }
-
-  .shiki:not(.not-fumadocs-codeblock *) code .highlighted {
-    background-color: #2d2d2d !important;
-  }
-}
 
 @layer components {
   .range-calendar--custom-demo .range-calendar__cell {

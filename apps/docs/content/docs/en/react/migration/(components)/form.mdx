@@ -15,16 +15,16 @@ The Form component props remain the same between v2 and v3, with one addition:
 
 | Prop | v2 | v3 | Notes |
 |------|----|----|-------|
-| `validationBehavior` | ✅ | ✅ | Same: `"native"` \| `"aria"` |
-| `validationErrors` | ✅ | ✅ | Same: `Record<string, string \| string[]>` |
-| `onSubmit` | ✅ | ✅ | Same |
-| `onReset` | ✅ | ✅ | Same |
-| `action` | ✅ | ✅ | Same |
-| `method` | ✅ | ✅ | Same |
-| `encType` | ✅ | ✅ | Same |
-| `target` | ✅ | ✅ | Same |
-| `className` | ✅ | ✅ | Same |
-| `onInvalid` | ❌ | ✅ | New: Handler called when form validation fails |
+| `validationBehavior` | <StatusCheck /> | <StatusCheck /> | Same: `"native"` \| `"aria"` |
+| `validationErrors` | <StatusCheck /> | <StatusCheck /> | Same: `Record<string, string \| string[]>` |
+| `onSubmit` | <StatusCheck /> | <StatusCheck /> | Same |
+| `onReset` | <StatusCheck /> | <StatusCheck /> | Same |
+| `action` | <StatusCheck /> | <StatusCheck /> | Same |
+| `method` | <StatusCheck /> | <StatusCheck /> | Same |
+| `encType` | <StatusCheck /> | <StatusCheck /> | Same |
+| `target` | <StatusCheck /> | <StatusCheck /> | Same |
+| `className` | <StatusCheck /> | <StatusCheck /> | Same |
+| `onInvalid` | <StatusCross /> | <StatusCheck /> | New: Handler called when form validation fails |
 
 ## Structure Changes
 

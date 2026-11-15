@@ -2,10 +2,12 @@
 import * as React from "react";
 
 import {getDemo} from "@/demos";
+import {getInitialControlValues, renderDemoSource} from "@/lib/demo-controls";
 import {cn} from "@/utils/cn";
 
+import {highlightCode} from "./codeblock";
 import {ComponentPreviewContainer} from "./component-preview-container";
-import {ComponentSource} from "./component-source";
+import {ComponentSource, readDemoSource} from "./component-source";
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
@@ -56,6 +58,41 @@ export async function ComponentPreview({
   }
 
   const Component = await demo.loader();
+
+  if (demo.controls) {
+    // The source is re-rendered as the controls change, so the client gets the raw
+    // file plus a server-highlighted first paint for the initial values.
+    const source = hideCode ? undefined : await readDemoSource(demo.file);
+    const initialCode = source
+      ? renderDemoSource(source, demo.controls, getInitialControlValues(demo.controls))
+      : undefined;
+    const highlighted = initialCode ? await highlightCode(initialCode, "tsx") : undefined;
+
+    return (
+      <ComponentPreviewContainer
+        align={align}
+        className={className}
+        controls={demo.controls}
+        description={description}
+        hideCode={hideCode}
+        minHeight={minHeight}
+        name={name}
+        source={source}
+        initialCode={
+          highlighted && !highlighted.failed
+            ? {
+                code: initialCode!,
+                preview: highlighted.preview,
+                rendered: highlighted.rendered,
+              }
+            : undefined
+        }
+        {...props}
+      >
+        <Component />
+      </ComponentPreviewContainer>
+    );
+  }
 
   return (
     <ComponentPreviewContainer

@@ -11,7 +11,9 @@ github:
 
 本次发布新增 4 个组件：[Calendar](/docs/components/calendar)、[RangeCalendar](/docs/components/range-calendar)、[DatePicker](/docs/components/date-picker) 与 [DateRangePicker](/docs/components/date-range-picker)。同时还引入了 [Switch.Content](#switchcontent)，用于将 label 与 description 组合到 Switch 控件旁边；以及 [Tabs.Separator](#tabsseparator)，用于在 Tab 之间按需添加分隔线。
 
-⚠️ **破坏性变更**：从 Tabs 中移除了 `hideSeparator`；`DateInputGroup` 与 `ColorInputGroup` 已分别合并到 `DateField.Group`、`TimeField.Group` 与 `ColorField.Group` 之下。
+<Callout type="warning">
+  **破坏性变更**：从 Tabs 中移除了 `hideSeparator`；`DateInputGroup` 与 `ColorInputGroup` 已分别合并到 `DateField.Group`、`TimeField.Group` 与 `ColorField.Group` 之下。
+</Callout>
 
 <DocsImage
   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-7-light@2x.jpg"
@@ -164,7 +166,7 @@ import { Switch, Label, Description } from '@heroui/react';
 
 ### Field 子组件的合并
 
-`DateField`、`TimeField` 与 `ColorField` 现在直接暴露各自的输入组子组件，不再需要单独引入 `DateInputGroup` 或 `ColorInputGroup`。具体的迁移方式请参阅 [破坏性变更](#-breaking-changes)。
+`DateField`、`TimeField` 与 `ColorField` 现在直接暴露各自的输入组子组件，不再需要单独引入 `DateInputGroup` 或 `ColorInputGroup`。具体的迁移方式请参阅 [破坏性变更](#破坏性变更)。
 
 ### Breadcrumbs 修复
 
@@ -184,7 +186,7 @@ import { Switch, Label, Description } from '@heroui/react';
 - **@internationalized/date**：从 `3.10.1` 升级到 `3.11.0` —— 日期字段现在改为在失焦时进行约束，而不是在输入过程中实时约束
 - 新增 `@react-aria/i18n` 与 `@react-stately/utils`，用于日历的国际化
 
-## ⚠️ 破坏性变更
+## 破坏性变更
 
 ### Tabs —— 移除 `hideSeparator` prop
 

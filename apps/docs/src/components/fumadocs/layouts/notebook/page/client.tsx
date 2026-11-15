@@ -5,7 +5,8 @@ import type * as PageTree from "fumadocs-core/page-tree";
 import type {ComponentProps} from "react";
 
 import {useTranslations} from "@fuma-translate/react";
-import {ChevronDown, ChevronLeft, ChevronRight} from "@gravity-ui/icons";
+import {ArrowLeft, ArrowRight, ChevronDown, ChevronRight} from "@gravity-ui/icons";
+import {Tooltip} from "@heroui/react";
 import {getBreadcrumbItemsFromPath} from "fumadocs-core/breadcrumb";
 import {usePathname} from "fumadocs-core/framework";
 import Link from "fumadocs-core/link";
@@ -246,10 +247,12 @@ export interface FooterProps extends ComponentProps<"div"> {
   };
 }
 
-export function PageFooter({items, ...props}: FooterProps) {
+/** Previous and next pages of the current page in sidebar order. */
+function usePageNeighbours(items?: FooterProps["items"]): {previous?: Item; next?: Item} {
   const footerList = useFooterItems();
   const pathname = usePathname();
-  const {next, previous} = useMemo(() => {
+
+  return useMemo(() => {
     if (items) return items;
 
     const idx = footerList.findIndex((item) => isActive(item.url, pathname, false));
@@ -261,15 +264,61 @@ export function PageFooter({items, ...props}: FooterProps) {
       previous: footerList[idx - 1],
     };
   }, [footerList, items, pathname]);
+}
+
+const NAV_BUTTON =
+  "docs-pill docs-pill-segment inline-flex size-8 items-center justify-center [&_svg]:size-3.5 rtl:[&_svg]:rotate-180";
+
+/** Round previous / next page buttons for the page header. */
+export function PageNavButtons({className, ...props}: ComponentProps<"div">) {
+  const t = useTranslations({note: "pagination"});
+  const {next, previous} = usePageNeighbours();
+
+  if (!previous && !next) return null;
+
+  const links = [
+    {Icon: ArrowLeft, item: previous, label: t("Previous Page")},
+    {Icon: ArrowRight, item: next, label: t("Next Page")},
+  ];
+
+  return (
+    <div className={cn("flex items-center gap-2", className)} {...props}>
+      {links.map(({Icon, item, label}) =>
+        item ? (
+          <Tooltip key={label} delay={300}>
+            <Tooltip.Trigger role="presentation" tabIndex={-1}>
+              <Link
+                aria-label={typeof item.name === "string" ? `${label}: ${item.name}` : label}
+                className={NAV_BUTTON}
+                data-strong=""
+                href={item.url}
+              >
+                <Icon />
+              </Link>
+            </Tooltip.Trigger>
+            <Tooltip.Content placement="bottom">{item.name}</Tooltip.Content>
+          </Tooltip>
+        ) : (
+          <span
+            key={label}
+            aria-hidden
+            className={cn(NAV_BUTTON, "pointer-events-none opacity-40")}
+          >
+            <Icon />
+          </span>
+        ),
+      )}
+    </div>
+  );
+}
+
+export function PageFooter({items, ...props}: FooterProps) {
+  const {next, previous} = usePageNeighbours(items);
 
   return (
     <div
       {...props}
-      className={cn(
-        "@container my-8 grid gap-4",
-        previous && next ? "grid-cols-2" : "grid-cols-1",
-        props.className,
-      )}
+      className={cn("my-10 flex items-center justify-between gap-4", props.className)}
     >
       {previous ? <FooterItem index={0} item={previous} /> : null}
       {next ? <FooterItem index={1} item={next} /> : null}
@@ -277,30 +326,25 @@ export function PageFooter({items, ...props}: FooterProps) {
   );
 }
 
+/** Pill link to the previous / next page: arrow and page name only. */
 function FooterItem({index, item}: {item: Item; index: 0 | 1}) {
   const t = useTranslations({note: "pagination"});
-  const Icon = index === 0 ? ChevronLeft : ChevronRight;
+  const isNext = index === 1;
+  const Icon = isNext ? ArrowRight : ArrowLeft;
+  const label = isNext ? t("Next Page") : t("Previous Page");
 
   return (
     <Link
+      aria-label={typeof item.name === "string" ? `${label}: ${item.name}` : label}
+      data-strong=""
       href={item.url}
       className={cn(
-        "hover:text-fd-accent-foreground flex flex-col gap-2 rounded-2xl p-4 text-sm transition-none hover:bg-surface-secondary @max-lg:col-span-full",
-        index === 1 && "text-end",
+        "docs-pill docs-pill-segment inline-flex h-9 min-w-0 items-center gap-2 text-sm font-medium",
+        isNext ? "ms-auto flex-row-reverse ps-4 pe-3" : "ps-3 pe-4",
       )}
     >
-      <div
-        className={cn(
-          "inline-flex items-center gap-1.5 font-medium",
-          index === 1 && "flex-row-reverse",
-        )}
-      >
-        <Icon className="-mx-1 size-4 shrink-0 rtl:rotate-180" />
-        <p>{item.name}</p>
-      </div>
-      <p className="text-fd-muted-foreground truncate">
-        {item.description ?? (index === 0 ? t("Previous Page") : t("Next Page"))}
-      </p>
+      <Icon className="size-3.5 shrink-0 rtl:rotate-180" />
+      <span className="truncate">{item.name}</span>
     </Link>
   );
 }

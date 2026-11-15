@@ -421,7 +421,7 @@ HeroUINativeProviderRaw
 Always use a single `HeroUINativeProvider` at the root of your app. Don't nest multiple providers:
 
 ```tsx
-// ❌ Bad
+// ✗ Bad
 <HeroUINativeProvider>
   <SomeComponent>
     <HeroUINativeProvider> {/* Don't do this */}
@@ -430,7 +430,7 @@ Always use a single `HeroUINativeProvider` at the root of your app. Don't nest m
   </SomeComponent>
 </HeroUINativeProvider>
 
-// ✅ Good
+// ✓ Good
 <HeroUINativeProvider>
   <SomeComponent>
     <AnotherComponent />
@@ -443,7 +443,7 @@ Always use a single `HeroUINativeProvider` at the root of your app. Don't nest m
 Define your configuration outside the component to prevent recreating on each render:
 
 ```tsx
-// ❌ Bad
+// ✗ Bad
 function App() {
   return (
     <HeroUINativeProvider
@@ -458,7 +458,7 @@ function App() {
   );
 }
 
-// ✅ Good
+// ✓ Good
 const config: HeroUINativeConfig = {
   textProps: {
     maxFontSizeMultiplier: 1.5,

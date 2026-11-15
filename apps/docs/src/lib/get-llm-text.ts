@@ -13,12 +13,16 @@ import remarkMdx from "remark-mdx";
 import {getRelatedComponents} from "@/components-registry";
 import {siteConfig} from "@/config/site";
 import {getDemo} from "@/demos";
+import {getInitialControlValues, renderDemoSource} from "@/lib/demo-controls";
+import {remarkMdxIcons, replaceMdxIcons} from "@/lib/mdx-icons-markdown";
 import {replaceNativeComponentsCategories} from "@/lib/native-components-markdown";
 import {source} from "@/lib/source";
 
 const processor = remark()
   .use(remarkMdx)
   .use(remarkInclude)
+  // after `remarkInclude`, so `<include>`d sections lose their icon tags too
+  .use(remarkMdxIcons)
   .use(remarkGfm)
   .use(remarkAutoTypeTable)
   .use(remarkNpm);
@@ -122,7 +126,7 @@ ${header}
   const finalContent = processed.value
     .toString()
     .replace(
-      /<(ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g,
+      /<(ComponentPreview|CollapsibleCode|RelatedComponents|DocsImage|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g,
       "",
     );
 
@@ -133,7 +137,8 @@ ${finalContent}
 </page>`;
 }
 
-const COMPONENT_PREVIEW_REGEX = /<ComponentPreview\s+name\s*=\s*["']([^"']+)["'][^/>]*\/>/g;
+// `name` can follow other props (e.g. `isBgSolid`).
+const COMPONENT_PREVIEW_REGEX = /<ComponentPreview\b[^>]*?\sname\s*=\s*["']([^"']+)["'][^>]*\/>/g;
 const REGEX_ESCAPE = /[.*+?^${}()|[\]\\]/g;
 
 async function replaceComponentPreview(content: string, lang?: string): Promise<string> {
@@ -158,7 +163,11 @@ async function replaceComponentPreview(content: string, lang?: string): Promise<
 
       try {
         const filePath = join(process.cwd(), DEMOS_DIR, demo.file);
-        const code = await readFile(filePath, "utf-8");
+        const source = await readFile(filePath, "utf-8");
+        // Controlled demos print as the preview shows them on load.
+        const code = demo.controls
+          ? renderDemoSource(source, demo.controls, getInitialControlValues(demo.controls))
+          : source;
 
         return {
           match: fullMatch,
@@ -218,7 +227,7 @@ function replaceRelatedComponents(content: string): string {
 }
 
 const USELESS_COMPONENT_TAGS =
-  /<(ComponentCard|ComponentGrid|ComponentsCategory|ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsCategory|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g;
+  /<(ComponentCard|ComponentGrid|ComponentsCategory|ComponentPreview|CollapsibleCode|RelatedComponents|DocsImage|NativeComponentsCategory|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g;
 const BR_TAG = /<br\s*\/>/g;
 const CODE_BLOCK_BEFORE = /([^\n`])\n(```[\w]*\n)/g;
 const CODE_BLOCK_AFTER = /(```[\s\S]*?```)\n([^\n`])/g;
@@ -287,6 +296,7 @@ async function processMDXContent(
   processed = await replaceComponentPreview(processed, lang);
   processed = replaceRelatedComponents(processed);
   processed = replaceNativeComponentsCategories(processed, pages);
+  processed = replaceMdxIcons(processed);
   processed = cleanContentForLLM(processed);
 
   return processed;

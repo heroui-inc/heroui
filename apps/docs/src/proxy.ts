@@ -30,7 +30,7 @@ const MARKDOWN_EXCLUDED_PATHS = new Set([
 
 const PUBLIC_FILE_PATTERN = /\.[a-z0-9]+$/i;
 const UNRESOLVED_TEMPLATE_PATTERN = /(?:\{[^/{}]+\}|%7B[^/]+%7D)/i;
-const PERMANENT_LOCALIZED_PREFIXES = ["/docs", "/showcase", "/themes"];
+const PERMANENT_LOCALIZED_PREFIXES = ["/docs", "/themes"];
 const TRUST_PATHS = new Set(["/about", "/contact", "/privacy"]);
 const GONE_BUILD_PATHS = new Set(["/en/node_modules/heroui-native/lib", "/en/src/uniwind.d.ts"]);
 
@@ -144,7 +144,7 @@ export function proxy(request: NextRequest) {
   // Routes under `app/[lang]` require a locale prefix. When none is provided:
   //   - the homepage (`/`) is internally rewritten to the default locale so the
   //     visible URL stays clean.
-  //   - all other localized paths (e.g. `/docs/...`, `/showcase/...`, `/themes`) are
+  //   - all other localized paths (e.g. `/docs/...`, `/themes`) are
   //     redirected to include the default locale prefix.
   if (!getLocaleFromPath(pathname) && !shouldSkipLocaleRedirect(pathname)) {
     const url = request.nextUrl.clone();

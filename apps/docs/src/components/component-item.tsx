@@ -118,7 +118,7 @@ export function ComponentItem({
           </ConditionalLink>
         )}
       </div>
-      <div className="relative order-2 h-[198px] overflow-hidden rounded-xl border border-separator sm:order-1">
+      <div className="relative order-2 h-[198px] overflow-hidden rounded-2xl bg-(--docs-card) sm:order-1">
         <ConditionalLink className="h-full w-full" href={href} openInNewTab={openInNewTab}>
           <ComponentImagePair alt={title} darkSrc={darkSrc} lightSrc={lightSrc} />
         </ConditionalLink>
