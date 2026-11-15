@@ -1,0 +1,8 @@
+/* Arcade Theme - Component Overrides
+   Storybook loads several themes at once, so every file scopes its rules to the theme. */
+
+@import "./button.css";
+@import "./switch.css";
+@import "./chip.css";
+@import "./card.css";
+@import "./tooltip.css";

@@ -1,0 +1,22 @@
+/* Arcade Theme - Switch */
+/* Outlines are drawn with shadows, not borders: no layout shift, and the track's
+   shadow utility still composes with the focus ring. */
+
+:is(.arcade-light, .arcade-dark, [data-theme="arcade-light"], [data-theme="arcade-dark"]) {
+  .switch__control {
+    @apply shadow-[inset_0_0_0_var(--arcade-outline)_var(--border)];
+  }
+
+  .switch__thumb {
+    background-color: var(--snow);
+    box-shadow: 0 0 0 var(--arcade-outline) var(--border);
+
+    /* @heroui/styles restyles the thumb when selected, with a more specific selector.
+       Repeat that selector (both the ARIA and the data attribute) to win. */
+    .switch[aria-checked="true"] &,
+    .switch[data-selected="true"] & {
+      background-color: var(--snow);
+      box-shadow: 0 0 0 var(--arcade-outline) var(--border);
+    }
+  }
+}

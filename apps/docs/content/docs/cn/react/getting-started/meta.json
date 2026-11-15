@@ -25,6 +25,7 @@
     "(ui-for-agents)/mcp-server",
     "(ui-for-agents)/agent-skills",
     "(ui-for-agents)/agents-md",
-    "(ui-for-agents)/design-md"
+    "(ui-for-agents)/design-md",
+    "(ui-for-agents)/theming-for-agents"
   ]
 }
