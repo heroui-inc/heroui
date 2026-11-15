@@ -163,7 +163,7 @@ function PageRow({
         ) : null}
       </span>
       {isPro ? (
-        <span className="shrink-0 text-[10px] leading-3 font-semibold tracking-[0.08em] text-(--docs-fg-faint)">
+        <span className="inline-flex h-4.5 shrink-0 items-center rounded-full bg-accent-soft px-1.5 text-[10px] leading-none font-semibold tracking-[0.07em] text-accent-soft-foreground">
           PRO
         </span>
       ) : null}
@@ -251,6 +251,39 @@ export default function CustomSearchDialog(props: SharedProps) {
 
     return () => window.removeEventListener("keydown", onKeyDown, true);
   }, [askAi, isAiEnabled, onOpenChange, open, prompt, setSearch]);
+
+  // fumadocs scrolls the active row only until it touches the list edge, where the scroll
+  // shadow fades it out. After arrow-key moves, nudge it past the fade (`.docs-search-list`).
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+
+      requestAnimationFrame(() => {
+        const list = document.getElementById("fd-search-list");
+        const row = list?.querySelector<HTMLElement>('[aria-selected="true"]');
+
+        if (!list || !row) return;
+
+        const fade = parseFloat(getComputedStyle(list).getPropertyValue("--scroll-shadow-size"));
+
+        if (!fade) return;
+
+        const listRect = list.getBoundingClientRect();
+        const rowRect = row.getBoundingClientRect();
+        const overTop = listRect.top + fade - rowRect.top;
+        const overBottom = rowRect.bottom - (listRect.bottom - fade);
+
+        if (overTop > 0) list.scrollTop -= overTop;
+        else if (overBottom > 0) list.scrollTop += overBottom;
+      });
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   // Strip the locale prefix so URLs compare against paths like `/docs/react/...`.
   const stripLocale = useCallback(
@@ -569,7 +602,7 @@ export default function CustomSearchDialog(props: SharedProps) {
         <SearchDialogList
           items={items}
           className={cn(
-            "[&_#fd-search-list]:max-h-[min(460px,60vh)] [&_#fd-search-list]:gap-0.5 [&_#fd-search-list]:px-2 [&_#fd-search-list]:pt-2 [&_#fd-search-list]:pb-3",
+            "docs-search-list [&_#fd-search-list]:max-h-[min(460px,60vh)] [&_#fd-search-list]:gap-0.5 [&_#fd-search-list]:px-2 [&_#fd-search-list]:pt-2 [&_#fd-search-list]:pb-3",
           )}
           Empty={() => (
             <p className="py-10 text-center text-sm text-(--docs-fg-muted)" role="status">
