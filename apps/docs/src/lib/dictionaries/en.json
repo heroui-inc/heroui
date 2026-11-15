@@ -360,5 +360,32 @@
     "label": "Controls",
     "reset": "Reset",
     "unset": "Default"
+  },
+  "componentsIndex": {
+    "all": "All",
+    "free": "Free",
+    "pro": "Pro",
+    "filterLabel": "Filter components",
+    "licenseLabel": "License",
+    "noResults": "No components match “{query}”.",
+    "categories": {
+      "buttons": "Buttons",
+      "forms": "Forms",
+      "date-and-time": "Date and Time",
+      "navigation": "Navigation",
+      "overlays": "Overlays",
+      "collections": "Collections",
+      "controls": "Controls",
+      "feedback": "Feedback",
+      "layout": "Layout",
+      "media": "Media",
+      "pickers": "Pickers",
+      "typography": "Typography",
+      "data-display": "Data Display",
+      "charts": "Charts",
+      "ai": "AI",
+      "colors": "Colors",
+      "utilities": "Utilities"
+    }
   }
 }

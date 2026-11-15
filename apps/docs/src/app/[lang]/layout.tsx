@@ -10,6 +10,7 @@ import {NuqsAdapter} from "nuqs/adapters/next/app";
 import {siteConfig} from "@/config/site";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {getOrganizationJsonLd, getSoftwareApplicationJsonLd, getWebSiteJsonLd} from "@/lib/json-ld";
+import {getProSearchItems} from "@/lib/pro-components";
 import {getLanguageTag} from "@/lib/seo";
 import {source} from "@/lib/source";
 import {__BASE_URL__} from "@/utils/env";
@@ -37,6 +38,8 @@ export default async function Layout({
 }) {
   const {lang} = await params;
   const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
+  // Loaded with the layout so ⌘K can filter Pro components without a request per keystroke.
+  const proComponents = await getProSearchItems();
 
   return (
     <html
@@ -62,7 +65,7 @@ export default async function Layout({
         <NuqsAdapter>
           <NextProvider>
             <TreeContextProvider tree={source.getPageTree(lang)}>
-              <CustomRootProvider dict={dict} lang={lang}>
+              <CustomRootProvider dict={dict} lang={lang} proComponents={proComponents}>
                 {children}
               </CustomRootProvider>
             </TreeContextProvider>

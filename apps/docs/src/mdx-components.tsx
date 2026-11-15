@@ -17,7 +17,7 @@ import {Suspense} from "react";
 
 import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview, ComponentPreviewFallback} from "./components/component-preview";
-import {ComponentsCategory} from "./components/components-category";
+import {ComponentsIndex} from "./components/components-index";
 import {CopyPrompt} from "./components/copy-prompt";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
@@ -25,7 +25,6 @@ import {LocaleLink} from "./components/locale-link";
 import {InlineIcon} from "./components/mdx-inline-icon";
 import {StatusCheck, StatusCross, StatusWarning} from "./components/mdx-status-icons";
 import {
-  ComponentsCategory as NativeComponentsCategory,
   ImageHeroView as NativeImageHeroView,
   QRPreviewPopover as NativeQRPreviewPopover,
   TryOnDevice as NativeTryOnDevice,
@@ -164,7 +163,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentCount,
     ComponentGrid,
     ComponentPreview: ComponentPreviewWithSuspense,
-    ComponentsCategory,
+    ComponentsIndex,
     CopyPrompt,
     DocsImage,
     ExampleCount,
@@ -172,7 +171,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Info,
     InlineIcon,
     Link: LocaleLink,
-    NativeComponentsCategory,
     NativeImageHeroView,
     NativeQRPreviewPopover,
     NativeTryOnDevice,

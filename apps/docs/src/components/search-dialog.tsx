@@ -1,5 +1,6 @@
 "use client";
 
+import type {ProSearchItem} from "@/lib/pro-components";
 import type {Item, Node} from "fumadocs-core/page-tree";
 import type {SearchItemType, SharedProps} from "fumadocs-ui/components/dialog/search";
 import type {ComponentProps, ReactNode} from "react";
@@ -22,6 +23,7 @@ import {useTreeContext} from "fumadocs-ui/contexts/tree";
 import {usePathname, useRouter} from "next/navigation";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
+import {useProComponents} from "@/components/pro-components-provider";
 import {useDictionary} from "@/hooks/use-dictionary";
 import {HEROUI_DOCS_AGENT_ID} from "@/lib/heroui-agent";
 import {readsAsQuestion} from "@/lib/search-question";
@@ -72,66 +74,34 @@ const FILTERS: Filter[] = ["all", "components", "guides", "pro"];
 const ALL_LIMITS = {components: 5, guides: 4, pro: 3, sections: 5};
 const FOCUSED_LIMIT = 20;
 
-const PRO_URL = process.env["NEXT_PUBLIC_PRO_URL"] ?? "https://heroui.pro";
-const PRO_SEARCH_DEBOUNCE_MS = 150;
+/** Pro components whose name, slug or description contain every word of the query; names first. */
+function useProSearch(query: string, framework: Framework): ProSearchItem[] {
+  const items = useProComponents();
 
-interface ProComponent {
-  title: string;
-  description: string;
-  slug: string;
-  category: string;
-}
+  return useMemo(() => {
+    const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
 
-function useProSearch(query: string, tag: Framework) {
-  const [results, setResults] = useState<ProComponent[]>([]);
-  const abortRef = useRef<AbortController | null>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    if (words.length === 0) return [];
 
-  const fetchResults = useCallback(
-    (q: string) => {
-      abortRef.current?.abort();
+    const platform = framework === "native" ? "native" : "react";
+    const normalized = words.join(" ");
+    const titleRank = (item: ProSearchItem) => {
+      const title = item.title.toLowerCase();
 
-      if (!q) {
-        setResults([]);
-
-        return;
-      }
-
-      const controller = new AbortController();
-
-      abortRef.current = controller;
-
-      fetch(`${PRO_URL}/docs/api/pro-components/search?q=${encodeURIComponent(q)}&tag=${tag}`, {
-        signal: controller.signal,
-      })
-        .then((res) => (res.ok ? res.json() : {results: []}))
-        .then((data: {results: ProComponent[]}) => {
-          if (!controller.signal.aborted) {
-            setResults(data.results);
-          }
-        })
-        .catch(() => {
-          // aborted or network error — ignore
-        });
-    },
-    [tag],
-  );
-
-  useEffect(() => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-
-    timerRef.current = setTimeout(() => fetchResults(query), PRO_SEARCH_DEBOUNCE_MS);
-
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      return title.startsWith(normalized) ? 0 : title.includes(normalized) ? 1 : 2;
     };
-  }, [query, fetchResults]);
 
-  useEffect(() => {
-    return () => abortRef.current?.abort();
-  }, []);
+    return items
+      .filter((item) => {
+        if (item.platform !== platform) return false;
 
-  return results;
+        const searchable =
+          `${item.title} ${item.name.replaceAll("-", " ")} ${item.description}`.toLowerCase();
+
+        return words.every((word) => searchable.includes(word));
+      })
+      .sort((a, b) => titleRank(a) - titleRank(b));
+  }, [framework, items, query]);
 }
 
 interface SectionHit {
@@ -444,14 +414,11 @@ export default function CustomSearchDialog(props: SharedProps) {
 
     const proRows = proComponents.map((comp): Row => ({
       group: filter === "pro" ? "pro" : "components",
-      id: `pro-${comp.slug}`,
+      id: `pro-${comp.platform}-${comp.name}`,
       kind: "page",
       node: <PageRow isPro description={comp.description} icon={<Cube />} title={comp.title} />,
-      onSelect: () =>
-        window.open(
-          `${PRO_URL}${comp.slug}?utm_source=heroui_docs&utm_medium=search&utm_campaign=pro_components`,
-          "_blank",
-        ),
+      // Pro components live on the Pro docs, a separate site.
+      onSelect: () => window.open(comp.url, "_blank", "noopener,noreferrer"),
     }));
 
     let out: Row[];

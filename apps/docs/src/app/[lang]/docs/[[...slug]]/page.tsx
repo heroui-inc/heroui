@@ -12,7 +12,11 @@ import {PageActions} from "@/components/ai/page-actions";
 import {NATIVE_SETUP_PROMPT, REACT_SETUP_PROMPT, buildPagePrompt} from "@/components/ai/prompts";
 import {ComponentLinks, ComponentResources} from "@/components/component-links";
 import {ComponentPreview, ComponentPreviewFallback} from "@/components/component-preview";
-import {ComponentsCategory} from "@/components/components-category";
+import {
+  ComponentsIndex,
+  getComponentsIndexPlatform,
+  getComponentsIndexToc,
+} from "@/components/components-index";
 import {TocProCard} from "@/components/docs-shell/toc-pro-card";
 import {
   DocsBody,
@@ -22,11 +26,11 @@ import {
 } from "@/components/fumadocs/layouts/notebook/page";
 import {PageNavButtons} from "@/components/fumadocs/layouts/notebook/page/client";
 import {LocaleLink} from "@/components/locale-link";
-import {ComponentsCategory as NativeComponentsCategory} from "@/components/native/components-category";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
 import {getComponentCount, getExampleCount} from "@/demos";
+import {getComponentsCatalog} from "@/lib/components-catalog";
 import {getDocsSeoMetadata} from "@/lib/docs-seo";
 import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
 import {absoluteUrl, getLocalizedAlternates, localizedPath, stripLocale} from "@/lib/seo";
@@ -95,6 +99,12 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
   // Fetch PR contributors if github info is available
   const contributors = githubInfo?.pull ? await fetchPRContributors(githubInfo.pull) : undefined;
 
+  // The components index builds its sections (and TOC) from the free + Pro catalog.
+  const componentsIndexPlatform = getComponentsIndexPlatform(rawContent);
+  const toc = componentsIndexPlatform
+    ? getComponentsIndexToc(await getComponentsCatalog(componentsIndexPlatform, params.lang))
+    : page.data.toc;
+
   const slugParts = params.slug ?? [];
   const pagePath = `/docs/${slugParts.join("/")}`;
   const pageUrl = absoluteUrl(localizedPath(params.lang, pagePath));
@@ -129,7 +139,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
       />
       <DocsPage
         full={page.data.full}
-        toc={page.data.toc}
+        toc={toc}
         // TODO: add github last edit
         // lastUpdate={lastEditTime}
         tableOfContent={{
@@ -151,7 +161,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
                 <StatusChip className="w-fit" status={page.data.icon as StatusChipStatus} />
               )}
             </DocsTitle>
-            {page.data.toc.length > 0 && (
+            {toc.length > 0 && (
               <div className="flex items-center gap-2">
                 <PageActions markdownUrl={markdownUrl} prompt={prompt} />
                 <PageNavButtons />
@@ -170,11 +180,8 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
                   <ComponentPreview {...props} locale={params.lang} />
                 </Suspense>
               ),
-              ComponentsCategory: (props) => <ComponentsCategory {...props} locale={params.lang} />,
+              ComponentsIndex: (props) => <ComponentsIndex {...props} locale={params.lang} />,
               ExampleCount: () => <>{getExampleCount(params.lang)}</>,
-              NativeComponentsCategory: (props) => (
-                <NativeComponentsCategory {...props} locale={params.lang} />
-              ),
               PRContributors: () => (
                 <PRContributors contributors={contributors} github={githubInfo ?? undefined} />
               ),

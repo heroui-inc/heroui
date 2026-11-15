@@ -1,10 +1,12 @@
+import type {ComponentsCatalog} from "@/lib/components-catalog";
+
 import {remark} from "remark";
 import remarkGfm from "remark-gfm";
 import remarkMdx from "remark-mdx";
 import {describe, expect, it} from "vitest";
 
+import {replaceComponentsIndex} from "@/lib/components-index-markdown";
 import {remarkMdxIcons, replaceMdxIcons} from "@/lib/mdx-icons-markdown";
-import {replaceNativeComponentsCategories} from "@/lib/native-components-markdown";
 
 describe("remarkMdxIcons", () => {
   it("replaces icon elements in the parsed tree", async () => {
@@ -71,30 +73,56 @@ describe("replaceMdxIcons", () => {
   });
 });
 
-describe("replaceNativeComponentsCategories", () => {
-  it("adds native component links and descriptions to the Markdown overview", () => {
-    const content = '## Buttons\n\n<NativeComponentsCategory category="Buttons" />';
-    const pages = [
+describe("replaceComponentsIndex", () => {
+  const catalog: ComponentsCatalog = {
+    categories: [
       {
-        data: {description: "Triggers an action", title: "Button"},
-        path: "en/native/components/(buttons)/button.mdx",
-        url: "/docs/native/components/button",
+        id: "buttons",
+        items: [
+          {
+            description: "Triggers an action",
+            href: "/docs/native/components/button",
+            media: {dark: "", light: "", type: "video"},
+            name: "button",
+            pro: false,
+            title: "Button",
+          },
+          {
+            description: "",
+            href: "https://heroui.pro/docs/native/components/fab",
+            media: {dark: "", light: "", type: "video"},
+            name: "fab",
+            pro: true,
+            title: "FAB",
+          },
+        ],
+        title: "Buttons",
       },
-      {
-        data: {description: "Outside this category", title: "Input"},
-        path: "en/native/components/(forms)/input.mdx",
-        url: "/docs/native/components/input",
-      },
-    ];
+    ],
+    platform: "native",
+  };
 
-    expect(replaceNativeComponentsCategories(content, pages)).toBe(
-      "## Buttons\n\n- [Button](/docs/native/components/button): Triggers an action",
+  it("lists free and Pro components under their category headings", async () => {
+    const content = 'Intro\n\n<ComponentsIndex platform="native" />';
+    const platforms: string[] = [];
+
+    await expect(
+      replaceComponentsIndex(content, async (platform) => {
+        platforms.push(platform);
+
+        return catalog;
+      }),
+    ).resolves.toBe(
+      "Intro\n\n## Buttons\n\n" +
+        "- [Button](/docs/native/components/button): Triggers an action\n" +
+        "- [FAB](https://heroui.pro/docs/native/components/fab) (Pro)",
     );
+    expect(platforms).toEqual(["native"]);
   });
 
-  it("keeps empty categories empty when their source pages are unavailable", () => {
-    const content = '<NativeComponentsCategory category="Utilities" />';
+  it("leaves content without the index untouched", async () => {
+    const content = "## Buttons\n\nNo index here.";
 
-    expect(replaceNativeComponentsCategories(content, [])).toBe("");
+    await expect(replaceComponentsIndex(content, async () => catalog)).resolves.toBe(content);
   });
 });

@@ -360,5 +360,32 @@
     "label": "控件",
     "reset": "重置",
     "unset": "默认"
+  },
+  "componentsIndex": {
+    "all": "全部",
+    "free": "免费",
+    "pro": "Pro",
+    "filterLabel": "筛选组件",
+    "licenseLabel": "许可",
+    "noResults": "没有匹配“{query}”的组件。",
+    "categories": {
+      "buttons": "按钮",
+      "forms": "表单",
+      "date-and-time": "日期与时间",
+      "navigation": "导航",
+      "overlays": "浮层",
+      "collections": "集合",
+      "controls": "控件",
+      "feedback": "反馈",
+      "layout": "布局",
+      "media": "媒体",
+      "pickers": "选择器",
+      "typography": "排版",
+      "data-display": "数据展示",
+      "charts": "图表",
+      "ai": "AI",
+      "colors": "颜色",
+      "utilities": "工具"
+    }
   }
 }

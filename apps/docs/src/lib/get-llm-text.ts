@@ -13,10 +13,10 @@ import remarkMdx from "remark-mdx";
 import {getRelatedComponents} from "@/components-registry";
 import {siteConfig} from "@/config/site";
 import {getDemo} from "@/demos";
+import {getComponentsCatalog} from "@/lib/components-catalog";
+import {replaceComponentsIndex} from "@/lib/components-index-markdown";
 import {getInitialControlValues, renderDemoSource} from "@/lib/demo-controls";
 import {remarkMdxIcons, replaceMdxIcons} from "@/lib/mdx-icons-markdown";
-import {replaceNativeComponentsCategories} from "@/lib/native-components-markdown";
-import {source} from "@/lib/source";
 
 const processor = remark()
   .use(remarkMdx)
@@ -110,11 +110,7 @@ ${header}
   }
 
   // First, process MDX content to replace ComponentPreview, CollapsibleCode, etc.
-  const processedContent = await processMDXContent(
-    rawContent,
-    page.locale,
-    source.getPages(page.locale),
-  );
+  const processedContent = await processMDXContent(rawContent, page.locale);
 
   // Then process with remark to convert MDX to markdown
   const processed = await processor.process({
@@ -227,7 +223,7 @@ function replaceRelatedComponents(content: string): string {
 }
 
 const USELESS_COMPONENT_TAGS =
-  /<(ComponentCard|ComponentGrid|ComponentsCategory|ComponentPreview|CollapsibleCode|RelatedComponents|DocsImage|NativeComponentsCategory|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g;
+  /<(ComponentCard|ComponentGrid|ComponentPreview|CollapsibleCode|RelatedComponents|DocsImage|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g;
 const BR_TAG = /<br\s*\/>/g;
 const CODE_BLOCK_BEFORE = /([^\n`])\n(```[\w]*\n)/g;
 const CODE_BLOCK_AFTER = /(```[\s\S]*?```)\n([^\n`])/g;
@@ -286,16 +282,14 @@ function cleanContentForLLM(content: string): string {
   return processed;
 }
 
-async function processMDXContent(
-  content: string,
-  lang?: string,
-  pages: Page[] = [],
-): Promise<string> {
+async function processMDXContent(content: string, lang?: string): Promise<string> {
   let processed = replaceCollapsibleCode(content);
 
   processed = await replaceComponentPreview(processed, lang);
   processed = replaceRelatedComponents(processed);
-  processed = replaceNativeComponentsCategories(processed, pages);
+  processed = await replaceComponentsIndex(processed, (platform) =>
+    getComponentsCatalog(platform, lang ?? "en"),
+  );
   processed = replaceMdxIcons(processed);
   processed = cleanContentForLLM(processed);
 
@@ -322,11 +316,7 @@ ${header}
 </page>`;
   }
 
-  const processedContent = await processMDXContent(
-    rawContent,
-    page.locale,
-    source.getPages(page.locale),
-  );
+  const processedContent = await processMDXContent(rawContent, page.locale);
 
   if (!processedContent.trim()) {
     return `<page url="${url}">
