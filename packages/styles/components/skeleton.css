@@ -40,6 +40,22 @@
   }
 }
 
+/* In RTL, sweep the shimmer from the inline-start (right) edge toward the left */
+.skeleton--shimmer:dir(rtl) {
+  &::after,
+  &:has(.skeleton)::before {
+    @apply translate-x-full;
+
+    animation-name: skeleton-rtl;
+  }
+}
+
+@keyframes skeleton-rtl {
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
 .skeleton--pulse {
   @apply animate-pulse;
 }

@@ -56,6 +56,11 @@
 
       @apply motion-reduce:animate-none;
     }
+
+    /* The fill is anchored at inline-start (the right edge in RTL), so sweep toward the left */
+    &:dir(rtl) .progress-bar__fill {
+      animation-name: progress-bar-indeterminate-rtl;
+    }
   }
 
   /* Disabled state */
@@ -80,6 +85,15 @@
   }
   100% {
     transform: translateX(350%);
+  }
+}
+
+@keyframes progress-bar-indeterminate-rtl {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-350%);
   }
 }
 
