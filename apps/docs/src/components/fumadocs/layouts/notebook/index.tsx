@@ -81,10 +81,10 @@ export function DocsLayout({
 
             {actions ? (
               // Sticky bar over the content columns (not the sidebar). It shares the
-              // main row so it sticks for the whole page; below xl it sits under the
-              // TOC popover bar. Content fades out under its bottom edge.
+              // main row so it sticks for the whole page; below xl it moves to the TOC
+              // popover row and sits above that bar. Content fades out under its bottom edge.
               <div
-                className="sticky top-(--fd-docs-row-3) z-30 col-[2/-1] row-[3] flex h-[72px] items-center justify-end self-start bg-background pe-10 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-4 after:bg-linear-to-b after:from-background after:to-transparent max-md:hidden"
+                className="sticky top-(--fd-docs-row-2) z-30 col-[2/-1] row-[3] flex h-[72px] items-center justify-end self-start bg-background pe-10 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-4 after:bg-linear-to-b after:from-background after:to-transparent max-xl:row-[2] max-md:hidden"
                 id="nd-nav-actions"
               >
                 {actions}

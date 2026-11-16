@@ -127,7 +127,7 @@ export function DocsPage({
         data-full={full}
         id="nd-page"
         className={cn(
-          "flex min-w-0 flex-col gap-4 px-5 pt-8 pb-16 [grid-area:main] md:px-8 md:pt-22",
+          "flex min-w-0 flex-col gap-4 px-5 pt-8 pb-16 [grid-area:main] md:px-8 md:pt-4 xl:pt-22",
           full && "*:max-w-[1285px]",
         )}
       >

@@ -76,6 +76,8 @@ export function PageTOCPopover({children, className, ...rest}: ComponentProps<"d
         open={open}
         className={cn(
           "max-xl:layout:[--fd-toc-popover-height:--spacing(10)] sticky top-(--fd-docs-row-2) z-10 h-(--fd-toc-popover-height) [grid-area:toc-popover] xl:hidden",
+          // From md, the 72px `#nd-nav-actions` bar shares this row above the TOC bar.
+          "md:top-[calc(var(--fd-docs-row-2)+72px)] md:mt-[72px]",
           className,
         )}
         onOpenChange={setOpen}
@@ -84,9 +86,9 @@ export function PageTOCPopover({children, className, ...rest}: ComponentProps<"d
         <header
           ref={ref}
           className={cn(
-            "relative backdrop-blur-sm transition-colors md:border-b",
-            // Below md, content fades out under the bar, like the desktop actions bar but softer.
-            "max-md:after:pointer-events-none max-md:after:absolute max-md:after:inset-x-0 max-md:after:top-full max-md:after:h-4 max-md:after:bg-linear-to-b max-md:after:from-background/80 max-md:after:to-transparent",
+            "relative backdrop-blur-sm transition-colors",
+            // Content fades out under the bar, like the desktop actions bar but softer.
+            "after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-4 after:bg-linear-to-b after:from-background/80 after:to-transparent",
             (!isNavTransparent || open) && "bg-fd-background/80",
             open && "shadow-lg after:hidden",
           )}

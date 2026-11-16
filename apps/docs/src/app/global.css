@@ -560,6 +560,14 @@
   }
 }
 
+/* Below xl the TOC bar sits right under `#nd-nav-actions`, so drop the actions
+   bar's fade, which would paint over it. */
+@media (width < 80rem) {
+  #nd-notebook-layout:has([data-toc-popover]) #nd-nav-actions::after {
+    display: none;
+  }
+}
+
 /* ============================================================================
    PROSE & CONTENT STYLES
    ============================================================================ */
