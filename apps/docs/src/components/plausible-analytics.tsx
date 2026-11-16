@@ -1,5 +1,7 @@
 "use client";
 
+import type {PlausibleRequestPayload} from "@plausible-analytics/tracker";
+
 import {init} from "@plausible-analytics/tracker";
 import {useEffect} from "react";
 
@@ -10,8 +12,8 @@ import {useEffect} from "react";
 const PLAUSIBLE_DOMAIN = "heroui.com";
 
 /**
- * The query parameters Plausible reads for sources and campaigns. The rest of a URL's query never
- * leaves the browser.
+ * The query parameters Plausible reads for sources and campaigns. The rest of a URL's query and its
+ * fragment never leave the browser.
  */
 const SOURCE_PARAMS = new Set([
   "ref",
@@ -44,19 +46,41 @@ export function PlausibleAnalytics() {
       fileDownloads: true,
       logging: false,
       outboundLinks: true,
-      transformRequest: (payload) => ({...payload, u: withSourceParamsOnly(payload.u)}),
+      transformRequest: withoutPrivateUrls,
     });
   }, []);
 
   return null;
 }
 
-function withSourceParamsOnly(href: string) {
+/**
+ * The event with its page URL cleaned (`withoutPrivateParts`), and its referrer too when it's from
+ * heroui.com. Other sites' referrers are left as they are.
+ */
+export function withoutPrivateUrls(payload: PlausibleRequestPayload): PlausibleRequestPayload {
+  return {
+    ...payload,
+    r: payload.r && isSameSite(payload.r, payload.u) ? withoutPrivateParts(payload.r) : payload.r,
+    u: withoutPrivateParts(payload.u),
+  };
+}
+
+/** The URL with only its source parameters and no fragment. */
+function withoutPrivateParts(href: string) {
   const url = new URL(href);
 
+  url.hash = "";
   for (const key of [...url.searchParams.keys()]) {
     if (!SOURCE_PARAMS.has(key)) url.searchParams.delete(key);
   }
 
   return url.toString();
+}
+
+function isSameSite(referrer: string, href: string) {
+  try {
+    return new URL(referrer).host === new URL(href).host;
+  } catch {
+    return false;
+  }
 }
