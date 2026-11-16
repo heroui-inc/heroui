@@ -46,8 +46,8 @@ export default async function Layout({
             {/* Height matches the top-right action buttons (shared center line); `ps-1` lines the logo up with the nav text. */}
             <div className="flex h-8 items-center gap-3 ps-1">
               <HomeLink />
-              {/* The logo mark hangs below the wordmark, so centering leaves the version high; this sets it on the "hero" baseline. */}
-              <VersionSelector className="translate-y-[3.5px]" />
+              {/* The logo mark hangs below the wordmark, so plain centering leaves the version high; this nudge centers it on the "hero" letters. */}
+              <VersionSelector className="translate-y-[2.5px]" />
             </div>
             <FrameworksTabs />
           </>

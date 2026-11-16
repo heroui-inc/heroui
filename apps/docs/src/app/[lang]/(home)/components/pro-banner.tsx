@@ -242,7 +242,7 @@ export function ProBanner() {
       {visible ? (
         <motion.div
           animate={{opacity: 1, scale: 1, y: 0}}
-          className="fixed start-6 bottom-6 z-50 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl"
+          className="fixed end-6 bottom-6 z-50 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl"
           exit={{opacity: 0, scale: 0.95, transition: {duration: 0.2, ease: "easeIn"}, y: 20}}
           initial={{opacity: 0, scale: 0.95, y: 20}}
           transition={{damping: 25, delay: 0.5, stiffness: 300, type: "spring"}}

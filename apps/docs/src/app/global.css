@@ -77,7 +77,7 @@
   --docs-item-active: color-mix(in oklab, var(--foreground) 5%, var(--background));
   --docs-code-inline: color-mix(in oklab, var(--foreground) 7%, var(--background));
   /* Related component cards, TOC promo */
-  --docs-card: color-mix(in oklab, var(--foreground) 4.5%, var(--background));
+  --docs-card: color-mix(in oklab, var(--foreground) 3%, var(--background));
   --docs-control: var(--default);
   --docs-control-hover: var(--default-hover);
   --docs-control-open: color-mix(in oklab, var(--default) 80%, var(--foreground) 12%);

@@ -170,7 +170,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
           <DocsDescription>{page.data.description}</DocsDescription>
           {!!links && <ComponentLinks className="mt-2 xl:hidden" links={links} />}
         </section>
-        <DocsBody className="prose-sm">
+        <DocsBody>
           <MDXContent
             components={getMDXComponents({
               ComponentCount: () => <>{getComponentCount(params.lang)}</>,
