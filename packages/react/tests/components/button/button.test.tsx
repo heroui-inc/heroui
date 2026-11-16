@@ -155,6 +155,78 @@ describe("Button", () => {
     expect(onPress).toHaveBeenCalledTimes(2);
   });
 
+  describe("form submission", () => {
+    const renderSubmitForm = () => {
+      const events: string[] = [];
+      const onClick = vi.fn(() => events.push("click"));
+      const onPress = vi.fn();
+      const onSubmit = vi.fn((e: React.FormEvent) => {
+        e.preventDefault();
+        events.push("submit");
+      });
+
+      render(
+        <form onSubmit={onSubmit}>
+          <Button type="submit" onClick={onClick} onPress={onPress}>
+            Submit
+          </Button>
+        </form>,
+      );
+
+      return {button: screen.getByRole("button", {name: "Submit"}), events, onClick, onPress};
+    };
+
+    it("calls onClick once before submit on mouse click", async () => {
+      const {button, events, onPress} = renderSubmitForm();
+
+      await user.click(button);
+
+      expect(events).toEqual(["click", "submit"]);
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it("calls onClick once before submit on Enter", async () => {
+      const {events, onPress} = renderSubmitForm();
+
+      await user.tab();
+      await user.keyboard("{Enter}");
+
+      expect(events).toEqual(["click", "submit"]);
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it("calls onClick once before submit on Space", async () => {
+      const {events} = renderSubmitForm();
+
+      await user.tab();
+      await user.keyboard(" ");
+
+      expect(events).toEqual(["click", "submit"]);
+    });
+
+    it("calls onClick once before submit on virtual click", () => {
+      const {button, events, onPress} = renderSubmitForm();
+
+      button.click();
+
+      expect(events).toEqual(["click", "submit"]);
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it("calls onClick once for each Enter and Space press on a non-submit button", async () => {
+      const onClick = vi.fn();
+
+      render(<Button onClick={onClick}>Save</Button>);
+
+      await user.tab();
+      await user.keyboard("{Enter}");
+      expect(onClick).toHaveBeenCalledTimes(1);
+
+      await user.keyboard(" ");
+      expect(onClick).toHaveBeenCalledTimes(2);
+    });
+  });
+
   it("supports render-prop children for press state", () => {
     render(<Button>{({isPressed}) => (isPressed ? "Pressed" : "Save")}</Button>);
     const button = screen.getByRole("button", {name: "Save"});
