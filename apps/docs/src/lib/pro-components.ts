@@ -74,7 +74,10 @@ export const getProCatalog = cache(async (): Promise<ProCatalog> => {
 });
 
 /** Absolute link to a Pro component page, tagged with where in the docs it was opened from. */
-export function getProComponentUrl(href: string, medium: "components_index" | "search") {
+export function getProComponentUrl(
+  href: string,
+  medium: "components_index" | "related_components" | "search",
+) {
   const url = new URL(href, PRO_URL);
 
   url.searchParams.set("utm_source", "heroui_docs");

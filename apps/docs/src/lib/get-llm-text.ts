@@ -10,13 +10,13 @@ import {remark} from "remark";
 import remarkGfm from "remark-gfm";
 import remarkMdx from "remark-mdx";
 
-import {getRelatedComponents} from "@/components-registry";
 import {siteConfig} from "@/config/site";
 import {getDemo} from "@/demos";
 import {getComponentsCatalog} from "@/lib/components-catalog";
 import {replaceComponentsIndex} from "@/lib/components-index-markdown";
 import {getInitialControlValues, renderDemoSource} from "@/lib/demo-controls";
 import {remarkMdxIcons, replaceMdxIcons} from "@/lib/mdx-icons-markdown";
+import {getRelatedComponentItems} from "@/lib/related-components";
 
 const processor = remark()
   .use(remarkMdx)
@@ -31,7 +31,6 @@ const CONTENT_DIR = "content/docs";
 const DEMOS_DIR = "src/demos";
 const DEFAULT_CATEGORY = "docs";
 const DEFAULT_TITLE = "Untitled";
-const MAX_RELATED_COMPONENTS = 3;
 
 function normalizePagePath(pagePath: string): string {
   return pagePath.endsWith(".mdx") ? pagePath : `${pagePath}.mdx`;
@@ -202,24 +201,30 @@ function replaceCollapsibleCode(content: string): string {
 
 const RELATED_COMPONENTS_REGEX = /<RelatedComponents\s+component\s*=\s*["']([^"']+)["']\s*\/>/g;
 
-function replaceRelatedComponents(content: string): string {
-  return content.replace(RELATED_COMPONENTS_REGEX, (_match, componentName) => {
-    const relatedComponents =
-      getRelatedComponents(componentName)?.slice(0, MAX_RELATED_COMPONENTS) || [];
+async function replaceRelatedComponents(content: string): Promise<string> {
+  const matches = [...content.matchAll(RELATED_COMPONENTS_REGEX)];
+  const replacements = await Promise.all(
+    matches.map(async ([, componentName = ""]) => {
+      const {free, pro} = await getRelatedComponentItems(componentName);
+      const componentList = [
+        ...free.map(
+          (comp) =>
+            `- **${comp.title || "Untitled Component"}**: ${comp.description || "A related component"}`,
+        ),
+        // Plain Pro URL: tracking params are for docs visitors, not agents.
+        ...pro.map(
+          (comp) =>
+            `- **[${comp.title}](${comp.href.split("?")[0]})** (HeroUI Pro): ${comp.description}`,
+        ),
+      ].join("\n");
 
-    if (relatedComponents.length === 0) {
-      return "";
-    }
+      // The MDX page already has its own "Related Components" heading.
+      return componentList ? `\n${componentList}\n` : "";
+    }),
+  );
+  let index = 0;
 
-    const componentList = relatedComponents
-      .map(
-        (comp) =>
-          `- **${comp.title || "Untitled Component"}**: ${comp.description || "A related component"}`,
-      )
-      .join("\n");
-
-    return `\n## Related Components\n\n${componentList}\n`;
-  });
+  return content.replace(RELATED_COMPONENTS_REGEX, () => replacements[index++] ?? "");
 }
 
 const USELESS_COMPONENT_TAGS =
@@ -286,7 +291,7 @@ async function processMDXContent(content: string, lang?: string): Promise<string
   let processed = replaceCollapsibleCode(content);
 
   processed = await replaceComponentPreview(processed, lang);
-  processed = replaceRelatedComponents(processed);
+  processed = await replaceRelatedComponents(processed);
   processed = await replaceComponentsIndex(processed, (platform) =>
     getComponentsCatalog(platform, lang ?? "en"),
   );

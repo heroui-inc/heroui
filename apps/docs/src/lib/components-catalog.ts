@@ -159,7 +159,11 @@ function toStatus(icon: string | undefined): StatusChipStatus | undefined {
   return icon && STATUS_ICONS.has(icon) ? (icon as StatusChipStatus) : undefined;
 }
 
-function getFreeMedia(platform: ComponentsPlatform, name: string, title: string): ComponentMedia {
+export function getFreeMedia(
+  platform: ComponentsPlatform,
+  name: string,
+  title: string,
+): ComponentMedia {
   if (platform === "native") {
     const videoName = NATIVE_VIDEO_NAME_OVERRIDES[name] ?? name;
 
