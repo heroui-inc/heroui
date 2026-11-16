@@ -30,6 +30,7 @@
     "@iconify/react": "6.0.3",
     "@internationalized/date": "3.12.4",
     "@lglab/react-qr-code": "1.8.1",
+    "@plausible-analytics/tracker": "0.4.7",
     "@react-aria/overlays": "3.32.1",
     "@react-stately/data": "3.16.1",
     "@t3-oss/env-nextjs": "0.13.11",
