@@ -136,9 +136,10 @@ function heading(id: string, name: PageTree.Folder["name"]): PageTree.Separator 
  *    pages come with links to the other roots' landing pages: Components right after
  *    Quick Start, Releases and Migration at the end. Its own sections (Handbook,
  *    UI for Agents, ...) follow.
- * 2. Below it comes the current root's content, or the second root (Components) while
- *    on a Getting Started page. Its landing page is skipped, since step 1 links to it.
- *    Releases adds nothing: its link stays active on every release page.
+ * 2. Below it comes the current root's content. Its landing page is skipped, since step 1
+ *    links to it. Releases adds nothing (its link stays active on every release page), so
+ *    on Releases, Getting Started, and roots with only a landing page, the second root
+ *    (Components) shows instead.
  */
 function useSidebarNodes(): PageTree.Node[] {
   const {full, root} = useTreeContext();
@@ -181,11 +182,17 @@ function useSidebarNodes(): PageTree.Node[] {
       ...sections,
     ];
 
-    const current = root === base ? rest[0] : root;
+    const contentOf = (folder: TreeParent): PageTree.Node[] => {
+      if (isReleasesRoot(folder)) return [];
+      const index = getRootIndex(folder);
 
-    if (current && !isReleasesRoot(current)) {
-      const index = getRootIndex(current);
-      const currentNodes = current.children.filter((node) => node !== index);
+      return folder.children.filter((node) => node !== index);
+    };
+    const own = root === base ? [] : contentOf(root);
+    const current = own.length > 0 ? root : rest[0];
+
+    if (current) {
+      const currentNodes = current === root ? own : contentOf(current);
 
       if (currentNodes[0] && currentNodes[0].type !== "separator") {
         nodes.push(heading(`${current.$id}-heading`, current.name));
