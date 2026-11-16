@@ -88,11 +88,16 @@
 
   /*
    * A full-viewport backdrop-filter stalls mid-range mobile GPUs long enough
-   * that the open animation is skipped. Keep the dim scrim.
+   * that the open animation is skipped. On touch devices, only skip the blur
+   * while the backdrop is animating so the dim scrim fades on its own, then
+   * apply the blur once the overlay has settled.
    */
   @media (hover: none) and (pointer: coarse) {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
+    &[data-entering="true"],
+    &[data-exiting="true"] {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
 }
 
