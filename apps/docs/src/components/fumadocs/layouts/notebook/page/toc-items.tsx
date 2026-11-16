@@ -3,14 +3,17 @@
 import type {TOCItemType} from "fumadocs-core/toc";
 import type {ComponentProps} from "react";
 
-import * as Primitive from "fumadocs-core/toc";
 import {useTOCItems} from "fumadocs-ui/components/toc";
+import {useEffect, useRef} from "react";
 
 import {cn} from "@/utils/cn";
 
-function TOCItem({item}: {item: TOCItemType}) {
+import {useActiveHeading} from "./active-heading";
+
+function TOCItem({active, item}: {active: boolean; item: TOCItemType}) {
   return (
-    <Primitive.TOCItem
+    <a
+      data-active={active}
       href={item.url}
       className={cn(
         "flex min-h-6 scroll-m-4 items-center py-0.5 text-[13px] leading-5 wrap-anywhere text-(--docs-fg-subtle) transition-colors duration-150",
@@ -20,7 +23,7 @@ function TOCItem({item}: {item: TOCItemType}) {
       )}
     >
       {item.title}
-    </Primitive.TOCItem>
+    </a>
   );
 }
 
@@ -29,13 +32,34 @@ export type TOCItemsProps = ComponentProps<"div">;
 /** Flat list of the page's headings; the active one is set in the foreground color. */
 export function TOCItems({className, ...props}: TOCItemsProps) {
   const items = useTOCItems();
+  const active = useActiveHeading();
+  const listRef = useRef<HTMLDivElement>(null);
+  const hasScrolledRef = useRef(false);
+  const activeIndex = items.findIndex((item) => item.url === `#${active}`);
+
+  // Keep the active item centered in the TOC scroll area (the list's parent).
+  useEffect(() => {
+    const list = listRef.current;
+    const container = list?.parentElement;
+    const link = list?.children[activeIndex];
+
+    if (!container || !(link instanceof HTMLElement)) return;
+
+    const offset = link.getBoundingClientRect().top - container.getBoundingClientRect().top;
+
+    container.scrollTo({
+      behavior: hasScrolledRef.current ? "smooth" : "instant",
+      top: container.scrollTop + offset - (container.clientHeight - link.offsetHeight) / 2,
+    });
+    hasScrolledRef.current = true;
+  }, [activeIndex]);
 
   if (items.length === 0) return null;
 
   return (
-    <div className={cn("flex flex-col", className)} {...props}>
-      {items.map((item) => (
-        <TOCItem key={item.url} item={item} />
+    <div ref={listRef} className={cn("flex flex-col", className)} {...props}>
+      {items.map((item, index) => (
+        <TOCItem key={item.url} active={index === activeIndex} item={item} />
       ))}
     </div>
   );

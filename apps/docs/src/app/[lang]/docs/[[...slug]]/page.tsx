@@ -149,7 +149,6 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
               <TocProCard />
             </>
           ),
-          single: true,
           style: "normal",
         }}
       >

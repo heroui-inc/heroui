@@ -1,5 +1,5 @@
 import type {BreadcrumbProps, FooterProps} from "./client";
-import type {AnchorProviderProps, TOCItemType} from "fumadocs-core/toc";
+import type {TOCItemType} from "fumadocs-core/toc";
 import type {ComponentProps, ReactNode} from "react";
 
 import {T} from "@fuma-translate/react";
@@ -9,6 +9,7 @@ import {buttonVariants} from "fumadocs-ui/components/ui/button";
 import {Edit} from "@/components/fumadocs/ui/icons";
 import {cn} from "@/utils/cn";
 
+import {ActiveHeadingProvider} from "./active-heading";
 import {
   PageBreadcrumb,
   PageFooter,
@@ -53,7 +54,7 @@ export interface DocsPageProps {
   children?: ReactNode;
 }
 
-type TableOfContentOptions = Pick<AnchorProviderProps, "single"> & {
+type TableOfContentOptions = {
   /**
    * Custom content in TOC container, before the main TOC
    */
@@ -73,7 +74,7 @@ type TableOfContentOptions = Pick<AnchorProviderProps, "single"> & {
   style?: "normal" | "clerk";
 };
 
-type TableOfContentPopoverOptions = Omit<TableOfContentOptions, "single">;
+type TableOfContentPopoverOptions = TableOfContentOptions;
 
 export function DocsPage({
   breadcrumb: {component: breadcrumb, enabled: breadcrumbEnabled = true, ...breadcrumbProps} = {},
@@ -101,8 +102,8 @@ export function DocsPage({
 
   if (tocEnabled || tocPopoverEnabled) {
     wrapper = (children) => (
-      <TOCProvider single={tocOptions.single} toc={toc}>
-        {children}
+      <TOCProvider toc={toc}>
+        <ActiveHeadingProvider toc={toc}>{children}</ActiveHeadingProvider>
       </TOCProvider>
     );
   }

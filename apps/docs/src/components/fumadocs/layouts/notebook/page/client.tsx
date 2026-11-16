@@ -10,7 +10,6 @@ import {Tooltip} from "@heroui/react";
 import {getBreadcrumbItemsFromPath} from "fumadocs-core/breadcrumb";
 import {usePathname} from "fumadocs-core/framework";
 import Link from "fumadocs-core/link";
-import {useActiveAnchor} from "fumadocs-core/toc";
 import {useTOCItems} from "fumadocs-ui/components/toc";
 import {
   Collapsible,
@@ -35,6 +34,8 @@ import {isActive} from "@/components/fumadocs/utils/urls";
 import {cn} from "@/utils/cn";
 
 import {LayoutContext} from "../client";
+
+import {useActiveHeading} from "./active-heading";
 
 const TocPopoverContext = createContext<{
   open: boolean;
@@ -83,9 +84,11 @@ export function PageTOCPopover({children, className, ...rest}: ComponentProps<"d
         <header
           ref={ref}
           className={cn(
-            "border-b backdrop-blur-sm transition-colors",
+            "relative backdrop-blur-sm transition-colors md:border-b",
+            // Below md, content fades out under the bar, like the desktop actions bar but softer.
+            "max-md:after:pointer-events-none max-md:after:absolute max-md:after:inset-x-0 max-md:after:top-full max-md:after:h-4 max-md:after:bg-linear-to-b max-md:after:from-background/80 max-md:after:to-transparent",
             (!isNavTransparent || open) && "bg-fd-background/80",
-            open && "shadow-lg",
+            open && "shadow-lg after:hidden",
           )}
         >
           {children}
@@ -99,7 +102,7 @@ export function PageTOCPopoverTrigger({className, ...props}: ComponentProps<"but
   const t = useTranslations({note: "table of contents"});
   const {open} = use(TocPopoverContext)!;
   const items = useTOCItems();
-  const active = useActiveAnchor();
+  const active = useActiveHeading();
   const selected = useMemo(
     () => items.findIndex((item) => active === item.url.slice(1)),
     [items, active],
