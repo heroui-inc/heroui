@@ -27,7 +27,7 @@ export function TocProCard({className}: {className?: string}) {
       target="_blank"
       className={cn(
         // 16px above, like "On this page" → first item (TOC scroll padding + column gap).
-        "flex flex-col items-start gap-1.5 rounded-2xl bg-(--docs-card) p-4 [[data-toc-resources]+&]:mt-3",
+        "flex flex-col items-start gap-1.5 rounded-2xl bg-(--docs-promo) p-4 [[data-toc-resources]+&]:mt-3",
         className,
       )}
     >
