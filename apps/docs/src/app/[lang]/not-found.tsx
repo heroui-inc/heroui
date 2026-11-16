@@ -1,15 +1,19 @@
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 import Image from "next/image";
+import {lang} from "next/root-params";
 
 import {Footer} from "@/components/footer";
-import {getDictionary, getRequestLocale} from "@/lib/dictionaries";
+import {getDictionary, hasLocale} from "@/lib/dictionaries";
+import {i18n} from "@/lib/i18n";
 
 import {getHomeLayoutLinks} from "./(home)/home-layout-links";
 import {baseOptions} from "./layout.config";
 
 export default async function NotFound() {
-  const locale = await getRequestLocale();
-  const dict = await getDictionary(locale);
+  // Next renders this boundary into every page under `[lang]`. A root param, unlike request
+  // headers, is known at build time, so those pages stay statically prerendered.
+  const locale = (await lang()) ?? i18n.defaultLanguage;
+  const dict = await getDictionary(hasLocale(locale) ? locale : "en");
   const {notFound} = dict;
 
   return (

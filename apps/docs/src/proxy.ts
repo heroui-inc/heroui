@@ -164,7 +164,14 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Matcher ignoring `/_next/`, this app's prefixed assets (`assetPrefix` in next.config.ts), and `/api/`
-  // You may need to adjust it to ignore static assets in `/public` folder
-  matcher: ["/((?!api|_next/static|_next/image|docs-static/_next|favicon.ico).*)"],
+  matcher: [
+    // Skips `/_next/`, this app's prefixed assets (`assetPrefix` in next.config.ts), and `/api/`.
+    // Also skips locale-prefixed paths (`/en/...`, `/cn/...`): those are prerendered pages, and
+    // running the proxy there would put a function in front of every page view and prefetch.
+    // The proxy only redirects unprefixed paths, so `/en` and `/cn` themselves still match.
+    "/((?!api|_next/static|_next/image|docs-static/_next|favicon.ico|en/|cn/).*)",
+    // GONE_BUILD_PATHS under a locale prefix.
+    "/en/node_modules/:path*",
+    "/en/src/:path*",
+  ],
 };

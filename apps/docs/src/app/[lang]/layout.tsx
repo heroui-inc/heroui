@@ -9,6 +9,7 @@ import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
+import {i18n} from "@/lib/i18n";
 import {getOrganizationJsonLd, getSoftwareApplicationJsonLd, getWebSiteJsonLd} from "@/lib/json-ld";
 import {getProSearchItems} from "@/lib/pro-components";
 import {getLanguageTag} from "@/lib/seo";
@@ -75,6 +76,11 @@ export default async function Layout({
       </body>
     </html>
   );
+}
+
+// Prerenders every route under `[lang]` for each locale at build time instead of on first request.
+export function generateStaticParams() {
+  return i18n.languages.map((lang) => ({lang}));
 }
 
 export const metadata: Metadata = {
