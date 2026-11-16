@@ -95,3 +95,6 @@ apps/docs/public/skills
 
 # SEO analysis output
 .seo-output
+
+# Local Claude Code dev-server configs
+.claude/launch.json
