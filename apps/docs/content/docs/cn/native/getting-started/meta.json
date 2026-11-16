@@ -4,7 +4,6 @@
   "root": true,
   "icon": "book-open",
   "pages": [
-    "---概述---",
     "index",
     "(overview)/quick-start",
     "(overview)/design-principles",

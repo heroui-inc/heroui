@@ -1,10 +1,12 @@
 "use client";
 
+import type {DatePickerProps, DateValue} from "@heroui/react";
+
 import {Calendar, DateField, DatePicker, Label} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: DatePickerProps<DateValue>) {
   return (
-    <DatePicker className="w-72" name="date">
+    <DatePicker {...props} className="w-72" name="date">
       <Label>Date</Label>
       <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>

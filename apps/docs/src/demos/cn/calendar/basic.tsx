@@ -1,10 +1,12 @@
 "use client";
 
+import type {CalendarProps} from "@heroui/react";
+
 import {Calendar} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: CalendarProps) {
   return (
-    <Calendar aria-label="活动日期">
+    <Calendar {...props} aria-label="活动日期">
       <Calendar.Header>
         <Calendar.Heading />
         <Calendar.NavButton slot="previous" />

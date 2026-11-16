@@ -1,6 +1,14 @@
+import type {Callout as FDCallout} from "fumadocs-ui/components/callout";
 import type {MDXComponents} from "mdx/types";
+import type {ReactNode} from "react";
 
-import {Callout as FDCallout} from "fumadocs-ui/components/callout";
+import {
+  Bulb,
+  CircleCheckFill,
+  CircleInfoFill,
+  CircleXmarkFill,
+  TriangleExclamationFill,
+} from "@gravity-ui/icons";
 import {Card, Cards} from "fumadocs-ui/components/card";
 import {Pre} from "fumadocs-ui/components/codeblock";
 import * as TabsComponents from "fumadocs-ui/components/tabs";
@@ -9,13 +17,14 @@ import {Suspense} from "react";
 
 import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview, ComponentPreviewFallback} from "./components/component-preview";
-import {ComponentsCategory} from "./components/components-category";
+import {ComponentsIndex} from "./components/components-index";
 import {CopyPrompt} from "./components/copy-prompt";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
 import {LocaleLink} from "./components/locale-link";
+import {InlineIcon} from "./components/mdx-inline-icon";
+import {StatusCheck, StatusCross, StatusWarning} from "./components/mdx-status-icons";
 import {
-  ComponentsCategory as NativeComponentsCategory,
   ImageHeroView as NativeImageHeroView,
   QRPreviewPopover as NativeQRPreviewPopover,
   TryOnDevice as NativeTryOnDevice,
@@ -23,7 +32,6 @@ import {
 } from "./components/native";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
-import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
 import {VideoPlayer} from "./components/video-player";
 import {getComponentCount, getExampleCount} from "./demos";
 import {FumadocsCustomCodeblock as CodeBlock} from "./mdx-components/fumadocs-custom-codeblock";
@@ -82,15 +90,6 @@ function ComponentCard({
   );
 }
 
-// Wrapper component for RelatedShowcases with Suspense
-function RelatedShowcases(props: any) {
-  return (
-    <Suspense fallback={null}>
-      <RelatedShowcasesComponent {...props} />
-    </Suspense>
-  );
-}
-
 // Wrapper component for RelatedComponents with Suspense
 function RelatedComponents(props: any) {
   return (
@@ -108,12 +107,44 @@ function ComponentPreviewWithSuspense(props: React.ComponentProps<typeof Compone
   );
 }
 
-function Callout({className, ...props}: React.ComponentProps<typeof FDCallout>) {
+type CalloutKind = "error" | "idea" | "info" | "success" | "warning";
+
+const CALLOUT_ICONS: Record<CalloutKind, ReactNode> = {
+  error: <CircleXmarkFill className="text-danger" />,
+  idea: <Bulb className="text-warning" />,
+  info: <CircleInfoFill className="text-accent" />,
+  success: <CircleCheckFill className="text-success" />,
+  warning: <TriangleExclamationFill className="text-warning" />,
+};
+
+/** Flat note: a soft fill and a colored icon; no border, bar or shadow. */
+function Callout({
+  children,
+  className,
+  icon,
+  title,
+  type = "info",
+  ...props
+}: React.ComponentProps<typeof FDCallout>) {
+  const kind: CalloutKind = type === "warn" ? "warning" : type;
+
   return (
-    <FDCallout
+    <div
+      data-callout={kind}
+      className={cn(
+        "my-5 flex gap-3 rounded-2xl bg-(--docs-card) px-4 py-3 text-sm leading-6",
+        className,
+      )}
       {...props}
-      className={cn("bg-surface text-surface-foreground shadow-surface", className)}
-    />
+    >
+      <span aria-hidden className="flex h-6 shrink-0 items-center [&>svg]:size-4">
+        {icon ?? CALLOUT_ICONS[kind]}
+      </span>
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
+        {title ? <p className="my-0! font-medium text-foreground">{title}</p> : null}
+        <div className="prose-no-margin text-(--docs-fg-muted) empty:hidden">{children}</div>
+      </div>
+    </div>
   );
 }
 
@@ -132,14 +163,14 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentCount,
     ComponentGrid,
     ComponentPreview: ComponentPreviewWithSuspense,
-    ComponentsCategory,
+    ComponentsIndex,
     CopyPrompt,
     DocsImage,
     ExampleCount,
     Icon,
     Info,
+    InlineIcon,
     Link: LocaleLink,
-    NativeComponentsCategory,
     NativeImageHeroView,
     NativeQRPreviewPopover,
     NativeTryOnDevice,
@@ -149,8 +180,10 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Pre,
     Preview,
     RelatedComponents,
-    RelatedShowcases,
     Star,
+    StatusCheck,
+    StatusCross,
+    StatusWarning,
     VideoPlayer,
     X,
     XCircle,

@@ -1,7 +1,5 @@
-"use client";
-
-import {ComponentItem} from "@/components/component-item";
-import {getRelatedComponents} from "@/components-registry";
+import {ComponentTile} from "@/components/components-index/component-tile";
+import {getRelatedComponentItems} from "@/lib/related-components";
 import {cn} from "@/utils/cn";
 
 interface RelatedComponentsProps {
@@ -9,12 +7,12 @@ interface RelatedComponentsProps {
   className?: string;
 }
 
-export function RelatedComponents({className, component}: RelatedComponentsProps) {
-  const relatedComponents = getRelatedComponents(component)?.slice(0, 3);
+/** Related free components, followed by related Pro components (which open the Pro docs). */
+export async function RelatedComponents({className, component}: RelatedComponentsProps) {
+  const {free, pro} = await getRelatedComponentItems(component);
+  const items = [...free, ...pro];
 
-  if (!relatedComponents || relatedComponents.length === 0) {
-    return null;
-  }
+  if (items.length === 0) return null;
 
   return (
     <div
@@ -23,8 +21,8 @@ export function RelatedComponents({className, component}: RelatedComponentsProps
         className,
       )}
     >
-      {relatedComponents.map((relatedComponent) => (
-        <ComponentItem key={relatedComponent.name} component={relatedComponent} />
+      {items.map((item) => (
+        <ComponentTile key={`${item.pro ? "pro" : "free"}-${item.name}`} item={item} />
       ))}
     </div>
   );

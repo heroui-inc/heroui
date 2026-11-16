@@ -14,8 +14,8 @@ Below are three approaches for AI assistants to access migration documentation. 
 | **Access method** | MCP tools | Script files | Local file reads |
 | **Setup** | MCP config | Install command | `heroui-cli` command |
 | **Updates** | Real-time | Real-time | Manual |
-| **Offline** | ❌ | ❌ | ✅ |
-| **Tools** | MCP tools + prompts | Scripts | ❌ |
+| **Offline** | <StatusCross /> | <StatusCross /> | <StatusCheck /> |
+| **Tools** | MCP tools + prompts | Scripts | <StatusCross /> |
 | **Guide** | [MCP Server →](/docs/react/migration/mcp-server) | [Agent Skills →](/docs/react/migration/agent-skills) | [AGENTS.md →](/docs/react/migration/agents-md) |
 
 ## Major Changes
@@ -94,63 +94,63 @@ HeroUI v2 and v3 cannot coexist in the same project without special setup. You h
 Use the table below to quickly find migration guidance for each component. Use the link in the "Migration Guide" column to jump to detailed migration instructions.
 
 <Callout>
-  **Component Development Status**: Components marked with 🔄 In Progress or 📋 Planned are still being developed. Check the [Roadmap](https://herouiv3.featurebase.app/roadmap) for the task status. Guides for these components will be available once development is finished.
+  **Component Development Status**: Components marked with <InlineIcon icon="arrows-rotate-right" /> In Progress or <InlineIcon icon="list-check" /> Planned are still being developed. Check the [Roadmap](https://herouiv3.featurebase.app/roadmap) for the task status. Guides for these components will be available once development is finished.
 </Callout>
 
 | v2 Component | v3 Component | Status | Migration Guide |
 |-------------|--------------|--------|-----------------|
-| Accordion | Accordion | ✅ Available | [View guide →](/docs/react/migration/accordion) |
-| Alert | Alert | ✅ Available | [View guide →](/docs/react/migration/alert) |
-| Autocomplete | ComboBox | ✅ Renamed | [View guide →](/docs/react/migration/autocomplete) |
-| Avatar | Avatar | ✅ Available | [View guide →](/docs/react/migration/avatar) |
-| Badge | Badge | ✅ Available | [View guide →](/docs/react/migration/badge) |
-| Breadcrumbs | Breadcrumbs | ✅ Available | [View guide →](/docs/react/migration/breadcrumbs) |
-| Button | Button | ✅ Available | [View guide →](/docs/react/migration/button) |
-| ButtonGroup | ButtonGroup | ✅ Available | [View guide →](/docs/react/migration/button-group) |
-| Calendar | Calendar | ✅ Available | [View guide →](/docs/react/migration/calendar) |
-| Card | Card | ✅ Available | [View guide →](/docs/react/migration/card) |
-| Checkbox | Checkbox | ✅ Available | [View guide →](/docs/react/migration/checkbox) |
-| CheckboxGroup | CheckboxGroup | ✅ Available | [View guide →](/docs/react/migration/checkbox-group) |
-| Chip | Chip | ✅ Available | [View guide →](/docs/react/migration/chip) |
-| Code | ❌ | ❌ Removed | [View guide →](/docs/react/migration/code) |
-| DateInput | DateField | ✅ Renamed | [View guide →](/docs/react/migration/dateinput) |
-| DatePicker | DatePicker | ✅ Available | [View guide →](/docs/react/migration/date-picker) |
-| DateRangePicker | DateRangePicker | ✅ Available | [View guide →](/docs/react/migration/date-range-picker) |
-| TimeInput | TimeField | ✅ Renamed | [View guide →](/docs/react/migration/timeinput) |
-| Divider | Separator | ✅ Renamed | [View guide →](/docs/react/migration/divider) |
-| Drawer | Drawer | ✅ Available | [View guide →](/docs/react/migration/drawer) |
-| Dropdown | Dropdown | ✅ Available | [View guide →](/docs/react/migration/dropdown) |
-| Form | Form | ✅ Available | [View guide →](/docs/react/migration/form) |
-| Image | ❌ | ❌ Removed | [View guide →](/docs/react/migration/image) |
-| Input | TextField, Input, InputGroup | ✅ Available | [View guide →](/docs/react/migration/input) |
-| InputOTP | InputOTP | ✅ Available | [View guide →](/docs/react/migration/input-otp) |
-| Kbd | Kbd | ✅ Available | [View guide →](/docs/react/migration/kbd) |
-| Link | Link | ✅ Available | [View guide →](/docs/react/migration/link) |
-| Listbox | ListBox | ✅ Available | [View guide →](/docs/react/migration/listbox) |
-| Modal | Modal | ✅ Available | [View guide →](/docs/react/migration/modal) |
-| Navbar | ❌ | ❌ Removed | [View guide →](/docs/react/migration/navbar) |
-| NumberInput | NumberField | ✅ Renamed | [View guide →](/docs/react/migration/numberinput) |
-| Pagination | Pagination | ✅ Available | [View guide →](/docs/react/migration/pagination) |
-| Popover | Popover | ✅ Available | [View guide →](/docs/react/migration/popover) |
-| Progress | ProgressBar | ✅ Renamed | [View guide →](/docs/react/migration/progress) |
-| CircularProgress | ProgressCircle | ✅ Renamed | [View guide →](/docs/react/migration/circular-progress) |
-| Radio | Radio | ✅ Available | [View guide →](/docs/react/migration/radio) |
-| RadioGroup | RadioGroup | ✅ Available | [View guide →](/docs/react/migration/radio-group) |
-| RangeCalendar | RangeCalendar | ✅ Available | [View guide →](/docs/react/migration/range-calendar) |
-| Ripple | ❌ | ❌ Removed | [See Button ripple →](/docs/react/components/button#adding-ripple-effect) |
-| ScrollShadow | ScrollShadow | ✅ Available | [View guide →](/docs/react/migration/scroll-shadow) |
-| Select | Select | ✅ Available | [View guide →](/docs/react/migration/select) |
-| Skeleton | Skeleton | ✅ Available | [View guide →](/docs/react/migration/skeleton) |
-| Slider | Slider | ✅ Available | [View guide →](/docs/react/migration/slider) |
-| Snippet | ❌ | ❌ Removed | [View guide →](/docs/react/migration/snippet) |
-| Spacer | ❌ | ❌ Removed | [View guide →](/docs/react/migration/spacer) |
-| Spinner | Spinner | ✅ Available | [View guide →](/docs/react/migration/spinner) |
-| Switch | Switch | ✅ Available | [View guide →](/docs/react/migration/switch) |
-| Table | Table | ✅ Available | [View guide →](/docs/react/migration/table) |
-| Tabs | Tabs | ✅ Available | [View guide →](/docs/react/migration/tabs) |
-| Toast | Toast | ✅ Available | [View guide →](/docs/react/migration/toast) |
-| Tooltip | Tooltip | ✅ Available | [View guide →](/docs/react/migration/tooltip) |
-| User | ❌ | ❌ Removed | [View guide →](/docs/react/migration/user) |
+| Accordion | Accordion | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/accordion) |
+| Alert | Alert | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/alert) |
+| Autocomplete | ComboBox | <StatusCheck>Renamed</StatusCheck> | [View guide →](/docs/react/migration/autocomplete) |
+| Avatar | Avatar | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/avatar) |
+| Badge | Badge | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/badge) |
+| Breadcrumbs | Breadcrumbs | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/breadcrumbs) |
+| Button | Button | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/button) |
+| ButtonGroup | ButtonGroup | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/button-group) |
+| Calendar | Calendar | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/calendar) |
+| Card | Card | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/card) |
+| Checkbox | Checkbox | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/checkbox) |
+| CheckboxGroup | CheckboxGroup | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/checkbox-group) |
+| Chip | Chip | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/chip) |
+| Code | <StatusCross /> | <StatusCross>Removed</StatusCross> | [View guide →](/docs/react/migration/code) |
+| DateInput | DateField | <StatusCheck>Renamed</StatusCheck> | [View guide →](/docs/react/migration/dateinput) |
+| DatePicker | DatePicker | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/date-picker) |
+| DateRangePicker | DateRangePicker | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/date-range-picker) |
+| TimeInput | TimeField | <StatusCheck>Renamed</StatusCheck> | [View guide →](/docs/react/migration/timeinput) |
+| Divider | Separator | <StatusCheck>Renamed</StatusCheck> | [View guide →](/docs/react/migration/divider) |
+| Drawer | Drawer | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/drawer) |
+| Dropdown | Dropdown | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/dropdown) |
+| Form | Form | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/form) |
+| Image | <StatusCross /> | <StatusCross>Removed</StatusCross> | [View guide →](/docs/react/migration/image) |
+| Input | TextField, Input, InputGroup | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/input) |
+| InputOTP | InputOTP | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/input-otp) |
+| Kbd | Kbd | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/kbd) |
+| Link | Link | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/link) |
+| Listbox | ListBox | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/listbox) |
+| Modal | Modal | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/modal) |
+| Navbar | <StatusCross /> | <StatusCross>Removed</StatusCross> | [View guide →](/docs/react/migration/navbar) |
+| NumberInput | NumberField | <StatusCheck>Renamed</StatusCheck> | [View guide →](/docs/react/migration/numberinput) |
+| Pagination | Pagination | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/pagination) |
+| Popover | Popover | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/popover) |
+| Progress | ProgressBar | <StatusCheck>Renamed</StatusCheck> | [View guide →](/docs/react/migration/progress) |
+| CircularProgress | ProgressCircle | <StatusCheck>Renamed</StatusCheck> | [View guide →](/docs/react/migration/circular-progress) |
+| Radio | Radio | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/radio) |
+| RadioGroup | RadioGroup | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/radio-group) |
+| RangeCalendar | RangeCalendar | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/range-calendar) |
+| Ripple | <StatusCross /> | <StatusCross>Removed</StatusCross> | [See Button ripple →](/docs/react/components/button#adding-ripple-effect) |
+| ScrollShadow | ScrollShadow | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/scroll-shadow) |
+| Select | Select | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/select) |
+| Skeleton | Skeleton | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/skeleton) |
+| Slider | Slider | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/slider) |
+| Snippet | <StatusCross /> | <StatusCross>Removed</StatusCross> | [View guide →](/docs/react/migration/snippet) |
+| Spacer | <StatusCross /> | <StatusCross>Removed</StatusCross> | [View guide →](/docs/react/migration/spacer) |
+| Spinner | Spinner | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/spinner) |
+| Switch | Switch | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/switch) |
+| Table | Table | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/table) |
+| Tabs | Tabs | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/tabs) |
+| Toast | Toast | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/toast) |
+| Tooltip | Tooltip | <StatusCheck>Available</StatusCheck> | [View guide →](/docs/react/migration/tooltip) |
+| User | <StatusCross /> | <StatusCross>Removed</StatusCross> | [View guide →](/docs/react/migration/user) |
 
 </section>
 

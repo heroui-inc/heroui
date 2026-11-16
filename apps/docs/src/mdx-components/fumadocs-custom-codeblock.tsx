@@ -26,7 +26,14 @@ export function FumadocsCustomCodeblock({
       // @ts-expect-error - TODO: fumadocs-ui error
       viewportProps={{ref: areaRef}}
       Actions={(actionsProps) => (
-        <div {...actionsProps} className={cn("z-1! empty:hidden", actionsProps.className)}>
+        <div
+          {...actionsProps}
+          className={cn(
+            "z-1! empty:hidden",
+            actionsProps.className,
+            "top-2.5 rounded-full backdrop-blur-none",
+          )}
+        >
           {!!allowCopy && <CopyButton code={code} containerRef={areaRef} />}
         </div>
       )}
@@ -71,7 +78,7 @@ function CopyButton({
       data-checked={checked || undefined}
       type="button"
       className={buttonVariants({
-        class: cn("-mt-0.5 bg-transparent text-muted", className),
+        class: cn("bg-transparent text-(--docs-fg-subtle) hover:text-(--docs-fg)", className),
         isIconOnly: true,
         size: "sm",
         variant: "ghost",

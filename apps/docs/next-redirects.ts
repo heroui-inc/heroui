@@ -197,18 +197,18 @@ export async function getRedirects(): Promise<Redirect[]> {
     source: "/theme",
   });
 
-  // Showcase moved under [lang] for i18n. Redirect legacy /showcase and
-  // /showcase/<id> to the default-locale URL so old links keep working.
+  // The showcase pages were removed. Send old links (with or without a locale
+  // prefix) to the React getting-started page instead of a 404.
   redirects.push(
     {
-      destination: "/en/showcase",
+      destination: "/en/docs/react/getting-started",
       permanent: true,
-      source: "/showcase",
+      source: "/showcase/:id*",
     },
     {
-      destination: "/en/showcase/:id",
+      destination: "/:lang/docs/react/getting-started",
       permanent: true,
-      source: "/showcase/:id",
+      source: "/:lang(en|cn)/showcase/:id*",
     },
   );
 

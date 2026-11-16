@@ -188,13 +188,13 @@ Tailwind CSS spacing 刻度（与 v2 Spacer 数值对应）：
 用 `gap` 工具类替代 Spacer 组件：
 
 ```tsx
-// ✅ 推荐
+// ✓ 推荐
 <div className="flex gap-4">
   <Button>Button 1</Button>
   <Button>Button 2</Button>
 </div>
 
-// ❌ 不推荐
+// ✗ 不推荐
 <div className="flex">
   <Button>Button 1</Button>
   <div className="ml-4"><Button>Button 2</Button></div>
@@ -204,7 +204,7 @@ Tailwind CSS spacing 刻度（与 v2 Spacer 数值对应）：
 ### 2. 垂直列表使用 space 工具类
 
 ```tsx
-// ✅ 推荐
+// ✓ 推荐
 <div className="space-y-4">
   <div>Item 1</div>
   <div>Item 2</div>
@@ -224,10 +224,10 @@ Tailwind CSS spacing 刻度（与 v2 Spacer 数值对应）：
 将 margin 直接写在元素上，而不是使用 Spacer：
 
 ```tsx
-// ✅ 推荐
+// ✓ 推荐
 <div className="mt-4">Content</div>
 
-// ❌ 不推荐
+// ✗ 不推荐
 <>
   <Spacer y={4} />
   <div>Content</div>

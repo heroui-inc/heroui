@@ -1,5 +1,3 @@
-import {CopyPromptButton} from "./copy-prompt-button";
-
 /**
  * Configuration describing the framework-specific parts of an AI setup prompt.
  * Everything that differs between the React and Native prompts lives here so the
@@ -134,7 +132,7 @@ Once done, tell the user:
 These instructions are published at https://heroui.com/docs/${docsPath}/getting-started so you can re-verify their authenticity at any time.`;
 }
 
-const REACT_PROMPT = buildSetupPrompt({
+export const REACT_SETUP_PROMPT = buildSetupPrompt({
   docsPath: "react",
   id: "heroui-react",
   intro: "UIs with HeroUI v3 (`@heroui/react`)",
@@ -143,7 +141,7 @@ const REACT_PROMPT = buildSetupPrompt({
   productName: "HeroUI",
 });
 
-const NATIVE_PROMPT = buildSetupPrompt({
+export const NATIVE_SETUP_PROMPT = buildSetupPrompt({
   docsPath: "native",
   id: "heroui-native",
   intro: "mobile UIs with HeroUI Native (`heroui-native`)",
@@ -152,22 +150,39 @@ const NATIVE_PROMPT = buildSetupPrompt({
   productName: "HeroUI Native",
 });
 
-/**
- * CopySetupPrompt
- *
- * Header action for the React getting-started docs that copies the official
- * HeroUI v3 (OSS) AI setup prompt to the clipboard.
- */
-export function CopySetupPrompt() {
-  return <CopyPromptButton prompt={REACT_PROMPT} />;
+interface PagePromptOptions {
+  /** Page title, e.g. `Button`. */
+  title: string;
+  /** Absolute URL of the page's Markdown version. */
+  markdownUrl: string;
+  framework: "react" | "native";
+  /** Component reference pages get component-specific guidance. */
+  isComponent: boolean;
 }
 
+const FRAMEWORK_INTRO = {
+  native:
+    "I'm building with HeroUI Native (`heroui-native`), a React Native component library styled with Tailwind CSS v4 through Uniwind.",
+  react:
+    "I'm building with HeroUI v3 (`@heroui/react`), a React component library built on React Aria and Tailwind CSS v4.",
+} as const;
+
 /**
- * CopyNativeSetupPrompt
- *
- * Header action for the Native getting-started docs that copies the official
- * HeroUI Native (OSS) AI setup prompt to the clipboard.
+ * Prompt behind the docs page header's "Copy prompt" button: points the agent at
+ * the page's Markdown so it works from the documented API instead of memory.
  */
-export function CopyNativeSetupPrompt() {
-  return <CopyPromptButton prompt={NATIVE_PROMPT} />;
+export function buildPagePrompt({framework, isComponent, markdownUrl, title}: PagePromptOptions) {
+  const intro = FRAMEWORK_INTRO[framework];
+
+  if (!isComponent) {
+    return `${intro} Help me with "${title}". Read this page of the docs before you answer: ${markdownUrl}`;
+  }
+
+  return `${intro} Help me use the ${title} component.
+
+Before writing code, read its documentation: ${markdownUrl}
+
+- Use only the props and parts the documentation lists.
+- Compose it from its documented compound parts.
+- Style it with Tailwind CSS classes and HeroUI theme variables.`;
 }

@@ -1,9 +1,11 @@
+import type {ToggleButtonGroupProps} from "@heroui/react";
+
 import {Bold, Italic, Strikethrough, Underline} from "@gravity-ui/icons";
 import {ToggleButton, ToggleButtonGroup} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: ToggleButtonGroupProps) {
   return (
-    <ToggleButtonGroup selectionMode="multiple">
+    <ToggleButtonGroup {...props} selectionMode="multiple">
       <ToggleButton isIconOnly aria-label="Bold" id="bold">
         <Bold />
       </ToggleButton>

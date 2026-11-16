@@ -1,14 +1,15 @@
 import type {BreadcrumbProps, FooterProps} from "./client";
-import type {AnchorProviderProps, TOCItemType} from "fumadocs-core/toc";
+import type {TOCItemType} from "fumadocs-core/toc";
 import type {ComponentProps, ReactNode} from "react";
 
 import {T} from "@fuma-translate/react";
 import {TOCProvider, TOCScrollArea} from "fumadocs-ui/components/toc";
 import {buttonVariants} from "fumadocs-ui/components/ui/button";
 
-import {Edit, Text} from "@/components/fumadocs/ui/icons";
+import {Edit} from "@/components/fumadocs/ui/icons";
 import {cn} from "@/utils/cn";
 
+import {ActiveHeadingProvider} from "./active-heading";
 import {
   PageBreadcrumb,
   PageFooter,
@@ -53,7 +54,7 @@ export interface DocsPageProps {
   children?: ReactNode;
 }
 
-type TableOfContentOptions = Pick<AnchorProviderProps, "single"> & {
+type TableOfContentOptions = {
   /**
    * Custom content in TOC container, before the main TOC
    */
@@ -73,7 +74,7 @@ type TableOfContentOptions = Pick<AnchorProviderProps, "single"> & {
   style?: "normal" | "clerk";
 };
 
-type TableOfContentPopoverOptions = Omit<TableOfContentOptions, "single">;
+type TableOfContentPopoverOptions = TableOfContentOptions;
 
 export function DocsPage({
   breadcrumb: {component: breadcrumb, enabled: breadcrumbEnabled = true, ...breadcrumbProps} = {},
@@ -101,8 +102,8 @@ export function DocsPage({
 
   if (tocEnabled || tocPopoverEnabled) {
     wrapper = (children) => (
-      <TOCProvider single={tocOptions.single} toc={toc}>
-        {children}
+      <TOCProvider toc={toc}>
+        <ActiveHeadingProvider toc={toc}>{children}</ActiveHeadingProvider>
       </TOCProvider>
     );
   }
@@ -126,7 +127,7 @@ export function DocsPage({
         data-full={full}
         id="nd-page"
         className={cn(
-          "flex flex-col gap-4 px-4 py-6 [grid-area:main] *:max-w-[900px] md:px-6 md:pt-8 xl:px-8 xl:pt-14",
+          "flex min-w-0 flex-col gap-4 px-5 pt-8 pb-16 [grid-area:main] md:px-8 md:pt-4 xl:pt-22",
           full && "*:max-w-[1285px]",
         )}
       >
@@ -137,15 +138,14 @@ export function DocsPage({
       {!!tocEnabled &&
         (tocReplace ?? (
           <div
-            className="xl:layout:[--fd-toc-width:268px] sticky top-(--fd-docs-row-3) flex h-[calc(var(--fd-docs-height)-var(--fd-docs-row-3))] w-(--fd-toc-width) flex-col pe-4 pt-12 pb-2 [grid-area:toc] max-xl:hidden"
+            className="xl:layout:[--fd-toc-width:var(--docs-toc-width)] sticky top-(--fd-docs-row-3) flex h-[calc(var(--fd-docs-height)-var(--fd-docs-row-3))] w-(--fd-toc-width) flex-col gap-1 ps-4 pe-5 pt-[96px] pb-2 [grid-area:toc] max-xl:hidden"
             id="nd-toc"
           >
             {tocOptions.header}
             <h3
-              className="text-fd-muted-foreground inline-flex items-center gap-1.5 text-sm"
+              className="text-[13px] leading-[18px] font-medium text-(--docs-fg-subtle)"
               id="toc-title"
             >
-              <Text className="size-4" />
               <T note="table of contents" text="On this page" />
             </h3>
             <TOCScrollArea>
@@ -199,7 +199,10 @@ export function DocsDescription({children, className, ...props}: ComponentProps<
   if (children === undefined) return null;
 
   return (
-    <p {...props} className={cn("text-fd-muted-foreground mb-8 text-lg", className)}>
+    <p
+      {...props}
+      className={cn("max-w-[560px] text-base leading-6 text-(--docs-fg-muted)", className)}
+    >
       {children}
     </p>
   );
@@ -207,7 +210,13 @@ export function DocsDescription({children, className, ...props}: ComponentProps<
 
 export function DocsTitle({children, className, ...props}: ComponentProps<"h1">) {
   return (
-    <h1 {...props} className={cn("text-[1.75em] font-semibold", className)}>
+    <h1
+      {...props}
+      className={cn(
+        "text-[28px] leading-9 font-semibold tracking-[-0.022em] text-foreground md:text-4xl md:leading-10",
+        className,
+      )}
+    >
       {children}
     </h1>
   );

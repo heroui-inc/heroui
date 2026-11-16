@@ -4,7 +4,6 @@
   "icon": "rocket",
   "root": true,
   "pages": [
-    "---概述---",
     "index",
     "---版本列表---",
     "v1-0-11",

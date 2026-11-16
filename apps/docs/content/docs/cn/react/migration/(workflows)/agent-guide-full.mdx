@@ -66,7 +66,7 @@ HeroUI v2 提供了组件挂钩（例如`useSwitch`, `useInput`, `useCheckbox`�
 <include>../index.mdx#step-6-component-migration-reference</include>
 
 <Callout type="info">
-  **已删除/进行中/计划的组件**：对于标记为 ❌ 已删除、🔄 进行中或 📋 计划的组件，请在迁移过程中将其替换为标准 HTML 元素。一旦 HeroUI 组件在 v3 中可用，您就可以迁移回它们。
+  **已删除/进行中/计划的组件**：对于标记为 <StatusCross>已删除</StatusCross>、<InlineIcon icon="arrows-rotate-right" /> 进行中或 <InlineIcon icon="list-check" /> 计划的组件，请在迁移过程中将其替换为标准 HTML 元素。一旦 HeroUI 组件在 v3 中可用，您就可以迁移回它们。
 </Callout>
 
 使用`get_component_migration_guides`MCP 工具可获取每个组件的详细指南。
@@ -94,12 +94,14 @@ HeroUI v2 提供了组件挂钩（例如`useSwitch`, `useInput`, `useCheckbox`�
 1. **准备阶段**：迁移所有组件代码，同时仍依赖 v2 依赖项（代码将被破坏）
 2. **切换阶段**：将依赖项更新到 v3 并修复任何剩余问题
 
-**⚠️ 关键：不要构建来检查迁移过程中的错误**
+<Callout type="warning">
+  **关键：不要构建来检查迁移过程中的错误**
 
-- 使用**类型检查**（例如，`tsc --noEmit`) 如果可以检查 TypeScript 错误
-- 使用**lint**（例如，`eslint`, `biome check`) 如果可以检查代码质量
-- **不要**运行构建命令（例如，`npm run build`, `next build`, `vite build`)
-- **请勿** 在迁移期间尝试启动/运行项目
+  - 使用**类型检查**（例如，`tsc --noEmit`) 如果可以检查 TypeScript 错误
+  - 使用**lint**（例如，`eslint`, `biome check`) 如果可以检查代码质量
+  - **不要**运行构建命令（例如，`npm run build`, `next build`, `vite build`)
+  - **请勿** 在迁移期间尝试启动/运行项目
+</Callout>
 
 ### 第 0 阶段：设置和分析
 
@@ -128,7 +130,7 @@ HeroUI v2 提供了组件挂钩（例如`useSwitch`, `useInput`, `useCheckbox`�
 2. **将 Tailwind CSS 更新至 v4**（如果尚未更新）
    - 这可以在切换 HeroUI 之前完成
 
-3. **🛑 检查点：停止并等待用户批准**
+3. **<InlineIcon icon="hand-stop" /> 检查点：停止并等待用户批准**
    - **不要自动进入下一阶段**
    - 解释配置更改
    - 在继续之前等待明确的用户批准
@@ -153,7 +155,7 @@ HeroUI v2 提供了组件挂钩（例如`useSwitch`, `useInput`, `useCheckbox`�
    - 检查依赖项是否已经迁移
    - 根据需要迁移共享代码
 
-4. **🛑 检查点：停止并等待用户批准**
+4. **<InlineIcon icon="hand-stop" /> 检查点：停止并等待用户批准**
    - **不要自动进入下一阶段**
    - 总结一下本阶段迁移的内容
    - 在继续之前等待明确的用户批准
@@ -180,7 +182,7 @@ HeroUI v2 提供了组件挂钩（例如`useSwitch`, `useInput`, `useCheckbox`�
    - 修复任何 linting 错误
    - 注意：请勿在迁移期间尝试构建或运行项目
 
-3. **🛑 检查点：停止并等待用户批准**
+3. **<InlineIcon icon="hand-stop" /> 检查点：停止并等待用户批准**
    - **不要自动进行样式设置**
    - 验证组件是否正常工作
    - 在样式迁移之前等待明确的用户批准

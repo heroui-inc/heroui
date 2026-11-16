@@ -4,6 +4,8 @@ import {highlight} from "fumadocs-core/highlight";
 import * as Base from "fumadocs-ui/components/codeblock";
 import * as React from "react";
 
+import {docsShikiOptions} from "@/lib/shiki-themes";
+
 import {CodeBlock as CodeBlockClient} from "./codeblock-client";
 
 export async function CodeBlock({
@@ -24,49 +26,7 @@ export async function CodeBlock({
   title: string | undefined;
   collapsible?: boolean;
 } & CodeBlockProps) {
-  let rendered;
-  let renderedPreview;
-  let highlightFailed = false;
-  const components = {
-    pre: (props: React.ComponentProps<typeof Base.Pre>) => <Base.Pre {...props} />,
-  };
-
-  // Trim the code to avoid issues with leading/trailing whitespace
-  const trimmedCode = code?.trim() || "";
-
-  // Skip highlighting for empty code blocks
-  if (trimmedCode) {
-    try {
-      const lines = trimmedCode.split("\n");
-
-      if (lines.length > 10) {
-        const previewCode = lines.slice(0, 5).join("\n");
-
-        renderedPreview = await highlight(previewCode, {
-          components,
-          lang: lang || "text",
-        });
-      }
-
-      rendered = await highlight(trimmedCode, {
-        components,
-        lang: lang || "text",
-        // other Shiki options
-      });
-    } catch (error) {
-      console.error("Syntax highlighting error:", error);
-      highlightFailed = true;
-    }
-  }
-
-  if (!trimmedCode || highlightFailed) {
-    // Fallback to plain code block without syntax highlighting
-    rendered = (
-      <Base.Pre>
-        <code>{highlightFailed ? code : undefined}</code>
-      </Base.Pre>
-    );
-  }
+  const {failed, preview, rendered} = await highlightCode(code, lang);
 
   return (
     <CodeBlockClient
@@ -75,12 +35,60 @@ export async function CodeBlock({
       collapsible={collapsible}
       isIsolated={isIsolated}
       lang={lang}
-      preview={renderedPreview}
+      preview={preview}
       showLineNumbers={showLineNumbers}
       title={title}
       {...props}
     >
-      {rendered}
+      {failed ? (
+        <Base.Pre>
+          <code>{code}</code>
+        </Base.Pre>
+      ) : (
+        rendered
+      )}
     </CodeBlockClient>
   );
+}
+
+/** Code longer than this gets a highlighted 5-line `preview` for its collapsed peek. */
+const PREVIEW_MIN_LINES = 10;
+
+/** Server-side highlighting shared by code blocks and controlled demos. */
+export async function highlightCode(
+  code: string | undefined,
+  lang: string | undefined,
+): Promise<{rendered: React.ReactNode; preview?: React.ReactNode; failed: boolean}> {
+  const components = {
+    pre: (props: React.ComponentProps<typeof Base.Pre>) => <Base.Pre {...props} />,
+  };
+  const options = {components, lang: lang || "text", ...docsShikiOptions};
+  // Trim the code to avoid issues with leading/trailing whitespace
+  const trimmedCode = code?.trim() || "";
+
+  // Skip highlighting for empty code blocks
+  if (!trimmedCode) {
+    return {
+      failed: false,
+      rendered: (
+        <Base.Pre>
+          <code />
+        </Base.Pre>
+      ),
+    };
+  }
+
+  try {
+    const lines = trimmedCode.split("\n");
+    const preview =
+      lines.length > PREVIEW_MIN_LINES
+        ? await highlight(lines.slice(0, 5).join("\n"), options)
+        : undefined;
+
+    return {failed: false, preview, rendered: await highlight(trimmedCode, options)};
+  } catch (error) {
+    console.error("Syntax highlighting error:", error);
+
+    return {failed: true, rendered: null};
+  }
 }

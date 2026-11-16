@@ -1,8 +1,10 @@
+import type {ProgressBarProps} from "@heroui/react";
+
 import {Label, ProgressBar} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: ProgressBarProps) {
   return (
-    <ProgressBar aria-label="加载中" className="w-64" value={60}>
+    <ProgressBar {...props} aria-label="加载中" className="w-64">
       <Label>加载中</Label>
       <ProgressBar.Output />
       <ProgressBar.Track>

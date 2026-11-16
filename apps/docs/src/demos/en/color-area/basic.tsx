@@ -1,8 +1,12 @@
+"use client";
+
+import type {ColorAreaProps} from "@heroui/react";
+
 import {ColorArea} from "@heroui/react";
 
-export function ColorAreaBasic() {
+export function ColorAreaBasic(props: ColorAreaProps) {
   return (
-    <ColorArea defaultValue="rgb(116, 52, 255)">
+    <ColorArea {...props} defaultValue="rgb(116, 52, 255)">
       <ColorArea.Thumb />
     </ColorArea>
   );

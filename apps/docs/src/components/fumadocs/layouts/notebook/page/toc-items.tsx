@@ -1,118 +1,66 @@
 "use client";
 
 import type {TOCItemType} from "fumadocs-core/toc";
-import type {ComponentProps, RefObject} from "react";
+import type {ComponentProps} from "react";
 
-import * as Primitive from "fumadocs-core/toc";
 import {useTOCItems} from "fumadocs-ui/components/toc";
-import {useCallback, useEffect, useRef} from "react";
+import {useEffect, useRef} from "react";
 
-import {mergeRefs} from "@/components/fumadocs/utils/merge-refs";
 import {cn} from "@/utils/cn";
 
-function calc(container: HTMLElement, active: string[]): [number, number] {
-  if (active.length === 0 || container.clientHeight === 0) return [0, 0];
+import {useActiveHeading} from "./active-heading";
 
-  let upper = Number.MAX_VALUE;
-  let lower = 0;
-
-  for (const id of active) {
-    const element =
-      container.querySelector<HTMLElement>(`a[href="#${id}"]`) ??
-      container.querySelector<HTMLElement>(`a[href="#${encodeURIComponent(id)}"]`);
-
-    if (!element) continue;
-
-    const styles = getComputedStyle(element);
-
-    upper = Math.min(upper, element.offsetTop + parseFloat(styles.paddingTop));
-    lower = Math.max(
-      lower,
-      element.offsetTop + element.clientHeight - parseFloat(styles.paddingBottom),
-    );
-  }
-
-  if (upper === Number.MAX_VALUE) return [0, 0];
-
-  return [upper, lower - upper];
-}
-
-function TocThumb({containerRef}: {containerRef: RefObject<HTMLDivElement | null>}) {
-  const thumbRef = useRef<HTMLDivElement>(null);
-  const active = Primitive.useActiveAnchors();
-
-  const update = useCallback(() => {
-    const thumb = thumbRef.current;
-    const container = containerRef.current;
-
-    if (!thumb || !container) return;
-
-    const [top, height] = calc(container, active);
-
-    thumb.style.setProperty("--fd-top", `${top}px`);
-    thumb.style.setProperty("--fd-height", `${height}px`);
-  }, [active, containerRef]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-
-    if (!container) return;
-
-    const observer = new ResizeObserver(update);
-
-    observer.observe(container);
-    update();
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [update, containerRef]);
-
+function TOCItem({active, item}: {active: boolean; item: TOCItemType}) {
   return (
-    <div
-      ref={thumbRef}
-      className="bg-fd-primary absolute inset-s-0 top-(--fd-top) h-(--fd-height) w-px transition-[top,height] ease-linear data-[hidden=true]:opacity-0"
-      data-hidden={active.length === 0}
-    />
-  );
-}
-
-function TOCItem({item}: {item: TOCItemType}) {
-  return (
-    <Primitive.TOCItem
+    <a
+      data-active={active}
       href={item.url}
       className={cn(
-        "prose text-fd-muted-foreground hover:text-fd-accent-foreground data-[active=true]:text-fd-primary scroll-m-4 py-1.5 text-sm wrap-anywhere transition-colors first:pt-0 last:pb-0",
-        item.depth <= 2 && "ps-3",
-        item.depth === 3 && "ps-6",
-        item.depth >= 4 && "ps-8",
+        "flex min-h-6 scroll-m-4 items-center py-0.5 text-[13px] leading-5 wrap-anywhere text-(--docs-fg-subtle) transition-colors duration-150",
+        "hover:text-(--docs-fg) data-[active=true]:font-medium data-[active=true]:text-foreground",
+        "[&_code]:font-mono [&_code]:text-[12px]",
+        item.depth >= 3 && "ps-3",
       )}
     >
       {item.title}
-    </Primitive.TOCItem>
+    </a>
   );
 }
 
 export type TOCItemsProps = ComponentProps<"div">;
 
-export function TOCItems({className, ref, ...props}: TOCItemsProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+/** Flat list of the page's headings; the active one is set in the foreground color. */
+export function TOCItems({className, ...props}: TOCItemsProps) {
   const items = useTOCItems();
+  const active = useActiveHeading();
+  const listRef = useRef<HTMLDivElement>(null);
+  const hasScrolledRef = useRef(false);
+  const activeIndex = items.findIndex((item) => item.url === `#${active}`);
+
+  // Keep the active item centered in the TOC scroll area (the list's parent).
+  useEffect(() => {
+    const list = listRef.current;
+    const container = list?.parentElement;
+    const link = list?.children[activeIndex];
+
+    if (!container || !(link instanceof HTMLElement)) return;
+
+    const offset = link.getBoundingClientRect().top - container.getBoundingClientRect().top;
+
+    container.scrollTo({
+      behavior: hasScrolledRef.current ? "smooth" : "instant",
+      top: container.scrollTop + offset - (container.clientHeight - link.offsetHeight) / 2,
+    });
+    hasScrolledRef.current = true;
+  }, [activeIndex]);
 
   if (items.length === 0) return null;
 
   return (
-    <div className="relative">
-      <TocThumb containerRef={containerRef} />
-      <div
-        ref={mergeRefs(ref, containerRef)}
-        className={cn("border-fd-foreground/10 flex flex-col border-s", className)}
-        {...props}
-      >
-        {items.map((item) => (
-          <TOCItem key={item.url} item={item} />
-        ))}
-      </div>
+    <div ref={listRef} className={cn("flex flex-col", className)} {...props}>
+      {items.map((item, index) => (
+        <TOCItem key={item.url} active={index === activeIndex} item={item} />
+      ))}
     </div>
   );
 }

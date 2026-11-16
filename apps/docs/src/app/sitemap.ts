@@ -3,7 +3,6 @@ import type {MetadataRoute} from "next";
 import {filterExcludedPages} from "@/lib/llms-utils";
 import {LOCALES, absoluteUrl, getSitemapAlternates, localizedPath, stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
-import {getAllShowcases} from "@/showcases";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
@@ -48,15 +47,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   for (const locale of LOCALES) {
-    addPath(paths, "/showcase", locale);
     addPath(paths, "/themes", locale);
 
     for (const page of filterExcludedPages(source.getPages(locale))) {
       addPath(paths, stripLocale(page.url), locale);
-    }
-
-    for (const showcase of getAllShowcases()) {
-      addPath(paths, `/showcase/${showcase.name}`, locale);
     }
   }
 

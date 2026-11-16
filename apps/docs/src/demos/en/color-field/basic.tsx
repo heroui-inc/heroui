@@ -1,15 +1,15 @@
 "use client";
 
-import type {Color} from "@heroui/react";
+import type {Color, ColorFieldProps} from "@heroui/react";
 
 import {ColorField, ColorSwatch, Label, parseColor} from "@heroui/react";
 import {useState} from "react";
 
-export function Basic() {
+export function Basic(props: ColorFieldProps) {
   const [color, setColor] = useState<Color | null>(parseColor("#0485F7"));
 
   return (
-    <ColorField className="w-[280px]" name="color" value={color} onChange={setColor}>
+    <ColorField {...props} className="w-[280px]" name="color" value={color} onChange={setColor}>
       <Label>Color</Label>
       <ColorField.Group>
         <ColorField.Prefix>

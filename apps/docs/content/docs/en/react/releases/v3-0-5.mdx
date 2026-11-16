@@ -11,7 +11,9 @@ github:
 
 Patch release: `Text` is renamed to `Typography` to resolve a `tailwind-merge` collision that silently dropped variant classes. Derived color tokens (`hover`, `soft`, `border-secondary`, …) moved from `@theme inline` aliases into `variables.css` as unprefixed source tokens, so component CSS can reference them directly. Plus Checkbox and Radio border alignment fixes, an `accent-soft-foreground` hover refinement for Calendar, and a new CLI docs page.
 
-⚠️ **Breaking change**: `Text` → `Typography`. The BEM block changes from `text` to `typography` (e.g. `text--body-sm` → `typography--body-sm`).
+<Callout type="warning">
+  **Breaking change**: `Text` → `Typography`. The BEM block changes from `text` to `typography` (e.g. `text--body-sm` → `typography--body-sm`).
+</Callout>
 
 ## Installation
 
@@ -44,7 +46,7 @@ Update to the latest version:
   **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
 </Callout>
 
-## ⚠️ Breaking Changes
+## Breaking Changes
 
 ### `Text` → `Typography`
 

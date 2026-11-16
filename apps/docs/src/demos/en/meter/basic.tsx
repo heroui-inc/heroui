@@ -1,8 +1,10 @@
+import type {MeterProps} from "@heroui/react";
+
 import {Label, Meter} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: MeterProps) {
   return (
-    <Meter aria-label="Storage" className="w-64" value={60}>
+    <Meter {...props} aria-label="Storage" className="w-64">
       <Label>Storage</Label>
       <Meter.Output />
       <Meter.Track>

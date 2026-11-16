@@ -187,13 +187,13 @@ Tailwind CSS spacing scale (matches v2 Spacer values):
 Instead of Spacer components, use `gap` utilities:
 
 ```tsx
-// ✅ Recommended
+// ✓ Recommended
 <div className="flex gap-4">
   <Button>Button 1</Button>
   <Button>Button 2</Button>
 </div>
 
-// ❌ Not recommended
+// ✗ Not recommended
 <div className="flex">
   <Button>Button 1</Button>
   <div className="ml-4"><Button>Button 2</Button></div>
@@ -203,7 +203,7 @@ Instead of Spacer components, use `gap` utilities:
 ### 2. Use Space Utilities for Vertical Lists
 
 ```tsx
-// ✅ Recommended
+// ✓ Recommended
 <div className="space-y-4">
   <div>Item 1</div>
   <div>Item 2</div>
@@ -223,10 +223,10 @@ Instead of Spacer components, use `gap` utilities:
 Apply margin directly to elements instead of using Spacer:
 
 ```tsx
-// ✅ Recommended
+// ✓ Recommended
 <div className="mt-4">Content</div>
 
-// ❌ Not recommended
+// ✗ Not recommended
 <>
   <Spacer y={4} />
   <div>Content</div>
