@@ -1,0 +1,89 @@
+---
+title: RTL 与国际化
+description: 在阿拉伯语、波斯语、希伯来语和乌尔都语等从右到左的语言中使用 HeroUI v3
+icon: globe
+---
+
+HeroUI v3 基于 [React Aria](https://react-aria.adobe.com/) 构建，因此键盘导航、日期与数字格式以及布局方向都会跟随当前语言环境。HeroUI 的样式使用逻辑属性（`ms-*`、`pe-*`、`start-*`、`rounded-s-*`），当文档方向为 `rtl` 时，组件会自动镜像。
+
+## 设置方向
+
+在 `<html>` 元素上设置 `lang` 和 `dir`，并使用 `I18nProvider` 包裹应用，使 React Aria 使用相同的语言环境。`isRTL` 可以判断某个语言环境的书写方向。
+
+```tsx
+import {I18nProvider, isRTL} from "@heroui/react";
+
+const locale = "fa-IR"; // 或 "ar-AE"、"ur-PK"、"he-IL"
+
+export function App({children}) {
+  return (
+    <html dir={isRTL(locale) ? "rtl" : "ltr"} lang={locale}>
+      <body>
+        <I18nProvider locale={locale}>{children}</I18nProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+<Callout type="info">
+  只设置 `dir="rtl"` 会镜像布局，但 React Aria 仍会使用浏览器的语言环境来处理键盘行为和格式化。请同时设置 `dir` 和 `I18nProvider`，保持二者一致。
+</Callout>
+
+服务端渲染的配置请参阅 [框架 → 语言环境设置](/docs/react/getting-started/frameworks)。
+
+## 波斯语、阿拉伯语和乌尔都语
+
+| 语言 | 语言环境 | 方向 | 默认日历 | 默认数字 |
+| --- | --- | --- | --- | --- |
+| 波斯语 | `fa-IR` | RTL | 波斯历（太阳回历） | 波斯数字（`۱۲۳`） |
+| 阿拉伯语 | `ar-AE`、`ar-SA`、`ar-EG` 等 | RTL | 公历 | 因地区而异，阿拉伯数字或拉丁数字 |
+| 乌尔都语 | `ur-PK` | RTL | 公历 | 拉丁数字 |
+| 希伯来语 | `he-IL` | RTL | 公历 | 拉丁数字 |
+
+`Calendar`、`DatePicker`、`DateRangePicker` 等日期组件会使用语言环境的默认日历。使用 `fa-IR` 时，无需额外配置即可显示波斯历。
+
+### 选择日历或数字系统
+
+使用 [Unicode 语言环境扩展](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale) 覆盖默认值：
+
+```tsx
+// 波斯语界面 + 公历
+<I18nProvider locale="fa-IR-u-ca-gregory">…</I18nProvider>
+
+// 阿拉伯语界面 + 伊斯兰民用历
+<I18nProvider locale="ar-AE-u-ca-islamic-civil">…</I18nProvider>
+
+// 波斯语界面 + 拉丁数字
+<I18nProvider locale="fa-IR-u-nu-latn">…</I18nProvider>
+```
+
+无论用户看到的是哪种日历，日期组件的 `onChange` 始终返回与 `value` 或 `defaultValue` 相同日历系统的值（未提供时为公历）。
+
+### 内置文案
+
+React Aria 为阿拉伯语和希伯来语提供了已翻译的无障碍文案（例如 "Next month" 或 "Clear"）。波斯语和乌尔都语目前尚未包含在其翻译集中，这些文案会回退为英文。如需完整翻译，请在组件支持的地方传入自定义的 `aria-label`。
+
+## 编写适配 RTL 的样式
+
+自定义组件时，请优先使用逻辑工具类而非物理工具类，这样你的覆盖样式也会随方向镜像：
+
+| 避免使用 | 推荐使用 |
+| --- | --- |
+| `ml-*` / `mr-*` | `ms-*` / `me-*` |
+| `pl-*` / `pr-*` | `ps-*` / `pe-*` |
+| `left-*` / `right-*` | `start-*` / `end-*` |
+| `rounded-l-*` / `rounded-r-*` | `rounded-s-*` / `rounded-e-*` |
+| `text-left` / `text-right` | `text-start` / `text-end` |
+
+对于没有逻辑等价写法的情况（例如带方向的图标），请使用 Tailwind 的 `rtl:` 变体：
+
+```tsx
+<Icon className="rtl:rotate-180" icon="gravity-ui:chevron-right" />
+```
+
+## 相关链接
+
+- [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — 为子树设置语言环境
+- [`useLocale`](https://react-aria.adobe.com/useLocale) — 读取当前语言环境与方向
+- [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — 日历系统与日期类型
