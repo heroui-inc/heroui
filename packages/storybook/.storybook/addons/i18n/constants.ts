@@ -225,6 +225,18 @@ export const LOCALES = [
     label: "Hebrew",
     value: "he-IL",
   },
+  {
+    country: "Iran",
+    direction: "rtl",
+    label: "Persian",
+    value: "fa-IR",
+  },
+  {
+    country: "Pakistan",
+    direction: "rtl",
+    label: "Urdu",
+    value: "ur-PK",
+  },
 ];
 
 export const DEFAULT_LOCALE = "Auto";
