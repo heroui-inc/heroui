@@ -7,6 +7,7 @@ import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
 import {Geist_Mono, Inter} from "next/font/google";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 
+import {DesignThemeScript} from "@/components/design-theme-script";
 import {PlausibleAnalytics} from "@/components/plausible-analytics";
 import {siteConfig} from "@/config/site";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
@@ -50,6 +51,7 @@ export default async function Layout({
       lang={getLanguageTag(lang)}
     >
       <head>
+        <DesignThemeScript />
         <script
           dangerouslySetInnerHTML={{__html: JSON.stringify(getOrganizationJsonLd())}}
           type="application/ld+json"

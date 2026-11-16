@@ -49,9 +49,9 @@ export const DESIGN_THEMES: DesignThemeOption[] = [
 /**
  * Design theme state shared by the theme pickers.
  *
- * Mounting this hook also re-applies the stored theme and vibrant palette to
- * `<html>`: there is no pre-paint script, so a page must render one picker for a
- * saved theme to load.
+ * `DesignThemeScript` applies the stored theme and vibrant palette to `<html>`
+ * before first paint; mounting this hook applies them again and keeps the
+ * pickers in sync.
  */
 export function useDesignTheme() {
   const [active, setActive] = useState<ThemeId>("default");

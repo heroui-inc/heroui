@@ -30,6 +30,13 @@ const MODE_ICONS = {dark: Moon, light: Sun, system: Display} satisfies Record<Mo
 
 const MODE_LABELS: Record<Mode, string> = {dark: "Dark", light: "Light", system: "System"};
 
+// Before mount, `data-color-mode` (set by `DesignThemeScript` before paint) picks the icon.
+const PRE_MOUNT_ICON_CLASSES: Record<Mode, string> = {
+  dark: "hidden in-data-[color-mode=dark]:block",
+  light: "hidden in-data-[color-mode=light]:block",
+  system: "in-data-[color-mode=dark]:hidden in-data-[color-mode=light]:hidden",
+};
+
 function isMode(value: string | undefined): value is Mode {
   return MODES.includes(value as Mode);
 }
@@ -53,7 +60,15 @@ function ModeToggle() {
           variant="ghost"
           onPress={() => setTheme(next)}
         >
-          <Icon className="size-3.5" />
+          {mounted ? (
+            <Icon className="size-3.5" />
+          ) : (
+            MODES.map((key) => {
+              const ModeIcon = MODE_ICONS[key];
+
+              return <ModeIcon key={key} className={cn("size-3.5", PRE_MOUNT_ICON_CLASSES[key])} />;
+            })
+          )}
         </Button>
       </Tooltip.Trigger>
       <Tooltip.Content placement="bottom">{MODE_LABELS[mode]}</Tooltip.Content>

@@ -25,6 +25,21 @@ export interface DocsLayoutProps {
   sidebar?: {defaultOpenLevel?: number; prefetch?: boolean};
 }
 
+// Centers the active link before paint when it starts out of view. Fumadocs' `useAutoScroll`
+// otherwise scrolls it in after hydration, which shifts the list under the reader.
+const SIDEBAR_SCROLL_SCRIPT = `(() => {
+  const viewport = document.querySelector("#nd-sidebar [data-docs-sidebar-viewport]");
+  const link = viewport && viewport.querySelector('a[data-active="true"]');
+
+  if (!link) return;
+
+  const box = viewport.getBoundingClientRect();
+  const rect = link.getBoundingClientRect();
+
+  if (rect.top >= box.top && rect.bottom <= box.bottom) return;
+  viewport.scrollTop += rect.top - box.top - (box.height - rect.height) / 2;
+})();`;
+
 const ICON_BUTTON =
   "docs-pill docs-pill-segment inline-flex size-8 items-center justify-center [&_svg]:size-4";
 
@@ -54,6 +69,7 @@ export function DocsLayout({
                 <SidebarNav />
               </SidebarViewport>
             </SidebarContent>
+            <script dangerouslySetInnerHTML={{__html: SIDEBAR_SCROLL_SCRIPT}} />
 
             <SidebarDrawer>
               <div className="flex flex-col gap-4 px-1 pt-1.5" data-sidebar-header="">
