@@ -1,4 +1,5 @@
 import {fireEvent, render, screen, setupUser} from "@heroui/testing/helpers";
+import {ButtonContext} from "react-aria-components/Button";
 
 import {Button} from "@/components/button";
 
@@ -211,6 +212,156 @@ describe("Button", () => {
 
       expect(events).toEqual(["click", "submit"]);
       expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it("calls onClick once when Enter keydown is prevented and does not submit", async () => {
+      const events: string[] = [];
+      const onPress = vi.fn();
+      const onSubmit = vi.fn((e: React.FormEvent) => e.preventDefault());
+
+      render(
+        <form onSubmit={onSubmit}>
+          <Button
+            type="submit"
+            onClick={() => events.push("click")}
+            onPress={onPress}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.preventDefault();
+            }}
+          >
+            Submit
+          </Button>
+        </form>,
+      );
+
+      await user.tab();
+      await user.keyboard("{Enter}");
+
+      expect(events).toEqual(["click"]);
+      expect(onPress).toHaveBeenCalledTimes(1);
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("calls onClick once when Space keyup is prevented and does not submit", async () => {
+      const onClick = vi.fn();
+      const onSubmit = vi.fn((e: React.FormEvent) => e.preventDefault());
+
+      render(
+        <form onSubmit={onSubmit}>
+          <Button
+            type="submit"
+            onClick={onClick}
+            onKeyUp={(e) => {
+              if (e.key === " ") e.preventDefault();
+            }}
+          >
+            Submit
+          </Button>
+        </form>,
+      );
+
+      await user.tab();
+      await user.keyboard(" ");
+
+      await vi.waitFor(() => expect(onClick).toHaveBeenCalledTimes(1));
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("does not treat a later mouse click as keyboard activation", async () => {
+      const {button, events} = renderSubmitForm();
+
+      await user.tab();
+      await user.keyboard("{Enter}");
+      await user.click(button);
+
+      expect(events).toEqual(["click", "submit", "click", "submit"]);
+    });
+
+    it("calls onClick once before reset on Enter", async () => {
+      const events: string[] = [];
+
+      render(
+        <form onReset={() => events.push("reset")}>
+          <Button type="reset" onClick={() => events.push("click")}>
+            Reset
+          </Button>
+        </form>,
+      );
+
+      await user.tab();
+      await user.keyboard("{Enter}");
+
+      expect(events).toEqual(["click", "reset"]);
+    });
+
+    it("applies to a submit type set through ButtonContext", async () => {
+      const events: string[] = [];
+      const onSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        events.push("submit");
+      };
+
+      render(
+        <form onSubmit={onSubmit}>
+          <ButtonContext value={{type: "submit"}}>
+            <Button onClick={() => events.push("click")}>Submit</Button>
+          </ButtonContext>
+        </form>,
+      );
+
+      await user.tab();
+      await user.keyboard("{Enter}");
+
+      expect(events).toEqual(["click", "submit"]);
+    });
+
+    it("forwards onKeyDown, onKeyUp and onClickCapture on a submit button", async () => {
+      const onClickCapture = vi.fn();
+      const onKeyDown = vi.fn();
+      const onKeyUp = vi.fn();
+
+      render(
+        <form onSubmit={(e) => e.preventDefault()}>
+          <Button
+            type="submit"
+            onClick={vi.fn()}
+            onClickCapture={onClickCapture}
+            onKeyDown={onKeyDown}
+            onKeyUp={onKeyUp}
+          >
+            Submit
+          </Button>
+        </form>,
+      );
+
+      await user.tab();
+      await user.keyboard("{Enter}");
+
+      expect(onKeyDown).toHaveBeenCalledWith(expect.objectContaining({key: "Enter"}));
+      expect(onKeyUp).toHaveBeenCalledWith(expect.objectContaining({key: "Enter"}));
+      expect(onClickCapture).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not call onClick or submit while pending", async () => {
+      const onClick = vi.fn();
+      const onSubmit = vi.fn((e: React.FormEvent) => e.preventDefault());
+
+      render(
+        <form onSubmit={onSubmit}>
+          <Button isPending type="submit" onClick={onClick}>
+            Submit
+          </Button>
+        </form>,
+      );
+      const button = screen.getByRole("button", {name: "Submit"});
+
+      await user.click(button);
+      button.focus();
+      await user.keyboard("{Enter}");
+      await user.keyboard(" ");
+
+      expect(onClick).not.toHaveBeenCalled();
+      expect(onSubmit).not.toHaveBeenCalled();
     });
 
     it("calls onClick once for each Enter and Space press on a non-submit button", async () => {

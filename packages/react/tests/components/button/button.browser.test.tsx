@@ -56,5 +56,48 @@ describe("Button (browser)", () => {
 
       await expect.poll(() => events).toEqual(["click", "submit"]);
     });
+
+    it("calls onClick once without submitting when the activation key is prevented", async () => {
+      const events: string[] = [];
+      const onSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        events.push("submit");
+      };
+
+      await render(
+        <Form onSubmit={onSubmit}>
+          <Button
+            type="submit"
+            onClick={() => events.push("click")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.preventDefault();
+            }}
+            onKeyUp={(e) => {
+              if (e.key === " ") e.preventDefault();
+            }}
+          >
+            Submit
+          </Button>
+        </Form>,
+      );
+      const button = page.getByRole("button", {name: "Submit"});
+
+      (button.element() as HTMLElement).focus();
+      await userEvent.keyboard("{Enter}");
+      await expect.poll(() => events).toEqual(["click"]);
+
+      await userEvent.keyboard(" ");
+      await expect.poll(() => events).toEqual(["click", "click"]);
+    });
+
+    it("calls onClick once for a mouse click after keyboard activation", async () => {
+      const {button, events} = await renderSubmitForm();
+
+      (button.element() as HTMLElement).focus();
+      await userEvent.keyboard("{Enter}");
+      await button.click();
+
+      await expect.poll(() => events).toEqual(["click", "submit", "click", "submit"]);
+    });
   });
 });
