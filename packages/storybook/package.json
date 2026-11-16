@@ -35,7 +35,7 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
-    "glob": "13.0.6",
+    "glob": "14.0.2",
     "postcss": "8.5.31",
     "storybook": "10.6.3",
     "tailwindcss": "4.3.3",
