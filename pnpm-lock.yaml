@@ -207,6 +207,9 @@ importers:
       '@lglab/react-qr-code':
         specifier: 1.8.1
         version: 1.8.1(react@19.3.1)
+      '@plausible-analytics/tracker':
+        specifier: 0.4.7
+        version: 0.4.7
       '@react-aria/overlays':
         specifier: 3.32.1
         version: 3.32.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -2970,6 +2973,9 @@ packages:
   '@pkgr/core@0.3.6':
     resolution: {integrity: sha512-SEeaJLb3qBNF/OaXnaR1NmmBbFYk1zC0ZH/52fATcRPLFg/p791YrcyFFy44Bo9sLaGuSuLp5Q6axbb/O+v/RA==}
     engines: {node: ^14.18.0 || >=16.0.0}
+
+  '@plausible-analytics/tracker@0.4.7':
+    resolution: {integrity: sha512-majmq1uion4uLo88Tr0eMCMfi7TY00okp3I0Vql9egFaAz6DYCW4bJaV3t5LB3BfcvW5exJpmqzROU0a1b6nAA==}
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -11277,6 +11283,8 @@ snapshots:
       - napi-wasm
 
   '@pkgr/core@0.3.6': {}
+
+  '@plausible-analytics/tracker@0.4.7': {}
 
   '@polka/url@1.0.0-next.29': {}
 
