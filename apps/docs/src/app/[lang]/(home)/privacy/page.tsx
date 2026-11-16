@@ -37,12 +37,14 @@ export default function PrivacyPage() {
       <section>
         <h2>Site analytics and skill installation</h2>
         <p>
-          HeroUI uses Vercel Analytics on the documentation site. When the public{" "}
-          <code>/install</code> route is used to download an agent-skill installer, the production
-          service records an installation event in PostHog with request metadata supplied by the
-          hosting platform: IP address, city, region, postal code, country, user agent, referring
-          page, and requested URL. This page does not claim a retention period or other processing
-          detail that HeroUI has not published.
+          HeroUI uses Vercel Analytics and Plausible on the documentation site. Plausible is web
+          analytics that HeroUI hosts itself on Fly.io: it counts page views, referral sources,
+          outbound link clicks, and your approximate country without cookies, and it does not store
+          your IP address. When the public <code>/install</code> route is used to download an
+          agent-skill installer, the production service records an installation event in PostHog
+          with request metadata supplied by the hosting platform: IP address, city, region, postal
+          code, country, user agent, referring page, and requested URL. This page does not claim a
+          retention period or other processing detail that HeroUI has not published.
         </p>
       </section>
       <section>

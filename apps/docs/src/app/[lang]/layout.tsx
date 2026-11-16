@@ -7,6 +7,7 @@ import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
 import {Geist_Mono, Inter} from "next/font/google";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 
+import {PlausibleAnalytics} from "@/components/plausible-analytics";
 import {siteConfig} from "@/config/site";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
@@ -73,6 +74,7 @@ export default async function Layout({
           </NextProvider>
         </NuqsAdapter>
         <Analytics />
+        <PlausibleAnalytics />
       </body>
     </html>
   );
