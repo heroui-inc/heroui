@@ -127,7 +127,7 @@ export function DocsPage({
         data-full={full}
         id="nd-page"
         className={cn(
-          "flex min-w-0 flex-col gap-4 px-5 pt-8 pb-16 [grid-area:main] md:px-8 md:pt-28",
+          "flex min-w-0 flex-col gap-4 px-5 pt-8 pb-16 [grid-area:main] md:px-8 md:pt-22",
           full && "*:max-w-[1285px]",
         )}
       >
@@ -138,7 +138,7 @@ export function DocsPage({
       {!!tocEnabled &&
         (tocReplace ?? (
           <div
-            className="xl:layout:[--fd-toc-width:var(--docs-toc-width)] sticky top-(--fd-docs-row-3) flex h-[calc(var(--fd-docs-height)-var(--fd-docs-row-3))] w-(--fd-toc-width) flex-col gap-1 ps-4 pe-5 pt-[120px] pb-2 [grid-area:toc] max-xl:hidden"
+            className="xl:layout:[--fd-toc-width:var(--docs-toc-width)] sticky top-(--fd-docs-row-3) flex h-[calc(var(--fd-docs-height)-var(--fd-docs-row-3))] w-(--fd-toc-width) flex-col gap-1 ps-4 pe-5 pt-[96px] pb-2 [grid-area:toc] max-xl:hidden"
             id="nd-toc"
           >
             {tocOptions.header}
