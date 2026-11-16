@@ -308,6 +308,41 @@
   }
 }
 
+/* Search results scroll shadow. fumadocs owns the scrolling `#fd-search-list` and its arrow-key
+   navigation only scrolls that listbox, so it can't be wrapped in <ScrollShadow>. This applies
+   ScrollShadow's scroll-driven fade to it instead, reusing its keyframes from @heroui/styles.
+   Engines without scroll timelines keep the plain list. */
+@supports (animation-timeline: scroll(self)) {
+  .docs-search-list #fd-search-list {
+    --scroll-shadow-size: 32px;
+
+    animation:
+      scroll-shadow-start-fade linear both,
+      scroll-shadow-end-fade linear both;
+    animation-timeline: scroll(self block), scroll(self block);
+    animation-range:
+      0 var(--scroll-shadow-size),
+      calc(100% - var(--scroll-shadow-size)) 100%;
+    /* The second layer keeps the scrollbar lane opaque so the thumb never fades. */
+    mask-image:
+      linear-gradient(
+        180deg,
+        transparent 0,
+        #000 var(--scroll-shadow-start-fade),
+        #000 calc(100% - var(--scroll-shadow-end-fade)),
+        transparent 100%
+      ),
+      linear-gradient(#000, #000);
+    mask-position:
+      left top,
+      right top;
+    mask-repeat: no-repeat;
+    mask-size:
+      100% 100%,
+      8px 100%;
+  }
+}
+
 /* Keep CJK phrases together so they wrap as a whole word instead of breaking between characters. 
    Safe for non-CJK locales since `keep-all` behaves like `normal` for non-CJK text. */
 #nd-sidebar a,
