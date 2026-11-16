@@ -72,6 +72,11 @@ describe("Table (browser)", () => {
       await render(fixture());
       const header = fieldOf("Select all");
 
+      // The pointer stays where an earlier test file left it, which can be over the header
+      // checkbox. Move it off and let the hover fill settle so only the indeterminate exit is seen.
+      await userEvent.hover(page.getByRole("rowheader", {name: "Kate"}));
+      await Promise.all(header.getAnimations({subtree: true}).map(({finished}) => finished));
+
       await userEvent.click(controlOf("Select Kate"));
       expect(header).toHaveAttribute("data-indeterminate", "true");
 
