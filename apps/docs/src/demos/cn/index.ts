@@ -1,6 +1,35 @@
 /* eslint-disable sort-keys, sort-keys-fix/sort-keys-fix */
 import type {DemoItem} from "@/demos";
 
+import {
+  buttonControls,
+  calendarControls,
+  checkboxControls,
+  colorAreaControls,
+  colorFieldControls,
+  colorSliderControls,
+  colorSwatchControls,
+  colorSwatchPickerControls,
+  dateFieldControls,
+  datePickerControls,
+  dateRangePickerControls,
+  inputControls,
+  meterControls,
+  numberFieldControls,
+  progressBarControls,
+  progressCircleControls,
+  radioGroupControls,
+  rangeCalendarControls,
+  searchFieldControls,
+  spinnerControls,
+  switchControls,
+  textAreaControls,
+  textFieldControls,
+  timeFieldControls,
+  toggleButtonControls,
+  toggleButtonGroupControls,
+} from "../controls";
+
 export const demos: Record<string, DemoItem> = {
   "sheet-basic": {
     loader: () => import("./sheet/basic").then((m) => m.Basic),
@@ -392,6 +421,7 @@ export const demos: Record<string, DemoItem> = {
   "button-basic": {
     loader: () => import("./button/basic").then((m) => m.Basic),
     file: "cn/button/basic.tsx",
+    controls: buttonControls,
   },
   "button-variants": {
     loader: () => import("./button/variants").then((m) => m.Variants),
@@ -486,6 +516,7 @@ export const demos: Record<string, DemoItem> = {
   "calendar-basic": {
     loader: () => import("./calendar/basic").then((m) => m.Basic),
     file: "cn/calendar/basic.tsx",
+    controls: calendarControls,
   },
   "calendar-disabled": {
     loader: () => import("./calendar/disabled").then((m) => m.Disabled),
@@ -592,6 +623,7 @@ export const demos: Record<string, DemoItem> = {
   "checkbox-basic": {
     loader: () => import("./checkbox/basic").then((m) => m.Basic),
     file: "cn/checkbox/basic.tsx",
+    controls: checkboxControls,
   },
   "checkbox-variants": {
     loader: () => import("./checkbox/variants").then((m) => m.Variants),
@@ -733,6 +765,7 @@ export const demos: Record<string, DemoItem> = {
   "color-area-basic": {
     loader: () => import("./color-area/basic").then((m) => m.ColorAreaBasic),
     file: "cn/color-area/basic.tsx",
+    controls: colorAreaControls,
   },
   "color-area-with-dots": {
     loader: () => import("./color-area/with-dots").then((m) => m.ColorAreaWithDots),
@@ -763,6 +796,7 @@ export const demos: Record<string, DemoItem> = {
   "color-field-basic": {
     loader: () => import("./color-field/basic").then((m) => m.Basic),
     file: "cn/color-field/basic.tsx",
+    controls: colorFieldControls,
   },
   "color-field-variants": {
     loader: () => import("./color-field/variants").then((m) => m.Variants),
@@ -841,6 +875,7 @@ export const demos: Record<string, DemoItem> = {
   "color-slider-basic": {
     loader: () => import("./color-slider/basic").then((m) => m.Basic),
     file: "cn/color-slider/basic.tsx",
+    controls: colorSliderControls,
   },
   "color-slider-disabled": {
     loader: () => import("./color-slider/disabled").then((m) => m.Disabled),
@@ -878,6 +913,7 @@ export const demos: Record<string, DemoItem> = {
   "color-swatch-basic": {
     loader: () => import("./color-swatch/basic").then((m) => m.ColorSwatchBasic),
     file: "cn/color-swatch/basic.tsx",
+    controls: colorSwatchControls,
   },
   "color-swatch-sizes": {
     loader: () => import("./color-swatch/sizes").then((m) => m.ColorSwatchSizes),
@@ -907,6 +943,7 @@ export const demos: Record<string, DemoItem> = {
   "color-swatch-picker-basic": {
     loader: () => import("./color-swatch-picker/basic").then((m) => m.Basic),
     file: "cn/color-swatch-picker/basic.tsx",
+    controls: colorSwatchPickerControls,
   },
   "color-swatch-picker-variants": {
     loader: () => import("./color-swatch-picker/variants").then((m) => m.Variants),
@@ -1045,6 +1082,7 @@ export const demos: Record<string, DemoItem> = {
   "date-field-basic": {
     loader: () => import("./date-field/basic").then((m) => m.Basic),
     file: "cn/date-field/basic.tsx",
+    controls: dateFieldControls,
   },
   "date-field-with-prefix-icon": {
     loader: () => import("./date-field/with-prefix-icon").then((m) => m.WithPrefixIcon),
@@ -1114,6 +1152,7 @@ export const demos: Record<string, DemoItem> = {
   "date-picker-basic": {
     loader: () => import("./date-picker/basic").then((m) => m.Basic),
     file: "cn/date-picker/basic.tsx",
+    controls: datePickerControls,
   },
   "date-picker-disabled": {
     loader: () => import("./date-picker/disabled").then((m) => m.Disabled),
@@ -1156,6 +1195,7 @@ export const demos: Record<string, DemoItem> = {
   "date-range-picker-basic": {
     loader: () => import("./date-range-picker/basic").then((m) => m.Basic),
     file: "cn/date-range-picker/basic.tsx",
+    controls: dateRangePickerControls,
   },
   "date-range-picker-disabled": {
     loader: () => import("./date-range-picker/disabled").then((m) => m.Disabled),
@@ -1387,6 +1427,7 @@ export const demos: Record<string, DemoItem> = {
   "input-basic": {
     loader: () => import("./input/basic").then((m) => m.Basic),
     file: "cn/input/basic.tsx",
+    controls: inputControls,
   },
   "input-variants": {
     loader: () => import("./input/variants").then((m) => m.Variants),
@@ -1653,6 +1694,7 @@ export const demos: Record<string, DemoItem> = {
   "meter-basic": {
     loader: () => import("./meter/basic").then((m) => m.Basic),
     file: "cn/meter/basic.tsx",
+    controls: meterControls,
   },
   "meter-sizes": {
     loader: () => import("./meter/sizes").then((m) => m.Sizes),
@@ -1735,6 +1777,7 @@ export const demos: Record<string, DemoItem> = {
   "number-field-basic": {
     loader: () => import("./number-field/basic").then((m) => m.Basic),
     file: "cn/number-field/basic.tsx",
+    controls: numberFieldControls,
   },
   "number-field-variants": {
     loader: () => import("./number-field/variants").then((m) => m.Variants),
@@ -1866,6 +1909,7 @@ export const demos: Record<string, DemoItem> = {
   "progress-bar-basic": {
     loader: () => import("./progress-bar/basic").then((m) => m.Basic),
     file: "cn/progress-bar/basic.tsx",
+    controls: progressBarControls,
   },
   "progress-bar-sizes": {
     loader: () => import("./progress-bar/sizes").then((m) => m.Sizes),
@@ -1895,6 +1939,7 @@ export const demos: Record<string, DemoItem> = {
   "progress-circle-basic": {
     loader: () => import("./progress-circle/basic").then((m) => m.Basic),
     file: "cn/progress-circle/basic.tsx",
+    controls: progressCircleControls,
   },
   "progress-circle-sizes": {
     loader: () => import("./progress-circle/sizes").then((m) => m.Sizes),
@@ -1924,6 +1969,7 @@ export const demos: Record<string, DemoItem> = {
   "radio-group-basic": {
     loader: () => import("./radio-group/basic").then((m) => m.Basic),
     file: "cn/radio-group/basic.tsx",
+    controls: radioGroupControls,
   },
   "radio-group-horizontal": {
     loader: () => import("./radio-group/horizontal").then((m) => m.Horizontal),
@@ -1973,6 +2019,7 @@ export const demos: Record<string, DemoItem> = {
   "range-calendar-basic": {
     loader: () => import("./range-calendar/basic").then((m) => m.Basic),
     file: "cn/range-calendar/basic.tsx",
+    controls: rangeCalendarControls,
   },
   "range-calendar-disabled": {
     loader: () => import("./range-calendar/disabled").then((m) => m.Disabled),
@@ -2088,6 +2135,7 @@ export const demos: Record<string, DemoItem> = {
   "search-field-basic": {
     loader: () => import("./search-field/basic").then((m) => m.Basic),
     file: "cn/search-field/basic.tsx",
+    controls: searchFieldControls,
   },
   "search-field-variants": {
     loader: () => import("./search-field/variants").then((m) => m.Variants),
@@ -2348,6 +2396,7 @@ export const demos: Record<string, DemoItem> = {
   "spinner-basic": {
     loader: () => import("./spinner/basic").then((m) => m.SpinnerBasic),
     file: "cn/spinner/basic.tsx",
+    controls: spinnerControls,
   },
   "spinner-colors": {
     loader: () => import("./spinner/colors").then((m) => m.SpinnerColors),
@@ -2386,6 +2435,7 @@ export const demos: Record<string, DemoItem> = {
   "switch-basic": {
     loader: () => import("./switch/basic").then((m) => m.Basic),
     file: "cn/switch/basic.tsx",
+    controls: switchControls,
   },
   "switch-sizes": {
     loader: () => import("./switch/sizes").then((m) => m.Sizes),
@@ -2590,6 +2640,7 @@ export const demos: Record<string, DemoItem> = {
   "textarea-basic": {
     loader: () => import("./textarea/basic").then((m) => m.Basic),
     file: "cn/textarea/basic.tsx",
+    controls: textAreaControls,
   },
   "textarea-variants": {
     loader: () => import("./textarea/variants").then((m) => m.Variants),
@@ -2619,6 +2670,7 @@ export const demos: Record<string, DemoItem> = {
   "textfield-basic": {
     loader: () => import("./textfield/basic").then((m) => m.Basic),
     file: "cn/textfield/basic.tsx",
+    controls: textFieldControls,
   },
   "textfield-on-surface": {
     loader: () => import("./textfield/on-surface").then((m) => m.OnSurface),
@@ -2672,6 +2724,7 @@ export const demos: Record<string, DemoItem> = {
   "time-field-basic": {
     loader: () => import("./time-field/basic").then((m) => m.Basic),
     file: "cn/time-field/basic.tsx",
+    controls: timeFieldControls,
   },
   "time-field-with-prefix-icon": {
     loader: () => import("./time-field/with-prefix-icon").then((m) => m.WithPrefixIcon),
@@ -2778,6 +2831,7 @@ export const demos: Record<string, DemoItem> = {
   "toggle-button-basic": {
     loader: () => import("./toggle-button/basic").then((m) => m.Basic),
     file: "cn/toggle-button/basic.tsx",
+    controls: toggleButtonControls,
   },
   "toggle-button-variants": {
     loader: () => import("./toggle-button/variants").then((m) => m.Variants),
@@ -2807,6 +2861,7 @@ export const demos: Record<string, DemoItem> = {
   "toggle-button-group-basic": {
     loader: () => import("./toggle-button-group/basic").then((m) => m.Basic),
     file: "cn/toggle-button-group/basic.tsx",
+    controls: toggleButtonGroupControls,
   },
   "toggle-button-group-sizes": {
     loader: () => import("./toggle-button-group/sizes").then((m) => m.Sizes),

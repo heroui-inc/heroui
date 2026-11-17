@@ -4,7 +4,6 @@
   "icon": "rocket",
   "root": true,
   "pages": [
-    "---Overview---",
     "index",
     "---Releases---",
     "v1-0-11",

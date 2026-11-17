@@ -4,7 +4,6 @@
   "root": true,
   "icon": "code-pull-request-arrow-right",
   "pages": [
-    "---Overview---",
     "index",
     "---Migration for Agents---",
     "(migration-for-agents)/mcp-server",

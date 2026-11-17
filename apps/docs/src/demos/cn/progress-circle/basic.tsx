@@ -1,8 +1,10 @@
+import type {ProgressCircleProps} from "@heroui/react";
+
 import {ProgressCircle} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: ProgressCircleProps) {
   return (
-    <ProgressCircle aria-label="加载中" value={60}>
+    <ProgressCircle {...props} aria-label="加载中">
       <ProgressCircle.Track>
         <ProgressCircle.TrackCircle />
         <ProgressCircle.FillCircle />

@@ -1,8 +1,10 @@
+import type {RadioGroupProps} from "@heroui/react";
+
 import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: RadioGroupProps) {
   return (
-    <RadioGroup defaultValue="premium" name="plan">
+    <RadioGroup {...props} defaultValue="premium" name="plan">
       <Label>选择套餐</Label>
       <Description>选择最适合你的套餐</Description>
       <Radio value="basic">

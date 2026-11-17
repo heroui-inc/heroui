@@ -1,5 +1,3 @@
-export {ComponentItem} from "./component-item";
-export {ComponentsCategory} from "./components-category";
 export {DeepLinkQRCode} from "./deep-link-qr-code";
 export {DownloadAppBanner} from "./download-app-banner";
 export {ImageHeroView} from "./image-hero-view";

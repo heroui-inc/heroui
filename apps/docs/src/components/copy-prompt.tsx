@@ -51,15 +51,16 @@ export function CopyPrompt({children, className, icon = "sparkles-fill", prompt}
   return (
     <div
       className={cn(
-        "flex gap-2 rounded-xl border border-border bg-surface py-3 ps-1 pe-3 text-sm text-surface-foreground shadow-surface",
+        // Flat note like the MDX Callout (colored icon, no border or shadow), on a
+        // lighter fill so it reads as a tip rather than a panel.
+        "flex items-center gap-3 rounded-2xl bg-(--docs-card)/60 py-3 ps-4 pe-3 text-sm leading-6",
         className,
       )}
     >
-      <div className="flex gap-2">
-        <div className="w-0.5 self-stretch rounded-sm bg-accent/50" role="none" />
-        <Iconify className="mt-1 size-4 shrink-0 text-accent" icon={icon} />
-      </div>
-      <div className="prose-no-margin min-w-0 flex-1 leading-relaxed">{children}</div>
+      <span aria-hidden className="flex h-6 shrink-0 items-center self-start">
+        <Iconify className="size-4 text-accent" icon={icon} />
+      </span>
+      <div className="prose-no-margin min-w-0 flex-1 text-(--docs-fg-muted)">{children}</div>
       <Button
         aria-label={checked ? dict.ariaLabelCopied : dict.ariaLabelCopy}
         className="shrink-0"

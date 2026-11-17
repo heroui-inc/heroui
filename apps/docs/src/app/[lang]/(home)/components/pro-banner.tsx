@@ -24,7 +24,7 @@ const PRO_API_URL = env.NEXT_PUBLIC_PRO_API_URL;
 const DISCOUNT_CAMPAIGN = "launch_discount";
 const DEFAULT_CAMPAIGN = "pro_default";
 
-const getProHref = (medium: string, campaign: string) =>
+export const getProHref = (medium: string, campaign: string) =>
   `${PRO_URL}?utm_source=heroui.com&utm_medium=${medium}&utm_campaign=${campaign}`;
 
 const withPercent = (template: string, percent: number | undefined) =>
@@ -107,6 +107,15 @@ function useCountdown(endsAt: string | null) {
   if (!endsAt || countdown?.endsAt !== endsAt) return null;
 
   return countdown.time;
+}
+
+/** Whether a Pro discount is running, and the UTM campaign that goes with it. */
+export function useProOffer() {
+  const discount = useProDiscount();
+  const time = useCountdown(discount?.endsAt ?? null);
+  const hasLiveDiscount = Boolean(discount && time);
+
+  return {campaign: hasLiveDiscount ? DISCOUNT_CAMPAIGN : DEFAULT_CAMPAIGN, hasLiveDiscount};
 }
 
 export function HeaderBanner() {
@@ -233,7 +242,7 @@ export function ProBanner() {
       {visible ? (
         <motion.div
           animate={{opacity: 1, scale: 1, y: 0}}
-          className="fixed start-6 bottom-6 z-50 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl"
+          className="fixed end-6 bottom-6 z-50 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl"
           exit={{opacity: 0, scale: 0.95, transition: {duration: 0.2, ease: "easeIn"}, y: 20}}
           initial={{opacity: 0, scale: 0.95, y: 20}}
           transition={{damping: 25, delay: 0.5, stiffness: 300, type: "spring"}}

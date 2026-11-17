@@ -66,7 +66,7 @@ See the [Full Migration Guide](/docs/react/migration/full-migration#step-5-updat
 <include>../index.mdx#step-6-component-migration-reference</include>
 
 <Callout type="info">
-  **Removed/In-Progress/Planned Components**: For components marked as ❌ Removed, 🔄 In Progress, or 📋 Planned, replace them with standard HTML elements during migration. You can migrate back to HeroUI components once they become available in v3.
+  **Removed/In-Progress/Planned Components**: For components marked as <StatusCross>Removed</StatusCross>, <InlineIcon icon="arrows-rotate-right" /> In Progress, or <InlineIcon icon="list-check" /> Planned, replace them with standard HTML elements during migration. You can migrate back to HeroUI components once they become available in v3.
 </Callout>
 
 Use the `get_component_migration_guides` MCP tool to fetch detailed guides for each component.
@@ -94,12 +94,14 @@ See the [Full Migration Guide](/docs/react/migration/full-migration#step-9-styli
 1. **Preparation Stage**: Migrate all component code while still on v2 dependencies (code will be broken)
 2. **Switch Stage**: Update dependencies to v3 and fix any remaining issues
 
-**⚠️ CRITICAL: Don't build to check for errors during migration**
+<Callout type="warning">
+  **CRITICAL: Don't build to check for errors during migration**
 
-- Use **typecheck** (e.g., `tsc --noEmit`) if available to check TypeScript errors
-- Use **lint** (e.g., `eslint`, `biome check`) if available to check code quality
-- **DO NOT** run build commands (e.g., `npm run build`, `next build`, `vite build`)
-- **DO NOT** attempt to start/run the project during migration
+  - Use **typecheck** (e.g., `tsc --noEmit`) if available to check TypeScript errors
+  - Use **lint** (e.g., `eslint`, `biome check`) if available to check code quality
+  - **DO NOT** run build commands (e.g., `npm run build`, `next build`, `vite build`)
+  - **DO NOT** attempt to start/run the project during migration
+</Callout>
 
 ### Phase 0: Setup and Analysis
 
@@ -128,7 +130,7 @@ These steps can be done before switching HeroUI dependencies and won't break the
 2. **Update Tailwind CSS to v4** (if not already)
    - This can be done before switching HeroUI
 
-3. **🛑 CHECKPOINT: Stop and wait for user approval**
+3. **<InlineIcon icon="hand-stop" /> CHECKPOINT: Stop and wait for user approval**
    - **DO NOT proceed to next phase automatically**
    - Explain configuration changes
    - Wait for explicit user approval before continuing
@@ -153,7 +155,7 @@ For each component group in the migration plan:
    - Check if dependencies are already migrated
    - Migrate shared code as needed
 
-4. **🛑 CHECKPOINT: Stop and wait for user approval**
+4. **<InlineIcon icon="hand-stop" /> CHECKPOINT: Stop and wait for user approval**
    - **DO NOT proceed to next phase automatically**
    - Summarize what was migrated in this phase
    - Wait for explicit user approval before continuing
@@ -180,7 +182,7 @@ For each component group in the migration plan:
    - Fix any linting errors
    - Note: Do not attempt to build or run the project during migration
 
-3. **🛑 CHECKPOINT: Stop and wait for user approval**
+3. **<InlineIcon icon="hand-stop" /> CHECKPOINT: Stop and wait for user approval**
    - **DO NOT proceed to styling automatically**
    - Verify components work correctly
    - Wait for explicit user approval before styling migration

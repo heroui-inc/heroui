@@ -57,7 +57,7 @@ To avoid this, keep the state of interactive components (like text inputs) insid
 ### Example Pattern
 
 ```tsx
-// ❌ Problematic: State in parent causes re-renders that affect portal content
+// ✗ Problematic: State in parent causes re-renders that affect portal content
 function ParentComponent() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [inputValue, setInputValue] = useState(""); // State in parent
@@ -78,7 +78,7 @@ function ParentComponent() {
   );
 }
 
-// ✅ Correct: State managed inside separate component within portal
+// ✓ Correct: State managed inside separate component within portal
 function ParentComponent() {
   const [dialogOpen, setDialogOpen] = useState(false);
   

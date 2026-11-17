@@ -8,6 +8,15 @@ import {cn} from "@/utils/cn";
 
 import {CodeBlock} from "./codeblock";
 
+/** Raw source of a demo file (`DemoItem.file`), or `undefined` if it can't be read. */
+export async function readDemoSource(file: string): Promise<string | undefined> {
+  try {
+    return await fs.readFile(path.join(process.cwd(), "src", "demos", file), "utf-8");
+  } catch {
+    return undefined;
+  }
+}
+
 export async function ComponentSource({
   className,
   // TODO: Disclosure is not ready yet, so we need to use collapsible for now
@@ -42,15 +51,7 @@ export async function ComponentSource({
   }
 
   if (src) {
-    try {
-      const file = await fs.readFile(path.join(process.cwd(), "src", "demos", src), "utf-8");
-
-      code = file;
-    } catch (error) {
-      // Failed to read demo file
-
-      return null;
-    }
+    code = await readDemoSource(src);
   }
 
   if (!code) {

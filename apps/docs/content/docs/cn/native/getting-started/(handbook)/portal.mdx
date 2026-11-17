@@ -57,7 +57,7 @@ function CustomNotification() {
 ### 示例模式
 
 ```tsx
-// ❌ 问题：父级状态导致重渲染，影响Portal内内容
+// ✗ 问题：父级状态导致重渲染，影响Portal内内容
 function ParentComponent() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [inputValue, setInputValue] = useState(""); // State in parent
@@ -78,7 +78,7 @@ function ParentComponent() {
   );
 }
 
-// ✅ 正确：在Portal内的独立组件中管理状态
+// ✓ 正确：在Portal内的独立组件中管理状态
 function ParentComponent() {
   const [dialogOpen, setDialogOpen] = useState(false);
   

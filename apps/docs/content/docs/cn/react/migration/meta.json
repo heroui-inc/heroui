@@ -4,7 +4,6 @@
   "root": true,
   "icon": "code-pull-request-arrow-right",
   "pages": [
-    "---概述---",
     "index",
     "---面向 Agent 的迁移---",
     "(migration-for-agents)/mcp-server",

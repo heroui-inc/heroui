@@ -1,8 +1,10 @@
+import type {SwitchProps} from "@heroui/react";
+
 import {Switch} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: SwitchProps) {
   return (
-    <Switch>
+    <Switch {...props}>
       <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />

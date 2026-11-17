@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      // The docs import @heroui/react and @heroui/styles from source (their package exports point
+      // at `src` and the committed CSS), so their dist builds don't need to run first.
+      "dependsOn": [],
+      // Every docs build differs by commit, and its output (`.next`, with Next's own cache) is too
+      // large for the remote cache (413), so caching it only adds archive and upload time.
+      "cache": false
+    }
+  }
+}
