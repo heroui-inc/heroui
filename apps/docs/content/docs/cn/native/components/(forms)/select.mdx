@@ -180,7 +180,7 @@ Select 通过复合子组件构建下拉选择界面。
   <Select.Trigger>...</Select.Trigger>
   <Select.Portal>
     <Select.Overlay />
-    <Select.Content presentation="bottom-sheet" snapPoints={['35%']}>
+    <Select.Content presentation="bottom-sheet" detents={[0.35]}>
       <Select.Item value="1" label="项 1" />
       <Select.Item value="2" label="项 2" />
     </Select.Content>
@@ -606,12 +606,16 @@ Select 根级动画配置，可为：
 
 ### Select.Content（底部抽屉呈现）
 
-| prop                        | type               | default | description                                      |
-| --------------------------- | ------------------ | ------- | ------------------------------------------------ |
-| `children`                  | `ReactNode`        | -       | 底部抽屉内容                                     |
-| `presentation`              | `'bottom-sheet'`   | -       | 呈现模式                                         |
-| `contentContainerClassName` | `string`           | -       | 内容容器额外 class                               |
-| `...BottomSheetProps`       | `BottomSheetProps` | -       | 支持 `@gorhom/bottom-sheet` 的全部属性           |
+| prop                        | type                                 | default    | description                                                                    |
+| --------------------------- | ------------------------------------ | ---------- | ------------------------------------------------------------------------------ |
+| `children`                  | `ReactNode`                          | -          | 底部弹层内容                                                                   |
+| `presentation`              | `'bottom-sheet'`                     | -          | 呈现模式，须为 `bottom-sheet` 并与 Select.Root 的 presentation 一致（必填）          |
+| `detents`                   | `('auto' \| 'peek' \| number)[]`     | `['auto']` | 弹层可停留的尺寸，从小到大排列，最多 3 个                                      |
+| `contentContainerClassName` | `string`                             | -          | 内容容器额外 class                                                             |
+| `scrollableRef`             | `RefObject<ScrollViewInstance \| …>` | -          | 弹层内滚动视图的 ref                                                           |
+| `...BottomSheetProps`       | `BottomSheetProps`                   | -          | 支持 [`BottomSheet`](/docs/native/components/bottom-sheet) 的全部属性，`name` 与 TrueSheet 自身的 `presentation` 除外 |
+
+Select 打开时呈现弹层，关闭时收起弹层。以原生方式关闭弹层（向下拖动、点击遮暗区域、Android 返回键）会关闭 Select。需要安装 `@lodev09/react-native-true-sheet`。
 
 ### Select.Content（对话框呈现）
 
@@ -650,7 +654,7 @@ Select 根级动画配置，可为：
 
 ### Select.Close
 
-`Select.Close` 继承 [CloseButton](./close-button)，按下时自动关闭选择器。
+`Select.Close` 继承 [CloseButton](/docs/native/components/close-button)，按下时自动关闭选择器。
 
 ### Select.ListLabel
 
@@ -820,3 +824,5 @@ const insets = useSafeAreaInsets();
   ...
 </Select.Content>;
 ```
+
+完整示例请参见 `example/src/app/(home)/components/select-native-modal.tsx`。

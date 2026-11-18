@@ -157,7 +157,7 @@ Control the width of the popover content using the `width` prop.
 </Popover>;
 ```
 
-### Bottom Sheet Presentation
+### BottomSheet Presentation
 
 Use bottom sheet presentation for mobile-optimized interaction patterns.
 
@@ -337,15 +337,15 @@ Animation configuration for popover root component. Can be:
 
 ### Popover.Portal
 
-| prop                       | type        | default | description                                                                                                                   |
-| -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `children`                 | `ReactNode` | -       | The portal content (required)                                                                                                 |
-| `disableFullWindowOverlay` | `boolean`   | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
-| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
-| `hostName`                 | `string`    | -       | Optional name of the host element for the portal                                                                              |
-| `forceMount`               | `boolean`   | -       | Whether to force mount the component in the DOM                                                                               |
-| `className`                | `string`    | -       | Additional CSS classes for the portal container                                                                               |
-| `...ViewProps`             | `ViewProps` | -       | All standard React Native View props are supported                                                                            |
+| prop                                         | type        | default | description                                                                                                                                                                                                      |
+| -------------------------------------------- | ----------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`                                   | `ReactNode` | -       | The portal content (required)                                                                                                                                                                                    |
+| `disableFullWindowOverlay`                   | `boolean`   | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals                                                                                    |
+| `unstable_accessibilityContainerViewIsModal` | `boolean`   | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
+| `hostName`                                   | `string`    | -       | Optional name of the host element for the portal                                                                                                                                                                 |
+| `forceMount`                                 | `boolean`   | -       | Whether to force mount the component in the DOM                                                                                                                                                                  |
+| `className`                                  | `string`    | -       | Additional CSS classes for the portal container                                                                                                                                                                  |
+| `...ViewProps`                               | `ViewProps` | -       | All standard React Native View props are supported                                                                                                                                                               |
 
 ### Popover.Overlay
 
@@ -395,18 +395,18 @@ Animation configuration for popover overlay component. Can be:
 | `asChild`                 | `boolean`                                        | `false`         | Whether to render as a child element                                                                    |
 | `...Animated.ViewProps`   | `Animated.ViewProps`                             | -               | All Reanimated Animated.View props are supported                                                        |
 
-### Popover.Content (Bottom Sheet Presentation)
+### Popover.Content (BottomSheet Presentation)
 
-| prop                        | type                   | default | description                                                                                    |
-| --------------------------- | ---------------------- | ------- | ---------------------------------------------------------------------------------------------- |
-| `children`                  | `ReactNode`            | -       | The bottom sheet content                                                                       |
-| `presentation`              | `'bottom-sheet'`       | -       | Presentation mode - must be 'bottom-sheet' and match Popover.Root presentation prop (required) |
-| `contentContainerClassName` | `string`               | -       | Additional CSS classes for the content container                                               |
-| `contentContainerProps`     | `BottomSheetViewProps` | -       | Props for the content container                                                                |
-| `enablePanDownToClose`      | `boolean`              | `true`  | Whether pan down gesture closes the sheet                                                      |
-| `backgroundStyle`           | `ViewStyle`            | -       | Style for the bottom sheet background                                                          |
-| `handleIndicatorStyle`      | `ViewStyle`            | -       | Style for the bottom sheet handle indicator                                                    |
-| `...BottomSheetProps`       | `BottomSheetProps`     | -       | All @gorhom/bottom-sheet props are supported                                                   |
+| prop                        | type                                 | default    | description                                                                                                 |
+| --------------------------- | ------------------------------------ | ---------- | ----------------------------------------------------------------------------------------------------------- |
+| `children`                  | `ReactNode`                          | -          | The bottom sheet content                                                                                    |
+| `presentation`              | `'bottom-sheet'`                     | -          | Presentation mode - must be 'bottom-sheet' and match Popover.Root presentation prop (required)              |
+| `detents`                   | `('auto' \| 'peek' \| number)[]`     | `['auto']` | Sizes the sheet can rest at, smallest first, up to 3                                                        |
+| `contentContainerClassName` | `string`                             | -          | Additional CSS classes for the content container                                                            |
+| `scrollableRef`             | `RefObject<ScrollViewInstance \| …>` | -          | Ref of a scroll view inside the sheet                                                                       |
+| `...BottomSheetProps`       | `BottomSheetProps`                   | -          | All [`BottomSheet`](/docs/native/components/bottom-sheet) props except `name` and TrueSheet's own `presentation` |
+
+The sheet is presented when the Popover opens and dismissed when it closes. Dismissing the sheet natively (dragging it down, tapping the dimmed area, Android back) closes the Popover. Requires `@lodev09/react-native-true-sheet`.
 
 #### PopupPopoverContentAnimation
 
@@ -440,7 +440,7 @@ Animation configuration for popover content component (popover presentation). Ca
 
 ### Popover.Close
 
-Popover.Close extends [CloseButton](./close-button) and automatically handles popover dismissal when pressed.
+Popover.Close extends [CloseButton](/docs/native/components/close-button) and automatically handles popover dismissal when pressed.
 
 ### Popover.Title
 
@@ -530,3 +530,5 @@ const insets = useSafeAreaInsets();
   ...
 </Popover.Content>;
 ```
+
+See `example/src/app/(home)/components/popover-native-modal.tsx` for a complete example.

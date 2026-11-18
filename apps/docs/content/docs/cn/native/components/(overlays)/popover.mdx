@@ -396,16 +396,16 @@ export default function PopoverExample() {
 
 ### Popover.Content（底部抽屉呈现）
 
-| prop                        | type                   | default | description                                                                                    |
-| --------------------------- | ---------------------- | ------- | ---------------------------------------------------------------------------------------------- |
-| `children`                  | `ReactNode`            | -       | 底部抽屉内容                                                                                   |
-| `presentation`              | `'bottom-sheet'`       | -       | 呈现模式，须为 `bottom-sheet` 并与根一致（必填）                                               |
-| `contentContainerClassName` | `string`               | -       | 内容容器额外 class                                                                             |
-| `contentContainerProps`     | `BottomSheetViewProps` | -       | 内容容器属性                                                                                   |
-| `enablePanDownToClose`      | `boolean`              | `true`  | 是否允许下滑关闭                                                                               |
-| `backgroundStyle`           | `ViewStyle`            | -       | 底部抽屉背景样式                                                                               |
-| `handleIndicatorStyle`      | `ViewStyle`            | -       | 把手指示器样式                                                                                 |
-| `...BottomSheetProps`       | `BottomSheetProps`     | -       | 支持 `@gorhom/bottom-sheet` 的全部属性                                                         |
+| prop                        | type                                 | default    | description                                                                    |
+| --------------------------- | ------------------------------------ | ---------- | ------------------------------------------------------------------------------ |
+| `children`                  | `ReactNode`                          | -          | 底部弹层内容                                                                   |
+| `presentation`              | `'bottom-sheet'`                     | -          | 呈现模式，须为 `bottom-sheet` 并与 Popover.Root 的 presentation 一致（必填）          |
+| `detents`                   | `('auto' \| 'peek' \| number)[]`     | `['auto']` | 弹层可停留的尺寸，从小到大排列，最多 3 个                                      |
+| `contentContainerClassName` | `string`                             | -          | 内容容器额外 class                                                             |
+| `scrollableRef`             | `RefObject<ScrollViewInstance \| …>` | -          | 弹层内滚动视图的 ref                                                           |
+| `...BottomSheetProps`       | `BottomSheetProps`                   | -          | 支持 [`BottomSheet`](/docs/native/components/bottom-sheet) 的全部属性，`name` 与 TrueSheet 自身的 `presentation` 除外 |
+
+Popover 打开时呈现弹层，关闭时收起弹层。以原生方式关闭弹层（向下拖动、点击遮暗区域、Android 返回键）会关闭 Popover。需要安装 `@lodev09/react-native-true-sheet`。
 
 #### PopupPopoverContentAnimation
 
@@ -439,7 +439,7 @@ export default function PopoverExample() {
 
 ### Popover.Close
 
-`Popover.Close` 继承 [CloseButton](./close-button)，按下时自动关闭浮层。
+`Popover.Close` 继承 [CloseButton](/docs/native/components/close-button)，按下时自动关闭浮层。
 
 ### Popover.Title
 
@@ -529,3 +529,5 @@ const insets = useSafeAreaInsets();
   ...
 </Popover.Content>;
 ```
+
+完整示例请参见 `example/src/app/(home)/components/popover-native-modal.tsx`。
