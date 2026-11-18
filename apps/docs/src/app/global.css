@@ -125,6 +125,8 @@
   --docs-code-inline: color-mix(in oklab, var(--foreground) 11%, var(--background));
   --docs-card: color-mix(in oklab, var(--foreground) 6.5%, var(--background));
   --docs-promo: color-mix(in oklab, var(--foreground) 10%, var(--background));
+  /* Demo and card frames; --docs-card's step is too faint around a page-background stage. */
+  --docs-demo: color-mix(in oklab, var(--foreground) 10%, var(--background));
   --docs-track: color-mix(in oklab, var(--foreground) 6%, var(--background));
   --docs-popover: color-mix(in oklab, var(--foreground) 8%, var(--background));
   --docs-search-footer: color-mix(in oklab, var(--foreground) 5%, var(--background));
