@@ -1,5 +1,6 @@
 "use client";
 
+import type {DemoFrameSize} from "./demo-frame";
 import type {FC} from "react";
 
 import {ArrowRotateLeft, VolumeFill, VolumeSlashFill} from "@gravity-ui/icons";
@@ -9,6 +10,7 @@ import {useIntersectionObserver} from "usehooks-ts";
 
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 
+import {DemoFrame} from "./demo-frame";
 import {Iconify} from "./iconify";
 
 interface VideoPlayerProps {
@@ -20,7 +22,10 @@ interface VideoPlayerProps {
   width?: number;
   height?: number;
   controls?: boolean;
+  /** Classes for the `<video>` element. */
   className?: string;
+  /** Thickness of the demo frame around the video. */
+  frameSize?: DemoFrameSize;
   onPlayingChange?: (isPlaying: boolean) => void;
 }
 
@@ -28,6 +33,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
   autoPlay = true,
   className,
   controls = false,
+  frameSize,
   height,
   muted = false,
   onPlayingChange,
@@ -141,9 +147,11 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
   }, [isPlaying]);
 
   return (
-    <div
-      className="not-prose relative z-1 aspect-video w-full overflow-hidden rounded-xl border border-separator"
+    <DemoFrame
+      className="not-prose relative z-1 w-full"
       data-playing={isPlaying}
+      size={frameSize}
+      stageClassName="aspect-video"
     >
       {isLoading ? (
         <Spinner
@@ -226,6 +234,6 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         onPause={handlePause}
         onPlay={handlePlay}
       />
-    </div>
+    </DemoFrame>
   );
 };

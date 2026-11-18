@@ -1,6 +1,7 @@
 "use client";
 
 import type {NativeQRPreviewTarget} from "./qr-preview-popover/target";
+import type {DemoFrameSize} from "@/components/demo-frame";
 
 import {cn} from "@heroui/react";
 import {useTheme} from "next-themes";
@@ -64,6 +65,11 @@ interface VideoPlayerViewBaseProps {
    * Optional extra class names applied to the outer wrapper.
    */
   className?: string;
+  /**
+   * Thickness of the demo frame around the video.
+   * @default "md"
+   */
+  frameSize?: DemoFrameSize;
 }
 
 /**
@@ -83,6 +89,7 @@ export const VideoPlayerView = (props: VideoPlayerViewProps) => {
     autoPlay,
     className,
     controls,
+    frameSize,
     height = 300,
     playMode,
     poster,
@@ -105,6 +112,7 @@ export const VideoPlayerView = (props: VideoPlayerViewProps) => {
       <VideoPlayer
         autoPlay={autoPlay}
         controls={controls}
+        frameSize={frameSize}
         height={height}
         playMode={playMode}
         poster={poster}
