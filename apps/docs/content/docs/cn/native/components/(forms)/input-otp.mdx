@@ -1,6 +1,7 @@
 ---
 title: InputOTP 一次性密码输入框
 description: 用于输入一次性验证码（OTP）的输入组件，支持分格、动画与校验。
+icon: updated
 links:
   source_native: input-otp/input-otp.tsx
   styles_native: input-otp/input-otp.styles.ts
@@ -198,33 +199,9 @@ import { InputOTP, REGEXP_ONLY_CHARS } from 'heroui-native';
 </InputOTP>
 ```
 
-### 在底部抽屉内
+### 在 BottomSheet 内
 
-在 `BottomSheet` 中渲染 `InputOTP` 时，使用 `useBottomSheetAwareHandlers` 返回的 `onFocus` / `onBlur` 传给 `InputOTP`，以正确处理键盘避让。
-
-```tsx
-import { InputOTP, useBottomSheetAwareHandlers } from 'heroui-native';
-
-const BottomSheetOTPInput = () => {
-  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
-
-  return (
-    <InputOTP maxLength={6} onFocus={onFocus} onBlur={onBlur}>
-      <InputOTP.Group>
-        <InputOTP.Slot index={0} />
-        <InputOTP.Slot index={1} />
-        <InputOTP.Slot index={2} />
-      </InputOTP.Group>
-      <InputOTP.Separator />
-      <InputOTP.Group>
-        <InputOTP.Slot index={3} />
-        <InputOTP.Slot index={4} />
-        <InputOTP.Slot index={5} />
-      </InputOTP.Group>
-    </InputOTP>
-  );
-};
-```
+`BottomSheet` 会以原生方式随键盘移动，因此其中的 `InputOTP` 无需额外的处理函数。如果弹层内容可滚动，请将滚动视图的 ref 传给弹层的 `scrollableRef`，使聚焦的输入框保持在键盘上方。
 
 ## 示例
 
@@ -296,7 +273,6 @@ export default function InputOTPExample() {
 | `children`                 | `React.ReactNode`             | -           | 子节点                                                                                     |
 | `className`                | `string`                      | -           | 根容器额外 class                                                                           |
 | `style`                    | `PressableProps['style']`     | -           | 传给容器 `Pressable` 的样式                                                                |
-| `isBottomSheetAware`       | `boolean`                     | `true`      | 在 `BottomSheet` 内是否自动处理键盘相关状态；设为 `false` 可关闭                           |
 | `animation`                | `"disable-all" \| undefined`  | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级全部动画                                         |
 
 ### InputOTP.Group

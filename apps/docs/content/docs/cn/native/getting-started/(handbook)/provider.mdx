@@ -177,6 +177,8 @@ const config: HeroUINativeConfig = {
     },
     // 开始淡出透明度前可见 toast 的最大数量
     maxVisibleToasts: 3,
+    // 可选：同时保留的 toast 最大数量；较早的 toast 会被关闭
+    // maxToasts: 1,
     // 用于包裹 toast 内容的自定义包裹函数
     contentWrapper: (children) => (
       <KeyboardAvoidingView
@@ -271,6 +273,7 @@ const config: HeroUINativeConfig = {
       right: 12,
     },
     maxVisibleToasts: 3,
+    // maxToasts: 1, // 可选：最多保留一个 toast；新 toast 会替换上一个
   },
   // 选项 2：完全禁用 toast
   // toast: false,
@@ -350,7 +353,7 @@ HeroUINativeProvider
 当你想完全掌控打包体积中包含哪些依赖时，使用 `HeroUINativeProviderRaw`。使用从 `heroui-native/provider-raw` 导入的 raw provider 时，以下依赖是可选的，仅在你使用对应组件时才需要：
 
 - **react-native-screens** —— 浮层组件（Popover、Dialog）所需
-- **@gorhom/bottom-sheet** —— BottomSheet 组件所需
+- **@lodev09/react-native-true-sheet** —— BottomSheet 组件以及 Popover、Select 与 Menu 的 `presentation="bottom-sheet"` 模式所需
 - **react-native-svg** —— 使用图标的组件所需（Accordion、Alert、Checkbox 等）
 
 ### 设置

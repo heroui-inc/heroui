@@ -22,13 +22,12 @@ import { ScrollShadow } from 'heroui-native';
 ## 结构
 
 ```tsx
-<ScrollShadow LinearGradientComponent={LinearGradient}>
+<ScrollShadow>
   <ScrollView>...</ScrollView>
 </ScrollShadow>
 ```
 
 - **ScrollShadow**：包裹可滚动组件，按滚动位置与内容溢出在边缘显示动态渐变阴影；自动识别横向/纵向滚动并管理阴影显隐。
-- **LinearGradientComponent**：必填，传入兼容库的 `LinearGradient`（如 expo-linear-gradient、react-native-linear-gradient）以绘制渐变阴影。
 
 ## 用法
 
@@ -37,7 +36,7 @@ import { ScrollShadow } from 'heroui-native';
 包裹任意可滚动组件，自动在边缘添加阴影。
 
 ```tsx
-<ScrollShadow LinearGradientComponent={LinearGradient}>
+<ScrollShadow>
   <ScrollView>...</ScrollView>
 </ScrollShadow>
 ```
@@ -47,7 +46,7 @@ import { ScrollShadow } from 'heroui-native';
 根据子组件的 `horizontal` 属性自动识别横向滚动。
 
 ```tsx
-<ScrollShadow LinearGradientComponent={LinearGradient}>
+<ScrollShadow>
   <FlatList horizontal data={data} renderItem={...} />
 </ScrollShadow>
 ```
@@ -57,7 +56,7 @@ import { ScrollShadow } from 'heroui-native';
 用 `size` 控制渐变阴影的高度或宽度（像素）。
 
 ```tsx
-<ScrollShadow size={100} LinearGradientComponent={LinearGradient}>
+<ScrollShadow size={100}>
   <ScrollView>...</ScrollView>
 </ScrollShadow>
 ```
@@ -67,15 +66,15 @@ import { ScrollShadow } from 'heroui-native';
 用 `visibility` 指定显示哪些边的阴影。
 
 ```tsx
-<ScrollShadow visibility="top" LinearGradientComponent={LinearGradient}>
+<ScrollShadow visibility="top">
   <ScrollView>...</ScrollView>
 </ScrollShadow>
 
-<ScrollShadow visibility="bottom" LinearGradientComponent={LinearGradient}>
+<ScrollShadow visibility="bottom">
   <ScrollView>...</ScrollView>
 </ScrollShadow>
 
-<ScrollShadow visibility="none" LinearGradientComponent={LinearGradient}>
+<ScrollShadow visibility="none">
   <ScrollView>...</ScrollView>
 </ScrollShadow>
 ```
@@ -85,7 +84,7 @@ import { ScrollShadow } from 'heroui-native';
 覆盖默认使用主题背景的阴影颜色。
 
 ```tsx
-<ScrollShadow color="#ffffff" LinearGradientComponent={LinearGradient}>
+<ScrollShadow color="#ffffff">
   <ScrollView>...</ScrollView>
 </ScrollShadow>
 ```
@@ -95,7 +94,6 @@ import { ScrollShadow } from 'heroui-native';
 **重要：** ScrollShadow 内部会将子节点转为 Reanimated 动画组件。若需使用 `onScroll`，必须使用 `react-native-reanimated` 的 `useAnimatedScrollHandler`，而不能使用普通的 `onScroll`。
 
 ```tsx
-import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { useAnimatedScrollHandler } from 'react-native-reanimated';
 
 const scrollHandler = useAnimatedScrollHandler({
@@ -104,7 +102,7 @@ const scrollHandler = useAnimatedScrollHandler({
   },
 });
 
-<ScrollShadow LinearGradientComponent={LinearGradient}>
+<ScrollShadow>
   <Animated.ScrollView onScroll={scrollHandler}>...</Animated.ScrollView>
 </ScrollShadow>;
 ```
@@ -113,7 +111,6 @@ const scrollHandler = useAnimatedScrollHandler({
 
 ```tsx
 import { ScrollShadow, Surface } from 'heroui-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { FlatList, ScrollView, Text, View } from 'react-native';
 
 export default function ScrollShadowExample() {
@@ -125,7 +122,7 @@ export default function ScrollShadowExample() {
   return (
     <View className="flex-1 bg-background">
       <Text className="px-5 py-3 text-lg font-semibold">Horizontal List</Text>
-      <ScrollShadow LinearGradientComponent={LinearGradient}>
+      <ScrollShadow>
         <FlatList
           data={horizontalData}
           horizontal
@@ -140,11 +137,7 @@ export default function ScrollShadowExample() {
       </ScrollShadow>
 
       <Text className="px-5 py-3 text-lg font-semibold">Vertical Content</Text>
-      <ScrollShadow
-        size={80}
-        className="h-48"
-        LinearGradientComponent={LinearGradient}
-      >
+      <ScrollShadow size={80} className="h-48">
         <ScrollView
           contentContainerClassName="p-5"
           showsVerticalScrollIndicator={false}
@@ -176,7 +169,7 @@ export default function ScrollShadowExample() {
 | prop                      | type                                                                   | default      | description                                                                                                     |
 | ------------------------- | ---------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------- |
 | `children`                | `React.ReactElement`                                                   | -            | 需要增强阴影的可滚动组件，须为单一 React 元素（ScrollView、FlatList 等）                                         |
-| `LinearGradientComponent` | `ComponentType<`<br/>`LinearGradientProps>`                            | **必填**     | 来自任意兼容库的 LinearGradient 组件                                                                           |
+| `LinearGradientComponent` | `ComponentType<`<br/>`LinearGradientProps>`                            | -            | **已弃用。** 可选的渐变组件（expo-linear-gradient 等）。不传入时阴影也会以原生方式绘制                         |
 | `size`                    | `number`                                                               | `50`         | 渐变阴影高度或宽度（像素）                                                                                     |
 | `orientation`             | `'horizontal' \| 'vertical'`                                           | 自动检测     | 阴影方向；未提供时根据子组件 `horizontal` 自动检测                                                             |
 | `visibility`              | `'auto' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'both' \| 'none'` | `'auto'`     | 阴影显隐模式；`auto` 根据滚动位置与溢出自动显示                                                                |
@@ -202,7 +195,7 @@ ScrollShadow 动画配置，可为：
 
 ### LinearGradientProps
 
-`LinearGradientComponent` 应接受以下属性：
+**已弃用。** 仅供已弃用的 `LinearGradientComponent` 属性使用。传入该属性的组件会接收以下属性：
 
 | prop        | type                              | description                                                        |
 | ----------- | --------------------------------- | ------------------------------------------------------------------ |
@@ -213,5 +206,23 @@ ScrollShadow 动画配置，可为：
 | `style`     | `StyleProp<ViewStyle>`（可选）    | 应用于渐变视图的样式                                               |
 
 ## 特别说明
+
+### React Native 版本支持
+
+阴影使用原生 `backgroundImage` 样式（`linear-gradient`）绘制，因此无需任何渐变库。所用的样式键取决于 React Native 版本，并会自动选择：
+
+| React Native     | 使用的渐变样式                 | 说明                                     |
+| ---------------- | ------------------------------ | ---------------------------------------- |
+| `0.87` 及以上    | `backgroundImage`              | 稳定 API，推荐使用                       |
+| `0.81` - `0.86`  | `experimental_backgroundImage` | 使用这些版本提供的实验性 API             |
+| 低于 `0.81`      | 不支持                         | 低于 HeroUI Native 要求的最低 React Native 版本 |
+
+版本仅从 `Platform.constants.reactNativeVersion` 读取一次，无需任何配置。
+
+### 从 `LinearGradientComponent` 迁移
+
+`LinearGradientComponent` 已弃用，且不再是必需的。移除它即可使用内置渐变。如果仍然传入，ScrollShadow 会像之前一样渲染该组件。它将在未来的主版本中移除。
+
+### 自定义滚动处理器
 
 **重要：** ScrollShadow 内部会将子节点转为 Reanimated 动画组件。若需在可滚动组件上使用滚动回调，必须使用 `react-native-reanimated` 的 `useAnimatedScrollHandler`，不能使用标准 `onScroll`。
