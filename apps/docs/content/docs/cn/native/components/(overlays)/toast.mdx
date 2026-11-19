@@ -1,6 +1,7 @@
 ---
 title: Toast 轻提示
 description: 在屏幕顶部或底部展示的临时通知消息。
+icon: updated
 links:
   source_native: toast/toast.tsx
   styles_native: toast/toast.styles.ts
@@ -166,7 +167,7 @@ export default function ToastExample() {
 }
 ```
 
-更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/toast.tsx>)。
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/toast.tsx)。
 
 ## 全局配置
 
@@ -258,6 +259,24 @@ function AppContent() {
 </HeroUINativeProvider>
 ```
 
+### 限制提示数量
+
+默认情况下，每个提示都会保留到被关闭为止：`maxVisibleToasts` 只控制绘制的数量，其余提示在堆叠后方等待，并在前方的提示被关闭后重新出现。设置 `maxToasts` 可改为移除最早的提示。设置 `maxToasts: 1` 时，每个新提示都会替换上一个：
+
+```tsx
+<HeroUINativeProvider
+  config={{
+    toast: {
+      maxToasts: 1,
+    },
+  }}
+>
+  {children}
+</HeroUINativeProvider>
+```
+
+因超出上限而被移除的提示，与调用 `toast.hide(id)` 的效果相同：会播放退出动画、清除自动关闭计时器，并执行其 `onHide` 回调。
+
 ## API 参考
 
 ### Toast
@@ -313,7 +332,7 @@ Toast 根动画配置，可为：
 
 ### Toast.Action
 
-`Toast.Action` 继承 [Button](button) 的全部属性。按钮变体默认由 Toast 变体推断，也可覆盖。
+`Toast.Action` 继承 [Button](/docs/native/components/button) 的全部属性。按钮变体默认由 Toast 变体推断，也可覆盖。
 
 | prop        | type                   | default | description                                                                  |
 | ----------- | ---------------------- | ------- | ---------------------------------------------------------------------------- |
@@ -322,11 +341,11 @@ Toast 根动画配置，可为：
 | `size`      | `'sm' \| 'md' \| 'lg'` | `'sm'`  | 操作按钮尺寸                                                                 |
 | `className` | `string`               | -       | 额外的 class                                                                 |
 
-`onPress`、`isDisabled` 等其余属性见 [Button API 参考](button#api-reference)。
+`onPress`、`isDisabled` 等其余属性见 [Button API 参考](/docs/native/components/button#api-reference)。
 
 ### Toast.Close
 
-`Toast.Close` 继承 [Button](button) 的全部属性。
+`Toast.Close` 继承 [Button](/docs/native/components/button) 的全部属性。
 
 | prop        | type                                | default | description                                    |
 | ----------- | ----------------------------------- | ------- | ---------------------------------------------- |
@@ -336,7 +355,7 @@ Toast 根动画配置，可为：
 | `className` | `string`                            | -       | 额外的 class                                   |
 | `onPress`   | `(event: any) => void`              | -       | 自定义按下处理；默认隐藏 Toast                 |
 
-其余继承属性见 [Button API 参考](button#api-reference)。
+其余继承属性见 [Button API 参考](/docs/native/components/button#api-reference)。
 
 ### ToastProviderProps
 
@@ -349,6 +368,7 @@ Toast 根动画配置，可为：
 | `unstable_accessibilityContainerViewIsModal` | `boolean`                                           | `false` | 是否将覆盖窗口视为模态容器（VoiceOver）。为 true 时焦点限制在覆盖层内。仅 iOS；可能随 react-native-screens 变化                                                                                                  |
 | `insets`                                     | `ToastInsets`                                       | -       | 相对屏幕边缘的内边距（与安全区内边距相加）                                                                                                                                                                       |
 | `maxVisibleToasts`                           | `number`                                            | `3`     | 最大可见条数，超过后开始降低透明度                                                                                                                                                                               |
+| `maxToasts`                                  | `number`                                            | -       | 同时保留的最大提示数量。新提示超出上限时会关闭最早的提示，因此设为 `1` 时每个新提示都会替换上一个 |
 | `contentWrapper`                             | `(children: React.ReactNode) => React.ReactElement` | -       | 自定义包裹 Toast 内容的函数                                                                                                                                                                                      |
 | `children`                                   | `React.ReactNode`                                   | -       | 子节点                                                                                                                                                                                                           |
 
@@ -425,6 +445,18 @@ Toast 根动画配置，可为：
 | `onHide`    | `() => void`                                         | -       | 隐藏时回调                                                                          |
 
 ## 特别说明
+
+### 显示大量提示
+
+被推到可见堆叠后方（超出 `maxVisibleToasts`）的提示完全透明，因此只有可见堆叠以及其后方正在淡出的一个提示会被挂载。其余提示保持排队，自动关闭计时器继续运行，并在前方提示被关闭后重新挂载（不播放进入动画）。因此连续多次调用 `toast.show()` 时，渲染开销始终受 `maxVisibleToasts` 限制。
+
+若要移除较早的提示而不是让它们排队，请设置 `maxToasts`。设置 `maxToasts={1}` 时，每个新提示都会替换上一个：旧提示会播放退出动画并执行其 `onHide`，且在新提示被关闭后不会再出现。
+
+堆叠位置与高度保存在 Reanimated 共享值中，并在 UI 线程上执行动画：显示或关闭一个提示只会挂载或卸载该提示，已在屏幕上的提示不会重新渲染。由字符串或配置对象创建的提示在位置变化时从不重新渲染；自定义 `component` 提示会在 `index` 变化时重新渲染，因为它会在属性中接收实时的 `index`。只有最前方的提示按其自然高度布局；其后方的提示会以弹簧动画过渡到该高度，且内容被遮盖。拖动最前方的提示时，其后方的提示会显示内容，以便在前方提示被滑走时可读。
+
+`useToast()` 返回的 `toast` 对象引用稳定，因此显示或隐藏提示不会使调用该 hook 的组件重新渲染。只有读取 `isToastVisible` 的组件，才会在第一个提示出现或最后一个提示消失时重新渲染。
+
+拖动提示时，其自动关闭计时器会暂停，并在松手后以剩余时间继续计时。最后一个提示隐藏后，提示覆盖层会保持挂载片刻，以便其退出动画播放完成。
 
 ### 元素检查器（iOS）
 

@@ -177,6 +177,8 @@ const config: HeroUINativeConfig = {
     },
     // Maximum number of visible toasts before opacity starts fading
     maxVisibleToasts: 3,
+    // Optional: maximum number of toasts kept at once; older ones are dismissed
+    // maxToasts: 1,
     // Custom wrapper function to wrap the toast content
     contentWrapper: (children) => (
       <KeyboardAvoidingView
@@ -271,6 +273,7 @@ const config: HeroUINativeConfig = {
       right: 12,
     },
     maxVisibleToasts: 3,
+    // maxToasts: 1, // Optional: keep at most one toast; a new toast replaces the previous one
   },
   // Option 2: Disable toast entirely
   // toast: false,
@@ -350,7 +353,7 @@ The provider automatically wraps your application with [`SafeAreaListener`](http
 Use `HeroUINativeProviderRaw` when you want full control over which dependencies are included in your bundle. With the raw provider imported from `heroui-native/provider-raw`, the following dependencies are optional and only required if you use the corresponding components:
 
 - **react-native-screens** -- required for overlay components (Popover, Dialog)
-- **@gorhom/bottom-sheet** -- required for BottomSheet component
+- **@lodev09/react-native-true-sheet** -- required for BottomSheet and the `presentation="bottom-sheet"` mode of Popover, Select, and Menu
 - **react-native-svg** -- required for components that use icons (Accordion, Alert, Checkbox, etc.)
 
 ### Setup

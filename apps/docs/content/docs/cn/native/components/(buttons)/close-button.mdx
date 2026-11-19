@@ -1,6 +1,7 @@
 ---
 title: CloseButton 关闭按钮
 description: 用于关闭对话框、模态框或收起内容的按钮组件。
+icon: updated
 links:
   source_native: close-button/close-button.tsx
   styles_native: close-button/close-button.styles.ts
@@ -102,14 +103,15 @@ export default function CloseButtonExample() {
 
 ### CloseButton
 
-CloseButton 继承 [Button](./button) 的全部属性。默认 `variant='tertiary'`、`size='sm'`、`isIconOnly=true`。
+CloseButton 继承 [Button](/docs/native/components/button) 的全部属性。默认 `variant='tertiary'`、`size='sm'`、`isIconOnly=true` 与 `aria-label="Close"`。
 
-| prop        | type                   | default | description                                      |
-| ----------- | ---------------------- | ------- | ------------------------------------------------ |
-| `iconProps` | `CloseButtonIconProps` | -       | 自定义关闭图标属性                               |
-| `children`  | `React.ReactNode`      | -       | 自定义内容，替换默认关闭图标                     |
+| prop         | type                   | default   | description                  |
+| ------------ | ---------------------- | --------- | ---------------------------- |
+| `iconProps`  | `CloseButtonIconProps` | -         | 自定义关闭图标属性           |
+| `children`   | `React.ReactNode`      | -         | 自定义内容，替换默认关闭图标 |
+| `aria-label` | `string`               | `"Close"` | 屏幕阅读器为该按钮播报的标签 |
 
-`isDisabled`、`className`、`animation`、`feedbackVariant` 以及所有 Pressable 相关继承属性见 [Button API 参考](./button#api-reference)。
+`isDisabled`、`className`、`animation`、`feedbackVariant` 以及所有 Pressable 相关继承属性见 [Button API 参考](/docs/native/components/button#api-reference)。
 
 #### CloseButtonIconProps
 

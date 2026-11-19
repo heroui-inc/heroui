@@ -1,0 +1,267 @@
+---
+title: v1.1.0
+description:
+  BottomSheet 通过 TrueSheet 迁移为原生底部弹层并新增 Content、Header、Body 与 Footer 部件，Toast 为连续弹出重构并新增 maxToasts，ScrollShadow 不再需要渐变库，并修复 Dialog、Select 与 Switch 的问题
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 11 月 18 日</span>
+</div>
+
+HeroUI Native v1.1.0 通过 [`@lodev09/react-native-true-sheet`](https://sheet.lodev09.com) 以原生底部弹层取代 `@gorhom/bottom-sheet`：iOS 上使用 sheet presentation controller，Android 上使用原生底部弹层。`BottomSheet` 现在通过 ref 控制，并新增 `Content`、`Header`、`Body` 与 `Footer` 部件；Popover、Select 与 Menu 中的 `presentation="bottom-sheet"` 也使用同一原生弹层。本版本还重构了 Toast 核心，使连续弹出的提示保持流畅；新增 `maxToasts`；使用原生 `backgroundImage` 渐变绘制 ScrollShadow 的渐隐效果；并修复了 Dialog、Select 与 Switch 的问题。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+如果你使用了 `BottomSheet` 或 `presentation="bottom-sheet"`，请替换底部弹层依赖并重新构建应用（TrueSheet 是原生模块）：
+
+```bash
+npm uninstall @gorhom/bottom-sheet
+npx expo install @lodev09/react-native-true-sheet
+```
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 真机体验
+
+<NativeTryOnDevice />
+
+## 破坏性变更
+
+### BottomSheet 使用原生弹层
+
+`BottomSheet` 现在基于 `@lodev09/react-native-true-sheet` 构建，不再使用 `@gorhom/bottom-sheet`。弹层通过 ref 打开与关闭，其属性从 `BottomSheet.Content` 移到 `BottomSheet` 本身；由于弹层会自行呈现并添加遮暗效果，Portal 与 Overlay 部件已被移除。
+
+**变更前：**
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+<BottomSheet isOpen={isOpen} onOpenChange={setIsOpen}>
+  <BottomSheet.Trigger asChild>
+    <Button>Open</Button>
+  </BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay />
+    <BottomSheet.Content snapPoints={['40%', '80%']}>
+      <BottomSheet.Close />
+      <BottomSheet.Title>Terms of Service</BottomSheet.Title>
+      <BottomSheet.Description>...</BottomSheet.Description>
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>;
+```
+
+**变更后：**
+
+```tsx
+const sheetRef = useRef<BottomSheetRef>(null);
+
+<Button onPress={() => sheetRef.current?.present()}>Open</Button>
+<BottomSheet ref={sheetRef} detents={[0.4, 0.8]}>
+  <BottomSheet.Content>
+    <BottomSheet.Header>
+      <BottomSheet.Title>Terms of Service</BottomSheet.Title>
+      <BottomSheet.Description>...</BottomSheet.Description>
+      <BottomSheet.Close />
+    </BottomSheet.Header>
+    <BottomSheet.Body>...</BottomSheet.Body>
+  </BottomSheet.Content>
+</BottomSheet>;
+```
+
+| 变更前                                            | 现在                                                     |
+| ------------------------------------------------- | -------------------------------------------------------- |
+| `isOpen` / `onOpenChange` / `BottomSheet.Trigger` | `ref.present()` / `ref.dismiss()` 与 `onDidDismiss`      |
+| `BottomSheet.Portal`、`BottomSheet.Overlay`       | 不再需要：弹层以原生方式呈现，并自行遮暗（或模糊）背景   |
+| `BottomSheet.Content` 上的弹层属性                | 改为设置在 `BottomSheet` 本身；`className` 仍在 `Content` 上 |
+| `snapPoints={['40%', '80%']}`                     | `detents={[0.4, 0.8]}`                                   |
+| `enableDynamicSizing`                             | `detents={['auto']}`（默认值）                           |
+| `enablePanDownToClose={false}`                    | `dismissible={false}`                                    |
+| `BottomSheetScrollView` / `BottomSheetFlatList`   | `ScrollView` / `FlatList` 配合 `scrollableRef`           |
+| `BottomSheetFooter` / `footerComponent`           | `<BottomSheet.Footer isSticky>` 或 `footer` 属性         |
+| `useBottomSheetAwareHandlers`                     | 已移除：弹层以原生方式处理键盘                           |
+| `useBottomSheet()`                                | 已移除：改为持有弹层的 ref                               |
+
+**迁移方式：** 将 `@gorhom/bottom-sheet` 替换为 `@lodev09/react-native-true-sheet`（`^4.1.0`），重新构建应用，并按上表更新每个 `BottomSheet`。参见 [BottomSheet 迁移指南](/docs/native/components/bottom-sheet#从旧版-bottomsheet-迁移)。
+
+**相关 PR：** [#543](https://github.com/heroui-inc/heroui-native/pull/543)
+
+### Popover、Select 与 Menu 中的底部弹层呈现
+
+`presentation="bottom-sheet"` 的 API 保持不变（开关状态、触发器、选项选择与 `contentContainerClassName` 均与之前一致），但传给内容的 gorhom 专有属性需要改为对应的 TrueSheet 属性，例如 `snapPoints={['35%']}` 改为 `detents={[0.35]}`。在弹层模式下，`usePopoverAnimation()`、`useSelectAnimation()` 与 `useMenuAnimation()` 不再跟踪弹层位置；请改为在内容中调用 `useBottomSheetAnimation()`。
+
+**变更前：**
+
+```tsx
+<Select.Content presentation="bottom-sheet" snapPoints={['35%']}>
+```
+
+**变更后：**
+
+```tsx
+<Select.Content presentation="bottom-sheet" detents={[0.35]}>
+```
+
+**相关 PR：** [#543](https://github.com/heroui-inc/heroui-native/pull/543)
+
+## 新增功能
+
+### 原生 BottomSheet
+
+`BottomSheet` 现在以真正的原生弹层呈现，位于所有内容之上，包括原生模态与 `formSheet` 页面。拖动、键盘与遮暗均由原生处理，因此 JS 层的 Portal、遮罩与手势层已被移除。（[#543](https://github.com/heroui-inc/heroui-native/pull/543)）
+
+<NativeVideoPlayerView
+  target="component"
+  slug="bottom-sheet"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-dark.mp4"
+/>
+
+**特性：**
+
+- ref 方法 `present()`、`resize()`、`dismiss()` 与 `dismissStack()`；也可通过 `name` 配合 `useTrueSheet()` 或 `TrueSheet.present(name)` 控制弹层
+- 新的复合部件 `BottomSheet.Content`、`BottomSheet.Header`、`BottomSheet.Body` 与 `BottomSheet.Footer`，与 `Card` 保持一致；在 Header 或 Footer 上设置 `isSticky` 可在正文滚动时将其固定
+- `detents` 取代 `snapPoints`，其中 `'auto'`（默认值）会按内容自适应弹层高度
+- `dimBlur` 将弹层背后的屏幕模糊化，而非遮暗
+- 支持弹层堆叠，Dialog 与 Toast 会保持在已呈现的弹层之上可见
+- `useBottomSheetAnimation()` 提供实时 Reanimated 值（位置、停靠点、索引以及 0–1 的 `progress`），用于让内容随弹层一起动画
+- 在 Android 上，`Slider` 等基于手势处理器的组件可在弹层内正常工作
+- 可通过 TrueSheet 的 Expo Router 导航器将弹层作为路由使用
+- glass 主题保留平台自身的弹层材质（iOS 26 上为 Liquid Glass）；其他主题使用 `overlay` 颜色
+- 弹层在两个平台上都位于无障碍树中，且没有弹层打开时不会遮挡应用的无障碍树，修复了旧弹层的 VoiceOver（[#372](https://github.com/heroui-inc/heroui-native/issues/372)）与 Maestro（[#353](https://github.com/heroui-inc/heroui-native/issues/353)）问题
+
+**用法：**
+
+```tsx
+import { BottomSheet, Button, type BottomSheetRef } from 'heroui-native';
+import { useRef } from 'react';
+
+export function Example() {
+  const sheetRef = useRef<BottomSheetRef>(null);
+
+  return (
+    <>
+      <Button onPress={() => sheetRef.current?.present()}>Open</Button>
+      <BottomSheet ref={sheetRef} detents={['auto', 0.9]}>
+        <BottomSheet.Content>
+          <BottomSheet.Header isSticky>
+            <BottomSheet.Title>Terms of Service</BottomSheet.Title>
+            <BottomSheet.Close />
+          </BottomSheet.Header>
+          <BottomSheet.Body>...</BottomSheet.Body>
+          <BottomSheet.Footer isSticky>
+            <Button onPress={() => sheetRef.current?.dismiss()}>Accept</Button>
+          </BottomSheet.Footer>
+        </BottomSheet.Content>
+      </BottomSheet>
+    </>
+  );
+}
+```
+
+完整文档与示例请参见 [BottomSheet 组件页面](/docs/native/components/bottom-sheet)。
+
+### 为连续弹出重构 Toast
+
+Toast 核心围绕外部 store 重构，并在 UI 线程上进行堆叠布局，因此连续多次调用 `toast.show()` 时依然流畅（尤其是在 Android 上）。只有可见堆叠及其后方的一个提示会被挂载，新提示出现时，已在屏幕上的提示不再重新渲染。`toast.show` / `toast.hide` / `useToast` API 保持不变。（[#544](https://github.com/heroui-inc/heroui-native/pull/544)）
+
+Toast provider 配置新增可选的 `maxToasts` 选项，超出上限时会移除最早的提示。设置 `maxToasts: 1` 时，每个新提示都会替换上一个：
+
+```tsx
+<HeroUINativeProvider config={{ toast: { maxToasts: 1 } }}>
+  {children}
+</HeroUINativeProvider>
+```
+
+### ScrollShadow 无需渐变库
+
+`ScrollShadow` 现在使用原生 `backgroundImage` 样式（`linear-gradient`）绘制渐隐效果，因此不再需要 `expo-linear-gradient` 或类似的库。在 React Native 0.81–0.86 上会自动回退到 `experimental_backgroundImage`。`LinearGradientComponent` 现在为可选且已弃用；继续传入时会保持之前的渲染方式。（[#546](https://github.com/heroui-inc/heroui-native/pull/546)）
+
+```tsx
+<ScrollShadow>
+  <ScrollView>...</ScrollView>
+</ScrollShadow>
+```
+
+### CloseButton 无障碍标签
+
+`CloseButton`（被 `BottomSheet.Close`、`Dialog.Close` 等使用）现在会被屏幕阅读器播报为「Close」，而不再是未标注的按钮。传入 `aria-label` 可修改该标签。（[#543](https://github.com/heroui-inc/heroui-native/pull/543)）
+
+## 问题修复
+
+本版本包含以下问题的修复：
+
+- **[Issue #369](https://github.com/heroui-inc/heroui-native/issues/369)**：Toast 的滑动关闭在 Android 上不生效，且前方提示缩放时会透出上一个提示的一条文字。现在每个提示都有自己的手势根节点，遮盖层以同级视图绘制。（[#544](https://github.com/heroui-inc/heroui-native/pull/544)）
+- **Toast** 在 Android 横屏时可能渲染到导航栏下方。现在提示会保持在导航栏范围内。（[#544](https://github.com/heroui-inc/heroui-native/pull/544)）
+- **Dialog** 以及 `presentation="dialog"` 的 Select：向上拖动或短距离向下拖动后松手，内容会先跳动再归位。未触发关闭的松手现在会平滑地直接回到静止位置。（[#545](https://github.com/heroui-inc/heroui-native/pull/545)）
+- **Select.Overlay** 在向上拖动 dialog 呈现时会淡出。遮暗层现在在拖动过程中保持不变。（[#545](https://github.com/heroui-inc/heroui-native/pull/545)）
+- **[Issue #542](https://github.com/heroui-inc/heroui-native/issues/542)**：在低于 1.10 的 Uniwind 版本上，Switch 的滑块可能停留在起始边缘，且初始选中的开关可能短暂地从错误的一侧开始。现已移除静态的滑块内边距，由动画控制位置（包括 RTL）。（[#547](https://github.com/heroui-inc/heroui-native/pull/547)）
+- **示例应用**：水平 ScrollShadow 演示在阿拉伯语与希伯来语下显示为空白。（[#548](https://github.com/heroui-inc/heroui-native/pull/548)）
+
+**相关 PR：**
+
+- [#543](https://github.com/heroui-inc/heroui-native/pull/543)
+- [#544](https://github.com/heroui-inc/heroui-native/pull/544)
+- [#545](https://github.com/heroui-inc/heroui-native/pull/545)
+- [#546](https://github.com/heroui-inc/heroui-native/pull/546)
+- [#547](https://github.com/heroui-inc/heroui-native/pull/547)
+- [#548](https://github.com/heroui-inc/heroui-native/pull/548)
+
+## 依赖
+
+- **@lodev09/react-native-true-sheet** `^4.1.0` 为新增的可选对等依赖，`BottomSheet` 以及 Popover、Select 与 Menu 的 `presentation="bottom-sheet"` 模式需要它。（[#543](https://github.com/heroui-inc/heroui-native/pull/543)）
+- **@gorhom/bottom-sheet** 已从可选对等依赖中移除。（[#543](https://github.com/heroui-inc/heroui-native/pull/543)）
+
+## 更新的文档
+
+以下文档页面已更新，以反映本版本的变更：
+
+- [快速开始](/docs/native/getting-started/quick-start) — 可选依赖改为 `@lodev09/react-native-true-sheet`
+- [Provider](/docs/native/getting-started/provider) — `maxToasts` 选项，以及 TrueSheet 作为 raw provider 的可选依赖
+- [BottomSheet](/docs/native/components/bottom-sheet) — 针对原生弹层重写，新增部件、停靠点、模糊、堆叠、导航与迁移指南
+- [Toast](/docs/native/components/toast) — `maxToasts` 以及显示大量提示的说明
+- [ScrollShadow](/docs/native/components/scroll-shadow) — 内置渐变、React Native 版本支持与 `LinearGradientComponent` 弃用说明
+- [Select](/docs/native/components/select) — 底部弹层呈现改用 TrueSheet；修复 dialog 拖动问题
+- [Popover](/docs/native/components/popover) — 底部弹层呈现改用 TrueSheet
+- [Menu](/docs/native/components/menu) — 底部弹层呈现改用 TrueSheet
+- [Input](/docs/native/components/input) — 在 BottomSheet 内无需键盘处理函数
+- [InputOTP](/docs/native/components/input-otp) — 在 BottomSheet 内无需键盘处理函数
+- [CloseButton](/docs/native/components/close-button) — 默认 `aria-label="Close"`
+- [Dialog](/docs/native/components/dialog) — 修复：向上滑动后松手可平稳归位，不再跳动
+- [Switch](/docs/native/components/switch) — 修复：旧版 Uniwind 与 RTL 下的滑块位置
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

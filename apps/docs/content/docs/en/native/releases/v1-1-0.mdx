@@ -1,0 +1,267 @@
+---
+title: v1.1.0
+description:
+  BottomSheet moves to native sheets through TrueSheet with new Content, Header, Body and Footer parts, Toast is rebuilt for rapid toasts and gains maxToasts, ScrollShadow no longer needs a gradient library, and Dialog, Select and Switch fixes
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">November 18, 2026</span>
+</div>
+
+HeroUI Native v1.1.0 replaces `@gorhom/bottom-sheet` with native sheets through [`@lodev09/react-native-true-sheet`](https://sheet.lodev09.com): the sheet presentation controller on iOS and the native bottom sheet on Android. `BottomSheet` is now controlled through its ref and gains `Content`, `Header`, `Body` and `Footer` parts, and `presentation="bottom-sheet"` in Popover, Select and Menu uses the same native sheet. This release also rebuilds the Toast core so rapid toasts stay smooth, adds `maxToasts`, draws ScrollShadow fades with the native `backgroundImage` gradient, and fixes Dialog, Select and Switch bugs.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+If you use `BottomSheet` or `presentation="bottom-sheet"`, swap the sheet dependency and rebuild your app (TrueSheet is a native module):
+
+```bash
+npm uninstall @gorhom/bottom-sheet
+npx expo install @lodev09/react-native-true-sheet
+```
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It on Your Device
+
+<NativeTryOnDevice />
+
+## Breaking Changes
+
+### BottomSheet Uses Native Sheets
+
+`BottomSheet` is now built on `@lodev09/react-native-true-sheet` instead of `@gorhom/bottom-sheet`. The sheet is opened and closed through its ref, its props move from `BottomSheet.Content` to `BottomSheet` itself, and the portal and overlay parts are gone because the sheet presents and dims itself.
+
+**Before:**
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+<BottomSheet isOpen={isOpen} onOpenChange={setIsOpen}>
+  <BottomSheet.Trigger asChild>
+    <Button>Open</Button>
+  </BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay />
+    <BottomSheet.Content snapPoints={['40%', '80%']}>
+      <BottomSheet.Close />
+      <BottomSheet.Title>Terms of Service</BottomSheet.Title>
+      <BottomSheet.Description>...</BottomSheet.Description>
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>;
+```
+
+**After:**
+
+```tsx
+const sheetRef = useRef<BottomSheetRef>(null);
+
+<Button onPress={() => sheetRef.current?.present()}>Open</Button>
+<BottomSheet ref={sheetRef} detents={[0.4, 0.8]}>
+  <BottomSheet.Content>
+    <BottomSheet.Header>
+      <BottomSheet.Title>Terms of Service</BottomSheet.Title>
+      <BottomSheet.Description>...</BottomSheet.Description>
+      <BottomSheet.Close />
+    </BottomSheet.Header>
+    <BottomSheet.Body>...</BottomSheet.Body>
+  </BottomSheet.Content>
+</BottomSheet>;
+```
+
+| Before                                            | Now                                                                |
+| ------------------------------------------------- | ------------------------------------------------------------------ |
+| `isOpen` / `onOpenChange` / `BottomSheet.Trigger` | `ref.present()` / `ref.dismiss()` and `onDidDismiss`               |
+| `BottomSheet.Portal`, `BottomSheet.Overlay`       | Not needed: the sheet presents natively and dims (or blurs) itself |
+| `BottomSheet.Content` sheet props                 | Props on `BottomSheet` itself; `className` stays on `Content`      |
+| `snapPoints={['40%', '80%']}`                     | `detents={[0.4, 0.8]}`                                             |
+| `enableDynamicSizing`                             | `detents={['auto']}` (the default)                                 |
+| `enablePanDownToClose={false}`                    | `dismissible={false}`                                              |
+| `BottomSheetScrollView` / `BottomSheetFlatList`   | `ScrollView` / `FlatList` plus `scrollableRef`                     |
+| `BottomSheetFooter` / `footerComponent`           | `<BottomSheet.Footer isSticky>` or the `footer` prop               |
+| `useBottomSheetAwareHandlers`                     | Removed: the sheet handles the keyboard natively                   |
+| `useBottomSheet()`                                | Removed: keep a ref to the sheet                                   |
+
+**Migration:** Replace `@gorhom/bottom-sheet` with `@lodev09/react-native-true-sheet` (`^4.1.0`), rebuild the app, and update each `BottomSheet` using the table above. See the [BottomSheet migration guide](/docs/native/components/bottom-sheet#migrating-from-the-previous-bottomsheet).
+
+**Related PR:** [#543](https://github.com/heroui-inc/heroui-native/pull/543)
+
+### Bottom-Sheet Presentation in Popover, Select and Menu
+
+`presentation="bottom-sheet"` keeps its API (open state, triggers, item selection and `contentContainerClassName` work as before), but gorhom-specific props passed to the content need their TrueSheet equivalents, for example `snapPoints={['35%']}` becomes `detents={[0.35]}`. In sheet mode, `usePopoverAnimation()`, `useSelectAnimation()` and `useMenuAnimation()` no longer track the sheet position; call `useBottomSheetAnimation()` inside the content instead.
+
+**Before:**
+
+```tsx
+<Select.Content presentation="bottom-sheet" snapPoints={['35%']}>
+```
+
+**After:**
+
+```tsx
+<Select.Content presentation="bottom-sheet" detents={[0.35]}>
+```
+
+**Related PR:** [#543](https://github.com/heroui-inc/heroui-native/pull/543)
+
+## What's New
+
+### Native BottomSheet
+
+`BottomSheet` now presents as a real native sheet, above everything including native modals and `formSheet` screens. Dragging, the keyboard and dimming are handled natively, so the JS portal, overlay and gesture layers are gone. ([#543](https://github.com/heroui-inc/heroui-native/pull/543))
+
+<NativeVideoPlayerView
+  target="component"
+  slug="bottom-sheet"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Ref methods `present()`, `resize()`, `dismiss()` and `dismissStack()`; sheets can also be controlled by `name` with `useTrueSheet()` or `TrueSheet.present(name)`
+- New compound parts `BottomSheet.Content`, `BottomSheet.Header`, `BottomSheet.Body` and `BottomSheet.Footer`, matching `Card`; `isSticky` on Header or Footer pins it while the body scrolls
+- `detents` replaces `snapPoints`, with `'auto'` (the default) sizing the sheet to its content
+- `dimBlur` blurs the screen behind the sheet instead of dimming it
+- Stacked sheets, with Dialog and Toast staying visible above a presented sheet
+- `useBottomSheetAnimation()` exposes live Reanimated values (position, detent, index and a 0–1 `progress`) for animating content with the sheet
+- Gesture-handler components such as `Slider` work inside sheets on Android
+- Sheets as routes through TrueSheet's Expo Router navigator
+- The glass theme keeps the platform's own sheet material (Liquid Glass on iOS 26); other themes use the `overlay` color
+- Sheets are in the accessibility tree on both platforms, and nothing covers the app's tree while no sheet is open, which fixes VoiceOver ([#372](https://github.com/heroui-inc/heroui-native/issues/372)) and Maestro ([#353](https://github.com/heroui-inc/heroui-native/issues/353)) issues with the old sheet
+
+**Usage:**
+
+```tsx
+import { BottomSheet, Button, type BottomSheetRef } from 'heroui-native';
+import { useRef } from 'react';
+
+export function Example() {
+  const sheetRef = useRef<BottomSheetRef>(null);
+
+  return (
+    <>
+      <Button onPress={() => sheetRef.current?.present()}>Open</Button>
+      <BottomSheet ref={sheetRef} detents={['auto', 0.9]}>
+        <BottomSheet.Content>
+          <BottomSheet.Header isSticky>
+            <BottomSheet.Title>Terms of Service</BottomSheet.Title>
+            <BottomSheet.Close />
+          </BottomSheet.Header>
+          <BottomSheet.Body>...</BottomSheet.Body>
+          <BottomSheet.Footer isSticky>
+            <Button onPress={() => sheetRef.current?.dismiss()}>Accept</Button>
+          </BottomSheet.Footer>
+        </BottomSheet.Content>
+      </BottomSheet>
+    </>
+  );
+}
+```
+
+For complete documentation and examples, see the [BottomSheet component page](/docs/native/components/bottom-sheet).
+
+### Toast Rebuilt for Rapid Toasts
+
+The Toast core is rebuilt around an external store with stack layout on the UI thread, so calling `toast.show()` many times in a row stays smooth, mostly on Android. Only the visible stack plus one toast behind it is mounted, and toasts already on screen no longer re-render when a new one arrives. The `toast.show` / `toast.hide` / `useToast` API is unchanged. ([#544](https://github.com/heroui-inc/heroui-native/pull/544))
+
+A new opt-in `maxToasts` option on the toast provider config drops the oldest toasts past a limit. With `maxToasts: 1`, every new toast replaces the previous one:
+
+```tsx
+<HeroUINativeProvider config={{ toast: { maxToasts: 1 } }}>
+  {children}
+</HeroUINativeProvider>
+```
+
+### ScrollShadow Without a Gradient Library
+
+`ScrollShadow` now draws its fades with the native `backgroundImage` style (`linear-gradient`), so `expo-linear-gradient` or similar libraries are no longer needed. On React Native 0.81–0.86 it falls back to `experimental_backgroundImage` automatically. `LinearGradientComponent` is now optional and deprecated; passing it keeps the previous rendering. ([#546](https://github.com/heroui-inc/heroui-native/pull/546))
+
+```tsx
+<ScrollShadow>
+  <ScrollView>...</ScrollView>
+</ScrollShadow>
+```
+
+### CloseButton Accessibility Label
+
+`CloseButton` (used by `BottomSheet.Close`, `Dialog.Close` and others) is now announced as "Close" by screen readers instead of an unlabelled button. Pass `aria-label` to change it. ([#543](https://github.com/heroui-inc/heroui-native/pull/543))
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #369](https://github.com/heroui-inc/heroui-native/issues/369)**: Swipe-to-dismiss on Toast did not work on Android, and a strip of the previous toast's text showed through the front toast while it scaled. Each toast now has its own gesture root, and the covers are drawn as sibling views. ([#544](https://github.com/heroui-inc/heroui-native/pull/544))
+- **Toast** could render under the navigation bar in Android landscape. Toasts now stay inside it. ([#544](https://github.com/heroui-inc/heroui-native/pull/544))
+- **Dialog** and Select with `presentation="dialog"`: releasing after an upward or short downward drag made the content jump before settling. A release that doesn't dismiss now eases straight back to rest. ([#545](https://github.com/heroui-inc/heroui-native/pull/545))
+- **Select.Overlay** faded out while the dialog presentation was dragged upward. The dim layer now stays during the drag. ([#545](https://github.com/heroui-inc/heroui-native/pull/545))
+- **[Issue #542](https://github.com/heroui-inc/heroui-native/issues/542)**: The Switch thumb could stay at the leading edge on Uniwind versions below 1.10, and an initially selected switch could briefly start on the wrong side. The static thumb inset is removed so the animation owns the position, including in RTL. ([#547](https://github.com/heroui-inc/heroui-native/pull/547))
+- **Example app**: the horizontal ScrollShadow demo rendered blank in Arabic and Hebrew. ([#548](https://github.com/heroui-inc/heroui-native/pull/548))
+
+**Related PRs:**
+
+- [#543](https://github.com/heroui-inc/heroui-native/pull/543)
+- [#544](https://github.com/heroui-inc/heroui-native/pull/544)
+- [#545](https://github.com/heroui-inc/heroui-native/pull/545)
+- [#546](https://github.com/heroui-inc/heroui-native/pull/546)
+- [#547](https://github.com/heroui-inc/heroui-native/pull/547)
+- [#548](https://github.com/heroui-inc/heroui-native/pull/548)
+
+## Dependencies
+
+- **@lodev09/react-native-true-sheet** `^4.1.0` is a new optional peer dependency, required for `BottomSheet` and the `presentation="bottom-sheet"` mode of Popover, Select and Menu. ([#543](https://github.com/heroui-inc/heroui-native/pull/543))
+- **@gorhom/bottom-sheet** is removed as an optional peer dependency. ([#543](https://github.com/heroui-inc/heroui-native/pull/543))
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Quick Start](/docs/native/getting-started/quick-start) — Optional dependency changed to `@lodev09/react-native-true-sheet`
+- [Provider](/docs/native/getting-started/provider) — `maxToasts` option and TrueSheet as the raw provider's optional dependency
+- [BottomSheet](/docs/native/components/bottom-sheet) — Rewritten for native sheets, new parts, detents, blur, stacking, navigation and migration guide
+- [Toast](/docs/native/components/toast) — `maxToasts` and notes on showing many toasts
+- [ScrollShadow](/docs/native/components/scroll-shadow) — Built-in gradient, React Native version support and `LinearGradientComponent` deprecation
+- [Select](/docs/native/components/select) — Bottom-sheet presentation uses TrueSheet; dialog drag fix
+- [Popover](/docs/native/components/popover) — Bottom-sheet presentation uses TrueSheet
+- [Menu](/docs/native/components/menu) — Bottom-sheet presentation uses TrueSheet
+- [Input](/docs/native/components/input) — No keyboard handlers needed inside BottomSheet
+- [InputOTP](/docs/native/components/input-otp) — No keyboard handlers needed inside BottomSheet
+- [CloseButton](/docs/native/components/close-button) — Default `aria-label="Close"`
+- [Dialog](/docs/native/components/dialog) — Fixed: swipe-up release settles without jumping
+- [Switch](/docs/native/components/switch) — Fixed: thumb position on older Uniwind and RTL
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
