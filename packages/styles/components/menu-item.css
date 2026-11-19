@@ -19,11 +19,18 @@
   cursor: var(--cursor-interactive);
 
   [data-slot="label"] {
-    @apply pointer-events-none w-fit select-none;
+    @apply pointer-events-none w-fit min-w-0 select-none;
+    /* Let a long unbroken word wrap inside the item instead of overflowing it */
+    overflow-wrap: break-word;
   }
 
   [data-slot="description"] {
     @apply pointer-events-none text-wrap select-none;
+  }
+
+  /* Keep icons placed directly in the item at their natural size when the label wraps */
+  > svg {
+    @apply shrink-0;
   }
 
   [data-slot="submenu-indicator"] svg {
