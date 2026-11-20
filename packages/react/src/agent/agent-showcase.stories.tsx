@@ -315,6 +315,7 @@ export const FlightSeatMap = () => {
 
     const next = {
       ...assignments,
+      // eslint-disable-next-line react-hooks/purity -- runs when a seat is assigned, not during render
       [passenger]: {at: Date.now(), by: getChangeSource(), seat: seat.id},
     };
 
@@ -434,13 +435,13 @@ export const FlightSeatMap = () => {
       <button
         key={seat.id}
         aria-pressed={Boolean(holder)}
+        className={`${SEAT_BASE} ${SEAT_SIZES[seat.cabin]} ${SEAT_TONES[tone]}`}
+        data-agent-pointer={assignment?.by === "agent" ? assignment.at : undefined}
         disabled={seat.isTaken}
         type="button"
         aria-label={`Seat ${seat.id}, ${describeSeat(seat)}${
           seat.isTaken ? ", taken" : holder ? `, ${holder}` : ""
         }`}
-        className={`${SEAT_BASE} ${SEAT_SIZES[seat.cabin]} ${SEAT_TONES[tone]}`}
-        data-agent-pointer={assignment?.by === "agent" ? assignment.at : undefined}
         onClick={() => pressSeat(seat)}
       >
         {holder ? initialsOf(holder) : seat.isTaken ? null : seat.letter}
@@ -533,7 +534,7 @@ export const FlightSeatMap = () => {
         </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-          <div className="flex flex-wrap gap-1" data-agent-hidden>
+          <div data-agent-hidden className="flex flex-wrap gap-1">
             {PASSENGERS.map((name) => {
               const seat = SEAT_BY_ID.get(assignments[name]?.seat ?? "");
 
@@ -1375,6 +1376,7 @@ export const WeekCalendar = () => {
       ...input,
       by,
       id: `e${nextId.current++}`,
+      // eslint-disable-next-line react-hooks/purity -- runs when an event is created, not during render
       ...(by === "agent" ? {at: Date.now(), proposed: true} : {}),
     };
 
@@ -1608,7 +1610,7 @@ export const WeekCalendar = () => {
         </div>
 
         {/* Always takes its space, so the page does not jump when proposals arrive. */}
-        <div className="flex h-12 items-center justify-center" data-agent-hidden>
+        <div data-agent-hidden className="flex h-12 items-center justify-center">
           {proposals.length > 0 ? (
             <div className="flex animate-in items-center gap-1 rounded-full bg-foreground py-1.5 ps-4 pe-1.5 text-sm text-background shadow-overlay duration-300 fade-in slide-in-from-bottom-2">
               <span className="flex items-center gap-2 pe-3">
@@ -2166,15 +2168,15 @@ const CoachMap = ({seat}: {seat: SeatNumber}) => {
           rows.map((y) => (
             <rect
               key={`${x}-${y}`}
-              className={
-                x === mine.x && y === mine.y ? "fill-accent" : "fill-surface stroke-border"
-              }
               height="7"
               rx="2"
               strokeWidth="0.75"
               width="10"
               x={x}
               y={y}
+              className={
+                x === mine.x && y === mine.y ? "fill-accent" : "fill-surface stroke-border"
+              }
             />
           )),
         )}
@@ -2641,7 +2643,7 @@ export const InlineAnswer = () => {
         </div>
       </div>
 
-      <div className="mx-auto flex w-full max-w-[680px] flex-col gap-3 px-4 pb-6" data-agent-hidden>
+      <div data-agent-hidden className="mx-auto flex w-full max-w-[680px] flex-col gap-3 px-4 pb-6">
         <div className="flex min-h-8 flex-wrap gap-1.5">
           {remaining.map((entry) => (
             <Button

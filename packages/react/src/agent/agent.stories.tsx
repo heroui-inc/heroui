@@ -340,7 +340,7 @@ export const Playground = () => {
             </Dropdown.Menu>
           </Dropdown.Popover>
         </Dropdown>
-        <p className="ms-auto font-mono text-xs text-muted" data-agent-hidden>
+        <p data-agent-hidden className="ms-auto font-mono text-xs text-muted">
           {activity[0] ?? "getChangeSource() reports who triggered each handler"}
         </p>
       </footer>

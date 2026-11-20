@@ -351,6 +351,7 @@ export const AgentPanel = ({guarded = false, tasks}: AgentPanelProps) => {
     const turnId = nextId.current++;
 
     setIsRunning(true);
+    // eslint-disable-next-line react-hooks/purity -- runs when a turn starts, not during render
     setActivity({call: undefined, running: true, turnAt: Date.now()});
     setTurns((list) => [...list, {ask, done: false, id: turnId, lines: []}]);
 
@@ -723,12 +724,11 @@ export const AgentCursor = () => {
   const [isShown, setIsShown] = useState(false);
   const [point, setPoint] = useState<{x: number; y: number} | null>(null);
 
-  useEffect(() => {
-    if (isActive) {
-      setIsShown(true);
+  // Show as soon as the agent starts; hiding waits out the linger timer below.
+  if (isActive && !isShown) setIsShown(true);
 
-      return;
-    }
+  useEffect(() => {
+    if (isActive) return;
 
     const timer = setTimeout(() => setIsShown(false), 1400);
 
