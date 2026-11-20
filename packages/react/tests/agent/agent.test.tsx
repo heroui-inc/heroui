@@ -9,6 +9,7 @@ import {
   PickersFixture,
   RatingFixture,
   SettingsFixture,
+  StateFixture,
   SwappingRatingFixture,
 } from "./fixtures";
 
@@ -545,6 +546,7 @@ describe("Agent bridge", () => {
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
 
       expect((await run(agent, {action: "setValue", args: ["Pro"], ref: "Plan"})).ok).toBe(true);
+      expect(onPlanChange).toHaveBeenCalledTimes(1);
       expect(onPlanChange).toHaveBeenLastCalledWith("pro");
     });
 
@@ -567,6 +569,52 @@ describe("Agent bridge", () => {
 
       expect(sources).toEqual(["agent", "user"]);
       expect(getChangeSource()).toBe("user");
+    });
+  });
+
+  describe("change reports", () => {
+    it("reports a change inside a set", async () => {
+      render(<StateFixture />);
+
+      const result = await run(createAgent(), {action: "add", args: ["launch"], ref: "Tags"});
+
+      expect(result.steps[0]?.changes).toEqual([
+        expect.objectContaining({
+          key: "value",
+          previous: new Set(["design"]),
+          value: new Set(["design", "launch"]),
+        }),
+      ]);
+    });
+
+    it("does not report a value rebuilt with the same content", async () => {
+      render(<StateFixture />);
+
+      const agent = createAgent();
+      const rebuilt = await run(agent, {action: "rebuild", ref: "Tags"});
+      const reordered = await run(agent, {action: "reorder", ref: "Filters"});
+
+      expect(rebuilt.steps[0]?.changes).toEqual([]);
+      expect(reordered.steps[0]?.changes).toEqual([]);
+    });
+  });
+
+  describe("native select", () => {
+    it("supports choosing an option by its label", async () => {
+      const onCurrencyChange = vi.fn();
+
+      render(<StateFixture onCurrencyChange={onCurrencyChange} />);
+
+      const result = await run(createAgent(), {
+        action: "setValue",
+        args: ["Euro"],
+        ref: "Currency",
+      });
+
+      expect(result.ok).toBe(true);
+      expect(onCurrencyChange).toHaveBeenCalledTimes(1);
+      expect(onCurrencyChange).toHaveBeenCalledWith("eur");
+      expect(screen.getByRole("combobox", {name: "Currency"})).toHaveValue("eur");
     });
   });
 

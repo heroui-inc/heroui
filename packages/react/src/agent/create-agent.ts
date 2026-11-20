@@ -42,8 +42,64 @@ type Tracked = {
   label?: string;
 };
 
-const same = (a: unknown, b: unknown): boolean =>
-  a === b || JSON.stringify(a) === JSON.stringify(b);
+/** Compares two non-null objects of the same prototype by content. */
+const sameContent = (a: object, b: object, seen: WeakMap<object, object>): boolean => {
+  if (a instanceof Date) return a.getTime() === (b as Date).getTime();
+
+  if (Array.isArray(a)) {
+    const other = b as unknown[];
+
+    return a.length === other.length && a.every((value, index) => same(value, other[index], seen));
+  }
+
+  if (a instanceof Set) {
+    const other = [...(b as Set<unknown>)];
+
+    return (
+      a.size === other.length &&
+      [...a].every((value) => other.some((candidate) => same(value, candidate, seen)))
+    );
+  }
+
+  if (a instanceof Map) {
+    const other = b as Map<unknown, unknown>;
+
+    return (
+      a.size === other.size &&
+      [...a].every(([key, value]) => other.has(key) && same(value, other.get(key), seen))
+    );
+  }
+
+  const left = a as Record<string, unknown>;
+  const right = b as Record<string, unknown>;
+  const keys = Object.keys(left);
+
+  return (
+    keys.length === Object.keys(right).length &&
+    keys.every((key) => Object.hasOwn(right, key) && same(left[key], right[key], seen))
+  );
+};
+
+/**
+ * Whether two state values hold the same content. Arrays, plain objects (in any key order),
+ * sets, maps, and dates are compared by what they contain. A pair already being compared
+ * further up counts as equal, so cycles end.
+ */
+const same = (a: unknown, b: unknown, seen = new WeakMap<object, object>()): boolean => {
+  if (a === b || (Number.isNaN(a) && Number.isNaN(b))) return true;
+  if (typeof a !== "object" || typeof b !== "object" || a === null || b === null) return false;
+  if (Object.getPrototypeOf(a) !== Object.getPrototypeOf(b)) return false;
+  if (seen.get(a) === b) return true;
+
+  seen.set(a, b);
+
+  const result = sameContent(a, b, seen);
+
+  // Only pairs still being compared stay assumed equal; a pair that differs must not match later.
+  seen.delete(a);
+
+  return result;
+};
 
 const isFilled = (value: unknown): boolean =>
   value !== undefined && value !== null && value !== "" && !(Array.isArray(value) && !value.length);

@@ -177,6 +177,39 @@ const withRenderedOptions = async <T>(
   }
 };
 
+/**
+ * Chooses options in a native `<select>`, then fires `events` on it. React Aria's hidden select
+ * handles `input` and `change` alike, so it gets `change` alone: both would report one choice twice.
+ */
+const chooseOptions = (
+  select: HTMLSelectElement,
+  args: unknown[],
+  events: readonly string[],
+): void => {
+  const values = args.flat().map(String);
+
+  if (select.multiple) {
+    for (const option of Array.from(select.options)) {
+      option.selected = values.includes(option.value);
+    }
+  } else {
+    setNativeValue(select, values[0] ?? "");
+  }
+
+  for (const type of events) fire(select, type);
+};
+
+/** The two ends of a range argument: `{start, end}`, or the start and end as two arguments. */
+const rangeEnds = ([first, second]: unknown[]): [unknown, unknown] => {
+  if (first !== null && typeof first === "object") {
+    const {end, start} = first as {end?: unknown; start?: unknown};
+
+    return [start, end];
+  }
+
+  return [first, second];
+};
+
 const toNumber = (arg: unknown): number => {
   if (typeof arg === "number") return arg;
   if (typeof arg === "string") return Number.parseFloat(arg);
@@ -467,18 +500,9 @@ export const discover = (root: ParentNode, options: DiscoverOptions = {}): Found
         actions: () => {
           const actions: Record<string, Action> = {
             setValue: async (...args) => {
-              const values = args.flat().map(String);
+              if (listTrigger) await checkChoices(args.flat().map(String).filter(Boolean));
 
-              if (listTrigger) await checkChoices(values.filter(Boolean));
-
-              if (select.multiple) {
-                for (const option of Array.from(select.options)) {
-                  option.selected = values.includes(option.value);
-                }
-              } else {
-                setNativeValue(select, values[0] ?? "");
-              }
-              fire(select, "change");
+              chooseOptions(select, args, ["change"]);
             },
           };
 
@@ -548,14 +572,12 @@ export const discover = (root: ParentNode, options: DiscoverOptions = {}): Found
       {
         actions: () => ({
           setValue: (...args) => {
-            const [first, second] = args;
+            if (inputs.length === 1) return write(inputs[0], args[0]);
 
-            if (inputs.length === 1) return write(inputs[0], first);
+            const [start, end] = rangeEnds(args);
 
-            const range = (first ?? {}) as {end?: unknown; start?: unknown};
-
-            write(inputs[0], typeof first === "object" ? range.start : first);
-            write(inputs[1], typeof first === "object" ? range.end : second);
+            write(inputs[0], start);
+            write(inputs[1], end);
           },
         }),
         el: group,
@@ -587,15 +609,8 @@ export const discover = (root: ParentNode, options: DiscoverOptions = {}): Found
       {
         actions: () => ({
           setValue: async (...args) => {
-            const [first, second] = args;
             const active = group.ownerDocument.activeElement as HTMLElement | null;
-            const range = (first ?? {}) as {end?: unknown; start?: unknown};
-            const values =
-              inputs.length === 1
-                ? [first]
-                : typeof first === "object"
-                  ? [range.start, range.end]
-                  : [first, second];
+            const values = inputs.length === 1 ? [args[0]] : rangeEnds(args);
 
             for (const [index, input] of inputs.entries()) {
               await writeSegments(input, String(values[index] ?? ""), name());
@@ -729,19 +744,7 @@ export const discover = (root: ParentNode, options: DiscoverOptions = {}): Found
 
     add({
       actions: () => ({
-        setValue: (...args) => {
-          const values = args.flat().map(String);
-
-          if (select.multiple) {
-            for (const option of Array.from(select.options)) {
-              option.selected = values.includes(option.value);
-            }
-          } else {
-            setNativeValue(select, values[0] ?? "");
-          }
-          fire(select, "input");
-          fire(select, "change");
-        },
+        setValue: (...args) => chooseOptions(select, args, ["input", "change"]),
       }),
       closed: true,
       el: select,

@@ -437,3 +437,48 @@ export const SwappingRatingFixture = ({editing = false}: {editing?: boolean}) =>
     <div key="viewing" ref={ref} aria-label="Your rating" role="group" />
   );
 };
+
+export type StateFixtureProps = {
+  onCurrencyChange?: (value: string) => void;
+};
+
+/** Custom components whose values are a set and an object, and a plain native select. */
+export const StateFixture = ({onCurrencyChange}: StateFixtureProps) => {
+  const tagsRef = useRef<HTMLDivElement>(null);
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const [tags, setTags] = useState(() => new Set(["design"]));
+  const [filters, setFilters] = useState({owner: "me", status: "open"});
+
+  useAgentComponent(tagsRef, {
+    actions: {
+      add: (tag: string) => setTags((current) => new Set([...current, tag])),
+      rebuild: () => setTags((current) => new Set([...current].reverse())),
+    },
+    component: "tags",
+    state: () => ({value: tags}),
+  });
+
+  useAgentComponent(filtersRef, {
+    actions: {
+      // Same content, keys in another order.
+      reorder: () => setFilters((current) => ({status: current.status, owner: current.owner})),
+    },
+    component: "filters",
+    state: () => ({value: filters}),
+  });
+
+  return (
+    <main>
+      <div ref={tagsRef} aria-label="Tags" role="group" />
+      <div ref={filtersRef} aria-label="Filters" role="group" />
+      <select
+        aria-label="Currency"
+        defaultValue="usd"
+        onChange={(event) => onCurrencyChange?.(event.target.value)}
+      >
+        <option value="usd">US dollar</option>
+        <option value="eur">Euro</option>
+      </select>
+    </main>
+  );
+};
