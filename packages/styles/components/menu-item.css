@@ -19,7 +19,7 @@
   cursor: var(--cursor-interactive);
 
   [data-slot="label"] {
-    @apply pointer-events-none w-fit min-w-0 select-none;
+    @apply pointer-events-none w-fit max-w-full min-w-0 select-none;
     /* Let a long unbroken word wrap inside the item instead of overflowing it */
     overflow-wrap: break-word;
   }
@@ -31,6 +31,11 @@
   /* Keep icons placed directly in the item at their natural size when the label wraps */
   > svg {
     @apply shrink-0;
+  }
+
+  /* Let a wrapper around the label (e.g. label + description column) shrink so the label can wrap */
+  > :has([data-slot="label"]) {
+    @apply min-w-0;
   }
 
   [data-slot="submenu-indicator"] svg {
