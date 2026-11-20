@@ -146,9 +146,10 @@
   --animate-skeleton: skeleton 2s linear infinite;
   --animate-caret-blink: caret-blink 1.2s ease-out infinite;
 
+  /* `--skeleton-shimmer-direction` is -1 under RTL `.skeleton--shimmer`, mirroring the sweep */
   @keyframes skeleton {
     100% {
-      transform: translateX(200%);
+      transform: translateX(calc(var(--skeleton-shimmer-direction, 1) * 200%));
     }
   }
 
