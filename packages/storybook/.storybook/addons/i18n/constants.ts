@@ -225,6 +225,9 @@ export const LOCALES = [
     label: "Hebrew",
     value: "he-IL",
   },
+  // React Aria ships no translations for the two locales below, so its built-in strings
+  // (e.g. "Next", "Previous") fall back to English. Use them to check RTL layout, digits,
+  // and calendars (Persian defaults to the Solar Hijri calendar), not translated copy.
   {
     country: "Iran",
     direction: "rtl",

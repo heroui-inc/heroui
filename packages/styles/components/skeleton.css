@@ -6,8 +6,19 @@
 
 /* Animation types */
 .skeleton--shimmer {
+  /* The shimmer travels from inline-start to inline-end. The shared `skeleton` keyframes and the
+     start offset below scale their physical offsets by this sign; it is reset here so a nested
+     `dir="ltr"` subtree does not inherit an RTL ancestor's sign. */
+  --skeleton-shimmer-direction: 1;
+
+  @variant rtl {
+    --skeleton-shimmer-direction: -1;
+  }
+
   &::after {
-    @apply absolute inset-0 -translate-x-full animate-skeleton bg-linear-to-r from-transparent via-surface-tertiary to-transparent content-[''];
+    @apply absolute inset-0 animate-skeleton bg-linear-to-r from-transparent via-surface-tertiary to-transparent content-[''];
+
+    translate: calc(var(--skeleton-shimmer-direction) * -100%) 0;
   }
 
   /* When applied to a parent container with multiple skeletons */
@@ -18,7 +29,9 @@
 
     /* Single synchronized shimmer that passes over all children */
     &::before {
-      @apply absolute inset-0 -translate-x-full animate-skeleton content-[''];
+      @apply absolute inset-0 animate-skeleton content-[''];
+
+      translate: calc(var(--skeleton-shimmer-direction) * -100%) 0;
       background: linear-gradient(
         90deg,
         transparent 0%,
@@ -37,22 +50,6 @@
         content: none;
       }
     }
-  }
-}
-
-/* In RTL, sweep the shimmer from the inline-start (right) edge toward the left */
-.skeleton--shimmer:dir(rtl) {
-  &::after,
-  &:has(.skeleton)::before {
-    @apply translate-x-full;
-
-    animation-name: skeleton-rtl;
-  }
-}
-
-@keyframes skeleton-rtl {
-  100% {
-    transform: translateX(-200%);
   }
 }
 

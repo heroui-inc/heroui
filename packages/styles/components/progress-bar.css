@@ -52,14 +52,18 @@
     .progress-bar__fill {
       @apply w-2/5;
 
+      /* The fill is anchored at inline-start (the right edge in RTL), so the sweep must run
+         toward inline-end. The keyframes scale their physical offsets by this sign; it is
+         reset here so a nested `dir="ltr"` subtree does not inherit an RTL ancestor's sign. */
+      --progress-bar-sweep-direction: 1;
+
+      @variant rtl {
+        --progress-bar-sweep-direction: -1;
+      }
+
       animation: progress-bar-indeterminate 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 
       @apply motion-reduce:animate-none;
-    }
-
-    /* The fill is anchored at inline-start (the right edge in RTL), so sweep toward the left */
-    &:dir(rtl) .progress-bar__fill {
-      animation-name: progress-bar-indeterminate-rtl;
     }
   }
 
@@ -81,19 +85,10 @@
 
 @keyframes progress-bar-indeterminate {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(calc(var(--progress-bar-sweep-direction, 1) * -100%));
   }
   100% {
-    transform: translateX(350%);
-  }
-}
-
-@keyframes progress-bar-indeterminate-rtl {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-350%);
+    transform: translateX(calc(var(--progress-bar-sweep-direction, 1) * 350%));
   }
 }
 
