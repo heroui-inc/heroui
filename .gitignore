@@ -96,5 +96,8 @@ apps/docs/public/skills
 # SEO analysis output
 .seo-output
 
+# version-matched docs generated at pack time (scripts/build-docs.mjs)
+packages/react/docs
+
 # Local Claude Code dev-server configs
 .claude/launch.json

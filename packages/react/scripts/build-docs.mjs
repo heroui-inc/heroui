@@ -403,6 +403,10 @@ function renderIndex(pages, version) {
     ]),
     route("Restyle one component everywhere", "guides", ["theming-for-agents", "styling"]),
     route("Add motion", "guides", ["animation"]),
+    route("Let an AI agent operate the running app", "guides", [
+      "agent-bridge",
+      "agent-bridge-reference",
+    ]),
     route("Give a coding agent more HeroUI context", "guides", [
       "agent-skills",
       "mcp-server",

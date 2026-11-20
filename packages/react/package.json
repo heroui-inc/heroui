@@ -30,6 +30,9 @@
     ".": {
       "import": "./src/index.ts"
     },
+    "./agent": {
+      "import": "./src/agent/index.ts"
+    },
     "./package.json": "./package.json",
     "./styles": {
       "style": "./src/styles.css",
