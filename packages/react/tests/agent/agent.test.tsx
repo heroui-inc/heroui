@@ -4,7 +4,13 @@ import {cleanup, render, screen, setupUser} from "@heroui/testing/helpers";
 
 import {createAgent, getChangeSource} from "@/agent";
 
-import {PickersFixture, RatingFixture, SettingsFixture} from "./fixtures";
+import {
+  MarksFixture,
+  PickersFixture,
+  RatingFixture,
+  SettingsFixture,
+  SwappingRatingFixture,
+} from "./fixtures";
 
 const byLabel = (components: AgentComponent[], label: string) =>
   components.find((component) => component.label === label);
@@ -471,6 +477,85 @@ describe("Agent bridge", () => {
       expect(screen.getByLabelText("Password")).toHaveValue("hunter2");
     });
 
+    it("refuses a confirm-marked menu item when nobody can be asked", async () => {
+      const onMenuAction = vi.fn();
+
+      render(<MarksFixture onMenuAction={onMenuAction} />);
+
+      const result = await run(createAgent(), {
+        action: "press",
+        args: ["Delete"],
+        ref: "Project actions",
+      });
+
+      expect(result.error?.message).toBe(
+        'Needs a person: "Deletes the project for everyone". Ask them to use "Delete" themselves.',
+      );
+      expect(onMenuAction).not.toHaveBeenCalled();
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+    });
+
+    it("calls allow with the menu item's own mark", async () => {
+      const onMenuAction = vi.fn();
+      const allow = vi.fn(() => true);
+
+      render(<MarksFixture onMenuAction={onMenuAction} />);
+
+      const result = await run(createAgent({allow}), {
+        action: "press",
+        args: ["Delete"],
+        ref: "Project actions",
+      });
+
+      expect(result.ok).toBe(true);
+      expect(allow).toHaveBeenLastCalledWith(
+        expect.objectContaining({confirm: "Deletes the project for everyone", label: "Delete"}),
+        expect.anything(),
+      );
+      expect(onMenuAction.mock.calls[0]?.[0]).toBe("delete");
+    });
+
+    it("keeps hidden menu items from the agent", async () => {
+      const onMenuAction = vi.fn();
+
+      render(<MarksFixture onMenuAction={onMenuAction} />);
+
+      const result = await run(createAgent(), {
+        action: "press",
+        args: ["Transfer"],
+        ref: "Project actions",
+      });
+
+      expect(result.error?.message).toBe(
+        'No item "Transfer" in Project actions. Its items: Rename, Delete.',
+      );
+      expect(onMenuAction).not.toHaveBeenCalled();
+    });
+
+    it("refuses a disabled choice in a select", async () => {
+      const onPlanChange = vi.fn();
+
+      render(<MarksFixture onPlanChange={onPlanChange} />);
+
+      const agent = createAgent();
+      const refused = await run(agent, {action: "setValue", args: ["Enterprise"], ref: "Plan"});
+
+      expect(refused.error?.message).toBe('"Enterprise" is disabled in Plan.');
+      expect(onPlanChange).not.toHaveBeenCalled();
+      expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+
+      expect((await run(agent, {action: "setValue", args: ["Pro"], ref: "Plan"})).ok).toBe(true);
+      expect(onPlanChange).toHaveBeenLastCalledWith("pro");
+    });
+
+    it("keeps hidden text and secret values out of page text", () => {
+      render(<MarksFixture />);
+
+      const dialog = byLabel(createAgent().snapshot(), "Account summary");
+
+      expect(dialog?.text).toBe("Plan renews monthly. Tier:");
+    });
+
     it("exposes the agent as the change source inside handlers", async () => {
       const sources: string[] = [];
       const user = setupUser();
@@ -482,6 +567,21 @@ describe("Agent bridge", () => {
 
       expect(sources).toEqual(["agent", "user"]);
       expect(getChangeSource()).toBe("user");
+    });
+  });
+
+  describe("checkboxes", () => {
+    it("supports unchecking a mixed checkbox", async () => {
+      render(<MarksFixture />);
+
+      const agent = createAgent();
+
+      expect(byLabel(agent.snapshot(), "Select all")?.checked).toBe("mixed");
+
+      const result = await run(agent, {action: "setChecked", args: [false], ref: "Select all"});
+
+      expect(result.ok).toBe(true);
+      expect(byLabel(agent.snapshot(), "Select all")?.checked).toBe(false);
     });
   });
 
@@ -612,6 +712,19 @@ describe("Agent bridge", () => {
       rerender(<RatingFixture shown={() => false} />);
 
       expect(agent.snapshot()).toEqual([]);
+    });
+
+    it("supports a root element that changes after mount", () => {
+      const {rerender} = render(<SwappingRatingFixture />);
+      const agent = createAgent();
+
+      expect(agent.snapshot().map((component) => component.label)).toEqual(["Your rating"]);
+
+      rerender(<SwappingRatingFixture editing />);
+
+      expect(agent.snapshot()).toEqual([
+        expect.objectContaining({component: "rating", editing: true, label: "Edit rating"}),
+      ]);
     });
 
     it("removes the component when it unmounts", () => {

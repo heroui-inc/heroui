@@ -1,4 +1,4 @@
-import type {Found} from "./discover";
+import type {CheckItem, Found} from "./discover";
 import type {
   Agent,
   AgentActResult,
@@ -79,10 +79,14 @@ export const createAgent = (options: AgentOptions = {}): Agent => {
     return root ?? document;
   };
 
+  /** Set while a step runs: asks for permission when the item it presses is marked itself. */
+  let stepCheck: CheckItem | undefined;
+  const checkItem: CheckItem = async (item) => stepCheck?.(item);
+
   const find = (): Found[] => {
     const root = getRoot();
 
-    return root ? discover(root) : [];
+    return root ? discover(root, {checkItem}) : [];
   };
 
   /* Describing ------------------------------------------------------------------------------- */
@@ -470,18 +474,16 @@ export const createAgent = (options: AgentOptions = {}): Agent => {
     }
 
     const args = resolveArgs(found, step.action, Array.isArray(step.args) ? step.args : []);
+    const action: AgentAction = {
+      action: step.action,
+      args,
+      component: found.kind,
+      confirm: confirmOf(found.el),
+      label: nameOf(found),
+      ref,
+    };
 
-    await permit(
-      {
-        action: step.action,
-        args,
-        component: found.kind,
-        confirm: confirmOf(found.el),
-        label: nameOf(found),
-        ref,
-      },
-      extra,
-    );
+    await permit(action, extra);
 
     // Anything a person changed before this step is theirs, not the agent's.
     if (listeners.size > 0) flush("user");
@@ -489,12 +491,27 @@ export const createAgent = (options: AgentOptions = {}): Agent => {
     const before = listeners.size > 0 && baseline ? baseline : track(list);
     let result: unknown;
 
+    // An item in a menu or list can carry its own mark, often in a popup outside the component.
+    const approved = found.el.closest("[data-agent-confirm]");
+
+    stepCheck = async (item) => {
+      const mark = item.closest("[data-agent-confirm]");
+
+      if (!mark || mark === approved) return;
+
+      await permit(
+        {...action, confirm: confirmOf(item), label: labelOf(item) ?? action.label},
+        extra,
+      );
+    };
+
     acting = true;
     try {
       result = await asAgent(() => run(...args));
       await settle();
     } finally {
       acting = false;
+      stepCheck = undefined;
     }
 
     const after = track();

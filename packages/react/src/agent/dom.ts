@@ -62,7 +62,16 @@ export const clip = (text: string, max = MAX_TEXT): string => {
 
 const SKIPPED_TEXT_TAGS = new Set(["SVG", "SELECT", "SCRIPT", "STYLE", "TEMPLATE", "OPTION"]);
 
-/** Visible text of a node, skipping decorative and hidden descendants. */
+/** Areas whose values must never reach the agent. */
+const SECRET_AREA = '[data-agent-secret], [data-slot="input-otp"], [data-input-otp]';
+
+/** Parts that show a field's current value as text: a select's choice, an OTP digit, a date segment. */
+const VALUE_TEXT = '[data-slot$="-value"], [role="spinbutton"]';
+
+/**
+ * Visible text of a node, skipping decorative and hidden descendants, descendants marked
+ * `data-agent-hidden`, and the values shown inside secret areas.
+ */
 export const textOf = (node: Node | null | undefined, max = MAX_TEXT): string => {
   if (!node) return "";
 
@@ -80,6 +89,18 @@ export const textOf = (node: Node | null | undefined, max = MAX_TEXT): string =>
 
     if (SKIPPED_TEXT_TAGS.has(element.tagName.toUpperCase())) return;
     if (element.getAttribute("aria-hidden") === "true" || element.hasAttribute("hidden")) return;
+    // Only descendants are skipped: the bridge still reads a node it was pointed at directly,
+    // such as a select's value (redacted later) or a hidden field's label (to refuse it by name).
+    if (
+      current !== node &&
+      (element.hasAttribute("data-agent-hidden") ||
+        (element.matches(VALUE_TEXT) && element.closest(SECRET_AREA)))
+    ) {
+      // Keep the words on either side apart.
+      parts.push(" ");
+
+      return;
+    }
 
     for (const child of Array.from(element.childNodes)) walk(child);
     parts.push(" ");
@@ -291,8 +312,7 @@ const SECRET_AUTOCOMPLETE = /(^|\s)(cc-[a-z-]+|one-time-code|current-password|ne
 
 /** Whether a field's value must never reach the agent. */
 export const isSecret = (element: Element): boolean => {
-  if (element.closest("[data-agent-secret]")) return true;
-  if (element.closest('[data-slot="input-otp"], [data-input-otp]')) return true;
+  if (element.closest(SECRET_AREA)) return true;
 
   if (element.tagName === "INPUT") {
     const input = element as HTMLInputElement;

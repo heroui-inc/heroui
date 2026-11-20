@@ -28,17 +28,31 @@ export const useAgentComponent = (
   options: AgentComponentOptions,
 ): void => {
   const latest = useRef(options);
+  const registered = useRef<{element: Element; remove: () => void} | null>(null);
 
   // Layout timing keeps the state an agent reads in step with what was just committed.
   useIsomorphicLayoutEffect(() => {
     latest.current = options;
   });
 
+  // Checked after every commit: the ref object stays the same when the element it points to is
+  // swapped (a conditional root, a remount by key), and the new element has to be registered.
   useEffect(() => {
     const element = ref.current;
 
-    if (!element) return;
+    if (registered.current?.element === element) return;
 
-    return registerAgentComponent(element, () => latest.current);
-  }, [ref]);
+    registered.current?.remove();
+    registered.current = element
+      ? {element, remove: registerAgentComponent(element, () => latest.current)}
+      : null;
+  });
+
+  useEffect(
+    () => () => {
+      registered.current?.remove();
+      registered.current = null;
+    },
+    [],
+  );
 };

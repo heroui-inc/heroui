@@ -114,7 +114,7 @@ const result = await agent.act({
 });
 ```
 
-Lists take a choice's label or its value. Popups are handled for you: `press` with a menu item's label opens the menu, presses the item, and lets the menu close. Dates and times are ISO text, whatever format the field shows: a select, a date picker, or a date range is set without opening its popup.
+Lists take a choice's label or its value. Popups are handled for you: `press` with a menu item's label opens the menu, presses the item, and lets the menu close. A select opens its list briefly to check that the choice is enabled and not marked, then closes it. Dates and times are ISO text, whatever format the field shows: a date picker or a date range is set without opening its popup.
 
 The result says what happened, so the agent rarely needs a second snapshot:
 

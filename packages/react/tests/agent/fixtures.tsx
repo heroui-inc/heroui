@@ -347,3 +347,93 @@ export const PickersFixture = (props: PickersFixtureProps) => (
     </Autocomplete>
   </main>
 );
+
+export type MarksFixtureProps = {
+  onMenuAction?: (key: unknown) => void;
+  onPlanChange?: (value: unknown) => void;
+};
+
+/** Marks on items inside popups, a disabled choice, a mixed checkbox, and text an agent must not read. */
+export const MarksFixture = (props: MarksFixtureProps) => {
+  const [all, setAll] = useState<boolean | "mixed">("mixed");
+
+  return (
+    <main>
+      <Dropdown>
+        <Button aria-label="Project actions">Actions</Button>
+        <Dropdown.Popover>
+          <Dropdown.Menu onAction={props.onMenuAction}>
+            <Dropdown.Item id="rename" textValue="Rename">
+              Rename
+            </Dropdown.Item>
+            <Dropdown.Item
+              data-agent-confirm="Deletes the project for everyone"
+              id="delete"
+              textValue="Delete"
+            >
+              Delete
+            </Dropdown.Item>
+            <Dropdown.Item data-agent-hidden id="transfer" textValue="Transfer">
+              Transfer
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown>
+
+      <Select defaultValue="free" disabledKeys={["enterprise"]} onChange={props.onPlanChange}>
+        <Label>Plan</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            <ListBox.Item id="free" textValue="Free">
+              Free
+            </ListBox.Item>
+            <ListBox.Item id="pro" textValue="Pro">
+              Pro
+            </ListBox.Item>
+            <ListBox.Item id="enterprise" textValue="Enterprise">
+              Enterprise
+            </ListBox.Item>
+          </ListBox>
+        </Select.Popover>
+      </Select>
+
+      <Checkbox
+        isIndeterminate={all === "mixed"}
+        isSelected={all === true}
+        onChange={(selected) => setAll(selected)}
+      >
+        <Checkbox.Content>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          Select all
+        </Checkbox.Content>
+      </Checkbox>
+
+      <div aria-label="Account summary" role="dialog">
+        Plan renews monthly.
+        <span data-agent-hidden> Balance: $12,340.</span>
+        <div data-agent-secret>
+          Tier: <span data-slot="select-value">Gold</span>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+/** A registered component whose root element changes with `editing`. */
+export const SwappingRatingFixture = ({editing = false}: {editing?: boolean}) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useAgentComponent(ref, {component: "rating", state: () => ({editing})});
+
+  return editing ? (
+    <div key="editing" ref={ref} aria-label="Edit rating" role="group" />
+  ) : (
+    <div key="viewing" ref={ref} aria-label="Your rating" role="group" />
+  );
+};

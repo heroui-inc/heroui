@@ -88,6 +88,18 @@ export const pickItem = (items: AgentItem[], arg: unknown, name: string): AgentI
 
 const isExpanded = (element: Element) => element.getAttribute("aria-expanded") === "true";
 
+/** Items inside a list or popup that the agent may see: anything marked `data-agent-hidden` is left out. */
+const listed = (container: Element, selector: string): Element[] =>
+  Array.from(container.querySelectorAll(selector)).filter((item) => !isAgentHidden(item));
+
+/** Runs before the bridge presses an item inside a list or popup. Throws to refuse it. */
+export type CheckItem = (item: Element) => Promise<void>;
+
+export interface DiscoverOptions {
+  /** Lets the caller ask for permission when the item itself carries a `data-agent-confirm` mark. */
+  checkItem?: CheckItem;
+}
+
 const optionItem = (option: Element): AgentItem => {
   const label = textOf(option) || labelOf(option) || "";
   const item: AgentItem = {label, value: option.getAttribute("data-key") ?? label};
@@ -103,13 +115,14 @@ const pressInPopup = async (
   text: string,
   selector: string,
   name: string,
+  checkItem?: CheckItem,
 ): Promise<void> => {
   const wasOpen = isExpanded(trigger);
 
   if (!wasOpen) click(trigger);
 
   const popup = await waitFor(() => referenced(trigger, "aria-controls")[0]);
-  const read = () => (popup ? Array.from(popup.querySelectorAll(selector)) : []);
+  const read = () => (popup ? listed(popup, selector) : []);
   const matches = (option: Element) =>
     option.getAttribute("data-key") === text || fold(textOf(option)) === fold(text);
   const option = await waitFor(() => read().find(matches), 600);
@@ -127,8 +140,41 @@ const pressInPopup = async (
     );
   }
 
+  try {
+    await checkItem?.(option);
+  } catch (error) {
+    if (!wasOpen && popup) pressKey(popup, "Escape");
+    await settle();
+    throw error;
+  }
+
   click(option);
   await settle();
+};
+
+/**
+ * Opens a list from its trigger so its rendered options can be read, runs `inspect`, then
+ * closes the list again if it was closed. The options carry what a hidden native twin does not:
+ * which items are disabled, hidden from agents, or marked for a person.
+ */
+const withRenderedOptions = async <T>(
+  trigger: Element,
+  inspect: (options: Element[]) => Promise<T>,
+): Promise<T> => {
+  const wasOpen = isExpanded(trigger);
+
+  if (!wasOpen) click(trigger);
+
+  const popup = await waitFor(() => referenced(trigger, "aria-controls")[0]);
+
+  try {
+    return await inspect(popup ? Array.from(popup.querySelectorAll('[role="option"]')) : []);
+  } finally {
+    if (!wasOpen && popup) {
+      pressKey(popup, "Escape");
+      await settle();
+    }
+  }
 };
 
 const toNumber = (arg: unknown): number => {
@@ -305,7 +351,8 @@ const SKIPPED_INPUT_TYPES = new Set([
  * relies on (roles, labels, `data-slot`, and the hidden native controls React Aria keeps
  * for forms), so they are read from the page. Custom components join through the registry.
  */
-export const discover = (root: ParentNode): Found[] => {
+export const discover = (root: ParentNode, options: DiscoverOptions = {}): Found[] => {
+  const {checkItem} = options;
   const found: Found[] = [];
   const claimed = new Set<Element>();
   const owned: Element[] = [];
@@ -362,22 +409,67 @@ export const discover = (root: ParentNode): Found[] => {
 
     if (!selectRoot) continue;
 
-    const trigger = selectRoot.querySelector('button[aria-haspopup="listbox"]') ?? selectRoot;
+    const listTrigger = selectRoot.querySelector('button[aria-haspopup="listbox"]');
+    const trigger = listTrigger ?? selectRoot;
 
     if (!free(trigger)) continue;
 
-    const items = () =>
-      Array.from(select.options)
-        .filter((option) => option.value !== "")
-        .map((option) => ({label: clip(option.textContent ?? ""), value: option.value}));
+    const name = () => labelOf(trigger) ?? rootLabelOf(selectRoot) ?? "this list";
+    /** Options in the open list, by key. Empty while the list is closed. */
+    const renderedOptions = () =>
+      new Map(
+        referenced(trigger, "aria-controls").flatMap((list) =>
+          Array.from(list.querySelectorAll('[role="option"]'), (option) => [
+            option.getAttribute("data-key"),
+            option,
+          ]),
+        ),
+      );
+    const items = () => {
+      const rendered = renderedOptions();
+
+      return Array.from(select.options)
+        .filter((option) => {
+          const shown = rendered.get(option.value);
+
+          return option.value !== "" && !(shown && isAgentHidden(shown));
+        })
+        .map((option) => ({
+          label: clip(option.textContent ?? ""),
+          value: option.value,
+          ...(rendered.get(option.value)?.getAttribute("aria-disabled") === "true"
+            ? {disabled: true}
+            : {}),
+        }));
+    };
     const clearButton = selectRoot.querySelector('[data-slot$="clear-button"]');
+
+    /** The native twin knows nothing of disabled items or marks, so the rendered list is checked. */
+    const checkChoices = (values: string[]) =>
+      withRenderedOptions(trigger, async (options) => {
+        for (const value of values) {
+          const option = options.find((candidate) => candidate.getAttribute("data-key") === value);
+
+          if (!option) continue;
+
+          const label = textOf(option) || value;
+
+          if (isAgentHidden(option)) throw new AgentError(`No item "${label}" in ${name()}.`);
+          if (option.getAttribute("aria-disabled") === "true") {
+            throw new AgentError(`"${label}" is disabled in ${name()}.`);
+          }
+          await checkItem?.(option);
+        }
+      });
 
     add(
       {
         actions: () => {
           const actions: Record<string, Action> = {
-            setValue: (...args) => {
+            setValue: async (...args) => {
               const values = args.flat().map(String);
+
+              if (listTrigger) await checkChoices(values.filter(Boolean));
 
               if (select.multiple) {
                 for (const option of Array.from(select.options)) {
@@ -538,9 +630,7 @@ export const discover = (root: ParentNode): Found[] => {
 
     const comboRoot = input.closest('[data-slot="combo-box"], [data-slot="autocomplete"]');
     const options = () =>
-      referenced(input, "aria-controls").flatMap((list) =>
-        Array.from(list.querySelectorAll('[role="option"]')),
-      );
+      referenced(input, "aria-controls").flatMap((list) => listed(list, '[role="option"]'));
     const name = () => labelOf(input) ?? "this list";
 
     add(
@@ -549,6 +639,7 @@ export const discover = (root: ParentNode): Found[] => {
           clear: () => typeInto(input, ""),
           setValue: async (arg) => {
             const text = String(arg ?? "");
+            const previous = input.value;
 
             typeInto(input, text, {blur: false});
 
@@ -565,7 +656,17 @@ export const discover = (root: ParentNode): Found[] => {
               : undefined;
             const seen = options().map(optionItem);
 
-            if (option) click(option);
+            if (option) {
+              try {
+                await checkItem?.(option);
+              } catch (error) {
+                // Put the field back the way it was, so a refused choice leaves no trace.
+                typeInto(input, previous);
+                await settle();
+                throw error;
+              }
+              click(option);
+            }
             await settle();
             input.blur();
             await settle();
@@ -602,12 +703,13 @@ export const discover = (root: ParentNode): Found[] => {
     add(
       {
         actions: () => ({
-          setValue: (arg) => pressInPopup(trigger, String(arg), '[role="option"]', name()),
+          setValue: (arg) =>
+            pressInPopup(trigger, String(arg), '[role="option"]', name(), checkItem),
         }),
         el: trigger,
         items: () =>
           referenced(trigger, "aria-controls").flatMap((list) =>
-            Array.from(list.querySelectorAll('[role="option"]'), optionItem),
+            listed(list, '[role="option"]').map(optionItem),
           ),
         kind: "select",
         note: "setValue takes an item's label and opens the list to find it.",
@@ -760,11 +862,19 @@ export const discover = (root: ParentNode): Found[] => {
 
     add({
       actions: () => ({
-        setChecked: (arg) => {
+        setChecked: async (arg) => {
           const next = toBoolean(arg, name());
 
           if (isRadio && !next) throw new AgentError(`${name()} is a radio. Choose another one.`);
-          if (read() !== next) click(control);
+
+          // A mixed box flips the checked state hidden under it, so one click can land on either
+          // side. A second click settles it; anything else means the app overrode the change.
+          for (let tries = 0; tries < 2 && read() !== next; tries++) {
+            click(control);
+            await settle();
+          }
+
+          if (read() !== next) throw new AgentError(`${name()} didn't change to ${next}.`);
         },
         ...(isRadio ? {} : {toggle: () => click(control)}),
       }),
@@ -863,9 +973,7 @@ export const discover = (root: ParentNode): Found[] => {
     if (!free(trigger)) continue;
 
     const menuItems = () =>
-      referenced(trigger, "aria-controls").flatMap((menu) =>
-        Array.from(menu.querySelectorAll('[role^="menuitem"]')),
-      );
+      referenced(trigger, "aria-controls").flatMap((menu) => listed(menu, '[role^="menuitem"]'));
     const name = () => labelOf(trigger) ?? "this menu";
 
     add(
@@ -874,7 +982,7 @@ export const discover = (root: ParentNode): Found[] => {
           press: (arg) =>
             arg === undefined
               ? click(trigger)
-              : pressInPopup(trigger, String(arg), '[role^="menuitem"]', name()),
+              : pressInPopup(trigger, String(arg), '[role^="menuitem"]', name(), checkItem),
           setOpen: (arg) => {
             if (isExpanded(trigger) !== toBoolean(arg, name())) click(trigger);
           },
@@ -938,19 +1046,22 @@ export const discover = (root: ParentNode): Found[] => {
   for (const list of all('[role="listbox"]')) {
     if (!free(list)) continue;
 
-    const options = () => Array.from(list.querySelectorAll('[role="option"]'));
+    const options = () => listed(list, '[role="option"]');
     const multiple = list.getAttribute("aria-multiselectable") === "true";
     const isSelected = (option: Element) => option.getAttribute("aria-selected") === "true";
 
     add({
       actions: () => ({
-        setValue: (...args) => {
+        setValue: async (...args) => {
           const values = args.flat().map(String);
 
           for (const option of options()) {
             const wanted = values.includes(optionItem(option).value);
 
-            if (wanted !== isSelected(option) && (wanted || multiple)) click(option);
+            if (wanted !== isSelected(option) && (wanted || multiple)) {
+              await checkItem?.(option);
+              click(option);
+            }
           }
         },
       }),
@@ -975,16 +1086,19 @@ export const discover = (root: ParentNode): Found[] => {
   for (const menu of all('[role="menu"]')) {
     if (!free(menu)) continue;
 
-    const menuItems = () => Array.from(menu.querySelectorAll('[role^="menuitem"]'));
+    const menuItems = () => listed(menu, '[role^="menuitem"]');
 
     add({
       actions: () => ({
-        press: (arg) => {
-          const items = menuItems().map(optionItem);
+        press: async (arg) => {
+          const elements = menuItems();
+          const items = elements.map(optionItem);
           const target = pickItem(items, arg, labelOf(menu) ?? "this menu");
-          const element = menuItems()[items.indexOf(target)];
+          const element = elements[items.indexOf(target)];
 
-          if (element) click(element);
+          if (!element) return;
+          await checkItem?.(element);
+          click(element);
         },
       }),
       el: menu,
