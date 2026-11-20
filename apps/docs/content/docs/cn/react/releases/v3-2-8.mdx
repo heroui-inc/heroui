@@ -38,6 +38,10 @@ github:
   </Tab>
 </Tabs>
 
+<Callout type="warning">
+  **tailwind-variants 4。** `@heroui/react` 与 `@heroui/styles` 会从 `tailwind-variants` 重新导出 `tv`、`cn` 与 `VariantProps`，本版本将其从 `3.3.1` 升级至 `4.0.2`。如果你从 HeroUI 引入这些 API，升级后请检查自己的 `tv()` 调用：v4 将 `twMergeConfig` 移至 `tailwind-variants/config`，且更严格的类型可能会拒绝部分 v3 接受的 `tv()` 配置。
+</Callout>
+
 <Callout type="info">
   **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
 </Callout>

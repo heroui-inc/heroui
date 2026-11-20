@@ -38,6 +38,10 @@ Update to the latest version:
   </Tab>
 </Tabs>
 
+<Callout type="warning">
+  **tailwind-variants 4.** `@heroui/react` and `@heroui/styles` re-export `tv`, `cn`, and `VariantProps` from `tailwind-variants`, which this release upgrades from `3.3.1` to `4.0.2`. If you import them from HeroUI, check your own `tv()` calls after upgrading: v4 moves `twMergeConfig` to `tailwind-variants/config`, and its stricter types can reject some `tv()` configurations that v3 accepted.
+</Callout>
+
 <Callout type="info">
   **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
 </Callout>
