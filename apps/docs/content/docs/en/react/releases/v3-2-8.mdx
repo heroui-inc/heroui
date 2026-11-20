@@ -45,7 +45,7 @@ Update to the latest version:
 ## Dependencies
 
 - **tailwind-variants**: Upgrade `@heroui/react` and `@heroui/styles` to `tailwind-variants@4.0.2`. HeroUI's internal `tv` wrapper now uses `createTV` with the built-in `twMerge` config, and the unused `tailwind-merge` Rollup external is removed. If your app imports `tailwind-variants` directly and passes `twMergeConfig`, note that v4 moves that option to `tailwind-variants/config` ([#6996](https://github.com/heroui-inc/heroui/pull/6996), [#7010](https://github.com/heroui-inc/heroui/pull/7010)).
-- **Tooling**: Bump Tailwind CSS to `4.3.5`, Vitest to `5.1.0`, Storybook to `10.6.6`, and other development dependencies ([#7004](https://github.com/heroui-inc/heroui/pull/7004), [d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5)).
+- **Tooling**: Bump Tailwind CSS to `4.3.5`, Vitest to `5.1.1`, Storybook to `10.6.8`, and other development dependencies ([#7004](https://github.com/heroui-inc/heroui/pull/7004), [d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5), [#7035](https://github.com/heroui-inc/heroui/pull/7035)).
 - **Security**: Remove the vulnerable `deepmerge` package from the build toolchain (GHSA-gcqx-w48m-w2h4) and the unused `@vercel/og` dependency from the docs (GHSA-wx4j-mvgx-mqwp) ([#6997](https://github.com/heroui-inc/heroui/pull/6997)). Move development tooling to patched `minimatch@11` and `glob@14` (GHSA-g3hv-75wg-m249, GHSA-3g3m-2fjr-6pw4) ([#7029](https://github.com/heroui-inc/heroui/pull/7029)).
 
 ## What's New
