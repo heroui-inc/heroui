@@ -20,12 +20,14 @@ AI 助手可以协助迁移。你可以使用 [迁移 MCP 服务器](/docs/react
 1. **准备阶段**：迁移所有组件代码，同时仍依赖 v2 依赖项（代码将被破坏）
 2. **切换阶段**：将依赖项更新到 v3 并修复任何剩余问题
 
-**⚠️ 关键：不要构建来检查迁移过程中的错误**
+<Callout type="warning">
+  **关键：不要构建来检查迁移过程中的错误**
 
-- 使用**类型检查**（例如，`tsc --noEmit`) 如果可以检查 TypeScript 错误
-- 使用**lint**（例如，`eslint`, `biome check`) 如果可以检查代码质量
-- **不要**运行构建命令（例如，`npm run build`, `next build`, `vite build`)
-- **请勿** 在迁移期间尝试启动/运行项目
+  - 使用**类型检查**（例如，`tsc --noEmit`) 如果可以检查 TypeScript 错误
+  - 使用**lint**（例如，`eslint`, `biome check`) 如果可以检查代码质量
+  - **不要**运行构建命令（例如，`npm run build`, `next build`, `vite build`)
+  - **请勿** 在迁移期间尝试启动/运行项目
+</Callout>
 
 ## 分步迁移指南
 

@@ -1,8 +1,10 @@
+import type {SearchFieldProps} from "@heroui/react";
+
 import {Label, SearchField} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: SearchFieldProps) {
   return (
-    <SearchField name="search">
+    <SearchField {...props} name="search">
       <Label>搜索</Label>
       <SearchField.Group>
         <SearchField.SearchIcon />

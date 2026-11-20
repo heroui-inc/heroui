@@ -1,8 +1,16 @@
+import type {NumberFieldProps} from "@heroui/react";
+
 import {Label, NumberField} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: NumberFieldProps) {
   return (
-    <NumberField className="w-full max-w-64" defaultValue={1024} minValue={0} name="width">
+    <NumberField
+      {...props}
+      className="w-full max-w-64"
+      defaultValue={1024}
+      minValue={0}
+      name="width"
+    >
       <Label>宽度</Label>
       <NumberField.Group>
         <NumberField.DecrementButton />

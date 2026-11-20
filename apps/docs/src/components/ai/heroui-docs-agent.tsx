@@ -85,8 +85,8 @@ export function HeroUIDocsAgent() {
   }, [agent]);
 
   return (
+    // No floating launcher: the navbar AI button (and ⌘I) opens the agent.
     <HeroUIAgent
-      showLauncher
       startNewConversationOnOpen
       agentId={HEROUI_DOCS_AGENT_ID}
       appearance={{theme: agentTheme, viewMode: "sidebar"}}
@@ -94,6 +94,7 @@ export function HeroUIDocsAgent() {
       getAuthToken={getAuthToken}
       locale="en"
       permissions={{defaultMode: "auto", showPicker: false}}
+      showLauncher={false}
       tools={docsAgentTools}
     />
   );

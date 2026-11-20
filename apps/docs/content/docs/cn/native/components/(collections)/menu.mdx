@@ -277,7 +277,7 @@ const [textStyles, setTextStyles] = useState<Set<MenuKey>>(
 </Menu>
 ```
 
-### Bottom Sheet 呈现
+### BottomSheet 呈现
 
 使用 `presentation="bottom-sheet"` 以底部抽屉形式展示菜单内容。
 
@@ -404,7 +404,7 @@ export default function MenuExample() {
 }
 ```
 
-更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/menu.tsx>)。
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/menu.tsx)。
 
 ## API 参考
 
@@ -506,21 +506,20 @@ Popover 内容动画配置，可为：
 | `entering.value` | `EntryOrExitLayoutType` | Scale + fade entering animation | 自定义进入动画                 |
 | `exiting.value`  | `EntryOrExitLayoutType` | Scale + fade exiting animation  | 自定义退出动画                 |
 
-### Menu.Content（Bottom Sheet）
+### Menu.Content（BottomSheet）
 
-当 `presentation="bottom-sheet"` 时的属性。继承 `@gorhom/bottom-sheet` 的 BottomSheet 属性。
+当 `presentation="bottom-sheet"` 时的属性。
 
-| prop                        | type                                     | default | description                                          |
-| --------------------------- | ---------------------------------------- | ------- | ---------------------------------------------------- |
-| `children`                  | `React.ReactNode`                        | -       | 底部抽屉内容                                         |
-| `presentation`              | `'bottom-sheet'`                         | -       | 呈现方式（须与 Menu 根一致）                         |
-| `className`                 | `string`                                 | -       | 底部抽屉额外 class                                   |
-| `backgroundClassName`       | `string`                                 | -       | 背景额外 class                                       |
-| `handleIndicatorClassName`  | `string`                                 | -       | 把手指示条额外 class                                 |
-| `contentContainerClassName` | `string`                                 | -       | 内容容器额外 class                                   |
-| `contentContainerProps`     | `Omit<BottomSheetViewProps, 'children'>` | -       | 内容容器属性                                         |
-| `animation`                 | `AnimationDisabled`                      | -       | 设为 `false` 或 `"disabled"` 可关闭动画             |
-| `...BottomSheetProps`       | `Partial<BottomSheetProps>`              | -       | 支持 `@gorhom/bottom-sheet` 的全部属性               |
+| prop                        | type                                 | default    | description                                                                    |
+| --------------------------- | ------------------------------------ | ---------- | ------------------------------------------------------------------------------ |
+| `children`                  | `ReactNode`                          | -          | 底部弹层内容                                                                   |
+| `presentation`              | `'bottom-sheet'`                     | -          | 呈现模式，须为 `bottom-sheet` 并与 Menu.Root 的 presentation 一致（必填）          |
+| `detents`                   | `('auto' \| 'peek' \| number)[]`     | `['auto']` | 弹层可停留的尺寸，从小到大排列，最多 3 个                                      |
+| `contentContainerClassName` | `string`                             | -          | 内容容器额外 class                                                             |
+| `scrollableRef`             | `RefObject<ScrollViewInstance \| …>` | -          | 弹层内滚动视图的 ref                                                           |
+| `...BottomSheetProps`       | `BottomSheetProps`                   | -          | 支持 [`BottomSheet`](/docs/native/components/bottom-sheet) 的全部属性，`name` 与 TrueSheet 自身的 `presentation` 除外 |
+
+Menu 打开时呈现弹层，关闭时收起弹层。以原生方式关闭弹层（向下拖动、点击遮暗区域、Android 返回键）会关闭 Menu。需要安装 `@lodev09/react-native-true-sheet`。
 
 ### Menu.Close
 
@@ -843,3 +842,5 @@ const insets = useSafeAreaInsets();
   ...
 </Menu.Content>;
 ```
+
+完整示例请参见 `example/src/app/(home)/components/menu-in-modal-screen.tsx`。

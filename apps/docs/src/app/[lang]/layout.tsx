@@ -4,12 +4,16 @@ import type {ReactNode} from "react";
 import {Analytics} from "@vercel/analytics/next";
 import {NextProvider} from "fumadocs-core/framework/next";
 import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
-import {Inter} from "next/font/google";
+import {Geist_Mono, Inter} from "next/font/google";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 
+import {DesignThemeScript} from "@/components/design-theme-script";
+import {PlausibleAnalytics} from "@/components/plausible-analytics";
 import {siteConfig} from "@/config/site";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
+import {i18n} from "@/lib/i18n";
 import {getOrganizationJsonLd, getSoftwareApplicationJsonLd, getWebSiteJsonLd} from "@/lib/json-ld";
+import {getProSearchItems} from "@/lib/pro-components";
 import {getLanguageTag} from "@/lib/seo";
 import {source} from "@/lib/source";
 import {__BASE_URL__} from "@/utils/env";
@@ -23,6 +27,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+});
+
 export default async function Layout({
   children,
   params,
@@ -32,10 +41,17 @@ export default async function Layout({
 }) {
   const {lang} = await params;
   const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
+  // Loaded with the layout so ⌘K can filter Pro components without a request per keystroke.
+  const proComponents = await getProSearchItems();
 
   return (
-    <html suppressHydrationWarning className={inter.variable} lang={getLanguageTag(lang)}>
+    <html
+      suppressHydrationWarning
+      className={`${inter.variable} ${geistMono.variable}`}
+      lang={getLanguageTag(lang)}
+    >
       <head>
+        <DesignThemeScript />
         <script
           dangerouslySetInnerHTML={{__html: JSON.stringify(getOrganizationJsonLd())}}
           type="application/ld+json"
@@ -53,16 +69,22 @@ export default async function Layout({
         <NuqsAdapter>
           <NextProvider>
             <TreeContextProvider tree={source.getPageTree(lang)}>
-              <CustomRootProvider dict={dict} lang={lang}>
+              <CustomRootProvider dict={dict} lang={lang} proComponents={proComponents}>
                 {children}
               </CustomRootProvider>
             </TreeContextProvider>
           </NextProvider>
         </NuqsAdapter>
         <Analytics />
+        <PlausibleAnalytics />
       </body>
     </html>
   );
+}
+
+// Prerenders every route under `[lang]` for each locale at build time instead of on first request.
+export function generateStaticParams() {
+  return i18n.languages.map((lang) => ({lang}));
 }
 
 export const metadata: Metadata = {

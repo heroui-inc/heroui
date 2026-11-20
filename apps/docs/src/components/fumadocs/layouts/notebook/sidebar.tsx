@@ -4,31 +4,25 @@ import type {ComponentProps} from "react";
 
 import * as Base from "fumadocs-ui/components/sidebar/base";
 import {createLinkItemRenderer} from "fumadocs-ui/components/sidebar/link-item";
-import {createPageTreeRenderer} from "fumadocs-ui/components/sidebar/page-tree";
-import {useContext, useRef} from "react";
+import {useRef} from "react";
 import {tv} from "tailwind-variants";
 
 import {mergeRefs} from "@/components/fumadocs/utils/merge-refs";
 import {cn} from "@/utils/cn";
 
-import {LayoutContext} from "./client";
-
 const itemVariants = tv({
-  base: "text-fd-muted-foreground relative flex flex-row items-center gap-2 rounded-lg p-2 text-start [&_svg]:size-4 [&_svg]:shrink-0",
+  base: "relative flex min-h-7 w-full flex-row items-center gap-2 rounded-lg px-2 py-[5px] text-start text-[13px] leading-[18px] font-medium text-(--docs-fg) [&_svg]:size-3.5 [&_svg]:shrink-0",
   variants: {
-    highlight: {
-      true: "data-[active=true]:before:bg-fd-primary data-[active=true]:before:absolute data-[active=true]:before:inset-y-2.5 data-[active=true]:before:start-2.5 data-[active=true]:before:w-px data-[active=true]:before:content-['']",
-    },
     variant: {
-      button:
-        "hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 transition-colors hover:transition-none",
-      link: "hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 data-[active=true]:bg-fd-primary/10 data-[active=true]:text-fd-primary transition-colors hover:transition-none data-[active=true]:hover:transition-colors",
+      button: "cursor-(--cursor-interactive) hover:bg-(--docs-item-hover)",
+      link: "hover:bg-(--docs-item-hover) data-[active=true]:bg-(--docs-item-active) data-[active=true]:text-foreground",
     },
   },
 });
 
+/** A group's direct children line up with its label; deeper levels indent. */
 function getItemOffset(depth: number) {
-  return `calc(${2 + 3 * depth} * var(--spacing))`;
+  return `calc(${2 + 3 * Math.max(0, depth - 1)} * var(--spacing))`;
 }
 
 export const {
@@ -38,19 +32,22 @@ export const {
   SidebarTrigger,
 } = Base;
 
-/** Native overflow — Radix ScrollArea's overlay thumb lags behind the scroll offset. */
+/**
+ * Native overflow: Radix ScrollArea's overlay thumb lags behind the scroll offset.
+ * The mask fades items in under the header and out at the bottom edge.
+ */
 export function SidebarViewport({children, className, ...props}: ComponentProps<"div">) {
   return (
     <div
       data-docs-sidebar-viewport=""
       className={cn(
-        "min-h-0 flex-1 overflow-y-auto overscroll-contain p-4",
-        "mask-[linear-gradient(to_bottom,transparent,white_12px,white_calc(100%-12px),transparent)]",
+        "min-h-0 flex-1 overflow-y-auto overscroll-contain",
+        "mask-[linear-gradient(to_bottom,transparent,white_8px,white_calc(100%-56px),transparent)]",
         className,
       )}
       {...props}
     >
-      <div className="flex w-full flex-col gap-0.5">{children}</div>
+      <div className="flex w-full flex-col gap-0.5 pt-1 pb-14">{children}</div>
     </div>
   );
 }
@@ -61,41 +58,23 @@ export function SidebarContent({
   ref: refProp,
   ...props
 }: ComponentProps<"aside">) {
-  const context = useContext(LayoutContext);
-  const navMode = context?.navMode ?? "auto";
-
   const ref = useRef<HTMLElement>(null);
 
   return (
     <Base.SidebarContent>
-      {({collapsed, hovered, ref: asideRef, ...rest}) => (
+      {({collapsed: _collapsed, hovered: _hovered, ref: asideRef, ...rest}) => (
         <div
           data-sidebar-placeholder=""
           className={cn(
-            "md:layout:[--fd-sidebar-width:268px] pointer-events-none sticky z-20 [grid-area:sidebar] *:pointer-events-auto max-md:hidden",
-            navMode === "auto"
-              ? "top-(--fd-docs-row-1) h-[calc(var(--fd-docs-height)-var(--fd-docs-row-1))]"
-              : "top-(--fd-docs-row-2) h-[calc(var(--fd-docs-height)-var(--fd-docs-row-2))]",
+            "md:layout:[--fd-sidebar-width:var(--docs-sidebar-width)]",
+            "sticky top-(--fd-docs-row-1) z-20 h-[calc(var(--fd-docs-height)-var(--fd-docs-row-1))] [grid-area:sidebar] max-md:hidden",
           )}
         >
-          {!!collapsed && <div className="absolute inset-y-0 start-0 w-4" {...rest} />}
           <aside
             ref={mergeRefs(ref, refProp, asideRef)}
-            data-collapsed={collapsed}
-            data-hovered={!!collapsed && hovered}
             id="nd-sidebar"
             className={cn(
-              "absolute inset-y-0 start-0 flex w-full flex-col items-end text-sm duration-250 *:w-(--fd-sidebar-width)",
-              navMode === "auto" && "bg-fd-card border-e",
-              collapsed && [
-                "bg-fd-card inset-y-2 w-(--fd-sidebar-width) rounded-xl border transition-transform",
-                hovered
-                  ? "translate-x-2 shadow-lg rtl:-translate-x-2"
-                  : "-translate-x-(--fd-sidebar-width) rtl:translate-x-full",
-              ],
-              ref.current &&
-                (ref.current.getAttribute("data-collapsed") === "true") !== collapsed &&
-                "transition-[width,inset-block,translate,background-color]",
+              "absolute inset-0 flex w-(--fd-sidebar-width) flex-col gap-4 px-3 pt-5 text-sm",
               className,
             )}
             {...props}
@@ -116,10 +95,10 @@ export function SidebarDrawer({
 }: ComponentProps<typeof Base.SidebarDrawerContent>) {
   return (
     <>
-      <Base.SidebarDrawerOverlay className="data-[state=open]:animate-fd-fade-in data-[state=closed]:animate-fd-fade-out fixed inset-0 z-40 backdrop-blur-xs" />
+      <Base.SidebarDrawerOverlay className="data-[state=open]:animate-fd-fade-in data-[state=closed]:animate-fd-fade-out fixed inset-0 z-40 bg-(--color-backdrop) backdrop-blur-xs" />
       <Base.SidebarDrawerContent
         className={cn(
-          "bg-fd-background data-[state=open]:animate-fd-sidebar-in data-[state=closed]:animate-fd-sidebar-out fixed inset-y-0 end-0 z-40 flex w-[85%] max-w-[380px] flex-col text-[0.9375rem] shadow-lg",
+          "data-[state=open]:animate-fd-sidebar-in data-[state=closed]:animate-fd-sidebar-out fixed inset-y-0 end-0 z-40 flex w-[85%] max-w-[320px] flex-col gap-4 bg-background px-3 pt-4 shadow-overlay",
           className,
         )}
         {...props}
@@ -130,16 +109,19 @@ export function SidebarDrawer({
   );
 }
 
+/** Section heading inside the active root (from `---Title---` meta.json separators). */
 export function SidebarSeparator({children, className, style, ...props}: ComponentProps<"p">) {
   const depth = Base.useFolderDepth();
 
   return (
     <Base.SidebarSeparator
-      className={cn("[&_svg]:size-4 [&_svg]:shrink-0", className)}
-      style={{
-        paddingInlineStart: getItemOffset(depth),
-        ...style,
-      }}
+      data-sidebar-section=""
+      style={{paddingInlineStart: getItemOffset(depth), ...style}}
+      className={cn(
+        "flex h-7 items-center gap-2 px-2 text-[13px] leading-[18px] font-medium text-(--docs-fg-subtle) [&_svg]:size-3.5 [&_svg]:shrink-0",
+        "[&:not(:first-child)]:mt-2",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -157,11 +139,8 @@ export function SidebarItem({
 
   return (
     <Base.SidebarItem
-      className={cn(itemVariants({highlight: depth >= 1, variant: "link"}), className)}
-      style={{
-        paddingInlineStart: getItemOffset(depth),
-        ...style,
-      }}
+      className={cn(itemVariants({variant: "link"}), className)}
+      style={{paddingInlineStart: getItemOffset(depth), ...style}}
       {...props}
     >
       {children}
@@ -178,14 +157,12 @@ export function SidebarFolderTrigger({
 
   return (
     <Base.SidebarFolderTrigger
-      className={itemVariants({
-        class: `w-full ${className}`,
-        variant: collapsible ? "button" : undefined,
-      })}
-      style={{
-        paddingInlineStart: getItemOffset(depth - 1),
-        ...style,
-      }}
+      style={{paddingInlineStart: getItemOffset(depth - 1), ...style}}
+      className={cn(
+        itemVariants({variant: collapsible ? "button" : undefined}),
+        "[&>svg[data-icon]]:size-3 [&>svg[data-icon]]:text-(--docs-fg-faint)",
+        className,
+      )}
       {...props}
     >
       {props.children}
@@ -202,11 +179,12 @@ export function SidebarFolderLink({
 
   return (
     <Base.SidebarFolderLink
-      className={cn(itemVariants({highlight: depth > 1, variant: "link"}), "w-full", className)}
-      style={{
-        paddingInlineStart: getItemOffset(depth - 1),
-        ...style,
-      }}
+      style={{paddingInlineStart: getItemOffset(depth - 1), ...style}}
+      className={cn(
+        itemVariants({variant: "link"}),
+        "[&>svg[data-icon]]:size-3 [&>svg[data-icon]]:text-(--docs-fg-faint)",
+        className,
+      )}
       {...props}
     >
       {props.children}
@@ -219,31 +197,18 @@ export function SidebarFolderContent({
   className,
   ...props
 }: ComponentProps<typeof Base.SidebarFolderContent>) {
-  const depth = Base.useFolderDepth();
-
   return (
     <Base.SidebarFolderContent
       className={cn(
-        itemVariants({
-          class: "relative",
-          highlight: depth === 1,
-        }),
+        "data-[state=closed]:animate-fd-collapsible-up data-[state=open]:animate-fd-collapsible-down overflow-hidden",
         className,
       )}
       {...props}
     >
-      {children}
+      <div className="flex flex-col gap-0.5 pt-0.5">{children}</div>
     </Base.SidebarFolderContent>
   );
 }
-export const SidebarPageTree = createPageTreeRenderer({
-  SidebarFolder,
-  SidebarFolderContent,
-  SidebarFolderLink,
-  SidebarFolderTrigger,
-  SidebarItem,
-  SidebarSeparator,
-});
 
 export const SidebarLinkItem = createLinkItemRenderer({
   SidebarFolder,

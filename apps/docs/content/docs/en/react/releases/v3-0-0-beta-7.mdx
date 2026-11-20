@@ -11,7 +11,9 @@ github:
 
 This release adds 4 new components: [Calendar](/docs/components/calendar), [RangeCalendar](/docs/components/range-calendar), [DatePicker](/docs/components/date-picker), and [DateRangePicker](/docs/components/date-range-picker). Also new: [Switch.Content](#switchcontent) for grouping label and description, and [Tabs.Separator](#tabsseparator) for opt-in separator lines between tabs.
 
-⚠️ **Breaking changes**: `hideSeparator` removed from Tabs; `DateInputGroup` and `ColorInputGroup` moved under `DateField.Group`, `TimeField.Group`, and `ColorField.Group`.
+<Callout type="warning">
+  **Breaking changes**: `hideSeparator` removed from Tabs; `DateInputGroup` and `ColorInputGroup` moved under `DateField.Group`, `TimeField.Group`, and `ColorField.Group`.
+</Callout>
 
 <DocsImage
   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-7-light@2x.jpg"
@@ -164,7 +166,7 @@ Separators are now **opt-in** — add `<Tabs.Separator />` inside each `<Tabs.Ta
 
 ### Field Sub-Component Consolidation
 
-`DateField`, `TimeField`, and `ColorField` now expose their input group sub-components directly, removing the need to import `DateInputGroup` or `ColorInputGroup` separately. See [Breaking Changes](#-breaking-changes) for migration details.
+`DateField`, `TimeField`, and `ColorField` now expose their input group sub-components directly, removing the need to import `DateInputGroup` or `ColorInputGroup` separately. See [Breaking Changes](#breaking-changes) for migration details.
 
 ### Breadcrumbs Fix
 
@@ -184,7 +186,7 @@ Props passed to `Breadcrumbs.Item` are now forwarded to the underlying `Link` ([
 - **@internationalized/date**: Updated from `3.10.1` to `3.11.0` — date fields now constrain on blur instead of as you type
 - Added `@react-aria/i18n` and `@react-stately/utils` for calendar i18n
 
-## ⚠️ Breaking Changes
+## Breaking Changes
 
 ### Tabs — `hideSeparator` Prop Removed
 

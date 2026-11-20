@@ -13,7 +13,9 @@
  */
 
 import {existsSync, readFileSync} from "node:fs";
-import {dirname, join} from "node:path";
+import {join} from "node:path";
+
+import {findLocalDocs} from "./_local_docs.mjs";
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
 const FALLBACK_BASE = "https://heroui.com";
@@ -27,33 +29,6 @@ function toKebabCase(name) {
     .replace(/([a-z])([A-Z])/g, "$1-$2")
     .replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
     .toLowerCase();
-}
-
-/**
- * Find the docs that ship inside the installed `@heroui/react` package.
- * They match the project's installed version, so they are preferred over the network.
- * Set HEROUI_DOCS_SOURCE=remote to skip them.
- */
-function findLocalDocs() {
-  if (process.env.HEROUI_DOCS_SOURCE === "remote") return null;
-
-  for (let dir = process.cwd(); ; dir = dirname(dir)) {
-    const docsDir = join(dir, "node_modules", "@heroui", "react", "docs");
-
-    if (existsSync(join(docsDir, "llms.txt"))) {
-      let version = "unknown";
-
-      try {
-        version = JSON.parse(readFileSync(join(docsDir, "..", "package.json"), "utf-8")).version;
-      } catch {
-        // The docs are still usable without the version.
-      }
-
-      return {docsDir, version};
-    }
-
-    if (dirname(dir) === dir) return null;
-  }
 }
 
 /**

@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2025 年 12 月 19 日</span>
 </div>
 
-此版本引入了七个新组件（[ButtonGroup](/docs/components/button-group)、[DateField](/docs/components/date-field)、[ErrorMessage](/docs/components/error-message)、[ScrollShadow](/docs/components/scroll-shadow)、[SearchField](/docs/components/search-field)、[TagGroup](/docs/components/tag-group)、[TimeField](/docs/components/time-field)），为表单组件添加 `fullWidth` 支持，为 [Tabs](/docs/components/tabs)、[ButtonGroup](/docs/components/button-group) 与 [Accordion](/docs/components/accordion) 引入 `hideSeparator`，包含若干样式修复，以及 ⚠️ **破坏性变更**：移除 `asChild` prop，并更新了 [AlertDialog](/docs/components/alert-dialog) 与 [Modal](/docs/components/modal) 的 backdrop 变体。
+此版本引入了七个新组件（[ButtonGroup](/docs/components/button-group)、[DateField](/docs/components/date-field)、[ErrorMessage](/docs/components/error-message)、[ScrollShadow](/docs/components/scroll-shadow)、[SearchField](/docs/components/search-field)、[TagGroup](/docs/components/tag-group)、[TimeField](/docs/components/time-field)），为表单组件添加 `fullWidth` 支持，为 [Tabs](/docs/components/tabs)、[ButtonGroup](/docs/components/button-group) 与 [Accordion](/docs/components/accordion) 引入 `hideSeparator`，包含若干样式修复，以及 <StatusWarning /> **破坏性变更**：移除 `asChild` prop，并更新了 [AlertDialog](/docs/components/alert-dialog) 与 [Modal](/docs/components/modal) 的 backdrop 变体。
 
 
 <DocsImage
@@ -215,7 +215,7 @@ github:
 - **优化 will-change 属性**：在多个组件中调整 `will-change` CSS 属性，以获得更好的动画性能
 - **移除全局滚动条样式**：移除了全局滚动条样式，避免与自定义滚动条实现冲突，并修复了 modal / overlay 的交互问题
 
-## ⚠️ 破坏性变更
+## 破坏性变更
 
 ### AlertDialog 与 Modal 的 backdrop 变体
 

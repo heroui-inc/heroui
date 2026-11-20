@@ -9,6 +9,16 @@ description: HeroUI v3 的所有更新与变更，包含新功能、修复以及
 
 ## 最新版本
 
+### v3.2.8
+
+**2026 年 11 月 14 日**
+
+补丁版本：`@heroui/react` 随包附带与版本匹配的 Markdown 文档供编码代理读取，全新的 `heroui-theming` 技能让代理可以重新设计 HeroUI 样式或创建完整主题，`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。[ToggleButton](/docs/components/toggle-button) 新增 `fullWidth` 属性，[Sheet](/docs/components/sheet) 改用共享的浮层 z-index，因此可以显示在 [Modal](/docs/components/modal) 之上，浮层底部操作在空间不足时会换行而不再溢出。此外加宽了 [Table](/docs/components/table) 列宽调整手柄的点击区域，并修复内容不再溢出时 [ScrollShadow](/docs/components/scroll-shadow) 残留的渐隐效果。
+
+[阅读完整发布说明 →](/docs/react/releases/v3-2-8)
+
+---
+
 ### v3.2.7
 
 **2026 年 10 月 28 日**
@@ -103,7 +113,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
 
 **2026 年 5 月 15 日**
 
-补丁版本：`Text` 重命名为 `Typography` 以解决 `tailwind-merge` 冲突（⚠️ **破坏性变更**），派生颜色令牌重构为无前缀源变量，Checkbox 与 Radio 的 field-border 边框样式对齐，Calendar 悬停改用 `accent-soft-foreground` 以提升可读性，并新增 CLI 文档页。
+补丁版本：`Text` 重命名为 `Typography` 以解决 `tailwind-merge` 冲突（<StatusWarning /> **破坏性变更**），派生颜色令牌重构为无前缀源变量，Checkbox 与 Radio 的 field-border 边框样式对齐，Calendar 悬停改用 `accent-soft-foreground` 以提升可读性，并新增 CLI 文档页。
 
 [阅读完整发布说明 →](/docs/react/releases/v3-0-5)
 
@@ -201,7 +211,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
   href="/docs/react/releases/v3-0-0-beta-8"
 />
 
-此版本新增三个组件（[Badge](/docs/components/badge)、[Pagination](/docs/components/pagination)、[Table](/docs/components/table)），并为 [DateField](/docs/components/date-field) 与 [TimeField](/docs/components/time-field) 提供了新的 `InputContainer` 组合 API。⚠️ **破坏性变更**：TextField 的 CSS 类已从 `.text-field` 重命名为 `.textfield`。
+此版本新增三个组件（[Badge](/docs/components/badge)、[Pagination](/docs/components/pagination)、[Table](/docs/components/table)），并为 [DateField](/docs/components/date-field) 与 [TimeField](/docs/components/time-field) 提供了新的 `InputContainer` 组合 API。<StatusWarning /> **破坏性变更**：TextField 的 CSS 类已从 `.text-field` 重命名为 `.textfield`。
 
 [阅读完整发布说明 →](/docs/react/releases/v3-0-0-beta-8)
 
@@ -218,7 +228,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
   href="/docs/react/releases/v3-0-0-beta-7"
 />
 
-此版本引入了完整的**日期与时间**系统，包含四个新组件（[Calendar](/docs/components/calendar)、[RangeCalendar](/docs/components/range-calendar)、[DatePicker](/docs/components/date-picker)、[DateRangePicker](/docs/components/date-range-picker)），新增了 [Switch.Content](/docs/components/switch) 子组件、显式的 [Tabs.Separator](/docs/components/tabs) 用于按需启用分隔线，以及 ⚠️ **破坏性变更**：从 Tabs 中移除 `hideSeparator`，并将 `DateInputGroup` / `ColorInputGroup` 合并到各自的 Field 组件之下。
+此版本引入了完整的**日期与时间**系统，包含四个新组件（[Calendar](/docs/components/calendar)、[RangeCalendar](/docs/components/range-calendar)、[DatePicker](/docs/components/date-picker)、[DateRangePicker](/docs/components/date-range-picker)），新增了 [Switch.Content](/docs/components/switch) 子组件、显式的 [Tabs.Separator](/docs/components/tabs) 用于按需启用分隔线，以及 <StatusWarning /> **破坏性变更**：从 Tabs 中移除 `hideSeparator`，并将 `DateInputGroup` / `ColorInputGroup` 合并到各自的 Field 组件之下。
 
 [阅读完整发布说明 →](/docs/react/releases/v3-0-0-beta-7)
 
@@ -235,7 +245,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
   href="/docs/react/releases/v3-0-0-beta-6"
 />
 
-此版本引入了完整的**颜色系统**，包含六个新组件（[ColorPicker](/docs/components/color-picker)、[ColorArea](/docs/components/color-area)、[ColorSlider](/docs/components/color-slider)、[ColorField](/docs/components/color-field)、[ColorSwatch](/docs/components/color-swatch)、[ColorSwatchPicker](/docs/components/color-swatch-picker)），对 [Toast](/docs/components/toast) 进行了重大改进，加入了加载状态与 Promise 支持，[Separator](/docs/components/separator) 新增变体，以及 ⚠️ **破坏性变更**：将 `Toast.Container` 重命名为 `Toast.Provider`，并将 CSS 类名统一为连字符格式。
+此版本引入了完整的**颜色系统**，包含六个新组件（[ColorPicker](/docs/components/color-picker)、[ColorArea](/docs/components/color-area)、[ColorSlider](/docs/components/color-slider)、[ColorField](/docs/components/color-field)、[ColorSwatch](/docs/components/color-swatch)、[ColorSwatchPicker](/docs/components/color-swatch-picker)），对 [Toast](/docs/components/toast) 进行了重大改进，加入了加载状态与 Promise 支持，[Separator](/docs/components/separator) 新增变体，以及 <StatusWarning /> **破坏性变更**：将 `Toast.Container` 重命名为 `Toast.Provider`，并将 CSS 类名统一为连字符格式。
 
 [阅读完整发布说明 →](/docs/react/releases/v3-0-0-beta-6)
 
@@ -259,7 +269,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
   **已修复关键构建问题**：此版本（beta.4）存在一个关键构建问题，已在 **beta.5** 中修复。请升级到 `@heroui/styles@3.0.0-beta.5` 与 `@heroui/react@3.0.0-beta.5`，以确保 TypeScript 声明文件能正确生成、导出能正确解析。
 </Callout>
 
-此版本引入了用于可视化主题定制的全新[主题构建器](/themes)、三个新组件（[Autocomplete](/docs/components/autocomplete)、[Breadcrumbs](/docs/components/breadcrumbs)、[Toast](/docs/components/toast)），为 [Tabs](/docs/components/tabs) 添加了 secondary 变体，为 [Input](/docs/components/input) 与 [InputGroup](/docs/components/input-group) 添加了 primary / secondary 变体，以及 ⚠️ **破坏性变更**：移除了 Link 的下划线变体，并从表单组件中移除了 `isInSurface` prop。
+此版本引入了用于可视化主题定制的全新[主题构建器](/themes)、三个新组件（[Autocomplete](/docs/components/autocomplete)、[Breadcrumbs](/docs/components/breadcrumbs)、[Toast](/docs/components/toast)），为 [Tabs](/docs/components/tabs) 添加了 secondary 变体，为 [Input](/docs/components/input) 与 [InputGroup](/docs/components/input-group) 添加了 primary / secondary 变体，以及 <StatusWarning /> **破坏性变更**：移除了 Link 的下划线变体，并从表单组件中移除了 `isInSurface` prop。
 
 [阅读完整发布说明 →](/docs/react/releases/v3-0-0-beta-4)
 
@@ -277,7 +287,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
 />
 
 
-此版本引入了七个新组件（[ButtonGroup](/docs/components/button-group)、[DateField](/docs/components/date-field)、[ErrorMessage](/docs/components/error-message)、[ScrollShadow](/docs/components/scroll-shadow)、[SearchField](/docs/components/search-field)、[TagGroup](/docs/components/tag-group)、[TimeField](/docs/components/time-field)），为表单与输入组件添加了 `fullWidth` 支持，为 [Tabs](/docs/components/tabs)、[ButtonGroup](/docs/components/button-group) 和 [Accordion](/docs/components/accordion) 引入 `hideSeparator` 以获得更简洁的布局，包含若干样式修复，以及 ⚠️ **破坏性变更**：移除 `asChild` prop，并更新了 [AlertDialog](/docs/components/alert-dialog) 与 [Modal](/docs/components/modal) 的 backdrop 变体。
+此版本引入了七个新组件（[ButtonGroup](/docs/components/button-group)、[DateField](/docs/components/date-field)、[ErrorMessage](/docs/components/error-message)、[ScrollShadow](/docs/components/scroll-shadow)、[SearchField](/docs/components/search-field)、[TagGroup](/docs/components/tag-group)、[TimeField](/docs/components/time-field)），为表单与输入组件添加了 `fullWidth` 支持，为 [Tabs](/docs/components/tabs)、[ButtonGroup](/docs/components/button-group) 和 [Accordion](/docs/components/accordion) 引入 `hideSeparator` 以获得更简洁的布局，包含若干样式修复，以及 <StatusWarning /> **破坏性变更**：移除 `asChild` prop，并更新了 [AlertDialog](/docs/components/alert-dialog) 与 [Modal](/docs/components/modal) 的 backdrop 变体。
 
 [阅读完整发布说明 →](/docs/react/releases/v3-0-0-beta-3)
 
@@ -295,7 +305,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
 />
 
 
-此版本引入了六个重要的新组件（[AlertDialog](/docs/components/alert-dialog)、[ComboBox](/docs/components/combo-box)、[Dropdown](/docs/components/dropdown)、[InputGroup](/docs/components/input-group)、[Modal](/docs/components/modal)、[NumberField](/docs/components/number-field)），增强了主题兼容性与动效偏好支持，改进了 [Select](/docs/components/select) 组件的 API（包含 ⚠️ **破坏性变更**），并附带多项优化和 bug 修复。
+此版本引入了六个重要的新组件（[AlertDialog](/docs/components/alert-dialog)、[ComboBox](/docs/components/combo-box)、[Dropdown](/docs/components/dropdown)、[InputGroup](/docs/components/input-group)、[Modal](/docs/components/modal)、[NumberField](/docs/components/number-field)），增强了主题兼容性与动效偏好支持，改进了 [Select](/docs/components/select) 组件的 API（包含 <StatusWarning /> **破坏性变更**），并附带多项优化和 bug 修复。
 
 [阅读完整发布说明 →](/docs/react/releases/v3-0-0-beta-2)
 
@@ -327,7 +337,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
 #### React Server Components 支持
 - 修复了复合组件在 React Server Components（RSC）中无法正常工作的关键问题
 - 将复合组件模式的逻辑从组件移至 index 文件，解决 `"use client"` 冲突
-- **（⚠️ 破坏性变更）**：主组件现在需要 `.Root` 后缀（例如 `<Avatar>` → `<Avatar.Root>`）
+- **（<StatusWarning /> 破坏性变更）**：主组件现在需要 `.Root` 后缀（例如 `<Avatar>` → `<Avatar.Root>`）
 - 命名导出保持不变，并完全继续支持
 
 #### React 19 相关改进
@@ -335,7 +345,7 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
 - 简化了 Context 的使用方式（`Context.Provider` → [React 19](https://react.dev/blog/2024/12/05/react-19#context-as-a-provider)）
 
 #### Switch 组件重构
-- **（⚠️ 破坏性变更）**：将 Switch 与 SwitchGroup 拆分为独立组件
+- **（<StatusWarning /> 破坏性变更）**：将 Switch 与 SwitchGroup 拆分为独立组件
 - 更简洁的 API：`<SwitchGroup>` 取代 `<Switch.Group>` 和 `<Switch.GroupItems>`
 - 与 Radio / RadioGroup 模式保持一致
 - 各自拥有独立的样式、类型和实现
@@ -387,10 +397,10 @@ React Aria 升级：将 `react-aria-components` 升级至 `1.22.1`（`react-aria
 
 **2025 年 9 月 22 日**
 
-- 🎨 **展示页面** - 使用 HeroUI 构建的站点案例集
-- 🌀 **DisclosureGroup 组件** - 将多个 Disclosure 组合在一起
-- 📇 **Card 组件**（预览） - Card 组件的首个版本
-- 🔀 **Switch 组件**（预览） - 用于设置项的切换开关
+- <InlineIcon icon="palette" /> **展示页面** - 使用 HeroUI 构建的站点案例集
+- <InlineIcon icon="chevrons-expand-vertical" /> **DisclosureGroup 组件** - 将多个 Disclosure 组合在一起
+- <InlineIcon icon="square-article" /> **Card 组件**（预览） - Card 组件的首个版本
+- <InlineIcon icon="toggle-on" /> **Switch 组件**（预览） - 用于设置项的切换开关
 
 ---
 

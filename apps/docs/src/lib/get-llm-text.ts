@@ -10,15 +10,19 @@ import {remark} from "remark";
 import remarkGfm from "remark-gfm";
 import remarkMdx from "remark-mdx";
 
-import {getRelatedComponents} from "@/components-registry";
 import {siteConfig} from "@/config/site";
 import {getDemo} from "@/demos";
-import {replaceNativeComponentsCategories} from "@/lib/native-components-markdown";
-import {source} from "@/lib/source";
+import {getComponentsCatalog} from "@/lib/components-catalog";
+import {replaceComponentsIndex} from "@/lib/components-index-markdown";
+import {getInitialControlValues, renderDemoSource} from "@/lib/demo-controls";
+import {remarkMdxIcons, replaceMdxIcons} from "@/lib/mdx-icons-markdown";
+import {getRelatedComponentItems} from "@/lib/related-components";
 
 const processor = remark()
   .use(remarkMdx)
   .use(remarkInclude)
+  // after `remarkInclude`, so `<include>`d sections lose their icon tags too
+  .use(remarkMdxIcons)
   .use(remarkGfm)
   .use(remarkAutoTypeTable)
   .use(remarkNpm);
@@ -27,7 +31,6 @@ const CONTENT_DIR = "content/docs";
 const DEMOS_DIR = "src/demos";
 const DEFAULT_CATEGORY = "docs";
 const DEFAULT_TITLE = "Untitled";
-const MAX_RELATED_COMPONENTS = 3;
 
 function normalizePagePath(pagePath: string): string {
   return pagePath.endsWith(".mdx") ? pagePath : `${pagePath}.mdx`;
@@ -106,11 +109,7 @@ ${header}
   }
 
   // First, process MDX content to replace ComponentPreview, CollapsibleCode, etc.
-  const processedContent = await processMDXContent(
-    rawContent,
-    page.locale,
-    source.getPages(page.locale),
-  );
+  const processedContent = await processMDXContent(rawContent, page.locale);
 
   // Then process with remark to convert MDX to markdown
   const processed = await processor.process({
@@ -122,7 +121,7 @@ ${header}
   const finalContent = processed.value
     .toString()
     .replace(
-      /<(ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g,
+      /<(ComponentPreview|CollapsibleCode|RelatedComponents|DocsImage|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g,
       "",
     );
 
@@ -133,7 +132,8 @@ ${finalContent}
 </page>`;
 }
 
-const COMPONENT_PREVIEW_REGEX = /<ComponentPreview\s+name\s*=\s*["']([^"']+)["'][^/>]*\/>/g;
+// `name` can follow other props (e.g. `isBgSolid`).
+const COMPONENT_PREVIEW_REGEX = /<ComponentPreview\b[^>]*?\sname\s*=\s*["']([^"']+)["'][^>]*\/>/g;
 const REGEX_ESCAPE = /[.*+?^${}()|[\]\\]/g;
 
 async function replaceComponentPreview(content: string, lang?: string): Promise<string> {
@@ -158,7 +158,11 @@ async function replaceComponentPreview(content: string, lang?: string): Promise<
 
       try {
         const filePath = join(process.cwd(), DEMOS_DIR, demo.file);
-        const code = await readFile(filePath, "utf-8");
+        const source = await readFile(filePath, "utf-8");
+        // Controlled demos print as the preview shows them on load.
+        const code = demo.controls
+          ? renderDemoSource(source, demo.controls, getInitialControlValues(demo.controls))
+          : source;
 
         return {
           match: fullMatch,
@@ -197,28 +201,34 @@ function replaceCollapsibleCode(content: string): string {
 
 const RELATED_COMPONENTS_REGEX = /<RelatedComponents\s+component\s*=\s*["']([^"']+)["']\s*\/>/g;
 
-function replaceRelatedComponents(content: string): string {
-  return content.replace(RELATED_COMPONENTS_REGEX, (_match, componentName) => {
-    const relatedComponents =
-      getRelatedComponents(componentName)?.slice(0, MAX_RELATED_COMPONENTS) || [];
+async function replaceRelatedComponents(content: string): Promise<string> {
+  const matches = [...content.matchAll(RELATED_COMPONENTS_REGEX)];
+  const replacements = await Promise.all(
+    matches.map(async ([, componentName = ""]) => {
+      const {free, pro} = await getRelatedComponentItems(componentName);
+      const componentList = [
+        ...free.map(
+          (comp) =>
+            `- **${comp.title || "Untitled Component"}**: ${comp.description || "A related component"}`,
+        ),
+        // Plain Pro URL: tracking params are for docs visitors, not agents.
+        ...pro.map(
+          (comp) =>
+            `- **[${comp.title}](${comp.href.split("?")[0]})** (HeroUI Pro): ${comp.description}`,
+        ),
+      ].join("\n");
 
-    if (relatedComponents.length === 0) {
-      return "";
-    }
+      // The MDX page already has its own "Related Components" heading.
+      return componentList ? `\n${componentList}\n` : "";
+    }),
+  );
+  let index = 0;
 
-    const componentList = relatedComponents
-      .map(
-        (comp) =>
-          `- **${comp.title || "Untitled Component"}**: ${comp.description || "A related component"}`,
-      )
-      .join("\n");
-
-    return `\n## Related Components\n\n${componentList}\n`;
-  });
+  return content.replace(RELATED_COMPONENTS_REGEX, () => replacements[index++] ?? "");
 }
 
 const USELESS_COMPONENT_TAGS =
-  /<(ComponentCard|ComponentGrid|ComponentsCategory|ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsCategory|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g;
+  /<(ComponentCard|ComponentGrid|ComponentPreview|CollapsibleCode|RelatedComponents|DocsImage|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g;
 const BR_TAG = /<br\s*\/>/g;
 const CODE_BLOCK_BEFORE = /([^\n`])\n(```[\w]*\n)/g;
 const CODE_BLOCK_AFTER = /(```[\s\S]*?```)\n([^\n`])/g;
@@ -277,16 +287,15 @@ function cleanContentForLLM(content: string): string {
   return processed;
 }
 
-async function processMDXContent(
-  content: string,
-  lang?: string,
-  pages: Page[] = [],
-): Promise<string> {
+async function processMDXContent(content: string, lang?: string): Promise<string> {
   let processed = replaceCollapsibleCode(content);
 
   processed = await replaceComponentPreview(processed, lang);
-  processed = replaceRelatedComponents(processed);
-  processed = replaceNativeComponentsCategories(processed, pages);
+  processed = await replaceRelatedComponents(processed);
+  processed = await replaceComponentsIndex(processed, (platform) =>
+    getComponentsCatalog(platform, lang ?? "en"),
+  );
+  processed = replaceMdxIcons(processed);
   processed = cleanContentForLLM(processed);
 
   return processed;
@@ -312,11 +321,7 @@ ${header}
 </page>`;
   }
 
-  const processedContent = await processMDXContent(
-    rawContent,
-    page.locale,
-    source.getPages(page.locale),
-  );
+  const processedContent = await processMDXContent(rawContent, page.locale);
 
   if (!processedContent.trim()) {
     return `<page url="${url}">

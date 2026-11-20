@@ -1,57 +1,16 @@
 "use client";
 
-import type {ThemeId} from "@/app/[lang]/themes/constants";
 import type {ButtonProps} from "@heroui/react";
-import type {StaticImageData} from "next/image";
 
 import {BucketPaint, Palette} from "@gravity-ui/icons";
 import {Button, Description, Label, ListBox, Popover, Switch, buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
-import {themeValuesById} from "@/app/[lang]/themes/constants";
-import airbnbTheme from "@/assets/themes/airbnb.png";
-import blackTheme from "@/assets/themes/black.png";
-import coinbaseTheme from "@/assets/themes/coinbase.png";
-import defaultTheme from "@/assets/themes/default.png";
-import discordTheme from "@/assets/themes/discord.png";
-import lavenderTheme from "@/assets/themes/lavender.png";
-import mintTheme from "@/assets/themes/mint.png";
-import netflixTheme from "@/assets/themes/netflix.png";
-import rabbitTheme from "@/assets/themes/rabbit.png";
-import skyTheme from "@/assets/themes/sky.png";
-import spotifyTheme from "@/assets/themes/spotify.png";
+import {DESIGN_THEMES as THEMES, useDesignTheme} from "@/hooks/use-design-theme";
 import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
-import {
-  DESIGN_THEME_CHANGE_EVENT,
-  VIBRANT_STORAGE_KEY,
-  getStoredDesignTheme,
-  isDesignThemeId,
-  setStoredDesignTheme,
-  setStoredVibrantPalette,
-} from "@/utils/design-theme";
-
-interface ThemeOption {
-  id: ThemeId;
-  label: string;
-  image: StaticImageData;
-}
-
-const THEMES: ThemeOption[] = [
-  {id: "default", image: defaultTheme, label: "Default"},
-  {id: "sky", image: skyTheme, label: "Sky"},
-  {id: "lavender", image: lavenderTheme, label: "Lavender"},
-  {id: "mint", image: mintTheme, label: "Mint"},
-  {id: "netflix", image: netflixTheme, label: "Netflix"},
-  {id: "uber", image: blackTheme, label: "Uber"},
-  {id: "spotify", image: spotifyTheme, label: "Spotify"},
-  {id: "coinbase", image: coinbaseTheme, label: "Coinbase"},
-  {id: "airbnb", image: airbnbTheme, label: "Airbnb"},
-  {id: "discord", image: discordTheme, label: "Discord"},
-  {id: "rabbit", image: rabbitTheme, label: "Rabbit"},
-];
 
 export function DesignThemeSelector({
   triggerVariant = "tertiary",
@@ -59,63 +18,30 @@ export function DesignThemeSelector({
   triggerVariant?: ButtonProps["variant"];
 }) {
   const dict = useDictionary().themes;
-  const [active, setActive] = useState<ThemeId>("default");
+  const {
+    active,
+    builderHref: themeBuilderHref,
+    current,
+    selectTheme,
+    setVibrantPalette,
+    vibrant,
+  } = useDesignTheme();
   const [mounted, setMounted] = useState(false);
-  const [vibrant, setVibrant] = useState(false);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
-  useEffect(() => {
-    const stored = getStoredDesignTheme();
-    const storedVibrant = localStorage.getItem(VIBRANT_STORAGE_KEY) === "true";
+  const handleSelect = useCallback(
+    (keys: "all" | Set<React.Key>) => {
+      if (keys === "all") return;
+      const selected = [...keys][0];
 
-    if (stored !== "default") {
-      setStoredDesignTheme(stored);
-    }
+      if (typeof selected === "string") selectTheme(selected);
+    },
+    [selectTheme],
+  );
 
-    if (storedVibrant) setStoredVibrantPalette(true);
-
-    const syncAppearance = () => {
-      setActive(getStoredDesignTheme());
-      setVibrant(localStorage.getItem(VIBRANT_STORAGE_KEY) === "true");
-    };
-
-    syncAppearance();
-    window.addEventListener(DESIGN_THEME_CHANGE_EVENT, syncAppearance);
-
-    return () => window.removeEventListener(DESIGN_THEME_CHANGE_EVENT, syncAppearance);
-  }, []);
-  const handleSelect = useCallback((keys: "all" | Set<React.Key>) => {
-    if (keys === "all") return;
-    const selected = [...keys][0];
-
-    if (typeof selected !== "string" || !isDesignThemeId(selected)) return;
-    setStoredDesignTheme(selected);
-  }, []);
-
-  const handleVibrantToggle = useCallback((isSelected: boolean) => {
-    setStoredVibrantPalette(isSelected);
-  }, []);
-
-  const current = THEMES.find((t) => t.id === active);
-  const showAvatar = mounted && active !== "default" && current;
-
-  const themeBuilderHref = useMemo(() => {
-    const values = themeValuesById[active];
-
-    if (!values) {
-      return "/themes";
-    }
-
-    const params = new URLSearchParams();
-
-    params.set("lightness", String(values.lightness));
-    params.set("chroma", String(values.chroma));
-    params.set("hue", String(values.hue));
-
-    return `/themes?${params.toString()}`;
-  }, [active]);
+  const showAvatar = mounted && active !== "default";
 
   return (
     <>
@@ -206,7 +132,7 @@ export function DesignThemeSelector({
                     {dict.vibrantPaletteDescription}
                   </Description>
                 </div>
-                <Switch isSelected={vibrant} onChange={handleVibrantToggle}>
+                <Switch isSelected={vibrant} onChange={setVibrantPalette}>
                   <Switch.Content>
                     <Switch.Control>
                       <Switch.Thumb />

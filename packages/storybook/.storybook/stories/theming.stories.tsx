@@ -97,6 +97,9 @@ const useTheme = (theme: ThemeId, mode: Mode, onModeChange: (mode: Mode) => void
       if (desired !== entry) return;
 
       desired = null;
+      // Nothing to follow once the story unmounts; stop watching <html> for the other stories.
+      observer?.disconnect();
+      observer = null;
       root.setAttribute("data-theme", readMode());
     };
   }, [theme, mode, onModeChange]);

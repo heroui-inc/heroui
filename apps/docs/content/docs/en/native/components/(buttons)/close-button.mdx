@@ -1,6 +1,7 @@
 ---
 title: CloseButton
 description: Button component for closing dialogs, modals, or dismissing content.
+icon: updated
 links:
   source_native: close-button/close-button.tsx
   styles_native: close-button/close-button.styles.ts
@@ -102,14 +103,15 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 
 ### CloseButton
 
-CloseButton extends all props from [Button](./button) component. It defaults to `variant='tertiary'`, `size='sm'`, and `isIconOnly=true`.
+CloseButton extends all props from [Button](/docs/native/components/button) component. It defaults to `variant='tertiary'`, `size='sm'`, `isIconOnly=true`, and `aria-label="Close"`.
 
-| prop        | type                   | default | description                                      |
-| ----------- | ---------------------- | ------- | ------------------------------------------------ |
-| `iconProps` | `CloseButtonIconProps` | -       | Props for customizing the close icon             |
-| `children`  | `React.ReactNode`      | -       | Custom content to replace the default close icon |
+| prop         | type                   | default   | description                                      |
+| ------------ | ---------------------- | --------- | ------------------------------------------------ |
+| `iconProps`  | `CloseButtonIconProps` | -         | Props for customizing the close icon             |
+| `children`   | `React.ReactNode`      | -         | Custom content to replace the default close icon |
+| `aria-label` | `string`               | `"Close"` | Label screen readers announce for the button     |
 
-For inherited props including `isDisabled`, `className`, `animation`, `feedbackVariant` and all Pressable props, see [Button API Reference](./button#api-reference).
+For inherited props including `isDisabled`, `className`, `animation`, `feedbackVariant`, and all Pressable props, see [Button API Reference](/docs/native/components/button#api-reference).
 
 #### CloseButtonIconProps
 

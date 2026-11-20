@@ -23,7 +23,10 @@ const SITE_URL = "https://heroui.com";
 
 /** Docs-site widgets that carry no information in Markdown. */
 const WIDGET_TAGS =
-  /<(ComponentCard|ComponentGrid|ComponentsCategory|RelatedComponents|RelatedShowcases|DocsImage|ColorSection\w*|NativeComponentsCategory|NativeVideoPlayerView|NativeTryOnDevice)\b[^>]*\/>\n?/g;
+  /<(ComponentCard|ComponentGrid|ComponentsCategory|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsCategory|NativeVideoPlayerView|NativeTryOnDevice)\b[^>]*\/>\n?/g;
+/** Color swatches on the colors guide. Their tooltips hold the token values, so they are kept as CSS. */
+const COLOR_SECTION = /<ColorSection\w*\b[^>]*\/>/g;
+const COLOR_TOOLTIP = /\b\w*[Tt]ooltip\s*[:=]\s*\{?\s*"((?:[^"\\]|\\.)*)"/g;
 const COMPONENT_PREVIEW = /<ComponentPreview\b[^>]*?\bname\s*=\s*["']([^"']+)["'][^>]*\/>/g;
 /** Blocks that only make sense on the site, such as the "copy this prompt" button. */
 const SITE_ONLY_BLOCKS = /<CopyPrompt\b[\s\S]*?<\/CopyPrompt>\n?/g;
@@ -38,6 +41,39 @@ const titleCase = (slug) =>
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+
+/**
+ * Turns a `ColorSection*` swatch into a CSS block of the declarations its tooltips show, split
+ * into light and dark when the swatch shows both.
+ */
+function colorSectionToCss(element) {
+  const darkStart = element.search(/\bdarkColors\s*=/);
+  const light = [];
+  const dark = [];
+
+  for (const match of element.matchAll(COLOR_TOOLTIP)) {
+    const declaration = JSON.parse(`"${match[1]}"`)
+      .replace(/\s+/g, " ")
+      .replace(/\(\s+/g, "(")
+      .replace(/\s+\)/g, ")")
+      .trim();
+    const list = darkStart !== -1 && match.index > darkStart ? dark : light;
+
+    if (!list.includes(declaration)) list.push(declaration);
+  }
+
+  if (light.length === 0 && dark.length === 0) return "";
+
+  const name = element.match(/\bname\s*=\s*["']([^"']+)["']/)?.[1];
+  const lines = name ? [`/* ${name} */`] : [];
+
+  if (dark.length > 0) lines.push("/* Light */");
+  lines.push(...light.map((declaration) => `${declaration};`));
+  if (dark.length > 0)
+    lines.push("", "/* Dark */", ...dark.map((declaration) => `${declaration};`));
+
+  return `\`\`\`css\n${lines.join("\n")}\n\`\`\``;
+}
 
 async function walk(dir) {
   const entries = await fs.readdir(dir, {withFileTypes: true});
@@ -134,18 +170,14 @@ async function collectPages() {
 }
 
 function createLinkRewriter(pages, fromKind) {
-  const bySlug = new Map();
-
-  // Component pages win a slug clash, since most links point at components.
-  for (const page of pages) {
-    if (!bySlug.has(page.slug) || page.kind === "components") bySlug.set(page.slug, page);
-  }
+  // Match the full site path, so `/docs/react/migration/button` or `/docs/native/...` never
+  // resolves to the React component page that happens to share its last segment.
+  const byUrl = new Map(pages.map((page) => [page.url, page]));
 
   return (text) =>
     text.replace(/\]\((\/[^)\s]*)\)/g, (whole, href) => {
       const [pathname, hash = ""] = href.split("#");
-      const segments = pathname.split("/").filter(Boolean);
-      const page = segments[0] === "docs" ? bySlug.get(segments.at(-1)) : undefined;
+      const page = byUrl.get(pathname.replace(/\.mdx?$/, "").replace(/\/+$/, ""));
       const anchor = hash ? `#${hash}` : "";
 
       if (!page) return `](${SITE_URL}${href})`;
@@ -261,7 +293,14 @@ async function renderPage(page, context) {
     return `@@HEROUI_BLOCK_${blocks.length - 1}@@`;
   };
 
-  let content = body.replace(SITE_ONLY_BLOCKS, "").replace(WIDGET_TAGS, "");
+  let content = body
+    .replace(SITE_ONLY_BLOCKS, "")
+    .replace(COLOR_SECTION, (element) => {
+      const css = colorSectionToCss(element);
+
+      return css ? hold(css) : "";
+    })
+    .replace(WIDGET_TAGS, "");
 
   content = content.replace(COLLAPSIBLE_CODE, (_match, lang, code) =>
     hold(`\`\`\`${lang || "tsx"}\n${code.trim()}\n\`\`\``),
@@ -305,7 +344,7 @@ async function renderPage(page, context) {
 
   if (data.links?.source) {
     facts.push(
-      `Source: https://github.com/heroui-inc/heroui/blob/v3/packages/react/src/components/${data.links.source}`,
+      `Source: https://github.com/heroui-inc/heroui/blob/v${context.version}/packages/react/src/components/${data.links.source}`,
     );
   }
   if (data.links?.styles) {
@@ -427,6 +466,7 @@ async function buildDocs() {
     demos: await readDemoRegistry(),
     missingDemos: new Set(),
     pages: await collectPages(),
+    version,
   };
 
   await fs.remove(outDir);
@@ -446,8 +486,13 @@ async function buildDocs() {
   await fs.outputFile(path.join(outDir, "llms.txt"), index);
   bytes += Buffer.byteLength(index);
 
+  // A missing demo would ship as a silently dropped example, so it fails the pack.
   if (context.missingDemos.size > 0) {
-    console.warn(`⚠️  Demos without source: ${[...context.missingDemos].join(", ")}`);
+    throw new Error(
+      `Demos referenced by the docs have no source in ${path.join(demosDir, "en/index.ts")}: ${[
+        ...context.missingDemos,
+      ].join(", ")}`,
+    );
   }
 
   const components = context.pages.filter((page) => page.kind === "components").length;

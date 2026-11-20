@@ -1,10 +1,12 @@
 "use client";
 
+import type {RangeCalendarProps} from "@heroui/react";
+
 import {RangeCalendar} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: RangeCalendarProps) {
   return (
-    <RangeCalendar aria-label="行程日期" firstDayOfWeek="mon">
+    <RangeCalendar {...props} aria-label="行程日期">
       <RangeCalendar.Header>
         <RangeCalendar.Heading />
         <RangeCalendar.NavButton slot="previous" />

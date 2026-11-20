@@ -277,7 +277,7 @@ Control where the menu appears relative to the trigger.
 </Menu>
 ```
 
-### Bottom Sheet Presentation
+### BottomSheet Presentation
 
 Use `presentation="bottom-sheet"` to display menu content as a bottom sheet modal.
 
@@ -404,7 +404,7 @@ export default function MenuExample() {
 }
 ```
 
-You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/menu.tsx>).
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/menu.tsx).
 
 ## API Reference
 
@@ -440,14 +440,14 @@ Animation configuration for menu root component. Can be:
 
 ### Menu.Portal
 
-| prop                       | type              | default | description                                            |
-| -------------------------- | ----------------- | ------- | ------------------------------------------------------ |
-| `children`                 | `React.ReactNode` | -       | The portal content                                     |
-| `className`                | `string`          | -       | Additional CSS class for the portal container          |
-| `disableFullWindowOverlay` | `boolean`         | `false` | Use a regular View instead of FullWindowOverlay on iOS |
-| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
-| `hostName`                 | `string`          | -       | Optional name of the host element for the portal       |
-| `forceMount`               | `boolean`         | -       | Force mount the portal regardless of open state        |
+| prop                                         | type              | default | description                                                                                                                                                                                                      |
+| -------------------------------------------- | ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`                                   | `React.ReactNode` | -       | The portal content                                                                                                                                                                                               |
+| `className`                                  | `string`          | -       | Additional CSS class for the portal container                                                                                                                                                                    |
+| `disableFullWindowOverlay`                   | `boolean`         | `false` | Use a regular View instead of FullWindowOverlay on iOS                                                                                                                                                           |
+| `unstable_accessibilityContainerViewIsModal` | `boolean`         | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
+| `hostName`                                   | `string`          | -       | Optional name of the host element for the portal                                                                                                                                                                 |
+| `forceMount`                                 | `boolean`         | -       | Force mount the portal regardless of open state                                                                                                                                                                  |
 
 ### Menu.Overlay
 
@@ -506,21 +506,20 @@ Animation configuration for menu popover content component. Can be:
 | `entering.value` | `EntryOrExitLayoutType` | Scale + fade entering animation | Custom entering animation for content           |
 | `exiting.value`  | `EntryOrExitLayoutType` | Scale + fade exiting animation  | Custom exiting animation for content            |
 
-### Menu.Content (Bottom Sheet)
+### Menu.Content (BottomSheet)
 
-Props when `presentation="bottom-sheet"`. Extends `@gorhom/bottom-sheet` BottomSheet props.
+Props when `presentation="bottom-sheet"`.
 
-| prop                        | type                                     | default | description                                          |
-| --------------------------- | ---------------------------------------- | ------- | ---------------------------------------------------- |
-| `children`                  | `React.ReactNode`                        | -       | The bottom sheet content                             |
-| `presentation`              | `'bottom-sheet'`                         | -       | Presentation mode (must match Menu root)             |
-| `className`                 | `string`                                 | -       | Additional CSS class for the bottom sheet            |
-| `backgroundClassName`       | `string`                                 | -       | Additional CSS class for the background              |
-| `handleIndicatorClassName`  | `string`                                 | -       | Additional CSS class for the handle indicator        |
-| `contentContainerClassName` | `string`                                 | -       | Additional CSS class for the content container       |
-| `contentContainerProps`     | `Omit<BottomSheetViewProps, 'children'>` | -       | Props for the content container                      |
-| `animation`                 | `AnimationDisabled`                      | -       | Set to `false` or `"disabled"` to disable animations |
-| `...BottomSheetProps`       | `Partial<BottomSheetProps>`              | -       | All `@gorhom/bottom-sheet` props are supported       |
+| prop                        | type                                 | default    | description                                                                                                 |
+| --------------------------- | ------------------------------------ | ---------- | ----------------------------------------------------------------------------------------------------------- |
+| `children`                  | `ReactNode`                          | -          | The bottom sheet content                                                                                    |
+| `presentation`              | `'bottom-sheet'`                     | -          | Presentation mode - must be 'bottom-sheet' and match Menu.Root presentation prop (required)                 |
+| `detents`                   | `('auto' \| 'peek' \| number)[]`     | `['auto']` | Sizes the sheet can rest at, smallest first, up to 3                                                        |
+| `contentContainerClassName` | `string`                             | -          | Additional CSS classes for the content container                                                            |
+| `scrollableRef`             | `RefObject<ScrollViewInstance \| …>` | -          | Ref of a scroll view inside the sheet                                                                       |
+| `...BottomSheetProps`       | `BottomSheetProps`                   | -          | All [`BottomSheet`](/docs/native/components/bottom-sheet) props except `name` and TrueSheet's own `presentation` |
+
+The sheet is presented when the Menu opens and dismissed when it closes. Dismissing the sheet natively (dragging it down, tapping the dimmed area, Android back) closes the Menu. Requires `@lodev09/react-native-true-sheet`.
 
 ### Menu.Close
 
@@ -843,3 +842,5 @@ const insets = useSafeAreaInsets();
   ...
 </Menu.Content>;
 ```
+
+See `example/src/app/(home)/components/menu-in-modal-screen.tsx` for a complete example.

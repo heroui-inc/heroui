@@ -2,11 +2,48 @@ import {render} from "@heroui/testing/browser";
 import {isDocumentScrollLocked} from "@heroui/testing/helpers";
 import {page, userEvent} from "vitest/browser";
 
+import {AlertDialog} from "@/components/alert-dialog";
+import {Button} from "@/components/button";
+
 import {animatedProperties, stretchAnimation} from "../../helpers/overlay-motion";
 
 import {AlertDialogFixture} from "./fixtures";
 
 import "@/styles.css";
+
+const renderFooterDialog = (dialogWidth: number) =>
+  render(
+    <AlertDialog defaultOpen>
+      <AlertDialog.Backdrop>
+        <AlertDialog.Container>
+          <AlertDialog.Dialog style={{width: dialogWidth}}>
+            <AlertDialog.Header>
+              <AlertDialog.Heading>Delete project permanently?</AlertDialog.Heading>
+            </AlertDialog.Header>
+            <AlertDialog.Footer>
+              <Button slot="close" style={{width: 140}} variant="tertiary">
+                Keep
+              </Button>
+              <Button slot="close" style={{width: 140}} variant="danger">
+                Delete
+              </Button>
+            </AlertDialog.Footer>
+          </AlertDialog.Dialog>
+        </AlertDialog.Container>
+      </AlertDialog.Backdrop>
+    </AlertDialog>,
+  );
+
+const footerBoxes = () => {
+  const dialog = page.getByRole("alertdialog").element().getBoundingClientRect();
+  const footer = document
+    .querySelector<HTMLElement>('[data-slot="alert-dialog-footer"]')!
+    .getBoundingClientRect();
+  const keep = page.getByRole("button", {name: "Keep"}).element().getBoundingClientRect();
+  const remove = page.getByRole("button", {name: "Delete"}).element().getBoundingClientRect();
+
+  return {dialog, footer, keep, remove};
+};
 
 const renderAlertDialog = () => render(<AlertDialogFixture />);
 
@@ -91,5 +128,29 @@ describe("AlertDialog (browser)", () => {
     expect(animation?.animationName).toBe("heroui-overlay-exit");
     expect(getComputedStyle(container).animationFillMode).toBe("none");
     expect(properties).toEqual(["opacity", "transform"]);
+  });
+
+  // Regression: a nowrap footer pushed the first action past the dialog's start edge.
+  it("wraps footer actions that do not fit on one row", async () => {
+    await renderFooterDialog(220);
+
+    const {dialog, footer, keep, remove} = footerBoxes();
+
+    expect(keep.left).toBeGreaterThanOrEqual(dialog.left - 1);
+    expect(remove.left).toBeGreaterThanOrEqual(dialog.left - 1);
+    expect(keep.right).toBeLessThanOrEqual(dialog.right + 1);
+    expect(remove.right).toBeLessThanOrEqual(dialog.right + 1);
+    expect(remove.top).toBeGreaterThanOrEqual(keep.bottom - 1);
+    expect(Math.abs(keep.right - footer.right)).toBeLessThan(1);
+    expect(Math.abs(remove.right - footer.right)).toBeLessThan(1);
+  });
+
+  it("keeps footer actions on one row when they fit", async () => {
+    await renderFooterDialog(400);
+
+    const {keep, remove} = footerBoxes();
+
+    expect(Math.abs(remove.top - keep.top)).toBeLessThan(1);
+    expect(keep.right).toBeLessThanOrEqual(remove.left);
   });
 });

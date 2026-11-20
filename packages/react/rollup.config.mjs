@@ -53,7 +53,6 @@ const external = [
   /^@internationalized\//,
   /^react-aria($|\/)/,
   /^react-aria-components($|\/)/,
-  /^tailwind-merge/,
   /^tailwind-variants/,
 ];
 

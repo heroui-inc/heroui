@@ -218,6 +218,29 @@ export const IconOnly = {
   render: IconOnlyTemplate,
 };
 
+export const FullWidth = {
+  render: () => (
+    <div className="w-[400px] space-y-3">
+      <ToggleButton fullWidth>
+        <Icon icon="gravity-ui:heart" />
+        Like
+      </ToggleButton>
+      <ToggleButton fullWidth variant="ghost">
+        <Icon icon="gravity-ui:heart" />
+        Like
+      </ToggleButton>
+      <ToggleButton defaultSelected fullWidth size="sm">
+        <Icon icon="gravity-ui:heart-fill" />
+        Small
+      </ToggleButton>
+      <ToggleButton fullWidth size="lg">
+        <Icon icon="gravity-ui:heart" />
+        Large
+      </ToggleButton>
+    </div>
+  ),
+};
+
 export const Controlled = {
   render: ControlledTemplate,
 };

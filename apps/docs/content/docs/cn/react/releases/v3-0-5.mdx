@@ -11,7 +11,9 @@ github:
 
 补丁版本：`Text` 重命名为 `Typography`，以解决 `tailwind-merge` 冲突导致变体类名被静默丢弃的问题。派生颜色令牌（`hover`、`soft`、`border-secondary` 等）从 `theme.css` 中的 `@theme inline` 别名迁移到 `variables.css` 作为无前缀源变量，组件 CSS 可直接引用。此外还修复了 Checkbox 与 Radio 的边框对齐问题，优化了 Calendar 的 `accent-soft-foreground` 悬停样式，并新增了 CLI 文档页。
 
-⚠️ **破坏性变更**：`Text` → `Typography`。BEM 块名由 `text` 改为 `typography`（例如 `text--body-sm` → `typography--body-sm`）。
+<Callout type="warning">
+  **破坏性变更**：`Text` → `Typography`。BEM 块名由 `text` 改为 `typography`（例如 `text--body-sm` → `typography--body-sm`）。
+</Callout>
 
 ## 安装
 
@@ -44,7 +46,7 @@ github:
   **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
 </Callout>
 
-## ⚠️ 破坏性变更
+## 破坏性变更
 
 ### `Text` → `Typography`
 

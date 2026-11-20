@@ -1,8 +1,10 @@
+import type {RadioGroupProps} from "@heroui/react";
+
 import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 
-export function Basic() {
+export function Basic(props: RadioGroupProps) {
   return (
-    <RadioGroup defaultValue="premium" name="plan">
+    <RadioGroup {...props} defaultValue="premium" name="plan">
       <Label>Plan selection</Label>
       <Description>Choose the plan that suits you best</Description>
       <Radio value="basic">

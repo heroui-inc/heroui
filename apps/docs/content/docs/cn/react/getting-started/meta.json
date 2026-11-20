@@ -4,13 +4,11 @@
   "root": true,
   "icon": "book-open",
   "pages": [
-    "---概述---",
     "index",
     "(overview)/quick-start",
     "(overview)/design-principles",
     "(overview)/frameworks",
     "(overview)/cli",
-    "[sparkles][组件案例](/showcase)",
     "[route][路线图](https://herouiv3.featurebase.app/roadmap)",
     "[figma][Figma](https://www.figma.com/community/file/1546526812159103429)",
     "---手册---",

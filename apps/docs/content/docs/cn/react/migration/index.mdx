@@ -14,8 +14,8 @@ index: true
 | **访问方式** | MCP 工具 | 脚本文件 | 读取本地文件 |
 | **配置方式** | MCP 配置 | 安装命令 | `heroui-cli` 命令 |
 | **更新** | 实时 | 实时 | 手动 |
-| **离线** | ❌ | ❌ | ✅ |
-| **工具** | MCP 工具 + prompt | 脚本 | ❌ |
+| **离线** | <StatusCross /> | <StatusCross /> | <StatusCheck /> |
+| **工具** | MCP 工具 + prompt | 脚本 | <StatusCross /> |
 | **指南** | [MCP Server →](/docs/react/migration/mcp-server) | [Agent Skills →](/docs/react/migration/agent-skills) | [AGENTS.md →](/docs/react/migration/agents-md) |
 
 ## 主要变化
@@ -94,63 +94,63 @@ index: true
 可以通过下表快速查找每个组件的迁移指南。点击「迁移指南」列中的链接，即可跳转到对应的详细迁移说明。
 
 <Callout>
-  **组件开发状态**：标有 🔄 进行中或 📋 计划中的组件仍在开发中。可以查看[路线图](https://herouiv3.featurebase.app/roadmap)了解任务状态。这些组件的迁移指南将在开发完成后提供。
+  **组件开发状态**：标有 <InlineIcon icon="arrows-rotate-right" /> 进行中或 <InlineIcon icon="list-check" /> 计划中的组件仍在开发中。可以查看[路线图](https://herouiv3.featurebase.app/roadmap)了解任务状态。这些组件的迁移指南将在开发完成后提供。
 </Callout>
 
 | v2 组件 | v3 组件 | 状态 | 迁移指南 |
 |-------------|--------------|--------|-----------------|
-| Accordion | Accordion | ✅ 可用 | [查看指南 →](/docs/react/migration/accordion) |
-| Alert | Alert | ✅ 可用 | [查看指南 →](/docs/react/migration/alert) |
-| Autocomplete | ComboBox | ✅ 已重命名 | [查看指南 →](/docs/react/migration/autocomplete) |
-| Avatar | Avatar | ✅ 可用 | [查看指南 →](/docs/react/migration/avatar) |
-| Badge | Badge | ✅ 可用 | [查看指南 →](/docs/react/migration/badge) |
-| Breadcrumbs | Breadcrumbs | ✅ 可用 | [查看指南 →](/docs/react/migration/breadcrumbs) |
-| Button | Button | ✅ 可用 | [查看指南 →](/docs/react/migration/button) |
-| ButtonGroup | ButtonGroup | ✅ 可用 | [查看指南 →](/docs/react/migration/button-group) |
-| Calendar | Calendar | ✅ 可用 | [查看指南 →](/docs/react/migration/calendar) |
-| Card | Card | ✅ 可用 | [查看指南 →](/docs/react/migration/card) |
-| Checkbox | Checkbox | ✅ 可用 | [查看指南 →](/docs/react/migration/checkbox) |
-| CheckboxGroup | CheckboxGroup | ✅ 可用 | [查看指南 →](/docs/react/migration/checkbox-group) |
-| Chip | Chip | ✅ 可用 | [查看指南 →](/docs/react/migration/chip) |
-| Code | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/code) |
-| DateInput | DateField | ✅ 已重命名 | [查看指南 →](/docs/react/migration/dateinput) |
-| DatePicker | DatePicker | ✅ 可用 | [查看指南 →](/docs/react/migration/date-picker) |
-| DateRangePicker | DateRangePicker | ✅ 可用 | [查看指南 →](/docs/react/migration/date-range-picker) |
-| TimeInput | TimeField | ✅ 已重命名 | [查看指南 →](/docs/react/migration/timeinput) |
-| Divider | Separator | ✅ 已重命名 | [查看指南 →](/docs/react/migration/divider) |
-| Drawer | Drawer | ✅ 可用 | [查看指南 →](/docs/react/migration/drawer) |
-| Dropdown | Dropdown | ✅ 可用 | [查看指南 →](/docs/react/migration/dropdown) |
-| Form | Form | ✅ 可用 | [查看指南 →](/docs/react/migration/form) |
-| Image | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/image) |
-| Input | TextField、Input、InputGroup | ✅ 可用 | [查看指南 →](/docs/react/migration/input) |
-| InputOTP | InputOTP | ✅ 可用 | [查看指南 →](/docs/react/migration/input-otp) |
-| Kbd | Kbd | ✅ 可用 | [查看指南 →](/docs/react/migration/kbd) |
-| Link | Link | ✅ 可用 | [查看指南 →](/docs/react/migration/link) |
-| Listbox | ListBox | ✅ 可用 | [查看指南 →](/docs/react/migration/listbox) |
-| Modal | Modal | ✅ 可用 | [查看指南 →](/docs/react/migration/modal) |
-| Navbar | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/navbar) |
-| NumberInput | NumberField | ✅ 已重命名 | [查看指南 →](/docs/react/migration/numberinput) |
-| Pagination | Pagination | ✅ 可用 | [查看指南 →](/docs/react/migration/pagination) |
-| Popover | Popover | ✅ 可用 | [查看指南 →](/docs/react/migration/popover) |
-| Progress | ProgressBar | ✅ 已重命名 | [查看指南 →](/docs/react/migration/progress) |
-| CircularProgress | ProgressCircle | ✅ 已重命名 | [查看指南 →](/docs/react/migration/circular-progress) |
-| Radio | Radio | ✅ 可用 | [查看指南 →](/docs/react/migration/radio) |
-| RadioGroup | RadioGroup | ✅ 可用 | [查看指南 →](/docs/react/migration/radio-group) |
-| RangeCalendar | RangeCalendar | ✅ 可用 | [查看指南 →](/docs/react/migration/range-calendar) |
-| Ripple | ❌ | ❌ 已移除 | [参见 Button 的水波纹效果 →](/docs/react/components/button#adding-ripple-effect) |
-| ScrollShadow | ScrollShadow | ✅ 可用 | [查看指南 →](/docs/react/migration/scroll-shadow) |
-| Select | Select | ✅ 可用 | [查看指南 →](/docs/react/migration/select) |
-| Skeleton | Skeleton | ✅ 可用 | [查看指南 →](/docs/react/migration/skeleton) |
-| Slider | Slider | ✅ 可用 | [查看指南 →](/docs/react/migration/slider) |
-| Snippet | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/snippet) |
-| Spacer | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/spacer) |
-| Spinner | Spinner | ✅ 可用 | [查看指南 →](/docs/react/migration/spinner) |
-| Switch | Switch | ✅ 可用 | [查看指南 →](/docs/react/migration/switch) |
-| Table | Table | ✅ 可用 | [查看指南 →](/docs/react/migration/table) |
-| Tabs | Tabs | ✅ 可用 | [查看指南 →](/docs/react/migration/tabs) |
-| Toast | Toast | ✅ 可用 | [查看指南 →](/docs/react/migration/toast) |
-| Tooltip | Tooltip | ✅ 可用 | [查看指南 →](/docs/react/migration/tooltip) |
-| User | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/user) |
+| Accordion | Accordion | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/accordion) |
+| Alert | Alert | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/alert) |
+| Autocomplete | ComboBox | <StatusCheck>已重命名</StatusCheck> | [查看指南 →](/docs/react/migration/autocomplete) |
+| Avatar | Avatar | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/avatar) |
+| Badge | Badge | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/badge) |
+| Breadcrumbs | Breadcrumbs | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/breadcrumbs) |
+| Button | Button | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/button) |
+| ButtonGroup | ButtonGroup | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/button-group) |
+| Calendar | Calendar | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/calendar) |
+| Card | Card | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/card) |
+| Checkbox | Checkbox | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/checkbox) |
+| CheckboxGroup | CheckboxGroup | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/checkbox-group) |
+| Chip | Chip | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/chip) |
+| Code | <StatusCross /> | <StatusCross>已移除</StatusCross> | [查看指南 →](/docs/react/migration/code) |
+| DateInput | DateField | <StatusCheck>已重命名</StatusCheck> | [查看指南 →](/docs/react/migration/dateinput) |
+| DatePicker | DatePicker | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/date-picker) |
+| DateRangePicker | DateRangePicker | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/date-range-picker) |
+| TimeInput | TimeField | <StatusCheck>已重命名</StatusCheck> | [查看指南 →](/docs/react/migration/timeinput) |
+| Divider | Separator | <StatusCheck>已重命名</StatusCheck> | [查看指南 →](/docs/react/migration/divider) |
+| Drawer | Drawer | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/drawer) |
+| Dropdown | Dropdown | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/dropdown) |
+| Form | Form | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/form) |
+| Image | <StatusCross /> | <StatusCross>已移除</StatusCross> | [查看指南 →](/docs/react/migration/image) |
+| Input | TextField、Input、InputGroup | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/input) |
+| InputOTP | InputOTP | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/input-otp) |
+| Kbd | Kbd | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/kbd) |
+| Link | Link | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/link) |
+| Listbox | ListBox | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/listbox) |
+| Modal | Modal | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/modal) |
+| Navbar | <StatusCross /> | <StatusCross>已移除</StatusCross> | [查看指南 →](/docs/react/migration/navbar) |
+| NumberInput | NumberField | <StatusCheck>已重命名</StatusCheck> | [查看指南 →](/docs/react/migration/numberinput) |
+| Pagination | Pagination | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/pagination) |
+| Popover | Popover | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/popover) |
+| Progress | ProgressBar | <StatusCheck>已重命名</StatusCheck> | [查看指南 →](/docs/react/migration/progress) |
+| CircularProgress | ProgressCircle | <StatusCheck>已重命名</StatusCheck> | [查看指南 →](/docs/react/migration/circular-progress) |
+| Radio | Radio | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/radio) |
+| RadioGroup | RadioGroup | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/radio-group) |
+| RangeCalendar | RangeCalendar | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/range-calendar) |
+| Ripple | <StatusCross /> | <StatusCross>已移除</StatusCross> | [参见 Button 的水波纹效果 →](/docs/react/components/button#adding-ripple-effect) |
+| ScrollShadow | ScrollShadow | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/scroll-shadow) |
+| Select | Select | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/select) |
+| Skeleton | Skeleton | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/skeleton) |
+| Slider | Slider | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/slider) |
+| Snippet | <StatusCross /> | <StatusCross>已移除</StatusCross> | [查看指南 →](/docs/react/migration/snippet) |
+| Spacer | <StatusCross /> | <StatusCross>已移除</StatusCross> | [查看指南 →](/docs/react/migration/spacer) |
+| Spinner | Spinner | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/spinner) |
+| Switch | Switch | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/switch) |
+| Table | Table | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/table) |
+| Tabs | Tabs | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/tabs) |
+| Toast | Toast | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/toast) |
+| Tooltip | Tooltip | <StatusCheck>可用</StatusCheck> | [查看指南 →](/docs/react/migration/tooltip) |
+| User | <StatusCross /> | <StatusCross>已移除</StatusCross> | [查看指南 →](/docs/react/migration/user) |
 
 </section>
 

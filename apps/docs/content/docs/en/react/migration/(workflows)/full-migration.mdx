@@ -20,12 +20,14 @@ AI assistants can help with migration. Use the [Migration MCP Server](/docs/reac
 1. **Preparation Stage**: Migrate all component code while still on v2 dependencies (code will be broken)
 2. **Switch Stage**: Update dependencies to v3 and fix any remaining issues
 
-**⚠️ CRITICAL: Don't build to check for errors during migration**
+<Callout type="warning">
+  **CRITICAL: Don't build to check for errors during migration**
 
-- Use **typecheck** (e.g., `tsc --noEmit`) if available to check TypeScript errors
-- Use **lint** (e.g., `eslint`, `biome check`) if available to check code quality
-- **DO NOT** run build commands (e.g., `npm run build`, `next build`, `vite build`)
-- **DO NOT** attempt to start/run the project during migration
+  - Use **typecheck** (e.g., `tsc --noEmit`) if available to check TypeScript errors
+  - Use **lint** (e.g., `eslint`, `biome check`) if available to check code quality
+  - **DO NOT** run build commands (e.g., `npm run build`, `next build`, `vite build`)
+  - **DO NOT** attempt to start/run the project during migration
+</Callout>
 
 ## Step-by-Step Migration Guide
 

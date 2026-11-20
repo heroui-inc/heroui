@@ -9,6 +9,16 @@ description: All updates and changes to HeroUI v3, including new features, fixes
 
 ## Latest Release
 
+### v3.2.8
+
+**November 14, 2026**
+
+Patch release: `@heroui/react` ships version-matched Markdown docs for coding agents, the new `heroui-theming` skill lets an agent restyle HeroUI or author a full theme, and `@heroui/react` and `@heroui/styles` move to `tailwind-variants@4.0.2`. [ToggleButton](/docs/components/toggle-button) gains a `fullWidth` prop, [Sheet](/docs/components/sheet) stacks on the shared overlay z-index so it opens above a [Modal](/docs/components/modal), and overlay footer actions wrap instead of overflowing. Also widens the [Table](/docs/components/table) column resizer hit area and clears a stale [ScrollShadow](/docs/components/scroll-shadow) fade when content stops overflowing.
+
+[Read full release notes →](/docs/react/releases/v3-2-8)
+
+---
+
 ### v3.2.7
 
 **October 28, 2026**
@@ -103,7 +113,7 @@ Minor release: Chinese React docs and localized demos, accessible soft foregroun
 
 **May 15, 2026**
 
-Patch release: `Text` is renamed to `Typography` to resolve a `tailwind-merge` collision (⚠️ **breaking change**), derived color tokens are refactored into unprefixed source variables, Checkbox and Radio get aligned field-border styling, Calendar hover uses `accent-soft-foreground` for readability, and a new CLI docs page is added.
+Patch release: `Text` is renamed to `Typography` to resolve a `tailwind-merge` collision (<StatusWarning /> **breaking change**), derived color tokens are refactored into unprefixed source variables, Checkbox and Radio get aligned field-border styling, Calendar hover uses `accent-soft-foreground` for readability, and a new CLI docs page is added.
 
 [Read full release notes →](/docs/react/releases/v3-0-5)
 
@@ -199,7 +209,7 @@ Seven new components ([Drawer](/docs/components/drawer), [ToggleButton](/docs/co
   href="/docs/react/releases/v3-0-0-beta-8"
 />
 
-This release adds three new components ([Badge](/docs/components/badge), [Pagination](/docs/components/pagination), [Table](/docs/components/table)) and new `InputContainer` composition APIs for [DateField](/docs/components/date-field) + [TimeField](/docs/components/time-field). ⚠️ **Breaking changes**: TextField CSS classes were renamed from `.text-field` to `.textfield`.
+This release adds three new components ([Badge](/docs/components/badge), [Pagination](/docs/components/pagination), [Table](/docs/components/table)) and new `InputContainer` composition APIs for [DateField](/docs/components/date-field) + [TimeField](/docs/components/time-field). <StatusWarning /> **Breaking changes**: TextField CSS classes were renamed from `.text-field` to `.textfield`.
 
 [Read full release notes →](/docs/react/releases/v3-0-0-beta-8)
 
@@ -216,7 +226,7 @@ This release adds three new components ([Badge](/docs/components/badge), [Pagina
   href="/docs/react/releases/v3-0-0-beta-7"
 />
 
-This release introduces a comprehensive **Date & Time** system with four new components ([Calendar](/docs/components/calendar), [RangeCalendar](/docs/components/range-calendar), [DatePicker](/docs/components/date-picker), [DateRangePicker](/docs/components/date-range-picker)), new [Switch.Content](/docs/components/switch) sub-component, explicit [Tabs.Separator](/docs/components/tabs) for opt-in separator lines, and ⚠️ **breaking changes** removing `hideSeparator` from Tabs and consolidating `DateInputGroup`/`ColorInputGroup` under their respective field components.
+This release introduces a comprehensive **Date & Time** system with four new components ([Calendar](/docs/components/calendar), [RangeCalendar](/docs/components/range-calendar), [DatePicker](/docs/components/date-picker), [DateRangePicker](/docs/components/date-range-picker)), new [Switch.Content](/docs/components/switch) sub-component, explicit [Tabs.Separator](/docs/components/tabs) for opt-in separator lines, and <StatusWarning /> **breaking changes** removing `hideSeparator` from Tabs and consolidating `DateInputGroup`/`ColorInputGroup` under their respective field components.
 
 [Read full release notes →](/docs/react/releases/v3-0-0-beta-7)
 
@@ -233,7 +243,7 @@ This release introduces a comprehensive **Date & Time** system with four new com
   href="/docs/react/releases/v3-0-0-beta-6"
 />
 
-This release introduces a comprehensive **Color System** with six new components ([ColorPicker](/docs/components/color-picker), [ColorArea](/docs/components/color-area), [ColorSlider](/docs/components/color-slider), [ColorField](/docs/components/color-field), [ColorSwatch](/docs/components/color-swatch), [ColorSwatchPicker](/docs/components/color-swatch-picker)), major [Toast](/docs/components/toast) improvements with loading states and promise support, [Separator](/docs/components/separator) variants, and ⚠️ **breaking changes** renaming `Toast.Container` to `Toast.Provider` and updating CSS class names to hyphenated format.
+This release introduces a comprehensive **Color System** with six new components ([ColorPicker](/docs/components/color-picker), [ColorArea](/docs/components/color-area), [ColorSlider](/docs/components/color-slider), [ColorField](/docs/components/color-field), [ColorSwatch](/docs/components/color-swatch), [ColorSwatchPicker](/docs/components/color-swatch-picker)), major [Toast](/docs/components/toast) improvements with loading states and promise support, [Separator](/docs/components/separator) variants, and <StatusWarning /> **breaking changes** renaming `Toast.Container` to `Toast.Provider` and updating CSS class names to hyphenated format.
 
 [Read full release notes →](/docs/react/releases/v3-0-0-beta-6)
 
@@ -257,7 +267,7 @@ This release introduces a comprehensive **Color System** with six new components
   **Critical Build Issue Fixed**: This version (beta.4) had a critical build issue that has been fixed in **beta.5**. Please upgrade to `@heroui/styles@3.0.0-beta.5` and `@heroui/react@3.0.0-beta.5` to ensure proper TypeScript declaration generation and export resolution.
 </Callout>
 
-This release introduces the new [Theme Builder](/themes) for visual theme customization, three new components ([Autocomplete](/docs/components/autocomplete), [Breadcrumbs](/docs/components/breadcrumbs), [Toast](/docs/components/toast)), secondary variant for [Tabs](/docs/components/tabs), primary/secondary variants for [Input](/docs/components/input) and [InputGroup](/docs/components/input-group), and ⚠️ **breaking changes** removing Link's underline variants and `isInSurface` prop from form components.
+This release introduces the new [Theme Builder](/themes) for visual theme customization, three new components ([Autocomplete](/docs/components/autocomplete), [Breadcrumbs](/docs/components/breadcrumbs), [Toast](/docs/components/toast)), secondary variant for [Tabs](/docs/components/tabs), primary/secondary variants for [Input](/docs/components/input) and [InputGroup](/docs/components/input-group), and <StatusWarning /> **breaking changes** removing Link's underline variants and `isInSurface` prop from form components.
 
 [Read full release notes →](/docs/react/releases/v3-0-0-beta-4)
 
@@ -275,7 +285,7 @@ This release introduces the new [Theme Builder](/themes) for visual theme custom
 />
 
 
-This release introduces seven new components ([ButtonGroup](/docs/components/button-group), [DateField](/docs/components/date-field), [ErrorMessage](/docs/components/error-message), [ScrollShadow](/docs/components/scroll-shadow), [SearchField](/docs/components/search-field), [TagGroup](/docs/components/tag-group), [TimeField](/docs/components/time-field)), adds `fullWidth` support for form and input components, introduces `hideSeparator` to [Tabs](/docs/components/tabs), [ButtonGroup](/docs/components/button-group), and [Accordion](/docs/components/accordion) for cleaner layouts, includes styling fixes, and ⚠️ **breaking changes** removing the `asChild` prop and updating [AlertDialog](/docs/components/alert-dialog) & [Modal](/docs/components/modal) backdrop variant.
+This release introduces seven new components ([ButtonGroup](/docs/components/button-group), [DateField](/docs/components/date-field), [ErrorMessage](/docs/components/error-message), [ScrollShadow](/docs/components/scroll-shadow), [SearchField](/docs/components/search-field), [TagGroup](/docs/components/tag-group), [TimeField](/docs/components/time-field)), adds `fullWidth` support for form and input components, introduces `hideSeparator` to [Tabs](/docs/components/tabs), [ButtonGroup](/docs/components/button-group), and [Accordion](/docs/components/accordion) for cleaner layouts, includes styling fixes, and <StatusWarning /> **breaking changes** removing the `asChild` prop and updating [AlertDialog](/docs/components/alert-dialog) & [Modal](/docs/components/modal) backdrop variant.
 
 [Read full release notes →](/docs/react/releases/v3-0-0-beta-3)
 
@@ -293,7 +303,7 @@ This release introduces seven new components ([ButtonGroup](/docs/components/but
 />
 
 
-This release introduces six essential new components ([AlertDialog](/docs/components/alert-dialog), [ComboBox](/docs/components/combo-box), [Dropdown](/docs/components/dropdown), [InputGroup](/docs/components/input-group), [Modal](/docs/components/modal), [NumberField](/docs/components/number-field)), enhances theme compatibility and motion preferences, improves the [Select](/docs/components/select) component API with a ⚠️ **breaking change**, plus various refinements and bug fixes.
+This release introduces six essential new components ([AlertDialog](/docs/components/alert-dialog), [ComboBox](/docs/components/combo-box), [Dropdown](/docs/components/dropdown), [InputGroup](/docs/components/input-group), [Modal](/docs/components/modal), [NumberField](/docs/components/number-field)), enhances theme compatibility and motion preferences, improves the [Select](/docs/components/select) component API with a <StatusWarning /> **breaking change**, plus various refinements and bug fixes.
 
 [Read full release notes →](/docs/react/releases/v3-0-0-beta-2)
 
@@ -325,7 +335,7 @@ This release introduces a comprehensive redesign of HeroUI v3, merging v2's beau
 #### React Server Components Support
 - Fixed critical issue where compound components didn't work in React Server Components (RSC)
 - Moved compound pattern logic from components to index files, resolving `"use client"` conflicts
-- **(⚠️ Breaking change)**: Main component now requires `.Root` suffix (e.g., `<Avatar>` → `<Avatar.Root>`)
+- **(<StatusWarning /> Breaking change)**: Main component now requires `.Root` suffix (e.g., `<Avatar>` → `<Avatar.Root>`)
 - Named exports remain unchanged and fully supported
 
 #### React 19 Improvements
@@ -333,7 +343,7 @@ This release introduces a comprehensive redesign of HeroUI v3, merging v2's beau
 - Simplified Context usage (`Context.Provider` → [React 19](https://react.dev/blog/2024/12/05/react-19#context-as-a-provider))
 
 #### Switch Component Refactoring
-- **(⚠️ Breaking change)**: Split Switch and SwitchGroup into separate components
+- **(<StatusWarning /> Breaking change)**: Split Switch and SwitchGroup into separate components
 - Cleaner API: `<SwitchGroup>` replaces `<Switch.Group>` and `<Switch.GroupItems>`
 - Matches Radio/RadioGroup pattern for consistency
 - Separate styles, types, and implementations
@@ -385,10 +395,10 @@ Card component redesigned with [new variants](/docs/components/card), added [Clo
 
 **September 22, 2025**
 
-- 🎨 **Showcases page** - Gallery of sites built with HeroUI
-- 🌀 **DisclosureGroup component** - Groups multiple disclosures together
-- 📇 **Card component** (preview) - First version of card component
-- 🔀 **Switch component** (preview) - Toggle switch for settings
+- <InlineIcon icon="palette" /> **Showcases page** - Gallery of sites built with HeroUI
+- <InlineIcon icon="chevrons-expand-vertical" /> **DisclosureGroup component** - Groups multiple disclosures together
+- <InlineIcon icon="square-article" /> **Card component** (preview) - First version of card component
+- <InlineIcon icon="toggle-on" /> **Switch component** (preview) - Toggle switch for settings
 
 ---
 

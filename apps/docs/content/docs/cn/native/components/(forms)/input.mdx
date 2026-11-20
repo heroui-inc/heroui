@@ -119,27 +119,9 @@ import { Input, Label, TextField } from 'heroui-native';
 </TextField>;
 ```
 
-### 在 Bottom Sheet 内
+### 在 BottomSheet 内
 
-在 `BottomSheet` 中渲染 `Input` 时，使用 `useBottomSheetAwareHandlers` 连接键盘避让：将返回的 `onFocus`、`onBlur` 传给 `Input`。
-
-```tsx
-import { Input, TextField, useBottomSheetAwareHandlers } from 'heroui-native';
-
-const BottomSheetTextInput = () => {
-  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
-
-  return (
-    <TextField>
-      <Input
-        placeholder="在此输入…"
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
-    </TextField>
-  );
-};
-```
+`BottomSheet` 会以原生方式随键盘移动，因此其中的 `Input` 无需额外的处理函数。如果弹层内容可滚动，请将滚动视图的 ref 传给弹层的 `scrollableRef`，使聚焦的输入框保持在键盘上方。
 
 ## 示例
 
@@ -220,7 +202,6 @@ export const TextInputContent = () => {
 | className                 | `string`                   | -                     | 自定义 class                                                 |
 | selectionColorClassName   | `string`                   | `"accent-accent"`     | 选中文本颜色的 class                                         |
 | placeholderColorClassName | `string`                   | `"field-placeholder"` | 占位符文字颜色的 class                                       |
-| isBottomSheetAware        | `boolean`                  | `true`                | 在 BottomSheet 内是否自动处理键盘相关逻辑；设为 `false` 可关闭 |
 | animation                 | `AnimationRoot`            | `undefined`           | 输入框动画配置                                               |
 | background                | `React.ReactNode`          | -                     | 文本输入框后方的背景层。`undefined` 会在激活主题注册了默认背景内容时渲染主题感知的默认层（回退颜色跟随变体：primary → field 令牌，secondary → default 令牌）；自定义节点会替换它；`null` 则移除它 |
 | ...TextInputProps         | `TextInputProps`           | -                     | 支持 React Native `TextInput` 的全部属性                     |
