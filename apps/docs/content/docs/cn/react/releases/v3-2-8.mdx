@@ -45,7 +45,7 @@ github:
 ## 依赖
 
 - **tailwind-variants**：将 `@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。HeroUI 内部的 `tv` 封装改用 `createTV` 与内置的 `twMerge` 配置，并移除不再使用的 `tailwind-merge` Rollup external。如果你的应用直接引入 `tailwind-variants` 并传入 `twMergeConfig`，请注意 v4 已将该选项移至 `tailwind-variants/config`（[#6996](https://github.com/heroui-inc/heroui/pull/6996)、[#7010](https://github.com/heroui-inc/heroui/pull/7010)）。
-- **工具链**：将 Tailwind CSS 升级至 `4.3.5`、Vitest 升级至 `5.1.0`、Storybook 升级至 `10.6.6`，并更新其他开发依赖（[#7004](https://github.com/heroui-inc/heroui/pull/7004)、[d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5)）。
+- **工具链**：将 Tailwind CSS 升级至 `4.3.5`、Vitest 升级至 `5.1.1`、Storybook 升级至 `10.6.8`，并更新其他开发依赖（[#7004](https://github.com/heroui-inc/heroui/pull/7004)、[d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5)、[#7035](https://github.com/heroui-inc/heroui/pull/7035)）。
 - **安全**：从构建工具链中移除存在漏洞的 `deepmerge`（GHSA-gcqx-w48m-w2h4），并从文档站移除未使用的 `@vercel/og` 依赖（GHSA-wx4j-mvgx-mqwp）（[#6997](https://github.com/heroui-inc/heroui/pull/6997)）。将开发工具链升级至已修复漏洞的 `minimatch@11` 与 `glob@14`（GHSA-g3hv-75wg-m249、GHSA-3g3m-2fjr-6pw4）（[#7029](https://github.com/heroui-inc/heroui/pull/7029)）。
 
 ## 新功能
