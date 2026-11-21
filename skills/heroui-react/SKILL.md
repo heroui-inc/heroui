@@ -79,7 +79,7 @@ import { Card } from "@heroui/react";
 
 - `node_modules/@heroui/react/docs/llms.txt` — index: which page to read for a task, plus every component and guide
 - `node_modules/@heroui/react/docs/components/<name>.md` — one component (kebab-case, e.g. `date-picker.md`)
-- `node_modules/@heroui/react/docs/guides/<name>.md` — guides (`theming.md`, `styling.md`, `agent-bridge.md`…)
+- `node_modules/@heroui/react/docs/guides/<name>.md` — guides (`theming.md`, `styling.md`…)
 
 The scripts below do this for you: `get_component_docs.mjs` and `get_docs.mjs` read the installed docs when they exist and fall back to the network (latest version) when they don't. Run them from inside the project.
 
@@ -208,29 +208,6 @@ HeroUI uses semantic naming to communicate functional intent:
 | `outline`   | Secondary actions                 | Bordered style |
 
 **Don't use raw colors** - semantic variants adapt to themes and accessibility.
-
----
-
-## Letting an AI Agent Operate the App
-
-When the task is to let an in-app assistant or browser agent **use** the UI (fill forms, pick options, press buttons), do not script clicks or add `data-testid` hooks. Use the bridge in `@heroui/react/agent`: it reads HeroUI components from their accessible roles and labels, with no changes to the components.
-
-```tsx
-import {agentTools, callAgentTool, createAgent} from "@heroui/react/agent";
-
-const agent = createAgent({allow: (action) => !action.confirm});
-
-agent.snapshot(); // [{ref: "c1", component: "select", label: "Region", value: "us", items: [...], actions: ["setValue"]}, ...]
-await agent.act({steps: [{ref: "Region", action: "setValue", args: ["Europe"]}]});
-
-// With a model: pass `agentTools` as tool definitions, run each call with callAgentTool(agent, name, input)
-```
-
-- Mark risky controls with `data-agent-confirm="reason"`, private regions with `data-agent-hidden`, private values with `data-agent-secret`.
-- Custom components join with `useAgentComponent(ref, {component, state, actions})`.
-- Every field needs a `Label` (or `aria-label`): the label is how the agent finds it.
-
-Full guide: `node_modules/@heroui/react/docs/guides/agent-bridge.md` or `https://heroui.com/docs/react/getting-started/agent-bridge.mdx`.
 
 ---
 
