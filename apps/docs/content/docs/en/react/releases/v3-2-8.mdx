@@ -1,6 +1,6 @@
 ---
 title: v3.2.8
-description: The agent bridge (@heroui/react/agent), version-matched docs inside @heroui/react, a heroui-theming agent skill, tailwind-variants 4, ToggleButton fullWidth, Sheet stacking inside modals, wrapping overlay footers, an easier Table column resizer, RTL progress and skeleton animations, and fixes for Checkbox, Menu, ListBox, blur backdrops, and ScrollShadow.
+description: Version-matched docs inside @heroui/react, a heroui-theming agent skill, tailwind-variants 4, ToggleButton fullWidth, Sheet stacking inside modals, wrapping overlay footers, an easier Table column resizer, RTL progress and skeleton animations, and fixes for Checkbox, Menu, ListBox, blur backdrops, and ScrollShadow.
 github:
   pull: 6998
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">November 20, 2026</span>
 </div>
 
-Patch release: the new [agent bridge](/docs/react/getting-started/agent-bridge) (`@heroui/react/agent`) lets an AI agent read and operate a running HeroUI app through its components, `@heroui/react` now ships version-matched Markdown docs for coding agents, and the new `heroui-theming` skill lets an agent restyle HeroUI or author a complete theme ([Theming with Agents](/docs/react/getting-started/theming-for-agents)). `@heroui/react` and `@heroui/styles` move to `tailwind-variants@4.0.2`. [ToggleButton](/docs/components/toggle-button) gains a `fullWidth` prop, [Sheet](/docs/components/sheet) now stacks on the shared overlay z-index so it opens above a [Modal](/docs/components/modal), and footer actions in [Modal](/docs/components/modal), [AlertDialog](/docs/components/alert-dialog), [Drawer](/docs/components/drawer), and [Sheet](/docs/components/sheet) wrap instead of overflowing. [ProgressBar](/docs/components/progress-bar) and [Skeleton](/docs/components/skeleton) animations now sweep in the reading direction in RTL. This release also widens the [Table](/docs/components/table) column resizer hit area, stops the [Checkbox](/docs/components/checkbox) indeterminate fill from flashing, keeps icons and long labels in shape in [Dropdown](/docs/components/dropdown) menu and [ListBox](/docs/components/list-box) items, keeps `variant="blur"` backdrops blurred on touch devices, and clears a stale [ScrollShadow](/docs/components/scroll-shadow) fade when content stops overflowing.
+Patch release: `@heroui/react` now ships version-matched Markdown docs for coding agents, and the new `heroui-theming` skill lets an agent restyle HeroUI or author a complete theme ([Theming with Agents](/docs/react/getting-started/theming-for-agents)). `@heroui/react` and `@heroui/styles` move to `tailwind-variants@4.0.2`. [ToggleButton](/docs/components/toggle-button) gains a `fullWidth` prop, [Sheet](/docs/components/sheet) now stacks on the shared overlay z-index so it opens above a [Modal](/docs/components/modal), and footer actions in [Modal](/docs/components/modal), [AlertDialog](/docs/components/alert-dialog), [Drawer](/docs/components/drawer), and [Sheet](/docs/components/sheet) wrap instead of overflowing. [ProgressBar](/docs/components/progress-bar) and [Skeleton](/docs/components/skeleton) animations now sweep in the reading direction in RTL. This release also widens the [Table](/docs/components/table) column resizer hit area, stops the [Checkbox](/docs/components/checkbox) indeterminate fill from flashing, keeps icons and long labels in shape in [Dropdown](/docs/components/dropdown) menu and [ListBox](/docs/components/list-box) items, keeps `variant="blur"` backdrops blurred on touch devices, and clears a stale [ScrollShadow](/docs/components/scroll-shadow) fade when content stops overflowing.
 
 ## Installation
 
@@ -54,7 +54,6 @@ Update to the latest version:
 
 ## What's New
 
-- **Agent bridge**: Import `createAgent` from the new `@heroui/react/agent` entry point to give an AI agent three tools for your running app: `snapshot` to list the components on the page, `act` to use them by label (for example `setValue`, `setChecked`, `press`), and `query` to search them. The bridge reads the roles, labels, and state HeroUI already renders, so no component changes are needed. It includes an `allow` callback and `data-agent-confirm`, `data-agent-hidden`, and `data-agent-secret` marks for permissions, change subscriptions, `agentTools` and `callAgentTool` for model SDKs, `registerTools` for WebMCP, and `useAgentComponent` for custom components. See [Agent Bridge](/docs/react/getting-started/agent-bridge) and the [Agent Bridge Reference](/docs/react/getting-started/agent-bridge-reference) ([#7018](https://github.com/heroui-inc/heroui/pull/7018)).
 - **Docs inside the package**: `@heroui/react` now ships its documentation as Markdown under `node_modules/@heroui/react/docs/` — an `llms.txt` index plus component and guide pages — generated from the docs site at publish time. Coding agents read the docs for the version installed in your project, with no network access. Point your agent at `docs/llms.txt` from `AGENTS.md` or `CLAUDE.md`; see [LLMs.txt](/docs/react/getting-started/llms-txt#inside-the-package) ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
 - **heroui-theming skill**: A new agent skill for global customization and full theme authoring with tokens, BEM overrides, and named light and dark themes, on React or any framework. Install it with `curl -fsSL https://heroui.com/install | bash -s heroui-theming`; see [Theming with Agents](/docs/react/getting-started/theming-for-agents) ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
 - **heroui-react skill**: Read component docs and guides from the installed `@heroui/react` package when the project depends on it, falling back to heroui.com otherwise ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
@@ -77,7 +76,6 @@ Update to the latest version:
 ## Documentation
 
 - **Docs redesign**: A new docs shell with header actions and an appearance switcher, a sidebar grouped by category, interactive prop controls next to component previews, and a redesigned Cmd+K search with filters. The components index lists free and Pro components together, and the showcase pages are removed; old `/showcase` links redirect to getting started ([#7020](https://github.com/heroui-inc/heroui/pull/7020)).
-- **Agent Bridge**: Add the [Agent Bridge](/docs/react/getting-started/agent-bridge) guide and [Agent Bridge Reference](/docs/react/getting-started/agent-bridge-reference) ([#7018](https://github.com/heroui-inc/heroui/pull/7018)).
 - **Theming with Agents**: Add a guide to customizing HeroUI globally and authoring complete themes with a coding agent, and document the packaged docs on the [LLMs.txt](/docs/react/getting-started/llms-txt) and [Agent Skills](/docs/react/getting-started/agent-skills) pages ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
 - **DESIGN.md**: Publish default-theme `DESIGN.md` files for React and Native, and document the CLI's `design-md` command. See [DESIGN.md](/docs/react/getting-started/design-md) and [CLI](/docs/react/getting-started/cli) ([#6905](https://github.com/heroui-inc/heroui/pull/6905), [#6992](https://github.com/heroui-inc/heroui/pull/6992), [#6994](https://github.com/heroui-inc/heroui/pull/6994)).
 - **Web and Native switch**: Keep the current page when switching between Web and Native docs ([#7011](https://github.com/heroui-inc/heroui/pull/7011)).
@@ -86,7 +84,6 @@ Update to the latest version:
 ## Storybook
 
 - **Theming stories**: Add a Theming/Themes story with two example themes, Arcade and Ledger, that restyle components through tokens and BEM overrides ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
-- **Agent bridge stories**: Add agent bridge stories and showcase demos ([#7018](https://github.com/heroui-inc/heroui/pull/7018)).
 - **Locales**: Add Persian and Urdu to the locale switcher. Both fall back to English React Aria strings ([#7023](https://github.com/heroui-inc/heroui/pull/7023)).
 
 ## Links

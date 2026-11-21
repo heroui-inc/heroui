@@ -1,6 +1,6 @@
 ---
 title: v3.2.8
-description: "Agent Bridge（@heroui/react/agent）、@heroui/react 内置与版本匹配的文档、heroui-theming 代理技能、tailwind-variants 4、ToggleButton fullWidth、Sheet 在模态框内的层级、可换行的浮层底部操作、更易操作的 Table 列宽调整手柄、RTL 下的进度条与骨架屏动画，以及 Checkbox、Menu、ListBox、模糊背景与 ScrollShadow 修复。"
+description: "@heroui/react 内置与版本匹配的文档、heroui-theming 代理技能、tailwind-variants 4、ToggleButton fullWidth、Sheet 在模态框内的层级、可换行的浮层底部操作、更易操作的 Table 列宽调整手柄、RTL 下的进度条与骨架屏动画，以及 Checkbox、Menu、ListBox、模糊背景与 ScrollShadow 修复。"
 github:
   pull: 6998
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 11 月 20 日</span>
 </div>
 
-补丁版本：全新的 [Agent Bridge](/docs/react/getting-started/agent-bridge)（`@heroui/react/agent`）让 AI 代理可以通过组件读取并操作运行中的 HeroUI 应用；`@heroui/react` 现在随包附带与版本匹配的 Markdown 文档，供编码代理读取；全新的 `heroui-theming` 技能让代理可以重新设计 HeroUI 样式或创建完整主题（[使用代理定制主题](/docs/react/getting-started/theming-for-agents)）。`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。[ToggleButton](/docs/components/toggle-button) 新增 `fullWidth` 属性；[Sheet](/docs/components/sheet) 改用共享的浮层 z-index，因此可以显示在 [Modal](/docs/components/modal) 之上；[Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在空间不足时会换行而不再溢出。[ProgressBar](/docs/components/progress-bar) 与 [Skeleton](/docs/components/skeleton) 的动画在 RTL 下会按阅读方向扫动。本版本还加宽了 [Table](/docs/components/table) 列宽调整手柄的点击区域，修复 [Checkbox](/docs/components/checkbox) 不确定状态填充的闪烁，让 [Dropdown](/docs/components/dropdown) 菜单与 [ListBox](/docs/components/list-box) 选项中的图标和长标签保持正常布局，让触屏设备上的 `variant="blur"` 背景保持模糊，并修复内容不再溢出时 [ScrollShadow](/docs/components/scroll-shadow) 残留的渐隐效果。
+补丁版本：`@heroui/react` 现在随包附带与版本匹配的 Markdown 文档，供编码代理读取；全新的 `heroui-theming` 技能让代理可以重新设计 HeroUI 样式或创建完整主题（[使用代理定制主题](/docs/react/getting-started/theming-for-agents)）。`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。[ToggleButton](/docs/components/toggle-button) 新增 `fullWidth` 属性；[Sheet](/docs/components/sheet) 改用共享的浮层 z-index，因此可以显示在 [Modal](/docs/components/modal) 之上；[Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在空间不足时会换行而不再溢出。[ProgressBar](/docs/components/progress-bar) 与 [Skeleton](/docs/components/skeleton) 的动画在 RTL 下会按阅读方向扫动。本版本还加宽了 [Table](/docs/components/table) 列宽调整手柄的点击区域，修复 [Checkbox](/docs/components/checkbox) 不确定状态填充的闪烁，让 [Dropdown](/docs/components/dropdown) 菜单与 [ListBox](/docs/components/list-box) 选项中的图标和长标签保持正常布局，让触屏设备上的 `variant="blur"` 背景保持模糊，并修复内容不再溢出时 [ScrollShadow](/docs/components/scroll-shadow) 残留的渐隐效果。
 
 ## 安装
 
@@ -54,7 +54,6 @@ github:
 
 ## 新功能
 
-- **Agent Bridge**：从新的 `@heroui/react/agent` 入口引入 `createAgent`，为 AI 代理提供操作运行中应用的三个工具：`snapshot` 列出页面上的组件，`act` 按标签使用组件（例如 `setValue`、`setChecked`、`press`），`query` 搜索组件。Bridge 读取 HeroUI 已渲染的角色、标签与状态，无需修改组件。它提供用于权限控制的 `allow` 回调以及 `data-agent-confirm`、`data-agent-hidden`、`data-agent-secret` 标记、变更订阅、面向模型 SDK 的 `agentTools` 与 `callAgentTool`、面向 WebMCP 的 `registerTools`，以及用于自定义组件的 `useAgentComponent`。参见 [Agent Bridge](/docs/react/getting-started/agent-bridge) 与 [Agent Bridge 参考](/docs/react/getting-started/agent-bridge-reference)（[#7018](https://github.com/heroui-inc/heroui/pull/7018)）。
 - **包内文档**：`@heroui/react` 现在在 `node_modules/@heroui/react/docs/` 下以 Markdown 形式附带文档，包括 `llms.txt` 索引以及组件和指南页面，在发布时由文档站生成。编码代理可以离线读取与项目所装版本一致的文档。在 `AGENTS.md` 或 `CLAUDE.md` 中让代理先读取 `docs/llms.txt`；参见 [LLMs.txt](/docs/react/getting-started/llms-txt)（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
 - **heroui-theming 技能**：新的代理技能，支持通过令牌、BEM 覆盖以及具名的亮色与暗色主题进行全局定制和完整主题创作，适用于 React 或任意框架。使用 `curl -fsSL https://heroui.com/install | bash -s heroui-theming` 安装；参见 [使用代理定制主题](/docs/react/getting-started/theming-for-agents)（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
 - **heroui-react 技能**：当项目依赖 `@heroui/react` 时，从已安装的包中读取组件文档与指南，否则回退到 heroui.com（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
@@ -77,7 +76,6 @@ github:
 ## 文档
 
 - **文档改版**：全新的文档外壳，包含顶部操作与外观切换器、按类别分组的侧边栏、组件预览旁的交互式属性控件，以及带筛选的 Cmd+K 搜索。组件索引同时列出免费与 Pro 组件；展示页面已移除，旧的 `/showcase` 链接会重定向到入门页面（[#7020](https://github.com/heroui-inc/heroui/pull/7020)）。
-- **Agent Bridge**：新增 [Agent Bridge](/docs/react/getting-started/agent-bridge) 指南与 [Agent Bridge 参考](/docs/react/getting-started/agent-bridge-reference)（[#7018](https://github.com/heroui-inc/heroui/pull/7018)）。
 - **使用代理定制主题**：新增指南，介绍如何借助编码代理全局定制 HeroUI 并创建完整主题，并在 [LLMs.txt](/docs/react/getting-started/llms-txt) 与 [Agent Skills](/docs/react/getting-started/agent-skills) 页面中说明包内文档（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
 - **DESIGN.md**：发布 React 与 Native 的默认主题 `DESIGN.md` 文件，并为 CLI 的 `design-md` 命令补充文档。参见 [DESIGN.md](/docs/react/getting-started/design-md) 与 [CLI](/docs/react/getting-started/cli)（[#6905](https://github.com/heroui-inc/heroui/pull/6905)、[#6992](https://github.com/heroui-inc/heroui/pull/6992)、[#6994](https://github.com/heroui-inc/heroui/pull/6994)）。
 - **Web 与 Native 切换**：在 Web 与 Native 文档之间切换时保留当前页面（[#7011](https://github.com/heroui-inc/heroui/pull/7011)）。
@@ -86,7 +84,6 @@ github:
 ## Storybook
 
 - **主题示例**：新增 Theming/Themes 故事，提供 Arcade 与 Ledger 两套示例主题，通过令牌与 BEM 覆盖重新设计组件样式（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
-- **Agent Bridge 示例**：新增 Agent Bridge 故事与展示示例（[#7018](https://github.com/heroui-inc/heroui/pull/7018)）。
 - **语言**：在语言切换器中新增波斯语与乌尔都语，两者的 React Aria 文案回退为英文（[#7023](https://github.com/heroui-inc/heroui/pull/7023)）。
 
 ## 链接
