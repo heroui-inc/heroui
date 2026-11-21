@@ -1,0 +1,142 @@
+/* Arcade Theme Variables */
+
+.arcade-light,
+[data-theme="arcade-light"] {
+  color-scheme: light;
+
+  /* Primitives: tinted ink and paper instead of neutral black and white */
+  --snow: oklch(0.985 0.012 95);
+  --eclipse: oklch(0.24 0.03 285);
+
+  /* Arcade tokens (theme-specific, read by the component overrides) */
+  --arcade-outline: 2px;
+  --arcade-depth: 3px;
+  --arcade-edge: var(--eclipse);
+
+  /* Base */
+  --background: oklch(0.972 0.02 95);
+  --foreground: var(--eclipse);
+
+  /* Surfaces */
+  --surface: oklch(0.995 0.008 95);
+  --surface-foreground: var(--foreground);
+  --surface-secondary: oklch(0.955 0.022 95);
+  --surface-secondary-foreground: var(--foreground);
+  --surface-tertiary: oklch(0.935 0.026 95);
+  --surface-tertiary-foreground: var(--foreground);
+
+  /* Overlays */
+  --overlay: oklch(0.995 0.008 95);
+  --overlay-foreground: var(--foreground);
+  --backdrop: oklch(0.24 0.03 285 / 0.45);
+
+  /* Neutrals */
+  --muted: oklch(0.5 0.03 285);
+  --default: oklch(0.925 0.028 95);
+  --default-foreground: var(--eclipse);
+  --segment: var(--surface);
+  --segment-foreground: var(--foreground);
+
+  /* Accent and status */
+  --accent: oklch(0.74 0.17 55);
+  --accent-foreground: var(--eclipse);
+  --success: oklch(0.78 0.17 150);
+  --success-foreground: var(--eclipse);
+  --warning: oklch(0.85 0.16 90);
+  --warning-foreground: var(--eclipse);
+  --danger: oklch(0.65 0.22 25);
+  --danger-foreground: var(--snow);
+
+  /* Calculated token, re-declared: the default mix is too pale on cream */
+  --accent-soft-foreground: color-mix(in oklab, var(--accent) 45%, var(--foreground) 55%);
+
+  /* Fields: flat wells with an ink outline */
+  --field-background: var(--surface);
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--muted);
+  --field-border: var(--arcade-edge);
+  --field-border-width: var(--arcade-outline);
+  --field-border-hover: var(--arcade-edge);
+  --field-border-focus: var(--focus);
+
+  /* Lines and focus */
+  --border: var(--arcade-edge);
+  --separator: oklch(0.24 0.03 285 / 0.16);
+  --focus: oklch(0.55 0.22 285);
+  --link: var(--foreground);
+
+  /* Shape */
+  --radius: 0.75rem;
+  --field-radius: 0.875rem;
+
+  /* Elevation: hard offsets, never blurred. Every shadow token stays a real
+     shadow value (never `none`) so focus rings can still compose with it. */
+  --surface-shadow: 0 var(--arcade-depth) 0 0 var(--arcade-edge);
+  --overlay-shadow:
+    0 0 0 var(--arcade-outline) var(--arcade-edge),
+    0 calc(var(--arcade-depth) * 2) 0 var(--arcade-outline) var(--arcade-edge);
+  --field-shadow: 0 0 0 0 transparent;
+}
+
+.arcade-dark,
+[data-theme="arcade-dark"] {
+  color-scheme: dark;
+
+  --snow: oklch(0.985 0.012 95);
+  --eclipse: oklch(0.24 0.03 285);
+
+  --arcade-outline: 2px;
+  --arcade-depth: 3px;
+  --arcade-edge: oklch(0.11 0.02 285);
+
+  --background: oklch(0.2 0.03 285);
+  --foreground: var(--snow);
+
+  --surface: oklch(0.26 0.035 285);
+  --surface-foreground: var(--foreground);
+  --surface-secondary: oklch(0.3 0.035 285);
+  --surface-secondary-foreground: var(--foreground);
+  --surface-tertiary: oklch(0.34 0.035 285);
+  --surface-tertiary-foreground: var(--foreground);
+
+  --overlay: oklch(0.28 0.035 285);
+  --overlay-foreground: var(--foreground);
+  --backdrop: oklch(0.11 0.02 285 / 0.6);
+
+  --muted: oklch(0.74 0.03 285);
+  --default: oklch(0.33 0.04 285);
+  --default-foreground: var(--snow);
+  --segment: oklch(0.4 0.04 285);
+  --segment-foreground: var(--foreground);
+
+  --accent: oklch(0.8 0.16 60);
+  --accent-foreground: var(--eclipse);
+  --success: oklch(0.8 0.17 150);
+  --success-foreground: var(--eclipse);
+  --warning: oklch(0.86 0.15 90);
+  --warning-foreground: var(--eclipse);
+  --danger: oklch(0.66 0.21 25);
+  --danger-foreground: var(--snow);
+
+  --field-background: oklch(0.24 0.03 285);
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--muted);
+  --field-border: var(--arcade-edge);
+  --field-border-width: var(--arcade-outline);
+  --field-border-hover: var(--arcade-edge);
+  --field-border-focus: var(--focus);
+
+  --border: var(--arcade-edge);
+  --separator: oklch(0.985 0.012 95 / 0.14);
+  --focus: oklch(0.82 0.13 285);
+  --link: var(--foreground);
+
+  --radius: 0.75rem;
+  --field-radius: 0.875rem;
+
+  --surface-shadow: 0 var(--arcade-depth) 0 0 var(--arcade-edge);
+  --overlay-shadow:
+    0 0 0 var(--arcade-outline) var(--arcade-edge),
+    0 calc(var(--arcade-depth) * 2) 0 var(--arcade-outline) var(--arcade-edge);
+  --field-shadow: 0 0 0 0 transparent;
+}

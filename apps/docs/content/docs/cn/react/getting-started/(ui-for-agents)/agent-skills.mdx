@@ -51,6 +51,10 @@ Skills 会被你的 AI 助手 **自动发现**，你也可以通过 `/heroui-rea
   对于更复杂的使用场景，请使用 [MCP 服务器](/docs/react/getting-started/mcp-server)，它提供对组件文档与源代码的实时访问。
 </Callout>
 
+### 与你的版本匹配的文档
+
+当你的项目安装了 `@heroui/react` 时，skill 会从 `node_modules/@heroui/react/docs/` 读取组件文档和指南，因此它们与你当前使用的版本一致。如果没有安装该包，或者需要的内容未随包附带，skill 会从 heroui.com 获取最新文档。
+
 ### 包含的内容
 
 - HeroUI v3 安装指南

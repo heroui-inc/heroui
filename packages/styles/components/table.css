@@ -345,24 +345,27 @@
    Replaces the ::after separator when present.
    -------------------------------------------------------------------------- */
 .table__column-resizer {
-  /* Match the ::after separator: absolute, right edge, short vertical line */
-  @apply absolute end-0 top-1/2 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
-  /* Make it interactive — wider hit area with transparent padding */
-  @apply box-content translate-x-1/2 cursor-col-resize touch-none px-2;
+  /* Hit area: the header's full height and 24px (WCAG 2.2 target size) centred
+     on the column's end edge. It straddles the next header, so it is lifted
+     above it — otherwise that header paints over (and steals) its far half. */
+  @apply absolute inset-y-0 end-0 z-10 w-6 translate-x-1/2 cursor-col-resize touch-none rtl:-translate-x-1/2;
   /* Reset appearance */
-  @apply border-none bg-clip-content outline-none;
+  @apply border-none bg-transparent outline-none;
 
-  &[data-hovered="true"],
-  &:hover {
+  /* Visible line — matches the ::after separator it replaces */
+  &::before {
+    content: "";
+    @apply pointer-events-none absolute top-1/2 left-1/2 h-4 w-px -translate-1/2 rounded-sm bg-separator;
+  }
+
+  &[data-hovered="true"]::before,
+  &:hover::before,
+  &[data-resizing="true"]::before {
     @apply h-full w-0.5 bg-accent;
   }
 
-  &[data-resizing="true"] {
-    @apply h-full w-0.5 bg-accent;
-  }
-
-  &[data-focus-visible="true"],
-  &:focus-visible {
+  &[data-focus-visible="true"]::before,
+  &:focus-visible::before {
     @apply h-full w-0.5 bg-focus;
   }
 }

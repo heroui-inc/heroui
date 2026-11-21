@@ -1,0 +1,9 @@
+/* Arcade theme for HeroUI (the worked example from the heroui-theming skill)
+   Chunky and tactile: ink outlines, generous radius, and a hard "key cap"
+   shadow that buttons press into. */
+
+/* Theme variables (palette, radius, shadows, arcade tokens) */
+@import "./variables.css" layer(theme);
+
+/* Component overrides (BEM classes) */
+@import "./components/index.css" layer(components);

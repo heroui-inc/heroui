@@ -1,6 +1,7 @@
 @import "@heroui/styles";
 
 @source "../../react/src/components/**/*.{ts,tsx,js,jsx}";
+@source "../../react/src/agent/**/*.stories*.{ts,tsx}";
 
 /* Important: This source is important to make sure storybook styles are compiled */
 

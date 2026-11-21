@@ -62,10 +62,19 @@
   }
 
   /* Indeterminate line indicator */
-  &[data-indeterminate="true"] {
-    [data-slot="checkbox-default-indicator--indeterminate"] {
-      @apply absolute size-3;
-    }
+  [data-slot="checkbox-default-indicator--indeterminate"] {
+    @apply absolute size-3 text-accent-foreground opacity-0;
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: opacity 200ms var(--ease-linear);
+    @apply motion-reduce:transition-none;
+  }
+
+  &[data-indeterminate="true"] [data-slot="checkbox-default-indicator--indeterminate"] {
+    @apply opacity-100;
   }
 
   /* Invalid + Indeterminate: indeterminate icon color */
@@ -149,14 +158,20 @@
 
   /* Indeterminate */
   .checkbox[data-indeterminate="true"] & {
-    @apply bg-accent text-accent-foreground;
+    @apply text-accent-foreground;
+
+    &::before {
+      @apply scale-100 opacity-100;
+    }
   }
 
   /* Indeterminate + Pressed */
   .checkbox:active[data-indeterminate="true"] &,
   .checkbox[data-pressed="true"][data-indeterminate="true"] &,
   .checkbox:has([data-slot="checkbox-content"][data-pressed="true"])[data-indeterminate="true"] & {
-    @apply bg-accent-hover;
+    &::before {
+      @apply bg-accent-hover;
+    }
   }
 
   /* Validation states */
@@ -187,7 +202,11 @@
   /* Invalid + Indeterminate */
   .checkbox[data-indeterminate="true"][aria-invalid="true"] &,
   .checkbox[data-indeterminate="true"][data-invalid="true"] & {
-    @apply bg-danger text-danger-foreground;
+    @apply text-danger-foreground;
+
+    &::before {
+      @apply bg-danger;
+    }
   }
 }
 
@@ -238,18 +257,10 @@
   background-color: var(--checkbox-control-bg);
 }
 
-/* Selected state on secondary variant */
+/* Selected or indeterminate state on secondary variant */
 .checkbox--secondary[aria-checked="true"] .checkbox__control,
-.checkbox--secondary[data-selected="true"] .checkbox__control {
-  &::before {
-    @apply bg-accent;
-  }
-}
-
-/* Indeterminate state on secondary variant */
+.checkbox--secondary[data-selected="true"] .checkbox__control,
 .checkbox--secondary[data-indeterminate="true"] .checkbox__control {
-  @apply bg-accent;
-
   &::before {
     @apply bg-accent;
   }

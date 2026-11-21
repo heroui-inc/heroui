@@ -37,6 +37,7 @@ const componentEntries = componentDirs.reduce((acc, dir) => {
 
 // All entry points
 const input = {
+  "agent/index": "src/agent/index.ts",
   index: "src/index.ts",
   ...componentEntries,
 };
@@ -52,7 +53,6 @@ const external = [
   /^@internationalized\//,
   /^react-aria($|\/)/,
   /^react-aria-components($|\/)/,
-  /^tailwind-merge/,
   /^tailwind-variants/,
 ];
 

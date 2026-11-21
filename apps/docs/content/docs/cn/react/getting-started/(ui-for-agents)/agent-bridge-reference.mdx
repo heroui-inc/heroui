@@ -1,0 +1,249 @@
+---
+title: Agent Bridge 参考
+description: "@heroui/react/agent 中的全部函数、选项和类型"
+---
+
+本页的所有内容均从 `@heroui/react/agent` 导入。如需循序渐进的讲解，请从 [Agent Bridge](/docs/react/getting-started/agent-bridge) 指南开始。
+
+```tsx
+import {
+  createAgent,
+  agentTools,
+  callAgentTool,
+  registerTools,
+  useAgentComponent,
+  registerAgentComponent,
+  getChangeSource,
+} from "@heroui/react/agent";
+```
+
+## createAgent
+
+```tsx
+const agent = createAgent(options?);
+```
+
+创建一个通往页面的桥接。请在浏览器中调用它。
+
+| 选项 | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `allow` | `(action: AgentAction, context: {signal: AbortSignal}) => boolean \| Promise<boolean>` | 全部允许，需要确认的步骤除外 | 决定解析后的操作是否可以执行。 |
+| `timeout` | `number` | `300000` | 一个步骤等待 `allow` 的时长，单位为毫秒。超时后 `signal` 会中止。 |
+| `root` | `Element \| (() => Element \| null \| undefined)` | `document` | 将桥接层限定在页面的某一部分。 |
+
+它返回一个带有四个方法的 `Agent`。
+
+### agent.snapshot
+
+```tsx
+agent.snapshot(): AgentComponent[]
+```
+
+按页面顺序列出页面上的组件。最多返回 100 个；超出时，最后一个条目带有 `component: "more"` 和一个 `more` 计数。
+
+### agent.act
+
+```tsx
+agent.act(input: {steps: AgentStep[]}, options?: {allow?: AgentAllow}): Promise<AgentActResult>
+```
+
+按顺序执行步骤，并在第一次失败时停止。此前的步骤保持已应用状态。调用会排队执行，因此两次 `act` 调用永远不会交错。单次调用的 `allow` 在智能体实例自身的那一个之后运行。
+
+### agent.query
+
+```tsx
+agent.query(input: AgentQuery): Promise<AgentComponent[] | {error: string}>
+```
+
+查找组件，或某个列表的选项。最多返回 50 条结果，其后跟一个 `more` 条目。
+
+| 字段 | 类型 | 描述 |
+| --- | --- | --- |
+| `text` | `string` | 要在标签、分组、行和列表选项中查找的词。按整词匹配，忽略大小写和重音符号。 |
+| `within` | `string` | 某个列表的 ref 或标签。返回其选项，并按 `text` 过滤。 |
+| `kind` | `string` | 只保留某一类型的组件，例如 `"select"`。 |
+
+### agent.subscribe
+
+```tsx
+agent.subscribe(listener: (change: AgentChange) => void): () => void
+```
+
+报告 `value`、`checked`、`open` 和 `pressed` 的变化，无论由谁引起。返回一个用于停止订阅的函数。
+
+## 面向模型的工具
+
+### agentTools
+
+由三个工具定义组成的数组：`snapshot`、`act` 和 `query`。每个定义都有 `name`、`description`、`inputSchema`（JSON Schema）和 `annotations`。
+
+| 工具 | `readOnlyHint` | `consequentialHint` | `untrustedContentHint` |
+| --- | --- | --- | --- |
+| `snapshot` | `true` | | `true` |
+| `act` | `false` | `true` | `true` |
+| `query` | `true` | | `true` |
+
+### callAgentTool
+
+```tsx
+callAgentTool(agent: Agent, name: string, input: unknown, options?: {allow?: AgentAllow}): Promise<unknown>
+```
+
+执行来自模型的一次工具调用并返回其输出。名称不是 `snapshot`、`act` 或 `query` 时会抛出错误。
+
+### registerTools
+
+```tsx
+registerTools(agent: Agent, options: {allow: AgentAllow; prefix?: string}): () => void
+```
+
+通过 WebMCP（`document.modelContext` 或 `navigator.modelContext`）把这三个工具发布给浏览器的智能体。在没有 WebMCP 的环境中什么也不做。返回一个用于移除这些工具的函数。
+
+| 选项 | 类型 | 描述 |
+| --- | --- | --- |
+| `allow` | `AgentAllow` | 必填。决定浏览器的智能体请求的每个步骤。 |
+| `prefix` | `string` | 工具名称的前缀，例如 `"settings_"`。 |
+
+## 自定义组件
+
+### useAgentComponent
+
+```tsx
+useAgentComponent(ref: RefObject<Element | null>, options: AgentComponentOptions): void
+```
+
+向桥接层描述一个你自己构建的组件。每次快照都会重新读取这些选项，因此 `state` 看到的始终是当前这次渲染。
+
+### registerAgentComponent
+
+```tsx
+registerAgentComponent(element: Element, options: AgentComponentOptions | (() => AgentComponentOptions)): () => void
+```
+
+作用相同，但不依赖 React。返回一个用于移除该组件的函数。
+
+### AgentComponentOptions
+
+| 选项 | 类型 | 描述 |
+| --- | --- | --- |
+| `component` | `string` | 必填。在快照中报告的类型，例如 `"rating"`。 |
+| `label` | `string` | 无障碍名称。默认使用元素自身的名称。 |
+| `state` | `() => Record<string, unknown>` | 当前状态。`value`、`checked`、`open` 和 `pressed` 的变化会被跟踪。 |
+| `actions` | `Record<string, (...args) => unknown>` | 智能体可以调用的方法。返回值会作为该步骤的 `result` 传回。 |
+| `items` | `() => AgentItem[]` | 选项，适用于组件是列表的情况。 |
+| `closed` | `boolean` | 值始终是 `items` 中的一项。其他值会被拒绝，标签会被解析为值。 |
+| `secret` | `boolean` | 值永远不会展示给智能体。 |
+| `shown` | `() => boolean` | 智能体此刻是否能看到该组件。 |
+| `exposeChildren` | `boolean` | 同时列出元素内部的控件。默认情况下它们属于该组件的一部分。 |
+
+## getChangeSource
+
+```tsx
+getChangeSource(): "agent" | "user"
+```
+
+当处理函数因桥接操作而运行时返回 `"agent"`。请在处理函数内同步读取它；在 `await` 之后它会重新变为 `"user"`。
+
+## 标记属性
+
+| 属性 | 效果 |
+| --- | --- |
+| `data-agent-confirm="reason"` | 对该元素或其内部任何内容执行的步骤需要由用户确认。这段文本会作为 `action.confirm` 传给 `allow`。 |
+| `data-agent-hidden` | 该元素及其内部的所有内容都对智能体不可见。 |
+| `data-agent-secret` | 内部的值可以被设置，但永远无法读取。它们显示为 `"[redacted]"`。 |
+
+密码输入框、`autocomplete` 为信用卡或一次性验证码的输入框，以及 `InputOTP`，无需该属性即为保密。
+
+## 类型
+
+### AgentComponent
+
+快照或查询结果中的一个条目。
+
+| 字段 | 类型 | 描述 |
+| --- | --- | --- |
+| `ref` | `string` | 只要组件还在页面上就保持稳定，例如 `"c3"`。 |
+| `component` | `string` | 类型，例如 `"select"` 或某个自定义名称。 |
+| `label` | `string` | 无障碍名称。 |
+| `group` | `string` | 包裹它的 fieldset 或分组的标签。 |
+| `row` | `string` | 包裹它的表格行或列表项的文本。 |
+| `value` | `unknown` | 当前值。日期和时间为 ISO 文本。 |
+| `checked` | `boolean \| "mixed"` | 用于复选框、开关和单选框。 |
+| `open` | `boolean` | 用于菜单、手风琴、折叠面板和对话框。 |
+| `pressed` | `boolean` | 用于切换按钮。 |
+| `items` | `AgentItem[]` | 选项，不超过 10 个时列出。 |
+| `itemCount` | `number` | 选项未列出时的选项总数。 |
+| `description` | `string` | 与该组件关联的帮助文本和错误文本。 |
+| `text` | `string` | 对话框、警告或 toast 的可见文本。 |
+| `placeholder`、`href`、`min`、`max`、`step` | | 组件具有这些属性时包含。 |
+| `multiple`、`required`、`readOnly`、`invalid`、`disabled` | `boolean` | 仅在为 true 时包含。 |
+| `confirm` | `string` | `data-agent-confirm` 标记的文本。 |
+| `note` | `string` | 给智能体的额外指引。 |
+| `actions` | `string[]` | 此刻可用的操作名称。 |
+
+自定义组件可以添加它们自己的状态键。
+
+### AgentItem
+
+```tsx
+{value: string; label: string; disabled?: boolean}
+```
+
+### AgentStep
+
+```tsx
+{ref: string; action: string; args?: unknown[]}
+```
+
+`ref` 是来自快照的 ref，或组件标签中的词。匹配按整词进行，忽略大小写和重音符号，依次比对标签、组件所在的分组或行、组件类型。当有多个组件匹配时，该步骤会失败，并列出这些组件及其 ref。
+
+### AgentAction
+
+`allow` 收到的内容。
+
+```tsx
+{ref: string; component: string; label?: string; action: string; args: unknown[]; confirm?: string}
+```
+
+### AgentActResult
+
+| 字段 | 类型 | 描述 |
+| --- | --- | --- |
+| `ok` | `boolean` | 是否每个步骤都已执行。 |
+| `error` | `{step: number; message: string}` | 失败的步骤及原因。 |
+| `steps` | `AgentStepResult[]` | 已执行的步骤：`{step, ref, result?, changes}`。 |
+| `values` | `Record<string, unknown>` | 当前的字段值，以 ref 和标签为键，例如 `"c1 Project name"`。 |
+| `appeared` | `AgentComponent[]` | 在本次调用期间出现且仍在页面上的组件。 |
+| `gone` | `string[]` | 已离开页面的组件的 ref。 |
+
+### AgentChange
+
+```tsx
+{
+  ref: string;
+  component: string;
+  label?: string;
+  key: string; // "value" | "checked" | "open" | "pressed"
+  previous: unknown;
+  value: unknown;
+  source: "agent" | "user";
+}
+```
+
+## 错误消息
+
+错误消息是写给模型看的，并说明下一步该怎么做。
+
+| 情况 | 消息 |
+| --- | --- |
+| 没有匹配的组件 | `No component "Regoin" on the page. Take a snapshot to see what is there.` 会指出它可能位于哪些已收起的区块之后。 |
+| 多个组件匹配 | `"Email" names 2 components: c3 text-field Email (Billing), c9 text-field Email (Shipping). Use a ref.` |
+| 选项不在列表中 | `No item "Mars" in Region. Its items: United States, Europe, Asia.` |
+| 操作不正确 | `Save (c4) takes no setValue now. It takes: press.` |
+| 已禁用 | `Save (c4) is disabled.` |
+| 被用户拒绝 | `The person said no to "Deletes the project".` |
+| 无人及时响应 `allow` | `Nobody answered within 300s.` |
+| 需要确认，但未提供 `allow` | `Needs a person: "Deletes the project". Ask them to use "Delete project" themselves.` |
+| 被 `allow` 拒绝 | `The app doesn't allow press on "Delete project".` |
+| 对智能体隐藏 | `"Recovery code" is kept from agents. Ask the person to do this themselves.` |
+| 无效的日期或时间 | `Due date takes a date such as 2026-01-31.` |

@@ -1,0 +1,17 @@
+/* Arcade Theme - Tooltip */
+/* Inverted label: ink background, paper text, no key cap */
+
+:is(.arcade-light, .arcade-dark, [data-theme="arcade-light"], [data-theme="arcade-dark"]) {
+  .tooltip {
+    @apply font-medium;
+    background-color: var(--foreground);
+    color: var(--background);
+    box-shadow: none;
+
+    /* Parts without a BEM class are reached through their data-slot */
+    & [data-slot="overlay-arrow"] {
+      fill: var(--foreground);
+      stroke: none;
+    }
+  }
+}

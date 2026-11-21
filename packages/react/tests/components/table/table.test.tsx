@@ -204,13 +204,18 @@ describe("Table", () => {
     expect(selection === "all" ? null : [...selection]).toEqual(["2"]);
   });
 
-  it("preserves the header checkmark across indeterminate selection transitions", async () => {
+  it("preserves the header checkmark and dash across indeterminate selection transitions", async () => {
     renderTable();
     const headerCheckbox = screen.getByRole("checkbox", {name: "Select all"});
     const headerField = headerCheckbox.closest('[data-slot="checkbox"]');
     const checkmark = headerField?.querySelector(
       '[data-slot="checkbox-default-indicator--checkmark"]',
     );
+    const dash = headerField?.querySelector(
+      '[data-slot="checkbox-default-indicator--indeterminate"]',
+    );
+
+    expect(dash).not.toBeNull();
 
     await user.click(screen.getByRole("checkbox", {name: /^Select Kate/}));
     runAllTimers();
@@ -218,19 +223,20 @@ describe("Table", () => {
     expect(headerField).toHaveAttribute("data-indeterminate", "true");
     expect(
       headerField?.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]'),
-    ).not.toBeNull();
+    ).toBe(dash);
 
     await user.click(headerCheckbox);
     runAllTimers();
 
     expect(headerField).toHaveAttribute("data-selected", "true");
+    expect(headerField).not.toHaveAttribute("data-indeterminate");
     expect(headerField?.querySelector('[data-slot="checkbox-default-indicator--checkmark"]')).toBe(
       checkmark,
     );
     expect(checkmark).toHaveAttribute("stroke-dashoffset", "44");
     expect(
       headerField?.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]'),
-    ).toBeNull();
+    ).toBe(dash);
 
     await user.click(screen.getByRole("checkbox", {name: /^Select Kate/}));
     await user.click(screen.getByRole("checkbox", {name: /^Select John/}));
@@ -244,7 +250,7 @@ describe("Table", () => {
     expect(checkmark).toHaveAttribute("stroke-dashoffset", "66");
     expect(
       headerField?.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]'),
-    ).toBeNull();
+    ).toBe(dash);
   });
 
   it("supports toggling sort via Table tester", async () => {

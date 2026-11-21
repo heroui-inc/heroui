@@ -38,6 +38,8 @@ export const AGENT_SKILL_DESCRIPTIONS: Record<string, string> = {
     "Build React Native applications with HeroUI Native components, theme variables, and documentation lookup.",
   "heroui-react":
     "Build React applications with HeroUI v3 components, theming, styling, and documentation lookup.",
+  "heroui-theming":
+    "Customize HeroUI v3 globally and author complete light and dark themes with CSS tokens and BEM overrides, on React or any framework.",
 };
 
 export function normalizeOrigin(origin: string): string {

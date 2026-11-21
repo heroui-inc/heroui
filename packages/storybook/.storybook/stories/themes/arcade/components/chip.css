@@ -1,0 +1,13 @@
+/* Arcade Theme - Chip */
+
+:is(.arcade-light, .arcade-dark, [data-theme="arcade-light"], [data-theme="arcade-dark"]) {
+  .chip {
+    @apply font-semibold;
+    border: var(--arcade-outline) solid var(--border);
+  }
+
+  /* Tertiary chips have no fill, so drop the outline to keep them quiet */
+  .chip--tertiary {
+    @apply border-transparent;
+  }
+}
