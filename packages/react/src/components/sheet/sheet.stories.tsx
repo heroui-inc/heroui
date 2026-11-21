@@ -9,6 +9,7 @@ import {EmptyState} from "../empty-state";
 import {Input} from "../input";
 import {Label} from "../label";
 import {ListBox} from "../list-box";
+import {Modal} from "../modal";
 import {SearchField} from "../search-field";
 import {TextField} from "../textfield";
 
@@ -894,6 +895,57 @@ export function ProfessionsPicker() {
         Selected: <span className="font-medium text-foreground">{selected}</span>
       </p>
     </div>
+  );
+}
+
+export function InsideModal() {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  return (
+    <Modal>
+      <Button variant="secondary">Open Modal</Button>
+      <Modal.Backdrop>
+        <Modal.Container size="full">
+          <Modal.Dialog>
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading>Edit profile</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>
+              <p className="mb-4 text-sm text-muted">
+                Manage how your profile appears to other people.
+              </p>
+              <Button variant="secondary" onPress={() => setIsSheetOpen(true)}>
+                Visibility settings
+              </Button>
+            </Modal.Body>
+            <Sheet isOpen={isSheetOpen} onOpenChange={setIsSheetOpen}>
+              <Sheet.Backdrop>
+                <Sheet.Content className="mx-auto max-h-[95vh] max-w-[420px]">
+                  <Sheet.Dialog>
+                    <Sheet.Handle />
+                    <Sheet.CloseTrigger />
+                    <Sheet.Header>
+                      <Sheet.Heading>Profile visibility</Sheet.Heading>
+                    </Sheet.Header>
+                    <Sheet.Body>
+                      <p className="text-sm text-muted">
+                        Choose who can see your profile. You can change this at any time.
+                      </p>
+                    </Sheet.Body>
+                    <Sheet.Footer>
+                      <Button slot="close" variant="secondary">
+                        Done
+                      </Button>
+                    </Sheet.Footer>
+                  </Sheet.Dialog>
+                </Sheet.Content>
+              </Sheet.Backdrop>
+            </Sheet>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
   );
 }
 

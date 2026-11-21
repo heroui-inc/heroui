@@ -140,16 +140,20 @@ describe("Sheet", () => {
   );
 
   it("supports explicit closing when dismissal is disabled", async () => {
-    render(<SheetFixture defaultOpen isDismissable={false} />);
+    const onOpenChange = vi.fn();
+
+    render(<SheetFixture defaultOpen isDismissable={false} onOpenChange={onOpenChange} />);
     await setupUser().keyboard("{Escape}");
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(onOpenChange).not.toHaveBeenCalled();
     await setupUser().click(screen.getByRole("button", {name: "Dismiss sheet"}));
-    await waitFor(() =>
-      expect(document.querySelector('[data-slot="sheet-overlay"]')).toHaveAttribute(
-        "data-exiting",
-        "true",
-      ),
-    );
+    expect(onOpenChange).toHaveBeenCalledWith(false);
+    // The exit can finish before waitFor polls, so accept either the exiting or unmounted overlay.
+    await waitFor(() => {
+      const overlay = document.querySelector('[data-slot="sheet-overlay"]');
+
+      if (overlay) expect(overlay).toHaveAttribute("data-exiting", "true");
+    });
   });
 
   it("calls a close-trigger consumer handler", async () => {

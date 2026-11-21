@@ -1,5 +1,5 @@
 import {composeRenderProps} from "react-aria-components";
-import {twMerge} from "tailwind-merge";
+import {twMerge} from "tailwind-variants";
 
 export function composeTailwindRenderProps<T>(
   className: string | ((v: T) => string) | undefined,

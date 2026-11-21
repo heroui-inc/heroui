@@ -39,6 +39,18 @@ describe("ToggleButton", () => {
     expect(button).toHaveAttribute("aria-pressed", "false");
   });
 
+  it("supports fullWidth modifier", () => {
+    render(<ToggleButton fullWidth>Bold</ToggleButton>);
+
+    expect(screen.getByRole("button", {name: "Bold"})).toHaveClass("toggle-button--full-width");
+  });
+
+  it("renders without fullWidth modifier by default", () => {
+    render(<ToggleButton>Bold</ToggleButton>);
+
+    expect(screen.getByRole("button", {name: "Bold"})).not.toHaveClass("toggle-button--full-width");
+  });
+
   it("supports data attribute passthrough", () => {
     render(<ToggleButton data-testid="toggle">Bold</ToggleButton>);
 

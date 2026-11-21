@@ -1,0 +1,130 @@
+/* Ledger Theme Variables */
+
+.ledger-light,
+[data-theme="ledger-light"] {
+  color-scheme: light;
+
+  /* Primitives */
+  --snow: oklch(0.99 0.004 150);
+  --eclipse: oklch(0.2 0.02 160);
+
+  /* Ledger tokens */
+  --ledger-rule: oklch(0.2 0.02 160 / 0.2);
+
+  /* Base */
+  --background: oklch(0.975 0.006 120);
+  --foreground: var(--eclipse);
+
+  /* Surfaces */
+  --surface: oklch(0.995 0.003 120);
+  --surface-foreground: var(--foreground);
+  --surface-secondary: oklch(0.96 0.007 120);
+  --surface-secondary-foreground: var(--foreground);
+  --surface-tertiary: oklch(0.94 0.009 120);
+  --surface-tertiary-foreground: var(--foreground);
+
+  /* Overlays */
+  --overlay: oklch(0.995 0.003 120);
+  --overlay-foreground: var(--foreground);
+  --backdrop: oklch(0.2 0.02 160 / 0.35);
+
+  /* Neutrals */
+  --muted: oklch(0.48 0.015 160);
+  --default: oklch(0.935 0.009 120);
+  --default-foreground: var(--eclipse);
+  --segment: var(--surface);
+  --segment-foreground: var(--foreground);
+
+  /* Accent and status */
+  --accent: oklch(0.42 0.1 160);
+  --accent-foreground: var(--snow);
+  --success: oklch(0.52 0.13 150);
+  --success-foreground: var(--snow);
+  --warning: oklch(0.8 0.14 85);
+  --warning-foreground: var(--eclipse);
+  --danger: oklch(0.5 0.19 28);
+  --danger-foreground: var(--snow);
+
+  /* Fields: hairline boxes */
+  --field-background: var(--surface);
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--muted);
+  --field-border: oklch(0.2 0.02 160 / 0.35);
+  --field-border-width: 1px;
+  --field-border-hover: var(--foreground);
+  --field-border-focus: var(--accent);
+
+  /* Lines and focus */
+  --border: var(--ledger-rule);
+  --separator: var(--ledger-rule);
+  --focus: var(--accent);
+  --link: var(--accent);
+
+  /* Shape: square */
+  --radius: 0.125rem;
+  --field-radius: 0.125rem;
+
+  /* Elevation: a hairline instead of a shadow. Never `none`, so focus rings compose. */
+  --surface-shadow: 0 0 0 1px var(--ledger-rule);
+  --overlay-shadow: 0 0 0 1px var(--foreground), 0 16px 32px -16px oklch(0.2 0.02 160 / 0.35);
+  --field-shadow: 0 0 0 0 transparent;
+}
+
+.ledger-dark,
+[data-theme="ledger-dark"] {
+  color-scheme: dark;
+
+  --snow: oklch(0.99 0.004 150);
+  --eclipse: oklch(0.2 0.02 160);
+
+  --ledger-rule: oklch(0.95 0.01 150 / 0.2);
+
+  --background: oklch(0.17 0.012 160);
+  --foreground: oklch(0.95 0.01 150);
+
+  --surface: oklch(0.2 0.014 160);
+  --surface-foreground: var(--foreground);
+  --surface-secondary: oklch(0.24 0.014 160);
+  --surface-secondary-foreground: var(--foreground);
+  --surface-tertiary: oklch(0.28 0.014 160);
+  --surface-tertiary-foreground: var(--foreground);
+
+  --overlay: oklch(0.22 0.014 160);
+  --overlay-foreground: var(--foreground);
+  --backdrop: oklch(0.1 0.01 160 / 0.6);
+
+  --muted: oklch(0.72 0.015 160);
+  --default: oklch(0.27 0.016 160);
+  --default-foreground: var(--foreground);
+  --segment: oklch(0.34 0.016 160);
+  --segment-foreground: var(--foreground);
+
+  --accent: oklch(0.8 0.14 155);
+  --accent-foreground: var(--eclipse);
+  --success: oklch(0.78 0.15 150);
+  --success-foreground: var(--eclipse);
+  --warning: oklch(0.84 0.14 85);
+  --warning-foreground: var(--eclipse);
+  --danger: oklch(0.64 0.19 28);
+  --danger-foreground: var(--snow);
+
+  --field-background: oklch(0.19 0.012 160);
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--muted);
+  --field-border: oklch(0.95 0.01 150 / 0.35);
+  --field-border-width: 1px;
+  --field-border-hover: var(--foreground);
+  --field-border-focus: var(--accent);
+
+  --border: var(--ledger-rule);
+  --separator: var(--ledger-rule);
+  --focus: var(--accent);
+  --link: var(--accent);
+
+  --radius: 0.125rem;
+  --field-radius: 0.125rem;
+
+  --surface-shadow: 0 0 0 1px var(--ledger-rule);
+  --overlay-shadow: 0 0 0 1px var(--foreground), 0 16px 32px -16px oklch(0 0 0 / 0.6);
+  --field-shadow: 0 0 0 0 transparent;
+}

@@ -146,6 +146,22 @@ describe("ScrollShadow (browser)", () => {
       expect(fadesOf(scrollerOf())).toEqual({start: "0px", end: "0px"});
     });
 
+    // An inactive timeline that was active before keeps its last fade values, so content that
+    // overflowed, was scrolled to the end and then shrank would keep a top fade (#7014).
+    it("clears the fades when scrolled content shrinks to fit", async () => {
+      await render(<Overflowing />);
+
+      const scroller = scrollerOf();
+
+      scroller.scrollTop = maxScrollTopOf(scroller);
+
+      await expect.poll(() => fadesOf(scroller)).toEqual({start: `${SHADOW_SIZE}px`, end: "0px"});
+
+      (scroller.firstElementChild as HTMLElement).style.height = "20px";
+
+      await expect.poll(() => fadesOf(scroller)).toEqual({start: "0px", end: "0px"});
+    });
+
     // Deriving the mask from CSS alone means auto mode resolves a `mask-image` even with
     // nothing to scroll, so the root is always a stacking context. That is the deliberate
     // cost of not measuring overflow; the fade itself still collapses to a no-op.
