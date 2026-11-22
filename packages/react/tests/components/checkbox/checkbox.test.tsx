@@ -134,30 +134,53 @@ describe("Checkbox", () => {
     expect(field).toHaveAttribute("data-indeterminate", "true");
   });
 
-  it("preserves the checkmark draw animation across indeterminate transitions", () => {
+  it("preserves the checkmark and dash across indeterminate transitions", () => {
     const {rerender} = renderCheckbox({isIndeterminate: true});
+    const field = document.querySelector('[data-slot="checkbox"]');
     const checkmark = document.querySelector('[data-slot="checkbox-default-indicator--checkmark"]');
+    const dash = document.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]');
 
+    expect(field).toHaveAttribute("data-indeterminate", "true");
     expect(checkmark).toHaveAttribute("stroke-dashoffset", "66");
-    expect(
-      document.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]'),
-    ).not.toBeNull();
+    expect(dash).toHaveAttribute("aria-hidden", "true");
 
     rerender(checkbox());
+    expect(field).not.toHaveAttribute("data-indeterminate");
     expect(document.querySelector('[data-slot="checkbox-default-indicator--checkmark"]')).toBe(
       checkmark,
     );
     expect(checkmark).toHaveAttribute("stroke-dashoffset", "66");
-    expect(
-      document.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]'),
-    ).toBeNull();
+    expect(document.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]')).toBe(
+      dash,
+    );
 
     rerender(checkbox({isIndeterminate: true}));
     rerender(checkbox({isSelected: true}));
+    expect(field).not.toHaveAttribute("data-indeterminate");
     expect(document.querySelector('[data-slot="checkbox-default-indicator--checkmark"]')).toBe(
       checkmark,
     );
     expect(checkmark).toHaveAttribute("stroke-dashoffset", "44");
+    expect(document.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]')).toBe(
+      dash,
+    );
+  });
+
+  it("renders only custom indicator children", () => {
+    render(
+      <Checkbox isIndeterminate>
+        <Checkbox.Content>
+          <Checkbox.Control>
+            <Checkbox.Indicator>
+              {({isIndeterminate}) => (isIndeterminate ? <span>partial</span> : null)}
+            </Checkbox.Indicator>
+          </Checkbox.Control>
+          <Label>Accept terms</Label>
+        </Checkbox.Content>
+      </Checkbox>,
+    );
+
+    expect(screen.getByText("partial")).toBeInTheDocument();
     expect(
       document.querySelector('[data-slot="checkbox-default-indicator--indeterminate"]'),
     ).toBeNull();

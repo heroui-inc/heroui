@@ -7,14 +7,45 @@
  *   node get_docs.mjs /docs/react/releases/v3-0-0-beta-3
  *
  * Output:
- *   MDX documentation content
+ *   Documentation content. Guides are read from node_modules/@heroui/react/docs when
+ *   the installed package ships them (matches the installed version), otherwise
+ *   fetched from the network (latest).
  *
  * Note: For component docs, use get_component_docs.mjs instead.
  */
 
+import {existsSync, readFileSync} from "node:fs";
+import {join} from "node:path";
+
+import {findLocalDocs} from "./_local_docs.mjs";
+
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
 const FALLBACK_BASE = "https://heroui.com";
 const APP_PARAM = "app=react-skills";
+
+/**
+ * Read a guide or component page from the installed package, when it ships one.
+ */
+function readLocal(path) {
+  const local = findLocalDocs();
+
+  if (!local) return null;
+
+  const match = path
+    .replace(/\.mdx?$/, "")
+    .match(/^\/?docs\/(?:react\/)?(getting-started|components|ui-for-agents)\/([\w-]+)$/);
+
+  if (!match) return null;
+
+  const folder = match[1] === "components" ? "components" : "guides";
+  const file = join(local.docsDir, folder, `${match[2]}.md`);
+
+  if (!existsSync(file)) return null;
+
+  console.error(`# Using docs from the installed @heroui/react ${local.version}`);
+
+  return readFileSync(file, "utf-8");
+}
 
 /**
  * Fetch documentation from HeroUI API.
@@ -119,6 +150,15 @@ async function main() {
     const titleCase = componentName.charAt(0).toUpperCase() + componentName.slice(1);
 
     console.error(`# Example: node get_component_docs.mjs ${titleCase}`);
+  }
+
+  // Prefer the docs that ship with the installed version
+  const localContent = readLocal(path);
+
+  if (localContent) {
+    console.log(localContent);
+
+    return;
   }
 
   console.error(`# Fetching documentation for ${path}...`);

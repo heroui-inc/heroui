@@ -5,11 +5,15 @@ import {tv} from "tailwind-variants";
 export const toggleButtonVariants = tv({
   base: "toggle-button",
   defaultVariants: {
+    fullWidth: false,
     isIconOnly: false,
     size: "md",
     variant: "default",
   },
   variants: {
+    fullWidth: {
+      true: "toggle-button--full-width",
+    },
     isIconOnly: {
       true: "toggle-button--icon-only",
     },

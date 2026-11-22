@@ -1,0 +1,7 @@
+/* Ledger Theme - Chip */
+
+:is(.ledger-light, .ledger-dark, [data-theme="ledger-light"], [data-theme="ledger-dark"]) {
+  .chip {
+    @apply font-mono tracking-wide uppercase;
+  }
+}

@@ -6,8 +6,20 @@
 
 /* Animation types */
 .skeleton--shimmer {
+  /* The shimmer travels from inline-start to inline-end. The shared `skeleton` keyframes and the
+     start offset below scale their physical offsets by this sign. `:dir(rtl)` resolves the
+     element's own direction, so a nested `dir="ltr"` subtree keeps the LTR sign (Tailwind's `rtl`
+     variant would still match it through `[dir="rtl"] *`). */
+  --skeleton-shimmer-direction: 1;
+
+  &:dir(rtl) {
+    --skeleton-shimmer-direction: -1;
+  }
+
   &::after {
-    @apply absolute inset-0 -translate-x-full animate-skeleton bg-linear-to-r from-transparent via-surface-tertiary to-transparent content-[''];
+    @apply absolute inset-0 animate-skeleton bg-linear-to-r from-transparent via-surface-tertiary to-transparent content-[''];
+
+    translate: calc(var(--skeleton-shimmer-direction) * -100%) 0;
   }
 
   /* When applied to a parent container with multiple skeletons */
@@ -18,7 +30,9 @@
 
     /* Single synchronized shimmer that passes over all children */
     &::before {
-      @apply absolute inset-0 -translate-x-full animate-skeleton content-[''];
+      @apply absolute inset-0 animate-skeleton content-[''];
+
+      translate: calc(var(--skeleton-shimmer-direction) * -100%) 0;
       background: linear-gradient(
         90deg,
         transparent 0%,

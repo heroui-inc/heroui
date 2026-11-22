@@ -1,0 +1,13 @@
+/* Arcade Theme - Card */
+/* The key-cap shadow comes from --surface-shadow; the card only adds the outline. */
+
+:is(.arcade-light, .arcade-dark, [data-theme="arcade-light"], [data-theme="arcade-dark"]) {
+  .card {
+    border: var(--arcade-outline) solid var(--border);
+  }
+
+  /* `.card` now sets a border, so re-assert the modifier it would otherwise clobber */
+  .card--transparent {
+    @apply border-none;
+  }
+}

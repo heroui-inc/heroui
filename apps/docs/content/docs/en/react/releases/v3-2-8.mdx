@@ -1,0 +1,99 @@
+---
+title: v3.2.8
+description: Version-matched docs inside @heroui/react, a heroui-theming agent skill, tailwind-variants 4, ToggleButton fullWidth, Sheet stacking inside modals, wrapping overlay footers, an easier Table column resizer, RTL progress and skeleton animations, and fixes for Checkbox, Menu, ListBox, blur backdrops, and ScrollShadow.
+github:
+  pull: 6998
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">November 22, 2026</span>
+</div>
+
+Patch release: `@heroui/react` now ships version-matched Markdown docs for coding agents, and the new `heroui-theming` skill lets an agent restyle HeroUI or author a complete theme ([Theming with Agents](/docs/react/getting-started/theming-for-agents)). `@heroui/react` and `@heroui/styles` move to `tailwind-variants@4.0.2`. [ToggleButton](/docs/components/toggle-button) gains a `fullWidth` prop, [Sheet](/docs/components/sheet) now stacks on the shared overlay z-index so it opens above a [Modal](/docs/components/modal), and footer actions in [Modal](/docs/components/modal), [AlertDialog](/docs/components/alert-dialog), [Drawer](/docs/components/drawer), and [Sheet](/docs/components/sheet) wrap instead of overflowing. [ProgressBar](/docs/components/progress-bar) and [Skeleton](/docs/components/skeleton) animations now sweep in the reading direction in RTL. This release also widens the [Table](/docs/components/table) column resizer hit area, stops the [Checkbox](/docs/components/checkbox) indeterminate fill from flashing, keeps icons and long labels in shape in [Dropdown](/docs/components/dropdown) menu and [ListBox](/docs/components/list-box) items, keeps `variant="blur"` backdrops blurred on touch devices, and clears a stale [ScrollShadow](/docs/components/scroll-shadow) fade when content stops overflowing.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warning">
+  **tailwind-variants 4.** `@heroui/react` and `@heroui/styles` re-export `tv`, `cn`, and `VariantProps` from `tailwind-variants`, which this release upgrades from `3.3.1` to `4.0.2`. In v4, passing a non-empty `twMergeConfig` to the root `tv()` throws a `TypeError` at runtime. If you pass `twMergeConfig` to `tv()`, import `tv` from `tailwind-variants/config` instead. v4's stricter types can also reject some `tv()` configurations that v3 accepted.
+</Callout>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Dependencies
+
+- **tailwind-variants**: Upgrade `@heroui/react` and `@heroui/styles` to `tailwind-variants@4.0.2`. HeroUI's internal `tv` wrapper is now `createTV({twMerge: false})`, so class merging stays off as before, and the unused `tailwind-merge` Rollup external is removed. If you pass `twMergeConfig` to `tv()`, whether imported from HeroUI or from `tailwind-variants`, import `tv` from `tailwind-variants/config` instead; the root entry now throws a `TypeError` ([#6996](https://github.com/heroui-inc/heroui/pull/6996), [#7010](https://github.com/heroui-inc/heroui/pull/7010)).
+- **Tooling**: Bump Tailwind CSS to `4.3.5`, Vitest to `5.1.1`, Storybook to `10.6.8`, and other development dependencies ([#7004](https://github.com/heroui-inc/heroui/pull/7004), [d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5), [#7035](https://github.com/heroui-inc/heroui/pull/7035)).
+- **Security**: Remove the vulnerable `deepmerge` package from the build toolchain (GHSA-gcqx-w48m-w2h4) and the unused `@vercel/og` dependency from the docs (GHSA-wx4j-mvgx-mqwp) ([#6997](https://github.com/heroui-inc/heroui/pull/6997)). Move development tooling to patched `minimatch@11` and `glob@14` (GHSA-g3hv-75wg-m249, GHSA-3g3m-2fjr-6pw4) ([#7029](https://github.com/heroui-inc/heroui/pull/7029)).
+
+## What's New
+
+- **Docs inside the package**: `@heroui/react` now ships its documentation as Markdown under `node_modules/@heroui/react/docs/` — an `llms.txt` index plus component and guide pages — generated from the docs site at publish time. Coding agents read the docs for the version installed in your project, with no network access. Point your agent at `docs/llms.txt` from `AGENTS.md` or `CLAUDE.md`; see [LLMs.txt](/docs/react/getting-started/llms-txt#inside-the-package) ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
+- **heroui-theming skill**: A new agent skill for global customization and full theme authoring with tokens, BEM overrides, and named light and dark themes, on React or any framework. Install it with `curl -fsSL https://heroui.com/install | bash -s heroui-theming`; see [Theming with Agents](/docs/react/getting-started/theming-for-agents) ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
+- **heroui-react skill**: Read component docs and guides from the installed `@heroui/react` package when the project depends on it, falling back to heroui.com otherwise ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
+- **ToggleButton**: Add `fullWidth` to stretch the button to the width of its container. It works with every `variant` and `size`, and maps to the `toggle-button--full-width` modifier ([#7012](https://github.com/heroui-inc/heroui/pull/7012)).
+
+## Bug Fixes
+
+- **Checkbox**: Keep the indeterminate indicator mounted so its fill fades instead of flashing when the indeterminate state changes, including the select-all checkbox in [Table](/docs/components/table) ([#7019](https://github.com/heroui-inc/heroui/pull/7019)).
+- **Menu and ListBox items**: Keep icons from shrinking, and let long labels (including labels inside a label-and-description wrapper) wrap instead of overflowing the item in Menu, [Dropdown](/docs/components/dropdown), [ListBox](/docs/components/list-box), and [Select](/docs/components/select) ([#7034](https://github.com/heroui-inc/heroui/pull/7034)).
+- **Blur backdrops**: On touch devices, skip `backdrop-filter` only while the backdrop of [Modal](/docs/components/modal), [AlertDialog](/docs/components/alert-dialog), or [Drawer](/docs/components/drawer) is entering or exiting, so `variant="blur"` no longer looks opaque once the overlay has opened ([#7025](https://github.com/heroui-inc/heroui/pull/7025)).
+- **Sheet**: Stack the overlay on the shared `--z-index-overlay` value used by [Modal](/docs/components/modal), [AlertDialog](/docs/components/alert-dialog), and [Drawer](/docs/components/drawer) instead of `z-50`, so a Sheet opened from inside a Modal renders above it ([#7006](https://github.com/heroui-inc/heroui/pull/7006)).
+- **Overlay footers**: Wrap footer actions that do not fit on one row in [AlertDialog](/docs/components/alert-dialog), [Modal](/docs/components/modal), [Drawer](/docs/components/drawer), and [Sheet](/docs/components/sheet) instead of overflowing the panel ([#7001](https://github.com/heroui-inc/heroui/pull/7001)).
+- **Table**: Make the column resizer a 24px-wide, full-height hit area lifted above the next header, so its far half is no longer covered. The visible line now draws with `::before` and stays centered on the column edge in RTL ([#7007](https://github.com/heroui-inc/heroui/pull/7007)).
+- **ScrollShadow**: Clear the scroll-driven fade when content that overflowed, was scrolled, and then shrank to fit stops overflowing. Chromium and WebKit kept the last fade values on the inactive scroll timeline, leaving a stale edge fade ([#7015](https://github.com/heroui-inc/heroui/pull/7015)).
+
+## Styles
+
+- **RTL animations**: [ProgressBar](/docs/components/progress-bar)'s indeterminate sweep and [Skeleton](/docs/components/skeleton)'s shimmer now run right to left in RTL. One keyframe per animation is scaled by a direction sign set with `:dir(rtl)`, so reduced motion, custom `--animate-skeleton` values, and nested `dir="ltr"` subtrees keep working ([#7023](https://github.com/heroui-inc/heroui/pull/7023)).
+
+## Documentation
+
+- **Docs redesign**: A new docs shell with header actions and an appearance switcher, a sidebar grouped by category, interactive prop controls next to component previews, and a redesigned Cmd+K search with filters. The components index lists free and Pro components together, and the showcase pages are removed; old `/showcase` links redirect to getting started ([#7020](https://github.com/heroui-inc/heroui/pull/7020)).
+- **Theming with Agents**: Add a guide to customizing HeroUI globally and authoring complete themes with a coding agent, and document the packaged docs on the [LLMs.txt](/docs/react/getting-started/llms-txt) and [Agent Skills](/docs/react/getting-started/agent-skills) pages ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
+- **DESIGN.md**: Publish default-theme `DESIGN.md` files for React and Native, and document the CLI's `design-md` command. See [DESIGN.md](/docs/react/getting-started/design-md) and [CLI](/docs/react/getting-started/cli) ([#6905](https://github.com/heroui-inc/heroui/pull/6905), [#6992](https://github.com/heroui-inc/heroui/pull/6992), [#6994](https://github.com/heroui-inc/heroui/pull/6994)).
+- **Web and Native switch**: Keep the current page when switching between Web and Native docs ([#7011](https://github.com/heroui-inc/heroui/pull/7011)).
+- **Search**: List Ask AI first when a search reads as a question, and remove separators from the search dialog ([#6990](https://github.com/heroui-inc/heroui/pull/6990), [#6991](https://github.com/heroui-inc/heroui/pull/6991)).
+
+## Storybook
+
+- **Theming stories**: Add a Theming/Themes story with two example themes, Arcade and Ledger, that restyle components through tokens and BEM overrides ([#7017](https://github.com/heroui-inc/heroui/pull/7017)).
+- **Locales**: Add Persian and Urdu to the locale switcher. Both fall back to English React Aria strings ([#7023](https://github.com/heroui-inc/heroui/pull/7023)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6998](https://github.com/heroui-inc/heroui/pull/6998)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

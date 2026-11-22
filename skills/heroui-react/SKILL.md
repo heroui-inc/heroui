@@ -73,6 +73,16 @@ import { Card } from "@heroui/react";
 
 **For component details, examples, props, and implementation patterns, always fetch documentation:**
 
+### Installed Docs First
+
+`@heroui/react` ships its docs inside the package. When the project has it installed, they match the installed version, so read them before anything else:
+
+- `node_modules/@heroui/react/docs/llms.txt` — index: which page to read for a task, plus every component and guide
+- `node_modules/@heroui/react/docs/components/<name>.md` — one component (kebab-case, e.g. `date-picker.md`)
+- `node_modules/@heroui/react/docs/guides/<name>.md` — guides (`theming.md`, `styling.md`…)
+
+The scripts below do this for you: `get_component_docs.mjs` and `get_docs.mjs` read the installed docs when they exist and fall back to the network (latest version) when they don't. Run them from inside the project.
+
 ### Using Scripts
 
 ```bash
@@ -232,3 +242,9 @@ node scripts/get_theme.mjs
 ```
 
 For detailed theming, fetch: `https://heroui.com/docs/react/getting-started/theming.mdx`
+
+**Global customization and custom themes:** to restyle components app-wide (tokens, BEM class overrides, new variants) or author a complete named light/dark theme, use the `heroui-theming` skill. If it is not installed:
+
+```bash
+curl -fsSL https://heroui.com/install | bash -s heroui-theming
+```

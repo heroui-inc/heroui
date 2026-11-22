@@ -1,0 +1,36 @@
+/* Arcade Theme - Button */
+/* Every button is an outlined key cap: a hard bottom shadow that the button
+   travels into while it is pressed. */
+
+:is(.arcade-light, .arcade-dark, [data-theme="arcade-light"], [data-theme="arcade-dark"]) {
+  .button {
+    /* A shadow utility (not raw box-shadow) so the focus ring still composes with it */
+    @apply font-semibold shadow-[0_var(--arcade-depth)_0_0_var(--arcade-edge)];
+    border: var(--arcade-outline) solid var(--border);
+
+    transition:
+      translate 80ms var(--ease-out),
+      box-shadow 80ms var(--ease-out),
+      background-color 100ms var(--ease-out);
+    @apply motion-reduce:transition-none;
+
+    /* Replace the default scale with key travel. Both selectors, always. */
+    &:active,
+    &[data-pressed="true"] {
+      @apply shadow-[0_0_0_0_var(--arcade-edge)];
+      transform: none;
+      translate: 0 var(--arcade-depth);
+    }
+  }
+
+  /* Ghost stays flat: no outline, no key cap, no travel */
+  .button--ghost {
+    @apply border-transparent shadow-none;
+
+    &:active,
+    &[data-pressed="true"] {
+      @apply shadow-none;
+      translate: none;
+    }
+  }
+}

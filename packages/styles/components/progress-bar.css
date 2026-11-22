@@ -52,6 +52,16 @@
     .progress-bar__fill {
       @apply w-2/5;
 
+      /* The fill is anchored at inline-start (the right edge in RTL), so the sweep must run
+         toward inline-end. The keyframes scale their physical offsets by this sign. `:dir(rtl)`
+         resolves the element's own direction, so a nested `dir="ltr"` subtree keeps the LTR sign
+         (Tailwind's `rtl` variant would still match it through `[dir="rtl"] *`). */
+      --progress-bar-sweep-direction: 1;
+
+      &:dir(rtl) {
+        --progress-bar-sweep-direction: -1;
+      }
+
       animation: progress-bar-indeterminate 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 
       @apply motion-reduce:animate-none;
@@ -76,10 +86,10 @@
 
 @keyframes progress-bar-indeterminate {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(calc(var(--progress-bar-sweep-direction, 1) * -100%));
   }
   100% {
-    transform: translateX(350%);
+    transform: translateX(calc(var(--progress-bar-sweep-direction, 1) * 350%));
   }
 }
 

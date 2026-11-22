@@ -1,0 +1,8 @@
+/* Ledger Theme - Button */
+/* Small caps labels. Colors, radius, and focus all come from tokens. */
+
+:is(.ledger-light, .ledger-dark, [data-theme="ledger-light"], [data-theme="ledger-dark"]) {
+  .button {
+    @apply text-xs font-medium tracking-widest uppercase;
+  }
+}
