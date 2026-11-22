@@ -116,6 +116,21 @@
       "cardDescription": "更多组件、图表、进阶 MCP 与 Skills，以及完整的主题构建器。限时折扣，立即获取你的授权。",
       "cta": "立即享受优惠"
     },
+    "blackFriday": {
+      "dayLabel": "黑色星期五",
+      "weekLabel": "黑五周",
+      "headline": "立减 {percent}%",
+      "endsIn": "倒计时",
+      "cardTitle": "使用 HeroUI Pro 更快构建",
+      "cardDescription": "面向 React 与 React Native 的组件、模板与 AI 工具。结账时使用优惠码。",
+      "code": "优惠码",
+      "copy": "复制",
+      "copied": "已复制",
+      "copyLabel": "复制 {code}",
+      "copiedLabel": "已复制 {code}",
+      "copiedAnnouncement": "{code} 已复制到剪贴板。",
+      "cta": "获取优惠"
+    },
     "units": {
       "days": "天",
       "hours": "时",
