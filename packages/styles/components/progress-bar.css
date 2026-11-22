@@ -53,11 +53,12 @@
       @apply w-2/5;
 
       /* The fill is anchored at inline-start (the right edge in RTL), so the sweep must run
-         toward inline-end. The keyframes scale their physical offsets by this sign; it is
-         reset here so a nested `dir="ltr"` subtree does not inherit an RTL ancestor's sign. */
+         toward inline-end. The keyframes scale their physical offsets by this sign. `:dir(rtl)`
+         resolves the element's own direction, so a nested `dir="ltr"` subtree keeps the LTR sign
+         (Tailwind's `rtl` variant would still match it through `[dir="rtl"] *`). */
       --progress-bar-sweep-direction: 1;
 
-      @variant rtl {
+      &:dir(rtl) {
         --progress-bar-sweep-direction: -1;
       }
 

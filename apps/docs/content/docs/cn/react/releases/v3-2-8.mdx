@@ -39,7 +39,7 @@ github:
 </Tabs>
 
 <Callout type="warning">
-  **tailwind-variants 4。** `@heroui/react` 与 `@heroui/styles` 会从 `tailwind-variants` 重新导出 `tv`、`cn` 与 `VariantProps`，本版本将其从 `3.3.1` 升级至 `4.0.2`。如果你从 HeroUI 引入这些 API，升级后请检查自己的 `tv()` 调用：v4 将 `twMergeConfig` 移至 `tailwind-variants/config`，且更严格的类型可能会拒绝部分 v3 接受的 `tv()` 配置。
+  **tailwind-variants 4。** `@heroui/react` 与 `@heroui/styles` 会从 `tailwind-variants` 重新导出 `tv`、`cn` 与 `VariantProps`，本版本将其从 `3.3.1` 升级至 `4.0.2`。在 v4 中，向根入口的 `tv()` 传入非空的 `twMergeConfig` 会在运行时抛出 `TypeError`。如果你向 `tv()` 传入 `twMergeConfig`，请改为从 `tailwind-variants/config` 引入 `tv`。此外，v4 更严格的类型可能会拒绝部分 v3 接受的 `tv()` 配置。
 </Callout>
 
 <Callout type="info">
@@ -48,7 +48,7 @@ github:
 
 ## 依赖
 
-- **tailwind-variants**：将 `@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。HeroUI 内部的 `tv` 封装改用 `createTV` 与内置的 `twMerge` 配置，并移除不再使用的 `tailwind-merge` Rollup external。如果你的应用直接引入 `tailwind-variants` 并传入 `twMergeConfig`，请注意 v4 已将该选项移至 `tailwind-variants/config`（[#6996](https://github.com/heroui-inc/heroui/pull/6996)、[#7010](https://github.com/heroui-inc/heroui/pull/7010)）。
+- **tailwind-variants**：将 `@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。HeroUI 内部的 `tv` 封装改为 `createTV({twMerge: false})`，类名合并仍与之前一样保持关闭，并移除不再使用的 `tailwind-merge` Rollup external。无论从 HeroUI 还是从 `tailwind-variants` 引入 `tv`，只要向 `tv()` 传入 `twMergeConfig`，都请改为从 `tailwind-variants/config` 引入 `tv`；根入口现在会抛出 `TypeError`（[#6996](https://github.com/heroui-inc/heroui/pull/6996)、[#7010](https://github.com/heroui-inc/heroui/pull/7010)）。
 - **工具链**：将 Tailwind CSS 升级至 `4.3.5`、Vitest 升级至 `5.1.1`、Storybook 升级至 `10.6.8`，并更新其他开发依赖（[#7004](https://github.com/heroui-inc/heroui/pull/7004)、[d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5)、[#7035](https://github.com/heroui-inc/heroui/pull/7035)）。
 - **安全**：从构建工具链中移除存在漏洞的 `deepmerge`（GHSA-gcqx-w48m-w2h4），并从文档站移除未使用的 `@vercel/og` 依赖（GHSA-wx4j-mvgx-mqwp）（[#6997](https://github.com/heroui-inc/heroui/pull/6997)）。将开发工具链升级至已修复漏洞的 `minimatch@11` 与 `glob@14`（GHSA-g3hv-75wg-m249、GHSA-3g3m-2fjr-6pw4）（[#7029](https://github.com/heroui-inc/heroui/pull/7029)）。
 
@@ -71,7 +71,7 @@ github:
 
 ## 样式
 
-- **RTL 动画**：[ProgressBar](/docs/components/progress-bar) 的不确定进度扫动与 [Skeleton](/docs/components/skeleton) 的闪光效果在 RTL 下改为从右向左。每个动画只保留一个关键帧，并按通过 `rtl` 变体设置的方向符号缩放，因此减少动效、自定义 `--animate-skeleton` 以及嵌套的 `dir="ltr"` 子树都能正常工作（[#7023](https://github.com/heroui-inc/heroui/pull/7023)）。
+- **RTL 动画**：[ProgressBar](/docs/components/progress-bar) 的不确定进度扫动与 [Skeleton](/docs/components/skeleton) 的闪光效果在 RTL 下改为从右向左。每个动画只保留一个关键帧，并按通过 `:dir(rtl)` 设置的方向符号缩放，因此减少动效、自定义 `--animate-skeleton` 以及嵌套的 `dir="ltr"` 子树都能正常工作（[#7023](https://github.com/heroui-inc/heroui/pull/7023)）。
 
 ## 文档
 

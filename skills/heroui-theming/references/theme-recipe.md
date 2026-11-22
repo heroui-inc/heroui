@@ -133,8 +133,10 @@ Importing is not enough; one mode must be active on `<html>`:
 - If app code uses Tailwind's `dark:` variant: HeroUI's `dark:` matches `.dark` / `[data-theme="dark"]` only. Either keep `class="dark"` on `<html>` next to `data-theme="<name>-dark"`, or redefine the variant after the HeroUI import:
 
 ```css
-@custom-variant dark (&:where(.dark, .dark *, [data-theme$="-dark"], [data-theme$="-dark"] *));
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *, .<name>-dark, .<name>-dark *, [data-theme="<name>-dark"], [data-theme="<name>-dark"] *));
 ```
+
+This covers both the attribute and the class form of `<name>-dark` and keeps the default `.dark` / `[data-theme="dark"]` matches. It replaces HeroUI's definition, which also falls back to `prefers-color-scheme: dark` and styles `::before` / `::after`; `dark:` now follows only the explicit theme.
 
 To make the theme the app's only look (no attribute needed), add the root to the selectors: `:root, .<name>-light, [data-theme="<name>-light"]` for light and `.dark, .<name>-dark, [data-theme="<name>-dark"]` for dark.
 

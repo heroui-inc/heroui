@@ -7,11 +7,12 @@
 /* Animation types */
 .skeleton--shimmer {
   /* The shimmer travels from inline-start to inline-end. The shared `skeleton` keyframes and the
-     start offset below scale their physical offsets by this sign; it is reset here so a nested
-     `dir="ltr"` subtree does not inherit an RTL ancestor's sign. */
+     start offset below scale their physical offsets by this sign. `:dir(rtl)` resolves the
+     element's own direction, so a nested `dir="ltr"` subtree keeps the LTR sign (Tailwind's `rtl`
+     variant would still match it through `[dir="rtl"] *`). */
   --skeleton-shimmer-direction: 1;
 
-  @variant rtl {
+  &:dir(rtl) {
     --skeleton-shimmer-direction: -1;
   }
 

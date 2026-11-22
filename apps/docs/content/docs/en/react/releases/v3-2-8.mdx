@@ -39,7 +39,7 @@ Update to the latest version:
 </Tabs>
 
 <Callout type="warning">
-  **tailwind-variants 4.** `@heroui/react` and `@heroui/styles` re-export `tv`, `cn`, and `VariantProps` from `tailwind-variants`, which this release upgrades from `3.3.1` to `4.0.2`. If you import them from HeroUI, check your own `tv()` calls after upgrading: v4 moves `twMergeConfig` to `tailwind-variants/config`, and its stricter types can reject some `tv()` configurations that v3 accepted.
+  **tailwind-variants 4.** `@heroui/react` and `@heroui/styles` re-export `tv`, `cn`, and `VariantProps` from `tailwind-variants`, which this release upgrades from `3.3.1` to `4.0.2`. In v4, passing a non-empty `twMergeConfig` to the root `tv()` throws a `TypeError` at runtime. If you pass `twMergeConfig` to `tv()`, import `tv` from `tailwind-variants/config` instead. v4's stricter types can also reject some `tv()` configurations that v3 accepted.
 </Callout>
 
 <Callout type="info">
@@ -48,7 +48,7 @@ Update to the latest version:
 
 ## Dependencies
 
-- **tailwind-variants**: Upgrade `@heroui/react` and `@heroui/styles` to `tailwind-variants@4.0.2`. HeroUI's internal `tv` wrapper now uses `createTV` with the built-in `twMerge` config, and the unused `tailwind-merge` Rollup external is removed. If your app imports `tailwind-variants` directly and passes `twMergeConfig`, note that v4 moves that option to `tailwind-variants/config` ([#6996](https://github.com/heroui-inc/heroui/pull/6996), [#7010](https://github.com/heroui-inc/heroui/pull/7010)).
+- **tailwind-variants**: Upgrade `@heroui/react` and `@heroui/styles` to `tailwind-variants@4.0.2`. HeroUI's internal `tv` wrapper is now `createTV({twMerge: false})`, so class merging stays off as before, and the unused `tailwind-merge` Rollup external is removed. If you pass `twMergeConfig` to `tv()`, whether imported from HeroUI or from `tailwind-variants`, import `tv` from `tailwind-variants/config` instead; the root entry now throws a `TypeError` ([#6996](https://github.com/heroui-inc/heroui/pull/6996), [#7010](https://github.com/heroui-inc/heroui/pull/7010)).
 - **Tooling**: Bump Tailwind CSS to `4.3.5`, Vitest to `5.1.1`, Storybook to `10.6.8`, and other development dependencies ([#7004](https://github.com/heroui-inc/heroui/pull/7004), [d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5), [#7035](https://github.com/heroui-inc/heroui/pull/7035)).
 - **Security**: Remove the vulnerable `deepmerge` package from the build toolchain (GHSA-gcqx-w48m-w2h4) and the unused `@vercel/og` dependency from the docs (GHSA-wx4j-mvgx-mqwp) ([#6997](https://github.com/heroui-inc/heroui/pull/6997)). Move development tooling to patched `minimatch@11` and `glob@14` (GHSA-g3hv-75wg-m249, GHSA-3g3m-2fjr-6pw4) ([#7029](https://github.com/heroui-inc/heroui/pull/7029)).
 
@@ -71,7 +71,7 @@ Update to the latest version:
 
 ## Styles
 
-- **RTL animations**: [ProgressBar](/docs/components/progress-bar)'s indeterminate sweep and [Skeleton](/docs/components/skeleton)'s shimmer now run right to left in RTL. One keyframe per animation is scaled by a direction sign set through the `rtl` variant, so reduced motion, custom `--animate-skeleton` values, and nested `dir="ltr"` subtrees keep working ([#7023](https://github.com/heroui-inc/heroui/pull/7023)).
+- **RTL animations**: [ProgressBar](/docs/components/progress-bar)'s indeterminate sweep and [Skeleton](/docs/components/skeleton)'s shimmer now run right to left in RTL. One keyframe per animation is scaled by a direction sign set with `:dir(rtl)`, so reduced motion, custom `--animate-skeleton` values, and nested `dir="ltr"` subtrees keep working ([#7023](https://github.com/heroui-inc/heroui/pull/7023)).
 
 ## Documentation
 
