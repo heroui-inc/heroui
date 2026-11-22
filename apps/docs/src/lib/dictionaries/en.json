@@ -129,6 +129,7 @@
       "copyLabel": "Copy {code}",
       "copiedLabel": "Copied {code}",
       "copiedAnnouncement": "{code} copied to clipboard.",
+      "copyError": "Couldn't copy. Copy the code by hand.",
       "cta": "Get the deal"
     },
     "units": {

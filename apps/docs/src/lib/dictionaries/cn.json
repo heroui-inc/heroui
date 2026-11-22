@@ -129,6 +129,7 @@
       "copyLabel": "复制 {code}",
       "copiedLabel": "已复制 {code}",
       "copiedAnnouncement": "{code} 已复制到剪贴板。",
+      "copyError": "复制失败，请手动复制优惠码。",
       "cta": "获取优惠"
     },
     "units": {

@@ -3,7 +3,7 @@
 import {Check, Copy} from "@gravity-ui/icons";
 import {Button, buttonVariants} from "@heroui/react";
 import {Calligraph} from "calligraph";
-import {AnimatePresence, motion} from "motion/react";
+import {AnimatePresence, motion, useReducedMotion} from "motion/react";
 import {useEffect, useState} from "react";
 
 import {useDictionary} from "@/hooks/use-dictionary";
@@ -105,6 +105,7 @@ const withValues = (template: string, values: Record<string, number | string>) =
 
 function Countdown({className, ms}: {className: string; ms: number}) {
   const units = useDictionary().proBanner.units;
+  const reduceMotion = useReducedMotion();
   const total = Math.max(0, Math.floor(ms / 1000));
   const days = Math.floor(total / 86400);
   const parts = [
@@ -118,9 +119,13 @@ function Countdown({className, ms}: {className: string; ms: number}) {
     <span className={`flex gap-1 ${className}`}>
       {parts.map(({unit, value}) => (
         <span key={unit}>
-          <Calligraph animation="snappy" variant="number">
-            {pad(value)}
-          </Calligraph>
+          {reduceMotion ? (
+            pad(value)
+          ) : (
+            <Calligraph animation="snappy" variant="number">
+              {pad(value)}
+            </Calligraph>
+          )}
           {unit}
         </span>
       ))}
@@ -131,59 +136,77 @@ function Countdown({className, ms}: {className: string; ms: number}) {
 function CouponCode({code, tone}: {code: string; tone: Tone}) {
   const dict = useDictionary().proBanner.blackFriday;
   const styles = TONES[tone];
-  const [copied, setCopied] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const [status, setStatus] = useState<"copied" | "error" | "idle">("idle");
+  const copied = status === "copied";
+  const label = copied ? dict.copied : dict.copy;
+  // Reduced motion keeps the cross-fade and drops the scale and blur.
+  const hidden = reduceMotion ? {opacity: 0} : {filter: "blur(2px)", opacity: 0, scale: 0.5};
 
   useEffect(() => {
-    if (!copied) return;
+    if (status !== "copied") return;
 
-    const timeout = setTimeout(() => setCopied(false), 1500);
+    const timeout = setTimeout(() => setStatus("idle"), 1500);
 
     return () => clearTimeout(timeout);
-  }, [copied]);
+  }, [status]);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code).then(
-      () => setCopied(true),
-      () => {},
-    );
+  // Covers a denied permission and a missing Clipboard API (insecure context) alike.
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setStatus("copied");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
-    <div
-      className={`flex h-10 items-center justify-between rounded-xl border border-dashed ps-3 pe-2 ${styles.coupon}`}
-    >
-      <span className="flex items-center gap-2">
-        <span className={`text-xs font-medium ${styles.couponLabel}`}>{dict.code}</span>
-        <span
-          className={`font-mono text-[13px] font-medium tracking-[0.02em] ${styles.couponCode}`}
-        >
-          {code}
-        </span>
-      </span>
-      <button
-        aria-label={withValues(copied ? dict.copiedLabel : dict.copyLabel, {code})}
-        className={`flex h-[26px] items-center gap-1 rounded-lg px-2 text-xs font-medium transition-colors ${styles.copy}`}
-        type="button"
-        onClick={handleCopy}
+    <div className="flex flex-col gap-1.5">
+      <div
+        className={`flex h-10 items-center justify-between rounded-xl border border-dashed ps-3 pe-2 ${styles.coupon}`}
       >
-        <span aria-hidden className="relative flex size-3 items-center justify-center">
-          <AnimatePresence initial={false} mode="popLayout">
-            <motion.span
-              key={copied ? "check" : "copy"}
-              animate={{filter: "blur(0px)", opacity: 1, scale: 1}}
-              className="flex"
-              exit={{filter: "blur(2px)", opacity: 0, scale: 0.5}}
-              initial={{filter: "blur(2px)", opacity: 0, scale: 0.5}}
-              transition={{duration: 0.18, ease: [0.23, 1, 0.32, 1]}}
-            >
-              {copied ? <Check className="size-3" /> : <Copy className="size-3" />}
-            </motion.span>
-          </AnimatePresence>
+        <span className="flex items-center gap-2">
+          <span className={`text-xs font-medium ${styles.couponLabel}`}>{dict.code}</span>
+          <span
+            className={`font-mono text-[13px] font-medium tracking-[0.02em] select-all ${styles.couponCode}`}
+          >
+            {code}
+          </span>
         </span>
-        <Calligraph aria-hidden>{copied ? dict.copied : dict.copy}</Calligraph>
-      </button>
-      <span aria-live="polite" className="sr-only">
-        {copied ? withValues(dict.copiedAnnouncement, {code}) : ""}
+        <button
+          aria-label={withValues(copied ? dict.copiedLabel : dict.copyLabel, {code})}
+          className={`flex h-[26px] items-center gap-1 rounded-lg px-2 text-xs font-medium transition-colors ${styles.copy}`}
+          type="button"
+          onClick={() => void handleCopy()}
+        >
+          <span aria-hidden className="relative flex size-3 items-center justify-center">
+            <AnimatePresence initial={false} mode="popLayout">
+              <motion.span
+                key={copied ? "check" : "copy"}
+                animate={{filter: "blur(0px)", opacity: 1, scale: 1}}
+                className="flex"
+                exit={hidden}
+                initial={hidden}
+                transition={{duration: 0.18, ease: [0.23, 1, 0.32, 1]}}
+              >
+                {copied ? <Check className="size-3" /> : <Copy className="size-3" />}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+          {reduceMotion ? (
+            <span aria-hidden>{label}</span>
+          ) : (
+            <Calligraph aria-hidden>{label}</Calligraph>
+          )}
+        </button>
+      </div>
+      <span aria-live="polite" className={status === "error" ? "text-xs text-red-400" : "sr-only"}>
+        {status === "copied"
+          ? withValues(dict.copiedAnnouncement, {code})
+          : status === "error"
+            ? dict.copyError
+            : ""}
       </span>
     </div>
   );
@@ -246,7 +269,7 @@ export function BlackFridayContent({
           <h3 className={`text-base font-medium ${styles.title}`}>{copy.cardTitle}</h3>
           <p className={`text-sm leading-relaxed ${styles.body}`}>{copy.cardDescription}</p>
         </div>
-        <CouponCode code={offer.code} tone={offer.tone} />
+        <CouponCode key={offer.code} code={offer.code} tone={offer.tone} />
         <div className="flex items-center gap-2 pt-1">
           <Button
             className={`bg-transparent ${styles.close}`}
