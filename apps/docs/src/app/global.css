@@ -75,7 +75,8 @@
   --docs-fg-faint: color-mix(in oklab, var(--muted) 62%, var(--background));
   --docs-item-hover: color-mix(in oklab, var(--foreground) 3%, var(--background));
   --docs-item-active: color-mix(in oklab, var(--foreground) 5%, var(--background));
-  --docs-code-inline: color-mix(in oklab, var(--foreground) 7%, var(--background));
+  /* Translucent so inline code keeps the same step on the page and inside callouts. */
+  --docs-code-inline: color-mix(in oklab, var(--foreground) 5%, transparent);
   /* Related component cards */
   --docs-card: color-mix(in oklab, var(--foreground) 3%, var(--background));
   /* TOC Pro card; a step lighter than --docs-card in dark mode. */
@@ -122,7 +123,7 @@
   /* Docs shell tokens (dark) */
   --docs-item-hover: color-mix(in oklab, var(--foreground) 6%, var(--background));
   --docs-item-active: color-mix(in oklab, var(--foreground) 11%, var(--background));
-  --docs-code-inline: color-mix(in oklab, var(--foreground) 11%, var(--background));
+  --docs-code-inline: color-mix(in oklab, var(--foreground) 9%, transparent);
   --docs-card: color-mix(in oklab, var(--foreground) 6.5%, var(--background));
   --docs-promo: color-mix(in oklab, var(--foreground) 10%, var(--background));
   /* Demo and card frames; --docs-card's step is too faint around a page-background stage. */
@@ -574,14 +575,24 @@
    PROSE & CONTENT STYLES
    ============================================================================ */
 
-/* Docs page typography: muted body, foreground headings.
+/* Docs page typography: one text color for body, table cells, bold, links and
+   inline code, so inline marks read by weight and a light fill instead of
+   contrast jumps. Quotes stay muted.
    Every rule skips `.not-prose` subtrees (component demos, code blocks), the
    same way the fumadocs prose rules do, so component styles stay untouched. */
 #nd-page .prose {
   --tw-prose-bold: var(--docs-fg);
 
-  :where(p, li, blockquote, td):not(:where(.not-prose, .not-prose *)) {
+  :where(p, li, td):not(:where(.not-prose, .not-prose *)) {
+    color: var(--docs-fg);
+  }
+
+  :where(blockquote):not(:where(.not-prose, .not-prose *)) {
     color: var(--docs-fg-muted);
+  }
+
+  :where(strong):not(:where(.not-prose, .not-prose *)) {
+    font-weight: 600;
   }
 
   :where(h2):not(:where(.not-prose, .not-prose *)) {
@@ -609,23 +620,27 @@
   }
 
   :where(:not(pre) > code):not(:where(.not-prose *)) {
-    padding: 1px 5px;
+    padding: 0.125em 0.3em;
     border: none;
-    border-radius: 6px;
+    border-radius: 0.35em;
     background: var(--docs-code-inline);
-    color: var(--docs-fg);
+    color: inherit;
     font-family: var(--font-mono);
-    font-size: 0.9286em;
+    font-size: 0.85em;
+  }
+
+  :where(:is(h2, h3, h4) code):not(:where(.not-prose *)) {
+    font-size: 0.9em;
   }
 }
 
-/* Prose links (neutral): foreground, medium-weight text against the muted body
-   copy. Underlined only on hover / keyboard focus. No transition. */
+/* Prose links (neutral): body color, medium weight, a faint underline that
+   goes solid on hover / keyboard focus. No transition. */
 .prose :where(a:not([data-card])):not(:where(.not-prose, .not-prose *)) {
-  color: var(--foreground);
+  color: inherit;
   font-weight: 500;
-  text-decoration-line: none;
-  text-decoration-color: currentColor;
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in oklab, currentColor 30%, transparent);
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   transition: none;
@@ -633,7 +648,7 @@
   &:hover,
   &:focus-visible {
     opacity: 1;
-    text-decoration-line: underline;
+    text-decoration-color: currentColor;
   }
 }
 
@@ -646,11 +661,34 @@
   box-shadow: none;
   font-size: 13px;
 
-  /* Lines carry the inline padding, so text starts 16px in and highlights span the panel. */
+  /* Filename bar: no divider and no extra top padding on the code, so the
+     title and code read as one panel. */
+  > div:has(> figcaption) {
+    border-bottom: none;
+
+    + .fd-scroll-container {
+      padding-top: 2px;
+    }
+  }
+
+  /* Lines carry the inline padding, so text starts 16px in and highlights span the panel.
+     The bottom padding gives back the reserved scrollbar track (see "Code block scrollbars"). */
   .fd-scroll-container {
     max-height: fit-content;
-    padding: 14px 0;
+    padding: 14px 0 calc(14px - var(--code-scrollbar-reserve, 0px));
     background: transparent;
+  }
+
+  /* Untitled blocks: the copy button floats over the first line. Lines end clear of it at full
+     scroll, and the end fade keeps a solid zone behind it while there is more to scroll. */
+  &:not(:has(> div > figcaption)) {
+    .fd-scroll-container {
+      --code-fade-clear: 40px;
+    }
+
+    .line {
+      padding-inline-end: 48px;
+    }
   }
 
   pre {
@@ -782,7 +820,7 @@ code {
   background: transparent;
 
   .fd-scroll-container {
-    padding: 16px;
+    padding: 16px 16px calc(16px - var(--code-scrollbar-reserve, 0px));
   }
 }
 
@@ -807,6 +845,75 @@ code {
   .fd-scroll-container {
     scrollbar-width: thin;
     scrollbar-color: var(--code-scrollbar-thumb) transparent;
+  }
+}
+
+/* Chromium/Safari: docs code blocks always reserve fumadocs' 5px horizontal track, so a block
+   has the same bottom padding whether or not a line overflows. Padding rules subtract
+   --code-scrollbar-reserve to keep top and bottom even. */
+@supports selector(::-webkit-scrollbar) {
+  #nd-page .shiki:not(:where(.preview *)) .fd-scroll-container {
+    --code-scrollbar-reserve: 5px;
+    overflow-x: scroll;
+  }
+}
+
+/* Scroll shadow: code fades out at an edge only while there is more to scroll that way.
+   Driven by the block's own horizontal scroll, so a block that fits gets no fade. An overlaid
+   copy button sets --code-fade-clear to keep the text hidden behind it. Browsers without
+   scroll-driven animations keep the plain overflow. */
+@property --code-fade-start {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --code-fade-end {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes code-fade-start {
+  from {
+    --code-fade-start: 0;
+  }
+  to {
+    --code-fade-start: 1;
+  }
+}
+
+@keyframes code-fade-end {
+  from {
+    --code-fade-end: 1;
+  }
+  to {
+    --code-fade-end: 0;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  #nd-page .shiki:not(:where(.preview *)) .fd-scroll-container {
+    --code-fade-size: 32px;
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent 0,
+        #000 calc(var(--code-fade-start) * var(--code-fade-size))
+      ),
+      linear-gradient(
+        to left,
+        transparent calc(var(--code-fade-end) * var(--code-fade-clear, 0px)),
+        #000 calc(var(--code-fade-end) * (var(--code-fade-clear, 0px) + var(--code-fade-size)))
+      );
+    mask-composite: intersect;
+    animation:
+      code-fade-start linear both,
+      code-fade-end linear both;
+    animation-timeline: scroll(self inline), scroll(self inline);
+    animation-range:
+      0 48px,
+      calc(100% - 48px) 100%;
   }
 }
 
