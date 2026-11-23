@@ -201,10 +201,7 @@ export function DocsDescription({children, className, ...props}: ComponentProps<
   return (
     <p
       {...props}
-      className={cn(
-        "max-w-[560px] text-[1.05rem] leading-normal text-(--docs-fg-muted) sm:text-base",
-        className,
-      )}
+      className={cn("max-w-[560px] text-base leading-6 text-(--docs-fg-muted)", className)}
     >
       {children}
     </p>

@@ -52,19 +52,20 @@ export function CopyPrompt({children, className, icon = "sparkles-fill", prompt}
     <div
       className={cn(
         // Flat note like the MDX Callout (colored icon, no border or shadow), on the
-        // same fill as code blocks so it sits with the install steps around it.
-        "flex items-center gap-3 rounded-2xl bg-(--docs-demo) py-3 ps-4 pe-3 text-sm leading-6",
+        // same fill as code blocks so it sits with the install steps around it. Below lg the
+        // button drops under the text, so the text keeps the full width on phones and tablets.
+        "grid grid-cols-[auto_minmax(0,1fr)] items-start gap-3 rounded-2xl bg-(--docs-demo) py-3 ps-4 pe-3 text-sm leading-6 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center",
         className,
       )}
     >
       <span aria-hidden className="flex h-6 shrink-0 items-center self-start">
         <Iconify className="size-4 text-accent" icon={icon} />
       </span>
-      <div className="prose-no-margin min-w-0 flex-1 text-(--docs-fg-muted)">{children}</div>
+      <div className="prose-no-margin min-w-0 text-(--docs-fg-muted)">{children}</div>
       <Button
         aria-label={checked ? dict.ariaLabelCopied : dict.ariaLabelCopy}
         // Light: white pill so it lifts off the code-block fill. Dark keeps the tertiary fill.
-        className="shrink-0 [--button-bg-hover:var(--surface-hover)] [--button-bg-pressed:var(--surface-hover)] [--button-bg:var(--surface)] dark:[--button-bg-hover:var(--default-hover)] dark:[--button-bg-pressed:var(--default-hover)] dark:[--button-bg:var(--default)]"
+        className="col-start-2 justify-self-start [--button-bg-hover:var(--surface-hover)] [--button-bg-pressed:var(--surface-hover)] [--button-bg:var(--surface)] lg:col-start-3 lg:row-start-1 dark:[--button-bg-hover:var(--default-hover)] dark:[--button-bg-pressed:var(--default-hover)] dark:[--button-bg:var(--default)]"
         isDisabled={checked}
         size="sm"
         type="button"

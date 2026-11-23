@@ -580,18 +580,13 @@
    contrast jumps. Quotes stay muted.
    Every rule skips `.not-prose` subtrees (component demos, code blocks), the
    same way the fumadocs prose rules do, so component styles stay untouched.
-   Type scale: 15px body from tablet up; phones read larger (16.875px from
-   640px, 18.9px below). Headings, tables and inline code size in em, so they
-   follow the body size at every breakpoint. */
+   Type scale: 15px body from tablet up, 16px on phones. Headings, tables and
+   inline code size in em, so they follow the body size at every breakpoint. */
 #nd-page .prose {
   --tw-prose-bold: var(--docs-fg);
 
-  font-size: 18.9px;
+  font-size: 16px;
   line-height: 1.75;
-
-  @media (width >= 40rem) {
-    font-size: 16.875px;
-  }
 
   @media (width >= 48rem) {
     font-size: 15px;
