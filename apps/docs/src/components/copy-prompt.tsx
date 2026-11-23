@@ -51,9 +51,9 @@ export function CopyPrompt({children, className, icon = "sparkles-fill", prompt}
   return (
     <div
       className={cn(
-        // Flat note like the MDX Callout (colored icon, no border or shadow), on a
-        // lighter fill so it reads as a tip rather than a panel.
-        "flex items-center gap-3 rounded-2xl bg-(--docs-card)/60 py-3 ps-4 pe-3 text-sm leading-6",
+        // Flat note like the MDX Callout (colored icon, no border or shadow), on the
+        // same fill as code blocks so it sits with the install steps around it.
+        "flex items-center gap-3 rounded-2xl bg-(--docs-demo) py-3 ps-4 pe-3 text-sm leading-6",
         className,
       )}
     >
@@ -63,7 +63,8 @@ export function CopyPrompt({children, className, icon = "sparkles-fill", prompt}
       <div className="prose-no-margin min-w-0 flex-1 text-(--docs-fg-muted)">{children}</div>
       <Button
         aria-label={checked ? dict.ariaLabelCopied : dict.ariaLabelCopy}
-        className="shrink-0"
+        // Light: white pill so it lifts off the code-block fill. Dark keeps the tertiary fill.
+        className="shrink-0 [--button-bg-hover:var(--surface-hover)] [--button-bg-pressed:var(--surface-hover)] [--button-bg:var(--surface)] dark:[--button-bg-hover:var(--default-hover)] dark:[--button-bg-pressed:var(--default-hover)] dark:[--button-bg:var(--default)]"
         isDisabled={checked}
         size="sm"
         type="button"
