@@ -50,6 +50,7 @@ export const Default: Story = {
       <Card.Footer>
         <Link
           aria-label="Go to Acme Creator Hub (opens in new tab)"
+          className="text-sm"
           href="https://heroui.com"
           rel="noopener noreferrer"
           target="_blank"
@@ -252,7 +253,12 @@ export const WithImages: Story = {
                 </div>
               </Card.Header>
               <Card.Footer>
-                <Link aria-label="Go to settings" href="#" rel="noopener noreferrer">
+                <Link
+                  aria-label="Go to settings"
+                  className="text-sm"
+                  href="#"
+                  rel="noopener noreferrer"
+                >
                   Go to settings
                   <Link.Icon aria-hidden="true" />
                 </Link>
@@ -315,7 +321,10 @@ export const WithImages: Story = {
             </div>
           </div>
           {/* Right Column */}
-          <Card className="col-span-12 min-h-[200px] rounded-3xl lg:col-span-6" {...args}>
+          <Card
+            className="col-span-12 min-h-[200px] overflow-hidden rounded-3xl lg:col-span-6"
+            {...args}
+          >
             {/* Background image */}
             <img
               alt="NEO Home Robot"
@@ -366,7 +375,7 @@ export const WithImages: Story = {
         <div className="col-span-12 grid grid-cols-12 gap-4">
           {/* Left Column: Card */}
           <Card
-            className="relative col-span-12 h-[250px] sm:h-[300px] md:col-span-8 md:h-[350px]"
+            className="relative col-span-12 h-[250px] overflow-hidden sm:h-[300px] md:col-span-8 md:h-[350px]"
             {...args}
           >
             <img

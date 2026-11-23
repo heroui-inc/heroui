@@ -15,6 +15,7 @@ export function Default() {
       <Card.Footer>
         <Link
           aria-label="Go to Acme Creator Hub (opens in new tab)"
+          className="text-sm"
           href="https://heroui.com"
           rel="noopener noreferrer"
           target="_blank"
