@@ -50,7 +50,7 @@ github:
 
 ### `Text` → `Typography`
 
-[v3.0.4](/docs/react/releases/v3-0-4) 中发布的该组件使用了 `text-*` BEM 修饰符，与 Tailwind 的 `text-*` 工具类家族冲突。`tailwind-variants` 在每次变体组合时都会运行 `tailwind-merge`，并将 `text--body-sm`、`text--color-muted`、`text--weight-normal` 去重为单个类名——从而静默丢弃其他类名。
+[v3.0.4](/docs/react/releases/v3-0-4) 中发布的该组件使用了 `text-*` BEM 修饰符，与 Tailwind 的 `text-*` 工具类家族冲突。`tailwind-variants` 在每次变体组合时都会运行 `tailwind-merge`，并将 `text--body-sm`、`text--color-muted`、`text--weight-normal` 去重为单个类名：从而静默丢弃其他类名。
 
 将块名重命名为 `typography` 可永久解决该冲突 ([#6505](https://github.com/heroui-inc/heroui/pull/6505)，修复 [#6497](https://github.com/heroui-inc/heroui/issues/6497))。
 
@@ -92,11 +92,11 @@ CSS BEM 类名也会相应变更：`.text` → `.typography`，`.text--body-sm` 
 
 ### 无前缀源颜色令牌
 
-所有派生颜色令牌——`*-hover`、`*-soft`、`*-soft-foreground`、`border-secondary` 等——从 `theme.css` 中的 `@theme inline` 别名迁移到 `variables.css` 作为无前缀源变量，24 个组件 CSS 文件现直接引用源令牌 ([#6499](https://github.com/heroui-inc/heroui/pull/6499))。
+所有派生颜色令牌（`*-hover`、`*-soft`、`*-soft-foreground`、`border-secondary` 等）从 `theme.css` 中的 `@theme inline` 别名迁移到 `variables.css` 作为无前缀源变量，24 个组件 CSS 文件现直接引用源令牌 ([#6499](https://github.com/heroui-inc/heroui/pull/6499))。
 
 **1. `color-mix` 公式从 `theme.css` 移至 `variables.css`**
 
-之前——计算逻辑位于 `@theme inline` 块内：
+之前，计算逻辑位于 `@theme inline` 块内：
 
 ```css
 /* packages/styles/themes/shared/theme.css */
@@ -106,7 +106,7 @@ CSS BEM 类名也会相应变更：`.text` → `.typography`，`.text--body-sm` 
 --color-border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
 ```
 
-之后——`theme.css` 仅保留别名；公式位于 `variables.css`：
+之后，`theme.css` 仅保留别名；公式位于 `variables.css`：
 
 ```css
 /* packages/styles/themes/default/variables.css */
@@ -124,7 +124,7 @@ CSS BEM 类名也会相应变更：`.text` → `.typography`，`.text--body-sm` 
 
 **2. 组件 CSS 直接使用源令牌**
 
-之前——各处使用 `var(--color-*)` 引用：
+之前，各处使用 `var(--color-*)` 引用：
 
 ```css
 /* packages/styles/components/button.css */
@@ -141,7 +141,7 @@ CSS BEM 类名也会相应变更：`.text` → `.typography`，`.text--body-sm` 
 }
 ```
 
-之后——无前缀源令牌：
+之后，无前缀源令牌：
 
 ```css
 /* packages/styles/components/button.css */

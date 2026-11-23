@@ -8,6 +8,7 @@ import {useCallback, useEffect, useState, useSyncExternalStore} from "react";
 import {env} from "~env";
 
 import {useDictionary} from "@/hooks/use-dictionary";
+import {cn} from "@/utils/cn";
 
 import {FloatingStars} from "./floating-stars";
 import {PRO_URL, SHOW_BANNER} from "./pro-constants";
@@ -192,7 +193,7 @@ const subscribeToDismissed = (callback: () => void) => {
 const getDismissedSnapshot = () => sessionStorage.getItem(PRO_BANNER_DISMISSED_KEY) === "true";
 const getDismissedServerSnapshot = () => true;
 
-export function ProBanner() {
+export function ProBanner({className}: {className?: string}) {
   const dict = useDictionary().proBanner;
   const wasPreviouslyDismissed = useSyncExternalStore(
     subscribeToDismissed,
@@ -242,10 +243,14 @@ export function ProBanner() {
       {visible ? (
         <motion.div
           animate={{opacity: 1, scale: 1, y: 0}}
-          className="fixed end-6 bottom-6 z-50 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl"
           exit={{opacity: 0, scale: 0.95, transition: {duration: 0.2, ease: "easeIn"}, y: 20}}
           initial={{opacity: 0, scale: 0.95, y: 20}}
           transition={{damping: 25, delay: 0.5, stiffness: 300, type: "spring"}}
+          // z-40 keeps the promo below overlays (search dialog, agent panel, drawers), which use z-50
+          className={cn(
+            "fixed end-6 bottom-6 z-40 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl",
+            className,
+          )}
         >
           {/* Top gradient section */}
           <div className="relative flex h-[180px] flex-col items-center justify-center gap-2 overflow-hidden px-6 py-6">

@@ -15,7 +15,7 @@ github:
   muted
 />
 
-HeroUI Native 正式发布 v1.0.0——这是首个稳定版本，标志着库已从 beta 与候选发布阶段毕业，成为可用于生产环境的 React Native 应用基础。伴随这一里程碑，本版本还包含全新的 LinkButton 组件、子菜单冲突处理、可选的 `@gorhom/bottom-sheet` 对等依赖，以及针对 `useThemeColor` 的更强类型安全。
+HeroUI Native 正式发布 v1.0.0：这是首个稳定版本，标志着库已从 beta 与候选发布阶段毕业，成为可用于生产环境的 React Native 应用基础。伴随这一里程碑，本版本还包含全新的 LinkButton 组件、子菜单冲突处理、可选的 `@gorhom/bottom-sheet` 对等依赖，以及针对 `useThemeColor` 的更强类型安全。
 
 ## 安装
 
@@ -94,7 +94,7 @@ HeroUI Native 正式发布 v1.0.0——这是首个稳定版本，标志着库�
 **特性：**
 
 - 复合子组件：`LinkButton.Label`，用于样式化文本内容
-- 内部强制 ghost 变体——不对外暴露 `variant` 属性
+- 内部强制 ghost 变体：不对外暴露 `variant` 属性
 - 通过 `resolveAnimationObject` 默认关闭高亮反馈
 - `h-auto p-0` 基础类移除默认按钮高度与内边距，便于行内使用
 - 合并使用方动画配置时仍保持 `highlight: false`
@@ -123,7 +123,7 @@ export function TermsLink() {
 
 **改进：**
 
-- `openSubMenuId` 取代布尔标记——同一时间只能有一个子菜单处于打开状态；打开新的会自动关闭上一个
+- `openSubMenuId` 取代布尔标记：同一时间只能有一个子菜单处于打开状态；打开新的会自动关闭上一个
 - 子菜单打开时，在菜单内容上渲染 `Pressable` 遮罩，支持点击关闭
 - 非当前打开的子菜单触发器通过新的 `isOtherSubMenuOpen` 样式变体获得 `opacity-40` 与 `pointer-events-none`
 - 打开的子菜单内容使用 `z-50`，关闭的为 `z-40`，避免层叠问题
@@ -148,10 +148,10 @@ export function TermsLink() {
 ```tsx
 import { useThemeColor } from "heroui-native";
 
-// 正确 — 直接赋值
+// 正确：直接赋值
 const mutedColor = useThemeColor("muted");
 
-// 错误 — IDE 会立即标出 `never` 类型
+// 错误：IDE 会立即标出 `never` 类型
 const [color] = useThemeColor("muted"); // color: never
 ```
 
@@ -217,10 +217,10 @@ const { onFocus, onBlur } = useBottomSheetAwareHandlers();
 
 以下文档页面已随本版本更新：
 
-- [LinkButton](/docs/native/components/link-button) — LinkButton 复合组件文档：结构分解、用法示例与 API 参考
-- [Menu](/docs/native/components/menu) — 更新子菜单文档：单开约束与点击背景关闭行为
-- [Input](/docs/native/components/input) — 更新 Bottom Sheet 用法示例，采用 `useBottomSheetAwareHandlers` 模式
-- [InputOTP](/docs/native/components/input-otp) — 同上，Bottom Sheet 示例采用 `useBottomSheetAwareHandlers`
+- [LinkButton](/docs/native/components/link-button)：LinkButton 复合组件文档：结构分解、用法示例与 API 参考
+- [Menu](/docs/native/components/menu)：更新子菜单文档：单开约束与点击背景关闭行为
+- [Input](/docs/native/components/input)：更新 Bottom Sheet 用法示例，采用 `useBottomSheetAwareHandlers` 模式
+- [InputOTP](/docs/native/components/input-otp)：同上，Bottom Sheet 示例采用 `useBottomSheetAwareHandlers`
 
 ## 链接
 

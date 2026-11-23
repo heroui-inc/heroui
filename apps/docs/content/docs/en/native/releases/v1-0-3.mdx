@@ -114,7 +114,7 @@ The [ScrollShadow](/docs/native/components/scroll-shadow) component now correctl
 
 - `ScrollShadowRoot` now reads the `inverted` prop from its scrollable child, mirroring the existing `childHorizontal` auto-detection pattern
 - Swaps which animated style drives each visual edge so shadows render at the correct side
-- No public API changes — the fix activates only when the child has `inverted={true}`, which previously rendered the gradients on the wrong edges
+- No public API changes: the fix activates only when the child has `inverted={true}`, which previously rendered the gradients on the wrong edges
 
 Previously, wrapping an inverted list would render the gradient shadow on the top edge while scrollable content was below, and omit the bottom shadow even when more content was available. Indicators now point in the correct visual direction for inverted feeds, chat lists, and similar reverse-ordered scroll surfaces.
 
@@ -131,7 +131,7 @@ The [Tabs](/docs/native/components/tabs) component's indicator now positions cor
 - `Tabs.ScrollView` content width is used for scrollable tab layouts
 - The indicator's `translateX` is mirrored only when `I18nManager.isRTL` is enabled
 
-The indicator uses an absolute `left` anchor combined with a measured `translateX`. In RTL, React Native swaps the absolute anchor automatically, but the measured transform still needed to be mirrored — this is now handled internally. Both fixed and scrollable tab lists are fixed, and the public API is unchanged.
+The indicator uses an absolute `left` anchor combined with a measured `translateX`. In RTL, React Native swaps the absolute anchor automatically, but the measured transform still needed to be mirrored: this is now handled internally. Both fixed and scrollable tab lists are fixed, and the public API is unchanged.
 
 **Related PR:** [#396](https://github.com/heroui-inc/heroui-native/pull/396)
 
@@ -166,7 +166,7 @@ import { Avatar } from "heroui-native";
 </Avatar>;
 ```
 
-Existing code that passes an explicit `alt` continues to work unchanged — the prop simply gains a sensible default when omitted. The `RootProps` type now reflects `alt?: string` with a JSDoc `@default 'Avatar'`, and the component documentation has been updated to match.
+Existing code that passes an explicit `alt` continues to work unchanged: the prop simply gains a sensible default when omitted. The `RootProps` type now reflects `alt?: string` with a JSDoc `@default 'Avatar'`, and the component documentation has been updated to match.
 
 **Related PR:** [#404](https://github.com/heroui-inc/heroui-native/pull/404)
 
@@ -184,7 +184,7 @@ Refined sizing and color styling across [Button](/docs/native/components/button)
 - **Input**: Switched from `py-3.5` to `min-h-12` so the field maintains consistent height regardless of content
 - **Input**: Primary variant border now correctly uses the `border-field-border` token instead of `border-field`
 
-Minor pixel-level differences in Button `sm` size (+4px) and Chip `md`/`lg` paddings should be reviewed visually. No API changes were made — only style tokens in `button.styles.ts`, `chip.styles.ts`, and `input.styles.ts` were updated.
+Minor pixel-level differences in Button `sm` size (+4px) and Chip `md`/`lg` paddings should be reviewed visually. No API changes were made: only style tokens in `button.styles.ts`, `chip.styles.ts`, and `input.styles.ts` were updated.
 
 **Related PR:** [#406](https://github.com/heroui-inc/heroui-native/pull/406)
 

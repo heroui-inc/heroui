@@ -50,20 +50,20 @@ export default function App() {
 ### 1. 组件行为
 
 **v2：** 包裹子节点，并根据 `isLoaded` 显示/隐藏  
-**v3：** 独立占位符——可见性由你自行控制
+**v3：** 独立占位符，可见性由你自行控制
 
 ### 2. Prop 变更
 
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
-| `isLoaded` | — | 通过条件渲染手动控制可见性 |
+| `isLoaded` | - | 通过条件渲染手动控制可见性 |
 | `disableAnimation` | `animationType` | 改用 `animationType="shimmer" \| "pulse" \| "none"`（用 `"none"` 禁用动画） |
-| `classNames` | — | 直接使用 `className` prop |
-| `children` | — | Skeleton 不再包裹内容 |
+| `classNames` | - | 直接使用 `className` prop |
+| `children` | - | Skeleton 不再包裹内容 |
 
 ### 3. 新增 prop
 
-- `animationType` —— 控制动画类型：`"shimmer"`（默认）、`"pulse"` 或 `"none"`
+- `animationType`：控制动画类型：`"shimmer"`（默认）、`"pulse"` 或 `"none"`
 
 ## 迁移示例
 
@@ -221,7 +221,7 @@ export default function App() {
 </div>
 ```
 
-这种方式适用于卡片类布局——你需要的是一次统一扫过整体的微光，而不是每个 Skeleton 各自独立地播放动画。
+这种方式适用于卡片类布局：你需要的是一次统一扫过整体的微光，而不是每个 Skeleton 各自独立地播放动画。
 
 ## 全局动画配置
 
@@ -237,7 +237,7 @@ export default function App() {
 
 ## 总结
 
-1. **不再包裹子节点**：Skeleton 不再包裹其子节点——它本身就是一个独立的占位符
+1. **不再包裹子节点**：Skeleton 不再包裹其子节点，它本身就是一个独立的占位符
 2. **不再有 `isLoaded` prop**：通过条件渲染手动控制可见性
 3. **动画控制**：`disableAnimation` → `animationType`（`"shimmer"`、`"pulse"`、`"none"`）
 4. **样式**：`classNames` → 直接使用 `className` prop

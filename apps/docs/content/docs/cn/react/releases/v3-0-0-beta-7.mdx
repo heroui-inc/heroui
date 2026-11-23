@@ -57,7 +57,7 @@ github:
 
 ### 日期与时间体系
 
-**日期与时间** —— Calendar、DatePicker、RangeCalendar 与 DateRangePicker 均基于 React Aria 的日期基元构建。支持国际化、时区，以及完整的键盘导航与 ARIA 无障碍能力。
+**日期与时间**：Calendar、DatePicker、RangeCalendar 与 DateRangePicker 均基于 React Aria 的日期基元构建。支持国际化、时区，以及完整的键盘导航与 ARIA 无障碍能力。
 
 **主要特性：**
 - **历法系统**：公历、佛历、波斯历等
@@ -157,7 +157,7 @@ import { Switch, Label, Description } from '@heroui/react';
 
 [Tabs](/docs/components/tabs) 组件现在新增了一个显式的 `Tabs.Separator` 子组件，用于在 Tab 之间添加视觉分隔线。它取代了之前自动生成的 CSS 伪元素分隔线以及 `hideSeparator` prop（[#6243](https://github.com/heroui-inc/heroui/pull/6243)）。
 
-分隔线现在改为 **按需启用** —— 在希望出现分隔线的 `<Tabs.Tab>` 内部添加 `<Tabs.Separator />` 即可。
+分隔线现在改为 **按需启用**：在希望出现分隔线的 `<Tabs.Tab>` 内部添加 `<Tabs.Separator />` 即可。
 
 <ComponentPreview
   isBgSolid
@@ -180,15 +180,15 @@ import { Switch, Label, Description } from '@heroui/react';
 
 ## 依赖更新
 
-- **React Aria Components**：从 `1.14.0` 升级到 `1.15.0` —— 新增了 [`render` prop](https://react-aria.adobe.com/customization#dom-elements)，可用于自定义任何 React Aria 组件渲染的 DOM 元素（适用于路由链接、Motion 等动画库）
+- **React Aria Components**：从 `1.14.0` 升级到 `1.15.0`，新增了 [`render` prop](https://react-aria.adobe.com/customization#dom-elements)，可用于自定义任何 React Aria 组件渲染的 DOM 元素（适用于路由链接、Motion 等动画库）
 - **@react-aria/utils**：从 `3.32.0` 升级到 `3.33.0`
 - **@react-types/shared**：从 `3.32.1` 升级到 `3.33.0`
-- **@internationalized/date**：从 `3.10.1` 升级到 `3.11.0` —— 日期字段现在改为在失焦时进行约束，而不是在输入过程中实时约束
+- **@internationalized/date**：从 `3.10.1` 升级到 `3.11.0`，日期字段现在改为在失焦时进行约束，而不是在输入过程中实时约束
 - 新增 `@react-aria/i18n` 与 `@react-stately/utils`，用于日历的国际化
 
 ## 破坏性变更
 
-### Tabs —— 移除 `hideSeparator` prop
+### Tabs：移除 `hideSeparator` prop
 
 `hideSeparator` prop 已从 Tabs 组件中移除。分隔线现在改为 **按需启用**，通过新增的 `<Tabs.Separator />` 子组件来添加，而不再通过 CSS 伪元素自动生成（[#6243](https://github.com/heroui-inc/heroui/pull/6243)）。
 
@@ -205,7 +205,7 @@ import { Switch, Label, Description } from '@heroui/react';
 
 **之后：**
 ```tsx
-{/* No separators by default — explicitly add them where needed */}
+{/* No separators by default: explicitly add them where needed */}
 <Tabs>
   <Tabs.List>
     <Tabs.Tab id="tab1"><Tabs.Indicator />Tab 1</Tabs.Tab>

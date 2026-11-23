@@ -97,7 +97,8 @@ export default async function ThemeBuilderPage({params}: {params: Promise<{lang:
             <MobileFooter />
           </div>
           <Onboarding />
-          <ProBanner />
+          {/* Clear the z-50 mobile footer */}
+          <ProBanner className="max-sm:bottom-24" />
         </Suspense>
       </CodePanelProvider>
     </DictionaryProvider>

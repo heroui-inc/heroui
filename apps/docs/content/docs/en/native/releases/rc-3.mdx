@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">February 26, 2026</span>
 </div>
 
-RC 3 delivers three new components—TagGroup for selectable tag management, Menu for popover/bottom-sheet-based dropdown menus, and InputGroup for decorated text inputs with auto-measuring prefix/suffix slots. This release also brings Android hardware back button support for all bottom-sheet-based overlays, Expo 55 compatibility with a critical `combineStyles` fix that preserves Reanimated animated style bindings, and several dependency upgrades.
+RC 3 delivers three new components: TagGroup for selectable tag management, Menu for popover/bottom-sheet-based dropdown menus, and InputGroup for decorated text inputs with auto-measuring prefix/suffix slots. This release also brings Android hardware back button support for all bottom-sheet-based overlays, Expo 55 compatibility with a critical `combineStyles` fix that preserves Reanimated animated style bindings, and several dependency upgrades.
 
 ## Installation
 
@@ -223,7 +223,7 @@ The InputGroup component provides a decorated text input with absolutely-positio
 - Auto-padding: Prefix/Suffix widths are measured via `onLayout` and automatically applied as `paddingLeft`/`paddingRight` on the Input
 - `isDecorative` prop on Prefix/Suffix handles `pointerEvents="none"`, `accessibilityElementsHidden`, and `importantForAccessibility` in a single boolean
 - Root `isDisabled` cascades to all children via context (Prefix/Suffix opacity + pointer-events, Input editability)
-- `InputGroup.Input` is a direct pass-through — consumers manage `value`/`onChangeText` directly on the Input
+- `InputGroup.Input` is a direct pass-through: consumers manage `value`/`onChangeText` directly on the Input
 
 **Usage:**
 

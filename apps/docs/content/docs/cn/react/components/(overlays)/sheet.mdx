@@ -232,16 +232,16 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | 组合部分。 |
-| `isOpen` | `boolean` | — | 受控打开状态。 |
+| `children` | `ReactNode` | - | 组合部分。 |
+| `isOpen` | `boolean` | - | 受控打开状态。 |
 | `defaultOpen` | `boolean` | `false` | 非受控初始状态。 |
-| `onOpenChange` | `(open: boolean) => void` | — | 请求打开或关闭时调用。 |
-| `onClose` | `() => void` | — | 请求关闭时调用。 |
-| `onAnimationEnd` | `(open: boolean) => void` | — | 进入或退出结束后调用。 |
+| `onOpenChange` | `(open: boolean) => void` | - | 请求打开或关闭时调用。 |
+| `onClose` | `() => void` | - | 请求关闭时调用。 |
+| `onAnimationEnd` | `(open: boolean) => void` | - | 进入或退出结束后调用。 |
 | `placement` | `"bottom" \| "top" \| "left" \| "right"` | `"bottom"` | 屏幕的物理边缘。 |
 | `isDismissable` | `boolean` | `true` | 允许外部交互、Escape 和滑动关闭。 |
 | `isDetached` | `boolean` | `false` | 面板与屏幕边缘保持间距。 |
-| `snapPoints` | `(number \| string)[]` | — | 部分展开的吸附位置；完整展开位置隐式存在。 |
+| `snapPoints` | `(number \| string)[]` | - | 部分展开的吸附位置；完整展开位置隐式存在。 |
 
 `Sheet.NestedRoot` 必须在父 Sheet 内使用。根组件的 `isNested` 为内部标记；嵌套时使用 `NestedRoot`。
 
@@ -249,22 +249,22 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactElement` | — | 一个可按压的子元素，如 Button。直接放在 Sheet 内。 |
+| `children` | `ReactElement` | - | 一个可按压的子元素，如 Button。直接放在 Sheet 内。 |
 
 ### Sheet.Close
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactElement` | — | 一个可按压的子元素；其 onPress 回调与关闭操作组合执行。 |
+| `children` | `ReactElement` | - | 一个可按压的子元素；其 onPress 回调与关闭操作组合执行。 |
 
 ### Sheet.Backdrop
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | 要渲染的内容。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode` | - | 要渲染的内容。 |
+| `className` | `string` | - | CSS 类名。 |
 | `variant` | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | 遮罩外观。 |
-| `isExiting` | `boolean` | — | 关闭后保留内容，直到清除此标记。 |
+| `isExiting` | `boolean` | - | 关闭后保留内容，直到清除此标记。 |
 
 其他属性继承自 React Aria SheetOverlay，但不包含由根组件控制的状态、位置、吸附点和 `style`。关闭仍会释放模态焦点限制和页面滚动锁定。不再需要保留内容时，请清除 `isExiting`。
 
@@ -272,8 +272,8 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode \| ((values: SheetRenderProps) => ReactNode)` | — | 内容或接收 React Aria 面板状态的函数。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode \| ((values: SheetRenderProps) => ReactNode)` | - | 内容或接收 React Aria 面板状态的函数。 |
+| `className` | `string` | - | CSS 类名。 |
 
 其余属性继承自 React Aria Sheet。HeroUI 管理堆叠动画与过度滚动留白；`stackAnimation` 和 `overscrollPadding` 无法通过此组件覆盖。
 
@@ -281,12 +281,12 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | 要渲染的内容。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode` | - | 要渲染的内容。 |
+| `className` | `string` | - | CSS 类名。 |
 | `role` | `"dialog" \| "alertdialog"` | `"dialog"` | 对话框无障碍角色。 |
-| `aria-label` | `string` | — | 没有可见标题时的无障碍名称。 |
-| `aria-labelledby` | `string` | — | 为对话框提供名称的元素 ID。 |
-| `aria-describedby` | `string` | — | 描述对话框的元素 ID。 |
+| `aria-label` | `string` | - | 没有可见标题时的无障碍名称。 |
+| `aria-labelledby` | `string` | - | 为对话框提供名称的元素 ID。 |
+| `aria-describedby` | `string` | - | 描述对话框的元素 ID。 |
 
 其余属性与 ref 继承自 React Aria SheetContent。
 
@@ -294,8 +294,8 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | 头部内容。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode` | - | 头部内容。 |
+| `className` | `string` | - | CSS 类名。 |
 
 支持标准 div 属性、事件处理函数和 ref。
 
@@ -303,8 +303,8 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | 对话框标题。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode` | - | 对话框标题。 |
+| `className` | `string` | - | CSS 类名。 |
 | `slot` | `string` | `"title"` | 将标题关联到对话框。 |
 
 其余属性与 ref 继承自 React Aria Heading。
@@ -313,8 +313,8 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | 可滚动的主体内容。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode` | - | 可滚动的主体内容。 |
+| `className` | `string` | - | CSS 类名。 |
 
 支持标准 div 属性、事件处理函数和 ref。
 
@@ -322,8 +322,8 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | 底部操作。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode` | - | 底部操作。 |
+| `className` | `string` | - | CSS 类名。 |
 
 支持标准 div 属性、事件处理函数和 ref。
 
@@ -331,8 +331,8 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | 自定义手柄；省略时渲染默认指示条。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode` | - | 自定义手柄；省略时渲染默认指示条。 |
+| `className` | `string` | - | CSS 类名。 |
 
 支持标准 div 属性、事件处理函数和 ref。
 
@@ -340,11 +340,11 @@ DOM 部分提供以下 `data-slot`：`sheet-overlay`、`sheet-backdrop`、`sheet
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `children` | `ReactNode \| ((values: ButtonRenderProps) => ReactNode)` | — | 自定义内容；默认显示关闭图标。 |
-| `className` | `string` | — | CSS 类名。 |
+| `children` | `ReactNode \| ((values: ButtonRenderProps) => ReactNode)` | - | 自定义内容；默认显示关闭图标。 |
+| `className` | `string` | - | CSS 类名。 |
 | `isDisabled` | `boolean` | `false` | 禁用关闭按钮。 |
 | `aria-label` | `string` | `"Close"` | 无障碍名称；按需提供本地化文本。 |
-| `onPress` | `(event: PressEvent) => void` | — | 与面板关闭操作一起调用。 |
+| `onPress` | `(event: PressEvent) => void` | - | 与面板关闭操作一起调用。 |
 
 其余属性与 ref 继承自 CloseButton。
 

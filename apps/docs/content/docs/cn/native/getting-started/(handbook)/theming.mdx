@@ -338,8 +338,8 @@ export default function App() {
 
 组件通过 `font-normal`、`font-medium`、`font-semibold` 与 `font-bold` 工具类请求字重，而它们的解析方式取决于你是否定义了上述变量：
 
-- **已定义自定义字体** — 字重会选择对应的字体族，因此 `--font-semibold` 必须指向本身就是 semibold 的字面。此时不会应用数值化的 `font-weight`，因为将数值字重与单一字重的字面搭配会让 iOS 选中该字体族中最粗的字面。
-- **未定义自定义字体** — 同一字重会对系统字体应用数值化的 `font-weight`。
+- **已定义自定义字体**：字重会选择对应的字体族，因此 `--font-semibold` 必须指向本身就是 semibold 的字面。此时不会应用数值化的 `font-weight`，因为将数值字重与单一字重的字面搭配会让 iOS 选中该字体族中最粗的字面。
+- **未定义自定义字体**：同一字重会对系统字体应用数值化的 `font-weight`。
 
 **只要定义了其中任意一个变量，就请定义全部四个。** 这两种模式是按字重分别解析的，因此没有对应变量的字重会回退到平台字体上的数值字重，而其他字重仍使用你的自定义字体族。除了混用字体之外，这种组合还可能让 iOS 使用你字体族中最粗的字面来渲染文本，因为将数值字重与单一字重的字面搭配，正是 iOS 解析错误的情形。
 
@@ -347,9 +347,9 @@ export default function App() {
 
 HeroUI 定义三类变量：
 
-1. **基础变量** — 如 `--white`、`--black` 等不随主题切换的值
-2. **主题变量** — 随明暗主题切换的颜色
-3. **计算变量** — 自动生成的按压态（hover）与尺寸变体等
+1. **基础变量**：如 `--white`、`--black` 等不随主题切换的值
+2. **主题变量**：随明暗主题切换的颜色
+3. **计算变量**：自动生成的按压态（hover）与尺寸变体等
 
 完整参考：[颜色文档](/docs/native/getting-started/colors)、[默认主题变量](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/variables.css)、[共享主题工具](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/theme.css)
 
@@ -487,7 +487,7 @@ HeroUI 定义三类变量：
 @import "heroui-native/styles/vibrant"; /* [!code highlight] */
 ```
 
-这会将所有 `*-soft-foreground` 变量（accent、success、warning、danger）切换为「语义色 92% + 前景色 8%」的混合配方——更贴近原始色调，但仍带有轻微的对比度增强。[Alert](/docs/native/components/alert)、[Avatar](/docs/native/components/avatar)、[Button](/docs/native/components/button)、[Chip](/docs/native/components/chip)、[Toast](/docs/native/components/toast) 等组件会自动在其 soft 变体上使用新的柔和前景色——无需修改任何组件属性。
+这会将所有 `*-soft-foreground` 变量（accent、success、warning、danger）切换为「语义色 92% + 前景色 8%」的混合配方（更贴近原始色调，但仍带有轻微的对比度增强。[Alert](/docs/native/components/alert)、[Avatar](/docs/native/components/avatar)、[Button](/docs/native/components/button)、[Chip](/docs/native/components/chip)、[Toast](/docs/native/components/toast) 等组件会自动在其 soft 变体上使用新的柔和前景色）无需修改任何组件属性。
 
 | 模式 | 可读性优先（默认） | 鲜亮 |
 |------|----------------------|---------|

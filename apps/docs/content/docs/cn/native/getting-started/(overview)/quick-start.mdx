@@ -6,8 +6,8 @@ icon: rocket
 
 请根据项目情况选择适合的方案：
 
-- **方案 1** —— 通过我们的 CLI 一键创建预先配置好的新项目，无需手动设置。
-- **方案 2** —— 将 HeroUI Native 添加到已有的 React Native 或 Expo 项目。
+- **方案 1**：通过我们的 CLI 一键创建预先配置好的新项目，无需手动设置。
+- **方案 2**：将 HeroUI Native 添加到已有的 React Native 或 Expo 项目。
 
 ## 方案 1：创建新项目
 
@@ -56,24 +56,24 @@ npm run start
 <CopyPrompt
   prompt={`Set up HeroUI Native in this React Native project.
 
-Use the HeroUI Native MCP server (@heroui/native-mcp) as the single source of truth for installation steps, peer dependencies, and component APIs. Start by retrieving the latest quick-start / installation guide from the MCP and follow it precisely — do not rely on memory for versions, package names, or setup steps.
+Use the HeroUI Native MCP server (@heroui/native-mcp) as the single source of truth for installation steps, peer dependencies, and component APIs. Start by retrieving the latest quick-start / installation guide from the MCP and follow it precisely: do not rely on memory for versions, package names, or setup steps.
 
 Before making any changes:
 
-1. Analyze the project. Detect the package manager (npm / pnpm / yarn / bun), framework (Expo or bare React Native), TypeScript usage, and the location of node_modules. This matters for global.css — the @source path must be written relative to global.css itself and must resolve to node_modules/heroui-native/lib.
+1. Analyze the project. Detect the package manager (npm / pnpm / yarn / bun), framework (Expo or bare React Native), TypeScript usage, and the location of node_modules. This matters for global.css: the @source path must be written relative to global.css itself and must resolve to node_modules/heroui-native/lib.
 2. Read package.json and only install what is missing. Pin to the exact versions listed in the MCP quick-start to avoid compatibility issues.
-3. Inspect the app entry (App.tsx, app/_layout.tsx, index.tsx, etc.) and check whether GestureHandlerRootView already wraps the app. If it does, reuse it — do not nest a second GestureHandlerRootView.
+3. Inspect the app entry (App.tsx, app/_layout.tsx, index.tsx, etc.) and check whether GestureHandlerRootView already wraps the app. If it does, reuse it: do not nest a second GestureHandlerRootView.
 
 Then apply the setup:
 
 - Install heroui-native plus any missing mandatory+optional peer dependencies.
 - Set up Uniwind + Tailwind CSS (follow the Uniwind quickstart) and add the HeroUI Native imports plus the correct @source line to global.css.
-- Make sure GestureHandlerRootView wraps the entire app — it must be the outermost wrapper with style { flex: 1 }.
+- Make sure GestureHandlerRootView wraps the entire app - it must be the outermost wrapper with style { flex: 1 }.
 - Add HeroUINativeProvider as a direct child of GestureHandlerRootView, wrapping the rest of the app.
 
 When done, summarize the changes you made and tell me how to run the app on iOS / Android.`}
 >
-  **更喜欢让 AI 助手代劳？** 在编辑器中安装 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)，将上方提示词粘贴给你的 AI 助手 —— 它会分析你的项目并完成整套配置。
+  **更喜欢让 AI 助手代劳？** 在编辑器中安装 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)，将上方提示词粘贴给你的 AI 助手：它会分析你的项目并完成整套配置。
 </CopyPrompt>
 
 ### 1. 安装 HeroUI Native
@@ -216,19 +216,19 @@ import { Button, Card } from "heroui-native";
 
 **可用的细粒度入口：**
 
-- `heroui-native/provider` — Provider
-- `heroui-native/provider-raw` — 轻量 Provider（最小依赖起点）
-- `heroui-native/[component-name]` — 单个组件
-- `heroui-native/portal` — Portal 工具
-- `heroui-native/toast` — Toast Provider 与工具
-- `heroui-native/utils` — 工具函数
-- `heroui-native/hooks` — 自定义 Hooks
+- `heroui-native/provider`: Provider
+- `heroui-native/provider-raw`：轻量 Provider（最小依赖起点）
+- `heroui-native/[component-name]`：单个组件
+- `heroui-native/portal`：Portal 工具
+- `heroui-native/toast`：Toast Provider 与工具
+- `heroui-native/utils`：工具函数
+- `heroui-native/hooks`：自定义 Hooks
 
 <Callout type="warning">
   **重要：** 为控制包体，请**始终**坚持使用细粒度导入策略。只要存在一处从 `heroui-native` 的整体导入，就可能使上述优化失效。
 </Callout>
 
-> **提示：** 若需要更强控制，可使用 [`HeroUINativeProviderRaw`](/docs/native/getting-started/provider#raw-provider) — 轻量 Provider，不包含 `ToastProvider` 与 `PortalHost`。
+> **提示：** 若需要更强控制，可使用 [`HeroUINativeProviderRaw`](/docs/native/getting-started/provider#raw-provider)，轻量 Provider，不包含 `ToastProvider` 与 `PortalHost`。
 
 ## 接下来
 

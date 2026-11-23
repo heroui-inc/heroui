@@ -166,7 +166,7 @@ Inherits from [React Aria ToggleButtonGroup](https://react-aria.adobe.com/Toggle
 
 - ToggleButtonGroup uses React Context to pass `size` to all child ToggleButton components
 - Each ToggleButton must have a unique `id` prop that corresponds to the keys used in `selectedKeys` / `defaultSelectedKeys`
-- The `isDisabled` prop is handled natively by React Aria and disables all child ToggleButtons — individual buttons can override this by setting `isDisabled={false}`
+- The `isDisabled` prop is handled natively by React Aria and disables all child ToggleButtons: individual buttons can override this by setting `isDisabled={false}`
 - The component automatically handles border radius between buttons
 - Add `<ToggleButtonGroup.Separator />` inside each ToggleButton (except the first) to show dividers between buttons
 - Use `disallowEmptySelection` with `selectionMode="single"` to ensure one option is always selected

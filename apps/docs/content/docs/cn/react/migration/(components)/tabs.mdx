@@ -61,17 +61,17 @@ export default function App() {
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
 | `key`（在 Tab 上） | `id`（在 Tab 与 Panel 上） | prop 名称变更 |
-| `title`（在 Tab 上） | — | 内容直接放入 `Tabs.Tab` |
+| `title`（在 Tab 上） | - | 内容直接放入 `Tabs.Tab` |
 | `isVertical` | `orientation` | 改为 `"horizontal"` \| `"vertical"` |
-| `placement` | — | 通过 `orientation` 与布局表达 |
+| `placement` | - | 通过 `orientation` 与布局表达 |
 | `variant` | `variant` | 简化为仅 `primary` \| `secondary` |
-| `color` | — | 已移除（请改用 Tailwind CSS） |
-| `size` | — | 已移除（请改用 Tailwind CSS） |
-| `radius` | — | 已移除（请改用 Tailwind CSS） |
-| `classNames` | — | 改在各子组件上使用 `className` prop |
-| `disableCursorAnimation` | — | 改用 `Tabs.Indicator` 子组件控制 |
-| `disableAnimation` | — | 已移除（动画机制已不同） |
-| `fullWidth` | — | 已移除（请改用 Tailwind CSS） |
+| `color` | - | 已移除（请改用 Tailwind CSS） |
+| `size` | - | 已移除（请改用 Tailwind CSS） |
+| `radius` | - | 已移除（请改用 Tailwind CSS） |
+| `classNames` | - | 改在各子组件上使用 `className` prop |
+| `disableCursorAnimation` | - | 改用 `Tabs.Indicator` 子组件控制 |
+| `disableAnimation` | - | 已移除（动画机制已不同） |
+| `fullWidth` | - | 已移除（请改用 Tailwind CSS） |
 
 ### 3. 组件层面的变化
 
@@ -202,10 +202,10 @@ Tabs (Root)
 
 1. **组件结构**：必须使用复合组件（`Tabs.ListContainer`、`Tabs.List`、`Tabs.Tab`、`Tabs.Indicator`、`Tabs.Separator`、`Tabs.Panel`）
 2. **Tab 标识**：`key` → `id`（Tab 与 Panel 之间需保持一致）
-3. **Tab 内容**：移除 `title` prop——内容直接放入 `Tabs.Tab`
+3. **Tab 内容**：移除 `title` prop，内容直接放入 `Tabs.Tab`
 4. **Panel 分离**：面板内容移至独立的 `Tabs.Panel` 组件
 5. **指示器**：必须显式在每个 Tab 内使用 `Tabs.Indicator`
 6. **方向**：`isVertical` → `orientation` prop
-7. **样式**：`variant` 简化为 `primary` \| `secondary`；`color`、`size`、`radius`、`placement` 已移除——更多自定义请使用 Tailwind
+7. **样式**：`variant` 简化为 `primary` \| `secondary`；`color`、`size`、`radius`、`placement` 已移除：更多自定义请使用 Tailwind
 8. **移除 classNames**：改在各子组件上使用 `className` prop
 9. **分隔符（新增）**：在 `Tabs.Tab` 内使用 `Tabs.Separator` 显示 Tab 之间的分隔线（v2 无对应能力）

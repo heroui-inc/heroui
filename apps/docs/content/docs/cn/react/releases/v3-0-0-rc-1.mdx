@@ -56,7 +56,7 @@ github:
 - **[Drawer](#drawer)**：滑出式面板，支持拖拽关闭、4 种放置位置、多种背景遮罩变体以及可滚动的内容区（[文档](/docs/components/drawer)）
 - **[ToggleButton](#toggle-button)**：选中 / 未选中两态的切换按钮，支持全部按钮变体以及仅图标模式（[文档](/docs/components/toggle-button)）
 - **[ToggleButtonGroup](#toggle-button-group)**：单选或多选的切换按钮组，支持 attached / detached 布局以及方向设置（[文档](/docs/components/toggle-button-group)）
-- **[Meter](#meter)**：在已知范围内呈现某个数值——例如磁盘占用、密码强度、配额等（[文档](/docs/components/meter)）
+- **[Meter](#meter)**：在已知范围内呈现某个数值，例如磁盘占用、密码强度、配额等（[文档](/docs/components/meter)）
 - **[ProgressBar](#progress-bar)**：线性进度条，支持确定 / 不确定态、多种颜色与自定义格式（[文档](/docs/components/progress-bar)）
 - **[ProgressCircle](#progress-circle)**：基于 SVG 的环形进度条，可自定义轨道圆与填充圆（[文档](/docs/components/progress-circle)）
 - **[Toolbar](#toolbar)**：将按钮、切换控件与分隔线按水平或垂直方向组合在一起的工具栏组件（[文档](/docs/components/toolbar)）
@@ -117,7 +117,7 @@ github:
 
 ### Meter
 
-在已知范围内呈现某个数值——例如磁盘占用、密码强度、配额等。复合部件包括：`Root`、`Output`、`Track`、`Fill`。
+在已知范围内呈现某个数值，例如磁盘占用、密码强度、配额等。复合部件包括：`Root`、`Output`、`Track`、`Fill`。
 
 <ComponentPreview
   name="meter-basic"
@@ -206,10 +206,10 @@ Table 与 ListBox 现在可以借助 React Aria 的 `Virtualizer` 来支持大�
 `@heroui/react` 现在支持按组件的子路径入口，方便更明确地按需引入（[#6301](https://github.com/heroui-inc/heroui/pull/6301)）：
 
 ```tsx
-// Before — root entrypoint
+// Before: root entrypoint
 import { Button } from "@heroui/react";
 
-// After — granular subpath import
+// After: granular subpath import
 import { Button } from "@heroui/react/button";
 ```
 

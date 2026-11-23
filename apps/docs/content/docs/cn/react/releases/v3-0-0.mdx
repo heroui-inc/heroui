@@ -175,7 +175,7 @@ Tailwind 的 `@theme` 指令会将这些 token 映射为工具类。`bg-accent`�
 }
 ```
 
-无需层层传递 className，也无需在 style prop 上反复折腾。设计系统的覆写就发生在 CSS 中——它本就属于这里。
+无需层层传递 className，也无需在 style prop 上反复折腾。设计系统的覆写就发生在 CSS 中：它本就属于这里。
 
 ### 自定义主题
 
@@ -296,7 +296,7 @@ const MotionButton = motion(Button);
 
 ### 表单
 
-十三个表单组件：TextField、Select、Autocomplete、ComboBox、Checkbox、CheckboxGroup、RadioGroup、Switch、InputOTP、NumberField、SearchField、Slider 与 Fieldset。全部集成了 React Aria 的表单校验：`isRequired`、`isInvalid` 以及通过 FieldError 自定义错误信息——所有组件均可使用。
+十三个表单组件：TextField、Select、Autocomplete、ComboBox、Checkbox、CheckboxGroup、RadioGroup、Switch、InputOTP、NumberField、SearchField、Slider 与 Fieldset。全部集成了 React Aria 的表单校验：`isRequired`、`isInvalid` 以及通过 FieldError 自定义错误信息，所有组件均可使用。
 
 <ComponentPreview
   name="select-default"
@@ -389,7 +389,7 @@ HeroUI MCP 服务器将 AI 编码助手（Cursor、Claude Code、VS Code Copilot
 
 针对 AI 上下文窗口优化的结构化文档文件。这些文件发布在 `/llms.txt` 与 `/llms-components.txt`，为任何基于 LLM 的工具提供一份机器可读的 HeroUI API 摘要。
 
-MCP 服务器、Agent Skills、LLMs.txt——三层组合让 AI 助手能像人类开发者从文档中获取信息一样，获得对 HeroUI 的完整访问能力。
+MCP 服务器、Agent Skills、LLMs.txt：三层组合让 AI 助手能像人类开发者从文档中获取信息一样，获得对 HeroUI 的完整访问能力。
 
 ## HeroUI Native
 
@@ -457,7 +457,7 @@ import { Dialog, Button } from "heroui-native";
   </Alert.Content>
 </Alert>
 
-// React Native — similar API, native behavior
+// React Native: similar API, native behavior
 <Alert status="success">
   <Alert.Indicator />
   <Alert.Content>
@@ -507,7 +507,7 @@ import { Switch } from "heroui-native";
 </Switch>
 ```
 
-可以在任意层级关闭动画——单个组件、整棵子树，或者全局：
+可以在任意层级关闭动画，单个组件、整棵子树，或者全局：
 
 ```tsx
 // Single component

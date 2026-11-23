@@ -12,7 +12,7 @@ github:
 Calendar gains week and day views, a reworked year picker, and range demos built on React Aria 1.18. [Autocomplete](/docs/components/autocomplete) adds a Virtualizer example for large option lists. [Tooltip](/docs/components/tooltip) adds theme variables for global show and hide delays. The toggles (`Radio`, `Checkbox`, `Switch`) move to React Aria's `*Field` + `*Button` composition. This release also rolls in patch fixes for virtualized lists, grouped-field autofill, toast and fieldset behavior, and scroll and RTL styles.
 
 <Callout type="warning">
-  **Breaking changes**: `Radio`, `Checkbox`, and `Switch` move to an explicit `*.Content` composition — `*.Control` nests inside `*.Content`, the label is plain text inside `*.Content` (no nested `<Label>`), and `Description`/`FieldError` become siblings of `*.Content`. See [Breaking Changes](#breaking-changes).
+  **Breaking changes**: `Radio`, `Checkbox`, and `Switch` move to an explicit `*.Content` composition - `*.Control` nests inside `*.Content`, the label is plain text inside `*.Content` (no nested `<Label>`), and `Description`/`FieldError` become siblings of `*.Content`. See [Breaking Changes](#breaking-changes).
 </Callout>
 
 ## Installation
@@ -104,8 +104,8 @@ Virtualizer support for large option lists, with docs, Storybook, and style fixe
 
 [Tooltip](/docs/components/tooltip) reads default show and hide delays from theme CSS variables ([#6617](https://github.com/heroui-inc/heroui/pull/6617)):
 
-- `--tooltip-delay` — delay before showing a tooltip (default: `1500ms`)
-- `--tooltip-close-delay` — delay before hiding a tooltip (default: `500ms`)
+- `--tooltip-delay`: delay before showing a tooltip (default: `1500ms`)
+- `--tooltip-close-delay`: delay before hiding a tooltip (default: `500ms`)
 
 Override them globally:
 
@@ -136,9 +136,9 @@ Individual `delay` and `closeDelay` props still override these values on specifi
 - **Table RTL**: Column separators and resize handles use logical `end-0` positioning in RTL ([#6606](https://github.com/heroui-inc/heroui/pull/6606)).
 - **Link**: Drops the hardcoded `text-sm` so links inherit font size from their parent, and `.link__icon` scales relative to text with `size-[0.75em]` instead of a fixed `size-2` ([#6621](https://github.com/heroui-inc/heroui/pull/6621)).
 - **DatePicker / DateRangePicker**: Calendar popovers use `min-w-(--trigger-width)` instead of `max-w-(--trigger-width)` so the calendar is at least as wide as the trigger and no longer clips horizontally ([#6622](https://github.com/heroui-inc/heroui/pull/6622)).
-- **Table**: Secondary header borders and rounded corners render correctly when the table is wrapped in React Aria's `<Virtualizer>` — column selectors no longer treat every virtualized column as both first and last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624)).
+- **Table**: Secondary header borders and rounded corners render correctly when the table is wrapped in React Aria's `<Virtualizer>` - column selectors no longer treat every virtualized column as both first and last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624)).
 - **Autocomplete**: The popover is constrained to the trigger width and the listbox caps its height at `320px` with internal scrolling, so virtualized lists no longer overflow the popover ([#6642](https://github.com/heroui-inc/heroui/pull/6642)).
-- **ListBox**: Replaces `flex flex-col gap` with block flow + sibling margins so React Aria's Virtualizer content height is not collapsed by flex-shrink — fixes scrollbar thumb resizing during virtualized scroll ([#6636](https://github.com/heroui-inc/heroui/pull/6636)).
+- **ListBox**: Replaces `flex flex-col gap` with block flow + sibling margins so React Aria's Virtualizer content height is not collapsed by flex-shrink - fixes scrollbar thumb resizing during virtualized scroll ([#6636](https://github.com/heroui-inc/heroui/pull/6636)).
 - **InputGroup / NumberField / SearchField**: Browser autofill highlight lifts onto the group shell so prefix, suffix, and increment/decrement slots share the rounded highlight ([#6625](https://github.com/heroui-inc/heroui/pull/6625)).
 - **Spinner**: Uses `inline-flex` with `shrink-0` (instead of `relative`) so the spin animation renders correctly in non-flex layouts, and honors `motion-reduce` ([#6644](https://github.com/heroui-inc/heroui/pull/6644)).
 - **Toast**: Close button uses `-top-1 -right-1` on all breakpoints to align with container padding ([#6574](https://github.com/heroui-inc/heroui/pull/6574)).
@@ -155,8 +155,8 @@ Individual `delay` and `closeDelay` props still override these values on specifi
 
 These toggles now use React Aria's `*Field` + `*Button` composition under the hood. `X.Content` is now the **clickable label** (React Aria's `*Button`). Three things change:
 
-- **`X.Control` moves inside `X.Content`** — they used to be siblings.
-- **The label is plain text inside `X.Content`** — `X.Content` renders the `<label>` element, so don't nest a `<Label>` component (nested `<label>` elements are invalid HTML). For a standalone `Label`, place it **outside** and link it with `htmlFor` + the toggle `id`.
+- **`X.Control` moves inside `X.Content`**: they used to be siblings.
+- **The label is plain text inside `X.Content`**: `X.Content` renders the `<label>` element, so don't nest a `<Label>` component (nested `<label>` elements are invalid HTML). For a standalone `Label`, place it **outside** and link it with `htmlFor` + the toggle `id`.
 - **`Description`/`FieldError` move out** as siblings of `X.Content`, so they're exposed via `aria-describedby` instead of being folded into the accessible name.
 
 **Checkbox**
@@ -242,7 +242,7 @@ These toggles now use React Aria's `*Field` + `*Button` composition under the ho
 | Label provided via `<Label>` inside `X.Content` | Label is **plain text** inside `X.Content` (no nested `<Label>`) |
 | `Description` / `FieldError` inside `X.Content` | `Description` / `FieldError` as siblings of `X.Content` |
 
-**External label** — to use a standalone `Label`, place it outside the toggle and link it with `htmlFor` + the toggle `id`:
+**External label**: to use a standalone `Label`, place it outside the toggle and link it with `htmlFor` + the toggle `id`:
 
 ```tsx
 <div className="flex items-center gap-3">

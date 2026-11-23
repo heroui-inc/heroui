@@ -31,12 +31,12 @@ export default () => (
             <span>✓</span> {/* Custom indicator (optional) */}
           </Radio.Indicator>
         </Radio.Control>
-        Label {/* plain text — the clickable label */}
+        Label {/* plain text: the clickable label */}
       </Radio.Content>
-      <Description /> {/* Sibling — stays outside the button (announced via aria-describedby) */}
-      <FieldError /> {/* Optional — per-radio validation message */}
+      <Description /> {/* Sibling: stays outside the button (announced via aria-describedby) */}
+      <FieldError /> {/* Optional: per-radio validation message */}
     </Radio>
-    <FieldError /> {/* Optional — group-level validation */}
+    <FieldError /> {/* Optional: group-level validation */}
   </RadioGroup>
 )
 ```
@@ -165,7 +165,7 @@ The RadioGroup component uses these CSS classes ([View source styles](https://gi
 
 #### Modifier Classes [!toc]
 
-Disabled state is applied via `[data-disabled="true"]` / `[aria-disabled="true"]` (and `:disabled`) on `.radio` — there is no `.radio--disabled` modifier class.
+Disabled state is applied via `[data-disabled="true"]` / `[aria-disabled="true"]` (and `:disabled`) on `.radio`: there is no `.radio--disabled` modifier class.
 
 ### Interactive States
 

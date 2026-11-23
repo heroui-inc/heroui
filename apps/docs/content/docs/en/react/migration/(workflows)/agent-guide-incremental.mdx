@@ -107,7 +107,7 @@ For projects using incremental coexistence strategies, agents should:
 
 When encountering v2 components with no v3 counterpart (Code, Image, Navbar, Ripple, Snippet, Spacer, User):
 
-- **Leave them in place** — do not attempt to migrate them unless the user explicitly requests removal
+- **Leave them in place**: do not attempt to migrate them unless the user explicitly requests removal
 - **If the user wants to remove them**: Use `get_component_migration_guides` (where available) or the [Component Migration Reference](/docs/react/migration#component-migration-reference) to fetch guides and help replace with native HTML or manual implementations
 
 ## CSS Conflict Handling
@@ -238,7 +238,7 @@ Once all components are migrated:
 
 ### Project Uses v2 Navbar (or Other Removed Components)
 
-- Leave in place — v2 Navbar and other removed components (Code, Image, Ripple, Snippet, Spacer, User) will continue to work during coexistence
+- Leave in place: v2 Navbar and other removed components (Code, Image, Ripple, Snippet, Spacer, User) will continue to work during coexistence
 - Inform the user they can optionally remove them later with agent assistance and the [Component Migration Reference](/docs/react/migration#component-migration-reference) guides
 
 ## Next Steps

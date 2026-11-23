@@ -22,7 +22,7 @@ icon: layers
 </Tabs>
 
 <Callout>
-  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t app -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
+  `-t` skips the template picker. You are still prompted for a project name and package manager - pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t app -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
 </Callout>
 
 ### 2. Use your first HeroUI component
@@ -122,7 +122,7 @@ npx heroui-cli@latest init -t vite
 ```
 
 <Callout>
-  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t vite -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
+  `-t` skips the template picker. You are still prompted for a project name and package manager - pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t vite -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
 </Callout>
 
 ### 2. Use your first HeroUI component
@@ -156,7 +156,7 @@ npx heroui-cli@latest init -t react-router
 ```
 
 <Callout>
-  `-t` skips the template picker. You are still prompted for a project name and package manager — pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t react-router -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
+  `-t` skips the template picker. You are still prompted for a project name and package manager - pass them directly to skip all prompts: `npx heroui-cli@latest init my-app -t react-router -p pnpm`. Then open your new folder and install dependencies (for example `pnpm install`).
 </Callout>
 
 ### 2. Use your first HeroUI component
@@ -181,7 +181,7 @@ export default function Index() {
 
 ## Other Frameworks
 
-`@heroui/react` requires React because its behavior is built on React Aria. The design system itself lives in `@heroui/styles` — a package with no React dependency that ships HeroUI's BEM classes and framework-agnostic variant functions. You can use it from Vue, Svelte, Angular, or plain HTML.
+`@heroui/react` requires React because its behavior is built on React Aria. The design system itself lives in `@heroui/styles`: a package with no React dependency that ships HeroUI's BEM classes and framework-agnostic variant functions. You can use it from Vue, Svelte, Angular, or plain HTML.
 
 <Callout type="warning">
   This gives you HeroUI's visual design, not its behavior. Keyboard navigation, focus management, and ARIA attributes come from React Aria in `@heroui/react`, so you are responsible for them in your own components.
@@ -339,7 +339,7 @@ States the browser cannot infer must be set by you. The most common are:
 | `data-slot="..."` | Marks child parts of compound components |
 
 <Callout>
-  Stateless components such as button, chip, card, and skeleton work as drop-in markup. Overlays and collections (select, menu, popover, date picker) depend on state you would have to manage yourself — consider keeping those in React, or read the `data-*` selectors in the component's CSS file to see what is required.
+  Stateless components such as button, chip, card, and skeleton work as drop-in markup. Overlays and collections (select, menu, popover, date picker) depend on state you would have to manage yourself: consider keeping those in React, or read the `data-*` selectors in the component's CSS file to see what is required.
 </Callout>
 
 ### 5. Theming

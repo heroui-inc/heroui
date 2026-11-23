@@ -335,12 +335,12 @@ Popover、Select、Dialog、BottomSheet 的动画系统已重构：统一进出�
 **新能力：**
 
 ```tsx
-// 细粒度导入——仅需少量组件时推荐
+// 细粒度导入：仅需少量组件时推荐
 import { HeroUINativeProvider } from "heroui-native/provider";
 import { Button } from "heroui-native/button";
 import { Card } from "heroui-native/card";
 
-// 总入口导入——会拉取整库，适合大量使用组件时
+// 总入口导入：会拉取整库，适合大量使用组件时
 import { Button, Card } from "heroui-native";
 ```
 
@@ -348,11 +348,11 @@ import { Button, Card } from "heroui-native";
 
 **可用细粒度路径：**
 
-- `heroui-native/provider` — Provider
-- `heroui-native/[component-name]` — 各组件
-- `heroui-native/portal` — Portal 工具
-- `heroui-native/utils` — 工具函数
-- `heroui-native/hooks` — 自定义 Hooks
+- `heroui-native/provider`: Provider
+- `heroui-native/[component-name]`：各组件
+- `heroui-native/portal`：Portal 工具
+- `heroui-native/utils`：工具函数
+- `heroui-native/hooks`：自定义 Hooks
 
 <Callout type="warning">
   **重要**：为控制包体，请在整个项目中**一致地**使用细粒度导入。只要存在一处从 `heroui-native` 总入口的导入，摇树优化策略即可能失效。
@@ -408,8 +408,8 @@ Tabs 的 `variant` 由 `pill` / `line` 改为 `primary` / `secondary`，与其�
 
 **可选项：**
 
-- `"primary"` — 原 `"pill"`
-- `"secondary"` — 原 `"line"`
+- `"primary"`：原 `"pill"`
+- `"secondary"`：原 `"line"`
 
 **相关 PR：** [#236](https://github.com/heroui-inc/heroui-native/pull/236)
 

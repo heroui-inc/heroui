@@ -579,9 +579,23 @@
    inline code, so inline marks read by weight and a light fill instead of
    contrast jumps. Quotes stay muted.
    Every rule skips `.not-prose` subtrees (component demos, code blocks), the
-   same way the fumadocs prose rules do, so component styles stay untouched. */
+   same way the fumadocs prose rules do, so component styles stay untouched.
+   Type scale: 15px body from tablet up; phones read larger (16.875px from
+   640px, 18.9px below). Headings, tables and inline code size in em, so they
+   follow the body size at every breakpoint. */
 #nd-page .prose {
   --tw-prose-bold: var(--docs-fg);
+
+  font-size: 18.9px;
+  line-height: 1.75;
+
+  @media (width >= 40rem) {
+    font-size: 16.875px;
+  }
+
+  @media (width >= 48rem) {
+    font-size: 15px;
+  }
 
   :where(p, li, td):not(:where(.not-prose, .not-prose *)) {
     color: var(--docs-fg);
@@ -599,20 +613,25 @@
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     color: var(--foreground);
-    font-size: 20px;
+    font-size: 1.25em;
     font-weight: 600;
     letter-spacing: -0.015em;
-    line-height: 28px;
+    line-height: 1.4;
   }
 
   :where(h3):not(:where(.not-prose, .not-prose *)) {
     margin-top: 2rem;
     margin-bottom: 0.5rem;
     color: var(--foreground);
-    font-size: 16px;
+    font-size: 1.125em;
     font-weight: 600;
     letter-spacing: -0.01em;
-    line-height: 24px;
+    line-height: 1.45;
+  }
+
+  :where(table):not(:where(.not-prose, .not-prose *)) {
+    font-size: 1em;
+    line-height: 1.5;
   }
 
   > :is(h2, h3):first-child {
@@ -631,6 +650,16 @@
 
   :where(:is(h2, h3, h4) code):not(:where(.not-prose *)) {
     font-size: 0.9em;
+  }
+}
+
+/* Demos and other `.not-prose` blocks keep the 16px base they had before the
+   prose scale, so component previews never resize with the breakpoint. Layered,
+   so a text utility on the block itself still wins. */
+@layer base {
+  #nd-page .prose :where(.not-prose):not(:where(.not-prose *)) {
+    font-size: 1rem;
+    line-height: 1.75rem;
   }
 }
 
@@ -659,7 +688,7 @@
   border-radius: 16px;
   background: var(--docs-demo);
   box-shadow: none;
-  font-size: 13px;
+  font-size: 14px;
 
   /* Filename bar: no divider and no extra top padding on the code, so the
      title and code read as one panel. */
@@ -693,7 +722,7 @@
 
   pre {
     font-family: var(--font-mono);
-    line-height: 22px;
+    line-height: 1.75;
   }
 
   pre > code {
@@ -771,7 +800,7 @@ code {
     border: none;
     border-radius: 9999px;
     color: var(--docs-fg-subtle);
-    font-size: 13px;
+    font-size: 14px;
 
     &:hover {
       color: var(--docs-fg);
@@ -821,6 +850,23 @@ code {
 
   .fd-scroll-container {
     padding: 16px 16px calc(16px - var(--code-scrollbar-reserve, 0px));
+  }
+}
+
+/* Code copy actions: with a precise pointer they stay hidden until the code panel (or its tab
+   group / demo code section) is hovered or holds focus, and while "Copied" shows. Touch screens
+   (phones, tablets) have no hover, so the button stays visible there. */
+@media (hover: hover) and (pointer: fine) {
+  #nd-page .code-actions {
+    opacity: 0;
+    transition: opacity 150ms ease-out;
+  }
+
+  #nd-page
+    :is(figure.shiki, .code-section, div:has(> [role="tablist"])):is(:hover, :focus-within)
+    .code-actions,
+  #nd-page .code-actions:has([data-checked]) {
+    opacity: 1;
   }
 }
 

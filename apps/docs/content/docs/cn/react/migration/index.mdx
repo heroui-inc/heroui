@@ -26,7 +26,7 @@ index: true
 - **无需 Provider**：v3 不再需要 `HeroUIProvider`
 - **组件 API 更新**：许多组件改用 React Aria Components 模式
 - **复合组件**：全新的复合组件模式带来了更好的定制能力。详情请参阅各组件的迁移指南。
-- **已移除的 Hooks**：v2 中的组件 Hooks（如 `useSwitch`、`useInput`）已被移除——请改用复合组件。`useDisclosure` 已被替换为 `useOverlayState`。详情请参阅 [Hooks 迁移指南](/docs/react/migration/hooks)。
+- **已移除的 Hooks**：v2 中的组件 Hooks（如 `useSwitch`、`useInput`）已被移除，请改用复合组件。`useDisclosure` 已被替换为 `useOverlayState`。详情请参阅 [Hooks 迁移指南](/docs/react/migration/hooks)。
 - **配置变更**：从 Tailwind 配置中移除 `heroui()` 插件，更新 CSS 导入，并删除 `hero.ts` 文件
 - **条目标识**：集合类组件（Dropdown、ListBox、Select、Accordion 等）在 v3 中改用 `id` 和 `textValue`；列表本身仍需保留 React 的 `key`。
 
@@ -36,9 +36,9 @@ index: true
 
 在 v2 中，集合类组件（Dropdown、ListBox、Select、Accordion 等）使用 **React 的 `key`** 作为条目标识。同一个值既驱动 React 的列表协调，又承担组件的选中/展开状态。在使用 React Aria Components 的 v3 中，这两种职责被拆分开：
 
-- **`id`** — v3 在每个条目上使用显式的 **`id`** 属性来表示选中状态、焦点以及回调（例如 `selectedKeys`、`expandedKeys`、`onSelectionChange`）。请使用与你在 v2 中给 `key` 设置的相同（或等效）的值，这样状态和回调仍能正确指向对应的条目。
-- **`textValue`** — 当条目的可见内容不是纯文本时（例如使用了 `Label`、图标或 `Description`），v3 需要在条目上提供 **`textValue`**。它用于屏幕阅读器播报和键入快速定位（type-ahead）。
-- **`key`** — **继续在列表项上使用 React 的 `key`**。它仍然是 React 列表协调所必需的，且与 `id` 相互独立。
+- **`id`**：v3 在每个条目上使用显式的 **`id`** 属性来表示选中状态、焦点以及回调（例如 `selectedKeys`、`expandedKeys`、`onSelectionChange`）。请使用与你在 v2 中给 `key` 设置的相同（或等效）的值，这样状态和回调仍能正确指向对应的条目。
+- **`textValue`**：当条目的可见内容不是纯文本时（例如使用了 `Label`、图标或 `Description`），v3 需要在条目上提供 **`textValue`**。它用于屏幕阅读器播报和键入快速定位（type-ahead）。
+- **`key`**：**继续在列表项上使用 React 的 `key`**。它仍然是 React 列表协调所必需的，且与 `id` 相互独立。
 
 迁移时：为 v3 的 API 添加 `id`（必要时再加上 `textValue`），同时保留供 React 使用的 `key`。
 
@@ -56,8 +56,8 @@ index: true
 - 完成样式迁移
 
 **优点：**
-- 配置更简单——无需复杂的共存配置
-- 切换更干净——同一时间只有一个版本处于激活状态
+- 配置更简单：无需复杂的共存配置
+- 切换更干净：同一时间只有一个版本处于激活状态
 - 由 Migration MCP 的 prompt 提供支持
 
 **缺点：**

@@ -426,7 +426,7 @@ export default function App() {
 The v3 Dropdown follows this structure:
 
 ```
-Dropdown (Root) — accepts trigger="press" | "longPress"
+Dropdown (Root): accepts trigger="press" | "longPress"
   ├── Dropdown.Trigger (optional, defaults to first child)
   ├── Dropdown.Popover (required wrapper)
   │   └── Dropdown.Menu
@@ -455,7 +455,7 @@ Dropdown (Root) — accepts trigger="press" | "longPress"
 2. **Dropdown.Popover Required**: `Dropdown.Menu` must be wrapped in `Dropdown.Popover`
 3. **Label Component**: Item text must use `Label` component
 4. **Description Component**: Use `Description` component instead of `description` prop
-5. **Kbd Component**: Use `Kbd` with `slot="keyboard"` instead of the `shortcut` prop — the slot positions the shortcut at the end of the menu item
+5. **Kbd Component**: Use `Kbd` with `slot="keyboard"` instead of the `shortcut` prop - the slot positions the shortcut at the end of the menu item
 6. **Icons as Children**: Icons go as first child, not `startContent` prop
 7. **Separator Component**: Use `Separator` instead of `showDivider` prop
 8. **ItemIndicator Component**: Use `Dropdown.ItemIndicator` for selection indicators

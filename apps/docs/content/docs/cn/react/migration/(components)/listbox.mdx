@@ -60,17 +60,17 @@ export default function App() {
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
 | `key`（用于状态） | `ListBox.Item` | 条目身份（状态）请使用 `id` |
-| — | `textValue`（在 `ListBox.Item` 上） | 用于无障碍（输入预判） |
+| - | `textValue`（在 `ListBox.Item` 上） | 用于无障碍（输入预判） |
 | `variant`、`color` | `ListBox` 或 `ListBox.Item` 上的 `variant` | 精简为 `"default"` \| `"danger"`（不再有单独的 `color` prop） |
 | `onAction` | `ListBox` | 按下条目时触发，签名为 `(key: Key) => void` |
-| `disabledKeys` | `ListBox` | 与 v2 相同——一组键，对应应为非交互的条目 |
-| `startContent`、`endContent` | — | 请在条目内容中手动放置图标 |
+| `disabledKeys` | `ListBox` | 与 v2 相同：一组键，对应应为非交互的条目 |
+| `startContent`、`endContent` | - | 请在条目内容中手动放置图标 |
 | `description` | `Description` | 使用 `Description` 组件 |
 | `title`（在 Section 上） | `Header` | 使用 `Header` 组件 |
-| `topContent`、`bottomContent` | — | 已移除（请自行处理） |
-| `itemClasses`、`classNames` | — | 在各部分上使用 `className` |
-| `hideSelectedIcon` | — | 不渲染 `ListBox.ItemIndicator` |
-| `disableAnimation` | — | 已移除 |
+| `topContent`、`bottomContent` | - | 已移除（请自行处理） |
+| `itemClasses`、`classNames` | - | 在各部分上使用 `className` |
+| `hideSelectedIcon` | - | 不渲染 `ListBox.ItemIndicator` |
+| `disableAnimation` | - | 已移除 |
 | `isVirtualized`、`virtualization` | React Aria `Virtualizer` | 使用 React Aria 的 `<Virtualizer>` 包装（见下方示例） |
 | `selectedKeys` | `ListBox` | 与 v2 相同（使用 `Selection` 类型的 Set） |
 
@@ -274,7 +274,7 @@ export default function App() {
 在 v3 中，`ListBox` 与 `ListBox.Item` 都接受 `variant` prop，取值为 `"default"`（默认）或 `"danger"`。在根级 `ListBox` 上设置 `variant` 会作用于所有条目；在单个 `ListBox.Item` 上设置会覆盖该条目的根级值。
 
 ```tsx
-{/* Root-level variant — all items inherit "danger" styling */}
+{/* Root-level variant: all items inherit "danger" styling */}
 <ListBox variant="danger">
   <ListBox.Item id="delete" textValue="Delete">
     <Label>Delete</Label>
@@ -387,6 +387,6 @@ ListBox (Root)
 6. **`onAction`**：`ListBox` 上新增 `onAction`，用于处理条目按下。
 7. **`disabledKeys`**：仍在 `ListBox` 上支持，用于禁用特定条目。
 8. **渲染 prop**：`ListBox.Item` 通过渲染 prop 提供 `isSelected`、`isFocused`、`isDisabled`、`isPressed`。
-9. **已移除的内容 props**：`topContent`、`bottomContent`——请自行组织布局。
+9. **已移除的内容 props**：`topContent`、`bottomContent`，请自行组织布局。
 10. **虚拟化**：仍通过 React Aria `<Virtualizer>` 支持（替代 `isVirtualized` prop）。
 11. **选择类型**：使用 `Selection` 类型（Set），而不是数组。

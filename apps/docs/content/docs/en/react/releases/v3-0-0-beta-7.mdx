@@ -57,7 +57,7 @@ Update to the latest version:
 
 ### Date & Time System
 
-**Date & Time** — Calendar, DatePicker, RangeCalendar, and DateRangePicker built on React Aria date primitives. Supports i18n, time zones, and full keyboard/ARIA accessibility.
+**Date & Time**: Calendar, DatePicker, RangeCalendar, and DateRangePicker built on React Aria date primitives. Supports i18n, time zones, and full keyboard/ARIA accessibility.
 
 **Key features:**
 - **Calendar systems**: Gregorian, Buddhist, Persian, and others
@@ -157,7 +157,7 @@ import { Switch, Label, Description } from '@heroui/react';
 
 The [Tabs](/docs/components/tabs) component now includes an explicit `Tabs.Separator` sub-component for adding visual separator lines between tabs. This replaces the previous automatic CSS pseudo-element separator and the `hideSeparator` prop ([#6243](https://github.com/heroui-inc/heroui/pull/6243)).
 
-Separators are now **opt-in** — add `<Tabs.Separator />` inside each `<Tabs.Tab>` where you want a separator line.
+Separators are now **opt-in**: add `<Tabs.Separator />` inside each `<Tabs.Tab>` where you want a separator line.
 
 <ComponentPreview
   isBgSolid
@@ -180,15 +180,15 @@ Props passed to `Breadcrumbs.Item` are now forwarded to the underlying `Link` ([
 
 ## Dependencies
 
-- **React Aria Components**: Updated from `1.14.0` to `1.15.0` — adds a new [`render` prop](https://react-aria.adobe.com/customization#dom-elements) for customizing the DOM element rendered by any React Aria component (useful for router links, animation libraries like Motion, etc.)
+- **React Aria Components**: Updated from `1.14.0` to `1.15.0` - adds a new [`render` prop](https://react-aria.adobe.com/customization#dom-elements) for customizing the DOM element rendered by any React Aria component (useful for router links, animation libraries like Motion, etc.)
 - **@react-aria/utils**: Updated from `3.32.0` to `3.33.0`
 - **@react-types/shared**: Updated from `3.32.1` to `3.33.0`
-- **@internationalized/date**: Updated from `3.10.1` to `3.11.0` — date fields now constrain on blur instead of as you type
+- **@internationalized/date**: Updated from `3.10.1` to `3.11.0` - date fields now constrain on blur instead of as you type
 - Added `@react-aria/i18n` and `@react-stately/utils` for calendar i18n
 
 ## Breaking Changes
 
-### Tabs — `hideSeparator` Prop Removed
+### Tabs: `hideSeparator` Prop Removed
 
 The `hideSeparator` prop has been removed from the Tabs component. Separators are now **opt-in** using the new `<Tabs.Separator />` sub-component instead of being automatically generated via CSS pseudo-elements ([#6243](https://github.com/heroui-inc/heroui/pull/6243)).
 
@@ -205,7 +205,7 @@ The `hideSeparator` prop has been removed from the Tabs component. Separators ar
 
 **After:**
 ```tsx
-{/* No separators by default — explicitly add them where needed */}
+{/* No separators by default: explicitly add them where needed */}
 <Tabs>
   <Tabs.List>
     <Tabs.Tab id="tab1"><Tabs.Indicator />Tab 1</Tabs.Tab>

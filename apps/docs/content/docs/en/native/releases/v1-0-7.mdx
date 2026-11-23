@@ -10,7 +10,7 @@ github:
   <span className="text-sm text-muted">July 28, 2026</span>
 </div>
 
-HeroUI Native v1.0.7 makes component surfaces extensible: components now accept a `background` prop and expose a matching background compound part, so the layer behind a surface can be replaced with any node. It also adds the `GlassView` layer component, a `blur` overlay variant for Dialog and Bottom Sheet, and `expo-blur` as an optional peer dependency. These are extension points — the default theme registers no background content, so rendering is unchanged.
+HeroUI Native v1.0.7 makes component surfaces extensible: components now accept a `background` prop and expose a matching background compound part, so the layer behind a surface can be replaced with any node. It also adds the `GlassView` layer component, a `blur` overlay variant for Dialog and Bottom Sheet, and `expo-blur` as an optional peer dependency. These are extension points: the default theme registers no background content, so rendering is unchanged.
 
 ## Installation
 
@@ -73,7 +73,7 @@ import { Button, GlassView } from "heroui-native";
 </Button>
 ```
 
-The prop and part pair up predictably — `background` sits on the root for Button, Avatar, Switch, Chip, Checkbox, Input, and SubMenu, and on the sub-part for `Radio.Indicator`, `Slider.Track`, `Tabs.List`, `TagGroup.Item`, `InputOTP.Slot`, and `Popover.Content`, whose parts are `Radio.IndicatorBackground`, `Slider.TrackBackground`, `Tabs.ListBackground`, `TagGroup.ItemBackground`, `InputOTP.SlotBackground`, and `Popover.ContentBackground`. Each background container is an absolute-fill view that inherits the host element's positioning and clipping, and accepts a `fallbackColor` theme token for platforms without native blur.
+The prop and part pair up predictably: `background` sits on the root for Button, Avatar, Switch, Chip, Checkbox, Input, and SubMenu, and on the sub-part for `Radio.Indicator`, `Slider.Track`, `Tabs.List`, `TagGroup.Item`, `InputOTP.Slot`, and `Popover.Content`, whose parts are `Radio.IndicatorBackground`, `Slider.TrackBackground`, `Tabs.ListBackground`, `TagGroup.ItemBackground`, `InputOTP.SlotBackground`, and `Popover.ContentBackground`. Each background container is an absolute-fill view that inherits the host element's positioning and clipping, and accepts a `fallbackColor` theme token for platforms without native blur.
 
 Whether a default layer mounts is decided by the `--theme` CSS variable, with `useIsGlassTheme` and `useHasDefaultThemeBackground` available for detecting that case. The theme shipped with HeroUI Native registers no background content, so nothing renders unless you inject it yourself; the `glass` theme that activates these layers is provided by `heroui-native-pro/themes/glass`.
 
@@ -83,7 +83,7 @@ Whether a default layer mounts is decided by the `--theme` CSS variable, with `u
 
 ### Select Trigger Restyled to a Field Look
 
-`.select__trigger--variant-default` moves from a surface look to a field look on **every** theme — this change is not gated behind `--theme`. If you rely on the Select trigger matching surrounding `Surface` elements, it will now match your form fields instead.
+`.select__trigger--variant-default` moves from a surface look to a field look on **every** theme: this change is not gated behind `--theme`. If you rely on the Select trigger matching surrounding `Surface` elements, it will now match your form fields instead.
 
 **What changed:**
 
@@ -97,10 +97,10 @@ Whether a default layer mounts is decided by the `--theme` CSS variable, with `u
 No API changes are required. To restore the previous surface appearance, override the styling on the [Select](/docs/native/components/select) trigger:
 
 ```tsx
-// Before — trigger rendered with surface tokens by default
+// Before: trigger rendered with surface tokens by default
 <Select.Trigger />
 
-// After — restore the surface look explicitly
+// After: restore the surface look explicitly
 <Select.Trigger className="rounded-2xl bg-surface border-0 shadow-surface" />
 ```
 
@@ -110,15 +110,15 @@ No API changes are required. To restore the previous surface appearance, overrid
 
 `.toast__root` moves from `--color-surface` to `--color-overlay`, and its default label color moves from `--color-foreground` to `--color-overlay-foreground`.
 
-In the shipped theme these tokens resolve to identical values in both light (`--white`) and dark (`oklch(0.2103 0.0059 285.89)`) modes, so there is **no visible change** out of the box. This only matters if you have overridden `--surface` and `--overlay` — or `--foreground` and `--overlay-foreground` — to different values, in which case [Toast](/docs/native/components/toast) will now pick up your overlay values instead of your surface values.
+In the shipped theme these tokens resolve to identical values in both light (`--white`) and dark (`oklch(0.2103 0.0059 285.89)`) modes, so there is **no visible change** out of the box. This only matters if you have overridden `--surface` and `--overlay` - or `--foreground` and `--overlay-foreground` - to different values, in which case [Toast](/docs/native/components/toast) will now pick up your overlay values instead of your surface values.
 
 **Migration:**
 
 If you customized `--surface` for Toast, move that customization to `--overlay`, or override the Toast class directly:
 
 ```tsx
-// Before — Toast followed --surface / --foreground
-// After — Toast follows --overlay / --overlay-foreground
+// Before: Toast followed --surface / --foreground
+// After: Toast follows --overlay / --overlay-foreground
 <Toast className="bg-surface" />
 ```
 

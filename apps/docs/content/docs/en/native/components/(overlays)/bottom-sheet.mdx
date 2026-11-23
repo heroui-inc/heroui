@@ -1,6 +1,6 @@
 ---
 title: BottomSheet
-description: Displays a bottom sheet presented natively through TrueSheet — above everything, including native modals and formSheet screens.
+description: Displays a bottom sheet presented natively through TrueSheet - above everything, including native modals and formSheet screens.
 icon: updated
 links:
   source_native: bottom-sheet/bottom-sheet.tsx
@@ -13,7 +13,7 @@ links:
   srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-dark.mp4"
 />
 
-Displays a bottom sheet presented natively — the sheet presentation controller on iOS and the native bottom sheet on Android — through [`@lodev09/react-native-true-sheet`](https://sheet.lodev09.com). The sheet appears above everything, including native modals and `formSheet` screens.
+Displays a bottom sheet presented natively - the sheet presentation controller on iOS and the native bottom sheet on Android - through [`@lodev09/react-native-true-sheet`](https://sheet.lodev09.com). The sheet appears above everything, including native modals and `formSheet` screens.
 
 ## Installation
 
@@ -96,7 +96,7 @@ sheetRef.current?.resize(0); // move to the first detent
 
 ### Controlling a Sheet by Name
 
-You don't need a ref to control a sheet. Give it a unique `name` and control it from anywhere — another component, a store, a navigation listener — with the imperative TrueSheet API: `present`, `resize`, `dismiss`, `dismissStack`, and `dismissAll`.
+You don't need a ref to control a sheet. Give it a unique `name` and control it from anywhere - another component, a store, a navigation listener - with the imperative TrueSheet API: `present`, `resize`, `dismiss`, `dismissStack`, and `dismissAll`.
 
 Use the `useTrueSheet()` hook inside components. It works on every platform (on web it needs `TrueSheetProvider`, which `HeroUINativeProvider` already includes):
 
@@ -120,7 +120,7 @@ function Controls() {
 </BottomSheet>;
 ```
 
-Outside React (stores, services, navigation callbacks), call the static methods on `TrueSheet`. They are native only — use the hook where web matters:
+Outside React (stores, services, navigation callbacks), call the static methods on `TrueSheet`. They are native only - use the hook where web matters:
 
 ```tsx
 import { TrueSheet } from '@lodev09/react-native-true-sheet';

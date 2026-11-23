@@ -40,10 +40,10 @@ export default function App() {
 
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
-| `label` | — | 如有需要，请使用单独的元素手动添加标签 |
-| `variant` | — | 仅提供一种 spinner 变体 |
-| `labelColor` | — | 不再支持标签 |
-| `classNames` | — | 直接使用 `className` prop |
+| `label` | - | 如有需要，请使用单独的元素手动添加标签 |
+| `variant` | - | 仅提供一种 spinner 变体 |
+| `labelColor` | - | 不再支持标签 |
+| `classNames` | - | 直接使用 `className` prop |
 | `size` | `size` | 取值变化：`"sm" \| "md" \| "lg"` → `"sm" \| "md" \| "lg" \| "xl"` |
 | `color` | `color` | 取值有变化（详见下文） |
 
@@ -176,9 +176,9 @@ export default function App() {
 
 ## 总结
 
-1. **不再支持标签**：移除 `label` prop——如有需要请手动添加标签
-2. **不再有变体**：移除 `variant` prop——仅保留单一圆形 spinner
-3. **不再有标签颜色**：移除 `labelColor` prop——请自行为标签设置样式
+1. **不再支持标签**：移除 `label` prop，如有需要请手动添加标签
+2. **不再有变体**：移除 `variant` prop，仅保留单一圆形 spinner
+3. **不再有标签颜色**：移除 `labelColor` prop，请自行为标签设置样式
 4. **颜色值变化**：`"default"` → `"current"`、`"primary"` → `"accent"`、`"secondary"` 已移除
 5. **新增尺寸**：新增 `"xl"` 尺寸可选
 6. **移除 classNames**：直接使用 `className` prop
