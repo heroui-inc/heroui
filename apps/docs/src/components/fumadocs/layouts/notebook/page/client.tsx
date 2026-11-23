@@ -2,7 +2,7 @@
 
 import type {BreadcrumbOptions} from "fumadocs-core/breadcrumb";
 import type * as PageTree from "fumadocs-core/page-tree";
-import type {ComponentProps} from "react";
+import type {ComponentProps, ReactNode} from "react";
 
 import {useTranslations} from "@fuma-translate/react";
 import {ArrowLeft, ArrowRight, ChevronDown, ChevronRight} from "@gravity-ui/icons";
@@ -17,7 +17,6 @@ import {
   CollapsibleTrigger,
 } from "fumadocs-ui/components/ui/collapsible";
 import {useTreeContext, useTreePath} from "fumadocs-ui/contexts/tree";
-import {useFooterItems} from "fumadocs-ui/utils/use-footer-items";
 import {
   Fragment,
   createContext,
@@ -34,6 +33,7 @@ import {isActive} from "@/components/fumadocs/utils/urls";
 import {cn} from "@/utils/cn";
 
 import {LayoutContext} from "../client";
+import {useSidebarNodes} from "../sidebar-nav";
 
 import {useActiveHeading} from "./active-heading";
 
@@ -242,33 +242,151 @@ export function PageLastUpdate({
 }
 
 type Item = Pick<PageTree.Item, "name" | "description" | "url">;
+/** A previous / next page, with its sidebar section when the link leaves the current one. */
+type NeighbourItem = Item & {section?: ReactNode};
 export interface FooterProps extends ComponentProps<"div"> {
   /**
    * Items including information for the next and previous page
    */
   items?: {
-    previous?: Item;
-    next?: Item;
+    previous?: NeighbourItem;
+    next?: NeighbourItem;
   };
 }
 
-/** Previous and next pages of the current page in sidebar order. */
-function usePageNeighbours(items?: FooterProps["items"]): {previous?: Item; next?: Item} {
-  const footerList = useFooterItems();
+interface SectionedPage extends Item {
+  /** Separator, tab or folder name the page sits under in the sidebar. */
+  section?: ReactNode;
+  /** Tells apart sections that share a name, e.g. a "Components" separator and the Components tab. */
+  sectionId: number;
+}
+
+const EXTERNAL_URL = /^[a-z][a-z\d+.-]*:/i;
+
+/** Flattens tree nodes into their pages in reading order, each tagged with its section. */
+function toSectionedPages(nodes: PageTree.Node[], rootSection?: ReactNode): SectionedPage[] {
+  const list: SectionedPage[] = [];
+  const seen = new Set<string>();
+  let lastId = 0;
+
+  const add = (page: PageTree.Item, section: ReactNode, sectionId: number) => {
+    // Off-site links such as Roadmap and Figma stay in the sidebar only.
+    if (page.external || EXTERNAL_URL.test(page.url) || seen.has(page.url)) return;
+
+    seen.add(page.url);
+    list.push({
+      description: page.description,
+      name: page.name,
+      section,
+      sectionId,
+      url: page.url,
+    });
+  };
+
+  const walk = (children: PageTree.Node[], section: ReactNode, sectionId: number) => {
+    let current = section;
+    let currentId = sectionId;
+
+    for (const node of children) {
+      if (node.type === "separator") {
+        // A bare `---` is only a divider, so the pages below stay in the same section.
+        if (node.name) {
+          current = node.name;
+          currentId = ++lastId;
+        }
+      } else if (node.type === "page") {
+        add(node, current, currentId);
+      } else {
+        const folderId = ++lastId;
+
+        if (node.index) add(node.index, node.name, folderId);
+        walk(node.children, node.name, folderId);
+      }
+    }
+  };
+
+  walk(nodes, rootSection, lastId);
+
+  return list;
+}
+
+/**
+ * Pages in the order the sidebar lists them, so previous / next cross its sections and tabs:
+ * the last Getting Started page leads to the first component. Release entries are not in the
+ * sidebar (its Releases link stands for all of them), so they step through their own tab.
+ */
+function useSectionedPages(): SectionedPage[] {
+  const sidebarNodes = useSidebarNodes();
+  const {root} = useTreeContext();
+  const pathname = usePathname();
+
+  return useMemo(() => {
+    const pages = toSectionedPages(sidebarNodes);
+
+    return pages.some((page) => isActive(page.url, pathname, false))
+      ? pages
+      : toSectionedPages(root.children, root.name);
+  }, [pathname, root, sidebarNodes]);
+}
+
+/** Previous and next pages of the current page in sidebar order, across tabs. */
+function usePageNeighbours(items?: FooterProps["items"]): {
+  previous?: NeighbourItem;
+  next?: NeighbourItem;
+} {
+  const pages = useSectionedPages();
   const pathname = usePathname();
 
   return useMemo(() => {
     if (items) return items;
 
-    const idx = footerList.findIndex((item) => isActive(item.url, pathname, false));
+    const idx = pages.findIndex((item) => isActive(item.url, pathname, false));
 
     if (idx === -1) return {};
 
+    const current = pages[idx];
+    const isSameSection = (page: SectionedPage) =>
+      page.sectionId === current?.sectionId ||
+      (typeof page.section === "string" && page.section === current?.section);
+    const toNeighbour = (page?: SectionedPage): NeighbourItem | undefined =>
+      page && {
+        description: page.description,
+        name: page.name,
+        section: isSameSection(page) ? undefined : page.section,
+        url: page.url,
+      };
+
     return {
-      next: footerList[idx + 1],
-      previous: footerList[idx - 1],
+      next: toNeighbour(pages[idx + 1]),
+      previous: toNeighbour(pages[idx - 1]),
     };
-  }, [footerList, items, pathname]);
+  }, [items, pages, pathname]);
+}
+
+/** Accessible name for a neighbour link: "Next Page: Buttons: Button". */
+function neighbourLabel(label: string, item: NeighbourItem): string {
+  if (typeof item.name !== "string") return label;
+
+  return typeof item.section === "string"
+    ? `${label}: ${item.section}: ${item.name}`
+    : `${label}: ${item.name}`;
+}
+
+/**
+ * Page name, led by its muted section name when the link leaves the current section. The
+ * section gives way first, so a long label ends up as "UI for Ag… Theming".
+ */
+function NeighbourName({item}: {item: NeighbourItem}) {
+  return (
+    <span className="flex min-w-0 gap-1">
+      {item.section ? (
+        <span className="min-w-0 shrink-[10000] truncate text-(--docs-fg-muted)">
+          {item.section}:
+        </span>
+      ) : null}
+      <span className="min-w-0 truncate">{item.name}</span>
+    </span>
+  );
 }
 
 const NAV_BUTTON =
@@ -293,7 +411,7 @@ export function PageNavButtons({className, ...props}: ComponentProps<"div">) {
           <Tooltip key={label} delay={300}>
             <Tooltip.Trigger role="presentation" tabIndex={-1}>
               <Link
-                aria-label={typeof item.name === "string" ? `${label}: ${item.name}` : label}
+                aria-label={neighbourLabel(label, item)}
                 className={NAV_BUTTON}
                 data-strong=""
                 href={item.url}
@@ -301,7 +419,9 @@ export function PageNavButtons({className, ...props}: ComponentProps<"div">) {
                 <Icon />
               </Link>
             </Tooltip.Trigger>
-            <Tooltip.Content placement="bottom">{item.name}</Tooltip.Content>
+            <Tooltip.Content placement="bottom">
+              <NeighbourName item={item} />
+            </Tooltip.Content>
           </Tooltip>
         ) : (
           <span
@@ -331,8 +451,8 @@ export function PageFooter({items, ...props}: FooterProps) {
   );
 }
 
-/** Pill link to the previous / next page: arrow and page name only. */
-function FooterItem({index, item}: {item: Item; index: 0 | 1}) {
+/** Pill link to the previous / next page: arrow, then the section when it changes and the page name. */
+function FooterItem({index, item}: {item: NeighbourItem; index: 0 | 1}) {
   const t = useTranslations({note: "pagination"});
   const isNext = index === 1;
   const Icon = isNext ? ArrowRight : ArrowLeft;
@@ -340,16 +460,17 @@ function FooterItem({index, item}: {item: Item; index: 0 | 1}) {
 
   return (
     <Link
-      aria-label={typeof item.name === "string" ? `${label}: ${item.name}` : label}
+      aria-label={neighbourLabel(label, item)}
       data-strong=""
       href={item.url}
       className={cn(
-        "docs-pill docs-pill-segment inline-flex h-9 min-w-0 items-center gap-2 text-sm font-medium",
+        // Capped so two long labels share the row: the text ends in "…" instead.
+        "docs-pill docs-pill-segment inline-flex h-9 max-w-[min(50%_-_0.5rem,18rem)] min-w-0 items-center gap-2 text-sm font-medium",
         isNext ? "ms-auto flex-row-reverse ps-4 pe-3" : "ps-3 pe-4",
       )}
     >
       <Icon className="size-3.5 shrink-0 rtl:rotate-180" />
-      <span className="truncate">{item.name}</span>
+      <NeighbourName item={item} />
     </Link>
   );
 }

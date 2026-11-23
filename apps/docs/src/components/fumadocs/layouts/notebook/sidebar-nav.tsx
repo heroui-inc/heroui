@@ -130,7 +130,8 @@ function heading(id: string, name: PageTree.Folder["name"]): PageTree.Separator 
 }
 
 /**
- * Flat sidebar items, shadcn-style: nothing collapses and nothing moves between pages.
+ * Flat sidebar items: nothing collapses and nothing moves between pages. The page footer
+ * follows this order for its previous / next links.
  *
  * 1. The first root (Getting Started) is always on top, headed by its name. Its leading
  *    pages come with links to the other roots' landing pages: Components right after
@@ -141,7 +142,7 @@ function heading(id: string, name: PageTree.Folder["name"]): PageTree.Separator 
  *    on Releases, Getting Started, and roots with only a landing page, the second root
  *    (Components) shows instead.
  */
-function useSidebarNodes(): PageTree.Node[] {
+export function useSidebarNodes(): PageTree.Node[] {
   const {full, root} = useTreeContext();
 
   return useMemo(() => {
