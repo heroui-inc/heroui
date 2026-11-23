@@ -54,29 +54,29 @@ export default function App() {
 
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
-| `label` | — | 改用 `Label` 组件 |
-| `description` | — | 改用 `Description` 组件 |
-| `errorMessage` | — | 改用 `FieldError` 组件 |
+| `label` | - | 改用 `Label` 组件 |
+| `description` | - | 改用 `Description` 组件 |
+| `errorMessage` | - | 改用 `FieldError` 组件 |
 | `value`、`defaultValue`、`onChange` | `TimeField` | 与 React Aria 一致 |
 | `minValue`、`maxValue`、`granularity`、`placeholderValue` | `TimeField` | 相同 |
 | `isRequired`、`isDisabled`、`isReadOnly`、`isInvalid`、`name` | `TimeField` | 相同 |
 | `validationBehavior`、`shouldForceLeadingZeros` | `TimeField` | 相同 |
 | `variant` | `DateInputGroup` | 简化为仅 `primary` \| `secondary` |
 | `fullWidth` | `TimeField` 或 `DateInputGroup` | 设置在根或分组上 |
-| `color` | — | 已移除（请改用 Tailwind CSS） |
-| `size` | — | 已移除（请改用 Tailwind CSS） |
-| `radius` | — | 已移除（请改用 Tailwind CSS） |
-| `labelPlacement` | — | 通过布局自行处理 |
+| `color` | - | 已移除（请改用 Tailwind CSS） |
+| `size` | - | 已移除（请改用 Tailwind CSS） |
+| `radius` | - | 已移除（请改用 Tailwind CSS） |
+| `labelPlacement` | - | 通过布局自行处理 |
 | `startContent` | `DateInputGroup.Prefix` | 改用 Prefix 子组件 |
 | `endContent` | `DateInputGroup.Suffix` | 改用 Suffix 子组件 |
-| `classNames` | — | 在 `TimeField` 与 `DateInputGroup` 各部分上使用 `className` |
-| `groupProps` | — | 在 `DateInputGroup` 上使用 `className` 或标准 DOM 属性 |
-| `labelProps` | — | 在 `Label` 上使用 `className` |
-| `fieldProps` | — | 在 `DateInputGroup` 上使用 `className` |
-| `innerWrapperProps` | — | 在分组 / 输入相关部分上使用 `className` |
-| `descriptionProps` | — | 在 `Description` 上使用 `className` |
-| `errorMessageProps` | — | 在 `FieldError` 上使用 `className` |
-| `inputRef` | — | 由 `TimeField` / React Aria 处理 ref |
+| `classNames` | - | 在 `TimeField` 与 `DateInputGroup` 各部分上使用 `className` |
+| `groupProps` | - | 在 `DateInputGroup` 上使用 `className` 或标准 DOM 属性 |
+| `labelProps` | - | 在 `Label` 上使用 `className` |
+| `fieldProps` | - | 在 `DateInputGroup` 上使用 `className` |
+| `innerWrapperProps` | - | 在分组 / 输入相关部分上使用 `className` |
+| `descriptionProps` | - | 在 `Description` 上使用 `className` |
+| `errorMessageProps` | - | 在 `FieldError` 上使用 `className` |
+| `inputRef` | - | 由 `TimeField` / React Aria 处理 ref |
 
 ## 迁移示例
 
@@ -260,7 +260,7 @@ TimeField (Root)
 2. **组件结构**：必须使用复合组件：`TimeField`（根）配合 `DateInputGroup` 与 `DateInputGroup.Input`（render prop）+ `DateInputGroup.Segment`
 3. **标签 / 描述 / 错误**：改用独立组件（`Label`、`Description`、`FieldError`）
 4. **时间相关 prop 不变**：`value`、`defaultValue`、`onChange`、`minValue`、`maxValue`、`granularity`、`placeholderValue`、`isRequired`、`isDisabled`、`isInvalid`、`name`、`validationBehavior`、`shouldForceLeadingZeros` 继续保留在 `TimeField` 上
-5. **DateInputGroup 的变体**：v3 仅支持 `DateInputGroup` 上的 `variant="primary"` 与 `variant="secondary"`；`color`、`size`、`radius` 已移除——请改用 Tailwind CSS
+5. **DateInputGroup 的变体**：v3 仅支持 `DateInputGroup` 上的 `variant="primary"` 与 `variant="secondary"`；`color`、`size`、`radius` 已移除，请改用 Tailwind CSS
 6. **Start / End 内容**：`startContent` / `endContent` → `DateInputGroup.Prefix` 与 `DateInputGroup.Suffix`
-7. **移除 labelPlacement**：`labelPlacement` 已移除——请通过布局自行实现
-8. **DOM / className prop**：`groupProps`、`labelProps`、`fieldProps`、`classNames` 已移除——请在相关部分使用 `className`（以及标准 DOM 属性）
+7. **移除 labelPlacement**：`labelPlacement` 已移除，请通过布局自行实现
+8. **DOM / className prop**：`groupProps`、`labelProps`、`fieldProps`、`classNames` 已移除，请在相关部分使用 `className`（以及标准 DOM 属性）

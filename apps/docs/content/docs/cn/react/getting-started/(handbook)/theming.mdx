@@ -416,15 +416,15 @@ export function ThemeSwitch() {
 
 HeroUI 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) 中定义了三种类型的变量：
 
-1. **基础变量（Base Variables）** — 不会变化的值，例如 `--white`、`--black`、间距以及排版
-2. **主题变量（Theme Variables）** — 在浅色 / 深色主题之间切换的颜色，以及滚动条令牌（`--scrollbar-thumb`、`--scrollbar-width` 等）
-3. **计算变量（Calculated Variables）** — 悬停状态、柔和（soft）变体以及边框 / 分隔线层级（每个浅色 / 深色主题中的 **Calculated Colors** 区块，使用 `color-mix()` 计算）
+1. **基础变量（Base Variables）**：不会变化的值，例如 `--white`、`--black`、间距以及排版
+2. **主题变量（Theme Variables）**：在浅色 / 深色主题之间切换的颜色，以及滚动条令牌（`--scrollbar-thumb`、`--scrollbar-width` 等）
+3. **计算变量（Calculated Variables）**：悬停状态、柔和（soft）变体以及边框 / 分隔线层级（每个浅色 / 深色主题中的 **Calculated Colors** 区块，使用 `color-mix()` 计算）
 
 如需完整参考，请查阅：[颜色文档](/docs/react/getting-started/colors)、[默认主题变量](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css)、[共享主题工具](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css)
 
 **Tailwind 主题桥接（`@theme inline`）：**
 
-[`themes/shared/theme.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css) 将语义化变量映射为 Tailwind 令牌（`--color-*`、`--radius-*`、`--ease-*`）。计算颜色引用的是 `variables.css` 中的底层变量（例如 `--surface-hover`、`--accent-soft`）—— 它们并不会在该文件中通过 `color-mix()` 内联展开：
+[`themes/shared/theme.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css) 将语义化变量映射为 Tailwind 令牌（`--color-*`、`--radius-*`、`--ease-*`）。计算颜色引用的是 `variables.css` 中的底层变量（例如 `--surface-hover`、`--accent-soft`），它们并不会在该文件中通过 `color-mix()` 内联展开：
 <CollapsibleCode lang="css" code={`  @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -555,7 +555,7 @@ HeroUI 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packag
     --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
-    /* 自定义的平滑收尾曲线：快速启动、平滑结束 —— Apple 风格 */
+    /* 自定义的平滑收尾曲线：快速启动、平滑结束，Apple 风格 */
     --ease-out-fluid: cubic-bezier(0.32, 0.72, 0, 1);
     /* 由慢到快 */
     --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
@@ -600,7 +600,7 @@ HeroUI 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packag
 
 HeroUI 为组件中的滚动区域（表格、弹出框、抽屉等）应用统一的滚动条样式。滚动条使用标准 CSS 属性（`scrollbar-width`、`scrollbar-color`、`scrollbar-gutter`），不再依赖 `::-webkit-scrollbar` 覆盖。
 
-**模式** — 在 `<html>`、组件根元素或滚动插槽上设置 `data-scrollbar`：
+**模式**：在 `<html>`、组件根元素或滚动插槽上设置 `data-scrollbar`：
 
 | 模式 | `data-scrollbar` | 行为 |
 |------|------------------|------|
@@ -623,7 +623,7 @@ HeroUI 为组件中的滚动区域（表格、弹出框、抽屉等）应用统�
 </div>
 ```
 
-**主题变量** — 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) 的浅色与深色主题区块中定义：
+**主题变量**：在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) 的浅色与深色主题区块中定义：
 
 | 变量 | 描述 |
 |------|------|
@@ -644,7 +644,7 @@ HeroUI 为组件中的滚动区域（表格、弹出框、抽屉等）应用统�
 }
 ```
 
-**按滚动插槽** — 在组件上传入 `data-scrollbar`，或在外层包裹元素上覆盖相关令牌：
+**按滚动插槽**：在组件上传入 `data-scrollbar`，或在外层包裹元素上覆盖相关令牌：
 
 ```tsx
 <Table data-scrollbar="default">
@@ -656,7 +656,7 @@ HeroUI 为组件中的滚动区域（表格、弹出框、抽屉等）应用统�
 <Calendar.YearPickerGrid data-scrollbar="none" />
 ```
 
-**自定义溢出区域** — 在自己的元素上使用 `@heroui/styles` 提供的 `scrollbar`、`scrollbar-thin`、`scrollbar-default` 或 `scrollbar-none` 工具类。基于类的覆盖方式详见 [样式](/docs/react/getting-started/styling)。
+**自定义溢出区域**：在自己的元素上使用 `@heroui/styles` 提供的 `scrollbar`、`scrollbar-thin`、`scrollbar-default` 或 `scrollbar-none` 工具类。基于类的覆盖方式详见 [样式](/docs/react/getting-started/styling)。
 
 > **注意**：部分组件默认隐藏滚动条（日期选择器弹出框、颜色选择器、次级标签页）。嵌套的滚动插槽（例如日期选择器内部的日历年份选择器）会保留 HeroUI 滚动条，因为 `scrollbar-none` 只作用于其所在的元素本身，不会影响使用 `@apply scrollbar` 的后代元素。
 

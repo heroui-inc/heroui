@@ -63,15 +63,15 @@ export default function App() {
 | `offset` | `offset`（在 Content 上） | 移至 `Popover.Content` |
 | `shouldFlip` | `shouldFlip`（在 Content 上） | 移至 `Popover.Content` |
 | `isOpen` / `defaultOpen` / `onOpenChange` | 同名（在根上） | 受控状态仍保留在根 `Popover` 上 |
-| `showArrow` | — | 改用 `Popover.Arrow` 子组件 |
-| `size` | — | 已移除（请改用 Tailwind CSS） |
-| `color` | — | 已移除（请改用 Tailwind CSS） |
-| `radius` | — | 已移除（请改用 Tailwind CSS） |
-| `shadow` | — | 已移除（请改用 Tailwind CSS） |
-| `backdrop` | — | 已移除 |
-| `motionProps` | — | 已移除（动画机制已不同） |
-| `classNames` | — | 改在各子组件上使用 `className` |
-| `onClose` | — | 改用 `onOpenChange((open) => { if (!open) { ... } })` |
+| `showArrow` | - | 改用 `Popover.Arrow` 子组件 |
+| `size` | - | 已移除（请改用 Tailwind CSS） |
+| `color` | - | 已移除（请改用 Tailwind CSS） |
+| `radius` | - | 已移除（请改用 Tailwind CSS） |
+| `shadow` | - | 已移除（请改用 Tailwind CSS） |
+| `backdrop` | - | 已移除 |
+| `motionProps` | - | 已移除（动画机制已不同） |
+| `classNames` | - | 改在各子组件上使用 `className` |
+| `onClose` | - | 改用 `onOpenChange((open) => { if (!open) { ... } })` |
 
 ## 迁移示例
 
@@ -270,10 +270,10 @@ Popover (Root)
 1. **组件结构**：必须使用复合组件（`Popover.Content`、`Popover.Dialog` 等）
 2. **触发器**：可以使用 `Popover.Trigger`，或直接将 Button 作为子节点
 3. **内容包装**：内容必须放在 `Popover.Dialog` 中
-4. **箭头**：移除 `showArrow` prop——改用 `Popover.Arrow` 子组件
+4. **箭头**：移除 `showArrow` prop，改用 `Popover.Arrow` 子组件
 5. **标题**：改用 `Popover.Heading` 组件
 6. **prop 移动位置**：`placement`、`offset`、`shouldFlip` 移到 `Popover.Content` 上
-7. **移除样式 prop**：`size`、`color`、`radius`、`shadow` —— 请改用 Tailwind CSS
+7. **移除样式 prop**：`size`、`color`、`radius`、`shadow`，请改用 Tailwind CSS
 8. **移除 backdrop**：`backdrop` prop 已移除
 9. **移除 motion**：`motionProps` 已移除，动画机制已不同
 10. **移除 classNames**：改在各子组件上使用 `className` prop

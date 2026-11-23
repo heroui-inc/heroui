@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">February 20, 2026</span>
 </div>
 
-RC 2 continues the march toward production readiness with three new components—SearchField, ListGroup, and Slider—and a powerful multi-selection mode for Select backed by type-safe generics. The Button feedback API has been refactored into a cleaner unified `feedbackVariant` + `animation` prop pattern, and peer dependency constraints are relaxed for broader compatibility with Expo SDK 55. Several Select and Avatar bug fixes round out the release.
+RC 2 continues the march toward production readiness with three new components - SearchField, ListGroup, and Slider - and a powerful multi-selection mode for Select backed by type-safe generics. The Button feedback API has been refactored into a cleaner unified `feedbackVariant` + `animation` prop pattern, and peer dependency constraints are relaxed for broader compatibility with Expo SDK 55. Several Select and Avatar bug fixes round out the release.
 
 ## Installation
 
@@ -214,7 +214,7 @@ For complete documentation and examples, see the [SearchField component page](/d
 
 ### Select Multi-Selection Mode
 
-The [Select](/docs/native/components/select) component now supports multi-item selection via a new `selectionMode` prop. The `RootProps` type is now generic on `SelectionMode`, so TypeScript correctly resolves `value` and `onValueChange` types per mode—`SelectOption` for single, `SelectOption[]` for multiple.
+The [Select](/docs/native/components/select) component now supports multi-item selection via a new `selectionMode` prop. The `RootProps` type is now generic on `SelectionMode`, so TypeScript correctly resolves `value` and `onValueChange` types per mode: `SelectOption` for single, `SelectOption[]` for multiple.
 
 **Features:**
 
@@ -253,7 +253,7 @@ export function MultiSelect() {
 
 #### PressableFeedback.Scale
 
-A new compound sub-component for opt-in scale animation composability. `PressableFeedback.Scale` lets you add scale press animations to any pressable element—such as `ListGroup.Item`—without needing the root `PressableFeedback` to manage scale.
+A new compound sub-component for opt-in scale animation composability. `PressableFeedback.Scale` lets you add scale press animations to any pressable element - such as `ListGroup.Item` - without needing the root `PressableFeedback` to manage scale.
 
 **Usage:**
 
@@ -338,7 +338,7 @@ Peer dependency version constraints have been relaxed to use caret (`^`) and ran
 - `react-native-svg`: `15.12.1` → `^15.12.1` (allows patch/minor updates)
 - `react-native-worklets`: `0.5.1` → `>=0.5.1` (allows any version 0.5.1+)
 
-No runtime code changes are included—existing projects with previously valid versions continue to work without modification.
+No runtime code changes are included: existing projects with previously valid versions continue to work without modification.
 
 **Related PR:** [#306](https://github.com/heroui-inc/heroui-native/pull/306)
 

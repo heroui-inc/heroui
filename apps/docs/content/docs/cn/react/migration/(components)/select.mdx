@@ -73,28 +73,28 @@ export default function App() {
 | `selectedKeys` | `value` | 从 Set / 数组改为单个值或数组 |
 | `onSelectionChange` | `onChange` | 已重命名的事件处理函数 |
 | `defaultSelectedKeys` | `defaultValue` | 已重命名的 prop |
-| `label` | — | 使用 `Label` 组件 |
-| `description` | — | 使用 `Description` 组件 |
-| `errorMessage` | — | 使用 `FieldError` 组件 |
+| `label` | - | 使用 `Label` 组件 |
+| `description` | - | 使用 `Description` 组件 |
+| `errorMessage` | - | 使用 `FieldError` 组件 |
 | `variant` | `variant` | 仅保留 `primary` \| `secondary` |
-| `color` | — | 已移除（请使用 Tailwind CSS） |
-| `size` | — | 已移除（请使用 Tailwind CSS） |
-| `radius` | — | 已移除（请使用 Tailwind CSS） |
-| `classNames` | — | 在各子组件上使用 `className` prop |
-| `startContent` | — | 直接自定义 `Select.Trigger` |
-| `endContent` | — | 直接自定义 `Select.Trigger` |
-| `selectorIcon` | — | 自定义 `Select.Indicator` 的 children |
+| `color` | - | 已移除（请使用 Tailwind CSS） |
+| `size` | - | 已移除（请使用 Tailwind CSS） |
+| `radius` | - | 已移除（请使用 Tailwind CSS） |
+| `classNames` | - | 在各子组件上使用 `className` prop |
+| `startContent` | - | 直接自定义 `Select.Trigger` |
+| `endContent` | - | 直接自定义 `Select.Trigger` |
+| `selectorIcon` | - | 自定义 `Select.Indicator` 的 children |
 | `isClearable` | `Select.ClearButton` | 内置子组件；不要在 `Select.Trigger` 内嵌套 `<button>` |
-| `renderValue` | — | 使用 `Select.Value` 的渲染 prop |
-| `labelPlacement` | — | 标签始终在外部 |
+| `renderValue` | - | 使用 `Select.Value` 的渲染 prop |
+| `labelPlacement` | - | 标签始终在外部 |
 | `isRequired` | `isRequired` | 仍然可用 |
 | `disabledKeys` | `disabledKeys` | 仍然可用 |
 | `isOpen` | `isOpen` | 新增：受控地控制 Popover 的打开状态 |
 | `defaultOpen` | `defaultOpen` | 新增：非受控的默认打开状态 |
 | `onOpenChange` | `onOpenChange` | 新增：打开状态变化时触发 |
 | `selectionMode` | `selectionMode` | 仍然可用 |
-| `disableAnimation` | — | 已移除（动画机制已不同） |
-| `popoverProps`、`listboxProps`、`scrollShadowProps` | — | 直接在 `Select.Popover`、`ListBox` 等组件上传入 prop |
+| `disableAnimation` | - | 已移除（动画机制已不同） |
+| `popoverProps`、`listboxProps`、`scrollShadowProps` | - | 直接在 `Select.Popover`、`ListBox` 等组件上传入 prop |
 
 ## 迁移示例
 
@@ -513,7 +513,7 @@ Select (Root)
 
 ### 清除按钮
 
-`isClearable` prop 已移除。请在 `Select.Trigger` 内使用 `Select.ClearButton`。不要在触发器内嵌套 `<button>` — `Select.Trigger` 本身已经是 button。
+`isClearable` prop 已移除。请在 `Select.Trigger` 内使用 `Select.ClearButton`。不要在触发器内嵌套 `<button>`：`Select.Trigger` 本身已经是 button。
 
 清除控件面向指针操作；触发器同时支持按 `Backspace` 或 `Delete` 清除，以便键盘与屏幕阅读器用户使用。
 

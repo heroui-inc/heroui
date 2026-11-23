@@ -6,12 +6,12 @@ icon: rocket
 
 Choose the path that fits your project:
 
-- **Option 1** — Scaffold a new, preconfigured project with our CLI. Zero setup.
-- **Option 2** — Add HeroUI Native to an existing React Native or Expo project.
+- **Option 1**: Scaffold a new, preconfigured project with our CLI. Zero setup.
+- **Option 2**: Add HeroUI Native to an existing React Native or Expo project.
 
 ## Option 1: Create a New Project
 
-The fastest way to start. The CLI scaffolds an Expo project with HeroUI Native, all required peer dependencies, Uniwind / Tailwind CSS, global styles, and the `HeroUINativeProvider` already wired up — so you can jump straight to building.
+The fastest way to start. The CLI scaffolds an Expo project with HeroUI Native, all required peer dependencies, Uniwind / Tailwind CSS, global styles, and the `HeroUINativeProvider` already wired up - so you can jump straight to building.
 
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
   <Tab value="npm">
@@ -56,24 +56,24 @@ If you already have a React Native or Expo app, follow these steps to install an
 <CopyPrompt
   prompt={`Set up HeroUI Native in this React Native project.
 
-Use the HeroUI Native MCP server (@heroui/native-mcp) as the single source of truth for installation steps, peer dependencies, and component APIs. Start by retrieving the latest quick-start / installation guide from the MCP and follow it precisely — do not rely on memory for versions, package names, or setup steps.
+Use the HeroUI Native MCP server (@heroui/native-mcp) as the single source of truth for installation steps, peer dependencies, and component APIs. Start by retrieving the latest quick-start / installation guide from the MCP and follow it precisely: do not rely on memory for versions, package names, or setup steps.
 
 Before making any changes:
 
-1. Analyze the project. Detect the package manager (npm / pnpm / yarn / bun), framework (Expo or bare React Native), TypeScript usage, and the location of node_modules. This matters for global.css — the @source path must be written relative to global.css itself and must resolve to node_modules/heroui-native/lib.
+1. Analyze the project. Detect the package manager (npm / pnpm / yarn / bun), framework (Expo or bare React Native), TypeScript usage, and the location of node_modules. This matters for global.css: the @source path must be written relative to global.css itself and must resolve to node_modules/heroui-native/lib.
 2. Read package.json and only install what is missing. Pin to the exact versions listed in the MCP quick-start to avoid compatibility issues.
-3. Inspect the app entry (App.tsx, app/_layout.tsx, index.tsx, etc.) and check whether GestureHandlerRootView already wraps the app. If it does, reuse it — do not nest a second GestureHandlerRootView.
+3. Inspect the app entry (App.tsx, app/_layout.tsx, index.tsx, etc.) and check whether GestureHandlerRootView already wraps the app. If it does, reuse it: do not nest a second GestureHandlerRootView.
 
 Then apply the setup:
 
 - Install heroui-native plus any missing mandatory+optional peer dependencies.
 - Set up Uniwind + Tailwind CSS (follow the Uniwind quickstart) and add the HeroUI Native imports plus the correct @source line to global.css.
-- Make sure GestureHandlerRootView wraps the entire app — it must be the outermost wrapper with style { flex: 1 }.
+- Make sure GestureHandlerRootView wraps the entire app - it must be the outermost wrapper with style { flex: 1 }.
 - Add HeroUINativeProvider as a direct child of GestureHandlerRootView, wrapping the rest of the app.
 
 When done, summarize the changes you made and tell me how to run the app on iOS / Android.`}
 >
-  **Prefer to let your AI assistant do it?** Install the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server) in your editor, then paste the prompt into your AI assistant — it will analyze your project and handle the entire setup for you.
+  **Prefer to let your AI assistant do it?** Install the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server) in your editor, then paste the prompt into your AI assistant: it will analyze your project and handle the entire setup for you.
 </CopyPrompt>
 
 ### 1. Install HeroUI Native
@@ -161,7 +161,7 @@ Inside your `global.css` file add the following imports:
  *   - If global.css is in app/: ../node_modules/heroui-native/lib
  *   - If global.css is in src/styles/: ../../node_modules/heroui-native/lib
  */
-/* Not required starting from heroui-native 1.0.8 — the library registers its own source */
+/* Not required starting from heroui-native 1.0.8: the library registers its own source */
 @source './node_modules/heroui-native/lib';
 ```
 
@@ -229,7 +229,7 @@ Granular imports are ideal when you only need a few components, as they help kee
   **Important**: To keep the bundle size under control, you must follow the pattern with granular imports consistently. Even one general import from `heroui-native` will break this optimization strategy.
 </Callout>
 
-> **Tip**: For even more control over your bundle, consider using [`HeroUINativeProviderRaw`](/docs/native/getting-started/provider#raw-provider) — a lightweight provider that excludes `ToastProvider` and `PortalHost`.
+> **Tip**: For even more control over your bundle, consider using [`HeroUINativeProviderRaw`](/docs/native/getting-started/provider#raw-provider) - a lightweight provider that excludes `ToastProvider` and `PortalHost`.
 
 ## What's Next?
 

@@ -22,7 +22,7 @@ icon: layers
 </Tabs>
 
 <Callout>
-  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器 —— 直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t app -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
+  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器，直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t app -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
 </Callout>
 
 ### 2. 使用你的第一个 HeroUI 组件
@@ -122,7 +122,7 @@ npx heroui-cli@latest init -t vite
 ```
 
 <Callout>
-  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器 —— 直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t vite -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
+  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器，直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t vite -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
 </Callout>
 
 ### 2. 使用你的第一个 HeroUI 组件
@@ -156,7 +156,7 @@ npx heroui-cli@latest init -t react-router
 ```
 
 <Callout>
-  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器 —— 直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t react-router -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
+  `-t` 会跳过模板选择步骤，但仍会提示你输入项目名称并选择包管理器，直接传入这两项即可跳过所有提示：`npx heroui-cli@latest init my-app -t react-router -p pnpm`。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
 </Callout>
 
 ### 2. 使用你的第一个 HeroUI 组件
@@ -181,7 +181,7 @@ export default function Index() {
 
 ## 其他框架
 
-`@heroui/react` 的交互行为基于 React Aria 构建，因此必须在 React 中使用。但设计系统本身位于 `@heroui/styles` —— 这是一个不依赖 React 的包，提供 HeroUI 的 BEM 类名和与框架无关的变体函数。你可以在 Vue、Svelte、Angular 或纯 HTML 中使用它。
+`@heroui/react` 的交互行为基于 React Aria 构建，因此必须在 React 中使用。但设计系统本身位于 `@heroui/styles`：这是一个不依赖 React 的包，提供 HeroUI 的 BEM 类名和与框架无关的变体函数。你可以在 Vue、Svelte、Angular 或纯 HTML 中使用它。
 
 <Callout type="warning">
   这种方式只提供 HeroUI 的视觉样式，不包含交互行为。键盘导航、焦点管理和 ARIA 属性均由 `@heroui/react` 中的 React Aria 提供，因此在你自己的组件中需要自行实现。
@@ -339,7 +339,7 @@ HeroUI 的 CSS 同时匹配原生伪类和 `data-*` 属性，因此语义化的 
 | `data-slot="..."` | 标记复合组件的子部件 |
 
 <Callout>
-  button、chip、card、skeleton 等无状态组件可以直接以标记形式使用。而浮层和集合类组件（select、menu、popover、date picker）依赖你自行管理的状态 —— 建议这类组件继续使用 React，或查阅对应组件 CSS 文件中的 `data-*` 选择器以了解所需的属性。
+  button、chip、card、skeleton 等无状态组件可以直接以标记形式使用。而浮层和集合类组件（select、menu、popover、date picker）依赖你自行管理的状态：建议这类组件继续使用 React，或查阅对应组件 CSS 文件中的 `data-*` 选择器以了解所需的属性。
 </Callout>
 
 ### 5. 主题
@@ -364,7 +364,7 @@ HeroUI 的 CSS 同时匹配原生伪类和 `data-*` 属性，因此语义化的 
 
 ## 下一步
 
-- [快速入门](/docs/react/getting-started/quick-start) — 最快上手的方式
-- [主题](/docs/react/getting-started/theming) — 自定义颜色和设计令牌
-- [组合](/docs/react/getting-started/composition) — 变体函数与多态样式
-- [组件](/docs/react/components) — 探索所有可用的组件
+- [快速入门](/docs/react/getting-started/quick-start)：最快上手的方式
+- [主题](/docs/react/getting-started/theming)：自定义颜色和设计令牌
+- [组合](/docs/react/getting-started/composition)：变体函数与多态样式
+- [组件](/docs/react/components)：探索所有可用的组件

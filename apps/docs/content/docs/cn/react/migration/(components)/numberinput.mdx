@@ -55,20 +55,20 @@ export default function App() {
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
 | `onValueChange` | `onChange` | 事件处理函数已重命名 |
-| `label` | — | 改用 `Label` 组件 |
-| `description` | — | 改用 `Description` 组件 |
-| `errorMessage` | — | 改用 `FieldError` 组件 |
+| `label` | - | 改用 `Label` 组件 |
+| `description` | - | 改用 `Description` 组件 |
+| `errorMessage` | - | 改用 `FieldError` 组件 |
 | `variant` | `variant`（在 NumberField 上） | 简化为仅 `primary` \| `secondary` |
-| `color` | — | 已移除（请改用 Tailwind CSS） |
-| `size` | — | 已移除（请改用 Tailwind CSS） |
-| `radius` | — | 已移除（请改用 Tailwind CSS） |
-| `startContent` | — | 手动将内容放入 Group 中 |
-| `endContent` | — | 手动将内容放入 Group 中 |
-| `labelPlacement` | — | 通过布局类自行处理 |
-| `hideStepper` | — | 省略 `NumberField.IncrementButton` 与 `NumberField.DecrementButton` |
-| `isClearable` | — | 请手动实现清除功能 |
-| `classNames` | — | 改在各子组件上使用 `className` prop |
-| `isWheelDisabled` | — | 已移除 |
+| `color` | - | 已移除（请改用 Tailwind CSS） |
+| `size` | - | 已移除（请改用 Tailwind CSS） |
+| `radius` | - | 已移除（请改用 Tailwind CSS） |
+| `startContent` | - | 手动将内容放入 Group 中 |
+| `endContent` | - | 手动将内容放入 Group 中 |
+| `labelPlacement` | - | 通过布局类自行处理 |
+| `hideStepper` | - | 省略 `NumberField.IncrementButton` 与 `NumberField.DecrementButton` |
+| `isClearable` | - | 请手动实现清除功能 |
+| `classNames` | - | 改在各子组件上使用 `className` prop |
+| `isWheelDisabled` | - | 已移除 |
 
 ## 迁移示例
 
@@ -265,8 +265,8 @@ NumberField (Root)
 3. **标签 / 描述 / 错误**：改用独立组件（`Label`、`Description`、`FieldError`）
 4. **步进按钮**：必须显式包含 `NumberField.IncrementButton` 与 `NumberField.DecrementButton`
 5. **事件处理函数**：`onValueChange` → `onChange`
-6. **简化变体**：v3 仅支持 `variant="primary"` 与 `variant="secondary"`；`color`、`size`、`radius` 已移除——请改用 Tailwind CSS
-7. **移除 content prop**：`startContent`、`endContent` —— 请手动放置
-8. **移除清除按钮**：`isClearable` 已移除——请自行实现
-9. **步进控件**：`hideStepper` 已移除——通过省略相应按钮实现
-10. **移除 labelPlacement**：`labelPlacement` 已移除——请通过布局自行实现
+6. **简化变体**：v3 仅支持 `variant="primary"` 与 `variant="secondary"`；`color`、`size`、`radius` 已移除，请改用 Tailwind CSS
+7. **移除 content prop**：`startContent`、`endContent`，请手动放置
+8. **移除清除按钮**：`isClearable` 已移除，请自行实现
+9. **步进控件**：`hideStepper` 已移除，通过省略相应按钮实现
+10. **移除 labelPlacement**：`labelPlacement` 已移除，请通过布局自行实现

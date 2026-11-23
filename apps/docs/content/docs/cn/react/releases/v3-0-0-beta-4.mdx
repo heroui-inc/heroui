@@ -57,7 +57,7 @@ github:
 
 ### 主题构建器
 
-我们很高兴推出 **[主题构建器](/themes)** —— 用于创建与定制 HeroUI 主题的强大可视化工具。可在实时预览中构建你专属的主题，并导出可直接使用的 CSS。
+我们很高兴推出 **[主题构建器](/themes)**：用于创建与定制 HeroUI 主题的强大可视化工具。可在实时预览中构建你专属的主题，并导出可直接使用的 CSS。
 
 **主要特性：**
 - **可视化颜色编辑**：通过 OKLCH 颜色选择器以及直观的亮度、色度、色相滑块来调整颜色
@@ -187,12 +187,12 @@ github:
 [Link](/docs/components/link) 组件现在使用 Tailwind CSS 类来设置文本装饰，而不再依赖内置变体。这样既更灵活，也更贴合 Tailwind 的使用习惯。
 
 **可用的 Tailwind 工具类：**
-- `underline` —— 始终显示下划线
-- `no-underline` —— 移除下划线
-- `hover:underline` —— 仅在悬停时显示下划线
-- `decoration-primary`、`decoration-secondary` 等 —— 设置下划线颜色
-- `decoration-1`、`decoration-2`、`decoration-4` —— 控制下划线粗细
-- `underline-offset-1`、`underline-offset-2` 等 —— 调整下划线偏移
+- `underline`：始终显示下划线
+- `no-underline`：移除下划线
+- `hover:underline`，仅在悬停时显示下划线
+- `decoration-primary`、`decoration-secondary` 等：设置下划线颜色
+- `decoration-1`、`decoration-2`、`decoration-4`：控制下划线粗细
+- `underline-offset-1`、`underline-offset-2` 等：调整下划线偏移
 
 <ComponentPreview
   name="link-underline-and-offset"
@@ -200,7 +200,7 @@ github:
 
 ## 破坏性变更
 
-### Link 组件 —— 移除下划线相关变体
+### Link 组件：移除下划线相关变体
 
 Link 组件内置的 `underline` 与 `underlineOffset` prop 已被移除。请改用 Tailwind CSS 类来控制文本装饰。
 
@@ -219,15 +219,15 @@ Link 组件内置的 `underline` 与 `underlineOffset` prop 已被移除。请�
 ```
 
 **可用的 Tailwind 类：**
-- `underline`、`no-underline`、`hover:underline` —— 装饰线
-- `decoration-primary`、`decoration-muted` 等 —— 装饰线颜色
-- `decoration-solid`、`decoration-dashed`、`decoration-dotted` —— 装饰线样式
-- `decoration-1`、`decoration-2`、`decoration-4` —— 装饰线粗细
-- `underline-offset-1`、`underline-offset-2`、`underline-offset-4` —— 下划线偏移
+- `underline`、`no-underline`、`hover:underline`，装饰线
+- `decoration-primary`、`decoration-muted` 等：装饰线颜色
+- `decoration-solid`、`decoration-dashed`、`decoration-dotted`：装饰线样式
+- `decoration-1`、`decoration-2`、`decoration-4`：装饰线粗细
+- `underline-offset-1`、`underline-offset-2`、`underline-offset-4`：下划线偏移
 
 详见 [Link 文档](/docs/components/link)。
 
-### 表单组件 —— 移除 `isInSurface` prop
+### 表单组件：移除 `isInSurface` prop
 
 `isInSurface` prop 以及自动 surface 检测已从基于表单的组件中移除。当你将表单组件放置在 Surface、Card 或其他基于 Surface 的容器中时，请改用 `variant="secondary"`。
 
@@ -285,20 +285,20 @@ Link 组件内置的 `underline` 与 `underlineOffset` prop 已被移除。请�
 HeroUI 现在直接从 `react-aria-components` 重新导出了一系列基元与工具，方便你访问。这些导出对于 [React Aria 框架配置](https://react-aria.adobe.com/frameworks) 尤其有用。
 
 **Provider：**
-- `RouterProvider` —— 配置 React Aria 的 Link 使用客户端路由器
-- `I18nProvider` —— 设置 React Aria Components 使用的 locale
+- `RouterProvider`：配置 React Aria 的 Link 使用客户端路由器
+- `I18nProvider`：设置 React Aria Components 使用的 locale
 
 **Hook 与工具：**
-- `isRTL` —— 检查某个 locale 是否为从右到左
-- `useLocale` —— 访问当前 locale 与方向
-- `useFilter` —— 对集合进行过滤与排序
+- `isRTL`：检查某个 locale 是否为从右到左
+- `useLocale`：访问当前 locale 与方向
+- `useFilter`：对集合进行过滤与排序
 
 **组件：**
-- `Collection` —— 用于管理列表的集合组件
-- `ListBoxLoadMoreItem` —— 用于加载更多条目的 ListBox 项
+- `Collection`：用于管理列表的集合组件
+- `ListBoxLoadMoreItem`：用于加载更多条目的 ListBox 项
 
 **国际化工具：**
-- `getLocalizationScript` —— 获取用于服务端渲染的本地化脚本（来自 `react-aria-components/i18n`）
+- `getLocalizationScript`：获取用于服务端渲染的本地化脚本（来自 `react-aria-components/i18n`）
 
 以上这些都可以直接从 `@heroui/react` 引入：
 

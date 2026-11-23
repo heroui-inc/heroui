@@ -68,7 +68,7 @@ export default function App() {
 | `DropdownMenu`    | `Dropdown.Menu`      | 需包裹在 `Dropdown.Popover` 内          |
 | `DropdownItem`    | `Dropdown.Item`      | 使用 `id` 与 `textValue`；列表项保留 `key` |
 | `DropdownSection` | `Dropdown.Section`   | 功能相同                                  |
-| —                 | `Dropdown.Popover`   | 新增包裹组件（必填）                      |
+| -                 | `Dropdown.Popover`   | 新增包裹组件（必填）                      |
 
 ### 3. 菜单项标识
 
@@ -79,16 +79,16 @@ export default function App() {
 
 | v2 prop                              | v3 位置           | 说明                                                |
 | ------------------------------------ | ----------------- | --------------------------------------------------- |
-| `variant`、`color`（在 `DropdownMenu` 上） | —                 | 已移除（菜单不再有 variant/color）                  |
-| `classNames`、`itemClasses`（在 `DropdownMenu` 上） | —                 | 在 `Menu` 与菜单项上使用 `className`                |
+| `variant`、`color`（在 `DropdownMenu` 上） | -                 | 已移除（菜单不再有 variant/color）                  |
+| `classNames`、`itemClasses`（在 `DropdownMenu` 上） | -                 | 在 `Menu` 与菜单项上使用 `className`                |
 | `color`（在 `DropdownItem` 上）      | `Dropdown.Item`   | 使用 `variant="danger"` 表示危险操作                |
-| `title`                              | —                 | 使用 `Label` 子组件                                 |
-| `description`                      | —                 | 使用 `Description` 子组件                           |
-| `shortcut`                         | —                 | 使用 `Kbd` 子组件                                   |
-| `startContent`、`endContent`         | —                 | 将图标或组件作为 children 放置                      |
-| `selectedIcon`                     | —                 | 使用 `Dropdown.ItemIndicator`                       |
-| `showDivider`                      | —                 | 在菜单项之间使用 `Separator`                        |
-| `classNames`（在 `DropdownItem` 上） | —                 | 在菜单项上使用 `className`                          |
+| `title`                              | -                 | 使用 `Label` 子组件                                 |
+| `description`                      | -                 | 使用 `Description` 子组件                           |
+| `shortcut`                         | -                 | 使用 `Kbd` 子组件                                   |
+| `startContent`、`endContent`         | -                 | 将图标或组件作为 children 放置                      |
+| `selectedIcon`                     | -                 | 使用 `Dropdown.ItemIndicator`                       |
+| `showDivider`                      | -                 | 在菜单项之间使用 `Separator`                        |
+| `classNames`（在 `DropdownItem` 上） | -                 | 在菜单项上使用 `className`                          |
 | `isSelected`                       | `Dropdown.Menu`   | 在 `Menu` 上使用 `selectedKeys`                     |
 | `isDisabled`                       | `Dropdown.Menu`   | 在 `Menu` 上使用 `disabledKeys`                     |
 | `trigger`（在 `Dropdown` 上）      | `Dropdown`        | 仍支持：`"press"`（默认）或 `"longPress"`           |
@@ -426,7 +426,7 @@ export default function App() {
 v3 的 Dropdown 结构如下：
 
 ```
-Dropdown (Root) — accepts trigger="press" | "longPress"
+Dropdown (Root): accepts trigger="press" | "longPress"
   ├── Dropdown.Trigger (optional, defaults to first child)
   ├── Dropdown.Popover (required wrapper)
   │   └── Dropdown.Menu

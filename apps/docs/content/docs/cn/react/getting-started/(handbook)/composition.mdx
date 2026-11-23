@@ -106,10 +106,10 @@ import Link from 'next/link';
 ```
 
 **可用的按钮类名：**
-- `.button` — 基础按钮样式
-- `.button--primary`、`.button--secondary`、`.button--tertiary`、`.button--danger`、`.button--ghost` — 变体
-- `.button--sm`、`.button--md`、`.button--lg` — 尺寸
-- `.button--icon-only` — 仅图标按钮
+- `.button`：基础按钮样式
+- `.button--primary`、`.button--secondary`、`.button--tertiary`、`.button--danger`、`.button--ghost`：变体
+- `.button--sm`、`.button--md`、`.button--lg`：尺寸
+- `.button--icon-only`：仅图标按钮
 
 这种方法之所以可行，是因为 HeroUI 使用了 [BEM](https://bem.info/en/methodology/) 类，可以应用到任何元素上。当你不需要组件的交互功能（例如 `onPress` 事件处理器）、只想要视觉样式时，这种方式非常合适。
 
@@ -150,9 +150,9 @@ import Link from 'next/link';
 
 ## 复合组件
 
-HeroUI 组件以复合组件的方式构建 —— 它们会导出多个协同工作的子部件。你可以通过三种灵活的方式来使用它们：
+HeroUI 组件以复合组件的方式构建，它们会导出多个协同工作的子部件。你可以通过三种灵活的方式来使用它们：
 
-**选项 1：复合模式（推荐）** — 直接使用主组件，无需 `.Root` 后缀：
+**选项 1：复合模式（推荐）**，直接使用主组件，无需 `.Root` 后缀：
 
 ```tsx
 import { Alert } from '@heroui/react';
@@ -167,7 +167,7 @@ import { Alert } from '@heroui/react';
 </Alert>
 ```
 
-**选项 2：使用 .Root 的复合模式** — 如果你喜欢显式命名，可以添加 `.Root` 后缀：
+**选项 2：使用 .Root 的复合模式**，如果你喜欢显式命名，可以添加 `.Root` 后缀：
 
 ```tsx
 import { Alert } from '@heroui/react';
@@ -182,7 +182,7 @@ import { Alert } from '@heroui/react';
 </Alert.Root>
 ```
 
-**选项 3：命名导出** — 单独导入每个部分：
+**选项 3：命名导出**，单独导入每个部分：
 
 ```tsx
 import {
@@ -219,7 +219,7 @@ import { Alert, AlertTitle, AlertDescription } from '@heroui/react';
 </Alert>
 ```
 
-**简单组件：** 像 `Button` 这样的简单组件以同样的方式工作 —— 无需 `.Root`：
+**简单组件：** 像 `Button` 这样的简单组件以同样的方式工作，无需 `.Root`：
 
 ```tsx
 import { Button } from '@heroui/react';
@@ -344,7 +344,7 @@ export function CustomVariants() {
 
 **类型引用：** 在使用组件类型时，可以使用命名类型导入或对象样式语法。
 
-**推荐 — 命名类型导入：**
+**推荐，命名类型导入：**
 ```tsx
 import type { ButtonRootProps, AvatarRootProps } from "@heroui/react";
 
@@ -352,7 +352,7 @@ type MyButtonProps = ButtonRootProps;
 type MyAvatarProps = AvatarRootProps;
 ```
 
-**替代方案 — 对象样式语法：**
+**替代方案，对象样式语法：**
 ```tsx
 import { Button, Avatar } from "@heroui/react";
 

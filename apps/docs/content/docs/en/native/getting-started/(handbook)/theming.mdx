@@ -338,8 +338,8 @@ All HeroUI Native components automatically use these font variables, ensuring co
 
 Components request weights through the `font-normal`, `font-medium`, `font-semibold` and `font-bold` utilities, which resolve differently depending on whether you define the variables above:
 
-- **Custom fonts defined** — a weight selects the matching family, so `--font-semibold` must point at a face that is already semibold. No numeric `font-weight` is applied, because pairing one with a single-weight face makes iOS pick the heaviest face in the family.
-- **No custom fonts** — the same weight applies a numeric `font-weight` to the system font.
+- **Custom fonts defined**: a weight selects the matching family, so `--font-semibold` must point at a face that is already semibold. No numeric `font-weight` is applied, because pairing one with a single-weight face makes iOS pick the heaviest face in the family.
+- **No custom fonts**: the same weight applies a numeric `font-weight` to the system font.
 
 **Define all four variables if you define any of them.** The two modes are resolved per weight, so a weight with no variable falls back to a numeric weight on the platform font while the others keep your custom family. Besides mixing typefaces, that combination can make iOS render text with the heaviest face of your family, because pairing a numeric weight with a single-weight face is exactly the case iOS resolves incorrectly.
 
@@ -347,9 +347,9 @@ Components request weights through the `font-normal`, `font-medium`, `font-semib
 
 HeroUI defines three types of variables:
 
-1. **Base Variables** — Non-changing values like `--white`, `--black`
-2. **Theme Variables** — Colors that change between light/dark themes
-3. **Calculated Variables** — Automatically generated hover (pressed) states and size variants
+1. **Base Variables**: Non-changing values like `--white`, `--black`
+2. **Theme Variables**: Colors that change between light/dark themes
+3. **Calculated Variables**: Automatically generated hover (pressed) states and size variants
 
 For a complete reference, see: [Colors Documentation](/docs/native/getting-started/colors), [Default Theme Variables](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/variables.css), [Shared Theme Utilities](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/theme.css)
 
@@ -487,7 +487,7 @@ By default, HeroUI Native uses accessible soft foreground colors that mix the se
 @import "heroui-native/styles/vibrant"; /* [!code highlight] */
 ```
 
-This switches all `*-soft-foreground` variables (accent, success, warning, danger) to use 92% of the semantic color with only 8% foreground mixed in — closer to the raw color but with a slight contrast boost. Components such as [Alert](/docs/native/components/alert), [Avatar](/docs/native/components/avatar), [Button](/docs/native/components/button), [Chip](/docs/native/components/chip), and [Toast](/docs/native/components/toast) automatically pick up the new soft foreground colors on their soft variants — no component prop changes are required.
+This switches all `*-soft-foreground` variables (accent, success, warning, danger) to use 92% of the semantic color with only 8% foreground mixed in: closer to the raw color but with a slight contrast boost. Components such as [Alert](/docs/native/components/alert), [Avatar](/docs/native/components/avatar), [Button](/docs/native/components/button), [Chip](/docs/native/components/chip), and [Toast](/docs/native/components/toast) automatically pick up the new soft foreground colors on their soft variants: no component prop changes are required.
 
 | Mode | Accessible (default) | Vibrant |
 |------|----------------------|---------|

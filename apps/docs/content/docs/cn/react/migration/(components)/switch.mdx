@@ -51,19 +51,19 @@ export default function App() {
 | ------- | ------- | ---- |
 | `onValueChange` | `onChange` | 事件处理函数已重命名 |
 | `size` | `size` | 仍在根上（`sm` \| `md` \| `lg`） |
-| `label` | — | 请使用 `Label` 组件 |
-| `color` | — | 已移除（请使用 Tailwind CSS） |
-| `thumbIcon` | — | 请在 `Switch.Thumb` 内使用 `Switch.Icon` |
-| `startContent` | — | 请直接自定义控件 |
-| `endContent` | — | 请直接自定义控件 |
-| `classNames` | — | 请在各子组件上使用 `className` |
-| `disableAnimation` | — | 已移除（动画机制已不同） |
+| `label` | - | 请使用 `Label` 组件 |
+| `color` | - | 已移除（请使用 Tailwind CSS） |
+| `thumbIcon` | - | 请在 `Switch.Thumb` 内使用 `Switch.Icon` |
+| `startContent` | - | 请直接自定义控件 |
+| `endContent` | - | 请直接自定义控件 |
+| `classNames` | - | 请在各子组件上使用 `className` |
+| `disableAnimation` | - | 已移除（动画机制已不同） |
 
 ### 3. 新组件
 
-- `SwitchGroup` — 用于将多个 Switch 成组  
-- `Switch.Content` — 可点击的标签，包裹控件与 `Label`  
-- `Switch.Icon` — 拇指（Thumb）内的图标  
+- `SwitchGroup`：用于将多个 Switch 成组  
+- `Switch.Content`：可点击的标签，包裹控件与 `Label`  
+- `Switch.Icon`：拇指（Thumb）内的图标  
 
 ## 迁移示例
 
@@ -371,9 +371,9 @@ SwitchGroup
 
 1. **组件结构**：必须使用复合组件（`Switch.Content`、`Switch.Control`、`Switch.Thumb`）
 2. **可点击的标签**：用 `Switch.Content` 包裹 `Switch.Control` 与 `Label`；将 `Description` / `FieldError` 作为 `Switch.Content` 的同级元素
-3. **标签**：不再用 children 作为标签 — 请在 `Switch.Content` 内使用 `Label`
+3. **标签**：不再用 children 作为标签，请在 `Switch.Content` 内使用 `Label`
 4. **事件处理函数**：`onValueChange` → `onChange`
-5. **样式相关 prop 已移除**：`color` — 请使用 Tailwind CSS
-6. **图标相关 prop 已移除**：`thumbIcon`、`startContent`、`endContent` — 请用子组件或直接自定义
+5. **样式相关 prop 已移除**：`color`，请使用 Tailwind CSS
+6. **图标相关 prop 已移除**：`thumbIcon`、`startContent`、`endContent`，请用子组件或直接自定义
 7. **`classNames` 已移除**：请在各子组件上使用 `className` prop
 8. **新组件**：`SwitchGroup` 用于成组；`Switch.Content` 作为可点击的标签，包裹控件与 `Label`

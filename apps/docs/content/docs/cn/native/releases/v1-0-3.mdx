@@ -114,7 +114,7 @@ export function Example() {
 
 - `ScrollShadowRoot` 现会读取可滚动子组件上的 `inverted` 属性，沿用既有的 `childHorizontal` 自动检测模式
 - 内部交换驱动各视觉边缘的动画样式，使阴影渲染到正确的一侧
-- 公共 API 无变化——仅当子组件设置 `inverted={true}` 时启用该修复，此前在此情况下渐变会出现在错误的边缘
+- 公共 API 无变化：仅当子组件设置 `inverted={true}` 时启用该修复，此前在此情况下渐变会出现在错误的边缘
 
 此前，包裹反向列表时渐变阴影会渲染在顶部，而可滚动内容位于其下；即便仍有更多内容也不会出现底部阴影。修复后，反向 feed、聊天列表等反向滚动表面上的指示器方向已正确。
 
@@ -131,7 +131,7 @@ export function Example() {
 - 滚动布局使用 `Tabs.ScrollView` 的内容宽度
 - 仅当 `I18nManager.isRTL` 启用时，对指示器的 `translateX` 进行镜像
 
-指示器使用绝对定位 `left` 锚点配合测量得到的 `translateX`。在 RTL 模式下，React Native 会自动翻转绝对锚点，但所测量的 transform 仍需手动镜像——本次修复内部完成了这一处理。固定与滚动两类标签列表均已修复，且公共 API 未变。
+指示器使用绝对定位 `left` 锚点配合测量得到的 `translateX`。在 RTL 模式下，React Native 会自动翻转绝对锚点，但所测量的 transform 仍需手动镜像：本次修复内部完成了这一处理。固定与滚动两类标签列表均已修复，且公共 API 未变。
 
 **相关 PR：** [#396](https://github.com/heroui-inc/heroui-native/pull/396)
 
@@ -166,7 +166,7 @@ import { Avatar } from "heroui-native";
 </Avatar>;
 ```
 
-显式传入 `alt` 的既有代码继续正常工作——该属性仅在缺省时获得一个合理的默认值。`RootProps` 类型现已反映为 `alt?: string`，并通过 JSDoc 标注 `@default 'Avatar'`，组件文档同步更新。
+显式传入 `alt` 的既有代码继续正常工作，该属性仅在缺省时获得一个合理的默认值。`RootProps` 类型现已反映为 `alt?: string`，并通过 JSDoc 标注 `@default 'Avatar'`，组件文档同步更新。
 
 **相关 PR：** [#404](https://github.com/heroui-inc/heroui-native/pull/404)
 
@@ -184,7 +184,7 @@ import { Avatar } from "heroui-native";
 - **Input**：由 `py-3.5` 改为 `min-h-12`，无论内容如何字段都保持稳定高度
 - **Input**：primary 变体的边框现正确使用 `border-field-border` 令牌，而非 `border-field`
 
-Button `sm` 尺寸（+4px）与 Chip `md`/`lg` 内边距上的像素级差异建议进行视觉回归确认。无 API 变更——仅更新了 `button.styles.ts`、`chip.styles.ts`、`input.styles.ts` 中的样式令牌。
+Button `sm` 尺寸（+4px）与 Chip `md`/`lg` 内边距上的像素级差异建议进行视觉回归确认。无 API 变更：仅更新了 `button.styles.ts`、`chip.styles.ts`、`input.styles.ts` 中的样式令牌。
 
 **相关 PR：** [#406](https://github.com/heroui-inc/heroui-native/pull/406)
 
@@ -219,9 +219,9 @@ Button `sm` 尺寸（+4px）与 Chip `md`/`lg` 内边距上的像素级差异建
 
 以下文档页面已随本版本更新：
 
-- [Text](/docs/native/components/text) — 新组件文档，含结构、用法与完整 API 参考
-- [Avatar](/docs/native/components/avatar) — `alt` 属性记为可选，默认值 `'Avatar'`
-- [组件总览](/docs/native/components) — 在既有分类外新增 Typography 分类
+- [Text](/docs/native/components/text)：新组件文档，含结构、用法与完整 API 参考
+- [Avatar](/docs/native/components/avatar)：`alt` 属性记为可选，默认值 `'Avatar'`
+- [组件总览](/docs/native/components)：在既有分类外新增 Typography 分类
 
 ## 链接
 

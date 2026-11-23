@@ -232,16 +232,16 @@ The rendered parts expose `data-slot`: `sheet-overlay`, `sheet-backdrop`, `sheet
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | Compound parts. |
-| `isOpen` | `boolean` | — | Controlled visibility. |
+| `children` | `ReactNode` | - | Compound parts. |
+| `isOpen` | `boolean` | - | Controlled visibility. |
 | `defaultOpen` | `boolean` | `false` | Initial uncontrolled visibility. |
-| `onOpenChange` | `(open: boolean) => void` | — | Called when a visibility change is requested. |
-| `onClose` | `() => void` | — | Called when closing is requested. |
-| `onAnimationEnd` | `(open: boolean) => void` | — | Called after entering or exiting finishes. |
+| `onOpenChange` | `(open: boolean) => void` | - | Called when a visibility change is requested. |
+| `onClose` | `() => void` | - | Called when closing is requested. |
+| `onAnimationEnd` | `(open: boolean) => void` | - | Called after entering or exiting finishes. |
 | `placement` | `"bottom" \| "top" \| "left" \| "right"` | `"bottom"` | Physical screen edge. |
 | `isDismissable` | `boolean` | `true` | Allow outside, Escape, and swipe dismissal. |
 | `isDetached` | `boolean` | `false` | Inset the sheet from the screen edges. |
-| `snapPoints` | `(number \| string)[]` | — | Partial resting positions; full expansion is implicit. |
+| `snapPoints` | `(number \| string)[]` | - | Partial resting positions; full expansion is implicit. |
 
 `Sheet.NestedRoot` requires a parent Sheet. The `isNested` root flag is internal; use `NestedRoot` for nesting.
 
@@ -249,22 +249,22 @@ The rendered parts expose `data-slot`: `sheet-overlay`, `sheet-backdrop`, `sheet
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactElement` | — | One pressable child, such as Button. Place directly inside Sheet. |
+| `children` | `ReactElement` | - | One pressable child, such as Button. Place directly inside Sheet. |
 
 ### Sheet.Close
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactElement` | — | One pressable child; its onPress handler is composed with closing. |
+| `children` | `ReactElement` | - | One pressable child; its onPress handler is composed with closing. |
 
 ### Sheet.Backdrop
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | Content to render. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode` | - | Content to render. |
+| `className` | `string` | - | CSS classes. |
 | `variant` | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | Backdrop appearance. |
-| `isExiting` | `boolean` | — | Retain content after closing until this flag is cleared. |
+| `isExiting` | `boolean` | - | Retain content after closing until this flag is cleared. |
 
 Other props inherit from React Aria SheetOverlay, excluding root-owned state, position, snap points, and `style`. Closing still releases modal focus containment and scroll locking. Clear `isExiting` when retained content is no longer needed.
 
@@ -272,8 +272,8 @@ Other props inherit from React Aria SheetOverlay, excluding root-owned state, po
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode \| ((values: SheetRenderProps) => ReactNode)` | — | Content or a function receiving React Aria sheet state. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode \| ((values: SheetRenderProps) => ReactNode)` | - | Content or a function receiving React Aria sheet state. |
+| `className` | `string` | - | CSS classes. |
 
 Other props inherit from React Aria Sheet. HeroUI manages stacking animation and overscroll padding; `stackAnimation` and `overscrollPadding` cannot be overridden through this component.
 
@@ -281,12 +281,12 @@ Other props inherit from React Aria Sheet. HeroUI manages stacking animation and
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | Content to render. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode` | - | Content to render. |
+| `className` | `string` | - | CSS classes. |
 | `role` | `"dialog" \| "alertdialog"` | `"dialog"` | Accessible dialog role. |
-| `aria-label` | `string` | — | Accessible name when no visible heading is provided. |
-| `aria-labelledby` | `string` | — | ID of the element that labels the dialog. |
-| `aria-describedby` | `string` | — | ID of the element describing the dialog. |
+| `aria-label` | `string` | - | Accessible name when no visible heading is provided. |
+| `aria-labelledby` | `string` | - | ID of the element that labels the dialog. |
+| `aria-describedby` | `string` | - | ID of the element describing the dialog. |
 
 Other props and refs inherit from React Aria SheetContent.
 
@@ -294,8 +294,8 @@ Other props and refs inherit from React Aria SheetContent.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | Header content. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode` | - | Header content. |
+| `className` | `string` | - | CSS classes. |
 
 Supports standard div props, event handlers, and refs.
 
@@ -303,8 +303,8 @@ Supports standard div props, event handlers, and refs.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | Dialog title. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode` | - | Dialog title. |
+| `className` | `string` | - | CSS classes. |
 | `slot` | `string` | `"title"` | Associates the heading with the dialog. |
 
 Other props and refs inherit from React Aria Heading.
@@ -313,8 +313,8 @@ Other props and refs inherit from React Aria Heading.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | Scrollable body content. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode` | - | Scrollable body content. |
+| `className` | `string` | - | CSS classes. |
 
 Supports standard div props, event handlers, and refs.
 
@@ -322,8 +322,8 @@ Supports standard div props, event handlers, and refs.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | Footer actions. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode` | - | Footer actions. |
+| `className` | `string` | - | CSS classes. |
 
 Supports standard div props, event handlers, and refs.
 
@@ -331,8 +331,8 @@ Supports standard div props, event handlers, and refs.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode` | — | Custom grip; renders the default bar when omitted. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode` | - | Custom grip; renders the default bar when omitted. |
+| `className` | `string` | - | CSS classes. |
 
 Supports standard div props, event handlers, and refs.
 
@@ -340,11 +340,11 @@ Supports standard div props, event handlers, and refs.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `children` | `ReactNode \| ((values: ButtonRenderProps) => ReactNode)` | — | Custom content; defaults to the close icon. |
-| `className` | `string` | — | CSS classes. |
+| `children` | `ReactNode \| ((values: ButtonRenderProps) => ReactNode)` | - | Custom content; defaults to the close icon. |
+| `className` | `string` | - | CSS classes. |
 | `isDisabled` | `boolean` | `false` | Disable the close button. |
 | `aria-label` | `string` | `"Close"` | Accessible name; provide localized text when needed. |
-| `onPress` | `(event: PressEvent) => void` | — | Called together with the sheet close action. |
+| `onPress` | `(event: PressEvent) => void` | - | Called together with the sheet close action. |
 
 Other props and refs inherit from CloseButton.
 

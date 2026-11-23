@@ -39,7 +39,7 @@ Update to the latest version:
 </Tabs>
 
 <Callout type="warning">
-  **Peer dependencies changed.** `@internationalized/date@^3.12.4` is now a peer dependency — it was always imported at runtime by [Calendar](/docs/components/calendar), [RangeCalendar](/docs/components/range-calendar), and the date utilities, and only resolved by accident through `react-aria-components`. Install it explicitly if your package manager does not hoist it. This release also requires `react-aria-components@^1.21.1` and `react-aria@^3.52.1`, and no longer requires `@react-aria/i18n`.
+  **Peer dependencies changed.** `@internationalized/date@^3.12.4` is now a peer dependency: it was always imported at runtime by [Calendar](/docs/components/calendar), [RangeCalendar](/docs/components/range-calendar), and the date utilities, and only resolved by accident through `react-aria-components`. Install it explicitly if your package manager does not hoist it. This release also requires `react-aria-components@^1.21.1` and `react-aria@^3.52.1`, and no longer requires `@react-aria/i18n`.
 </Callout>
 
 <Callout type="info">
@@ -50,7 +50,7 @@ Update to the latest version:
 
 ### AvatarGroup
 
-[AvatarGroup](/docs/components/avatar-group) stacks compound [Avatar](/docs/components/avatar) children and passes `size`, `color`, and `variant` down to its direct children, so a group is styled in one place. `max` truncates the visible avatars and counts the rest, `isGrid` swaps the overlap for a wrapping grid, and `overlap` chooses between the default crescent clip (`"clip"`) and a solid outline (`"ring"`). For a known total from the server, render an explicit `AvatarGroup.Count` — it is not truncated by `max` and replaces the v2 `total` prop. The group carries no implicit `role="group"`; add `role` and a label when the stack is meaningful.
+[AvatarGroup](/docs/components/avatar-group) stacks compound [Avatar](/docs/components/avatar) children and passes `size`, `color`, and `variant` down to its direct children, so a group is styled in one place. `max` truncates the visible avatars and counts the rest, `isGrid` swaps the overlap for a wrapping grid, and `overlap` chooses between the default crescent clip (`"clip"`) and a solid outline (`"ring"`). For a known total from the server, render an explicit `AvatarGroup.Count`: it is not truncated by `max` and replaces the v2 `total` prop. The group carries no implicit `role="group"`; add `role` and a label when the stack is meaningful.
 
 - **AvatarGroup**: Add the `AvatarGroup` component with `max`, `isGrid`, `overlap`, context-driven `size` / `color` / `variant`, and an `AvatarGroup.Count` overflow indicator ([#6861](https://github.com/heroui-inc/heroui/pull/6861)).
 
@@ -71,13 +71,13 @@ Update to the latest version:
 
 ## Styles
 
-- **Dead classes removed**: Drop CSS classes that were never applied by any component — the unused `separator__*` element classes, `.checkbox--disabled`, `.radio--disabled`, and `.switch__label` ([Switch](/docs/components/switch) composes the shared [Label](/docs/components/label)). If you targeted any of these in a custom stylesheet, they never had an effect ([#6853](https://github.com/heroui-inc/heroui/pull/6853)).
+- **Dead classes removed**: Drop CSS classes that were never applied by any component - the unused `separator__*` element classes, `.checkbox--disabled`, `.radio--disabled`, and `.switch__label` ([Switch](/docs/components/switch) composes the shared [Label](/docs/components/label)). If you targeted any of these in a custom stylesheet, they never had an effect ([#6853](https://github.com/heroui-inc/heroui/pull/6853)).
 - **Fieldset**: Rename `fieldset__field_group` to `fieldset__field-group` for BEM consistency. Update any CSS override that targets the old class name ([#6853](https://github.com/heroui-inc/heroui/pull/6853)).
 
 ## Dependencies
 
 - **React Aria**: Upgrade to `react-aria-components@1.21.1` and `react-aria@3.52.1` ([#6848](https://github.com/heroui-inc/heroui/pull/6848)).
-- **Runtime dependencies**: Bump the packages that ship with `@heroui/react` — `@radix-ui/react-avatar` to `1.2.6`, which backs [Avatar](/docs/components/avatar) and [AvatarGroup](/docs/components/avatar-group), and `input-otp` to `1.5.0`, which backs [InputOTP](/docs/components/input-otp) ([#6866](https://github.com/heroui-inc/heroui/pull/6866)).
+- **Runtime dependencies**: Bump the packages that ship with `@heroui/react` - `@radix-ui/react-avatar` to `1.2.6`, which backs [Avatar](/docs/components/avatar) and [AvatarGroup](/docs/components/avatar-group), and `input-otp` to `1.5.0`, which backs [InputOTP](/docs/components/input-otp) ([#6866](https://github.com/heroui-inc/heroui/pull/6866)).
 - **Declarations**: Promote `@internationalized/date` to `peerDependencies`, drop the unused `tailwind-merge` dependency (it already ships transitively through `tailwind-variants`, and pinning it directly caused duplicate copies), and drop `@react-aria/i18n`, which nothing in the library referenced but every consumer had to install ([#6847](https://github.com/heroui-inc/heroui/pull/6847)).
 - **Security**: Pin the transitive `js-yaml` and `svgo` used by the build tooling to patched versions ([#6844](https://github.com/heroui-inc/heroui/pull/6844)).
 

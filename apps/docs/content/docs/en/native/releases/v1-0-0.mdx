@@ -15,7 +15,7 @@ github:
   muted
 />
 
-HeroUI Native reaches v1.0.0 — the first stable release, marking the library's graduation from beta and release candidate stages into a production-ready foundation for React Native apps. Alongside this milestone, the release includes the new LinkButton component, sub-menu conflict resolution, an optional `@gorhom/bottom-sheet` peer dependency, and improved type safety for `useThemeColor`.
+HeroUI Native reaches v1.0.0: the first stable release, marking the library's graduation from beta and release candidate stages into a production-ready foundation for React Native apps. Alongside this milestone, the release includes the new LinkButton component, sub-menu conflict resolution, an optional `@gorhom/bottom-sheet` peer dependency, and improved type safety for `useThemeColor`.
 
 ## Installation
 
@@ -68,7 +68,7 @@ The new [LinkButton](/docs/native/components/button) compound component renders 
 **Features:**
 
 - Compound sub-component: `LinkButton.Label` for styled text content
-- Ghost variant enforced internally — no `variant` prop exposed
+- Ghost variant enforced internally: no `variant` prop exposed
 - Highlight feedback disabled by default via `resolveAnimationObject`
 - `h-auto p-0` base class removes default button height and padding for inline use
 - Consumer animation config merged while preserving `highlight: false`
@@ -97,7 +97,7 @@ The [Menu](/docs/native/components/menu) sub-menu system has been refactored to 
 
 **Improvements:**
 
-- `openSubMenuId` replaces the boolean flag — only one sub-menu can be active at a time; opening a new one automatically closes the previous
+- `openSubMenuId` replaces the boolean flag: only one sub-menu can be active at a time; opening a new one automatically closes the previous
 - A `Pressable` overlay renders over the menu content when a sub-menu is open, allowing tap-to-dismiss
 - Non-active sub-menu triggers receive `opacity-40` and `pointer-events-none` via the new `isOtherSubMenuOpen` style variant
 - Open sub-menu content uses `z-50`; closed uses `z-40` to avoid stacking issues
@@ -122,10 +122,10 @@ The `useThemeColor` hook now returns a `ThemeColorValue` branded type for single
 ```tsx
 import { useThemeColor } from "heroui-native";
 
-// Correct — direct assignment
+// Correct: direct assignment
 const mutedColor = useThemeColor("muted");
 
-// Incorrect — IDE immediately surfaces `never` type
+// Incorrect: IDE immediately surfaces `never` type
 const [color] = useThemeColor("muted"); // color: never
 ```
 
