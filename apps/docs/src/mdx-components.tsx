@@ -2,13 +2,7 @@ import type {Callout as FDCallout} from "fumadocs-ui/components/callout";
 import type {MDXComponents} from "mdx/types";
 import type {ReactNode} from "react";
 
-import {
-  Bulb,
-  CircleCheckFill,
-  CircleInfoFill,
-  CircleXmarkFill,
-  TriangleExclamationFill,
-} from "@gravity-ui/icons";
+import {Bulb, CircleCheckFill, CircleXmarkFill, TriangleExclamationFill} from "@gravity-ui/icons";
 import {Card, Cards} from "fumadocs-ui/components/card";
 import {Pre} from "fumadocs-ui/components/codeblock";
 import * as TabsComponents from "fumadocs-ui/components/tabs";
@@ -109,15 +103,16 @@ function ComponentPreviewWithSuspense(props: React.ComponentProps<typeof Compone
 
 type CalloutKind = "error" | "idea" | "info" | "success" | "warning";
 
+/** Info notes are plain text; the other kinds keep a colored icon so the warning reads at a glance. */
 const CALLOUT_ICONS: Record<CalloutKind, ReactNode> = {
   error: <CircleXmarkFill className="text-danger" />,
   idea: <Bulb className="text-warning" />,
-  info: <CircleInfoFill className="text-accent" />,
+  info: null,
   success: <CircleCheckFill className="text-success" />,
   warning: <TriangleExclamationFill className="text-warning" />,
 };
 
-/** Flat note: a soft fill and a colored icon; no border, bar or shadow. */
+/** Flat note: a soft fill, body-colored text; no border, bar or shadow. */
 function Callout({
   children,
   className,
@@ -127,22 +122,25 @@ function Callout({
   ...props
 }: React.ComponentProps<typeof FDCallout>) {
   const kind: CalloutKind = type === "warn" ? "warning" : type;
+  const resolvedIcon = icon ?? CALLOUT_ICONS[kind];
 
   return (
     <div
       data-callout={kind}
       className={cn(
-        "my-5 flex gap-3 rounded-2xl bg-(--docs-card) px-4 py-3 text-sm leading-6",
+        "my-5 flex gap-3 rounded-2xl bg-(--docs-card) px-4 py-3 text-sm leading-6 text-(--docs-fg)",
         className,
       )}
       {...props}
     >
-      <span aria-hidden className="flex h-6 shrink-0 items-center [&>svg]:size-4">
-        {icon ?? CALLOUT_ICONS[kind]}
-      </span>
+      {resolvedIcon ? (
+        <span aria-hidden className="flex h-6 shrink-0 items-center [&>svg]:size-4">
+          {resolvedIcon}
+        </span>
+      ) : null}
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         {title ? <p className="my-0! font-medium text-foreground">{title}</p> : null}
-        <div className="prose-no-margin text-(--docs-fg-muted) empty:hidden">{children}</div>
+        <div className="prose-no-margin empty:hidden">{children}</div>
       </div>
     </div>
   );
