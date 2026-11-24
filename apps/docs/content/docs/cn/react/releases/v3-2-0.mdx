@@ -12,7 +12,7 @@ github:
 Calendar 新增周视图与日视图、重做的年份选择器，以及基于 React Aria 1.18 的范围日历演示。[Autocomplete](/docs/components/autocomplete) 新增用于大型选项列表的 Virtualizer 示例。[Tooltip](/docs/components/tooltip) 新增用于全局显示与隐藏延迟的主题变量。Radio、Checkbox、Switch 迁移到 React Aria 的 `*Field` + `*Button` 组合方式。本次发布同时纳入了虚拟化列表、分组字段自动填充、Toast 与 Fieldset 行为，以及滚动与 RTL 样式方面的补丁修复。
 
 <Callout type="warning">
-  **破坏性变更**：`Radio`、`Checkbox`、`Switch` 改为显式的 `*.Content` 组合 —— `*.Control` 嵌套进 `*.Content`，标签变为 `*.Content` 内的纯文本（不嵌套 `<Label>`），`Description`/`FieldError` 变为 `*.Content` 的兄弟节点。详见[破坏性变更](#breaking-changes)。
+  **破坏性变更**：`Radio`、`Checkbox`、`Switch` 改为显式的 `*.Content` 组合，`*.Control` 嵌套进 `*.Content`，标签变为 `*.Content` 内的纯文本（不嵌套 `<Label>`），`Description`/`FieldError` 变为 `*.Content` 的兄弟节点。详见[破坏性变更](#breaking-changes)。
 </Callout>
 
 ## 安装
@@ -104,8 +104,8 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 
 [Tooltip](/docs/components/tooltip) 现在会从主题 CSS 变量读取默认的显示与隐藏延迟 ([#6617](https://github.com/heroui-inc/heroui/pull/6617))：
 
-- `--tooltip-delay` — 显示 Tooltip 前的延迟（默认：`1500ms`）
-- `--tooltip-close-delay` — 隐藏 Tooltip 前的延迟（默认：`500ms`）
+- `--tooltip-delay`：显示 Tooltip 前的延迟（默认：`1500ms`）
+- `--tooltip-close-delay`：隐藏 Tooltip 前的延迟（默认：`500ms`）
 
 全局覆盖示例：
 
@@ -136,9 +136,9 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 - **Table RTL**：列分隔线与拖拽手柄在 RTL 下使用逻辑属性 `end-0` 定位 ([#6606](https://github.com/heroui-inc/heroui/pull/6606))。
 - **Link**：移除硬编码的 `text-sm`，让链接从父元素继承字号；`.link__icon` 改为相对单位 `size-[0.75em]`，随文本大小缩放，而不再使用固定的 `size-2` ([#6621](https://github.com/heroui-inc/heroui/pull/6621))。
 - **DatePicker / DateRangePicker**：日历 popover 由 `max-w-(--trigger-width)` 改为 `min-w-(--trigger-width)`，确保 popover 至少与触发器一样宽，避免被水平裁剪 ([#6622](https://github.com/heroui-inc/heroui/pull/6622))。
-- **Table**：当 Table 被 React Aria 的 `<Virtualizer>` 包裹时，secondary 表头的边框与圆角能够正确渲染 —— 列选择器不再把每个虚拟化列都同时视为 first 和 last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624))。
+- **Table**：当 Table 被 React Aria 的 `<Virtualizer>` 包裹时，secondary 表头的边框与圆角能够正确渲染，列选择器不再把每个虚拟化列都同时视为 first 和 last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624))。
 - **Autocomplete**：Popover 限制为触发器宽度，listbox 高度上限为 `320px` 并支持内部滚动，避免虚拟化列表溢出 popover ([#6642](https://github.com/heroui-inc/heroui/pull/6642))。
-- **ListBox**：将 `flex flex-col gap` 改为普通块级流 + 兄弟节点间距，避免 React Aria Virtualizer 的内容高度被 flex-shrink 压缩 —— 修复虚拟化滚动时滚动条滑块尺寸变化的问题 ([#6636](https://github.com/heroui-inc/heroui/pull/6636))。
+- **ListBox**：将 `flex flex-col gap` 改为普通块级流 + 兄弟节点间距，避免 React Aria Virtualizer 的内容高度被 flex-shrink 压缩，修复虚拟化滚动时滚动条滑块尺寸变化的问题 ([#6636](https://github.com/heroui-inc/heroui/pull/6636))。
 - **InputGroup / NumberField / SearchField**：浏览器自动填充高亮提升到分组容器上，使 prefix、suffix 和增减按钮槽位共享圆角高亮 ([#6625](https://github.com/heroui-inc/heroui/pull/6625))。
 - **Spinner**：改用 `inline-flex` 搭配 `shrink-0`（替代 `relative`），使旋转动画在非 flex 布局中也能正确渲染，并支持 `motion-reduce` ([#6644](https://github.com/heroui-inc/heroui/pull/6644))。
 - **Toast**：关闭按钮在所有断点下统一使用 `-top-1 -right-1`，与容器内边距对齐 ([#6574](https://github.com/heroui-inc/heroui/pull/6574))。
@@ -155,8 +155,8 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 
 这些组件现在在底层使用 React Aria 的 `*Field` + `*Button` 组合方式。`X.Content` 现在是**可点击的 label**（React Aria 的 `*Button`）。共有三点变化：
 
-- **`X.Control` 移进 `X.Content`** —— 它们以前是兄弟节点。
-- **标签是 `X.Content` 内部的纯文本** —— `X.Content` 渲染的是 `<label>` 元素，所以不要嵌套 `<Label>` 组件（嵌套的 `<label>` 是无效 HTML）。若要使用独立的 `Label`，请把它放在**外部**，并用 `htmlFor` + 组件 `id` 关联。
+- **`X.Control` 移进 `X.Content`**：它们以前是兄弟节点。
+- **标签是 `X.Content` 内部的纯文本**：`X.Content` 渲染的是 `<label>` 元素，所以不要嵌套 `<Label>` 组件（嵌套的 `<label>` 是无效 HTML）。若要使用独立的 `Label`，请把它放在**外部**，并用 `htmlFor` + 组件 `id` 关联。
 - **`Description`/`FieldError` 移到外部**，作为 `X.Content` 的兄弟节点，这样它们会通过 `aria-describedby` 朗读，而不会被并入无障碍名称。
 
 **Checkbox**
@@ -242,7 +242,7 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 | 通过 `X.Content` 内的 `<Label>` 提供标签 | 标签是 `X.Content` 内的**纯文本**（不嵌套 `<Label>`） |
 | `Description` / `FieldError` 位于 `X.Content` 内 | `Description` / `FieldError` 作为 `X.Content` 的兄弟节点 |
 
-**外部标签** —— 若要使用独立的 `Label`，请把它放在组件外部，并用 `htmlFor` + 组件 `id` 关联：
+**外部标签**：若要使用独立的 `Label`，请把它放在组件外部，并用 `htmlFor` + 组件 `id` 关联：
 
 ```tsx
 <div className="flex items-center gap-3">

@@ -129,10 +129,10 @@ HeroUI 遵循 [BEM](https://bem.info/en/methodology/) 方法论，确保组件�
 
 TextField 会根据状态自动管理以下 data 属性：
 
-- **无效**：`[data-invalid="true"]` 或 `[aria-invalid="true"]` — 无效时自动隐藏 description 插槽
-- **禁用**：`[data-disabled="true"]` — 在 `isDisabled` 为 true 时应用
-- **焦点在内部**：`[data-focus-within="true"]` — 任一子级 input 聚焦时应用
-- **可见焦点**：`[data-focus-visible="true"]` — 键盘导航产生可见焦点时应用
+- **无效**：`[data-invalid="true"]` 或 `[aria-invalid="true"]`，无效时自动隐藏 description 插槽
+- **禁用**：`[data-disabled="true"]`，在 `isDisabled` 为 true 时应用
+- **焦点在内部**：`[data-focus-within="true"]`，任一子级 input 聚焦时应用
+- **可见焦点**：`[data-focus-visible="true"]`，键盘导航产生可见焦点时应用
 
 更多属性可通过 render prop 获取（见下文 TextFieldRenderProps）。
 
@@ -197,11 +197,11 @@ TextField 会根据状态自动管理以下 data 属性：
 
 TextField 与以下独立组件配合使用，请直接按需引入并组合：
 
-- **Label** — `@heroui/react` 的字段标签组件
-- **Input** — `@heroui/react` 的单行文本输入
-- **TextArea** — `@heroui/react` 的多行文本输入
-- **Description** — `@heroui/react` 的辅助说明组件
-- **FieldError** — `@heroui/react` 的校验错误信息组件
+- **Label**：`@heroui/react` 的字段标签组件
+- **Input**：`@heroui/react` 的单行文本输入
+- **TextArea**：`@heroui/react` 的多行文本输入
+- **Description**：`@heroui/react` 的辅助说明组件
+- **FieldError**：`@heroui/react` 的校验错误信息组件
 
 这些组件各自有独立的 props API，请在 TextField 内直接使用：
 
@@ -224,7 +224,7 @@ TextField 与以下独立组件配合使用，请直接按需引入并组合：
 | `isInvalid` | `boolean` | 字段当前是否无效。 |
 | `isReadOnly` | `boolean` | 字段是否只读。 |
 | `isRequired` | `boolean` | 字段是否必填。 |
-| `isFocused` | `boolean` | 字段是否聚焦（已弃用 — 请使用 `isFocusWithin`）。 |
+| `isFocused` | `boolean` | 字段是否聚焦（已弃用：请使用 `isFocusWithin`）。 |
 | `isFocusWithin` | `boolean` | 是否有任一子元素聚焦。 |
 | `isFocusVisible` | `boolean` | 是否为可见键盘焦点。 |
 

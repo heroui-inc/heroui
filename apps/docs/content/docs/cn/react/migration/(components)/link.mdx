@@ -26,7 +26,7 @@ description: Link 从 HeroUI v2 到 v3 的迁移指南。
 
 ### 3. 新增 prop
 
-- `onPress` —— 链接被激活（通过点击或键盘）时触发的事件处理函数。接受 `(e: PressEvent) => void` 回调。
+- `onPress`：链接被激活（通过点击或键盘）时触发的事件处理函数。接受 `(e: PressEvent) => void` 回调。
 
 ## 结构变化
 
@@ -176,7 +176,7 @@ Link (Root)
 ## 总结
 
 1. **图标处理**：`showAnchorIcon` 与 `anchorIcon` prop 由 `Link.Icon` 子组件取代
-2. **外部链接**：`isExternal` prop 已移除——请手动设置 `target` 与 `rel`
+2. **外部链接**：`isExternal` prop 已移除，请手动设置 `target` 与 `rel`
 3. **移除 size prop**：改用 Tailwind CSS 类（`text-sm`、`text-base`、`text-lg`）
 4. **移除 color prop**：改用 Tailwind CSS 类（`text-primary`、`text-danger` 等）
 5. **移除 isBlock prop**：改用 Tailwind CSS 类（`block`、`hover:bg-surface`）

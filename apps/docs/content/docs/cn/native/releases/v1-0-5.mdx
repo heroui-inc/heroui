@@ -51,7 +51,7 @@ HeroUI Native v1.0.5 通过将字段边框拆分为独立的宽度与颜色令�
 
 ### 单次挂载的 Popover、Menu、Select 动画
 
-[Popover](/docs/native/components/popover)、[Menu](/docs/native/components/menu)、[Select](/docs/native/components/select) 的内容现在只挂载一次，并在完成测量与定位后通过共享值播放进入动画。此前，内容子树会被挂载两次——先用一个隐藏探针测量尺寸，再挂载可见节点——以便进入 Keyframe 能在正确位置于挂载时触发。
+[Popover](/docs/native/components/popover)、[Menu](/docs/native/components/menu)、[Select](/docs/native/components/select) 的内容现在只挂载一次，并在完成测量与定位后通过共享值播放进入动画。此前，内容子树会被挂载两次（先用一个隐藏探针测量尺寸，再挂载可见节点）以便进入 Keyframe 能在正确位置于挂载时触发。
 
 **改进点：**
 
@@ -60,7 +60,7 @@ HeroUI Native v1.0.5 通过将字段边框拆分为独立的宽度与颜色令�
 - 内容在就绪之前对指针事件保持隐藏；禁用动画时直接解析为显示状态
 - 自定义的进入 Keyframe 仍保留原先的「探针 + 挂载」回退路径
 
-组件的公开 API 未变——单次挂载路径完全是内部实现，自定义进入动画的行为与之前完全一致。建议在全部四个放置方向、子菜单过渡以及禁用动画的情形下，验证进入与退出动画。
+组件的公开 API 未变：单次挂载路径完全是内部实现，自定义进入动画的行为与之前完全一致。建议在全部四个放置方向、子菜单过渡以及禁用动画的情形下，验证进入与退出动画。
 
 **相关 PR：** [#438](https://github.com/heroui-inc/heroui-native/pull/438)
 
@@ -89,7 +89,7 @@ HeroUI Native v1.0.5 通过将字段边框拆分为独立的宽度与颜色令�
 - 默认勾选图标颜色改用 `accent-soft-foreground`，提升选中列表项的对比度
 - JSDoc 与组件文档已同步更新以反映新的默认值
 
-仅在省略 `iconProps.color` 时默认图标颜色会发生变化——API 未变，自定义颜色仍然有效。建议在亮色与暗色主题下进行手动验证，以确认指示器对比度。
+仅在省略 `iconProps.color` 时默认图标颜色会发生变化：API 未变，自定义颜色仍然有效。建议在亮色与暗色主题下进行手动验证，以确认指示器对比度。
 
 **相关 PR：** [#436](https://github.com/heroui-inc/heroui-native/pull/436)
 
@@ -173,13 +173,13 @@ export function App() {
 
 **迁移：**
 
-仅通过 `--field-border` 颜色设置的边框将不再显示——`--field-border-width` 现在默认为 `0px`，因此需要同时设置宽度：
+仅通过 `--field-border` 颜色设置的边框将不再显示，`--field-border-width` 现在默认为 `0px`，因此需要同时设置宽度：
 
 ```tsx
-// 之前——仅设置颜色即可渲染出可见边框
+// 之前：仅设置颜色即可渲染出可见边框
 // --field-border: <color>;
 
-// 之后——还需设置宽度，因为 --field-border-width 默认为 0px
+// 之后：还需设置宽度，因为 --field-border-width 默认为 0px
 // --field-border: <color>;
 // --field-border-width: 1.5px;
 ```
@@ -208,9 +208,9 @@ export function App() {
 
 以下文档页面已随本版本更新以反映相关变更：
 
-- [Typography](/docs/native/components/text) — 记录了 iOS 上默认的 `dynamicTypeRamp` 行为
-- [Select](/docs/native/components/select) — 更新了 `Select.ItemIndicator` 默认勾选图标颜色
-- [Provider](/docs/native/getting-started/provider) — 新增 `textInputProps` 章节、示例与 Provider 层级说明
+- [Typography](/docs/native/components/text)：记录了 iOS 上默认的 `dynamicTypeRamp` 行为
+- [Select](/docs/native/components/select)：更新了 `Select.ItemIndicator` 默认勾选图标颜色
+- [Provider](/docs/native/getting-started/provider)：新增 `textInputProps` 章节、示例与 Provider 层级说明
 
 ## 链接
 

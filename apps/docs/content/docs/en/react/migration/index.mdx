@@ -36,9 +36,9 @@ Below are three approaches for AI assistants to access migration documentation. 
 
 In v2, collection components (Dropdown, Listbox, Select, Accordion, etc.) used **React's `key`** as the item identity. The same value drove both React's list reconciliation and the component's selection/expand state. In v3, which uses React Aria Components, those roles are split:
 
-- **`id`** — v3 uses an explicit **`id`** prop on each item for selection state, focus, and callbacks (e.g. `selectedKeys`, `expandedKeys`, `onSelectionChange`). Use the same (or equivalent) value you used for `key` in v2 so that state and callbacks continue to refer to the correct item.
-- **`textValue`** — v3 requires **`textValue`** on items when the visible content is not plain text (e.g. when using `Label`, icons, or `Description`). It is used for screen reader announcements and type-ahead.
-- **`key`** — **Keep using React's `key`** on list items. It is still required for React's reconciliation and is independent of `id`.
+- **`id`**: v3 uses an explicit **`id`** prop on each item for selection state, focus, and callbacks (e.g. `selectedKeys`, `expandedKeys`, `onSelectionChange`). Use the same (or equivalent) value you used for `key` in v2 so that state and callbacks continue to refer to the correct item.
+- **`textValue`**: v3 requires **`textValue`** on items when the visible content is not plain text (e.g. when using `Label`, icons, or `Description`). It is used for screen reader announcements and type-ahead.
+- **`key`**: **Keep using React's `key`** on list items. It is still required for React's reconciliation and is independent of `id`.
 
 When migrating: add `id` (and `textValue` where needed) for v3's API, but keep `key` for React.
 

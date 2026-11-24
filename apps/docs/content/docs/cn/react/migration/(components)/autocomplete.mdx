@@ -187,8 +187,8 @@ const { contains } = useFilter({ sensitivity: "base" });
 
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
-| — | `id`（在 `ListBox.Item` 上） | 状态用的项标识 |
-| — | `textValue`（在 `ListBox.Item` 上） | 无障碍（提前输入） |
+| - | `id`（在 `ListBox.Item` 上） | 状态用的项标识 |
+| - | `textValue`（在 `ListBox.Item` 上） | 无障碍（提前输入） |
 | `label` | `Label` | 使用 `Label` 组件 |
 | `description` | `Description` | 使用 `Description` 组件 |
 | `placeholder` | `Input` | 写在 `Input` 的 `placeholder` |
@@ -196,28 +196,28 @@ const { contains } = useFilter({ sensitivity: "base" });
 | `allowsCustomValue`、`allowsEmptyCollection`、`defaultFilter` | `ComboBox` | 与 v2 相同 |
 | `disabledKeys`、`isDisabled`、`isRequired`、`isInvalid`、`name` | `ComboBox` | 与 v2 相同 |
 | `menuTrigger` | `ComboBox` | `"focus"`（默认）、`"input"` 或 `"manual"` |
-| `variant`、`color`、`size`、`radius` | — | 已移除（请使用 Tailwind CSS） |
-| `labelPlacement` | — | 已移除（请自行摆放 Label） |
-| `startContent`、`endContent` | — | 加到 `Input` 或 InputGroup |
-| `selectorIcon`、`clearIcon` | — | 自定义 `ComboBox.Trigger` 或手动实现 |
-| `isClearable` | — | 手动实现 |
-| `showScrollIndicators` | — | 已移除 |
-| `classNames` | — | 在各部件上使用 `className` |
-| `popoverProps`、`listboxProps`、`inputProps` | — | 直接在对应子组件上配置 |
-| `scrollShadowProps`、`scrollRef` | — | 已移除 |
-| `selectorButtonProps`、`clearButtonProps`、`disableSelectorIconRotation` | — | 已移除 |
+| `variant`、`color`、`size`、`radius` | - | 已移除（请使用 Tailwind CSS） |
+| `labelPlacement` | - | 已移除（请自行摆放 Label） |
+| `startContent`、`endContent` | - | 加到 `Input` 或 InputGroup |
+| `selectorIcon`、`clearIcon` | - | 自定义 `ComboBox.Trigger` 或手动实现 |
+| `isClearable` | - | 手动实现 |
+| `showScrollIndicators` | - | 已移除 |
+| `classNames` | - | 在各部件上使用 `className` |
+| `popoverProps`、`listboxProps`、`inputProps` | - | 直接在对应子组件上配置 |
+| `scrollShadowProps`、`scrollRef` | - | 已移除 |
+| `selectorButtonProps`、`clearButtonProps`、`disableSelectorIconRotation` | - | 已移除 |
 | `isReadOnly` | `ComboBox` | `ComboBox` 上的 `isReadOnly` prop |
 | `fullWidth` | `ComboBox` | `ComboBox` 上的 `fullWidth` prop |
-| `isVirtualized`、`maxListboxHeight`、`itemHeight` | — | 已移除 |
-| `onClose`、`onClear` | — | 改用其他事件处理函数 |
+| `isVirtualized`、`maxListboxHeight`、`itemHeight` | - | 已移除 |
+| `onClose`、`onClear` | - | 改用其他事件处理函数 |
 | `validationBehavior`、`validate` | `ComboBox` | 写在 `ComboBox` 上的 prop |
 
 ### 9. Prop 变更（Autocomplete）
 
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
-| — | `id`（在 `ListBox.Item` 上） | 状态用的项标识 |
-| — | `textValue`（在 `ListBox.Item` 上） | 无障碍（提前输入） |
+| - | `id`（在 `ListBox.Item` 上） | 状态用的项标识 |
+| - | `textValue`（在 `ListBox.Item` 上） | 无障碍（提前输入） |
 | `label` | `Label` | 使用 `Label` 组件 |
 | `description` | `Description` | 使用 `Description` 组件 |
 | `placeholder` | `Autocomplete` | 根组件上的 `placeholder` prop |
@@ -225,13 +225,13 @@ const { contains } = useFilter({ sensitivity: "base" });
 | `selectionMode` | `Autocomplete` | `"single"`（默认）或 `"multiple"` |
 | `inputValue`、`onInputChange` | `Autocomplete.Filter` | 写在 `Filter` 上的 `inputValue` 与 `onInputChange` |
 | `disabledKeys`、`isDisabled`、`isRequired`、`isInvalid`、`name` | `Autocomplete` | 与 v2 相同 |
-| `variant`、`color`、`size`、`radius` | — | 已移除（请使用 Tailwind CSS）；`variant` 支持 `"primary"` / `"secondary"` |
+| `variant`、`color`、`size`、`radius` | - | 已移除（请使用 Tailwind CSS）；`variant` 支持 `"primary"` / `"secondary"` |
 | `isClearable` | `Autocomplete.ClearButton` | 内置子组件 |
 | `selectorIcon` | `Autocomplete.Indicator` | 将自定义图标作为 children 传入 |
 | `onClear` | `Autocomplete` | 根组件上的 `onClear` prop |
 | `fullWidth` | `Autocomplete` | 根组件上的 `fullWidth` prop |
-| `classNames` | — | 在各部件上使用 `className` |
-| `popoverProps`、`listboxProps`、`inputProps` | — | 直接在对应子组件上配置 |
+| `classNames` | - | 在各部件上使用 `className` |
+| `popoverProps`、`listboxProps`、`inputProps` | - | 直接在对应子组件上配置 |
 
 ## 迁移示例
 

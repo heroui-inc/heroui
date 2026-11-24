@@ -213,7 +213,7 @@ export function DocsTitle({children, className, ...props}: ComponentProps<"h1">)
     <h1
       {...props}
       className={cn(
-        "text-[28px] leading-9 font-semibold tracking-[-0.022em] text-foreground md:text-4xl md:leading-10",
+        "text-[30px] leading-9 font-semibold tracking-[-0.022em] text-foreground",
         className,
       )}
     >

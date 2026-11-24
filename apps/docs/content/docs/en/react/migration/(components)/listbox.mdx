@@ -63,7 +63,7 @@ export default function App() {
 | - | `textValue` (on ListBox.Item) | For accessibility (type-ahead) |
 | `variant`, `color` | `variant` on `ListBox` or `ListBox.Item` | Simplified to `"default"` \| `"danger"` (no `color` prop) |
 | `onAction` | `ListBox` | Callback fired when an item is pressed (`(key: Key) => void`) |
-| `disabledKeys` | `ListBox` | Same — set of keys for items that should be non-interactive |
+| `disabledKeys` | `ListBox` | Same: set of keys for items that should be non-interactive |
 | `startContent`, `endContent` | - | Place icons manually in item content |
 | `description` | `Description` | Use `Description` component |
 | `title` (on Section) | `Header` | Use `Header` component |
@@ -274,7 +274,7 @@ export default function App() {
 In v3, both `ListBox` and `ListBox.Item` accept a `variant` prop with values `"default"` (default) or `"danger"`. Setting `variant` on the root `ListBox` applies to all items; setting it on an individual `ListBox.Item` overrides the root value for that item.
 
 ```tsx
-{/* Root-level variant — all items inherit "danger" styling */}
+{/* Root-level variant: all items inherit "danger" styling */}
 <ListBox variant="danger">
   <ListBox.Item id="delete" textValue="Delete">
     <Label>Delete</Label>

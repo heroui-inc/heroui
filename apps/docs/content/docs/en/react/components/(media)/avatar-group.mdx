@@ -122,10 +122,10 @@ Composes `Avatar` + `Avatar.Fallback` for the overflow indicator. Not truncated 
 
 - AvatarGroup uses React Context to pass `size`, `color`, and `variant` to **direct Avatar children only**
 - `max` truncates visible avatars when set and auto-counts remaining children; omit to show all
-- For a known total (e.g. from the server), render an explicit `AvatarGroup.Count` — it is not truncated by `max` and suppresses the auto count. Prefer `Count` over the removed v2 `total` prop
+- For a known total (e.g. from the server), render an explicit `AvatarGroup.Count`: it is not truncated by `max` and suppresses the auto count. Prefer `Count` over the removed v2 `total` prop
 - `isGrid` disables overlap and uses a wrapping grid layout instead
 - `overlap` defaults to `"clip"` (transparent seam); use `"ring"` for the solid outline; no effect with `isGrid`
-- No default `role="group"` — when the stack is meaningful (assignees, viewers), pass `role="group"` with `aria-label` or `aria-labelledby`
+- No default `role="group"`: when the stack is meaningful (assignees, viewers), pass `role="group"` with `aria-label` or `aria-labelledby`
 
 ## Related Components
 

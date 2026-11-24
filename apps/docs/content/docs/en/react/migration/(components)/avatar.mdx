@@ -67,7 +67,7 @@ export default function App() {
 | - | `Avatar.Image` | New: `srcSet`, `sizes`, `loading` for responsive images |
 | - | `Avatar.Fallback` | New: `delayMs` to delay fallback display (prevents flash) |
 | `classNames` | - | Use `className` on parts |
-| AvatarGroup | `AvatarGroup` | Available again — compound `Avatar` children with `max` / `color` / `variant` / `isGrid` / `overlap` (`clip`\|`ring`) and optional `AvatarGroup.Count`; v2 `total` → explicit `Count`; see [AvatarGroup](/docs/react/components/avatar-group) |
+| AvatarGroup | `AvatarGroup` | Available again: compound `Avatar` children with `max` / `color` / `variant` / `isGrid` / `overlap` (`clip`\|`ring`) and optional `AvatarGroup.Count`; v2 `total` → explicit `Count`; see [AvatarGroup](/docs/react/components/avatar-group) |
 
 ### 3. Variant Prop (New in v3)
 
@@ -130,7 +130,7 @@ export default function App() {
 ### 8. AvatarGroup (Available in v3)
 
 **v2:** Dedicated `AvatarGroup` with props like `isBordered`, `max`, and `total`  
-**v3:** `AvatarGroup` is available again as a dedicated component. Wrap compound `Avatar` children, inherit `size` / `color` / `variant` via context, and use `max`, `isGrid`, and `overlap` (`"clip"` default, or `"ring"`). v2 `total` is removed — render an explicit `AvatarGroup.Count` child for a known server total (it suppresses the auto count from `max`). `isBordered` is removed; use Tailwind or `overlap="ring"`. See the [AvatarGroup docs](/docs/react/components/avatar-group).
+**v3:** `AvatarGroup` is available again as a dedicated component. Wrap compound `Avatar` children, inherit `size` / `color` / `variant` via context, and use `max`, `isGrid`, and `overlap` (`"clip"` default, or `"ring"`). v2 `total` is removed: render an explicit `AvatarGroup.Count` child for a known server total (it suppresses the auto count from `max`). `isBordered` is removed; use Tailwind or `overlap="ring"`. See the [AvatarGroup docs](/docs/react/components/avatar-group).
 
 ```tsx
 import { Avatar, AvatarGroup } from "@heroui/react";

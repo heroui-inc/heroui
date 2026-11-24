@@ -182,8 +182,8 @@ const state = useOverlayState();
 | v2 prop                     | v3 位置                         | 说明                                                         |
 | --------------------------- | ------------------------------- | ------------------------------------------------------------ |
 | `size`                      | `size`（在 `Modal.Container`）  | 简化取值（xs、sm、md、lg、cover、full）                      |
-| `radius`                    | —                               | 已移除（请用 Tailwind CSS）                                  |
-| `shadow`                    | —                               | 已移除（请用 Tailwind CSS）                                  |
+| `radius`                    | -                               | 已移除（请用 Tailwind CSS）                                  |
+| `shadow`                    | -                               | 已移除（请用 Tailwind CSS）                                  |
 | `backdrop`                  | `variant`（在 **`Modal.Backdrop`**） | 已重命名；取值不变（`opaque`、`blur`、`transparent`）   |
 | `scrollBehavior`            | `scroll`（在 `Modal.Container`） | 已重命名（`normal` → `inside`）                             |
 | `placement`                 | `placement`（在 `Modal.Container`） | 移到 Container                                            |
@@ -191,13 +191,13 @@ const state = useOverlayState();
 | `isKeyboardDismissDisabled` | `isKeyboardDismissDisabled`（在 **`Modal.Backdrop`**） | 移到 `Modal.Backdrop`              |
 | `isOpen`                    | `isOpen`（在 **`Modal.Backdrop`**） | 受控状态在 `Modal.Backdrop`                              |
 | `onOpenChange`              | `onOpenChange`（在 **`Modal.Backdrop`**） | 同上                                                 |
-| `onClose`                   | —                               | 使用渲染 prop 提供的 `close`                                 |
-| `hideCloseButton`           | —                               | 省略 `Modal.CloseTrigger` 即可                               |
-| `closeButton`               | —                               | 使用 `Modal.CloseTrigger` 自定义内容                         |
-| `motionProps`               | —                               | 已移除（动画机制已不同）                                     |
-| `classNames`                | —                               | 在各子组件上使用 `className`                                 |
-| `shouldBlockScroll`         | —                               | 已移除（由组件自动处理）                                     |
-| `portalContainer`           | —                               | 已移除                                                       |
+| `onClose`                   | -                               | 使用渲染 prop 提供的 `close`                                 |
+| `hideCloseButton`           | -                               | 省略 `Modal.CloseTrigger` 即可                               |
+| `closeButton`               | -                               | 使用 `Modal.CloseTrigger` 自定义内容                         |
+| `motionProps`               | -                               | 已移除（动画机制已不同）                                     |
+| `classNames`                | -                               | 在各子组件上使用 `className`                                 |
+| `shouldBlockScroll`         | -                               | 已移除（由组件自动处理）                                     |
+| `portalContainer`           | -                               | 已移除                                                       |
 
 ## 迁移示例
 

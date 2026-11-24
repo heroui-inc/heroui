@@ -33,12 +33,12 @@ export default () => (
             <span>✓</span> {/* Custom indicator (optional) */}
           </Radio.Indicator>
         </Radio.Control>
-        Label {/* 纯文本 —— 可点击的标签 */}
+        Label {/* 纯文本：可点击的标签 */}
       </Radio.Content>
-      <Description /> {/* 兄弟节点 — 位于按钮外部（通过 aria-describedby 关联） */}
-      <FieldError /> {/* 可选 — 单选项校验错误信息 */}
+      <Description /> {/* 兄弟节点：位于按钮外部（通过 aria-describedby 关联） */}
+      <FieldError /> {/* 可选：单选项校验错误信息 */}
     </Radio>
-    <FieldError /> {/* 可选 — 组级校验 */}
+    <FieldError /> {/* 可选：组级校验 */}
   </RadioGroup>
 )
 ```
@@ -55,8 +55,8 @@ export default () => (
 
 RadioGroup 组件支持两种视觉变体：
 
-- **`primary`**（默认）— 带默认背景的标准样式，适用于大多数场景
-- **`secondary`** — 低强调变体，适合在 Surface 等表面背景上使用
+- **`primary`**（默认）：带默认背景的标准样式，适用于大多数场景
+- **`secondary`**：低强调变体，适合在 Surface 等表面背景上使用
 
 <ComponentPreview name="radio-group-variants" />
 
@@ -165,7 +165,7 @@ RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 
 #### 修饰类 [!toc]
 
-禁用态通过 `.radio` 上的 `[data-disabled="true"]` / `[aria-disabled="true"]`（以及 `:disabled`）应用——没有 `.radio--disabled` 修饰类。
+禁用态通过 `.radio` 上的 `[data-disabled="true"]` / `[aria-disabled="true"]`（以及 `:disabled`）应用，没有 `.radio--disabled` 修饰类。
 
 ### 交互状态
 

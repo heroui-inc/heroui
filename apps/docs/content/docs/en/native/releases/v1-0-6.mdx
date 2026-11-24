@@ -10,7 +10,7 @@ github:
   <span className="text-sm text-muted">July 21, 2026</span>
 </div>
 
-HeroUI Native v1.0.6 centralizes styling by migrating every component from inline Tailwind class strings to dedicated BEM-named CSS files under `src/styles/components`, keeping the `tv()` slots as thin references to those classes for easier overriding and maintenance. This release also fixes a `PortalHost` reconciliation bug where sheets, dialogs, and popovers could inherit each other's state across screens — producing "ghost" open sheets — by keying each portal subtree by its unique name.
+HeroUI Native v1.0.6 centralizes styling by migrating every component from inline Tailwind class strings to dedicated BEM-named CSS files under `src/styles/components`, keeping the `tv()` slots as thin references to those classes for easier overriding and maintenance. This release also fixes a `PortalHost` reconciliation bug where sheets, dialogs, and popovers could inherit each other's state across screens - producing "ghost" open sheets - by keying each portal subtree by its unique name.
 
 ## Installation
 
@@ -68,7 +68,7 @@ Public component APIs are unchanged, so no code changes are required. Consumers 
 
 ### PortalHost Ghost Sheets
 
-`PortalHost` previously rendered all registered portals as an unkeyed array, so React reconciled them by index. When a portal registered or unregistered mid-list — for example when a screen unmounted — sibling portals shifted index and React grafted one portal's live component state onto a different portal's content. For bottom sheets this adopted the internal sheet instance and its animated position, so a closed sheet could appear fully open ("ghost" sheet) while an open sheet could inherit a closed instance and never become visible.
+`PortalHost` previously rendered all registered portals as an unkeyed array, so React reconciled them by index. When a portal registered or unregistered mid-list - for example when a screen unmounted - sibling portals shifted index and React grafted one portal's live component state onto a different portal's content. For bottom sheets this adopted the internal sheet instance and its animated position, so a closed sheet could appear fully open ("ghost" sheet) while an open sheet could inherit a closed instance and never become visible.
 
 Each portal subtree is now keyed by its unique portal name, so React tracks portals by identity instead of array position. This resolves the ghost-sheet behavior across `BottomSheet`, `Dialog`, `Popover`, and `Select` portals and is a likely root cause behind intermittent bottom-sheet visibility failures.
 

@@ -57,7 +57,7 @@ HeroUI Native v1.0.9 重构了组件样式中字重的解析方式，修复了�
 
 ```tsx
 toast.show({ label: 'Quick flash', duration: 0 });
-// Toast 会一直停留在屏幕上——与 'persistent' 相同
+// Toast 会一直停留在屏幕上：与 'persistent' 相同
 ```
 
 **之后：**
@@ -99,7 +99,7 @@ toast.show({ label: 'Sticky', duration: 'persistent' });
 }
 ```
 
-**迁移：** 补上缺失的 `--font-bold` 变量，指向该字体族的 bold 字面。使用系统字体的应用无需任何修改——未定义任何 `--font-*` 变量时会自动恢复数值化字重。
+**迁移：** 补上缺失的 `--font-bold` 变量，指向该字体族的 bold 字面。使用系统字体的应用无需任何修改，未定义任何 `--font-*` 变量时会自动恢复数值化字重。
 
 **相关 PR：** [#473](https://github.com/heroui-inc/heroui-native/pull/473)
 

@@ -8,6 +8,7 @@ import {useCallback, useEffect, useState, useSyncExternalStore} from "react";
 import {env} from "~env";
 
 import {useDictionary} from "@/hooks/use-dictionary";
+import {cn} from "@/utils/cn";
 
 import {
   BlackFridayContent,
@@ -217,7 +218,7 @@ function useNow(enabled: boolean) {
   return now;
 }
 
-export function ProBanner() {
+export function ProBanner({className}: {className?: string}) {
   const dict = useDictionary().proBanner;
   const wasPreviouslyDismissed = useSyncExternalStore(
     subscribeToDismissed,
@@ -274,9 +275,12 @@ export function ProBanner() {
           exit={{opacity: 0, scale: 0.95, transition: {duration: 0.2, ease: "easeIn"}, y: 20}}
           initial={{opacity: 0, scale: 0.95, y: 20}}
           transition={{damping: 25, delay: 0.5, stiffness: 300, type: "spring"}}
-          className={`fixed end-6 bottom-6 z-50 w-[288px] overflow-hidden rounded-[20px] border shadow-xl ${
-            offer ? blackFridayCardClassName(offer) : "border-separator bg-surface"
-          }`}
+          // z-40 keeps the promo below overlays (search dialog, agent panel, drawers), which use z-50
+          className={cn(
+            "fixed end-6 bottom-6 z-40 w-[288px] overflow-hidden rounded-[20px] border shadow-xl",
+            offer ? blackFridayCardClassName(offer) : "border-separator bg-surface",
+            className,
+          )}
         >
           {offer && now !== null ? (
             <BlackFridayContent now={now} offer={offer} onDismiss={handleDismiss} />

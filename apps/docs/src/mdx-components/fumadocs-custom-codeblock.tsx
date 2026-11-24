@@ -29,7 +29,7 @@ export function FumadocsCustomCodeblock({
         <div
           {...actionsProps}
           className={cn(
-            "z-1! empty:hidden",
+            "code-actions z-1! empty:hidden",
             actionsProps.className,
             "top-2.5 rounded-full backdrop-blur-none",
           )}

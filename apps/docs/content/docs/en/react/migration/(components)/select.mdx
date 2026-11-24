@@ -73,28 +73,28 @@ export default function App() {
 | `selectedKeys` | `value` | Changed from Set/array to single value or array |
 | `onSelectionChange` | `onChange` | Renamed event handler |
 | `defaultSelectedKeys` | `defaultValue` | Renamed prop |
-| `label` | — | Use `Label` component |
-| `description` | — | Use `Description` component |
-| `errorMessage` | — | Use `FieldError` component |
+| `label` | - | Use `Label` component |
+| `description` | - | Use `Description` component |
+| `errorMessage` | - | Use `FieldError` component |
 | `variant` | `variant` | Simplified to `primary` \| `secondary` only |
-| `color` | — | Removed (use Tailwind CSS) |
-| `size` | — | Removed (use Tailwind CSS) |
-| `radius` | — | Removed (use Tailwind CSS) |
-| `classNames` | — | Use `className` props on individual components |
-| `startContent` | — | Customize `Select.Trigger` directly |
-| `endContent` | — | Customize `Select.Trigger` directly |
-| `selectorIcon` | — | Customize `Select.Indicator` children |
+| `color` | - | Removed (use Tailwind CSS) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `classNames` | - | Use `className` props on individual components |
+| `startContent` | - | Customize `Select.Trigger` directly |
+| `endContent` | - | Customize `Select.Trigger` directly |
+| `selectorIcon` | - | Customize `Select.Indicator` children |
 | `isClearable` | `Select.ClearButton` | Built-in subcomponent; do not nest a `<button>` in `Select.Trigger` |
-| `renderValue` | — | Use `Select.Value` render prop |
-| `labelPlacement` | — | Labels are always outside |
+| `renderValue` | - | Use `Select.Value` render prop |
+| `labelPlacement` | - | Labels are always outside |
 | `isRequired` | `isRequired` | Still exists |
 | `disabledKeys` | `disabledKeys` | Still exists |
 | `isOpen` | `isOpen` | New: controls the open state of the popover (controlled) |
 | `defaultOpen` | `defaultOpen` | New: sets the default open state of the popover (uncontrolled) |
 | `onOpenChange` | `onOpenChange` | New: handler called when the open state changes |
 | `selectionMode` | `selectionMode` | Still exists |
-| `disableAnimation` | — | Removed (animations handled differently) |
-| `popoverProps`, `listboxProps`, `scrollShadowProps` | — | Use props on `Select.Popover`, `ListBox`, etc. directly |
+| `disableAnimation` | - | Removed (animations handled differently) |
+| `popoverProps`, `listboxProps`, `scrollShadowProps` | - | Use props on `Select.Popover`, `ListBox`, etc. directly |
 
 ## Migration Examples
 
@@ -513,7 +513,7 @@ Select (Root)
 
 ### Clear Button
 
-The `isClearable` prop has been removed. Use `Select.ClearButton` inside `Select.Trigger`. Do not nest a `<button>` in the trigger — `Select.Trigger` is already a button.
+The `isClearable` prop has been removed. Use `Select.ClearButton` inside `Select.Trigger`. Do not nest a `<button>` in the trigger: `Select.Trigger` is already a button.
 
 The clear control is a pointer affordance; the trigger also clears on `Backspace` or `Delete` for keyboard and screen reader users.
 

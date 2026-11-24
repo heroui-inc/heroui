@@ -51,7 +51,7 @@ Update to the latest version:
 
 ### Single-Mount Popover, Menu, and Select Animations
 
-The [Popover](/docs/native/components/popover), [Menu](/docs/native/components/menu), and [Select](/docs/native/components/select) content now mounts a single time and animates in via a shared value once it has been measured and positioned. Previously, the content subtree was mounted twice — a hidden probe to measure dimensions, then a visible node — so the entering Keyframe could fire on mount at the correct position.
+The [Popover](/docs/native/components/popover), [Menu](/docs/native/components/menu), and [Select](/docs/native/components/select) content now mounts a single time and animates in via a shared value once it has been measured and positioned. Previously, the content subtree was mounted twice - a hidden probe to measure dimensions, then a visible node - so the entering Keyframe could fire on mount at the correct position.
 
 **Improvements:**
 
@@ -60,7 +60,7 @@ The [Popover](/docs/native/components/popover), [Menu](/docs/native/components/m
 - Content is hidden from pointer events until it is ready; disabled animations resolve directly to the shown state
 - Custom entering Keyframes retain the previous probe-and-mount fallback path
 
-Public component APIs are unchanged — the single-mount path is entirely internal, and custom entering animations behave exactly as before. We recommend verifying enter and exit animations across all four placements, sub-menu transitions, and the disabled-animations case.
+Public component APIs are unchanged: the single-mount path is entirely internal, and custom entering animations behave exactly as before. We recommend verifying enter and exit animations across all four placements, sub-menu transitions, and the disabled-animations case.
 
 **Related PR:** [#438](https://github.com/heroui-inc/heroui-native/pull/438)
 
@@ -89,7 +89,7 @@ The [Select](/docs/native/components/select) component's `Select.ItemIndicator` 
 - Default check icon color uses `accent-soft-foreground` for improved contrast in selected list items
 - JSDoc and component docs updated to reflect the new default
 
-Only the default icon color changes when `iconProps.color` is omitted — the API is unchanged and custom colors still work. Manual verification on light and dark themes is recommended to confirm indicator contrast.
+Only the default icon color changes when `iconProps.color` is omitted: the API is unchanged and custom colors still work. Manual verification on light and dark themes is recommended to confirm indicator contrast.
 
 **Related PR:** [#436](https://github.com/heroui-inc/heroui-native/pull/436)
 
@@ -173,13 +173,13 @@ The public component API is unchanged, but the visual and behavioral changes req
 
 **Migration:**
 
-Borders set via the `--field-border` color alone no longer appear — `--field-border-width` now defaults to `0px`, so set a width as well:
+Borders set via the `--field-border` color alone no longer appear - `--field-border-width` now defaults to `0px`, so set a width as well:
 
 ```tsx
-// Before — a color alone rendered a visible border
+// Before: a color alone rendered a visible border
 // --field-border: <color>;
 
-// After — also set a width, since --field-border-width defaults to 0px
+// After: also set a width, since --field-border-width defaults to 0px
 // --field-border: <color>;
 // --field-border-width: 1.5px;
 ```

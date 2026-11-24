@@ -51,7 +51,7 @@ Update to the latest version:
 
 ### Typography Component (Renamed from `Text`)
 
-The library's typography primitive has been renamed from `Text` to `Typography` to avoid clashing with React Native's built-in `Text` and to better describe its purpose as a semantic typography system. The component's API, variants, and behavior are unchanged — only the public name moves.
+The library's typography primitive has been renamed from `Text` to `Typography` to avoid clashing with React Native's built-in `Text` and to better describe its purpose as a semantic typography system. The component's API, variants, and behavior are unchanged: only the public name moves.
 
 ```tsx
 import { Typography } from "heroui-native";
@@ -120,7 +120,7 @@ The [Alert](/docs/native/components/alert), [Avatar](/docs/native/components/ava
 - A new optional `heroui-native/styles/vibrant` export preserves saturated brand colors on soft variants for apps that want a more vivid look
 - Example app demos for Alert, Avatar, Button, Chip, and Toast were updated to match the refined color usage
 
-Component props and public APIs are unchanged — only the color values applied to soft variants. Apps relying on the default theme will see softer, more legible icon and label colors on soft variants out of the box.
+Component props and public APIs are unchanged: only the color values applied to soft variants. Apps relying on the default theme will see softer, more legible icon and label colors on soft variants out of the box.
 
 **Related PR:** [#420](https://github.com/heroui-inc/heroui-native/pull/420)
 
@@ -131,7 +131,7 @@ The [TextArea](/docs/native/components/text-area) component now applies proper i
 **Improvements:**
 
 - `TextArea` now uses `h-32 py-2` for consistent inner spacing
-- No API changes — the fix is a styling-only update inside the component
+- No API changes: the fix is a styling-only update inside the component
 
 **Related PR:** [#421](https://github.com/heroui-inc/heroui-native/pull/421)
 
@@ -224,7 +224,7 @@ const insets = useSafeAreaInsets();
 </Popover.Content>;
 ```
 
-This is a documentation-only change — no API or runtime behavior was modified.
+This is a documentation-only change: no API or runtime behavior was modified.
 
 **Related PR:** [#419](https://github.com/heroui-inc/heroui-native/pull/419)
 
@@ -244,7 +244,7 @@ This release includes fixes for the following issues:
 
 ### `Text` Typography Exports
 
-The `Text` component and related exports are now **deprecated** in favor of `Typography`. Existing imports continue to work and will not produce runtime errors — only TypeScript / IDE deprecation hints are emitted. Plan to migrate before a future major release removes the deprecated aliases.
+The `Text` component and related exports are now **deprecated** in favor of `Typography`. Existing imports continue to work and will not produce runtime errors: only TypeScript / IDE deprecation hints are emitted. Plan to migrate before a future major release removes the deprecated aliases.
 
 **Deprecated → Recommended:**
 

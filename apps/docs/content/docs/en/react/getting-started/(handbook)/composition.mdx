@@ -106,10 +106,10 @@ import Link from 'next/link';
 ```
 
 **Available button classes:**
-- `.button` — Base button styles
-- `.button--primary`, `.button--secondary`, `.button--tertiary`, `.button--danger`, `.button--ghost` — Variants
-- `.button--sm`, `.button--md`, `.button--lg` — Sizes
-- `.button--icon-only` — Icon-only button
+- `.button`: Base button styles
+- `.button--primary`, `.button--secondary`, `.button--tertiary`, `.button--danger`, `.button--ghost`: Variants
+- `.button--sm`, `.button--md`, `.button--lg`: Sizes
+- `.button--icon-only`: Icon-only button
 
 This approach works because HeroUI uses [BEM](https://bem.info/en/methodology/) classes that can be applied to any element. It's perfect when you don't need the component's interactive features (like `onPress` handlers) and just want the visual styling.
 
@@ -150,9 +150,9 @@ import Link from 'next/link';
 
 ## Compound Components
 
-HeroUI components are built as compound components—they export multiple parts that work together. Use them in three flexible ways:
+HeroUI components are built as compound components: they export multiple parts that work together. Use them in three flexible ways:
 
-**Option 1: Compound pattern (recommended)** — Use the main component directly without `.Root` suffix:
+**Option 1: Compound pattern (recommended)**: Use the main component directly without `.Root` suffix:
 
 ```tsx
 import { Alert } from '@heroui/react';
@@ -167,7 +167,7 @@ import { Alert } from '@heroui/react';
 </Alert>
 ```
 
-**Option 2: Compound pattern with .Root** — Use the `.Root` suffix if you prefer explicit naming:
+**Option 2: Compound pattern with .Root**: Use the `.Root` suffix if you prefer explicit naming:
 
 ```tsx
 import { Alert } from '@heroui/react';
@@ -182,7 +182,7 @@ import { Alert } from '@heroui/react';
 </Alert.Root>
 ```
 
-**Option 3: Named exports** — Import each part separately:
+**Option 3: Named exports**: Import each part separately:
 
 ```tsx
 import {
@@ -219,7 +219,7 @@ import { Alert, AlertTitle, AlertDescription } from '@heroui/react';
 </Alert>
 ```
 
-**Simple components:** Simple components like `Button` work the same way—no `.Root` needed:
+**Simple components:** Simple components like `Button` work the same way - no `.Root` needed:
 
 ```tsx
 import { Button } from '@heroui/react';
@@ -344,7 +344,7 @@ export function CustomVariants() {
 
 **Type references:** When working with component types, use named type imports or object-style syntax.
 
-**Recommended — Named type imports:**
+**Recommended - Named type imports:**
 ```tsx
 import type { ButtonRootProps, AvatarRootProps } from "@heroui/react";
 
@@ -352,7 +352,7 @@ type MyButtonProps = ButtonRootProps;
 type MyAvatarProps = AvatarRootProps;
 ```
 
-**Alternative — Object-style syntax:**
+**Alternative - Object-style syntax:**
 ```tsx
 import { Button, Avatar } from "@heroui/react";
 
