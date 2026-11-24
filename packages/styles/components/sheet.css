@@ -121,6 +121,14 @@
   @apply relative flex min-h-0 flex-col overflow-hidden bg-overlay text-overlay-foreground shadow-overlay outline-none;
 }
 
+/* Room for the on-screen keyboard. React Aria sets --sheet-scroll-padding-y on
+   the overlay (the keyboard's height, 0 without one). A spacer after the footer
+   lifts the footer with the fields, and it may shrink with the body so short
+   viewports keep a usable body. */
+.sheet__dialog::after {
+  @apply h-(--sheet-scroll-padding-y,0px) content-[''];
+}
+
 .sheet__content[data-detached] .sheet__dialog {
   @apply rounded-2xl;
 }
