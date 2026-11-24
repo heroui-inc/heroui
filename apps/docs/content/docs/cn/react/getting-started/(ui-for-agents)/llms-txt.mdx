@@ -8,18 +8,37 @@ description: 让 Claude、Cursor、Windsurf 等 AI 助手理解 HeroUI v3
 ## 可用文件
 
 **核心文档：**
-- [/react/llms.txt](/react/llms.txt) — React 文档的快速参考索引
-- [/react/llms-full.txt](/react/llms-full.txt) — 完整的 HeroUI React 文档
+- [/react/llms.txt](/react/llms.txt)：React 文档的快速参考索引
+- [/react/llms-full.txt](/react/llms-full.txt)：完整的 HeroUI React 文档
 
 **适用于上下文窗口有限的场景：**
-- [/react/llms-components.txt](/react/llms-components.txt) — 仅包含组件文档
-- [/react/llms-patterns.txt](/react/llms-patterns.txt) — 常见模式与代码片段
+- [/react/llms-components.txt](/react/llms-components.txt)：仅包含组件文档
+- [/react/llms-patterns.txt](/react/llms-patterns.txt)：常见模式与代码片段
 
 **全平台：**
-- [/llms.txt](/llms.txt) — 快速参考索引（React + Native）
-- [/llms-full.txt](/llms-full.txt) — 完整文档（React + Native）
-- [/llms-components.txt](/llms-components.txt) — 全部组件文档
-- [/llms-patterns.txt](/llms-patterns.txt) — 全部模式与代码片段
+- [/llms.txt](/llms.txt)：快速参考索引（React + Native）
+- [/llms-full.txt](/llms-full.txt)：完整文档（React + Native）
+- [/llms-components.txt](/llms-components.txt)：全部组件文档
+- [/llms-patterns.txt](/llms-patterns.txt)：全部模式与代码片段
+
+## 包内文档
+
+`@heroui/react` 还会以 Markdown 形式随包附带文档，因此编码代理读取的是你项目中已安装版本的文档，且无需访问网络。
+
+```
+node_modules/@heroui/react/docs/llms.txt
+node_modules/@heroui/react/docs/components/button.md
+node_modules/@heroui/react/docs/guides/theming.md
+```
+
+`llms.txt` 是索引：它把任务（“构建主题”“搭建项目”）引导到应该阅读的页面，并列出所有组件和指南。在 `AGENTS.md` 或 `CLAUDE.md` 中让你的代理指向它：
+
+```md
+Before using a HeroUI component, read `node_modules/@heroui/react/docs/llms.txt`
+and the page it links for that component.
+```
+
+上方的托管文件始终描述最新发布的版本。当你的项目使用较旧的版本时，请优先使用包内的副本。
 
 ## 包内文档
 

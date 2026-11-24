@@ -60,7 +60,12 @@ export function WithImages() {
                 </div>
               </Card.Header>
               <Card.Footer>
-                <Link aria-label="Go to settings" href="#" rel="noopener noreferrer">
+                <Link
+                  aria-label="Go to settings"
+                  className="text-sm"
+                  href="#"
+                  rel="noopener noreferrer"
+                >
                   Go to settings
                   <Link.Icon aria-hidden="true" />
                 </Link>
@@ -158,7 +163,7 @@ export function WithImages() {
         {/* Row 3 */}
         <div className="col-span-12 grid grid-cols-12 gap-4">
           {/* Left Column: Card */}
-          <Card className="relative col-span-12 h-[250px] sm:h-[300px] md:col-span-8 md:h-[350px]">
+          <Card className="relative col-span-12 h-[250px] overflow-hidden sm:h-[300px] md:col-span-8 md:h-[350px]">
             <img
               alt="NEO Home Robot"
               aria-hidden="true"

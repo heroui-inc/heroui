@@ -50,7 +50,7 @@ Update to the latest version:
 
 ### `Text` → `Typography`
 
-The component shipped in [v3.0.4](/docs/react/releases/v3-0-4) used `text-*` BEM modifiers, which collide with Tailwind's `text-*` utility family. `tailwind-variants` runs `tailwind-merge` on every variant composition and dedupes `text--body-sm`, `text--color-muted`, `text--weight-normal` to a single class — silently dropping the others.
+The component shipped in [v3.0.4](/docs/react/releases/v3-0-4) used `text-*` BEM modifiers, which collide with Tailwind's `text-*` utility family. `tailwind-variants` runs `tailwind-merge` on every variant composition and dedupes `text--body-sm`, `text--color-muted`, `text--weight-normal` to a single class: silently dropping the others.
 
 Renaming the block to `typography` permanently fixes the collision ([#6505](https://github.com/heroui-inc/heroui/pull/6505), closes [#6497](https://github.com/heroui-inc/heroui/issues/6497)).
 
@@ -92,11 +92,11 @@ CSS BEM classes change too: `.text` → `.typography`, `.text--body-sm` → `.ty
 
 ### Unprefixed source color tokens
 
-All derived color tokens — `*-hover`, `*-soft`, `*-soft-foreground`, `border-secondary`, etc. — moved from `@theme inline` aliases in `theme.css` into `variables.css` as unprefixed source variables, and 24 component CSS files now reference source tokens directly ([#6499](https://github.com/heroui-inc/heroui/pull/6499)).
+All derived color tokens: `*-hover`, `*-soft`, `*-soft-foreground`, `border-secondary`, etc. - moved from `@theme inline` aliases in `theme.css` into `variables.css` as unprefixed source variables, and 24 component CSS files now reference source tokens directly ([#6499](https://github.com/heroui-inc/heroui/pull/6499)).
 
 **1. `color-mix` formulas moved from `theme.css` to `variables.css`**
 
-Before — the calculation lived inside the `@theme inline` block:
+Before - the calculation lived inside the `@theme inline` block:
 
 ```css
 /* packages/styles/themes/shared/theme.css */
@@ -106,7 +106,7 @@ Before — the calculation lived inside the `@theme inline` block:
 --color-border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
 ```
 
-After — `theme.css` is pure aliases; the formulas live in `variables.css`:
+After: `theme.css` is pure aliases; the formulas live in `variables.css`:
 
 ```css
 /* packages/styles/themes/default/variables.css */
@@ -124,7 +124,7 @@ After — `theme.css` is pure aliases; the formulas live in `variables.css`:
 
 **2. Component CSS uses source tokens directly**
 
-Before — `var(--color-*)` references everywhere:
+Before - `var(--color-*)` references everywhere:
 
 ```css
 /* packages/styles/components/button.css */
@@ -141,7 +141,7 @@ Before — `var(--color-*)` references everywhere:
 }
 ```
 
-After — unprefixed source tokens:
+After - unprefixed source tokens:
 
 ```css
 /* packages/styles/components/button.css */

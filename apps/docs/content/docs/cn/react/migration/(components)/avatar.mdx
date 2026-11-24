@@ -52,22 +52,22 @@ export default function App() {
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
 | `src` | `Avatar.Image` | 使用 `<Avatar.Image src="..." />` |
-| `name` | — | 请自行生成首字母缩写并传入 `<Avatar.Fallback />` |
-| `showFallback` | — | 已移除（图片加载失败或未提供时显示后备） |
+| `name` | - | 请自行生成首字母缩写并传入 `<Avatar.Fallback />` |
+| `showFallback` | - | 已移除（图片加载失败或未提供时显示后备） |
 | `fallback`, `icon` | `Avatar.Fallback` | 将内容放在 `<Avatar.Fallback />` 内 |
 | `color` | `Avatar` | 相同；`primary` → `accent`，`secondary` → `default` |
 | `variant` | `Avatar` | v3 新增；`"default"` \| `"soft"` |
 | `size` | `Avatar` | 相同 |
-| `isBordered` | — | 已移除（请使用 Tailwind，例如 `ring-2 ring-background`） |
-| `radius` | — | 已移除（请使用 Tailwind，例如 `rounded-full`） |
-| `isDisabled`, `isFocusable` | — | 已移除（如需请用 Tailwind / `asChild`） |
-| `getInitials` | — | 请手动生成首字母缩写 |
-| `ImgComponent`, `imgProps` | — | 如需请在 `Avatar.Image` 上使用 `asChild` |
+| `isBordered` | - | 已移除（请使用 Tailwind，例如 `ring-2 ring-background`） |
+| `radius` | - | 已移除（请使用 Tailwind，例如 `rounded-full`） |
+| `isDisabled`, `isFocusable` | - | 已移除（如需请用 Tailwind / `asChild`） |
+| `getInitials` | - | 请手动生成首字母缩写 |
+| `ImgComponent`, `imgProps` | - | 如需请在 `Avatar.Image` 上使用 `asChild` |
 | `onError` | `Avatar.Image` | 在 `<Avatar.Image />` 上使用 `onError` |
-| — | `Avatar.Image` | 新增：`srcSet`、`sizes`、`loading`（响应式图片） |
-| — | `Avatar.Fallback` | 新增：`delayMs` 延迟显示后备（减少闪烁） |
-| `classNames` | — | 请在各部分使用 `className` |
-| `AvatarGroup` | `AvatarGroup` | 已重新提供 — 复合 `Avatar` 子组件，支持 `max` / `color` / `variant` / `isGrid` / `overlap`（`clip`\|`ring`）与可选的 `AvatarGroup.Count`；v2 `total` → 显式 `Count`；参见 [AvatarGroup](/docs/react/components/avatar-group) |
+| - | `Avatar.Image` | 新增：`srcSet`、`sizes`、`loading`（响应式图片） |
+| - | `Avatar.Fallback` | 新增：`delayMs` 延迟显示后备（减少闪烁） |
+| `classNames` | - | 请在各部分使用 `className` |
+| `AvatarGroup` | `AvatarGroup` | 已重新提供：复合 `Avatar` 子组件，支持 `max` / `color` / `variant` / `isGrid` / `overlap`（`clip`\|`ring`）与可选的 `AvatarGroup.Count`；v2 `total` → 显式 `Count`；参见 [AvatarGroup](/docs/react/components/avatar-group) |
 
 ### 3. `variant` prop（v3 新增）
 
@@ -130,7 +130,7 @@ export default function App() {
 ### 8. `AvatarGroup`（v3 已提供）
 
 **v2：** 独立 `AvatarGroup`，支持 `isBordered`、`max`、`total` 等 props  
-**v3：** `AvatarGroup` 再次作为独立组件提供。包裹复合 `Avatar` 子组件，通过 Context 继承 `size` / `color` / `variant`，并支持 `max`、`isGrid`、`overlap`（默认 `"clip"`，或 `"ring"`）。v2 的 `total` 已移除 — 已知服务端总量时渲染显式的 `AvatarGroup.Count`（会抑制 `max` 的自动计数）。`isBordered` 已移除；可用 Tailwind 或 `overlap="ring"`。参见 [AvatarGroup 文档](/docs/react/components/avatar-group)。
+**v3：** `AvatarGroup` 再次作为独立组件提供。包裹复合 `Avatar` 子组件，通过 Context 继承 `size` / `color` / `variant`，并支持 `max`、`isGrid`、`overlap`（默认 `"clip"`，或 `"ring"`）。v2 的 `total` 已移除，已知服务端总量时渲染显式的 `AvatarGroup.Count`（会抑制 `max` 的自动计数）。`isBordered` 已移除；可用 Tailwind 或 `overlap="ring"`。参见 [AvatarGroup 文档](/docs/react/components/avatar-group)。
 
 ```tsx
 import { Avatar, AvatarGroup } from "@heroui/react";

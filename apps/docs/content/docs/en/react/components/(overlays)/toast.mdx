@@ -299,7 +299,7 @@ const id = toast("Saving…", { timeout: 0 });
 toast.update(id, "Saved", { variant: "success", timeout: 4000 });
 
 // Promise support (automatically shows loading spinner). The loading toast
-// updates in place when the promise settles — same toast, same stack
+// updates in place when the promise settles: same toast, same stack
 // position; the auto-dismiss countdown starts at that point.
 toast.promise(
   uploadFile(),

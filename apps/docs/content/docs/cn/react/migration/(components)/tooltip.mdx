@@ -53,36 +53,36 @@ export default function App() {
 
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
-| `content` | — | 请使用 `Tooltip.Content` 的 children |
+| `content` | - | 请使用 `Tooltip.Content` 的 children |
 | `showArrow` | `showArrow`（在 Content 上） | 移至 `Tooltip.Content` |
 | `placement` | `placement`（在 Content 上） | 移至 `Tooltip.Content` |
 | `offset` | `offset`（在 Content 上） | 移至 `Tooltip.Content` |
-| `color` | — | 已移除（请使用 Tailwind CSS） |
-| `size` | — | 已移除（请使用 Tailwind CSS） |
-| `radius` | — | 已移除（请使用 Tailwind CSS） |
-| `shadow` | — | 已移除（请使用 Tailwind CSS） |
-| `classNames` | — | 请在各子组件上使用 `className` |
-| `motionProps` | — | 已移除（动画机制已不同） |
+| `color` | - | 已移除（请使用 Tailwind CSS） |
+| `size` | - | 已移除（请使用 Tailwind CSS） |
+| `radius` | - | 已移除（请使用 Tailwind CSS） |
+| `shadow` | - | 已移除（请使用 Tailwind CSS） |
+| `classNames` | - | 请在各子组件上使用 `className` |
+| `motionProps` | - | 已移除（动画机制已不同） |
 | `trigger` | `trigger`（在根上） | 仍存在：`"hover"` \| `"focus"`（默认 `"hover"`） |
 | `isDisabled` | `isDisabled`（在根上） | v3 新增：可完全禁用 Tooltip |
 | `delay` | `delay`（在根上） | 仍存在（默认由 `0` 改为 `700`） |
 | `closeDelay` | `closeDelay`（在根上） | 仍存在（默认 `0`） |
-| `portalContainer` | — | 不再对外暴露 |
-| `updatePositionDeps` | — | 不再对外暴露 |
-| `containerPadding`, `crossOffset` | — | 不再对外暴露 |
-| `shouldFlip` | — | 自动处理 |
-| `triggerScaleOnOpen` | — | 不可用 |
-| `isKeyboardDismissDisabled` | — | 不可用 |
-| `isDismissable` | — | 不可用 |
-| `shouldCloseOnBlur` | — | 不可用 |
-| `shouldCloseOnInteractOutside` | — | 不可用 |
-| `onClose` | — | 请改用 `onOpenChange` |
+| `portalContainer` | - | 不再对外暴露 |
+| `updatePositionDeps` | - | 不再对外暴露 |
+| `containerPadding`, `crossOffset` | - | 不再对外暴露 |
+| `shouldFlip` | - | 自动处理 |
+| `triggerScaleOnOpen` | - | 不可用 |
+| `isKeyboardDismissDisabled` | - | 不可用 |
+| `isDismissable` | - | 不可用 |
+| `shouldCloseOnBlur` | - | 不可用 |
+| `shouldCloseOnInteractOutside` | - | 不可用 |
+| `onClose` | - | 请改用 `onOpenChange` |
 
 ### 3. 移至 `Tooltip.Content` 的 prop
 
-- `showArrow` — 现位于 `Tooltip.Content`
-- `placement` — 现位于 `Tooltip.Content`
-- `offset` — 现位于 `Tooltip.Content`
+- `showArrow`：现位于 `Tooltip.Content`
+- `placement`：现位于 `Tooltip.Content`
+- `offset`：现位于 `Tooltip.Content`
 
 ## 迁移示例
 
@@ -343,7 +343,7 @@ Tooltip (Root)
 1. **组件结构**：必须使用复合组件（`Tooltip.Trigger`、`Tooltip.Content`、`Tooltip.Arrow`）
 2. **`content` prop 已移除**：请使用 `Tooltip.Content` 的 children
 3. **prop 迁移**：`showArrow`、`placement`、`offset` 移至 `Tooltip.Content`
-4. **样式相关 prop 已移除**：`color`、`size`、`radius`、`shadow` — 请使用 Tailwind CSS
+4. **样式相关 prop 已移除**：`color`、`size`、`radius`、`shadow`，请使用 Tailwind CSS
 5. **`classNames` 已移除**：请在各子组件上使用 `className`
 6. **`motionProps` 已移除**：动画机制已不同
 7. **高级 prop 已移除**：大量定位与行为相关 prop 已移除

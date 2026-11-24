@@ -56,28 +56,28 @@ export default function App() {
 
 | v2 Prop | v3 Location | Notes |
 |---------|-------------|-------|
-| `label` | — | Use `Label` component |
-| `size` | — | Removed (use Tailwind CSS) |
-| `color` | — | Removed (use Tailwind CSS) |
-| `radius` | — | Removed (use Tailwind CSS) |
-| `classNames` | — | Use `className` props on individual components |
-| `showSteps` | — | Not yet supported |
-| `showTooltip` | — | Not yet supported |
-| `marks` | — | Not yet supported (see `Slider.Marks`) |
-| `startContent` | — | Customize track wrapper directly |
-| `endContent` | — | Customize track wrapper directly |
-| `hideValue` | — | Omit `Slider.Output` |
-| `hideThumb` | — | Omit `Slider.Thumb` |
-| `showOutline` | — | Use Tailwind CSS |
-| `renderThumb` | — | Use `Slider.Thumb` render prop |
-| `renderLabel` | — | Use `Label` component |
-| `renderValue` | — | Use `Slider.Output` render prop |
-| `getValue` | — | Use `Slider.Output` render prop |
-| `getTooltipValue` | — | Use `Slider.Output` render prop |
-| `fillOffset` | — | Not yet supported |
-| `disableThumbScale` | — | Use Tailwind CSS |
-| `disableAnimation` | — | Removed |
-| `onChangeEnd` | `Slider` | Still supported — handler called when the user finishes dragging a thumb |
+| `label` | - | Use `Label` component |
+| `size` | - | Removed (use Tailwind CSS) |
+| `color` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `classNames` | - | Use `className` props on individual components |
+| `showSteps` | - | Not yet supported |
+| `showTooltip` | - | Not yet supported |
+| `marks` | - | Not yet supported (see `Slider.Marks`) |
+| `startContent` | - | Customize track wrapper directly |
+| `endContent` | - | Customize track wrapper directly |
+| `hideValue` | - | Omit `Slider.Output` |
+| `hideThumb` | - | Omit `Slider.Thumb` |
+| `showOutline` | - | Use Tailwind CSS |
+| `renderThumb` | - | Use `Slider.Thumb` render prop |
+| `renderLabel` | - | Use `Label` component |
+| `renderValue` | - | Use `Slider.Output` render prop |
+| `getValue` | - | Use `Slider.Output` render prop |
+| `getTooltipValue` | - | Use `Slider.Output` render prop |
+| `fillOffset` | - | Not yet supported |
+| `disableThumbScale` | - | Use Tailwind CSS |
+| `disableAnimation` | - | Removed |
+| `onChangeEnd` | `Slider` | Still supported: handler called when the user finishes dragging a thumb |
 
 ## Migration Examples
 
@@ -250,4 +250,4 @@ For range sliders, use a render prop in `Slider.Track`:
 6. **Render Props Removed**: `renderThumb`, `renderLabel`, `renderValue` - use render props on components
 7. **Visibility Props Removed**: `hideValue`, `hideThumb` - omit components instead
 8. **Range Sliders**: Must map over thumbs in `Slider.Track` render prop
-9. **onChangeEnd**: Still supported on `Slider` — fires when the user finishes dragging a thumb
+9. **onChangeEnd**: Still supported on `Slider` - fires when the user finishes dragging a thumb

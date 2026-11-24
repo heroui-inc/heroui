@@ -8,7 +8,13 @@ import {useCallback, useEffect, useState, useSyncExternalStore} from "react";
 import {env} from "~env";
 
 import {useDictionary} from "@/hooks/use-dictionary";
+import {cn} from "@/utils/cn";
 
+import {
+  BlackFridayContent,
+  blackFridayCardClassName,
+  getBlackFridayOffer,
+} from "./black-friday-card";
 import {FloatingStars} from "./floating-stars";
 import {PRO_URL, SHOW_BANNER} from "./pro-constants";
 import {ProTitle} from "./pro-title";
@@ -192,7 +198,27 @@ const subscribeToDismissed = (callback: () => void) => {
 const getDismissedSnapshot = () => sessionStorage.getItem(PRO_BANNER_DISMISSED_KEY) === "true";
 const getDismissedServerSnapshot = () => true;
 
-export function ProBanner() {
+/** Current time, ticking every second while `enabled`; null until the first tick on the client. */
+function useNow(enabled: boolean) {
+  const [now, setNow] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!enabled) return;
+
+    const tick = () => setNow(Date.now());
+    const frame = requestAnimationFrame(tick);
+    const interval = setInterval(tick, 1000);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      clearInterval(interval);
+    };
+  }, [enabled]);
+
+  return now;
+}
+
+export function ProBanner({className}: {className?: string}) {
   const dict = useDictionary().proBanner;
   const wasPreviouslyDismissed = useSyncExternalStore(
     subscribeToDismissed,
@@ -203,7 +229,11 @@ export function ProBanner() {
   const discount = useProDiscount();
   const time = useCountdown(discount?.endsAt ?? null);
 
-  const visible = SHOW_BANNER && !wasPreviouslyDismissed && !dismissed;
+  const open = SHOW_BANNER && !wasPreviouslyDismissed && !dismissed;
+  const now = useNow(open);
+  // Wait for the clock so the default card never flashes before a Black Friday one.
+  const visible = open && now !== null;
+  const offer = now === null ? null : getBlackFridayOffer(now);
   const hasLiveDiscount = Boolean(discount && time);
   const campaign = hasLiveDiscount ? DISCOUNT_CAMPAIGN : DEFAULT_CAMPAIGN;
   const copy = hasLiveDiscount ? dict.discount : dict.default;
@@ -242,188 +272,199 @@ export function ProBanner() {
       {visible ? (
         <motion.div
           animate={{opacity: 1, scale: 1, y: 0}}
-          className="fixed end-6 bottom-6 z-50 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl"
           exit={{opacity: 0, scale: 0.95, transition: {duration: 0.2, ease: "easeIn"}, y: 20}}
           initial={{opacity: 0, scale: 0.95, y: 20}}
           transition={{damping: 25, delay: 0.5, stiffness: 300, type: "spring"}}
+          // z-40 keeps the promo below overlays (search dialog, agent panel, drawers), which use z-50
+          className={cn(
+            "fixed end-6 bottom-6 z-40 w-[288px] overflow-hidden rounded-[20px] border shadow-xl",
+            offer ? blackFridayCardClassName(offer) : "border-separator bg-surface",
+            className,
+          )}
         >
-          {/* Top gradient section */}
-          <div className="relative flex h-[180px] flex-col items-center justify-center gap-2 overflow-hidden px-6 py-6">
-            <svg
-              className="absolute inset-0 size-full -scale-y-100"
-              fill="none"
-              preserveAspectRatio="none"
-              viewBox="0 0 406 328"
-            >
-              <g clipPath="url(#clip0_pro_banner)">
-                <g filter="url(#filter0_i_pro_banner)">
-                  <rect
-                    fill="url(#paint0_linear_pro_banner)"
-                    height="365"
-                    width="406"
-                    x="0"
-                    y="0"
-                  />
-                </g>
-                <g filter="url(#filter1_f_pro_banner)">
-                  <path
-                    d="M301.812 168C361.459 168 409.812 216.353 409.812 276C409.812 335.647 361.459 384 301.812 384C242.166 384 193.813 335.647 193.812 276C193.812 216.353 242.166 168 301.812 168Z"
-                    fill="url(#paint1_linear_pro_banner)"
-                  />
-                </g>
-              </g>
-              <defs>
-                <filter
-                  colorInterpolationFilters="sRGB"
-                  filterUnits="userSpaceOnUse"
-                  height="365"
-                  id="filter0_i_pro_banner"
-                  width="406"
-                  x="0"
-                  y="0"
+          {offer && now !== null ? (
+            <BlackFridayContent now={now} offer={offer} onDismiss={handleDismiss} />
+          ) : (
+            <>
+              {/* Top gradient section */}
+              <div className="relative flex h-[180px] flex-col items-center justify-center gap-2 overflow-hidden px-6 py-6">
+                <svg
+                  className="absolute inset-0 size-full -scale-y-100"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  viewBox="0 0 406 328"
                 >
-                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="BackgroundImageFix"
-                    mode="normal"
-                    result="shape"
-                  />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    result="hardAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  />
-                  <feMorphology
-                    in="SourceAlpha"
-                    operator="erode"
-                    radius="12.8125"
-                    result="effect1_innerShadow_pro_banner"
-                  />
-                  <feOffset />
-                  <feGaussianBlur stdDeviation="80.0781" />
-                  <feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.728741 0 0 0 0 0.968353 0 0 0 0 1 0 0 0 0.8 0"
-                  />
-                  <feBlend in2="shape" mode="normal" result="effect1_innerShadow_pro_banner" />
-                </filter>
-                <filter
-                  colorInterpolationFilters="sRGB"
-                  filterUnits="userSpaceOnUse"
-                  height="344.125"
-                  id="filter1_f_pro_banner"
-                  width="344.125"
-                  x="129.75"
-                  y="103.938"
-                >
-                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="BackgroundImageFix"
-                    mode="normal"
-                    result="shape"
-                  />
-                  <feGaussianBlur
-                    result="effect1_foregroundBlur_pro_banner"
-                    stdDeviation="32.0312"
-                  />
-                </filter>
-                <linearGradient
-                  gradientUnits="userSpaceOnUse"
-                  id="paint0_linear_pro_banner"
-                  x1="203"
-                  x2="203"
-                  y1="0"
-                  y2="365"
-                >
-                  <stop stopColor="#E9E9FF" />
-                  <stop offset="1" stopColor="#CCE5F1" />
-                </linearGradient>
-                <linearGradient
-                  gradientUnits="userSpaceOnUse"
-                  id="paint1_linear_pro_banner"
-                  x1="235.242"
-                  x2="397.641"
-                  y1="219.359"
-                  y2="417.953"
-                >
-                  <stop stopColor="#5DD0E7" />
-                  <stop offset="1" stopColor="#7300FF" />
-                </linearGradient>
-                <clipPath id="clip0_pro_banner">
-                  <rect fill="white" height="328" width="406" />
-                </clipPath>
-              </defs>
-            </svg>
-            {/* Floating white particles */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-50">
-                <FloatingStars />
+                  <g clipPath="url(#clip0_pro_banner)">
+                    <g filter="url(#filter0_i_pro_banner)">
+                      <rect
+                        fill="url(#paint0_linear_pro_banner)"
+                        height="365"
+                        width="406"
+                        x="0"
+                        y="0"
+                      />
+                    </g>
+                    <g filter="url(#filter1_f_pro_banner)">
+                      <path
+                        d="M301.812 168C361.459 168 409.812 216.353 409.812 276C409.812 335.647 361.459 384 301.812 384C242.166 384 193.813 335.647 193.812 276C193.812 216.353 242.166 168 301.812 168Z"
+                        fill="url(#paint1_linear_pro_banner)"
+                      />
+                    </g>
+                  </g>
+                  <defs>
+                    <filter
+                      colorInterpolationFilters="sRGB"
+                      filterUnits="userSpaceOnUse"
+                      height="365"
+                      id="filter0_i_pro_banner"
+                      width="406"
+                      x="0"
+                      y="0"
+                    >
+                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                      <feBlend
+                        in="SourceGraphic"
+                        in2="BackgroundImageFix"
+                        mode="normal"
+                        result="shape"
+                      />
+                      <feColorMatrix
+                        in="SourceAlpha"
+                        result="hardAlpha"
+                        type="matrix"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      />
+                      <feMorphology
+                        in="SourceAlpha"
+                        operator="erode"
+                        radius="12.8125"
+                        result="effect1_innerShadow_pro_banner"
+                      />
+                      <feOffset />
+                      <feGaussianBlur stdDeviation="80.0781" />
+                      <feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic" />
+                      <feColorMatrix
+                        type="matrix"
+                        values="0 0 0 0 0.728741 0 0 0 0 0.968353 0 0 0 0 1 0 0 0 0.8 0"
+                      />
+                      <feBlend in2="shape" mode="normal" result="effect1_innerShadow_pro_banner" />
+                    </filter>
+                    <filter
+                      colorInterpolationFilters="sRGB"
+                      filterUnits="userSpaceOnUse"
+                      height="344.125"
+                      id="filter1_f_pro_banner"
+                      width="344.125"
+                      x="129.75"
+                      y="103.938"
+                    >
+                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                      <feBlend
+                        in="SourceGraphic"
+                        in2="BackgroundImageFix"
+                        mode="normal"
+                        result="shape"
+                      />
+                      <feGaussianBlur
+                        result="effect1_foregroundBlur_pro_banner"
+                        stdDeviation="32.0312"
+                      />
+                    </filter>
+                    <linearGradient
+                      gradientUnits="userSpaceOnUse"
+                      id="paint0_linear_pro_banner"
+                      x1="203"
+                      x2="203"
+                      y1="0"
+                      y2="365"
+                    >
+                      <stop stopColor="#E9E9FF" />
+                      <stop offset="1" stopColor="#CCE5F1" />
+                    </linearGradient>
+                    <linearGradient
+                      gradientUnits="userSpaceOnUse"
+                      id="paint1_linear_pro_banner"
+                      x1="235.242"
+                      x2="397.641"
+                      y1="219.359"
+                      y2="417.953"
+                    >
+                      <stop stopColor="#5DD0E7" />
+                      <stop offset="1" stopColor="#7300FF" />
+                    </linearGradient>
+                    <clipPath id="clip0_pro_banner">
+                      <rect fill="white" height="328" width="406" />
+                    </clipPath>
+                  </defs>
+                </svg>
+                {/* Floating white particles */}
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <div className="absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-50">
+                    <FloatingStars />
+                  </div>
+                </div>
+                <div className="relative flex items-center gap-2">
+                  <ProTitle />
+                </div>
+                {hasLiveDiscount ? (
+                  <span className="relative text-xs text-[#4E75A5] tabular-nums">
+                    {dict.discount.cardCountdown}{" "}
+                    <Calligraph animation="snappy" variant="number">
+                      {time?.days}
+                    </Calligraph>
+                    {dict.units.days}{" "}
+                    <Calligraph animation="snappy" variant="number">
+                      {time?.hours}
+                    </Calligraph>
+                    {dict.units.hours}{" "}
+                    <Calligraph animation="snappy" variant="number">
+                      {time?.minutes}
+                    </Calligraph>
+                    {dict.units.minutes}{" "}
+                    <Calligraph animation="snappy" variant="number">
+                      {time?.seconds}
+                    </Calligraph>
+                    {dict.units.seconds}
+                  </span>
+                ) : (
+                  <span className="relative text-xs font-medium text-[#4E75A5]">
+                    {dict.default.heroLabel}
+                  </span>
+                )}
               </div>
-            </div>
-            <div className="relative flex items-center gap-2">
-              <ProTitle />
-            </div>
-            {hasLiveDiscount ? (
-              <span className="relative text-xs text-[#4E75A5] tabular-nums">
-                {dict.discount.cardCountdown}{" "}
-                <Calligraph animation="snappy" variant="number">
-                  {time?.days}
-                </Calligraph>
-                {dict.units.days}{" "}
-                <Calligraph animation="snappy" variant="number">
-                  {time?.hours}
-                </Calligraph>
-                {dict.units.hours}{" "}
-                <Calligraph animation="snappy" variant="number">
-                  {time?.minutes}
-                </Calligraph>
-                {dict.units.minutes}{" "}
-                <Calligraph animation="snappy" variant="number">
-                  {time?.seconds}
-                </Calligraph>
-                {dict.units.seconds}
-              </span>
-            ) : (
-              <span className="relative text-xs font-medium text-[#4E75A5]">
-                {dict.default.heroLabel}
-              </span>
-            )}
-          </div>
+
+              {/* Content section */}
+              <div className="flex flex-col gap-3 p-4">
+                <div className="flex flex-col gap-1.5">
+                  <h3 className="text-base font-semibold text-foreground">{copy.cardTitle}</h3>
+                  <p className="text-sm leading-relaxed text-muted">{copy.cardDescription}</p>
+                </div>
+                <div className="flex items-center gap-2 pt-1">
+                  <Button size="md" variant="outline" onPress={handleDismiss}>
+                    {dict.close}
+                  </Button>
+                  <a
+                    href={getProHref("pro_banner", campaign)}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className={buttonVariants({
+                      className: "bg-black text-white dark:bg-white dark:text-black",
+                      fullWidth: true,
+                      size: "md",
+                      variant: "primary",
+                    })}
+                  >
+                    {copy.cta}
+                  </a>
+                </div>
+              </div>
+            </>
+          )}
 
           <CloseButton
             className="absolute end-2 top-2 bg-transparent text-white/50 hover:bg-white/10 hover:text-white"
             onPress={handleDismiss}
           />
-
-          {/* Content section */}
-          <div className="flex flex-col gap-3 p-4">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-base font-semibold text-foreground">{copy.cardTitle}</h3>
-              <p className="text-sm leading-relaxed text-muted">{copy.cardDescription}</p>
-            </div>
-            <div className="flex items-center gap-2 pt-1">
-              <Button size="md" variant="outline" onPress={handleDismiss}>
-                {dict.close}
-              </Button>
-              <a
-                href={getProHref("pro_banner", campaign)}
-                rel="noopener noreferrer"
-                target="_blank"
-                className={buttonVariants({
-                  className: "bg-black text-white dark:bg-white dark:text-black",
-                  fullWidth: true,
-                  size: "md",
-                  variant: "primary",
-                })}
-              >
-                {copy.cta}
-              </a>
-            </div>
-          </div>
         </motion.div>
       ) : null}
     </AnimatePresence>

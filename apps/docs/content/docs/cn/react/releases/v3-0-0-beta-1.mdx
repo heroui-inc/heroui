@@ -167,7 +167,7 @@ github:
 
 ### 灵活的组件模式
 
-HeroUI 现在支持更灵活的组件写法。复合组件可以带 `.Root` 也可以不带 `.Root`，也可以使用命名导出——三种写法表现完全一致。
+HeroUI 现在支持更灵活的组件写法。复合组件可以带 `.Root` 也可以不带 `.Root`，也可以使用命名导出：三种写法表现完全一致。
 
 **可用模式：**
 
@@ -456,8 +456,8 @@ import { Link } from "@heroui/react";
 ```
 
 **新增 prop：**
-- `underline`：`"none" | "hover" | "always"` —— 控制下划线的可见性
-- `underlineOffset`：`number` —— 控制下划线相对文本的偏移
+- `underline`：`"none" | "hover" | "always"`：控制下划线的可见性
+- `underlineOffset`：`number`，控制下划线相对文本的偏移
 
 #### 类型引用语法
 
@@ -468,12 +468,12 @@ import { Link } from "@heroui/react";
 type AvatarProps = Avatar.RootProps
 ```
 
-**之后（方式 1 —— 对象样式语法）：**
+**之后（方式 1，对象样式语法）：**
 ```tsx
 type AvatarProps = Avatar["RootProps"]
 ```
 
-**之后（方式 2 —— 具名类型导入，推荐）：**
+**之后（方式 2，具名类型导入，推荐）：**
 ```tsx
 import type { AvatarRootProps } from "@heroui/react"
 
@@ -710,12 +710,12 @@ Surface 层级现在会自动从 `--surface` 计算得出，因此无需手动�
 type ButtonProps = Button.RootProps
 ```
 
-**之后（方式 1 —— 对象样式）：**
+**之后（方式 1，对象样式）：**
 ```tsx
 type ButtonProps = Button["RootProps"]
 ```
 
-**之后（方式 2 —— 具名导入，推荐）：**
+**之后（方式 2，具名导入，推荐）：**
 ```tsx
 import type { ButtonRootProps } from "@heroui/react"
 

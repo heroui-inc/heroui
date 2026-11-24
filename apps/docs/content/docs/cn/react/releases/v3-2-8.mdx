@@ -1,15 +1,15 @@
 ---
 title: v3.2.8
-description: "@heroui/react 内置与版本匹配的文档、heroui-theming 代理技能、tailwind-variants 4、ToggleButton fullWidth、Sheet 在模态框内的层级、可换行的浮层底部操作、更易操作的 Table 列宽调整手柄，以及 ScrollShadow 渐隐修复。"
+description: "@heroui/react 内置与版本匹配的文档、heroui-theming 代理技能、tailwind-variants 4、ToggleButton fullWidth、Sheet 在模态框内的层级、可换行的浮层底部操作、更易操作的 Table 列宽调整手柄、RTL 下的进度条与骨架屏动画，以及 Checkbox、Menu、ListBox、模糊背景与 ScrollShadow 修复。"
 github:
   pull: 6998
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-muted">2026 年 11 月 14 日</span>
+  <span className="text-sm text-muted">2026 年 11 月 22 日</span>
 </div>
 
-补丁版本：`@heroui/react` 现在随包附带与版本匹配的 Markdown 文档，供编码代理读取；全新的 `heroui-theming` 技能让代理可以重新设计 HeroUI 样式或创建完整主题（[使用代理定制主题](/docs/react/getting-started/theming-for-agents)）。`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。[ToggleButton](/docs/components/toggle-button) 新增 `fullWidth` 属性；[Sheet](/docs/components/sheet) 改用共享的浮层 z-index，因此可以显示在 [Modal](/docs/components/modal) 之上；[Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在空间不足时会换行而不再溢出。本版本还加宽了 [Table](/docs/components/table) 列宽调整手柄的点击区域，并修复内容不再溢出时 [ScrollShadow](/docs/components/scroll-shadow) 残留的渐隐效果。
+补丁版本：`@heroui/react` 现在随包附带与版本匹配的 Markdown 文档，供编码代理读取；全新的 `heroui-theming` 技能让代理可以重新设计 HeroUI 样式或创建完整主题（[使用代理定制主题](/docs/react/getting-started/theming-for-agents)）。`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。[ToggleButton](/docs/components/toggle-button) 新增 `fullWidth` 属性；[Sheet](/docs/components/sheet) 改用共享的浮层 z-index，因此可以显示在 [Modal](/docs/components/modal) 之上；[Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在空间不足时会换行而不再溢出。[ProgressBar](/docs/components/progress-bar) 与 [Skeleton](/docs/components/skeleton) 的动画在 RTL 下会按阅读方向扫动。本版本还加宽了 [Table](/docs/components/table) 列宽调整手柄的点击区域，修复 [Checkbox](/docs/components/checkbox) 不确定状态填充的闪烁，让 [Dropdown](/docs/components/dropdown) 菜单与 [ListBox](/docs/components/list-box) 选项中的图标和长标签保持正常布局，让触屏设备上的 `variant="blur"` 背景保持模糊，并修复内容不再溢出时 [ScrollShadow](/docs/components/scroll-shadow) 残留的渐隐效果。
 
 ## 安装
 
@@ -38,15 +38,19 @@ github:
   </Tab>
 </Tabs>
 
+<Callout type="warning">
+  **tailwind-variants 4。** `@heroui/react` 与 `@heroui/styles` 会从 `tailwind-variants` 重新导出 `tv`、`cn` 与 `VariantProps`，本版本将其从 `3.3.1` 升级至 `4.0.2`。在 v4 中，向根入口的 `tv()` 传入非空的 `twMergeConfig` 会在运行时抛出 `TypeError`。如果你向 `tv()` 传入 `twMergeConfig`，请改为从 `tailwind-variants/config` 引入 `tv`。此外，v4 更严格的类型可能会拒绝部分 v3 接受的 `tv()` 配置。
+</Callout>
+
 <Callout type="info">
   **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
 </Callout>
 
 ## 依赖
 
-- **tailwind-variants**：将 `@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。HeroUI 内部的 `tv` 封装改用 `createTV` 与内置的 `twMerge` 配置，并移除不再使用的 `tailwind-merge` Rollup external。如果你的应用直接引入 `tailwind-variants` 并传入 `twMergeConfig`，请注意 v4 已将该选项移至 `tailwind-variants/config`（[#6996](https://github.com/heroui-inc/heroui/pull/6996)、[#7010](https://github.com/heroui-inc/heroui/pull/7010)）。
-- **工具链**：将 Tailwind CSS 升级至 `4.3.5`、Vitest 升级至 `5.1.0`、Storybook 升级至 `10.6.6`，并更新其他开发依赖（[#7004](https://github.com/heroui-inc/heroui/pull/7004)、[d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5)）。
-- **安全**：从构建工具链中移除存在漏洞的 `deepmerge`（GHSA-gcqx-w48m-w2h4），并从文档站移除未使用的 `@vercel/og` 依赖（GHSA-wx4j-mvgx-mqwp）（[#6997](https://github.com/heroui-inc/heroui/pull/6997)）。
+- **tailwind-variants**：将 `@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.0.2`。HeroUI 内部的 `tv` 封装改为 `createTV({twMerge: false})`，类名合并仍与之前一样保持关闭，并移除不再使用的 `tailwind-merge` Rollup external。无论从 HeroUI 还是从 `tailwind-variants` 引入 `tv`，只要向 `tv()` 传入 `twMergeConfig`，都请改为从 `tailwind-variants/config` 引入 `tv`；根入口现在会抛出 `TypeError`（[#6996](https://github.com/heroui-inc/heroui/pull/6996)、[#7010](https://github.com/heroui-inc/heroui/pull/7010)）。
+- **工具链**：将 Tailwind CSS 升级至 `4.3.5`、Vitest 升级至 `5.1.1`、Storybook 升级至 `10.6.8`，并更新其他开发依赖（[#7004](https://github.com/heroui-inc/heroui/pull/7004)、[d7f820d](https://github.com/heroui-inc/heroui/commit/d7f820df5)、[#7035](https://github.com/heroui-inc/heroui/pull/7035)）。
+- **安全**：从构建工具链中移除存在漏洞的 `deepmerge`（GHSA-gcqx-w48m-w2h4），并从文档站移除未使用的 `@vercel/og` 依赖（GHSA-wx4j-mvgx-mqwp）（[#6997](https://github.com/heroui-inc/heroui/pull/6997)）。将开发工具链升级至已修复漏洞的 `minimatch@11` 与 `glob@14`（GHSA-g3hv-75wg-m249、GHSA-3g3m-2fjr-6pw4）（[#7029](https://github.com/heroui-inc/heroui/pull/7029)）。
 
 ## 新功能
 
@@ -57,13 +61,21 @@ github:
 
 ## 错误修复
 
+- **Checkbox**：始终挂载不确定状态指示器，使其填充在不确定状态变化时淡入淡出而不再闪烁，包括 [Table](/docs/components/table) 中的全选复选框（[#7019](https://github.com/heroui-inc/heroui/pull/7019)）。
+- **Menu 与 ListBox 选项**：防止图标被压缩，并让长标签（包括标签与描述组合中的标签）换行而不再溢出选项，适用于 Menu、[Dropdown](/docs/components/dropdown)、[ListBox](/docs/components/list-box) 与 [Select](/docs/components/select)（[#7034](https://github.com/heroui-inc/heroui/pull/7034)）。
+- **模糊背景**：在触屏设备上，仅在 [Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog) 或 [Drawer](/docs/components/drawer) 的背景进入或退出时跳过 `backdrop-filter`，使 `variant="blur"` 在浮层打开后不再显得不透明（[#7025](https://github.com/heroui-inc/heroui/pull/7025)）。
 - **Sheet**：浮层改用与 [Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog)、[Drawer](/docs/components/drawer) 共享的 `--z-index-overlay`，取代 `z-50`，使在 Modal 内打开的 Sheet 显示在其上方（[#7006](https://github.com/heroui-inc/heroui/pull/7006)）。
 - **浮层底部**：[AlertDialog](/docs/components/alert-dialog)、[Modal](/docs/components/modal)、[Drawer](/docs/components/drawer) 与 [Sheet](/docs/components/sheet) 的底部操作在一行放不下时自动换行，不再溢出面板（[#7001](https://github.com/heroui-inc/heroui/pull/7001)）。
 - **Table**：列宽调整手柄改为 24px 宽、全高的点击区域，并提升至下一个表头之上，远端一半不再被遮挡。可见的分隔线改由 `::before` 绘制，并在 RTL 下保持在列边缘居中（[#7007](https://github.com/heroui-inc/heroui/pull/7007)）。
 - **ScrollShadow**：当内容曾经溢出并被滚动、随后缩小到不再溢出时，清除滚动驱动的渐隐效果。此前 Chromium 与 WebKit 会在失效的滚动时间线上保留最后的渐隐值，导致边缘残留渐隐（[#7015](https://github.com/heroui-inc/heroui/pull/7015)）。
 
+## 样式
+
+- **RTL 动画**：[ProgressBar](/docs/components/progress-bar) 的不确定进度扫动与 [Skeleton](/docs/components/skeleton) 的闪光效果在 RTL 下改为从右向左。每个动画只保留一个关键帧，并按通过 `:dir(rtl)` 设置的方向符号缩放，因此减少动效、自定义 `--animate-skeleton` 以及嵌套的 `dir="ltr"` 子树都能正常工作（[#7023](https://github.com/heroui-inc/heroui/pull/7023)）。
+
 ## 文档
 
+- **文档改版**：全新的文档外壳，包含顶部操作与外观切换器、按类别分组的侧边栏、组件预览旁的交互式属性控件，以及带筛选的 Cmd+K 搜索。组件索引同时列出免费与 Pro 组件；展示页面已移除，旧的 `/showcase` 链接会重定向到入门页面（[#7020](https://github.com/heroui-inc/heroui/pull/7020)）。
 - **使用代理定制主题**：新增指南，介绍如何借助编码代理全局定制 HeroUI 并创建完整主题，并在 [LLMs.txt](/docs/react/getting-started/llms-txt) 与 [Agent Skills](/docs/react/getting-started/agent-skills) 页面中说明包内文档（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
 - **DESIGN.md**：发布 React 与 Native 的默认主题 `DESIGN.md` 文件，并为 CLI 的 `design-md` 命令补充文档。参见 [DESIGN.md](/docs/react/getting-started/design-md) 与 [CLI](/docs/react/getting-started/cli)（[#6905](https://github.com/heroui-inc/heroui/pull/6905)、[#6992](https://github.com/heroui-inc/heroui/pull/6992)、[#6994](https://github.com/heroui-inc/heroui/pull/6994)）。
 - **Web 与 Native 切换**：在 Web 与 Native 文档之间切换时保留当前页面（[#7011](https://github.com/heroui-inc/heroui/pull/7011)）。
@@ -72,6 +84,7 @@ github:
 ## Storybook
 
 - **主题示例**：新增 Theming/Themes 故事，提供 Arcade 与 Ledger 两套示例主题，通过令牌与 BEM 覆盖重新设计组件样式（[#7017](https://github.com/heroui-inc/heroui/pull/7017)）。
+- **语言**：在语言切换器中新增波斯语与乌尔都语，两者的 React Aria 文案回退为英文（[#7023](https://github.com/heroui-inc/heroui/pull/7023)）。
 
 ## 链接
 

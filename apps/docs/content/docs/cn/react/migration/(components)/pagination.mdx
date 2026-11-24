@@ -77,32 +77,32 @@ export default function App() {
 
 | v2 prop | v3 对应 | 说明 |
 | ------- | ------- | ---- |
-| `total` | — | 已移除（请手动组合条目） |
-| `page` | — | 通过在 `Pagination.Link` 上使用 `isActive` 管理当前页 |
-| `initialPage` | — | 请在外部自行管理状态 |
-| `onChange` | — | 请在各个 `Pagination.Link` 上使用 `onPress` |
-| `siblings` | — | 已移除（请手动组合条目） |
-| `boundaries` | — | 已移除（请手动组合条目） |
-| `dotsJump` | — | 已移除（省略号点击请自行处理） |
-| `loop` | — | 已移除（请自行实现） |
-| `showControls` | — | 请组合 `Pagination.Previous` 与 `Pagination.Next` |
-| `isCompact` | — | 已移除（请用 Tailwind CSS 控制样式） |
-| `showShadow` | — | 已移除（请使用 Tailwind `shadow-*` 类） |
+| `total` | - | 已移除（请手动组合条目） |
+| `page` | - | 通过在 `Pagination.Link` 上使用 `isActive` 管理当前页 |
+| `initialPage` | - | 请在外部自行管理状态 |
+| `onChange` | - | 请在各个 `Pagination.Link` 上使用 `onPress` |
+| `siblings` | - | 已移除（请手动组合条目） |
+| `boundaries` | - | 已移除（请手动组合条目） |
+| `dotsJump` | - | 已移除（省略号点击请自行处理） |
+| `loop` | - | 已移除（请自行实现） |
+| `showControls` | - | 请组合 `Pagination.Previous` 与 `Pagination.Next` |
+| `isCompact` | - | 已移除（请用 Tailwind CSS 控制样式） |
+| `showShadow` | - | 已移除（请使用 Tailwind `shadow-*` 类） |
 | `size` | `Pagination` 上的 `size` | 与 v2 相同（`sm`、`md`、`lg`） |
-| `variant` | — | 已移除（请使用 Tailwind CSS） |
-| `color` | — | 已移除（请使用 Tailwind CSS） |
-| `radius` | — | 已移除（请使用 Tailwind CSS） |
+| `variant` | - | 已移除（请使用 Tailwind CSS） |
+| `color` | - | 已移除（请使用 Tailwind CSS） |
+| `radius` | - | 已移除（请使用 Tailwind CSS） |
 | `isDisabled` | `Pagination.Link`、`Pagination.Previous`、`Pagination.Next` 上的 `isDisabled` | 按条目分别控制，而非全局 |
-| `disableCursorAnimation` | — | 已移除 |
-| `disableAnimation` | — | 已移除 |
-| `renderItem` | — | 请直接组合子节点 |
-| `getItemAriaLabel` | — | 请在各条目上设置 `aria-label` |
-| `classNames` | — | 请在各复合子组件上使用 `className` |
+| `disableCursorAnimation` | - | 已移除 |
+| `disableAnimation` | - | 已移除 |
+| `renderItem` | - | 请直接组合子节点 |
+| `getItemAriaLabel` | - | 请在各条目上设置 `aria-label` |
+| `classNames` | - | 请在各复合子组件上使用 `className` |
 
 ### 4. Hook 变化
 
 **v2：** 提供 `usePagination` hook，便于自定义实现  
-**v3：** 无内置 hook——请直接组合分页项，或自行实现分页逻辑
+**v3：** 无内置 hook，请直接组合分页项，或自行实现分页逻辑
 
 ## 迁移示例
 

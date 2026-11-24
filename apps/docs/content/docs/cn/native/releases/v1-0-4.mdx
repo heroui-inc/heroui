@@ -51,7 +51,7 @@ HeroUI Native v1.0.4 将排版基元 `Text` 重命名为 `Typography`，让出 R
 
 ### Typography 组件（由 `Text` 重命名而来）
 
-库内的排版基元已从 `Text` 重命名为 `Typography`，避免与 React Native 内建的 `Text` 重名，并更准确地体现其作为语义化排版系统的定位。组件的 API、变体与行为保持不变——只是公开名称发生变化。
+库内的排版基元已从 `Text` 重命名为 `Typography`，避免与 React Native 内建的 `Text` 重名，并更准确地体现其作为语义化排版系统的定位。组件的 API、变体与行为保持不变：只是公开名称发生变化。
 
 ```tsx
 import { Typography } from "heroui-native";
@@ -120,7 +120,7 @@ import "heroui-native/styles/vibrant";
 - 新增可选的 `heroui-native/styles/vibrant` 导出，为希望保留饱和品牌色的应用保留更鲜亮的 soft 变体外观
 - 示例应用中 Alert、Avatar、Button、Chip、Toast 的演示同步更新以匹配新的取色方式
 
-组件属性与公开 API 均无变化——仅 soft 变体的取色发生变化。沿用默认主题的应用将开箱获得 soft 变体上更柔和、可读性更佳的图标与标签颜色。
+组件属性与公开 API 均无变化：仅 soft 变体的取色发生变化。沿用默认主题的应用将开箱获得 soft 变体上更柔和、可读性更佳的图标与标签颜色。
 
 **相关 PR：** [#420](https://github.com/heroui-inc/heroui-native/pull/420)
 
@@ -131,7 +131,7 @@ import "heroui-native/styles/vibrant";
 **改进点：**
 
 - `TextArea` 现使用 `h-32 py-2`，提供一致的内部间距
-- 无 API 变更——仅为组件内的样式调整
+- 无 API 变更：仅为组件内的样式调整
 
 **相关 PR：** [#421](https://github.com/heroui-inc/heroui-native/pull/421)
 
@@ -244,7 +244,7 @@ const insets = useSafeAreaInsets();
 
 ### `Text` 排版导出
 
-`Text` 组件与相关导出现已**弃用**，推荐使用 `Typography`。既有导入仍可继续工作，不会产生运行时错误——仅会在 TypeScript / IDE 中提示弃用。请在未来某个大版本移除弃用别名之前完成迁移。
+`Text` 组件与相关导出现已**弃用**，推荐使用 `Typography`。既有导入仍可继续工作，不会产生运行时错误：仅会在 TypeScript / IDE 中提示弃用。请在未来某个大版本移除弃用别名之前完成迁移。
 
 **弃用 → 推荐：**
 
@@ -270,11 +270,11 @@ import {
 
 以下文档页面已随本版本更新：
 
-- [Typography](/docs/native/components/typography) — 组件由 Text 重命名而来；完整 API、Anatomy 与用法已更新
-- [Menu](/docs/native/components/menu) — 新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
-- [Popover](/docs/native/components/popover) — 新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
-- [Select](/docs/native/components/select) — 新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
-- [快速开始](/docs/native/getting-started/quick-start) — 可选对等依赖 `@gorhom/bottom-sheet` 更新到 `^5.2.9`
+- [Typography](/docs/native/components/typography)：组件由 Text 重命名而来；完整 API、Anatomy 与用法已更新
+- [Menu](/docs/native/components/menu)：新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
+- [Popover](/docs/native/components/popover)：新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
+- [Select](/docs/native/components/select)：新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
+- [快速开始](/docs/native/getting-started/quick-start)：可选对等依赖 `@gorhom/bottom-sheet` 更新到 `^5.2.9`
 
 ## 链接
 

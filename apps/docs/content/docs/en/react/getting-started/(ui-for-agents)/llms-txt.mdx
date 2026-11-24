@@ -8,18 +8,37 @@ We provide [LLMs.txt](https://llmstxt.org/) files to make HeroUI v3 documentatio
 ## Available Files
 
 **Core documentation:**
-- [/react/llms.txt](/react/llms.txt) — Quick reference index for React documentation
-- [/react/llms-full.txt](/react/llms-full.txt) — Complete HeroUI React documentation
+- [/react/llms.txt](/react/llms.txt): Quick reference index for React documentation
+- [/react/llms-full.txt](/react/llms-full.txt): Complete HeroUI React documentation
 
 **For limited context windows:**
-- [/react/llms-components.txt](/react/llms-components.txt) — Component documentation only
-- [/react/llms-patterns.txt](/react/llms-patterns.txt) — Common patterns and recipes
+- [/react/llms-components.txt](/react/llms-components.txt): Component documentation only
+- [/react/llms-patterns.txt](/react/llms-patterns.txt): Common patterns and recipes
 
 **All platforms:**
-- [/llms.txt](/llms.txt) — Quick reference index (React + Native)
-- [/llms-full.txt](/llms-full.txt) — Complete documentation (React + Native)
-- [/llms-components.txt](/llms-components.txt) — All component documentation
-- [/llms-patterns.txt](/llms-patterns.txt) — All patterns and recipes
+- [/llms.txt](/llms.txt): Quick reference index (React + Native)
+- [/llms-full.txt](/llms-full.txt): Complete documentation (React + Native)
+- [/llms-components.txt](/llms-components.txt): All component documentation
+- [/llms-patterns.txt](/llms-patterns.txt): All patterns and recipes
+
+## Inside the Package
+
+`@heroui/react` also ships its docs as Markdown, so a coding agent reads the docs for the version installed in your project, with no network access.
+
+```
+node_modules/@heroui/react/docs/llms.txt
+node_modules/@heroui/react/docs/components/button.md
+node_modules/@heroui/react/docs/guides/theming.md
+```
+
+`llms.txt` is the index: it routes a task ("build a theme", "set up a project") to the page to read, and lists every component and guide. Point your agent at it from `AGENTS.md` or `CLAUDE.md`:
+
+```md
+Before using a HeroUI component, read `node_modules/@heroui/react/docs/llms.txt`
+and the page it links for that component.
+```
+
+The hosted files above always describe the latest release. Prefer the package copy when your project is on an older version.
 
 ## Inside the Package
 

@@ -53,7 +53,7 @@ github:
 
 ### 颜色系统
 
-我们很高兴推出完整的**颜色系统**——一整套用于颜色选择、处理与展示的组件。这些组件基于 React Aria 的颜色基元构建，可以无缝协同工作。
+我们很高兴推出完整的**颜色系统**：一整套用于颜色选择、处理与展示的组件。这些组件基于 React Aria 的颜色基元构建，可以无缝协同工作。
 
 **主要特性：**
 - **完整的色彩空间支持**：支持 HSL、HSB 与 RGB 色彩空间
@@ -154,7 +154,7 @@ ColorPicker 是一个复合组件，将所有颜色组件组合在一起，提�
 
 为 [Separator](/docs/components/separator) 组件新增了变体，提供不同的视觉风格。
 
-### Chip 组件 —— Label slot
+### Chip 组件：Label slot
 
 [Chip](/docs/components/chip) 组件现在支持 `Chip.Label` 子组件，以获得更好的视觉对齐。当移除起始或末尾的内容（如图标）时，标签文字会过于贴近 Chip 的边缘。为了向后兼容，纯文本的 children 会自动被包裹在 `<Chip.Label>` 中。
 
@@ -199,7 +199,7 @@ import { Chip } from '@heroui/react';
 
 ## 破坏性变更
 
-### Toast 组件 —— Container 重命名为 Provider
+### Toast 组件：Container 重命名为 Provider
 
 为提升语义清晰度，`Toast.Container` 已重命名为 `Toast.Provider`（#6151）。
 
@@ -241,7 +241,7 @@ import { Chip } from '@heroui/react';
 | | `.listbox-item--default` | `.list-box-item--default` | |
 | | `.listbox-item--danger` | `.list-box-item--danger` | |
 | **ListBoxSection** | `.listbox-section` | `.list-box-section` | 全部相关类名同步更新 |
-| **TextArea** | `.textarea` | `.textarea` | **未变更** —— 为避免与 Tailwind 冲突已回滚 |
+| **TextArea** | `.textarea` | `.textarea` | **未变更**：为避免与 Tailwind 冲突已回滚 |
 
 #### 迁移指南
 

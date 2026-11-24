@@ -1,5 +1,5 @@
 ---
-title: v1.1.0
+title: v1.1.1
 description:
   BottomSheet 通过 TrueSheet 迁移为原生底部弹层并新增 Content、Header、Body 与 Footer 部件，Toast 为连续弹出重构并新增 maxToasts，ScrollShadow 不再需要渐变库，并修复 Dialog、Select 与 Switch 的问题
 ---
@@ -8,7 +8,7 @@ description:
   <span className="text-sm text-muted">2026 年 11 月 18 日</span>
 </div>
 
-HeroUI Native v1.1.0 通过 [`@lodev09/react-native-true-sheet`](https://sheet.lodev09.com) 以原生底部弹层取代 `@gorhom/bottom-sheet`：iOS 上使用 sheet presentation controller，Android 上使用原生底部弹层。`BottomSheet` 现在通过 ref 控制，并新增 `Content`、`Header`、`Body` 与 `Footer` 部件；Popover、Select 与 Menu 中的 `presentation="bottom-sheet"` 也使用同一原生弹层。本版本还重构了 Toast 核心，使连续弹出的提示保持流畅；新增 `maxToasts`；使用原生 `backgroundImage` 渐变绘制 ScrollShadow 的渐隐效果；并修复了 Dialog、Select 与 Switch 的问题。
+HeroUI Native v1.1.1 通过 [`@lodev09/react-native-true-sheet`](https://sheet.lodev09.com) 以原生底部弹层取代 `@gorhom/bottom-sheet`：iOS 上使用 sheet presentation controller，Android 上使用原生底部弹层。`BottomSheet` 现在通过 ref 控制，并新增 `Content`、`Header`、`Body` 与 `Footer` 部件；Popover、Select 与 Menu 中的 `presentation="bottom-sheet"` 也使用同一原生弹层。本版本还重构了 Toast 核心，使连续弹出的提示保持流畅；新增 `maxToasts`；使用原生 `backgroundImage` 渐变绘制 ScrollShadow 的渐隐效果；并修复了 Dialog、Select 与 Switch 的问题。
 
 ## 安装
 
@@ -243,19 +243,19 @@ Toast provider 配置新增可选的 `maxToasts` 选项，超出上限时会移�
 
 以下文档页面已更新，以反映本版本的变更：
 
-- [快速开始](/docs/native/getting-started/quick-start) — 可选依赖改为 `@lodev09/react-native-true-sheet`
-- [Provider](/docs/native/getting-started/provider) — `maxToasts` 选项，以及 TrueSheet 作为 raw provider 的可选依赖
-- [BottomSheet](/docs/native/components/bottom-sheet) — 针对原生弹层重写，新增部件、停靠点、模糊、堆叠、导航与迁移指南
-- [Toast](/docs/native/components/toast) — `maxToasts` 以及显示大量提示的说明
-- [ScrollShadow](/docs/native/components/scroll-shadow) — 内置渐变、React Native 版本支持与 `LinearGradientComponent` 弃用说明
-- [Select](/docs/native/components/select) — 底部弹层呈现改用 TrueSheet；修复 dialog 拖动问题
-- [Popover](/docs/native/components/popover) — 底部弹层呈现改用 TrueSheet
-- [Menu](/docs/native/components/menu) — 底部弹层呈现改用 TrueSheet
-- [Input](/docs/native/components/input) — 在 BottomSheet 内无需键盘处理函数
-- [InputOTP](/docs/native/components/input-otp) — 在 BottomSheet 内无需键盘处理函数
-- [CloseButton](/docs/native/components/close-button) — 默认 `aria-label="Close"`
-- [Dialog](/docs/native/components/dialog) — 修复：向上滑动后松手可平稳归位，不再跳动
-- [Switch](/docs/native/components/switch) — 修复：旧版 Uniwind 与 RTL 下的滑块位置
+- [快速开始](/docs/native/getting-started/quick-start)：可选依赖改为 `@lodev09/react-native-true-sheet`
+- [Provider](/docs/native/getting-started/provider)：`maxToasts` 选项，以及 TrueSheet 作为 raw provider 的可选依赖
+- [BottomSheet](/docs/native/components/bottom-sheet)：针对原生弹层重写，新增部件、停靠点、模糊、堆叠、导航与迁移指南
+- [Toast](/docs/native/components/toast)：`maxToasts` 以及显示大量提示的说明
+- [ScrollShadow](/docs/native/components/scroll-shadow)：内置渐变、React Native 版本支持与 `LinearGradientComponent` 弃用说明
+- [Select](/docs/native/components/select)：底部弹层呈现改用 TrueSheet；修复 dialog 拖动问题
+- [Popover](/docs/native/components/popover)：底部弹层呈现改用 TrueSheet
+- [Menu](/docs/native/components/menu)：底部弹层呈现改用 TrueSheet
+- [Input](/docs/native/components/input)：在 BottomSheet 内无需键盘处理函数
+- [InputOTP](/docs/native/components/input-otp)：在 BottomSheet 内无需键盘处理函数
+- [CloseButton](/docs/native/components/close-button)：默认 `aria-label="Close"`
+- [Dialog](/docs/native/components/dialog)：修复：向上滑动后松手可平稳归位，不再跳动
+- [Switch](/docs/native/components/switch)：修复：旧版 Uniwind 与 RTL 下的滑块位置
 
 ## 链接
 

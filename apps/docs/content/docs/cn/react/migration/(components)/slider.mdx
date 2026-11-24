@@ -56,28 +56,28 @@ export default function App() {
 
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
-| `label` | — | 改用 `Label` 组件 |
-| `size` | — | 已移除（请改用 Tailwind CSS） |
-| `color` | — | 已移除（请改用 Tailwind CSS） |
-| `radius` | — | 已移除（请改用 Tailwind CSS） |
-| `classNames` | — | 改在各子组件上使用 `className` prop |
-| `showSteps` | — | 暂不支持 |
-| `showTooltip` | — | 暂不支持 |
-| `marks` | — | 暂不支持（请参阅 `Slider.Marks`） |
-| `startContent` | — | 直接在 Track 包装层中自定义 |
-| `endContent` | — | 直接在 Track 包装层中自定义 |
-| `hideValue` | — | 省略 `Slider.Output` |
-| `hideThumb` | — | 省略 `Slider.Thumb` |
-| `showOutline` | — | 改用 Tailwind CSS |
-| `renderThumb` | — | 使用 `Slider.Thumb` 的 render prop |
-| `renderLabel` | — | 改用 `Label` 组件 |
-| `renderValue` | — | 使用 `Slider.Output` 的 render prop |
-| `getValue` | — | 使用 `Slider.Output` 的 render prop |
-| `getTooltipValue` | — | 使用 `Slider.Output` 的 render prop |
-| `fillOffset` | — | 暂不支持 |
-| `disableThumbScale` | — | 改用 Tailwind CSS |
-| `disableAnimation` | — | 已移除 |
-| `onChangeEnd` | `Slider` | 仍支持——当用户完成拖动 thumb 时触发 |
+| `label` | - | 改用 `Label` 组件 |
+| `size` | - | 已移除（请改用 Tailwind CSS） |
+| `color` | - | 已移除（请改用 Tailwind CSS） |
+| `radius` | - | 已移除（请改用 Tailwind CSS） |
+| `classNames` | - | 改在各子组件上使用 `className` prop |
+| `showSteps` | - | 暂不支持 |
+| `showTooltip` | - | 暂不支持 |
+| `marks` | - | 暂不支持（请参阅 `Slider.Marks`） |
+| `startContent` | - | 直接在 Track 包装层中自定义 |
+| `endContent` | - | 直接在 Track 包装层中自定义 |
+| `hideValue` | - | 省略 `Slider.Output` |
+| `hideThumb` | - | 省略 `Slider.Thumb` |
+| `showOutline` | - | 改用 Tailwind CSS |
+| `renderThumb` | - | 使用 `Slider.Thumb` 的 render prop |
+| `renderLabel` | - | 改用 `Label` 组件 |
+| `renderValue` | - | 使用 `Slider.Output` 的 render prop |
+| `getValue` | - | 使用 `Slider.Output` 的 render prop |
+| `getTooltipValue` | - | 使用 `Slider.Output` 的 render prop |
+| `fillOffset` | - | 暂不支持 |
+| `disableThumbScale` | - | 改用 Tailwind CSS |
+| `disableAnimation` | - | 已移除 |
+| `onChangeEnd` | `Slider` | 仍支持：当用户完成拖动 thumb 时触发 |
 
 ## 迁移示例
 
@@ -243,11 +243,11 @@ Slider (Root)
 ## 总结
 
 1. **组件结构**：必须使用复合组件（`Slider.Output`、`Slider.Track`、`Slider.Fill`、`Slider.Thumb`）
-2. **标签处理**：移除 `label` prop——改用 `Label` 组件
-3. **移除样式 prop**：`size`、`color`、`radius` —— 改用 Tailwind CSS
+2. **标签处理**：移除 `label` prop，改用 `Label` 组件
+3. **移除样式 prop**：`size`、`color`、`radius`，改用 Tailwind CSS
 4. **移除 classNames**：改在各子组件上使用 `className` prop
-5. **移除功能性 prop**：`showSteps`、`showTooltip`、`marks`、`startContent`、`endContent` —— 暂不支持，或自行手动定制
-6. **移除 render prop**：`renderThumb`、`renderLabel`、`renderValue` —— 改用各组件自身的 render prop
-7. **移除可见性 prop**：`hideValue`、`hideThumb` —— 通过省略对应子组件实现
+5. **移除功能性 prop**：`showSteps`、`showTooltip`、`marks`、`startContent`、`endContent`，暂不支持，或自行手动定制
+6. **移除 render prop**：`renderThumb`、`renderLabel`、`renderValue`，改用各组件自身的 render prop
+7. **移除可见性 prop**：`hideValue`、`hideThumb`，通过省略对应子组件实现
 8. **区间 Slider**：必须在 `Slider.Track` 的 render prop 中遍历多个 thumb
-9. **onChangeEnd**：在 `Slider` 上仍受支持——当用户结束拖动 thumb 时触发
+9. **onChangeEnd**：在 `Slider` 上仍受支持，当用户结束拖动 thumb 时触发

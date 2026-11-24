@@ -55,20 +55,20 @@ export default function App() {
 | v2 Prop | v3 Location | Notes |
 |---------|-------------|-------|
 | `onValueChange` | `onChange` | Renamed event handler |
-| `label` | — | Use `Label` component |
-| `description` | — | Use `Description` component |
-| `errorMessage` | — | Use `FieldError` component |
+| `label` | - | Use `Label` component |
+| `description` | - | Use `Description` component |
+| `errorMessage` | - | Use `FieldError` component |
 | `variant` | `variant` (on NumberField) | Simplified to `primary` \| `secondary` only |
-| `color` | — | Removed (use Tailwind CSS) |
-| `size` | — | Removed (use Tailwind CSS) |
-| `radius` | — | Removed (use Tailwind CSS) |
-| `startContent` | — | Place content manually in Group |
-| `endContent` | — | Place content manually in Group |
-| `labelPlacement` | — | Handle with layout classes |
-| `hideStepper` | — | Omit `NumberField.IncrementButton` and `NumberField.DecrementButton` |
-| `isClearable` | — | Handle clear functionality manually |
-| `classNames` | — | Use `className` props on individual components |
-| `isWheelDisabled` | — | Removed |
+| `color` | - | Removed (use Tailwind CSS) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `startContent` | - | Place content manually in Group |
+| `endContent` | - | Place content manually in Group |
+| `labelPlacement` | - | Handle with layout classes |
+| `hideStepper` | - | Omit `NumberField.IncrementButton` and `NumberField.DecrementButton` |
+| `isClearable` | - | Handle clear functionality manually |
+| `classNames` | - | Use `className` props on individual components |
+| `isWheelDisabled` | - | Removed |
 
 ## Migration Examples
 
@@ -265,7 +265,7 @@ NumberField (Root)
 3. **Label/Description/Error**: Use separate components (`Label`, `Description`, `FieldError`)
 4. **Stepper Buttons**: Must explicitly include `NumberField.IncrementButton` and `NumberField.DecrementButton`
 5. **Event Handler**: `onValueChange` → `onChange`
-6. **Variant Simplified**: v3 supports only `variant="primary"` and `variant="secondary"`; `color`, `size`, `radius` removed — use Tailwind CSS
+6. **Variant Simplified**: v3 supports only `variant="primary"` and `variant="secondary"`; `color`, `size`, `radius` removed - use Tailwind CSS
 7. **Content Props Removed**: `startContent`, `endContent` - place manually
 8. **Clear Button Removed**: `isClearable` removed - handle manually
 9. **Stepper Control**: `hideStepper` removed - omit buttons instead

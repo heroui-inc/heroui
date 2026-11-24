@@ -71,14 +71,14 @@ export default function App() {
 | v2 prop | v3 位置 | 说明 |
 | ------- | ------- | ---- |
 | `isLoading` | `Button` | 已重命名为 `isPending` |
-| `isIconOnly` | `Button` | v3 仍支持 — 渲染仅含图标的方形按钮 |
-| `color` | — | 已移除（由变体负责样式） |
-| `radius` | — | 已移除（请使用 Tailwind，例如 `rounded-lg`） |
-| `startContent`, `endContent` | — | 请将图标作为 children 放置 |
-| `spinner`, `spinnerPlacement` | — | 请通过渲染 prop 自行处理加载态 |
-| `disableRipple` | — | 已移除（v3 已移除波纹） |
-| `disableAnimation` | — | 已移除（动画由内部处理） |
-| `classNames` | — | 请使用 `className` |
+| `isIconOnly` | `Button` | v3 仍支持：渲染仅含图标的方形按钮 |
+| `color` | - | 已移除（由变体负责样式） |
+| `radius` | - | 已移除（请使用 Tailwind，例如 `rounded-lg`） |
+| `startContent`, `endContent` | - | 请将图标作为 children 放置 |
+| `spinner`, `spinnerPlacement` | - | 请通过渲染 prop 自行处理加载态 |
+| `disableRipple` | - | 已移除（v3 已移除波纹） |
+| `disableAnimation` | - | 已移除（动画由内部处理） |
+| `classNames` | - | 请使用 `className` |
 
 ### 5. ButtonGroup 仍可用
 
@@ -333,12 +333,12 @@ v3 `Button` 支持渲染 prop 模式，可拿到状态信息：
 
 可用的渲染 prop：
 
-- `isPending` — 是否处于加载状态  
-- `isPressed` — 是否正被按下  
-- `isHovered` — 是否悬停  
-- `isFocused` — 是否聚焦  
-- `isFocusVisible` — 是否应显示焦点环  
-- `isDisabled` — 是否禁用  
+- `isPending`：是否处于加载状态  
+- `isPressed`：是否正被按下  
+- `isHovered`：是否悬停  
+- `isFocused`：是否聚焦  
+- `isFocusVisible`：是否应显示焦点环  
+- `isDisabled`：是否禁用  
 
 ## 总结
 
@@ -346,9 +346,9 @@ v3 `Button` 支持渲染 prop 模式，可拿到状态信息：
 2. **变体体系变更**：新变体系统（`primary`、`secondary`、`tertiary`、`outline`、`ghost`、`danger`、`danger-soft`）  
 3. **`danger-soft` 变体**：v3 新增，替代 v2 的 `color="danger" variant="flat"`  
 4. **`isLoading` → `isPending`**：加载相关 prop 已重命名  
-5. **`isIconOnly`**：v3 仍支持 — 用于仅图标的方形按钮  
-6. **默认宽度变更**：按钮默认 `w-fit`，不再内置最小宽度 — 可添加 `min-w-*` 贴近 v2  
-7. **图标**：`startContent` / `endContent` 已移除 — 请将图标作为 children  
+5. **`isIconOnly`**：v3 仍支持，用于仅图标的方形按钮  
+6. **默认宽度变更**：按钮默认 `w-fit`，不再内置最小宽度，可添加 `min-w-*` 贴近 v2  
+7. **图标**：`startContent` / `endContent` 已移除，请将图标作为 children  
 8. **加载指示器**：需通过渲染 prop 自行组合 Spinner 等  
 9. **渲染 prop**：v3 `Button` 的 children 可为函数，参数包含 `isPending`、`isPressed`、`isHovered`、`isFocused`、`isFocusVisible`、`isDisabled`  
 10. **`radius` 已移除**：请使用 Tailwind CSS 类  

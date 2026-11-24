@@ -33,7 +33,7 @@ import { Slider } from 'heroui-native';
 - **Slider**: Main container that manages slider value state, orientation, and provides context to all sub-components. Supports single value and range modes.
 - **Slider.Output**: Optional display of the current value(s). Supports render functions for custom formatting. Shows a formatted value label by default.
 - **Slider.Track**: Sizing container for Fill and Thumb elements. Reports its layout size for position calculations. Supports tap-to-position and render-function children for dynamic content (e.g. multiple thumbs for range sliders).
-- **Slider.TrackBackground**: Optional theme-aware background container rendered behind the track surface. Mounted automatically whenever the active theme registers default background content (e.g. `glass`) — the track background always uses the default color. Replace or remove it via the `background` prop on `Slider.Track`.
+- **Slider.TrackBackground**: Optional theme-aware background container rendered behind the track surface. Mounted automatically whenever the active theme registers default background content (e.g. `glass`): the track background always uses the default color. Replace or remove it via the `background` prop on `Slider.Track`.
 - **Slider.Fill**: Responsive fill bar that stretches the full cross-axis of the Track. Only the main-axis position and size are computed.
 - **Slider.Thumb**: Draggable thumb element using react-native-gesture-handler. Centered on the cross-axis by the Track layout. Animates scale on press via react-native-reanimated. Each thumb gets `role="slider"` with full `accessibilityValue`.
 

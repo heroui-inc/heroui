@@ -57,7 +57,7 @@ Update to the latest version:
 
 ```tsx
 toast.show({ label: 'Quick flash', duration: 0 });
-// Toast stayed on screen indefinitely — same as 'persistent'
+// Toast stayed on screen indefinitely: same as 'persistent'
 ```
 
 **After:**
@@ -99,7 +99,7 @@ Component styles now apply font weight through Uniwind `font-normal`, `font-medi
 }
 ```
 
-**Migration:** Add the missing `--font-bold` variable pointing at the bold face of your font family. System-font apps require no changes — numeric weights are restored automatically when no `--font-*` variables are defined.
+**Migration:** Add the missing `--font-bold` variable pointing at the bold face of your font family. System-font apps require no changes: numeric weights are restored automatically when no `--font-*` variables are defined.
 
 **Related PR:** [#473](https://github.com/heroui-inc/heroui-native/pull/473)
 
@@ -127,10 +127,10 @@ This release includes fixes for the following issues:
 
 The following documentation pages have been updated to reflect the changes in this release:
 
-- [Theming](/docs/native/getting-started/theming) — Documents the `--font-bold` variable requirement and explains how font weights resolve with and without custom fonts
-- [Typography](/docs/native/components/text) — Notes that custom `--font-*` families change weight resolution and links to the theming guide
-- [SearchField](/docs/native/components/search-field) — Clarifies that SearchIcon and ClearButton are optional and documents the Without Search Icon composition
-- [Toast](/docs/native/components/toast) — Clarifies `duration: 0` behavior versus `'persistent'`
+- [Theming](/docs/native/getting-started/theming): Documents the `--font-bold` variable requirement and explains how font weights resolve with and without custom fonts
+- [Typography](/docs/native/components/text): Notes that custom `--font-*` families change weight resolution and links to the theming guide
+- [SearchField](/docs/native/components/search-field): Clarifies that SearchIcon and ClearButton are optional and documents the Without Search Icon composition
+- [Toast](/docs/native/components/toast): Clarifies `duration: 0` behavior versus `'persistent'`
 
 ## Links
 

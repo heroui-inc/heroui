@@ -116,6 +116,22 @@
       "cardDescription": "More components, charts, advanced MCP & Skills, and a complete theme builder. Get your license now at a discounted price for a limited time.",
       "cta": "Get Pro deal"
     },
+    "blackFriday": {
+      "dayLabel": "Black Friday",
+      "weekLabel": "Black Friday week",
+      "headline": "{percent}% off",
+      "endsIn": "Ends in",
+      "cardTitle": "Build faster with HeroUI Pro",
+      "cardDescription": "Components, templates, and AI tooling for React and React Native. Use the code at checkout.",
+      "code": "Code",
+      "copy": "Copy",
+      "copied": "Copied",
+      "copyLabel": "Copy {code}",
+      "copiedLabel": "Copied {code}",
+      "copiedAnnouncement": "{code} copied to clipboard.",
+      "copyError": "Couldn't copy. Copy the code by hand.",
+      "cta": "Get the deal"
+    },
     "units": {
       "days": "d",
       "hours": "h",

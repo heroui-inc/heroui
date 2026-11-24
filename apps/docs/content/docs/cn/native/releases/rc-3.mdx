@@ -249,7 +249,7 @@ InputGroup 提供装饰性文本输入，`Prefix` 与 `Suffix` 子组件绝对�
 - 自动内边距：通过 `onLayout` 测量 Prefix/Suffix 宽度，自动作为 Input 的 `paddingLeft`/`paddingRight`
 - Prefix/Suffix 上 `isDecorative` 统一设置 `pointerEvents="none"`、`accessibilityElementsHidden` 与 `importantForAccessibility`
 - 根级 `isDisabled` 通过上下文级联（Prefix/Suffix 透明度与 pointer-events、Input 可编辑性）
-- `InputGroup.Input` 为直接透传——由使用方在 Input 上管理 `value`/`onChangeText`
+- `InputGroup.Input` 为直接透传：由使用方在 Input 上管理 `value`/`onChangeText`
 
 **用法：**
 
@@ -304,7 +304,7 @@ export function DisabledInput() {
 
 ### Slot 的 `combineStyles` 修复
 
-Slot 原语的 `combineStyles` 现返回样式数组，而不再使用 `StyleSheet.flatten`——后者会通过深拷贝样式对象破坏 Reanimated 的 `SharedValue` 与 `useAnimatedStyle` 绑定。
+Slot 原语的 `combineStyles` 现返回样式数组，而不再使用 `StyleSheet.flatten`：后者会通过深拷贝样式对象破坏 Reanimated 的 `SharedValue` 与 `useAnimatedStyle` 绑定。
 
 **改进：**
 
@@ -344,9 +344,9 @@ Slot 原语的 `combineStyles` 现返回样式数组，而不再使用 `StyleShe
 
 以下文档页面已随本版本更新：
 
-- [TagGroup](/docs/native/components/tag-group) — 新组件文档：用法示例与 API 参考
-- [Menu](/docs/native/components/menu) — 新组件文档：用法示例与 API 参考
-- [InputGroup](/docs/native/components/input-group) — 新组件文档：用法示例与 API 参考
+- [TagGroup](/docs/native/components/tag-group)：新组件文档：用法示例与 API 参考
+- [Menu](/docs/native/components/menu)：新组件文档：用法示例与 API 参考
+- [InputGroup](/docs/native/components/input-group)：新组件文档：用法示例与 API 参考
 
 ## 链接
 
