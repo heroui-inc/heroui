@@ -32,9 +32,9 @@
     @apply status-disabled;
   }
 
-  /* Active/pressed state */
+  /* Active/pressed scale; RAC keeps data-pressed while the dialog is open, so skip expanded */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     transform: scale(0.97);
   }
 }
