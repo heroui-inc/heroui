@@ -100,6 +100,18 @@ describe("Autocomplete", () => {
     expect(document.querySelector('[data-slot="autocomplete-value"]')).not.toBeNull();
   });
 
+  it("exposes the indicator as the named, focusable trigger button", () => {
+    render(<AutocompleteExample />);
+
+    const button = screen.getByRole("button", {name: "Select an animal Favorite Animal"});
+
+    expect(button).toHaveAttribute("data-slot", "autocomplete-indicator-button");
+    expect(button).toHaveClass("autocomplete__indicator-button");
+    expect(button).toHaveAttribute("aria-haspopup", "listbox");
+    expect(button).toHaveAttribute("aria-expanded", "false");
+    expect(button.querySelector('[data-slot="autocomplete-default-indicator"]')).not.toBeNull();
+  });
+
   it("supports open, select, and value update via Select tester", async () => {
     const onChange = vi.fn();
 

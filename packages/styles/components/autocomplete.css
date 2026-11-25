@@ -113,6 +113,21 @@
   }
 }
 
+/* The Select's focusable trigger button. It wraps the chevron and fills the inline-end padding
+ * the trigger reserves for it, so it has a real hit area and a non-empty focus rectangle. The
+ * trigger's focus ring (Group `data-focus-visible`) marks keyboard focus, so the button draws none. */
+.autocomplete__indicator-button {
+  @apply absolute inset-y-0 end-0 flex w-7 items-center justify-center outline-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  &:disabled,
+  &[data-disabled="true"] {
+    cursor: inherit;
+  }
+}
+
 .autocomplete__indicator {
   @apply absolute inset-y-0 end-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
 
