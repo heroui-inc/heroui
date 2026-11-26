@@ -220,7 +220,13 @@ const AutocompleteIndicator = <E extends keyof React.JSX.IntrinsicElements = "sv
       />
     );
 
-  return <ButtonPrimitive>{indicator}</ButtonPrimitive>;
+  // This is the Select's trigger button: it consumes the Select's ButtonContext, which supplies its
+  // accessible name (value + label), `aria-haspopup`, `aria-expanded` and keyboard handling.
+  return (
+    <ButtonPrimitive className={slots?.indicatorButton()} data-slot="autocomplete-indicator-button">
+      {indicator}
+    </ButtonPrimitive>
+  );
 };
 
 AutocompleteIndicator.displayName = "HeroUI.Autocomplete.Indicator";
