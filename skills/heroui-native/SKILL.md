@@ -57,6 +57,17 @@ import { Button } from "heroui-native";
 
 **For component details, examples, props, and implementation patterns, always fetch documentation:**
 
+### With the HeroUI MCP Server
+
+When the HeroUI Native MCP server is connected, use its tools instead of the scripts. This skill is also served by that server, and the served copy has no `scripts/` folder.
+
+| Instead of                      | Call the tool                                                        |
+| ------------------------------- | -------------------------------------------------------------------- |
+| `list_components.mjs`           | `list_components`                                                    |
+| `get_component_docs.mjs Button` | `get_component_docs` with `{ "components": ["Button"] }`             |
+| `get_theme.mjs`                 | `get_theme_variables`                                                |
+| `get_docs.mjs <path>`           | `get_docs` with `{ "path": "/docs/native/getting-started/theming" }` |
+
 ### Using Scripts
 
 ```bash
@@ -76,7 +87,7 @@ node scripts/get_docs.mjs /docs/native/getting-started/theming
 
 ### Direct MDX URLs
 
-Component docs: fetch `.mdx` with a concrete kebab-case slug. Run `node scripts/list_components.mjs` when the slug is unknown, and never fetch a URL that still contains a placeholder.
+Component docs: fetch `.mdx` with a concrete kebab-case slug. Run `node scripts/list_components.mjs` (or the `list_components` tool) when the slug is unknown, and never fetch a URL that still contains a placeholder.
 
 Examples:
 
