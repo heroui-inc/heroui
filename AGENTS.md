@@ -10,8 +10,8 @@ HeroUI v3 is a modern React UI library built with **Tailwind CSS v4**, organized
 
 | Technology | Version | Purpose |
 |---|---|---|
-| Node.js | 22+ | Runtime |
-| pnpm | 10.26.2 | Package manager (via corepack) |
+| Node.js | 26 (`.nvmrc`; 24.15+ allowed) | Runtime |
+| pnpm | 12 (pinned in root `packageManager`) | Package manager |
 | React | 19+ | UI framework |
 | Tailwind CSS | 4.x | Styling |
 | TypeScript | 5.x | Type safety |
@@ -49,7 +49,7 @@ Use the workspace manifests and lockfile as the source of truth for exact depend
 
 | Action | Command |
 |---|---|
-| Install dependencies | `pnpm i --hoist` |
+| Install dependencies | `pnpm i` |
 | Build libraries (styles + React) | `pnpm build` |
 | Build React and its dependencies | `pnpm build:react` |
 | Build docs | `pnpm build:docs` |
@@ -361,7 +361,7 @@ Source of truth: `packages/react/src/components/index.ts`. Keep this inventory a
 
 2. **Build order matters** — `@heroui/styles` must build before `@heroui/react`. Running `pnpm build` from root handles this via Turbo's `^build` dependency.
 
-3. **Native addons allowlist** — `onlyBuiltDependencies` in root `pnpm-workspace.yaml` allows native compilation for `esbuild`, `@swc/core`, `@parcel/watcher`, etc. If this list is missing, you'll see "Ignored build scripts" warnings.
+3. **Native addons allowlist** — `allowBuilds` in root `pnpm-workspace.yaml` allows native compilation for `esbuild`, `@swc/core`, `@parcel/watcher`, etc. A dependency with build scripts that is missing from this map fails `pnpm install`; add it with `true` (or `false` to skip its scripts).
 
 4. **Behavioral tests** — see [Behavioral tests](#behavioral-tests-herouireact) above. Harness lives in `@heroui/testing`; suites in `packages/react/tests/`.
 
@@ -371,6 +371,6 @@ Source of truth: `packages/react/src/components/index.ts`. Keep this inventory a
 
 ## Cursor Cloud Specific
 
-- **Node.js v22+** is installed via binary tarball to `/usr/local/`.
-- **pnpm** is activated via `corepack` — the `packageManager` field in root `package.json` declares `pnpm@10.26.2`.
+- **Node.js v26** (see `.nvmrc`) is installed via binary tarball to `/usr/local/`.
+- **pnpm 12** is required — the `packageManager` field in root `package.json` pins the exact version; pnpm 10+ switches to it automatically.
 - Full command reference and component architecture details are also in `CLAUDE.md`.
