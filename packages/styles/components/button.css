@@ -43,9 +43,11 @@
     @apply status-pending;
   }
 
-  /* Active / pressed */
+  /* Active / pressed
+   * React Aria keeps `data-pressed` on an overlay trigger for as long as the overlay
+   * is open, so only hold the scale for genuine presses (see `:active` above). */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     @apply will-change-transform;
     background-color: var(--button-bg-pressed);
     transform: scale(0.97);
@@ -74,7 +76,7 @@
   }
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     transform: scale(0.98);
   }
 }
@@ -87,7 +89,7 @@
   @apply h-11 text-base md:h-10;
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     transform: scale(0.96);
   }
 }

@@ -40,9 +40,11 @@
     @apply status-pending;
   }
 
-  /* Default active/pressed state - scale transform */
+  /* Default active/pressed state - scale transform.
+   * React Aria keeps `data-pressed` while the menu is open, so exclude the open
+   * state and only scale for genuine presses. */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     transform: scale(0.97);
   }
 }

@@ -111,6 +111,24 @@ describe("Dropdown (browser)", () => {
   });
 
   /**
+   * React Aria keeps `data-pressed` on an overlay trigger for as long as the overlay is
+   * open, so the press scale must end with the press rather than with the close.
+   */
+  it("does not hold the pressed scale while the menu is open", async () => {
+    await renderDropdown();
+
+    const trigger = page.getByRole("button", {name: "Menu"});
+
+    await trigger.click();
+    await expect.element(page.getByRole("menu")).toBeInTheDocument();
+
+    expect(trigger.element()).toHaveAttribute("data-pressed", "true");
+    expect(trigger.element()).toHaveAttribute("aria-expanded", "true");
+
+    await expect.poll(() => getComputedStyle(trigger.element()).transform).toBe("none");
+  });
+
+  /**
    * WebKit reports this animation as pending in the same frame React Aria checks
    * `getAnimations()`, then unmounts. The menu has to stay through the exit.
    */
