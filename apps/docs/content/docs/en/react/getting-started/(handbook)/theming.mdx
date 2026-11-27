@@ -503,6 +503,10 @@ For a complete reference, see: [Colors Documentation](/docs/react/getting-starte
     --color-default-soft-foreground: var(--default-soft-foreground);
     --color-default-soft-hover: var(--default-soft-hover);
 
+    /* Fill Colors */
+    --color-fill: var(--fill);
+    --color-fill-hover: var(--fill-hover);
+
     --color-accent-soft: var(--accent-soft);
     --color-accent-soft-foreground: var(--accent-soft-foreground);
     --color-accent-soft-hover: var(--accent-soft-hover);
@@ -595,6 +599,8 @@ For a complete reference, see: [Colors Documentation](/docs/react/getting-starte
 />
 
 Form controls rely on `--field-*` theme variables. Hover, focus, and border variants are defined under **Calculated Colors** in `variables.css` and mapped to Tailwind in `theme.css` (e.g. `--color-field-hover: var(--field-hover)`). Override `--field-background`, `--field-hover`, and related tokens in your theme to restyle inputs, checkboxes, radios, and OTP slots without affecting surfaces like buttons or cards.
+
+The `secondary` variant of each field and the Tabs track use `--fill` instead: `--foreground` at low opacity. Because it is translucent, it keeps the same contrast on `--background` and inside cards, so the same variant works in both places. Override `--fill` and `--fill-hover` to make these insets stronger or softer.
 
 ## Scrollbars
 

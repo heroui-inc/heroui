@@ -106,8 +106,12 @@
     -webkit-appearance: none;
     appearance: none;
     clip-path: inset(0 round var(--radius-field));
-    -webkit-box-shadow: 0 0 0 1000px var(--input-group-bg) inset;
-    box-shadow: 0 0 0 1000px var(--input-group-bg) inset;
+    -webkit-box-shadow:
+      0 0 0 1000px var(--input-group-bg) inset,
+      0 0 0 1000px var(--input-group-autofill-base, transparent) inset;
+    box-shadow:
+      0 0 0 1000px var(--input-group-bg) inset,
+      0 0 0 1000px var(--input-group-autofill-base, transparent) inset;
     -webkit-text-fill-color: var(--field-foreground);
     caret-color: var(--field-foreground);
     transition: background-color 9999s ease-in-out 0s;
@@ -185,9 +189,11 @@
   @apply shadow-none;
   background-color: var(--input-group-bg);
 
-  --input-group-bg: var(--default);
-  --input-group-bg-hover: var(--default-hover);
-  --input-group-bg-focus: var(--default);
+  --input-group-bg: var(--fill);
+  --input-group-bg-hover: var(--fill-hover);
+  --input-group-bg-focus: var(--fill);
+  /* `--fill` is translucent. Autofill composites it over `--surface`, where secondary fields usually sit. */
+  --input-group-autofill-base: var(--surface);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),

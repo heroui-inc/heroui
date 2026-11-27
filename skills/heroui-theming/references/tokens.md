@@ -212,6 +212,7 @@ Derived with `color-mix()` from the tokens above, inside the light and dark bloc
 | `--accent-soft`, `--success-soft`, `--warning-soft`                      | color at 15% (light) / 12% (dark) over transparent                               | `bg-accent-soft`…              |
 | `--danger-soft`                                                          | `--danger` at 15% over transparent                                               | `bg-danger-soft`               |
 | `--default-soft`                                                         | `--default` at 50% over transparent                                              | `bg-default-soft`              |
+| `--fill` / `--fill-hover`                                                | `--foreground` at 4.5% / 7% (light), 9% / 12% (dark) over transparent | `bg-fill`, `bg-fill-hover` |
 | `--*-soft-hover`                                                         | same color, a step more opaque (20% light / 16% dark; default 60%)               | `bg-accent-soft-hover`…        |
 | `--*-soft-foreground`                                                    | color mixed toward `--foreground` for contrast (default: `--default-foreground`) | `text-accent-soft-foreground`… |
 | `--field-hover`                                                          | 90% `--field-background` + 2% `--field-foreground`                               | `bg-field-hover`               |

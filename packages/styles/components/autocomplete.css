@@ -73,9 +73,9 @@
   @apply shadow-none;
   background-color: var(--autocomplete-trigger-bg);
 
-  --autocomplete-trigger-bg: var(--default);
-  --autocomplete-trigger-bg-hover: var(--default-hover);
-  --autocomplete-trigger-bg-focus: var(--default);
+  --autocomplete-trigger-bg: var(--fill);
+  --autocomplete-trigger-bg-hover: var(--fill-hover);
+  --autocomplete-trigger-bg-focus: var(--fill);
 
   /* Exclude when clear button is hovered to prevent double hover effect */
   @media (hover: hover) {

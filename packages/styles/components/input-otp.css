@@ -94,9 +94,9 @@
   @apply shadow-none;
   background-color: var(--input-otp-slot-bg);
 
-  --input-otp-slot-bg: var(--default);
-  --input-otp-slot-bg-hover: var(--default-hover);
-  --input-otp-slot-bg-focus: var(--default);
+  --input-otp-slot-bg: var(--fill);
+  --input-otp-slot-bg-hover: var(--fill-hover);
+  --input-otp-slot-bg-focus: var(--fill);
 
   @media (hover: hover) {
     &:hover,
