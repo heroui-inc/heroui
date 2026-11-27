@@ -1,6 +1,6 @@
 import type {Key} from "@react-types/shared";
 
-import {User, cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
+import {User, act, cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
 import {useFilter} from "react-aria-components/Autocomplete";
 
 import {Autocomplete} from "@/components/autocomplete";
@@ -18,6 +18,8 @@ const animals = [
 ];
 
 const AutocompleteExample = (props: {
+  defaultOpen?: boolean;
+  isOpen?: boolean;
   isDisabled?: boolean;
   isInvalid?: boolean;
   value?: Key | null;
@@ -31,9 +33,11 @@ const AutocompleteExample = (props: {
   return (
     <Autocomplete
       data-testid="autocomplete"
+      defaultOpen={props.defaultOpen}
       defaultValue={props.defaultValue}
       isDisabled={props.isDisabled}
       isInvalid={props.isInvalid}
+      isOpen={props.isOpen}
       placeholder="Select an animal"
       selectionMode="single"
       value={props.value}
@@ -184,6 +188,34 @@ describe("Autocomplete", () => {
     expect(screen.getByText("Please choose an animal")).toBeInTheDocument();
     expect(document.querySelector('[data-slot="field-error"]')).not.toBeNull();
     expect(screen.getByTestId("autocomplete")).toHaveAttribute("data-invalid", "true");
+  });
+
+  describe("indicator", () => {
+    const getIndicator = () =>
+      document.querySelector('[data-slot="autocomplete-default-indicator"]');
+
+    it("supports a deferred data-open while the root updates at once", () => {
+      const {rerender} = render(<AutocompleteExample isOpen={false} />);
+      const root = screen.getByTestId("autocomplete");
+
+      rerender(<AutocompleteExample isOpen />);
+      expect(root).toHaveAttribute("data-open", "true");
+      expect(getIndicator()).not.toHaveAttribute("data-open");
+      act(() => vi.advanceTimersByTime(50));
+      expect(getIndicator()).toHaveAttribute("data-open", "true");
+
+      rerender(<AutocompleteExample isOpen={false} />);
+      expect(root).not.toHaveAttribute("data-open");
+      expect(getIndicator()).toHaveAttribute("data-open", "true");
+      act(() => vi.advanceTimersByTime(50));
+      expect(getIndicator()).not.toHaveAttribute("data-open");
+    });
+
+    it("renders data-open on the first render when defaultOpen", () => {
+      render(<AutocompleteExample defaultOpen />);
+
+      expect(getIndicator()).toHaveAttribute("data-open", "true");
+    });
   });
 
   describe("multiple selection with tags", () => {
