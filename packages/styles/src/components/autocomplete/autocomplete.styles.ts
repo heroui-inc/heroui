@@ -12,6 +12,7 @@ export const autocompleteVariants = tv({
     clearButton: "autocomplete__clear-button",
     filter: "autocomplete__filter",
     indicator: "autocomplete__indicator",
+    indicatorButton: "autocomplete__indicator-button",
     popover: "autocomplete__popover",
     trigger: "autocomplete__trigger",
     value: "autocomplete__value",

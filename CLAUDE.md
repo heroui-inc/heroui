@@ -8,8 +8,8 @@ HeroUI v3 is a modern React UI library built with Tailwind CSS v4, using a pnpm 
 
 ### Key Technical Stack
 
-- **Node.js**: v22+ required
-- **pnpm**: v10.26.2 (package manager)
+- **Node.js**: v26 (see `.nvmrc`; `engines` also allows v24.15+)
+- **pnpm**: v12 (exact version pinned in root `packageManager`)
 - **React**: v19+
 - **Tailwind CSS**: v4.3.3
 - **TypeScript**: v5.9.3
@@ -24,8 +24,8 @@ Use the workspace manifests and lockfile as the source of truth for exact depend
 ### Core Development Commands
 
 ```bash
-# Install dependencies (use --hoist flag)
-pnpm i --hoist
+# Install dependencies
+pnpm i
 
 # Start Storybook for component development
 pnpm dev

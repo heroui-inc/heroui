@@ -44,15 +44,13 @@ describe("Sheet", () => {
     await tester.open();
     expect(tester.getDialog()).toHaveAccessibleName("Details");
     await setupUser().click(screen.getByRole("button", {name: "Done"}));
-    await waitFor(() =>
-      expect(document.querySelector('[data-slot="sheet-overlay"]')).toHaveAttribute(
-        "data-exiting",
-        "true",
-      ),
-    );
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(onOpenChange.mock.calls).toEqual([[true], [false]]);
     expect(onClose).toHaveBeenCalledTimes(1);
+    // jsdom exits within one frame, so assert the overlay unmounts rather than data-exiting.
+    await waitFor(() =>
+      expect(document.querySelector('[data-slot="sheet-overlay"]')).not.toBeInTheDocument(),
+    );
   });
 
   it("supports controlled state without a trigger", async () => {
@@ -75,10 +73,7 @@ describe("Sheet", () => {
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     rerender(tree(false));
     await waitFor(() =>
-      expect(document.querySelector('[data-slot="sheet-overlay"]')).toHaveAttribute(
-        "data-exiting",
-        "true",
-      ),
+      expect(document.querySelector('[data-slot="sheet-overlay"]')).not.toBeInTheDocument(),
     );
   });
 
@@ -148,12 +143,9 @@ describe("Sheet", () => {
     expect(onOpenChange).not.toHaveBeenCalled();
     await setupUser().click(screen.getByRole("button", {name: "Dismiss sheet"}));
     expect(onOpenChange).toHaveBeenCalledWith(false);
-    // The exit can finish before waitFor polls, so accept either the exiting or unmounted overlay.
-    await waitFor(() => {
-      const overlay = document.querySelector('[data-slot="sheet-overlay"]');
-
-      if (overlay) expect(overlay).toHaveAttribute("data-exiting", "true");
-    });
+    await waitFor(() =>
+      expect(document.querySelector('[data-slot="sheet-overlay"]')).not.toBeInTheDocument(),
+    );
   });
 
   it("calls a close-trigger consumer handler", async () => {
