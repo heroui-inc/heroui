@@ -104,8 +104,11 @@
     @apply rounded ring-2 ring-focus ring-offset-2 ring-offset-background outline-none;
   }
 
-  /* Pressed state */
-  &[data-pressed="true"] {
+  /* Pressed state
+   * React Aria keeps `data-pressed` on an overlay trigger for as long as the popup is
+   * open, so restore full opacity once opened and only dim during an active press. */
+  &:active,
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     @apply opacity-70;
   }
 
