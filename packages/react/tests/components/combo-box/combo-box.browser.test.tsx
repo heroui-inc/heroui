@@ -180,4 +180,22 @@ describe("ComboBox (browser)", () => {
     await expect.element(page.getByRole("button", {name: "Continue"})).toHaveFocus();
     await expect.element(listbox).not.toBeInTheDocument();
   });
+
+  /**
+   * React Aria keeps `data-pressed` on an overlay trigger for as long as the popover is
+   * open, so the trigger must restore its full opacity once open rather than staying dimmed.
+   */
+  it("does not hold the pressed dimmed opacity on the trigger while the popover is open", async () => {
+    await render(<ComboBoxFixture />);
+
+    const trigger = page.getByRole("button", {name: "Show suggestions"});
+
+    await trigger.click();
+    await expect.element(page.getByRole("listbox")).toBeInTheDocument();
+
+    expect(trigger.element()).toHaveAttribute("data-pressed", "true");
+    expect(trigger.element()).toHaveAttribute("aria-expanded", "true");
+
+    await expect.poll(() => getComputedStyle(trigger.element()).opacity).toBe("1");
+  });
 });
