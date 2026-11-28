@@ -190,11 +190,19 @@ describe("ComboBox (browser)", () => {
 
     const trigger = document.querySelector<HTMLElement>(".combo-box__trigger")!;
 
+    // Pressing the closed trigger should dim it.
+    trigger.setAttribute("data-pressed", "true");
+    await expect.poll(() => getComputedStyle(trigger).opacity).toBe("0.7");
+    trigger.removeAttribute("data-pressed");
+
+    // Open the popover.
     await page.getByRole("button", {name: "Show suggestions"}).click();
     await expect.element(page.getByRole("listbox")).toBeInTheDocument();
-
     expect(trigger).toHaveAttribute("aria-expanded", "true");
 
+    // React Aria keeps `data-pressed` while the overlay is open.
+    // With the fix the `:not([aria-expanded="true"])` guard prevents the dim.
+    trigger.setAttribute("data-pressed", "true");
     await expect.poll(() => getComputedStyle(trigger).opacity).toBe("1");
   });
 });
