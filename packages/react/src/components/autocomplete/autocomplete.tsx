@@ -7,7 +7,7 @@ import type {AutocompleteVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode, RefObject} from "react";
 
 import {autocompleteVariants} from "@heroui/styles";
-import React, {createContext, use, useCallback, useEffect, useRef, useState} from "react";
+import React, {createContext, use, useCallback, useRef, useState} from "react";
 import {mergeRefs} from "react-aria/mergeRefs";
 import {useIsHidden} from "react-aria/private/collections/Hidden";
 import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
@@ -25,6 +25,7 @@ import {composeSlotClassName, useResolvedClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {FieldSlotsGate} from "../../utils/field-slots-gate";
 import {usePopoverExitHold} from "../../utils/use-popover-exit-hold";
+import {useResizeObserver} from "../../utils/use-resize-observer";
 import {CloseIcon, IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -256,23 +257,7 @@ const AutocompletePopover = ({
     }
   }, [triggerRef]);
 
-  useEffect(() => {
-    const trigger = triggerRef.current;
-
-    if (!trigger) return;
-
-    if (typeof ResizeObserver === "undefined") {
-      window.addEventListener("resize", onResize);
-
-      return () => window.removeEventListener("resize", onResize);
-    }
-
-    const resizeObserver = new ResizeObserver(onResize);
-
-    resizeObserver.observe(trigger);
-
-    return () => resizeObserver.disconnect();
-  }, [triggerRef, onResize]);
+  useResizeObserver({ref: triggerRef, onResize});
 
   return (
     <SurfaceContext

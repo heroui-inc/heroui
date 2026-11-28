@@ -1,5 +1,6 @@
 "use client";
 
+import type {ImageLoadingStatus} from "../../utils/use-image-loading-status";
 import type {AvatarVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
@@ -9,29 +10,22 @@ import React, {createContext, use} from "react";
 import {useIsomorphicLayoutEffect} from "../../hooks/use-isomorphic-layout-effect";
 import {composeSlotClassName} from "../../utils/compose";
 import {Slot} from "../../utils/slot";
+import {useImageLoadingStatus} from "../../utils/use-image-loading-status";
 import {AVATAR_GROUP_CHILD, AvatarGroupContext} from "../avatar-group/avatar-group-context";
 
 /* ------------------------------------------------------------------------------------------------
  * Avatar Context
  * --------------------------------------------------------------------------------------------- */
-type AvatarImageLoadingStatus = "idle" | "loading" | "loaded" | "error";
-
 type AvatarContext = {
   slots?: ReturnType<typeof avatarVariants>;
-  imageLoadingStatus: AvatarImageLoadingStatus;
-  setImageLoadingStatus: (status: AvatarImageLoadingStatus) => void;
+  imageLoadingStatus: ImageLoadingStatus;
+  setImageLoadingStatus: (status: ImageLoadingStatus) => void;
 };
 
 const AvatarContext = createContext<AvatarContext>({
   imageLoadingStatus: "idle",
   setImageLoadingStatus: () => {},
 });
-
-const getImageLoadingStatus = (image: HTMLImageElement): AvatarImageLoadingStatus => {
-  if (!image.complete) return "loading";
-
-  return image.naturalWidth > 0 ? "loaded" : "error";
-};
 
 /* -------------------------------------------------------------------------------------------------
  * Avatar Root
@@ -66,8 +60,7 @@ const AvatarRoot = ({
     () => avatarVariants({color: finalColor, size: finalSize, variant: finalVariant}),
     [finalColor, finalSize, finalVariant],
   );
-  const [imageLoadingStatus, setImageLoadingStatus] =
-    React.useState<AvatarImageLoadingStatus>("idle");
+  const [imageLoadingStatus, setImageLoadingStatus] = React.useState<ImageLoadingStatus>("idle");
   const contextValue = React.useMemo(
     () => ({imageLoadingStatus, setImageLoadingStatus, slots}),
     [imageLoadingStatus, slots],
@@ -92,7 +85,7 @@ interface AvatarImageProps extends ComponentPropsWithRef<"img"> {
   /** Render the child element instead of an `img`, merging props into it. */
   asChild?: boolean;
   /** Called when the image loading status changes. */
-  onLoadingStatusChange?: (status: AvatarImageLoadingStatus) => void;
+  onLoadingStatusChange?: (status: ImageLoadingStatus) => void;
 }
 
 const AvatarImage = ({
@@ -104,45 +97,15 @@ const AvatarImage = ({
   src,
   ...props
 }: AvatarImageProps) => {
-  const {imageLoadingStatus, setImageLoadingStatus, slots} = React.use(AvatarContext);
+  const {setImageLoadingStatus, slots} = React.use(AvatarContext);
+  const imageLoadingStatus = useImageLoadingStatus(src, {crossOrigin, referrerPolicy});
 
-  // Preload off-DOM so the `img` only mounts once it can paint; the fallback
-  // stays visible until then.
+  // Share the status with `Avatar.Fallback`, which hides once the image loads.
   useIsomorphicLayoutEffect(() => {
-    if (!src) {
-      setImageLoadingStatus("error");
+    setImageLoadingStatus(imageLoadingStatus);
 
-      return;
-    }
-
-    // Only URL strings can be preloaded; anything else React resolves itself.
-    if (typeof src !== "string") {
-      setImageLoadingStatus("loaded");
-
-      return;
-    }
-
-    const image = new window.Image();
-    const handleLoad = () => setImageLoadingStatus(getImageLoadingStatus(image));
-    const handleError = () => setImageLoadingStatus("error");
-
-    image.addEventListener("load", handleLoad);
-    image.addEventListener("error", handleError);
-
-    if (referrerPolicy) {
-      image.referrerPolicy = referrerPolicy;
-    }
-
-    image.crossOrigin = crossOrigin ?? null;
-    image.src = src;
-    setImageLoadingStatus(getImageLoadingStatus(image));
-
-    return () => {
-      image.removeEventListener("load", handleLoad);
-      image.removeEventListener("error", handleError);
-      setImageLoadingStatus("idle");
-    };
-  }, [src, crossOrigin, referrerPolicy, setImageLoadingStatus]);
+    return () => setImageLoadingStatus("idle");
+  }, [imageLoadingStatus, setImageLoadingStatus]);
 
   const previousStatusRef = React.useRef(imageLoadingStatus);
 
