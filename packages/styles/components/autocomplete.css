@@ -129,7 +129,8 @@
 }
 
 .autocomplete__indicator {
-  @apply absolute inset-y-0 end-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
+  @apply absolute inset-y-0 end-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition-[rotate,color] duration-150;
+  @apply motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);

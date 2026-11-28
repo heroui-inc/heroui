@@ -59,6 +59,14 @@ describe("Autocomplete SSR", () => {
   });
 
   it("renders without hydration mismatch when defaultOpen", async () => {
-    await ssrSmoke(<AutocompleteExample defaultOpen />, {wrapper});
+    const {html} = await ssrSmoke(<AutocompleteExample defaultOpen />, {wrapper});
+    const container = document.createElement("div");
+
+    container.innerHTML = html;
+
+    expect(container.querySelector('[data-slot="autocomplete-default-indicator"]')).toHaveAttribute(
+      "data-open",
+      "true",
+    );
   });
 });

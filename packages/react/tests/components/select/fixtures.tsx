@@ -8,6 +8,7 @@ import {Select} from "@/components/select";
 
 export type SelectFixtureProps = {
   defaultOpen?: boolean;
+  isOpen?: boolean;
   isDisabled?: boolean;
   isTriggerDisabled?: boolean;
   isInvalid?: boolean;
@@ -26,6 +27,7 @@ export const SelectFixture = (props: SelectFixtureProps = {}) => (
     defaultValue={props.defaultValue}
     isDisabled={props.isDisabled}
     isInvalid={props.isInvalid}
+    isOpen={props.isOpen}
     placeholder="Select one"
     value={props.value}
     onChange={props.onChange}

@@ -1,5 +1,6 @@
 import {
   User,
+  act,
   cleanup,
   fireEvent,
   render,
@@ -119,6 +120,33 @@ describe("Select", () => {
     expect(screen.getByText("Please choose a state")).toBeInTheDocument();
     expect(document.querySelector('[data-slot="field-error"]')).not.toBeNull();
     expect(screen.getByTestId("select")).toHaveAttribute("data-invalid", "true");
+  });
+
+  describe("indicator", () => {
+    const getIndicator = () => document.querySelector('[data-slot="select-default-indicator"]');
+
+    it("supports a deferred data-open while the root updates at once", () => {
+      const {rerender} = render(<SelectFixture isOpen={false} />);
+      const root = screen.getByTestId("select");
+
+      rerender(<SelectFixture isOpen />);
+      expect(root).toHaveAttribute("data-open", "true");
+      expect(getIndicator()).not.toHaveAttribute("data-open");
+      act(() => vi.advanceTimersByTime(50));
+      expect(getIndicator()).toHaveAttribute("data-open", "true");
+
+      rerender(<SelectFixture isOpen={false} />);
+      expect(root).not.toHaveAttribute("data-open");
+      expect(getIndicator()).toHaveAttribute("data-open", "true");
+      act(() => vi.advanceTimersByTime(50));
+      expect(getIndicator()).not.toHaveAttribute("data-open");
+    });
+
+    it("renders data-open on the first render when defaultOpen", () => {
+      render(<SelectFixture defaultOpen />);
+
+      expect(getIndicator()).toHaveAttribute("data-open", "true");
+    });
   });
 
   describe("clear button", () => {
