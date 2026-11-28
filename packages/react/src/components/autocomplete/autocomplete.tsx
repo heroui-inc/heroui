@@ -7,8 +7,8 @@ import type {AutocompleteVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode, RefObject} from "react";
 
 import {autocompleteVariants} from "@heroui/styles";
-import {mergeRefs, useResizeObserver} from "@react-aria/utils";
 import React, {createContext, use, useCallback, useRef, useState} from "react";
+import {mergeRefs} from "react-aria/mergeRefs";
 import {useIsHidden} from "react-aria/private/collections/Hidden";
 import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
@@ -26,6 +26,7 @@ import {dom} from "../../utils/dom";
 import {FieldSlotsGate} from "../../utils/field-slots-gate";
 import {useFrameDeferred} from "../../utils/use-frame-deferred";
 import {usePopoverExitHold} from "../../utils/use-popover-exit-hold";
+import {useResizeObserver} from "../../utils/use-resize-observer";
 import {CloseIcon, IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 

@@ -12,7 +12,6 @@ import type {
 
 import {calendarVariants} from "@heroui/styles";
 import {CalendarDate, DateFormatter, createCalendar} from "@internationalized/date";
-import {useControlledState} from "@react-stately/utils";
 import React, {createContext, use} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
@@ -30,6 +29,7 @@ import {cx} from "tailwind-variants";
 import {getGregorianYearOffset} from "../../utils/calendar";
 import {composeSlotClassName, useResolvedClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
+import {useControlledState} from "../../utils/use-controlled-state";
 import {YearPickerContext} from "../calendar-year-picker/year-picker-context";
 import {IconChevronLeft, IconChevronRight} from "../icons";
 

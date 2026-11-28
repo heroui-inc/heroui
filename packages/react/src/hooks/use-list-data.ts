@@ -19,7 +19,7 @@
  */
 "use client";
 
-import type {Key, Selection} from "@react-types/shared";
+import type {Key, Selection} from "react-aria-components";
 
 import {useMemo, useState} from "react";
 

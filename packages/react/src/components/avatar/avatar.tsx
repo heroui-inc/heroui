@@ -1,13 +1,16 @@
 "use client";
 
+import type {ImageLoadingStatus} from "../../utils/use-image-loading-status";
 import type {AvatarVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {avatarVariants} from "@heroui/styles";
-import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import React, {createContext, use} from "react";
 
+import {useIsomorphicLayoutEffect} from "../../hooks/use-isomorphic-layout-effect";
 import {composeSlotClassName} from "../../utils/compose";
+import {Slot} from "../../utils/slot";
+import {useImageLoadingStatus} from "../../utils/use-image-loading-status";
 import {AVATAR_GROUP_CHILD, AvatarGroupContext} from "../avatar-group/avatar-group-context";
 
 /* ------------------------------------------------------------------------------------------------
@@ -15,19 +18,26 @@ import {AVATAR_GROUP_CHILD, AvatarGroupContext} from "../avatar-group/avatar-gro
  * --------------------------------------------------------------------------------------------- */
 type AvatarContext = {
   slots?: ReturnType<typeof avatarVariants>;
+  imageLoadingStatus: ImageLoadingStatus;
+  setImageLoadingStatus: (status: ImageLoadingStatus) => void;
 };
 
-const AvatarContext = createContext<AvatarContext>({});
+const AvatarContext = createContext<AvatarContext>({
+  imageLoadingStatus: "idle",
+  setImageLoadingStatus: () => {},
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Avatar Root
  * -----------------------------------------------------------------------------------------------*/
-interface AvatarRootProps
-  extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Root>, "color">, AvatarVariants {
+interface AvatarRootProps extends Omit<ComponentPropsWithRef<"span">, "color">, AvatarVariants {
+  /** Render the child element instead of a `span`, merging props into it. */
+  asChild?: boolean;
   [AVATAR_GROUP_CHILD]?: boolean;
 }
 
 const AvatarRoot = ({
+  asChild,
   children,
   className,
   color,
@@ -50,13 +60,18 @@ const AvatarRoot = ({
     () => avatarVariants({color: finalColor, size: finalSize, variant: finalVariant}),
     [finalColor, finalSize, finalVariant],
   );
-  const contextValue = React.useMemo(() => ({slots}), [slots]);
+  const [imageLoadingStatus, setImageLoadingStatus] = React.useState<ImageLoadingStatus>("idle");
+  const contextValue = React.useMemo(
+    () => ({imageLoadingStatus, setImageLoadingStatus, slots}),
+    [imageLoadingStatus, slots],
+  );
+  const Component = asChild ? Slot : "span";
 
   return (
     <AvatarContext value={contextValue}>
-      <AvatarPrimitive.Root className={slots.base({className})} {...props}>
+      <Component className={slots.base({className})} {...props}>
         {children}
-      </AvatarPrimitive.Root>
+      </Component>
     </AvatarContext>
   );
 };
@@ -66,31 +81,51 @@ AvatarRoot.displayName = "HeroUI.Avatar";
 /* -------------------------------------------------------------------------------------------------
  * Avatar Image
  * -----------------------------------------------------------------------------------------------*/
-interface AvatarImageProps extends ComponentPropsWithRef<typeof AvatarPrimitive.Image> {}
+interface AvatarImageProps extends ComponentPropsWithRef<"img"> {
+  /** Render the child element instead of an `img`, merging props into it. */
+  asChild?: boolean;
+  /** Called when the image loading status changes. */
+  onLoadingStatusChange?: (status: ImageLoadingStatus) => void;
+}
 
 const AvatarImage = ({
+  asChild,
   className,
   crossOrigin,
-  loading,
-  onError,
-  onLoad,
-  sizes,
+  onLoadingStatusChange,
+  referrerPolicy,
   src,
-  srcSet,
   ...props
 }: AvatarImageProps) => {
-  const {slots} = React.use(AvatarContext);
+  const {setImageLoadingStatus, slots} = React.use(AvatarContext);
+  const imageLoadingStatus = useImageLoadingStatus(src, {crossOrigin, referrerPolicy});
+
+  // Share the status with `Avatar.Fallback`, which hides once the image loads.
+  useIsomorphicLayoutEffect(() => {
+    setImageLoadingStatus(imageLoadingStatus);
+
+    return () => setImageLoadingStatus("idle");
+  }, [imageLoadingStatus, setImageLoadingStatus]);
+
+  const previousStatusRef = React.useRef(imageLoadingStatus);
+
+  useIsomorphicLayoutEffect(() => {
+    if (previousStatusRef.current === imageLoadingStatus) return;
+
+    previousStatusRef.current = imageLoadingStatus;
+    onLoadingStatusChange?.(imageLoadingStatus);
+  }, [imageLoadingStatus, onLoadingStatusChange]);
+
+  if (imageLoadingStatus !== "loaded") return null;
+
+  const Component = asChild ? Slot : "img";
 
   return (
-    <AvatarPrimitive.Image
+    <Component
       className={composeSlotClassName(slots?.image, className)}
       crossOrigin={crossOrigin}
-      loading={loading}
-      sizes={sizes}
+      referrerPolicy={referrerPolicy}
       src={src}
-      srcSet={srcSet}
-      onError={onError}
-      onLoad={onLoad}
       {...props}
     />
   );
@@ -101,15 +136,32 @@ AvatarImage.displayName = "HeroUI.Avatar.Image";
 /* -------------------------------------------------------------------------------------------------
  * Avatar Fallback
  * -----------------------------------------------------------------------------------------------*/
-interface AvatarFallbackProps extends ComponentPropsWithRef<typeof AvatarPrimitive.Fallback> {
+interface AvatarFallbackProps extends ComponentPropsWithRef<"span"> {
+  /** Render the child element instead of a `span`, merging props into it. */
+  asChild?: boolean;
   color?: AvatarVariants["color"];
+  /** Wait this long before rendering, so fast-loading images never flash the fallback. */
+  delayMs?: number;
 }
 
-const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
-  const {slots} = React.use(AvatarContext);
+const AvatarFallback = ({asChild, className, color, delayMs, ...props}: AvatarFallbackProps) => {
+  const {imageLoadingStatus, slots} = React.use(AvatarContext);
+  const [canRender, setCanRender] = React.useState(delayMs === undefined);
+
+  React.useEffect(() => {
+    if (delayMs === undefined) return;
+
+    const timerId = window.setTimeout(() => setCanRender(true), delayMs);
+
+    return () => window.clearTimeout(timerId);
+  }, [delayMs]);
+
+  if (!canRender || imageLoadingStatus === "loaded") return null;
+
+  const Component = asChild ? Slot : "span";
 
   return (
-    <AvatarPrimitive.Fallback
+    <Component
       className={composeSlotClassName(slots?.fallback, className, {color})}
       data-slot="avatar-fallback"
       {...props}

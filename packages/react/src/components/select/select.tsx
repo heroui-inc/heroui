@@ -4,8 +4,8 @@ import type {Booleanish} from "../../utils/assertion";
 import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {SelectVariants} from "@heroui/styles";
-import type {KeyboardEvent as AriaKeyboardEvent} from "@react-types/shared";
 import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {KeyboardEvent as AriaKeyboardEvent} from "react-aria-components";
 
 import {selectVariants} from "@heroui/styles";
 import React, {createContext, use} from "react";

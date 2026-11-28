@@ -1,4 +1,4 @@
-import type {Key, Selection} from "@react-types/shared";
+import type {Key, Selection} from "react-aria-components";
 
 import {User, render, screen} from "@heroui/testing/helpers";
 

@@ -1,4 +1,4 @@
-import type {Key} from "@react-types/shared";
+import type {Key} from "react-aria-components";
 
 import {User, act, cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
 import {useFilter} from "react-aria-components/Autocomplete";

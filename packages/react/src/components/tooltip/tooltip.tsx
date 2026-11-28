@@ -5,8 +5,8 @@ import type {TooltipVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tooltipVariants} from "@heroui/styles";
-import {mergeProps} from "@react-aria/utils";
 import React, {createContext, use, useRef} from "react";
+import {mergeProps} from "react-aria/mergeProps";
 import {useFocusable} from "react-aria/useFocusable";
 import {
   OverlayArrow,

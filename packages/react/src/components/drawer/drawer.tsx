@@ -9,8 +9,8 @@ import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components/Bu
 import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Dialog";
 
 import {drawerVariants} from "@heroui/styles";
-import {mergeProps} from "@react-aria/utils";
 import React, {createContext, use, useCallback, useMemo, useRef} from "react";
+import {mergeProps} from "react-aria/mergeProps";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
   Dialog as DialogPrimitive,
