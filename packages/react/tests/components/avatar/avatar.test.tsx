@@ -100,6 +100,16 @@ describe("Avatar", () => {
       expect(fallback.className).toEqual(expect.stringContaining("custom"));
     });
 
+    it("renders nothing when asChild has no element child", () => {
+      const {container} = render(
+        <Avatar>
+          <Avatar.Fallback asChild>{null}</Avatar.Fallback>
+        </Avatar>,
+      );
+
+      expect(container.querySelector('[data-slot="avatar-fallback"]')).toBeNull();
+    });
+
     describe("delayMs", () => {
       beforeEach(() => {
         vi.useFakeTimers();

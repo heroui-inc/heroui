@@ -1,8 +1,8 @@
 "use client";
 
-import type {ElementType, HTMLAttributes, ReactElement, ReactNode, Ref} from "react";
+import type {ElementType, HTMLAttributes, ReactNode, Ref} from "react";
 
-import {Children, useCallback} from "react";
+import {Children, isValidElement, useCallback} from "react";
 
 type AnyProps = Record<string, any>;
 
@@ -53,17 +53,21 @@ const assignRef = (ref: Ref<HTMLElement> | undefined, node: HTMLElement | null) 
 
 /**
  * Renders its single child element with the slot's props and ref merged in.
- * Backs the `asChild` prop.
+ * Backs the `asChild` prop. Renders nothing when the child is not an element
+ * (e.g. `null` from a condition or plain text); throws on multiple children.
  */
 export const Slot = ({children, ref, ...slotProps}: SlotProps) => {
-  const child = Children.only(children) as ReactElement<AnyProps>;
-  const Component = child.type as ElementType;
-  const {ref: childRef, ...childProps} = child.props;
-  const mergedProps = mergeSlotProps(slotProps, childProps);
+  const child = isValidElement<AnyProps>(children) ? children : null;
+
+  if (!child && Children.count(children) > 1) {
+    Children.only(children);
+  }
+
+  const childRef = child?.props["ref"] as Ref<HTMLElement> | undefined;
 
   const mergedRef = useCallback(
     (node: HTMLElement | null) => {
-      const refs = [childRef as Ref<HTMLElement> | undefined, ref];
+      const refs = [childRef, ref];
       const cleanups = refs.map((item) => assignRef(item, node));
 
       return () => {
@@ -75,6 +79,12 @@ export const Slot = ({children, ref, ...slotProps}: SlotProps) => {
     },
     [childRef, ref],
   );
+
+  if (!child) return null;
+
+  const Component = child.type as ElementType;
+  const {ref: _childRef, ...childProps} = child.props;
+  const mergedProps = mergeSlotProps(slotProps, childProps);
 
   return <Component {...mergedProps} ref={mergedRef} />;
 };

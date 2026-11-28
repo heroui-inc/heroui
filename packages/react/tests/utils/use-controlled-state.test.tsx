@@ -70,4 +70,47 @@ describe("useControlledState", () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
   });
+
+  it("calls onChange once for repeated calls before the next render", async () => {
+    const user = setupUser();
+    const onChange = vi.fn();
+
+    const DoubleSet = () => {
+      const [isOn, setIsOn] = useControlledState<boolean>(undefined, false, onChange);
+
+      return (
+        <button
+          aria-pressed={isOn}
+          type="button"
+          onClick={() => {
+            setIsOn(true);
+            setIsOn(true);
+          }}
+        >
+          Double
+        </button>
+      );
+    };
+
+    render(<DoubleSet />);
+
+    await user.click(screen.getByRole("button", {name: "Double"}));
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenLastCalledWith(true);
+  });
+
+  it("calls onChange again when a controlled parent ignored the previous change", async () => {
+    const user = setupUser();
+    const onChange = vi.fn();
+
+    render(<Toggle value={false} onChange={onChange} />);
+
+    const turnOn = screen.getByRole("button", {name: "Turn on"});
+
+    await user.click(turnOn);
+    await user.click(turnOn);
+
+    expect(onChange.mock.calls).toEqual([[true], [true]]);
+  });
 });
