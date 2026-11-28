@@ -1,5 +1,5 @@
-import type {Key} from "@react-types/shared";
 import type {ReactNode} from "react";
+import type {Key} from "react-aria-components";
 
 import {FieldError} from "@/components/field-error";
 import {Label} from "@/components/label";

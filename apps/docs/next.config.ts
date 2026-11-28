@@ -47,7 +47,6 @@ const config: NextConfig = {
       "@heroui/react",
       "@gravity-ui/icons",
       "@iconify/react",
-      "lucide-react",
       "motion",
       "fumadocs-ui",
       "fumadocs-core",

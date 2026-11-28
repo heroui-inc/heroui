@@ -1,4 +1,4 @@
-import type {Color} from "@react-types/color";
+import type {Color} from "react-aria-components";
 
 import {cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
 

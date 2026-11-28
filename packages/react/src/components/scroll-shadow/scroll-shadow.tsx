@@ -4,8 +4,8 @@ import type {ScrollShadowVariants} from "@heroui/styles";
 import type {RefObject} from "react";
 
 import {scrollShadowVariants} from "@heroui/styles";
-import {mergeRefs} from "@react-aria/utils";
 import {useMemo, useRef} from "react";
+import {mergeRefs} from "react-aria/mergeRefs";
 
 import {useSafeLayoutEffect} from "../../hooks/use-safe-layout-effect";
 

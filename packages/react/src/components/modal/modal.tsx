@@ -9,8 +9,8 @@ import type {Button as ButtonPrimitive} from "react-aria-components/Button";
 import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Dialog";
 
 import {modalVariants} from "@heroui/styles";
-import {mergeProps} from "@react-aria/utils";
 import {createContext, use, useMemo} from "react";
+import {mergeProps} from "react-aria/mergeProps";
 import {
   Dialog as DialogPrimitive,
   Heading as HeadingPrimitive,

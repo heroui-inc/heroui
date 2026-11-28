@@ -6,8 +6,9 @@ import type {ComponentPropsWithRef, ReactElement, ReactNode} from "react";
 import type {SheetRenderProps} from "react-aria-components/Sheet";
 
 import {sheetVariants} from "@heroui/styles";
-import {mergeProps, mergeRefs} from "@react-aria/utils";
 import React, {Suspense, isValidElement, useCallback, useMemo, useRef, useState} from "react";
+import {mergeProps} from "react-aria/mergeProps";
+import {mergeRefs} from "react-aria/mergeRefs";
 import {Heading as HeadingPrimitive} from "react-aria-components/Dialog";
 import {
   Sheet as AriaSheet,

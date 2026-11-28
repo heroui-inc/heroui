@@ -7,8 +7,8 @@ import type {AutocompleteVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode, RefObject} from "react";
 
 import {autocompleteVariants} from "@heroui/styles";
-import {mergeRefs, useResizeObserver} from "@react-aria/utils";
-import React, {createContext, use, useCallback, useRef, useState} from "react";
+import React, {createContext, use, useCallback, useEffect, useRef, useState} from "react";
+import {mergeRefs} from "react-aria/mergeRefs";
 import {useIsHidden} from "react-aria/private/collections/Hidden";
 import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
@@ -256,7 +256,23 @@ const AutocompletePopover = ({
     }
   }, [triggerRef]);
 
-  useResizeObserver({ref: triggerRef, onResize});
+  useEffect(() => {
+    const trigger = triggerRef.current;
+
+    if (!trigger) return;
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", onResize);
+
+      return () => window.removeEventListener("resize", onResize);
+    }
+
+    const resizeObserver = new ResizeObserver(onResize);
+
+    resizeObserver.observe(trigger);
+
+    return () => resizeObserver.disconnect();
+  }, [triggerRef, onResize]);
 
   return (
     <SurfaceContext

@@ -7,8 +7,8 @@ import type {ComponentPropsWithRef} from "react";
 import type {DateValue} from "react-aria-components/Calendar";
 
 import {datePickerVariants} from "@heroui/styles";
-import {mergeRefs} from "@react-aria/utils";
 import React, {createContext, use, useEffect, useRef} from "react";
+import {mergeRefs} from "react-aria/mergeRefs";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
   DatePicker as DatePickerPrimitive,

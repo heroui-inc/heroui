@@ -1,4 +1,4 @@
-import type {Key} from "@react-types/shared";
+import type {Key} from "react-aria-components";
 
 import {useState} from "react";
 

@@ -1,4 +1,4 @@
-import type {Key} from "@react-types/shared";
+import type {Key} from "react-aria-components";
 
 import {User, cleanup, render, runAllTimers, screen} from "@heroui/testing/helpers";
 import {MenuTrigger, Popover} from "react-aria-components/Menu";

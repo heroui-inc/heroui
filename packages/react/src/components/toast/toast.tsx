@@ -7,7 +7,6 @@ import type {CSSProperties, ComponentPropsWithRef, ReactNode, Ref} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components/Toast";
 
 import {toastVariants} from "@heroui/styles";
-import {mergeRefs} from "@react-aria/utils";
 import React, {
   createContext,
   use,
@@ -19,6 +18,7 @@ import React, {
   useState,
   useSyncExternalStore,
 } from "react";
+import {mergeRefs} from "react-aria/mergeRefs";
 import {useFocusVisible} from "react-aria/useFocusVisible";
 import {composeRenderProps} from "react-aria-components/composeRenderProps";
 import {Text as TextPrimitive} from "react-aria-components/Text";
