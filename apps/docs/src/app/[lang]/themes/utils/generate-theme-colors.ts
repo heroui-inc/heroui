@@ -700,6 +700,8 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
  * Light and dark themes differ in soft percentages:
  *   - Light: accent/warning/success soft 15%/20%, danger 15%/20%
  *   - Dark:  accent/warning/success soft 12%/16%, danger 15%/20%
+ *
+ * Fill (foreground over transparent) also differs: light 4.5%/7%, dark 9%/12%.
  */
 export function getDerivedColorFormulas(
   theme: "light" | "dark",
@@ -708,6 +710,7 @@ export function getDerivedColorFormulas(
   const isLight = theme === "light";
   const vibrant = options?.vibrant ?? false;
   const [softPct, softHoverPct] = isLight ? ["15%", "20%"] : ["12%", "16%"];
+  const [fillPct, fillHoverPct] = isLight ? ["4.5%", "7%"] : ["9%", "12%"];
 
   const vibrantSoftFg = "color-mix(in oklab, var(--VAR) 92%, var(--foreground) 8%)";
   const sfFg = (colorVar: string, accessibleFormula: string) =>
@@ -748,6 +751,8 @@ export function getDerivedColorFormulas(
     "--field-focus": "var(--field-background, var(--default))",
     "--field-hover":
       "color-mix(in oklab, var(--field-background, var(--default)) 90%, var(--field-foreground, var(--foreground)) 2%)",
+    "--fill": `color-mix(in oklab, var(--foreground) ${fillPct}, transparent)`,
+    "--fill-hover": `color-mix(in oklab, var(--foreground) ${fillHoverPct}, transparent)`,
     "--separator-secondary":
       "color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%)",
     "--separator-tertiary":

@@ -127,6 +127,35 @@ describe("Autocomplete (browser)", () => {
     });
   });
 
+  describe("trigger indicator", () => {
+    it("gives the trigger button a hit area that covers the chevron", async () => {
+      await render(<AutocompleteOpenFixture />);
+
+      const button = page
+        .getByRole("button", {name: "Select an animal Favorite Animal"})
+        .element() as HTMLElement;
+      const trigger = button.closest<HTMLElement>('[data-slot="autocomplete-trigger"]')!;
+      const chevron = button.querySelector('[data-slot="autocomplete-default-indicator"]')!;
+      const buttonRect = button.getBoundingClientRect();
+      const chevronRect = chevron.getBoundingClientRect();
+      const triggerRect = trigger.getBoundingClientRect();
+      const borderEnd = parseFloat(getComputedStyle(trigger).borderRightWidth);
+
+      // The button used to collapse to 0px wide around its absolutely positioned chevron.
+      expect(buttonRect.width).toBeGreaterThanOrEqual(24);
+      expect(buttonRect.left).toBeLessThanOrEqual(chevronRect.left);
+      expect(buttonRect.right).toBeGreaterThanOrEqual(chevronRect.right);
+      expect(buttonRect.top).toBeLessThanOrEqual(chevronRect.top);
+      expect(buttonRect.bottom).toBeGreaterThanOrEqual(chevronRect.bottom);
+      // The chevron keeps its place 8px in from the trigger's inner edge.
+      expect(triggerRect.right - borderEnd - chevronRect.right).toBeCloseTo(8, 0);
+
+      // A press off the glyph but inside the button still opens the dropdown.
+      await userEvent.click(button, {position: {x: 2, y: 2}});
+      await expect.element(page.getByRole("listbox")).toBeInTheDocument();
+    });
+  });
+
   describe("item indicator", () => {
     it("reserves room for the indicator so it never sits on the label", async () => {
       await render(<AutocompleteMultipleFixture defaultOpen />);

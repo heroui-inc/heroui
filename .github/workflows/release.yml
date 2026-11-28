@@ -45,12 +45,6 @@ jobs:
       - name: Build packages
         run: pnpm build
 
-      - name: Setup Node.js for publishing
-        uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          registry-url: "https://registry.npmjs.org"
-
       - name: Determine previous tag
         id: prev-tag
         run: |

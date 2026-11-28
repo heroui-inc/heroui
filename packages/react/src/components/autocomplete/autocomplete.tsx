@@ -7,8 +7,8 @@ import type {AutocompleteVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode, RefObject} from "react";
 
 import {autocompleteVariants} from "@heroui/styles";
-import {mergeRefs, useResizeObserver} from "@react-aria/utils";
 import React, {createContext, use, useCallback, useRef, useState} from "react";
+import {mergeRefs} from "react-aria/mergeRefs";
 import {useIsHidden} from "react-aria/private/collections/Hidden";
 import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
@@ -24,7 +24,9 @@ import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, useResolvedClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {FieldSlotsGate} from "../../utils/field-slots-gate";
+import {useFrameDeferred} from "../../utils/use-frame-deferred";
 import {usePopoverExitHold} from "../../utils/use-popover-exit-hold";
+import {useResizeObserver} from "../../utils/use-resize-observer";
 import {CloseIcon, IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -195,6 +197,7 @@ const AutocompleteIndicator = <E extends keyof React.JSX.IntrinsicElements = "sv
   Omit<React.JSX.IntrinsicElements[E], keyof AutocompleteIndicatorProps<E>>) => {
   const {slots} = use(AutocompleteContext);
   const state = use(SelectStateContext);
+  const isOpen = useFrameDeferred(state?.isOpen ?? false);
 
   const indicator =
     children && React.isValidElement(children) ? (
@@ -208,19 +211,25 @@ const AutocompleteIndicator = <E extends keyof React.JSX.IntrinsicElements = "sv
           ...(props as any),
           className: composeSlotClassName(slots?.indicator, className),
           "data-slot": "autocomplete-indicator",
-          "data-open": dataAttr(state?.isOpen),
+          "data-open": dataAttr(isOpen),
         },
       )
     ) : (
       <IconChevronDown
         className={composeSlotClassName(slots?.indicator, className)}
-        data-open={dataAttr(state?.isOpen)}
+        data-open={dataAttr(isOpen)}
         data-slot="autocomplete-default-indicator"
         {...(props as any)}
       />
     );
 
-  return <ButtonPrimitive>{indicator}</ButtonPrimitive>;
+  // This is the Select's trigger button: it consumes the Select's ButtonContext, which supplies its
+  // accessible name (value + label), `aria-haspopup`, `aria-expanded` and keyboard handling.
+  return (
+    <ButtonPrimitive className={slots?.indicatorButton()} data-slot="autocomplete-indicator-button">
+      {indicator}
+    </ButtonPrimitive>
+  );
 };
 
 AutocompleteIndicator.displayName = "HeroUI.Autocomplete.Indicator";

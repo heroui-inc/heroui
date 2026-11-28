@@ -46,8 +46,16 @@
   /* Active / pressed */
   &:active,
   &[data-pressed="true"] {
-    @apply will-change-transform;
     background-color: var(--button-bg-pressed);
+  }
+
+  /*
+   * RAC keeps data-pressed="true" on overlay triggers (Menu, Dialog, Popover) while
+   * open, so the scale is skipped on expanded triggers; :active still covers a real press.
+   */
+  &:active,
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
+    @apply will-change-transform;
     transform: scale(0.97);
   }
 
@@ -74,7 +82,7 @@
   }
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     transform: scale(0.98);
   }
 }
@@ -87,7 +95,7 @@
   @apply h-11 text-base md:h-10;
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"]:not([aria-expanded="true"]) {
     transform: scale(0.96);
   }
 }

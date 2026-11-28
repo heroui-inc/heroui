@@ -1,7 +1,7 @@
 "use client";
 
-import {useIsSSR} from "@react-aria/ssr";
 import * as React from "react";
+import {useIsSSR} from "react-aria/SSRProvider";
 
 // Cache for CSS variable values to avoid repeated DOM queries
 const cssVariableCache = new Map<string, string | undefined>();

@@ -1,4 +1,4 @@
-import type {Key} from "@react-types/shared";
+import type {Key} from "react-aria-components";
 
 import {useState} from "react";
 
@@ -31,6 +31,20 @@ export const NarrowViewportDropdownFixture = () => (
             <circle cx="8" cy="8" r="6" />
           </svg>
           <Label style={{minWidth: "16rem"}}>System theme</Label>
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown.Popover>
+  </Dropdown>
+);
+
+/** A HeroUI `Button` used directly as the trigger, so `button.css` styles it instead of `.dropdown__trigger`. */
+export const ButtonTriggerDropdownFixture = () => (
+  <Dropdown>
+    <Button aria-label="Menu">Actions</Button>
+    <Dropdown.Popover>
+      <Dropdown.Menu>
+        <Dropdown.Item id="new-file" textValue="New file">
+          <Label>New file</Label>
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown.Popover>

@@ -1,5 +1,5 @@
-import type {Selection} from "@react-types/shared";
 import type {Meta, StoryObj} from "@storybook/react";
+import type {Selection} from "react-aria-components";
 
 import {Icon} from "@iconify/react";
 import * as React from "react";

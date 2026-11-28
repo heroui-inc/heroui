@@ -1,4 +1,4 @@
-import type {Key} from "@react-types/shared";
+import type {Key} from "react-aria-components";
 
 import {ComboBox} from "@/components/combo-box";
 import {FieldError} from "@/components/field-error";

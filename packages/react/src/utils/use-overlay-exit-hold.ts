@@ -2,8 +2,8 @@
 
 import type {Ref, RefCallback} from "react";
 
-import {mergeRefs} from "@react-aria/utils";
 import {useCallback, useLayoutEffect, useRef, useState} from "react";
+import {mergeRefs} from "react-aria/mergeRefs";
 import {flushSync} from "react-dom";
 
 const EXITING_SELECTOR = '[data-exiting="true"]';

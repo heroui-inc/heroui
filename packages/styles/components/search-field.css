@@ -111,8 +111,12 @@
   &:autofill:hover,
   &:autofill:focus,
   &:autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px var(--search-field-group-bg) inset;
-    box-shadow: 0 0 0 1000px var(--search-field-group-bg) inset;
+    -webkit-box-shadow:
+      0 0 0 1000px var(--search-field-group-bg) inset,
+      0 0 0 1000px var(--search-field-group-autofill-base, transparent) inset;
+    box-shadow:
+      0 0 0 1000px var(--search-field-group-bg) inset,
+      0 0 0 1000px var(--search-field-group-autofill-base, transparent) inset;
     -webkit-text-fill-color: var(--field-foreground);
     caret-color: var(--field-foreground);
     transition: background-color 9999s ease-in-out 0s;
@@ -146,9 +150,11 @@
   @apply shadow-none;
   background-color: var(--search-field-group-bg);
 
-  --search-field-group-bg: var(--default);
-  --search-field-group-bg-hover: var(--default-hover);
-  --search-field-group-bg-focus: var(--default);
+  --search-field-group-bg: var(--fill);
+  --search-field-group-bg-hover: var(--fill-hover);
+  --search-field-group-bg-focus: var(--fill);
+  /* `--fill` is translucent. Autofill composites it over `--surface`, where secondary fields usually sit. */
+  --search-field-group-autofill-base: var(--surface);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),

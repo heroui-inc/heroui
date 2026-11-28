@@ -4,8 +4,8 @@ import type {Booleanish} from "../../utils/assertion";
 import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {SelectVariants} from "@heroui/styles";
-import type {KeyboardEvent as AriaKeyboardEvent} from "@react-types/shared";
 import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {KeyboardEvent as AriaKeyboardEvent} from "react-aria-components";
 
 import {selectVariants} from "@heroui/styles";
 import React, {createContext, use} from "react";
@@ -21,6 +21,7 @@ import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, useResolvedClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {FieldSlotsGate} from "../../utils/field-slots-gate";
+import {useFrameDeferred} from "../../utils/use-frame-deferred";
 import {usePopoverExitHold} from "../../utils/use-popover-exit-hold";
 import {CloseIcon, IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
@@ -203,6 +204,7 @@ const SelectIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
   Omit<React.JSX.IntrinsicElements[E], keyof SelectIndicatorProps<E>>) => {
   const {slots} = use(SelectContext);
   const state = use(SelectStateContext);
+  const isOpen = useFrameDeferred(state?.isOpen ?? false);
 
   if (children && React.isValidElement(children)) {
     return React.cloneElement(
@@ -215,7 +217,7 @@ const SelectIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
         ...(props as any),
         className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "select-indicator",
-        "data-open": dataAttr(state?.isOpen),
+        "data-open": dataAttr(isOpen),
       },
     );
   }
@@ -223,7 +225,7 @@ const SelectIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
   return (
     <IconChevronDown
       className={composeSlotClassName(slots?.indicator, className)}
-      data-open={dataAttr(state?.isOpen)}
+      data-open={dataAttr(isOpen)}
       data-slot="select-default-indicator"
       {...(props as any)}
     />

@@ -8,8 +8,10 @@
 
 import type {AllHTMLAttributes, ReactElement} from "react";
 
-import {mergeRefs, useLayoutEffect} from "@react-aria/utils";
 import React, {useMemo, useRef} from "react";
+import {mergeRefs} from "react-aria/mergeRefs";
+
+import {useIsomorphicLayoutEffect} from "../hooks/use-isomorphic-layout-effect";
 
 export type DOMRenderFunction<E extends keyof React.JSX.IntrinsicElements, T> = (
   props: React.JSX.IntrinsicElements[E],
@@ -39,7 +41,7 @@ function DOMElement(
   const elementRef = useRef<HTMLElement | null>(null);
   const ref = useMemo(() => mergeRefs(forwardedRef, elementRef), [forwardedRef, elementRef]);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (typeof process !== "undefined" && process.env?.["NODE_ENV"] !== "production" && render) {
       if (!elementRef.current) {
         console.warn(
