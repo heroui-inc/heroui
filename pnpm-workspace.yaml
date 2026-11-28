@@ -33,16 +33,19 @@ overrides:
   # GHSA-3g3m-2fjr-6pw4 — no 13.x backport; react-docgen-typescript only calls globSync().
   glob@13: "^14.0.6"
 
-onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - "@swc/core"
-  - "core-js"
-  - "esbuild"
-  - "lmdb"
-  - "msgpackr-extract"
-  - "protobufjs"
-  - "sharp"
-  - "unrs-resolver"
+saveExact: true
+
+# Keep fresh exact-pinned bumps and `pnpx pkg-pr-new` (QA.yaml) installable; pnpm 11+ defaults to 1440.
+minimumReleaseAge: 0
+
+allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
+  "esbuild": true
+  "lmdb": true
+  "msgpackr-extract": true
+  "sharp": true
+  "unrs-resolver": true
 
 patchedDependencies:
   "@rollup/plugin-node-resolve@16.0.3": patches/@rollup__plugin-node-resolve@16.0.3.patch
