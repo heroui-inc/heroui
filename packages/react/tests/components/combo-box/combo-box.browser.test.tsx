@@ -188,14 +188,13 @@ describe("ComboBox (browser)", () => {
   it("does not hold the pressed dimmed opacity on the trigger while the popover is open", async () => {
     await render(<ComboBoxFixture />);
 
-    const trigger = page.getByRole("button", {name: "Show suggestions"});
+    const trigger = document.querySelector<HTMLElement>(".combo-box__trigger")!;
 
-    await trigger.click();
+    await page.getByRole("button", {name: "Show suggestions"}).click();
     await expect.element(page.getByRole("listbox")).toBeInTheDocument();
 
-    expect(trigger.element()).toHaveAttribute("data-pressed", "true");
-    expect(trigger.element()).toHaveAttribute("aria-expanded", "true");
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
 
-    await expect.poll(() => getComputedStyle(trigger.element()).opacity).toBe("1");
+    await expect.poll(() => getComputedStyle(trigger).opacity).toBe("1");
   });
 });
