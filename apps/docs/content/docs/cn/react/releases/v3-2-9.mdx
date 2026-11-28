@@ -1,0 +1,84 @@
+---
+title: v3.2.9
+description: "用于标签页轨道与 secondary 输入框的半透明 --fill 令牌、tailwind-variants 4.1、可避开屏幕键盘的底部 Sheet、打开期间保持原尺寸的浮层触发器、可点击的 Autocomplete 指示器，以及 iOS Safari 上 Select 与 Autocomplete 箭头的过渡动画。"
+github:
+  pull: 7062
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 11 月 28 日</span>
+</div>
+
+补丁版本：新增半透明的 `--fill` 令牌，用于 [Tabs](/docs/components/tabs) 轨道与所有输入框的 `secondary` 变体，使其在页面上和 [Card](/docs/components/card) 内保持相同的对比度。`@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.1.0`。底部 [Sheet](/docs/components/sheet) 中靠下的输入框现在会上移到 iOS 屏幕键盘之上；[Dropdown](/docs/components/dropdown)、[Modal](/docs/components/modal)、[Drawer](/docs/components/drawer) 与 [AlertDialog](/docs/components/alert-dialog) 的触发器在浮层打开期间不再保持缩小状态。本版本还为 [Autocomplete](/docs/components/autocomplete) 指示器按钮提供了实际的点击区域与插槽，并修复 iOS Safari 上 [Select](/docs/components/select) 与 Autocomplete 箭头旋转动画丢失的问题。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warning">
+  **Secondary 输入框与 Tabs 改用 `--fill`。** Tabs 轨道与 `secondary` 输入框变体不再读取 `--default`。如果你的主题通过覆盖 `--default` 来调整它们的样式，请改为覆盖 `--fill` 与 `--fill-hover`。
+</Callout>
+
+<Callout type="info">
+  **使用 AI 助手？** 只需输入 "Hey Cursor, update HeroUI to the latest version"，你的 AI 助手就会自动比较版本并应用所需的更改。了解更多关于 [HeroUI MCP Server](/docs/ui-for-agents/mcp-server) 的信息。
+</Callout>
+
+## 依赖
+
+- **tailwind-variants**：将 `@heroui/react` 与 `@heroui/styles` 升级至 `tailwind-variants@4.1.0`（[#7061](https://github.com/heroui-inc/heroui/pull/7061)）。
+- **工具链**：仓库开发环境升级至 Node 26 与 pnpm 12。仅影响贡献者，已发布包的环境要求不变（[#7066](https://github.com/heroui-inc/heroui/pull/7066)、[#7043](https://github.com/heroui-inc/heroui/pull/7043)）。
+
+## 样式
+
+- **`--fill` 令牌**：新增 `--fill` 与 `--fill-hover`，以及 `bg-fill` 与 `bg-fill-hover` 工具类。`--fill` 是低不透明度的 `--foreground`（亮色为 4.5% 与 7%，暗色为 9% 与 12%），因此在 `--background` 与 `--surface` 上都能保持相同的层次差。它所替代的纯色 `--default` 灰色是针对 `--background` 调校的，在卡片内会显得过深。参见 [主题](/docs/react/getting-started/theming)（[#7063](https://github.com/heroui-inc/heroui/pull/7063)）。
+- **Tabs 与 secondary 输入框**：[Tabs](/docs/components/tabs) 轨道，以及 [Input](/docs/components/input)、[TextArea](/docs/components/text-area)、[InputGroup](/docs/components/input-group)、[NumberField](/docs/components/number-field)、[SearchField](/docs/components/search-field)、[InputOTP](/docs/components/input-otp)、[Select](/docs/components/select)、[Autocomplete](/docs/components/autocomplete)、日期与时间输入框和 [ColorField](/docs/components/color-field) 的 `secondary` 变体改用 `--fill`。自动填充遮罩现在由一层不透明的 `--surface` 托底，避免浏览器的自动填充高亮透过半透明填充显示出来（[#7063](https://github.com/heroui-inc/heroui/pull/7063)）。
+
+## 错误修复
+
+- **Sheet**：读取 React Aria 写入 `--sheet-scroll-padding-y` 的键盘高度，并在底部操作之后添加可收缩的占位元素，使底部 Sheet 中的输入框与底部操作上移到 iOS 屏幕键盘之上，而不再被遮挡（[#7052](https://github.com/heroui-inc/heroui/pull/7052)）。
+- **浮层触发器**：React Aria 会在浮层打开期间保留 Menu 与 Dialog 触发器上的 `data-pressed="true"`，导致按压缩放一直持续到浮层关闭。[Button](/docs/components/button)、[Dropdown](/docs/components/dropdown)、[Modal](/docs/components/modal)、[Drawer](/docs/components/drawer) 与 [AlertDialog](/docs/components/alert-dialog) 现在会跳过带有 `aria-expanded` 的触发器上的该缩放。真实按压仍会通过 `:active` 缩放，按压背景色保持不变（[#7056](https://github.com/heroui-inc/heroui/pull/7056)）。
+- **Autocomplete**：`Autocomplete.Indicator` 的触发按钮包裹着绝对定位的箭头，宽度塌缩为 0px，且没有可供定位的类名。现在它会填满触发器预留的行尾内边距，覆盖箭头而不移动其位置，并新增 `autocomplete__indicator-button` 类名与 `data-slot="autocomplete-indicator-button"`。按钮保留其无障碍名称、`aria-haspopup` 与 `aria-expanded`（[#7055](https://github.com/heroui-inc/heroui/pull/7055)）。
+- **Select 与 Autocomplete**：在 iOS Safari 上，由于 React Aria 在同一次提交中锁定页面滚动并将外部内容标记为 inert，打开弹出层时指示器的旋转过渡可能丢失。指示器现在会延后两个动画帧再应用 `data-open`。首次渲染保持不变，因此 SSR 与 `defaultOpen` 的输出依然一致；在减少动效模式下会跳过旋转动画（[#7065](https://github.com/heroui-inc/heroui/pull/7065)）。
+
+## 文档
+
+- **正文排版**：正文、表格、粗体、链接与行内代码统一使用同一种文字颜色，行内代码标签更小更轻，链接带有浅色下划线。正文在平板及以上为 15px，手机上为 16px，标题、表格与代码按其相对缩放。代码块间距更紧凑，复制按钮下方新增滚动阴影（[#7044](https://github.com/heroui-inc/heroui/pull/7044)、[#7048](https://github.com/heroui-inc/heroui/pull/7048)、[#7049](https://github.com/heroui-inc/heroui/pull/7049)）。
+- **页面导航**：上一页与下一页链接按侧边栏顺序跨章节跳转，章节最后一页会链接到下一章节，离开当前章节的链接会标明目标章节名称（[#7050](https://github.com/heroui-inc/heroui/pull/7050)）。
+- **主题**：将「使用代理定制主题」页面在 UI for Agents 下更名为 [主题](/docs/react/getting-started/theming-for-agents)，并在 [主题](/docs/react/getting-started/theming) 手册与主题生成器中补充 `--fill` 的说明（[#7045](https://github.com/heroui-inc/heroui/pull/7045)、[#7063](https://github.com/heroui-inc/heroui/pull/7063)）。
+- **代理技能**：`heroui-react` 与 `heroui-native` 技能会在 [HeroUI MCP Server](/docs/ui-for-agents/mcp-server) 已连接时让代理调用其工具，独立安装时仍使用随附的脚本（[#7059](https://github.com/heroui-inc/heroui/pull/7059)、[#7060](https://github.com/heroui-inc/heroui/pull/7060)）。
+- **Card**：缩小 [Card](/docs/components/card) 示例中的演示链接，并裁剪溢出的图片（[#7046](https://github.com/heroui-inc/heroui/pull/7046)）。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #7062](https://github.com/heroui-inc/heroui/pull/7062)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />
