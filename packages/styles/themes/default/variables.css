@@ -153,6 +153,13 @@
     --default-soft-foreground: var(--default-foreground);
     --default-soft-hover: color-mix(in oklab, var(--default) 60%, transparent);
 
+    /*
+     * Fill: translucent inset for tab tracks and secondary fields. Because it is
+     * see-through, it keeps the same step on `--background` and on `--surface`.
+     */
+    --fill: color-mix(in oklab, var(--foreground) 4.5%, transparent);
+    --fill-hover: color-mix(in oklab, var(--foreground) 7%, transparent);
+
     --accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
     --accent-soft-foreground: color-mix(in oklab, var(--accent) 70%, var(--foreground) 30%);
     --accent-soft-hover: color-mix(in oklab, var(--accent) 20%, transparent);
@@ -289,6 +296,10 @@
     --default-soft: color-mix(in oklab, var(--default) 50%, transparent);
     --default-soft-foreground: var(--default-foreground);
     --default-soft-hover: color-mix(in oklab, var(--default) 60%, transparent);
+
+    /* Higher than light: near-black backgrounds swallow small additions */
+    --fill: color-mix(in oklab, var(--foreground) 9%, transparent);
+    --fill-hover: color-mix(in oklab, var(--foreground) 12%, transparent);
 
     --accent-soft: color-mix(in oklab, var(--accent) 12%, transparent);
     --accent-soft-foreground: color-mix(in oklab, var(--accent) 80%, var(--foreground) 30%);

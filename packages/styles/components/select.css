@@ -84,9 +84,9 @@
   @apply shadow-none;
   background-color: var(--select-trigger-bg);
 
-  --select-trigger-bg: var(--default);
-  --select-trigger-bg-hover: var(--default-hover);
-  --select-trigger-bg-focus: var(--default);
+  --select-trigger-bg: var(--fill);
+  --select-trigger-bg-hover: var(--fill-hover);
+  --select-trigger-bg-focus: var(--fill);
 
   /* Exclude when clear button is hovered to prevent double hover effect */
   @media (hover: hover) {

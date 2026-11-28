@@ -8,11 +8,13 @@
   --input-bg: var(--color-field);
   --input-bg-hover: var(--color-field-hover);
   --input-bg-focus: var(--field-focus);
-  /* Inset layer covers the UA autofill paint. The rest keeps shadow-field and the focus ring. */
+  /* Inset layers cover the UA autofill paint. The rest keeps shadow-field and the focus ring.
+     The base layer is opaque, so a translucent fill can't let the UA paint show through. */
   --input-autofill-shadow:
-    0 0 0 1000px var(--input-bg) inset, var(--tw-inset-shadow, 0 0 #0000),
-    var(--tw-inset-ring-shadow, 0 0 #0000), var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow, 0 0 #0000);
+    0 0 0 1000px var(--input-bg) inset, 0 0 0 1000px var(--input-autofill-base, transparent) inset,
+    var(--tw-inset-shadow, 0 0 #0000), var(--tw-inset-ring-shadow, 0 0 #0000),
+    var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+    var(--tw-shadow, 0 0 #0000);
 
   /**
    * Transitions
@@ -98,9 +100,11 @@
   @apply shadow-none;
   background-color: var(--input-bg);
 
-  --input-bg: var(--default);
-  --input-bg-hover: var(--default-hover);
-  --input-bg-focus: var(--default);
+  --input-bg: var(--fill);
+  --input-bg-hover: var(--fill-hover);
+  --input-bg-focus: var(--fill);
+  /* `--fill` is translucent. Autofill composites it over `--surface`, where secondary fields usually sit. */
+  --input-autofill-base: var(--surface);
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),

@@ -503,6 +503,10 @@ HeroUI 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packag
     --color-default-soft-foreground: var(--default-soft-foreground);
     --color-default-soft-hover: var(--default-soft-hover);
 
+    /* 填充（Fill）颜色 */
+    --color-fill: var(--fill);
+    --color-fill-hover: var(--fill-hover);
+
     --color-accent-soft: var(--accent-soft);
     --color-accent-soft-foreground: var(--accent-soft-foreground);
     --color-accent-soft-hover: var(--accent-soft-hover);
@@ -595,6 +599,8 @@ HeroUI 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packag
 />
 
 表单控件依赖 `--field-*` 主题变量。悬停、聚焦及边框变体定义于 `variables.css` 的 **Calculated Colors** 区块中，并在 `theme.css` 中映射到 Tailwind 令牌（例如 `--color-field-hover: var(--field-hover)`）。在你的主题中覆盖 `--field-background`、`--field-hover` 及相关令牌，即可重新设计输入框、复选框、单选框和 OTP 输入槽的样式，而不会影响按钮或卡片等表面（surface）。
+
+各表单控件的 `secondary` 变体以及 Tabs 的轨道改用 `--fill`：即低不透明度的 `--foreground`。由于它是半透明的，在 `--background` 上和卡片内都能保持相同的对比度，因此同一变体可以在两处使用。覆盖 `--fill` 和 `--fill-hover` 即可让这些内嵌区域更深或更浅。
 
 ## 滚动条
 

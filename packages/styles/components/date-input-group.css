@@ -148,9 +148,9 @@
   @apply shadow-none;
   background-color: var(--date-input-group-bg);
 
-  --date-input-group-bg: var(--default);
-  --date-input-group-bg-hover: var(--default-hover);
-  --date-input-group-bg-focus: var(--default);
+  --date-input-group-bg: var(--fill);
+  --date-input-group-bg-hover: var(--fill-hover);
+  --date-input-group-bg-focus: var(--fill);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
