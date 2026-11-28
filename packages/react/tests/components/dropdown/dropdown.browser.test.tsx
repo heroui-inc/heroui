@@ -125,7 +125,13 @@ describe("Dropdown (browser)", () => {
     expect(trigger.element()).toHaveAttribute("data-pressed", "true");
     expect(trigger.element()).toHaveAttribute("aria-expanded", "true");
 
-    await expect.poll(() => getComputedStyle(trigger.element()).transform).toBe("none");
+    await expect
+      .poll(() => {
+        const transform = getComputedStyle(trigger.element()).transform;
+
+        return transform === "none" || transform === "matrix(1, 0, 0, 1, 0, 0)";
+      })
+      .toBe(true);
   });
 
   /**
