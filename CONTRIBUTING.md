@@ -133,11 +133,11 @@ After cloning the repository, execute the following commands in the root folder:
 1. Install dependencies
 
 ```bash
-pnpm i --hoist
+pnpm i
 
 #or
 
-pnpm install --hoist
+pnpm install
 ```
 
 We use [Turbo Repo](https://turborepo.org/) for the project management.
@@ -223,7 +223,7 @@ pnpm build
 npm run build
 ```
 
-> Note: ensure that you have at least Node.js 22.x as well as pnpm 10.26.2 (see root `packageManager`) installed on your machine to run the scripts
+> Note: ensure that you have Node.js 26 (see `.nvmrc`; 24.15+ also works) and pnpm 12 (exact version in root `packageManager`) installed on your machine to run the scripts
 
 6. Send your pull request:
 

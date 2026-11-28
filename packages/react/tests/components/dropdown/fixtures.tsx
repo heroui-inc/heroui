@@ -37,6 +37,20 @@ export const NarrowViewportDropdownFixture = () => (
   </Dropdown>
 );
 
+/** A HeroUI `Button` used directly as the trigger, so `button.css` styles it instead of `.dropdown__trigger`. */
+export const ButtonTriggerDropdownFixture = () => (
+  <Dropdown>
+    <Button aria-label="Menu">Actions</Button>
+    <Dropdown.Popover>
+      <Dropdown.Menu>
+        <Dropdown.Item id="new-file" textValue="New file">
+          <Label>New file</Label>
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown.Popover>
+  </Dropdown>
+);
+
 export const DropdownFixture = (props: DropdownFixtureProps = {}) => (
   <Dropdown defaultOpen={props.defaultOpen}>
     <Dropdown.Trigger aria-label="Menu">Actions</Dropdown.Trigger>

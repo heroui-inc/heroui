@@ -95,8 +95,8 @@
     "vitest": "5.1.1"
   },
   "engines": {
-    "node": "^22.22.2 || ^24.15.0 || >=26.0.0",
-    "pnpm": ">=10.x"
+    "node": "^24.15.0 || ^26.0.0",
+    "pnpm": ">=12.23.0"
   },
-  "packageManager": "pnpm@10.34.9"
+  "packageManager": "pnpm@12.23.0"
 }

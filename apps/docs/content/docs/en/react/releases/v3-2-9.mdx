@@ -1,0 +1,84 @@
+---
+title: v3.2.9
+description: A translucent --fill token for tab tracks and secondary fields, tailwind-variants 4.1, bottom Sheets that clear the on-screen keyboard, overlay triggers that stay full size while open, a clickable Autocomplete indicator, and the Select and Autocomplete chevron transition on iOS Safari.
+github:
+  pull: 7062
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">November 28, 2026</span>
+</div>
+
+Patch release: a new translucent `--fill` token backs the [Tabs](/docs/components/tabs) track and the `secondary` variant of every field, so they keep the same contrast on the page and inside a [Card](/docs/components/card). `@heroui/react` and `@heroui/styles` move to `tailwind-variants@4.1.0`. Fields low in a bottom [Sheet](/docs/components/sheet) now rise above the iOS on-screen keyboard, and the triggers of [Dropdown](/docs/components/dropdown), [Modal](/docs/components/modal), [Drawer](/docs/components/drawer), and [AlertDialog](/docs/components/alert-dialog) no longer stay shrunk while their overlay is open. This release also gives the [Autocomplete](/docs/components/autocomplete) indicator button a real hit area and slot, and keeps the [Select](/docs/components/select) and Autocomplete chevron rotation on iOS Safari.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warning">
+  **Secondary fields and Tabs use `--fill`.** The Tabs track and the `secondary` field variants no longer read `--default`. If your theme overrides `--default` to restyle them, override `--fill` and `--fill-hover` instead.
+</Callout>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Dependencies
+
+- **tailwind-variants**: Bump `@heroui/react` and `@heroui/styles` to `tailwind-variants@4.1.0` ([#7061](https://github.com/heroui-inc/heroui/pull/7061)).
+- **Tooling**: The repository now develops on Node 26 and pnpm 12. This only affects contributors; the published packages' requirements are unchanged ([#7066](https://github.com/heroui-inc/heroui/pull/7066), [#7043](https://github.com/heroui-inc/heroui/pull/7043)).
+
+## Styles
+
+- **`--fill` token**: Add `--fill` and `--fill-hover`, plus the `bg-fill` and `bg-fill-hover` utilities. `--fill` is `--foreground` at low opacity (4.5% and 7% in light, 9% and 12% in dark), so it keeps the same step on `--background` and on `--surface`. The solid `--default` gray it replaces was tuned against `--background` and read too dark inside cards. See [Theming](/docs/react/getting-started/theming) ([#7063](https://github.com/heroui-inc/heroui/pull/7063)).
+- **Tabs and secondary fields**: Move the [Tabs](/docs/components/tabs) track and the `secondary` variant of [Input](/docs/components/input), [TextArea](/docs/components/text-area), [InputGroup](/docs/components/input-group), [NumberField](/docs/components/number-field), [SearchField](/docs/components/search-field), [InputOTP](/docs/components/input-otp), [Select](/docs/components/select), [Autocomplete](/docs/components/autocomplete), date and time fields, and [ColorField](/docs/components/color-field) to `--fill`. An opaque `--surface` layer now backs the autofill cover so the browser's autofill highlight cannot show through the translucent fill ([#7063](https://github.com/heroui-inc/heroui/pull/7063)).
+
+## Bug Fixes
+
+- **Sheet**: Read the keyboard height React Aria sets in `--sheet-scroll-padding-y` and add a shrinkable spacer after the footer, so fields and footer actions in a bottom Sheet rise above the iOS on-screen keyboard instead of staying behind it ([#7052](https://github.com/heroui-inc/heroui/pull/7052)).
+- **Overlay triggers**: React Aria keeps `data-pressed="true"` on Menu and Dialog triggers while the overlay is open, so the press scale stuck until it closed. [Button](/docs/components/button), [Dropdown](/docs/components/dropdown), [Modal](/docs/components/modal), [Drawer](/docs/components/drawer), and [AlertDialog](/docs/components/alert-dialog) now skip that scale on `aria-expanded` triggers. A real press still scales through `:active`, and the pressed background is kept ([#7056](https://github.com/heroui-inc/heroui/pull/7056)).
+- **Autocomplete**: `Autocomplete.Indicator`'s trigger button collapsed to 0px around the absolutely positioned chevron and had no class to target. It now fills the inline-end padding the trigger reserves, covering the chevron without moving it, and gets the `autocomplete__indicator-button` class and `data-slot="autocomplete-indicator-button"`. It keeps its accessible name, `aria-haspopup`, and `aria-expanded` ([#7055](https://github.com/heroui-inc/heroui/pull/7055)).
+- **Select and Autocomplete**: On iOS Safari, opening the popover could drop the indicator's rotate transition, because React Aria locks page scroll and marks outside content inert in the same commit. The indicator now applies `data-open` two animation frames later. The first render is unchanged, so SSR and `defaultOpen` output still match, and the rotation is skipped under reduced motion ([#7065](https://github.com/heroui-inc/heroui/pull/7065)).
+
+## Documentation
+
+- **Prose typography**: Body copy, tables, bold text, links, and inline code share one text color, inline code chips are smaller and lighter, and links get a faint underline. Prose reads at 15px from tablet up and 16px on phones, with headings, tables, and code sized relative to it. Code blocks get tighter spacing and a scroll shadow under the copy button ([#7044](https://github.com/heroui-inc/heroui/pull/7044), [#7048](https://github.com/heroui-inc/heroui/pull/7048), [#7049](https://github.com/heroui-inc/heroui/pull/7049)).
+- **Page navigation**: The previous and next links follow the sidebar order across sections, so the last page of a section leads into the next one, and links that leave the current section name it ([#7050](https://github.com/heroui-inc/heroui/pull/7050)).
+- **Theming**: Rename the Theming with Agents page to [Theming](/docs/react/getting-started/theming-for-agents) under UI for Agents, and document `--fill` in the [Theming](/docs/react/getting-started/theming) handbook and the theme builder ([#7045](https://github.com/heroui-inc/heroui/pull/7045), [#7063](https://github.com/heroui-inc/heroui/pull/7063)).
+- **Agent skills**: The `heroui-react` and `heroui-native` skills tell agents to call the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server)'s tools when it is connected, and keep the bundled scripts for standalone installs ([#7059](https://github.com/heroui-inc/heroui/pull/7059), [#7060](https://github.com/heroui-inc/heroui/pull/7060)).
+- **Card**: Shrink the demo links and clip overflowing images in the [Card](/docs/components/card) examples ([#7046](https://github.com/heroui-inc/heroui/pull/7046)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #7062](https://github.com/heroui-inc/heroui/pull/7062)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

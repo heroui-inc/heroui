@@ -2,6 +2,7 @@ import {render} from "@heroui/testing/browser";
 import {page, userEvent} from "vitest/browser";
 
 import {
+  ButtonTriggerDropdownFixture,
   DropdownFixture,
   DropdownToModalFixture,
   ModalWithDropdownFixture,
@@ -71,6 +72,39 @@ describe("Dropdown (browser)", () => {
 
     await expect.element(menu).not.toBeInTheDocument();
     await expect.element(trigger).toHaveFocus();
+  });
+
+  /**
+   * #7053: React Aria keeps `data-pressed="true"` on the trigger for as long as the menu is open,
+   * so a scale keyed on that attribute alone left the trigger shrunk until the menu closed.
+   */
+  describe("trigger press scale", () => {
+    const scaleOf = (element: HTMLElement) => new DOMMatrix(getComputedStyle(element).transform).a;
+
+    it.each([
+      ["Dropdown.Trigger", () => <DropdownFixture />],
+      ["Button", () => <ButtonTriggerDropdownFixture />],
+    ])("renders a %s trigger at full size once released with the menu open", async (_, fixture) => {
+      await render(fixture());
+
+      const trigger = page.getByRole("button", {name: "Menu"});
+
+      await trigger.click();
+      await expect.element(page.getByRole("menu")).toBeInTheDocument();
+
+      const element = trigger.element() as HTMLElement;
+
+      // The state that used to keep the scale applied.
+      expect(element).toHaveAttribute("aria-expanded", "true");
+      expect(element).toHaveAttribute("data-pressed", "true");
+
+      // The transform transitions, so read the value it settles on rather than the first frame.
+      await Promise.all(element.getAnimations().map((animation) => animation.finished));
+
+      expect(scaleOf(element)).toBe(1);
+
+      await userEvent.keyboard("{Escape}");
+    });
   });
 
   /**

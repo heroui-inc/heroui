@@ -14,7 +14,7 @@
 
 /* Tab list container */
 .tabs__list-container {
-  @apply relative bg-default;
+  @apply relative bg-fill;
 
   border-radius: calc(var(--radius) * 2.5);
 

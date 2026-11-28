@@ -11,11 +11,14 @@
   --textarea-bg: var(--color-field);
   --textarea-bg-hover: var(--color-field-hover);
   --textarea-bg-focus: var(--field-focus);
-  /* Inset layer covers the UA autofill paint. The rest keeps shadow-field and the focus ring. */
+  /* Inset layers cover the UA autofill paint. The rest keeps shadow-field and the focus ring.
+     The base layer is opaque, so a translucent fill can't let the UA paint show through. */
   --textarea-autofill-shadow:
-    0 0 0 1000px var(--textarea-bg) inset, var(--tw-inset-shadow, 0 0 #0000),
-    var(--tw-inset-ring-shadow, 0 0 #0000), var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow, 0 0 #0000);
+    0 0 0 1000px var(--textarea-bg) inset,
+    0 0 0 1000px var(--textarea-autofill-base, transparent) inset,
+    var(--tw-inset-shadow, 0 0 #0000), var(--tw-inset-ring-shadow, 0 0 #0000),
+    var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+    var(--tw-shadow, 0 0 #0000);
 
   /**
    * Transitions
@@ -99,9 +102,11 @@
   @apply shadow-none;
   background-color: var(--textarea-bg);
 
-  --textarea-bg: var(--default);
-  --textarea-bg-hover: var(--default-hover);
-  --textarea-bg-focus: var(--default);
+  --textarea-bg: var(--fill);
+  --textarea-bg-hover: var(--fill-hover);
+  --textarea-bg-focus: var(--fill);
+  /* `--fill` is translucent. Autofill composites it over `--surface`, where secondary fields usually sit. */
+  --textarea-autofill-base: var(--surface);
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),

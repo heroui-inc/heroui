@@ -65,7 +65,7 @@
   "dependencies": {
     "@heroui/styles": "workspace:*",
     "input-otp": "1.5.0",
-    "tailwind-variants": "4.0.2"
+    "tailwind-variants": "4.1.0"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
