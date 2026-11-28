@@ -83,6 +83,21 @@ import { Card } from "@heroui/react";
 
 The scripts below do this for you: `get_component_docs.mjs` and `get_docs.mjs` read the installed docs when they exist and fall back to the network (latest version) when they don't. Run them from inside the project.
 
+### With the HeroUI MCP Server
+
+When the HeroUI React MCP server is connected, use its tools instead of the scripts. This skill is also served by that server, and the served copy has no `scripts/` folder.
+
+| Instead of                       | Call the tool                                                        |
+| -------------------------------- | -------------------------------------------------------------------- |
+| `list_components.mjs`            | `list_components`                                                    |
+| `get_component_docs.mjs Button`  | `get_component_docs` with `{ "components": ["Button"] }`             |
+| `get_source.mjs Button`          | `get_component_source_code` with `{ "components": ["Button"] }`      |
+| `get_styles.mjs Button`          | `get_component_source_styles` with `{ "components": ["Button"] }`    |
+| `get_theme.mjs`                  | `get_theme_variables`                                                |
+| `get_docs.mjs <path>`            | `get_docs` with `{ "path": "/docs/react/getting-started/theming" }`  |
+
+Installed docs still come first: read them when the project has `@heroui/react` installed.
+
 ### Using Scripts
 
 ```bash
@@ -108,7 +123,7 @@ node scripts/get_docs.mjs /docs/react/getting-started/theming
 
 ### Direct MDX URLs
 
-Component docs: fetch `.mdx` with a concrete kebab-case slug. Run `node scripts/list_components.mjs` when the slug is unknown, and never fetch a URL that still contains a placeholder.
+Component docs: fetch `.mdx` with a concrete kebab-case slug. Run `node scripts/list_components.mjs` (or the `list_components` tool) when the slug is unknown, and never fetch a URL that still contains a placeholder.
 
 Examples:
 

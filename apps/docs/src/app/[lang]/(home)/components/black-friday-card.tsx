@@ -18,27 +18,34 @@ export interface BlackFridayOffer {
   code: string;
   endsAt: number;
   percent: number;
+  /** What the countdown runs to: the end of the whole sale, since the day keeps the week's price. */
+  saleEndsAt: number;
   startsAt: number;
   tone: Tone;
 }
 
+const SALE_ENDS_AT = Date.UTC(2026, 11, 7);
+
 // UTC, same schedule as the heroui.com home card (heroui-pro apps/website). The day offer sits
-// inside the week and wins while it runs. The Stripe promotion codes are switched on by hand, so
-// keep these dates in step with them.
+// inside the week and wins while it runs: same code and percent as the week (so week buyers paid
+// the same price), only the gold look and label change. The Stripe promotion code is switched on by
+// hand, so keep these dates in step with it.
 const OFFERS: BlackFridayOffer[] = [
   {
     campaign: "black_friday_day",
-    code: "BLACKFRIDAY50",
+    code: "BLACKFRIDAY40",
     endsAt: Date.UTC(2026, 10, 28),
-    percent: 50,
+    percent: 40,
+    saleEndsAt: SALE_ENDS_AT,
     startsAt: Date.UTC(2026, 10, 27),
     tone: "day",
   },
   {
     campaign: "black_friday_week",
     code: "BLACKFRIDAY40",
-    endsAt: Date.UTC(2026, 11, 7),
+    endsAt: SALE_ENDS_AT,
     percent: 40,
+    saleEndsAt: SALE_ENDS_AT,
     startsAt: Date.UTC(2026, 10, 23),
     tone: "week",
   },
@@ -256,7 +263,7 @@ export function BlackFridayContent({
         </p>
         <p className="relative flex items-center gap-[5px] text-xs font-medium tabular-nums">
           <span className={styles.countdownLabel}>{copy.endsIn}</span>
-          <Countdown className={styles.countdownValue} ms={offer.endsAt - now} />
+          <Countdown className={styles.countdownValue} ms={offer.saleEndsAt - now} />
         </p>
         <div
           aria-hidden="true"
